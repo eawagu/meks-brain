@@ -593,3 +593,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 14:37:25 UTC — express-ingest
+
+**Source:** Cost & Usag_Teamapt_accounts.pptx
+**Created:** Cost and Usage Review TeamApt AWS Accounts Dec 2025 - Feb 2026, AWS, Abhinav Arora, Cloud Cost Optimization, AWS Outposts
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
