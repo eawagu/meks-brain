@@ -209,3 +209,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 08:11:56 UTC — express-ingest
+
+**Source:** Card-Manager-Service-CMS-Specification.md
+**Created:** Source Card Manager Service CMS Specification, Femi Davies, Card Issuance
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
