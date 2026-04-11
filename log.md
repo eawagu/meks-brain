@@ -473,3 +473,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Access Bank (existing), TeamApt (existing), Chris Purkis — new entity candidate
 **Contradictions flagged:** none
+
+## 2026-04-11 10:03:25 UTC — express-ingest
+
+**Source:** teamapt-limited-manco-meeting-20260331.md + .docx twin
+**Created:** TeamApt MANCo Meeting 2026-03-31
+**Updated:** none
+**Cross-references discovered:** Damilare Ogunnaike — new entity candidate, Tolu Aina — new entity candidate, Olanike Adeyemi — new entity candidate, Constance Onyeji-Jarret — new entity candidate, Precious Maduwuike — new entity candidate, Olufemi Agbaje — new entity candidate, Adefemi Opeogun — new entity candidate
+**Contradictions flagged:** none
