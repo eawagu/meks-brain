@@ -689,3 +689,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** eSentry report is image-heavy — content extraction failed, only title recovered. Manual review via full ingest recommended.
+
+## 2026-04-11 15:19:45 UTC — express-ingest
+
+**Source:** Moniepoint Inc - September 2025 Group Report (1).pdf
+**Created:** Moniepoint September 2025 Group Report, MonieWorld, MonieBook, Fintech Unit Economics
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
