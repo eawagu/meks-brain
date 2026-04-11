@@ -457,3 +457,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Dennis Ajalie (existing), Ibukun Atoyebi (existing), Mariam Davies (existing), Taiwo Baptista (existing), Opeyemi Animashaun (existing), Wycliffe Ochieng (existing)
 **Contradictions flagged:** none
+
+## 2026-04-11 10:01:34 UTC — express-ingest
+
+**Source:** Binary format files skipped (missing Python modules on MCP host)
+**Created:** none
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** AptPay Direct Debit - OKR Planning Q2 2026.pptx: No module 'pptx', TeamApt - Annual OKR Template for Operations&Support.pptx: No module 'pptx', Group OKRs.xlsx: No module 'openpyxl', Moniepoint 2026 Executive Retreat Agenda.xlsx: No module 'openpyxl', Technological control tools-Moniepoint_TeamApt.xlsx: No module 'openpyxl'
