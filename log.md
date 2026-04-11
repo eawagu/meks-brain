@@ -89,3 +89,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** 04-02 Roundtable Meeting_ Cross-Sector Cyber Incident Sharing, CERT Coordination, Regulatory Reporting, and Fraud Mitigation in Nigeria-Discussion Summary
 **Cross-references discovered:** Nigerian Cybersecurity Coordination (existing concept, linked)
 **Contradictions flagged:** none
+
+## 2026-04-11 07:13:43 UTC — express-ingest
+
+**Source:** review-queue.md
+**Created:** review-queue, Ibukun Atoyebi, Qazim Adedigba, Oladapo Onayemi, Fumbi Lawrence, Babajide Ojoboorun, Abraham Isinguzoro, FCMB, Fidelity Bank, Zenith Bank, Sterling Bank, Union Bank, Wema Bank, Polaris Bank, Remita, Moniepoint MFB, ATS, David Oseji, Daniel Ojinaka, Feyisayo Oyeniran, Access Bank, Innocent Nwaokorie, Damilare Ogunnaike, BRM Regulatory Exposure
+**Updated:** none
+**Cross-references discovered:** RC91 Multi-Bank Failure Pattern (existing concept, linked), DCIR Security Vulnerabilities (existing concept, linked), GoSubscribe (existing concept, linked), Stanbic Bank (existing entity, linked), CoralPay (existing entity, linked), NIBSS (existing entity, linked), Paystack (existing entity, linked), Frank Atashili (existing entity, linked), Dennis Ajalie (existing entity, linked), Emeka Awagu (existing entity, linked), Constance Onyeji-Jarret (existing entity id:88, skipped stub)
+**Contradictions flagged:** none
