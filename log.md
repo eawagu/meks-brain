@@ -633,3 +633,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** AWAGU - EMEKA OBIORAH.pdf: conversion_failed (No module named 'fitz' — PyMuPDF not installed). Moved to review/. Not marked processed.
+
+## 2026-04-11 15:11:33 UTC — express-ingest
+
+**Source:** AWAGU - EMEKA OBIORAH.pdf
+**Created:** AWAGU - EMEKA OBIORAH, Emeka Obiorah Awagu, Virgin Atlantic, Air Travel
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
