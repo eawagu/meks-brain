@@ -305,3 +305,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** E5 (exec-assistant-design.md), D5 (brain-design.md page types), D6 (frontmatter schema)
 **Contradictions flagged:** none
+
+## 2026-04-11 09:44:05 UTC — express-ingest
+
+**Source:** Dangote Non Disclosure Agreement (Draft).docx
+**Created:** Nigerian Exchange Group, Dangote Industries Free Zone, Lagos State Multi-Door Courthouse, Initial Public Offering, Non-Disclosure Agreement, Digital Payment Infrastructure, Securities Regulation, Data Protection
+**Updated:** Dangote Non Disclosure Agreement (Draft)
+**Cross-references discovered:** none
+**Contradictions flagged:** none
