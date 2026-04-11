@@ -185,3 +185,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 08:10:18 UTC — express-ingest
+
+**Source:** TSP Pending Decisions.md
+**Created:** TSP Pending Decisions, Juliana
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
