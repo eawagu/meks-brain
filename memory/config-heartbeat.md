@@ -4,7 +4,7 @@ type:
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
 summary: Exec assistant heartbeat configuration — cadence, phase order, briefing tick, error isolation, early exit rules.
-updated: "2026-04-11T17:55:13Z"
+updated: "2026-04-11T19:12:01Z"
 cssclasses:
   - "config"
 ---
@@ -16,11 +16,10 @@ cssclasses:
 
 ## Phase Order (per tick)
 
-Three phases execute sequentially within each tick. Phase 1 runs first (time-sensitive). Phase 3 runs last (patient, failure-isolated).
+Two phases execute sequentially within each tick. Phase 1 runs first (time-sensitive). Phase 2 runs last (patient, failure-isolated).
 
 1. **Heartbeat** — Perceive → Predict → Plan → Act → Improve
-2. **inbox.md** — Read entries, process as raw sources for ingest
-3. **Ingest** — Scan ingress folder, process unprocessed files (picks up inbox entries from phase 2 + any new file drops)
+2. **Ingest** — Scan ingress folder, process unprocessed files (picks up manually dropped files, notes captured via `capture_note`, and any other new content)
 
 ## Heartbeat Cycle (Phase 1)
 
@@ -53,12 +52,12 @@ Three phases execute sequentially within each tick. Phase 1 runs first (time-sen
 
 ## Error Isolation
 
-- Phase 3 (Ingest) is wrapped in try/catch. Ingest failure does not block Phase 1 (Heartbeat) or Phase 2 (inbox.md).
-- Phase 2 (inbox.md) failure does not block Phase 1. Unprocessed entries remain in inbox.md for next tick.
-- Phase 1 (Heartbeat) failure logs the error and exits. No downstream phases run on a failed heartbeat.
+- Phase 2 (Ingest) is wrapped in try/catch. Ingest failure does not affect Phase 1 (Heartbeat) results.
+- Phase 1 (Heartbeat) failure logs the error and exits. Phase 2 does not run on a failed heartbeat.
 
 ## Notes
 
-- Heartbeat runs first because it is time-sensitive (triage alerts). Ingest runs last so inbox entries from Phase 2 get picked up in the same tick.
+- Heartbeat runs first because it is time-sensitive (triage alerts). Ingest runs last so any new files dropped during the heartbeat phase get picked up in the same tick.
 - Early exit on zero deltas keeps cost minimal on quiet ticks. The Improve phase still runs on early-exit ticks to catch absence-of-signal conditions.
 - Source registration is governed by source-config pages — adding/removing sources does not require changes to this config.
+- Notes are captured via `capture_note` which drops timestamped files directly into the ingress folder. The ingest phase picks them up like any other source file.
