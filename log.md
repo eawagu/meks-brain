@@ -745,3 +745,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:45:59 UTC — config-updated
+
+**Source:** Step 3: Config pages — exec assistant behavioral spec
+**Created:** config-heartbeat, config-briefing, config-salience
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
