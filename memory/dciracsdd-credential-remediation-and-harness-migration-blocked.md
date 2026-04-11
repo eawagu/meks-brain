@@ -1,21 +1,21 @@
 ---
-title: DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked
+role: cto-teamapt
 type:
   - "situation"
+title: DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked
+status: developing
+created: "2026-04-11T16:42:32Z"
+summary: Five CRITICAL vulnerabilities. TDSD-6479 Harness P1 migration blocked at Authorize — five consecutive deploy windows missed. DCIR Stanbic server memory at 94.97%. ATS JAR deployment to Stanbic requested.
+updated: "2026-04-11T18:51:46Z"
 cssclasses:
   - "situation"
-status: developing
 accountability: Technology Reliability and Security
-role: cto-teamapt
-created: "2026-04-11T16:42:32Z"
-updated: "2026-04-11T16:42:32Z"
-summary: Five CRITICAL vulnerabilities across ACS, DCIR, DirectDebit. TDSD-6479 Harness P1 migration blocked at Authorize — five consecutive deploy windows missed, CTO approval sole blocker.
 ---
 
-Five CRITICAL vulnerabilities across [[ACS (Access Control Server)]], DCIR, [[DirectDebit]]. ACS connector replacement progressing: [[CoralPay]] service deployed to production ([[TDSD-6047]] Done, 18:45 WAT Apr 10, [[Ekene Udodi]]); [[FCMB]] MFA enrollment for VPN access confirmed. [[Fidelity Bank]] DD P1 ([[TDSD-6499]]) RESOLVED 13:07 WAT Apr 10 (11h7min, root cause: network connection loss to bank transfer API — independent of DCIR chain). TDSD-6504 (DD null mandate errors) escalated to [[NIBSS]] at 15:37 WAT Apr 10 — no resolution. [[TDSD-6479]] (Harness P1 migration) confirmed still at Authorize (07:08 WAT Apr 11 Jira scan). Five consecutive deploy windows missed — CTO approval is sole remaining blocker. Bank Cashout Service and Card transaction routing remain on legacy CI/CD.
+Five CRITICAL vulnerabilities across [[ACS (Access Control Server)]], DCIR, [[DirectDebit]]. ACS connector replacement progressing: [[CoralPay]] service deployed to production ([[TDSD-6047]] Done, 18:45 WAT Apr 10, [[Ekene Udodi]]); [[FCMB]] MFA enrollment for VPN access confirmed. [[Fidelity Bank]] DD P1 ([[TDSD-6499]]) RESOLVED 13:07 WAT Apr 10 (11h7min, root cause: network connection loss to bank transfer API — independent of DCIR chain). TDSD-6504 (DD null mandate errors) escalated to [[NIBSS]] at 15:37 WAT Apr 10 — no resolution. [[TDSD-6479]] (Harness P1 migration) confirmed still at Authorize (Jira scan 19:47 WAT Apr 11). Five consecutive deploy windows missed — CTO approval is sole remaining blocker. Bank Cashout Service and Card transaction routing remain on legacy CI/CD. NEW: DCIR Stanbic server memory at 94.97% (threshold 90%) — monitoring alert at 19:46 WAT Apr 11. ATS JAR deployment to [[Stanbic Bank]] requested by [[Babajide Ojoboorun]] at 17:01 WAT.
 
 ## Sources
-email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; email [[Yasir Syed Ali]] 01:44 WAT Apr 10; email Fidelity restart 00:30 WAT Apr 10; slack #teamapt-tech-operations; jira TDSD-6439, TDSD-6477, TDSD-6479, TDSD-6497, TDSD-6499; email [[Ezinne Okoro]] 09:45 WAT Apr 10
+email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; email [[Yasir Syed Ali]] 01:44 WAT Apr 10; email Fidelity restart 00:30 WAT Apr 10; slack #teamapt-tech-operations; jira TDSD-6439, TDSD-6477, TDSD-6479, TDSD-6497, TDSD-6499; email [[Ezinne Okoro]] 09:45 WAT Apr 10; email dcir-stanbic monitoring 19:46 WAT Apr 11
 
 ## Deltas
 - 2026-04-09 17:02 WAT — [[Access Bank]] ACS P1 (Direct Debit): mandate creation failed 09:20–13:40 WAT (4h 20min), resolved by bank. TDSD-6479: [[Tolu Aina]] directed [[Ekene Udodi]] to sync with Michael Oyedele — CTO and Tolu approvals still pending.
@@ -28,3 +28,4 @@ email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; email [[Yasir Syed Ali]] 01:44 WAT
 - 2026-04-10 17:05 WAT — TDSD-6497 RCA posted: network connection loss to bank transfer API. TDSD-6504 escalated to NIBSS.
 - 2026-04-10 21:12 WAT — TDSD-6504 at NIBSS. TDSD-6479 still at Authorize — fifth window opens in ~4 hours.
 - 2026-04-11 01:09 WAT — FIFTH CONSECUTIVE MISSED WINDOW CONFIRMED. Bank Cashout Service and Card transaction routing remain on legacy CI/CD.
+- 2026-04-11 19:46 WAT — DCIR Stanbic server memory at 94.97% (threshold 90%). Infrastructure stress signal. ATS JAR deployment to Stanbic requested by [[Babajide Ojoboorun]] at 17:01 WAT.
