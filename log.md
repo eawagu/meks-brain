@@ -441,3 +441,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Frank Atashili (existing), TeamApt (existing), ATS (existing), FCMB (existing), Interswitch (existing), Sterling Bank (existing)
 **Contradictions flagged:** none
+
+## 2026-04-11 10:00:12 UTC — express-ingest
+
+**Source:** product-migration-process-document.md
+**Created:** Product Migration Process Document
+**Updated:** none
+**Cross-references discovered:** Idris Aliyu (existing), Platform Engineering (existing)
+**Contradictions flagged:** none
