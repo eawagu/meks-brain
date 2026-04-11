@@ -409,3 +409,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 09:57:43 UTC — express-ingest
+
+**Source:** ptsp-weekly-stand-up-20260330.md + .docx twin (empty meeting)
+**Created:** PTSP Weekly Stand Up 2026-03-30
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
