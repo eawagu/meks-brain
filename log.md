@@ -545,3 +545,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** TSP Executive Briefing v2 supersedes v1 — 3 new transaction types, direct scheme adapters added, TSP Resource Allocation confirms 38 engineers exceeding 20-target — cross-refs Engineering Resources Roster, OKR Comparison reveals 3-year arc: build→scale→consolidate with 'integration≠activation' as core lesson, Visa VIP Gap Analysis maps directly against Transaction Switch Spec, Tokenization spec references both Visa VTS and Mastercard MDES — cross-refs card scheme entities
 **Contradictions flagged:** TSP Engineering roster shows 44 engineers vs Resource Allocation showing 38 — different counting methodology (44 includes all assigned, 38 is unique ICs+EMs excluding overlap)
+
+## 2026-04-11 11:01:51 UTC — express-ingest
+
+**Source:** Batch 9: Root-level files (7) + modified .docx meeting notes (7). 5 files failed conversion (2 pptx, 3 xlsx — missing server modules). 2 .docx had insufficient content.
+**Created:** Direct to Bank Daily Stand Up 2026-04-01, MANCo Meeting 2026-03-31
+**Updated:** none
+**Cross-references discovered:** MANCo meeting confirms Harness migration 100% complete, CBN compliance 'largely compliant', Direct to Bank stand-up shows Zenith/UBA blockers — cross-refs bank entities, Weekly Team Meeting 2026-04-10 already existed (id 339) — .docx twin marked as processed
+**Contradictions flagged:** none
