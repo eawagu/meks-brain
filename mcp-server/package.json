@@ -1,0 +1,25 @@
+{
+  "name": "brain-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for the Brain knowledge store — exposes Postgres-indexed memory pages via Streamable HTTP",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "pg": "^8.13.0",
+    "zod": "^3.24.0",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "@types/express": "^5.0.0",
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0"
+  }
+}

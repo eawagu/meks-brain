@@ -27,8 +27,9 @@ MUST complete before any other action, including responding to the user's messag
 
 ```
 CLAUDE.md              ← this file
-.claude/agents/        ← custom agents (write agent enforces all page modifications)
+.claude/agents/        ← custom agents (legacy — MCP server is now the single write authority)
 inbox.md               ← quick text capture (cleared after processing)
+briefing.md            ← heartbeat output (overwritten on briefing tick, appended on update ticks)
 dashboard.md           ← Dataview queries (human browsing, do not edit)
 log.md                 ← operations log (append-only)
 lint-report.md         ← judgment check output
@@ -37,11 +38,13 @@ memory/                ← all brain pages (flat, no subfolders)
 
 **Raw sources** are in a OneDrive-synced folder outside this vault. Path: `C:\Users\mek\OneDrive\mek-brain-ingress`. Express ingest reads from this folder. The `review/` subfolder is ignored by scheduled ingest — those files are for conversational full ingest only.
 
+Both root and `review/` are scanned recursively. Dropped folders are not treated as single sources — every file within them is processed individually. Folder structure is ignored for processing purposes; `source_path` records the relative path (e.g., `project-x/report.pdf`) to preserve traceability.
+
 ---
 
 ## Page Types
 
-Seven types. Start here. Add new types only when use proves them necessary.
+Eight types. Add new types only when use proves them necessary.
 
 | Type | What it holds |
 |---|---|
@@ -50,6 +53,7 @@ Seven types. Start here. Add new types only when use proves them necessary.
 | source | One page per ingested raw source. Summary, key points, links to pages created/updated. |
 | synthesis | Higher-order analysis across multiple sources/entities. Created when content richness warrants it. |
 | commitment | A specific promise: owner, counterparty, role, accountability, due date, status. Resolved commitments compound as history on entity pages. |
+| situation | A developing operational condition being actively tracked. Links to involved entities, tracks deltas over time, has a lifecycle. Retired situations become historical knowledge — they compound on entity pages and feed synthesis. |
 | source-config | Registration and directives for a signal source. Contains last-processed timestamp and natural-language filtering rules. |
 | config | Exec assistant behavioral spec (heartbeat, briefing format, triage thresholds, salience weights). Excluded from ingest, lint, and synthesis. |
 
@@ -61,7 +65,7 @@ Seven types. Start here. Add new types only when use proves them necessary.
 
 ```yaml
 title: string
-type: [string]       # array, primary type first. Valid: entity, concept, source, synthesis, commitment, source-config, config
+type: [string]       # array, primary type first. Valid: entity, concept, source, synthesis, commitment, situation, source-config, config
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ```
@@ -89,6 +93,13 @@ status: draft | current | superseded
 coverage: high | medium | low   # 5+ sources, 2-4, 0-1
 ```
 
+**situation:**
+```yaml
+status: developing | stable | resolving | retired
+accountability: string   # maps to role accountabilities
+role: string             # role slug (e.g., cto-teamapt)
+```
+
 **source-config:**
 ```yaml
 last_processed: ISO-8601  # datetime of last signal check
@@ -110,6 +121,40 @@ related: [string]      # memory page titles, explicit connections beyond backlin
 - Multi-type pages carry all applicable type-specific fields. Lint validates against every type in the array.
 - Type-specific fields MUST NOT appear on pages that don't carry that type.
 - `cssclasses` MUST include the primary type value for Obsidian styling.
+
+---
+
+## Situation Page Structure
+
+Situation pages track developing operational conditions. The heartbeat creates, updates, and retires them. Retired situations remain in the brain as historical knowledge.
+
+```markdown
+---
+title: [Descriptive title — entity + condition]
+type: [situation]
+status: developing
+accountability: [accountability tag]
+role: [role slug]
+created: ISO-8601
+updated: ISO-8601
+summary: [one sentence]
+---
+
+[Narrative body — current assessment of the situation. Wiki-links to involved entities throughout. Updated by the heartbeat when new signals arrive — rewrite to incorporate, do not just append.]
+
+## Sources
+[Comma-separated list of contributing signal references: source type, date, key identifier]
+
+## Deltas
+- [YYYY-MM-DD HH:MM TZ] — [one-sentence change description, appended by heartbeat each tick]
+```
+
+**Rules:**
+- Title names the entity and condition (e.g., "Stanbic Bank ATS — Persistent RC91 Pattern").
+- Narrative body is rewritten on each full review to incorporate accumulated deltas. Deltas accumulate between reviews.
+- Wiki-links to entity pages are mandatory for every entity mentioned. This enables cross-referencing: "what situations involve this entity?"
+- Status lifecycle: `developing` → `stable` (no new deltas but still active) → `resolving` (resolution signals received) → `retired` (no new signals for 2+ consecutive scans). Retired pages are not deleted.
+- The heartbeat queries active situations via Postgres: `type = situation AND status != retired`.
 
 ---
 
@@ -162,7 +207,9 @@ No pauses, no user interaction. Default for scheduled processing.
    - If page does not exist: create it.
    - Run semantic similarity search via pgvector against full brain. Update or cross-link related pages not explicitly referenced in the source.
 4. **Log** — append to `log.md`: timestamp, source file, pages created (list), pages updated (list), cross-references discovered, contradictions flagged
-5. **Mark processed** — update Postgres record for this source file
+5. **Mark processed** — upsert Postgres record for this source file: file path, file modification timestamp, ingested timestamp. On subsequent scans, a file is "new" if no Postgres record exists for its path, and "modified" if the file's modification timestamp is newer than the recorded one. Modified files are re-ingested through the full pipeline (steps 1–5); the existing source page is updated, not duplicated.
+
+The scan uses a last-scan timestamp (stored in Postgres) to filter: only files with filesystem modification timestamps newer than the last scan are candidates. Candidates are then checked against Postgres for new-or-modified status. This scales regardless of how many files accumulate in the ingress folder — the scan always finds only what changed since it last looked.
 
 Batch express produces a summary report at end: files processed, pages created, pages updated, contradictions flagged, with pointer to log.md.
 
@@ -195,7 +242,7 @@ When a user question requires cross-page analysis, synthesize an answer using dy
 
 ### Continuous Structural Checks
 
-Handled by the write agent on every page create/update. See Write Agent section below. Auto-fix without user approval.
+Handled by the MCP server on every page create/update. See Write Authority section below. Auto-fix without user approval.
 
 ### Judgment Checks (batch)
 
@@ -208,18 +255,18 @@ Run when conditions warrant review, or on a regular cadence. Output to `lint-rep
 
 ---
 
-## Write Agent
+## Write Authority
 
-All page creates, updates, and deletes in `memory/` MUST go through the write agent at `.claude/agents/brain-writer.md`. No session, scheduled task, or workflow directly modifies memory pages. The write agent is the only actor with Write/Edit tool access to `memory/`.
+All page creates, updates, and deletes in `memory/` MUST go through the brain MCP server (`mcp-server/`). No session, scheduled task, or workflow directly modifies memory pages — not via filesystem Write/Edit tools, not via shell commands, not via any path that bypasses the MCP server. The MCP server is the single write authority for all brain memory.
 
-The write agent enforces on every operation:
+The MCP server enforces on every write operation:
 1. **Frontmatter validation** — required fields present, type values valid, type-specific fields match declared types
 2. **Postgres sync** — content, frontmatter, and embeddings synced to Postgres index
 3. **Orphan detection** — flag pages with zero inbound wiki-links after update (flag in log, do not delete)
 4. **Git commit** — one commit per operation that changes vault state. Commit message describes what changed (e.g., "express-ingest: 3 files, 2 entities created, 1 synthesis updated"). No-delta operations produce no commit.
 5. **Log entry** — append to `log.md` per the format below
 
-This is an architectural boundary, not a guideline. The write tools are only available to the write agent, making structural violations impossible.
+This is a code boundary, not a guideline. Validation, Postgres sync, embeddings, and git commits are enforced in the MCP server's write tools — structural violations are impossible regardless of which client invokes the operation.
 
 ---
 
@@ -251,9 +298,9 @@ The exec assistant reads from and writes to this brain. It is not a foreign syst
 
 **Read:** Postgres MCP → hybrid search on memory pages. Queries commitments, entities, config pages, source-config directives. Governed by retrieval instructions in this schema.
 
-**Write:** All page modifications go through the write agent (`.claude/agents/brain-writer.md`). The exec assistant invokes the write agent for commitment creates/updates, entity updates from signal-check, and any other page modifications. Raw material can also be dropped in the OneDrive folder for express ingest.
+**Write:** All page modifications go through the brain MCP server. The exec assistant invokes MCP write tools (`create_page`, `update_page`, `delete_page`) for commitment creates/updates, entity updates from signal-check, and any other page modifications. Raw material can also be dropped in the OneDrive folder for express ingest.
 
-**Config:** This brain governs the exec assistant's config pages (`type: config`) with full understanding. Config pages define: heartbeat logic, briefing format (Ask → Signal → Implication structure, salience ordering), triage thresholds, salience weights. The brain can propose behavioral modifications to any of these. Human approves. Config changes go through the write agent like any other page modification.
+**Config:** This brain governs the exec assistant's config pages (`type: config`) with full understanding. Config pages define: heartbeat logic, briefing format (Ask → Signal → Implication structure, salience ordering), triage thresholds, salience weights. The brain can propose behavioral modifications to any of these. Human approves. Config changes go through the MCP server like any other page modification.
 
 ---
 

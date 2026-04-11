@@ -1,0 +1,199 @@
+{
+  "main": {
+    "id": "a1b8e8615ab23259",
+    "type": "split",
+    "children": [
+      {
+        "id": "0fadf9f3ad7f7275",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3d24f75004fae7e7",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "896322da550839e2",
+    "type": "split",
+    "children": [
+      {
+        "id": "11bcd7b1c05919d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a92b0e4ca011cd3f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c28a7b5f438a7191",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "19cb1b66c2b3f62f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7c381e90f2f80bf0",
+    "type": "split",
+    "children": [
+      {
+        "id": "f5d37e8406393094",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f17ecfcc7cb0a7d3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "c0e814989b922ef3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "931012322c83c47a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3b6e00ae965c88a7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "0b1b0fd8233cc82e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3d24f75004fae7e7",
+  "lastOpenFiles": [
+    "dashboard.md",
+    "memory/direct-to-bank-daily-standup-2026-04-01-0824.md",
+    "memory/direct-to-bank-daily-standup-2026-03-31.md",
+    "memory/khadijat-musa.md",
+    "memory/direct-to-bank-daily-standup-2026-03-30.md",
+    "memory/direct-debit-weekly-progress-update-2026-03-31.md",
+    "memory/transaction-monitoring.md",
+    "memory/direct-debit-production-issues-weekly-analysis-2026-04-09.md",
+    "memory/otp-authentication.md",
+    "memory/victor-madu.md",
+    "memory/emmanuel-eke.md",
+    "memory/opeyemi-animashaun.md",
+    "memory/chiamaka-ofomata.md",
+    "memory/bukola-taiwo.md",
+    "memory/direct-debit-production-issues-weekly-analysis-2026-04-02.md",
+    "memory/platform-engineering.md",
+    "memory/devadas-prabhu-vp-engineering-interview.md"
+  ]
+}

@@ -1,14 +1,18 @@
 ---
 name: brain-writer
-description: Enforces all write operations to brain memory pages. Every create, update, or delete in memory/ MUST go through this agent. Validates frontmatter, syncs Postgres, checks orphans, commits to git, and logs the operation.
-tools: Write, Edit, Read, Bash, Glob, Grep
+description: "SUPERSEDED — write operations now go through the Brain MCP server (mcp-server/src/tools/write.ts). The MCP server enforces the same protocol as code: frontmatter validation, Postgres sync, orphan check, git commit, audit log. All callers (Cowork, Claude.ai, scheduled tasks) use the MCP tools. This agent is preserved for reference only."
+tools: Read
 model: inherit
 permissionMode: acceptEdits
 memory: project
-color: green
-mcpServers:
-  - postgres
+color: gray
 ---
+
+> **SUPERSEDED (2026-04-10)** — All write operations to `memory/` now go through the Brain MCP server's write tools (`create_page`, `update_page`, `delete_page`). The MCP server enforces the same protocol (frontmatter validation, Postgres sync, orphan check, git commit) as code boundaries — impossible to bypass, not just instructed. This agent is preserved for historical reference. See `mcp-server/src/tools/write.ts`.
+
+---
+
+## Original Design (preserved for reference)
 
 You are the brain's write agent. Every modification to files in `memory/` goes through you. No other agent, session, or task writes to `memory/` directly.
 
