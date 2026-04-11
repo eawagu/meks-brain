@@ -3,7 +3,7 @@ type:
   - "entity"
 title: Moniepoint
 created: 2026-04-11
-summary: Moniepoint is a Nigerian fintech company with a formal 13-level job leveling framework and an active platform rebuild initiative (Project Phoenix) building a multi-market card issuance and processing platform.
+summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; operates Monnify payment gateway, Direct Debit, ACT acquiring, and GoSubscribe; building multi-market card issuance platform (Project Phoenix); 13-level job framework.
 updated: 2026-04-11
 cssclasses:
   - "entity"
@@ -11,7 +11,24 @@ cssclasses:
 
 ## Overview
 
-Moniepoint is a fintech company (inferred from context; confirmed by entity name). The organization has a structured career framework that spans 13 discrete levels across individual contributor and management tracks. It is also engaged in a major platform engineering initiative — [[Project Phoenix]] — to build a new card issuance and processing capability for multiple markets (Nigeria, UK, Kenya).
+Moniepoint is a Nigerian fintech group (Moniepoint Inc.). It operates payment and banking infrastructure across multiple products. TeamApt Ltd is a subsidiary where [[Emeka Awagu]] serves as CTO, reporting to [[Dennis Ajalie]] (CEO, TeamApt) with a dotted line to [[Felix Ike]] (Group CTO, Moniepoint Inc.).
+
+## Products & Platforms
+
+- **Monnify** — payment gateway; card acquiring (MPGS/Mastercard), direct debit, chargeback management; see [[Monnify]]
+- **Direct Debit (DD)** — mandate-based bank debit via NIBSS; multi-bank; see [[Direct Debit Program]]
+- **ACT (Acquirer Card Transaction)** — acquiring platform; KYC-gated merchant onboarding; manual fee collection
+- **GoSubscribe** — subscription product; RC91 routing dependency; CEO-level visibility Apr 2026; see [[GoSubscribe]]
+- **AptPay** — payment routing layer; Fidelity UAT dependency (blocked as of Apr 9, 2026)
+- **Card Issuance & Processing Platform** — under [[Project Phoenix]]; multi-market (Nigeria, UK, Kenya); Spine-and-Module architecture; Phase 1 kick-off Apr 7, 2026
+
+## Infrastructure
+
+- **TMS (Transaction Management System)** — HTTP migration committed Apr 2026 (root cause of routing + Kafka issues)
+- **NIBSS integration** — direct debit rails; VPN dependency; ACS connector replaced Apr 10; see [[NIBSS]]
+- **Harness** — CI/CD; migration 100% done (MANCo confirmed); pending CTO approval for P1 workloads; CBN AML flag
+- **GitLab** — MFA enforcement effective Apr 2026
+- **PostgreSQL** — VR-529: 3 critical RCE vulnerabilities (33 instances, 8 assets); Apr 1 2026
 
 ## Platform Engineering
 
@@ -44,13 +61,34 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 | 100 | Vice President | Owns department domain; sets strategic vision; designs org/systems/processes |
 | 200 | Senior Vice President | Holistically responsible for department business outcomes; partners with executive leadership on company strategy |
 
+## Active Issues (as of Apr 2026)
+
+- [[RC91 Multi-Bank Failure Pattern]] — 13+ banks, structural routing gap
+- [[NIBSS]] DD compound failures — TDSD-6437
+- Settlement integrity — TDSD-6424, TDSD-6431, TDSD-6276 active
+- [[DCIR Security Vulnerabilities]] — 5 CRITICAL Access Bank findings; remediation in progress
+- [[GoSubscribe]] — RC91 structurally reverting; war room activated Apr 8
+- CBN POS recertification — overdue as of Apr 2026
+- Lattice performance review deadline — Apr 10, 2026
+- MANCo decisions: Harness 100% migrated, CBN AML roadmap due June 10, engineering manager resigned at Monnify, February loss ₦318M
+
+## Key Leadership
+
+- [[Dennis Ajalie]] — CEO, TeamApt Ltd
+- [[Emeka Awagu]] — CTO, TeamApt Ltd
+- [[Felix Ike]] — Group CTO, Moniepoint Inc.
+- [[Tolulope Obianwu]] — Direct report to Emeka; operations leadership; on PIP
+
 ## Notes
 
 - Level numbers are not contiguous — gaps between 040/051/061/071 and 050/060/070 reflect the branching of IC vs. management paths at the senior level
 - IC and management tracks share the 050/051 number range, indicating organizational equivalence at that band
+- TeamApt Ltd is the operational subsidiary; Moniepoint Inc. is the group parent
 
 ## Sources
 
 - [[Moniepoint Job Levels]]
 - [[001-CI_P-exec-overview_v1.1]] — Project Phoenix executive overview
 - [[003_CMS_Core_Features_Overview_v1.0]] — CMS authored by Tracy Ojaigho, Moniepoint
+- [[Source: accountabilities]] — CTO accountability framework
+- [[Source: notes-2026-04-01]] through [[Source: notes-2026-04-10]] — daily CTO signals
