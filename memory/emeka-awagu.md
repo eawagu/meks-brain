@@ -1,16 +1,18 @@
 ---
-title: Emeka Awagu
 type:
   - "entity"
+title: Emeka Awagu
 created: 2026-04-11
+summary: "CTO at TeamApt Ltd (subsidiary of Moniepoint Inc.), responsible for technology strategy, reliability, talent, and operations across the Technology Operations division. This is the brain owner's own profile — this brain belongs to Emeka Awagu (Mek)."
 updated: 2026-04-11
 cssclasses:
   - "entity"
-summary: CTO at TeamApt Ltd (subsidiary of Moniepoint Inc.), responsible for technology strategy, reliability, talent, and operations across the Technology Operations division.
 ---
 
 ## Overview
 Emeka Awagu (known as Mek) is the Chief Technology Officer at [[TeamApt]] Ltd. He reports to [[Dennis Ajalie]] (CEO) with a dotted line to [[Felix Ike]] (Group CTO, Moniepoint Inc.). His accountability framework was formally documented in March 2026 with a review date of September 18, 2026.
+
+> **Note:** This brain belongs to Emeka Awagu. All pages, signals, and sources are written from his perspective as the brain owner.
 
 ## Role Scope
 Six accountability areas as CTO:
