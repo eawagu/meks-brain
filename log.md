@@ -681,3 +681,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:19:39 UTC — express-ingest
+
+**Source:** esentry annual cybersecurity report 2025.pdf
+**Created:** eSentry Annual Cybersecurity Report 2025, eSentry
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** eSentry report is image-heavy — content extraction failed, only title recovered. Manual review via full ingest recommended.
