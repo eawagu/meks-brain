@@ -625,3 +625,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:04:03 UTC — express-ingest
+
+**Source:** scheduled scan — 1 file found, 0 processed
+**Created:** none
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** AWAGU - EMEKA OBIORAH.pdf: conversion_failed (No module named 'fitz' — PyMuPDF not installed). Moved to review/. Not marked processed.
