@@ -489,3 +489,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Yasir Syed Ali (existing), Ravi Veluguleti (existing), Wycliffe Ochieng (existing), Emeka Awagu (existing)
 **Contradictions flagged:** none
+
+## 2026-04-11 10:09:33 UTC — express-ingest
+
+**Source:** fidelity-bank-teamapt-transfer-service-agreement-review.md + .docx twin, head-of-engineering-director-vp-level-rsop-interview-guide.md, panel-interview-for-head-of-engineering-vp-20260401.md + .docx twin
+**Created:** Fidelity Bank TeamApt Transfer Service Agreement Review, Head of Engineering RSOP Interview Guide, Panel Interview Head of Engineering VP 2026-04-01, Nora Chukwurah-Adeyinka, Tosin Eniolorunda, Opeyemi Folorunsho, Moniepoint Hiring Process
+**Updated:** none
+**Cross-references discovered:** Fidelity Bank (existing, id:119), Felix Ike (existing, id:69), Chris Purkis (existing, id:242), Chukwudum Ekwueme (existing, id:244), Oloruntoba Ojo (existing, id:253), Pavan Venkatesan (existing, id:243)
+**Contradictions flagged:** none
