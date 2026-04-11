@@ -329,3 +329,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 09:46:39 UTC — express-ingest
+
+**Source:** Deliberation_ Head of Engineering Batch Interviews  - 2026_04_10 12_57 WEST - Notes by Gemini.docx
+**Created:** none
+**Updated:** none
+**Cross-references discovered:** Duplicate of deliberation-head-of-engineering-batch-interviews-20260410.md — linked to existing source page Head of Engineering Batch Interview Deliberation 2026-04-10
+**Contradictions flagged:** none
