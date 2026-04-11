@@ -1,13 +1,13 @@
 ---
-title: source-config-slack
 type:
   - "source-config"
+title: source-config-slack
 created: 2026-04-11
-updated: 2026-04-11
+summary: Signal source registration and filtering directives for Slack (Slack MCP).
+updated: "2026-04-11T18:53:39Z"
 cssclasses:
   - "source-config"
-last_processed: null
-summary: Signal source registration and filtering directives for Slack (Slack MCP).
+last_processed: "2026-04-11T18:47:00Z"
 ---
 
 ## Connection
