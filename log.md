@@ -609,3 +609,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 14:39:14 UTC — express-ingest
+
+**Source:** scheduled scan — 13 PDF files failed conversion (No module named 'fitz'): AWAGU - EMEKA OBIORAH.pdf, AWS Enterprise Support Overview.pdf, AWS ES Orientation for MoniePoint.pdf, Cybersecurity Coordination Council.pdf, DavoDani_Website_Proposal_Review.pdf, DDMFB 2026 IT PUSH (1).pdf, esentry annual cybersecurity report 2025.pdf, Moniepoint Inc - September 2025 Group Report (1).pdf, Moniepoint_QBR_Mar'26 (1).pdf, MRS. AWAGU & KINGSNAZZY GLOBAL LIMITED SETTLEMENT - HALF CLAUSE.pdf, PE Advisory Board Charter - Feb 2026.pdf, Proposal for the Redesign of DavoDani Microfinance Bank Website.pdf, State of UX in Financial Apps Nigeria Report 2025.pdf — all moved to review/
+**Created:** none
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
