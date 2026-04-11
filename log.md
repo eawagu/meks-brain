@@ -529,3 +529,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Atlas spec duplicated across MoniePoint MFB and Monnify folders — single source page created, CMS spec duplicated across MoniePoint MFB and Monnify — single source page, IRIS spec duplicated across MoniePoint MFB and Monnify — single source page, Atlas_Transfer_Service_Specification 1.md is duplicate of primary — marked processed pointing to same page, Project Phoenix blindspot: CMS, Atlas, IRIS (MFB-operated systems) not accounted for in Phoenix planning
 **Contradictions flagged:** Vaibhav Bansal: existing page says on watch list for replacement with 3-month review due June 2026; Monnify Engineering doc says resigned/notice period with 9 engineers pending reassignment
+
+## 2026-04-11 11:01:33 UTC — express-ingest
+
+**Source:** Batch 6-7: Phoenix Meeting Decks (4), Phoenix Analysis (4), Spec Guide (6→1 consolidated), TACHA (6), TeamApt Org (8), Tech Ops (1), Admin (10 incl. briefings), Daily Briefings (6), Special files (4: shopping-list, Welcome, Index.base, repo-update.tar.gz), DD Architecture (1), Product Division OKRs duplicate (1), Repo Scans (2)
+**Created:** Frank Q1 2026 Lattice Self Review, TeamApt Diagram Guide, TeamApt OKR Process, TeamApt Product Division Appraisal Kit, TeamApt People Directory Q1 2026, Daily Briefing 2026-03-30, Daily Briefing 2026-03-31, Daily Briefing 2026-04-01, Daily Briefing 2026-04-02, Daily Briefing 2026-04-03, Daily Briefing 2026-04-06, Direct Debit Architecture Specification, 2026 Product Division OKRs
+**Updated:** none
+**Cross-references discovered:** Frank Atashili self-review references Project Phoenix, TSP, OKR-to-TSP mapping, Daily briefings cross-reference meetings already ingested (TSP Architecture Review, TeamApt/MoniePoint Integration), DD Architecture references TACHA, Monnify, bank entities already in brain
+**Contradictions flagged:** none
