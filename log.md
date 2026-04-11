@@ -697,3 +697,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:19:47 UTC — express-ingest
+
+**Source:** Moniepoint_QBR_Mar'26 (1).pdf
+**Created:** Moniepoint QBR March 2026, Shlomi Gabbay
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
