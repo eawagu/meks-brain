@@ -1,17 +1,21 @@
 ---
-title: Project Phoenix
 type:
   - "entity"
+title: Project Phoenix
 created: 2026-04-11
+summary: "Moniepoint's Card Issuance & Processing platform rebuild — Spine-and-Module architecture for multi-market deployment; Phase 1 (Nigeria) formally kicked off Apr 7, 2026."
 updated: 2026-04-11
 cssclasses:
   - "entity"
-summary: "Project Phoenix is Moniepoint's platform rebuild initiative delivering a new Card Issuance & Processing platform using a Spine-and-Module architecture that enables multi-market expansion without core platform changes."
 ---
 
 ## Overview
 
 Project Phoenix is a major [[Moniepoint]] platform initiative to build the [[Card Issuance & Processing Platform]] from the ground up. The platform is designed around a [[Spine and Module Architecture]] — a market-agnostic shared Spine plus independently deployable market-specific Modules — enabling new market launches without Spine changes.
+
+## Delivery Status
+
+**Phase 1 kick-off: April 7, 2026** — formally initiated per [[Emeka Awagu]]'s CTO notes. Architecture in active design as of Apr 8, 2026. Kick-off occurred during a high-operational-stress week (3 concurrent P1s, GoSubscribe war room, Easter weekend incidents).
 
 ## Scope
 
@@ -24,7 +28,7 @@ Project Phoenix encompasses the full [[Card Issuance & Processing Platform]], wh
 
 ## Delivery Phases
 
-1. **Phase 1** — Nigeria Platform Build: Spine + Nigeria Module (Verve and Visa adapters, personalisation vendor, BIN/config)
+1. **Phase 1** — Nigeria Platform Build: Spine + Nigeria Module (Verve and Visa adapters, personalisation vendor, BIN/config) ← **KICKED OFF APR 7, 2026**
 2. **Phase 2** — Nigeria Incremental Cutover: feature-flagged traffic migration with rollback capability
 3. **Phase 3** — UK Launch: add UK Module (Visa/Mastercard adapters, PSD2-compliant SCA adapter)
 4. **Phase 4** — Kenya Launch: add Kenya Module (Visa adapter, config)
@@ -57,3 +61,5 @@ Platform leadership reports to Head of Digital Banking Platforms → Head of CI&
 - [[002-CI_P_Platform_Team_Structure_v1_6]] — team structure
 - [[003A_Issuer_Management_PRD_v1_5]] — Issuer Management PRD
 - [[003_CMS_Core_Features_Overview_v1.0]] — CMS core features
+- [[Source: notes-2026-04-07]] — Phase 1 kick-off signal
+- [[Source: notes-2026-04-08]] — architecture in progress
