@@ -761,3 +761,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 18:42:53 UTC — config-updated
+
+**Source:** session-43: step 4 — merged hourly task, briefing page type, write authority directive
+**Created:** config-heartbeat, config-briefing, config-salience
+**Updated:** config-heartbeat, config-briefing
+**Cross-references discovered:** none
+**Contradictions flagged:** none
