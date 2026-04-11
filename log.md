@@ -241,3 +241,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 08:14:16 UTC — express-ingest
+
+**Source:** 01-overview-and-architecture.md (MasterCard)
+**Created:** MasterCard Overview and Architecture
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
