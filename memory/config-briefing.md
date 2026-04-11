@@ -1,12 +1,12 @@
 ---
-title: config-briefing
 type:
   - "config"
+title: config-briefing
+created: "2026-04-11T15:44:07Z"
+summary: Exec assistant briefing format — Ask/Signal/Implication structure, ordering, source attribution, awareness items.
+updated: "2026-04-11T17:55:20Z"
 cssclasses:
   - "config"
-created: "2026-04-11T15:44:07Z"
-updated: "2026-04-11T15:44:07Z"
-summary: Exec assistant briefing format — Ask/Signal/Implication structure, ordering, source attribution, awareness items.
 ---
 
 ## Briefing Structure
@@ -54,5 +54,6 @@ When the Ask involves choosing between options:
 ## Notes
 
 - The briefing is an output mode of the heartbeat tick (config-heartbeat), not a separate task. The first tick after 06:00 WAT produces the full briefing.
-- Briefing format is modifiable through Dispatch. Changes go through the brain's write agent with human approval.
+- Briefing output is a brain page (type: briefing, title: `briefing-YYYY-MM-DD`). One page per day. Previous day's page is set to `status: superseded` when the new one is created. Historical briefings are preserved — no lossy compression.
+- Briefing format is modifiable through Dispatch. Changes go through the brain's MCP server with human approval.
 - The Ask → Signal → Implication structure is derived from military intelligence briefing patterns and McKinsey SCR — leading with the decision respects executive cognitive load.
