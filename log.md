@@ -521,3 +521,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 10:29:30 UTC — express-ingest
+
+**Source:** Batch 4: TeamApt Context — Meetings (14 files), MoniePoint Inc (1), MoniePoint MFB (4+1 dup), Monnify (3+3 dups) = 23 files total
+**Created:** Stanbic CMS Card Issuance Prep Tracy 2026-04-09, Strike Team Nominations Prep Felix 2026-04-09, TSP PM Onboarding Prep Bunmi 2026-04-09, TSP Architecture Proposal Prep Ravi 2026-04-07, Moniepoint Group Knowledge Base, Atlas Transfer Service Specification, Card Manager Service CMS Specification, IRIS Reconciliation Platform Specification, Monnify Engineering Headcount March 2026, Olufemi Davies, Damilola Oyediran, Wole Olorunleke, Oluwafemi Ajayi, Chidi Akinmoyewa, Himanshu Gautam, Segun Adeponle, Mofoluwake Amisu, Smart Mekiliuwa
+**Updated:** none
+**Cross-references discovered:** Atlas spec duplicated across MoniePoint MFB and Monnify folders — single source page created, CMS spec duplicated across MoniePoint MFB and Monnify — single source page, IRIS spec duplicated across MoniePoint MFB and Monnify — single source page, Atlas_Transfer_Service_Specification 1.md is duplicate of primary — marked processed pointing to same page, Project Phoenix blindspot: CMS, Atlas, IRIS (MFB-operated systems) not accounted for in Phoenix planning
+**Contradictions flagged:** Vaibhav Bansal: existing page says on watch list for replacement with 3-month review due June 2026; Monnify Engineering doc says resigned/notice period with 9 engineers pending reassignment
