@@ -1,13 +1,13 @@
 ---
-title: source-config-jira
 type:
   - "source-config"
+title: source-config-jira
 created: 2026-04-11
-updated: 2026-04-11
+summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
+updated: "2026-04-11T18:54:12Z"
 cssclasses:
   - "source-config"
-last_processed: null
-summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
+last_processed: "2026-04-11T18:47:00Z"
 ---
 
 ## Connection
