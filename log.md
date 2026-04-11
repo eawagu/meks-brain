@@ -481,3 +481,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Damilare Ogunnaike — new entity candidate, Tolu Aina — new entity candidate, Olanike Adeyemi — new entity candidate, Constance Onyeji-Jarret — new entity candidate, Precious Maduwuike — new entity candidate, Olufemi Agbaje — new entity candidate, Adefemi Opeogun — new entity candidate
 **Contradictions flagged:** none
+
+## 2026-04-11 10:07:07 UTC — express-ingest
+
+**Source:** teamapt-weekly-team-meeting-20260410.md + .docx twin
+**Created:** TeamApt Weekly Team Meeting 2026-04-10, Prateek Gupta, Olawale Adegboyega, Priya Chawla, Ketan Dhamasana
+**Updated:** none
+**Cross-references discovered:** Yasir Syed Ali (existing), Ravi Veluguleti (existing), Wycliffe Ochieng (existing), Emeka Awagu (existing)
+**Contradictions flagged:** none
