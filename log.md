@@ -577,3 +577,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 13:48:13 UTC — express-ingest
+
+**Source:** Cost & Usag_Teamapt_accounts.pptx
+**Created:** none
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** INGEST FAILED: pptx conversion error — server missing python-pptx module. File remains unprocessed in ingress folder.
