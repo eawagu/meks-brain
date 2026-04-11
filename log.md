@@ -649,3 +649,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:19:29 UTC — express-ingest
+
+**Source:** AWS ES Orientation for MoniePoint.pdf
+**Created:** AWS ES Orientation for MoniePoint
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
