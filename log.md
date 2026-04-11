@@ -713,3 +713,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:19:52 UTC — express-ingest
+
+**Source:** PE Advisory Board Charter - Feb 2026.pdf
+**Created:** PE Advisory Board Charter - Feb 2026, ProduqtEdge, Niyi Yusuf, Femi Omotayo, Collins Onuegbu, Advisory Board Governance
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
