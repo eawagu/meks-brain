@@ -497,3 +497,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Fidelity Bank (existing, id:119), Felix Ike (existing, id:69), Chris Purkis (existing, id:242), Chukwudum Ekwueme (existing, id:244), Oloruntoba Ojo (existing, id:253), Pavan Venkatesan (existing, id:243)
 **Contradictions flagged:** none
+
+## 2026-04-11 10:12:18 UTC — express-ingest
+
+**Source:** round-2 interviews (20260408 + 20260407), project-phoenix-phase-1-kick-off-20260407.md, teamapt-limited---manco-meeting--2026-02-24.md, teamapt-limited---mgt-cybersecurity-it-steering-20260227.md + .docx twins
+**Created:** Round 2 Panel Interview HoE Dir Level 2026-04-08, Round 2 Technical Leadership Architecture Interview 2026-04-07, Project Phoenix Phase 1 Kick-off 2026-04-07, TeamApt MANCo Meeting 2026-02-24, TeamApt Cybersecurity IT Steering Committee 2026-02-27, Nora Chukwurah-Adeyinka, Tosin Eniolorunda, Opeyemi Folorunsho, Moniepoint Hiring Process
+**Updated:** none
+**Cross-references discovered:** Fidelity Bank (existing, id:119), Felix Ike (existing, id:69), Chris Purkis (existing, id:242), Chukwudum Ekwueme (existing, id:244), Oloruntoba Ojo (existing, id:253), Pavan Venkatesan (existing, id:243), Adegoke Obasa (existing, id:284)
+**Contradictions flagged:** none
