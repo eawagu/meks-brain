@@ -369,3 +369,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 09:51:15 UTC — express-ingest
+
+**Source:** direct-debit-weekly-progress-update-20260331.md + .docx twin
+**Created:** Direct Debit Weekly Progress Update 2026-03-31
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
