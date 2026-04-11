@@ -729,3 +729,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:19:54 UTC — express-ingest
+
+**Source:** State of UX in Financial Apps Nigeria Report 2025.pdf
+**Created:** State of UX in Financial Apps Nigeria Report 2025, Kuda, Fintech UX
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
