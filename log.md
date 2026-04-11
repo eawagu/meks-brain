@@ -705,3 +705,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 15:19:49 UTC — express-ingest
+
+**Source:** MRS. AWAGU & KINGSNAZZY GLOBAL LIMITED SETTLEMENT - HALF CLAUSE.pdf
+**Created:** Awagu v KingsNazzy Settlement Agreement, Elizabeth Awagu, KingsNazzy Global Limited, Adeyemi Kamar, ICMC, Dispute Resolution
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
