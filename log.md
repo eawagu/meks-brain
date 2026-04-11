@@ -537,3 +537,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Frank Atashili self-review references Project Phoenix, TSP, OKR-to-TSP mapping, Daily briefings cross-reference meetings already ingested (TSP Architecture Review, TeamApt/MoniePoint Integration), DD Architecture references TACHA, Monnify, bank entities already in brain
 **Contradictions flagged:** none
+
+## 2026-04-11 11:01:45 UTC — express-ingest
+
+**Source:** Batch 8: TeamApt OKR (7 files), Tokenization (9→1 consolidated), TSP (12 files), Visa (15→1 consolidated)
+**Created:** Q1 2026 Appraisals Frank Atashili Direct Reports, Q4 2025 Appraisals All Direct Reports, TeamApt 2024 OKRs, TeamApt 2025 Annual Performance Assessment, TeamApt 2026 OKRs Comprehensive, OKR Comparison 2024 2025 2026, Tokenization Platform Specification, TSP Executive Roadmap Idris, TSP Engineering Resources Roster, Transaction Switch Spec v0.5.0 Draft, TSP vs TeamApt Switch Analysis, TSP Deployment Architecture Position, TSP Engineering Resource Allocation, TSP Executive Briefing v2, TSP Executive Briefing v1, TSP Platform People Plan, TSP Resource Allocation Response, TSP Scheme Integration Coverage Analysis, Visa VIP Gap Analysis, Visa VIP System Specification
+**Updated:** none
+**Cross-references discovered:** TSP Executive Briefing v2 supersedes v1 — 3 new transaction types, direct scheme adapters added, TSP Resource Allocation confirms 38 engineers exceeding 20-target — cross-refs Engineering Resources Roster, OKR Comparison reveals 3-year arc: build→scale→consolidate with 'integration≠activation' as core lesson, Visa VIP Gap Analysis maps directly against Transaction Switch Spec, Tokenization spec references both Visa VTS and Mastercard MDES — cross-refs card scheme entities
+**Contradictions flagged:** TSP Engineering roster shows 44 engineers vs Resource Allocation showing 38 — different counting methodology (44 includes all assigned, 38 is unique ICs+EMs excluding overlap)
