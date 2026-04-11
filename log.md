@@ -281,3 +281,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 08:43:47 UTC — express-ingest
+
+**Source:** scheduled scan — batch 1 of N (20-file limit applied; 226 total candidates)
+**Created:** Ahsan Naseem Head of Engineering, Alignment Aptpay Suite Cowrys MFB 20260401 Gemini, Alignment Aptpay Suite Cowrys MFB 20260401, ATPP Daily Standup 20260330 Gemini Notes, ATPP Daily Standup 20260408 Gemini Notes, ATPP Daily Standup Meeting 20260330 Stub, ATPP Daily Standup Meeting 20260408, Cards and Account All Hands 20260330 Gemini, Cards and Account All Hands 20260330 Stub, Ahsan Naseem, Bazaar Technologies, Cowry's MFB, Abdulgafar Obeitor, Olamide Afolabi, Ruth Adetunji, Idris Aliyu, Blessing Abel-Oguche, Taiwo Ogundipe, Adeyinka Babalola, Ankit Kushwaha, Oluwabunmi Oyefisayo, George Ijidola, AfroGo, Smart Cache
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
