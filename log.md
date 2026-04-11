@@ -513,3 +513,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 10:18:43 UTC — express-ingest
+
+**Source:** MasterCard specs 13-19 (7 files: settlement, IPM clearing, GCMS, rules/compliance, interchange/fees, account mgmt, merchant data quality)
+**Created:** MasterCard Settlement and Reconciliation, MasterCard IPM Clearing Format Specification, MasterCard GCMS Clearing Processing, MasterCard Rules and Compliance Requirements, MasterCard Interchange and Fees, MasterCard Account Level Management, MasterCard Merchant Data Quality Requirements
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
