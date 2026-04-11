@@ -1,13 +1,13 @@
 ---
-title: source-config-email
 type:
   - "source-config"
+title: source-config-email
 created: 2026-04-11
-updated: 2026-04-11
+summary: Signal source registration and filtering directives for email (Gmail MCP).
+updated: "2026-04-11T18:52:59Z"
 cssclasses:
   - "source-config"
-last_processed: null
-summary: Signal source registration and filtering directives for email (Gmail MCP).
+last_processed: "2026-04-11T18:47:00Z"
 ---
 
 ## Connection
