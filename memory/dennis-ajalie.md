@@ -1,29 +1,36 @@
 ---
-title: Dennis Ajalie
 type:
   - "entity"
+title: Dennis Ajalie
 created: 2026-04-11
+summary: "CEO of TeamApt Ltd (subsidiary of Moniepoint Inc.) — Emeka Awagu's direct reporting line; named key relationship in the CTO accountability framework."
 updated: 2026-04-11
 cssclasses:
   - "entity"
-summary: "Named key relationship in Emeka Awagu's CTO accountability framework — role and org position not yet confirmed from available sources."
 ---
 
 ## Overview
 
-Dennis Ajalie is a named key relationship in [[Emeka Awagu]]'s CTO accountability framework at [[TeamApt / Moniepoint]].
+Dennis Ajalie is the CEO of TeamApt Ltd, the Moniepoint group subsidiary. [[Emeka Awagu]] (CTO) reports directly to Dennis.
 
-## Known Signals
+## Role
 
-- Listed as one of 12 key relationships in the accountabilities document (review date 2026-09-18)
-- Specific role, title, and nature of accountability relationship not captured in available notes
+- **Title**: CEO, TeamApt Ltd
+- **Organization**: [[Moniepoint]] (TeamApt Ltd subsidiary)
+- Emeka Awagu's primary reporting line
+
+## Signals
+
+- Named as one of 12 key relationships in Emeka's CTO accountability framework (review date 2026-09-18)
+- No direct signals from Dennis in available Apr 2026 notes — his presence is inferred through Emeka's accountability document
 
 ## Open Items
 
-- Role and reporting line not confirmed — to be enriched from performance reviews, scorecards, or subsequent notes
-- Nature of accountability relationship with Emeka not yet determined
+- No direct quotes or decisions from Dennis in available notes — to be enriched as more signal accumulates
+- Nature of the CEO-CTO working dynamic not yet characterized
 
 ## Relationships
 
-- [[Emeka Awagu]] — key relationship
-- [[TeamApt / Moniepoint]] — shared organization
+- [[Emeka Awagu]] — direct report (CTO)
+- [[Felix Ike]] — Group CTO at Moniepoint Inc. (peer/superior at group level)
+- [[Moniepoint]] — organization
