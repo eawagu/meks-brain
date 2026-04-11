@@ -465,3 +465,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** AptPay Direct Debit - OKR Planning Q2 2026.pptx: No module 'pptx', TeamApt - Annual OKR Template for Operations&Support.pptx: No module 'pptx', Group OKRs.xlsx: No module 'openpyxl', Moniepoint 2026 Executive Retreat Agenda.xlsx: No module 'openpyxl', Technological control tools-Moniepoint_TeamApt.xlsx: No module 'openpyxl'
+
+## 2026-04-11 10:02:31 UTC — express-ingest
+
+**Source:** round-2-panel-interview-for-head-of-engineering-20260408-1037.md + .docx twin (empty), PAYOUT SERVICE AGREEMENT - Access Bank x TeamAPT .docx
+**Created:** Round 2 Panel Interview HoE 2026-04-08 1037, Payout Service Agreement Access Bank x TeamApt
+**Updated:** none
+**Cross-references discovered:** Access Bank (existing), TeamApt (existing), Chris Purkis — new entity candidate
+**Contradictions flagged:** none
