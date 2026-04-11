@@ -201,3 +201,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-11 08:11:18 UTC — express-ingest
+
+**Source:** Visa-TeamApt Processing Agreement.md
+**Created:** Visa-TeamApt Processing Agreement, Opay
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
