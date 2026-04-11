@@ -1,38 +1,46 @@
 ---
-title: Dangote Non Disclosure Agreement (Draft)
 type:
   - "source"
+title: Dangote Non Disclosure Agreement (Draft)
 created: 2026-04-11
+summary: "Draft NDA between Dangote Petroleum Refinery and Petrochemicals FZE (DPRP) and TeamApt Limited in connection with DPRP's proposed IPO on the Nigerian Exchange Group, covering digital platform partnership for payment, subscription, and settlement infrastructure."
 updated: 2026-04-11
 cssclasses:
   - "source"
 source_path: Dangote Non Disclosure Agreement (Draft).docx
-summary: "Draft NDA between Dangote Petroleum Refinery and TeamApt Limited governing information exchange in connection with DPRP's planned IPO and potential digital platform partnership."
 ---
 
 ## Summary
-A mutual non-disclosure agreement between Dangote Petroleum Refinery and Petrochemicals FZE (DPRP) and [[TeamApt Limited]] governing the exchange of confidential information in connection with DPRP's planned initial public offering (IPO) on the Nigerian Exchange Group. [[TeamApt Limited]] is being considered as a digital platform partner to support the listing process, including digital payment solutions, subscription and settlement infrastructure, and investor onboarding.
+
+Draft mutual NDA between [[Dangote Petroleum Refinery and Petrochemicals FZE]] (DPRP) and [[TeamApt]] in connection with DPRP's proposed initial public offering on the [[Nigerian Exchange Group]]. TeamApt is being considered as a digital platform partner to support subscription and settlement infrastructure, investor onboarding, and payment solutions for the IPO.
 
 ## Key Points
-- DPRP is exploring an IPO on the Nigerian Exchange Group and considers engaging TeamApt as a digital platform partner.
-- Confidential Information covers IPO documents, shareholder data, pricing, investor materials, financial statements, business plans, technical data, and personal data.
-- Obligations: receiving party must not use CI beyond the Purpose, must not disclose to third parties without consent, must maintain security measures.
-- Operational Partners (banks, payment processors, settlement partners) may receive CI on a need-to-know basis if bound by equivalent confidentiality obligations.
-- Term: 3 years from Effective Date, or by mutual consent with 1-month notice; post-termination obligations survive for 2 years.
-- Governing law: Federal Republic of Nigeria; disputes resolved by arbitration at Lagos State Multi-Door Courthouse.
-- Signatories: Murat Erden (DPRP Group CFO), [[Dennis Ajalie]] (TeamApt CEO), [[Emeka Awagu]] (TeamApt CTO).
+
+- **Parties:** DPRP (license no 0020/D/2025, Dangote Industries Free Zone, Lekki) and TeamApt Limited (RC 1253771, 12 Wole Ariyo Street, Lekki Phase 1)
+- **Purpose:** Evaluating, structuring, and potentially implementing the Proposed IPO and a digital platform partnership — covering deal structure, pricing, underwriting, investor engagement, and related commercial/technical/regulatory matters
+- **Scope of confidentiality:** Covers prospectus drafts, cap table, pricing/valuation data, book-building data, investor pipeline, financial projections, business plans, trade secrets, and personal/shareholder data
+- **Data restriction:** TeamApt may not aggregate, analyse, monetise, or commercially exploit DPRP investor/transaction/subscription/payment data outside the Purpose
+- **Operational Partners:** TeamApt may disclose to banks, settlement partners, payment processors, and infrastructure providers on a need-to-know basis under equivalent confidentiality
+- **Term:** 3 years from Effective Date, with 2-year survival of obligations post-termination; trade secret protections continue indefinitely
+- **Governing law:** Nigerian law; arbitration at Lagos State Multi-Door Courthouse under Arbitration and Mediation Act 2023
+- **Sovereign immunity waiver:** Receiving Party waives state/sovereign immunity for obligations under this agreement
+- **Signatories:** Murat Erden (Group CFO, DPRP), Dennis Ajalie (CEO, TeamApt), [[Emeka Awagu]] (CTO, TeamApt)
 
 ## Entities Mentioned
+
 - [[Dangote Petroleum Refinery and Petrochemicals FZE]]
-- [[TeamApt Limited]]
+- [[TeamApt]]
+- [[Nigerian Exchange Group]]
+- [[Dangote Industries Free Zone]]
 - [[Murat Erden]]
 - [[Dennis Ajalie]]
 - [[Emeka Awagu]]
-- Nigerian Exchange Group
+- [[Lagos State Multi-Door Courthouse]]
 
 ## Concepts
+
+- [[Initial Public Offering]]
 - [[Non-Disclosure Agreement]]
-- [[IPO]]
-- [[Digital Payment Solutions]]
-- [[Confidentiality]]
-- [[Nigerian Contract Law]]
+- [[Digital Payment Infrastructure]]
+- [[Securities Regulation]]
+- [[Data Protection]]
