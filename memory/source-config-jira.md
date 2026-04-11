@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
-updated: "2026-04-11T21:12:57Z"
+updated: 2026-04-11
 cssclasses:
   - "source-config"
-last_processed: "2026-04-11T21:09:00Z"
+last_processed: "2026-04-11T22:09:00Z"
 ---
 
 ## Connection
@@ -76,3 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project. Other projects may become relevant — the heartbeat should note when a Tier 1 Slack or email message references a non-TDSD ticket and flag it for possible addition.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
+- **AUTH FAILURE 2026-04-11T22:09 UTC:** Jira connector returned "requires authentication" — signals missed this tick. Needs user re-auth.
