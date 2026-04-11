@@ -1,12 +1,12 @@
 ---
-title: config-heartbeat
 type:
   - "config"
+title: config-heartbeat
+created: "2026-04-11T15:43:35Z"
+summary: Exec assistant heartbeat configuration — cadence, phase order, briefing tick, error isolation, early exit rules.
+updated: "2026-04-11T17:55:13Z"
 cssclasses:
   - "config"
-created: "2026-04-11T15:43:35Z"
-updated: "2026-04-11T15:43:35Z"
-summary: Exec assistant heartbeat configuration — cadence, phase order, briefing tick, error isolation, early exit rules.
 ---
 
 ## Cadence
@@ -28,6 +28,7 @@ Three phases execute sequentially within each tick. Phase 1 runs first (time-sen
 - Load all source-config pages (`type: source-config`). For each source, check for deltas since `last_processed` timestamp.
 - **Early exit:** If zero deltas across all sources, skip Predict/Plan/Act. Proceed directly to Improve (to check for absence-of-signal triggers per config-salience), then exit.
 - For every new signal, run semantic similarity search against the full brain via pgvector — perfect cross-referencing, zero recall decay.
+- **Exclusion:** MUST NOT include `briefing` in type_filter during Perceive retrieval — briefing pages are output, not input. Including them creates circular retrieval.
 
 ### Predict
 - Dynamic context assembly: signal → related commitments → related entities → historical patterns → related concepts.
@@ -41,13 +42,14 @@ Three phases execute sequentially within each tick. Phase 1 runs first (time-sen
 ### Act
 - **Immediate tier signals:** Send triage alert to Dispatch.
 - **Briefing tier + Awareness tier signals:** Accumulate for next briefing tick.
-- **State updates:** Write new/updated commitment pages, entity updates, situational context updates to brain via write operations.
-- **Briefing tick only:** Produce the full briefing per config-briefing format.
+- **State updates:** Write new/updated commitment pages, entity updates, situation page updates to brain via MCP write tools.
+- **Briefing tick only:** Create a briefing brain page via `create_page` (type: `[briefing]`, title: `briefing-YYYY-MM-DD`, status: `current`). Format per config-briefing. Update the previous day's briefing page to `status: superseded` via `update_page`.
 
 ### Improve
 - Compare surfaced items against user actions since last tick (acted on / dismissed / missed).
 - Write tuning tuple to config-salience: `[date, item_hash, action, dominant_dimension]`.
 - Check absence-of-signal rules (config-salience) — fire Immediate or Briefing alerts as specified.
+- Query briefing pages (type: briefing) to compare what was surfaced vs. what was acted on — this is the only retrieval path that reads briefing pages.
 
 ## Error Isolation
 
