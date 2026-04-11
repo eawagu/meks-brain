@@ -7,7 +7,7 @@ summary: Signal source registration and filtering directives for Jira (Atlassian
 updated: 2026-04-11
 cssclasses:
   - "source-config"
-last_processed: "2026-04-11T19:12:00Z"
+last_processed: "2026-04-11T20:00:00Z"
 ---
 
 ## Connection
