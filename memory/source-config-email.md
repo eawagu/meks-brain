@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-12T16:11:19Z"
+updated: "2026-04-12T17:11:56Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T16:09:00Z"
+last_processed: "2026-04-12T17:09:00Z"
 ---
 
 ## Connection
