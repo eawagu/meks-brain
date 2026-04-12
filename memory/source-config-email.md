@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-12T18:12:08Z"
+updated: "2026-04-12T19:12:38Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T18:10:00Z"
+last_processed: "2026-04-12T19:12:00Z"
 ---
 
 ## Connection
@@ -31,7 +31,7 @@ last_processed: "2026-04-12T18:10:00Z"
 - CEO / COO / Dennis Ajalie
 - Direct reports (Tolu Aina, Tolulope Obianwu, and others per roles registry)
 - Regulatory bodies (CBN, NYDFS, NIBSS, PCIDSS, external auditors)
-- Bank counterparties when escalation thread (Stanbic, UBA, Access, Fidelity, Ecobank, Sterling, Polaris, Union, Wema, Habari)
+- Bank counterparties when escalation thread (Stanbic, UBA, Access, Fidelity, Ecobank, Sterling, Polaris, Union, Habari)
 
 **Tier 2 — Same-day (surface in next briefing):**
 - Peer executives and department heads
