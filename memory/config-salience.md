@@ -1,12 +1,12 @@
 ---
-title: config-salience
 type:
   - "config"
+title: config-salience
+created: "2026-04-11T15:44:57Z"
+summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
+updated: "2026-04-12T21:26:15Z"
 cssclasses:
   - "config"
-created: "2026-04-11T15:44:57Z"
-updated: "2026-04-11T15:44:57Z"
-summary: Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, and tuning mechanism.
 ---
 
 ## Triage Tiers
@@ -61,7 +61,7 @@ Five dimensions, scored 0.0–1.0 per signal. Weighted sum determines ordering w
 - Minimum per dimension: 0.05
 - Maximum per dimension: 0.40
 - All weights must sum to 1.00
-- Maximum adjustment per monthly tuning cycle: ±0.05 per dimension
+- Maximum adjustment per recalculation cycle: ±0.05 per dimension
 - If a weight adjustment hits a cap, flag in the next briefing as a potential structural issue — the dimension definition may need revision, not just the weight.
 
 ## Absence-of-Signal Rules
@@ -84,18 +84,33 @@ The Improve phase (config-heartbeat) observes three signal types after each tick
 2. **Dismissed** — Item surfaced but no action across two consecutive briefings, or user explicitly flagged as noise. Negative signal — reduce weight of dominant dimension.
 3. **Missed** — User asked about something not surfaced, or discovered a situation that should have been flagged. Most valuable signal. Reverse-engineer which dimensions would have caught it, increase their weight.
 
+### Missed Signal Capture
+
+Two input paths feed missed signal tuples into the Tuning Log:
+
+1. **Triage-time prompt (primary).** After triage annotation (config-triage Step 5b), the client asks "Anything I should have caught?" User-reported misses are written as tuples immediately. This captures misses noticed at decision time — zero friction, in-flow.
+2. **Async capture (secondary).** Notes captured via `capture_note` with a `MISS:` prefix (e.g., `MISS: should have flagged the Stanbic settlement delay from yesterday's Slack`) are routed to the Tuning Log by the ingest pipeline instead of creating source pages. This captures misses discovered later from any runtime — Cowork, Claude Code, claude.ai.
+
 ### Tuning Tuples
 
-After each tick, write: `[date, item_hash, action: acted|dismissed|missed, dominant_dimension]`
+Format: `[date, item_identifier, action: acted|dismissed|missed, dominant_dimension]`
 
-Tuples accumulate in a `## Tuning Log` section appended to this page (below).
+- `item_identifier`: briefing item ID (e.g., `B3`) for acted/dismissed tuples, or a short description for missed tuples.
+- `dominant_dimension`: the salience dimension most responsible for the outcome — the dimension that scored highest for acted/dismissed items, or the dimension that would have caught the signal for missed items.
 
-### Monthly Weight Recalculation
+Tuples are written by: the Improve phase (acted/dismissed from Triage Results), the triage client (missed from Step 5b), and the ingest pipeline (missed from `MISS:` notes).
 
-- Batch pass recalculates weights from accumulated tuples using frequency-weighted adjustment.
-- Tuples older than 90 days are compressed into the weight values and removed.
-- Weight changes are capped per the constraints above.
-- Recalculated weights are written to the Salience Dimensions table above. Human approval required before applying.
+Tuples accumulate in the `## Tuning Log` section below.
+
+### Recalculation Trigger
+
+The Improve phase checks the tuple count in the Tuning Log on each tick. When the count reaches 20 or more, the Improve phase surfaces "Salience recalculation due — N tuples accumulated" as a Decision item in the next briefing (confidence: high, recommended action: approve recalculation). On approval during triage, the recalculation runs:
+
+1. Read all tuples from the Tuning Log.
+2. Compute frequency-weighted adjustments: for each dimension, count how often it appears as `dominant_dimension` across each action type. Increase weight for dimensions dominant in `missed` tuples (system under-weighted them). Decrease weight for dimensions dominant in `dismissed` tuples (system over-weighted them). `acted` tuples confirm current weights.
+3. Apply weight constraints (min 0.05, max 0.40, total 1.00, max ±0.05 per dimension per cycle).
+4. Present proposed weight changes to the user with before/after comparison table.
+5. On user approval: update the Salience Dimensions table above via `update_page`. Compress processed tuples into a summary line: `[date_range, N acted, N dismissed, N missed, weight_deltas_applied]`. Remove processed tuples from the Tuning Log.
 
 ### Threshold Tuning
 
@@ -103,4 +118,4 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 
 ## Tuning Log
 
-*(Tuples appended by the Improve phase after each heartbeat tick)*
+*(Tuples appended by the Improve phase, triage client, and ingest pipeline)*
