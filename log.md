@@ -1025,3 +1025,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** Moniepoint MFB (existing entity — POS terminal at Renee Supermarket)
 **Contradictions flagged:** none
+
+## 2026-04-12 13:15:12 UTC — express-ingest
+
+**Source:** heartbeat tick 2026-04-12T13:09 UTC (non-briefing)
+**Created:** none
+**Updated:** Stanbic Bank ATS — Persistent RC91 Pattern, Union Bank, source-config-email, source-config-slack, source-config-jira, source-config-calendar
+**Cross-references discovered:** Union Bank TDSD-6519 linked to multi-bank RC91 pattern (Stanbic, Access, Wema)
+**Contradictions flagged:** none
