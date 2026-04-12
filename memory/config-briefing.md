@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-briefing
 created: "2026-04-11T15:44:07Z"
-summary: Briefing format specification — decision-forcing structure with Ask/Signal/Recommended Action/References, triage disposition annotations, dynamic context assembly at triage time.
-updated: "2026-04-12T03:02:42Z"
+summary: Briefing format specification — decision-forcing structure with Ask/Signal/Recommended Action/References/Confidence, three-tier triage routing, disposition annotations, dynamic context assembly at triage time.
+updated: "2026-04-12T16:11:57Z"
 cssclasses:
   - "config"
 ---
@@ -17,24 +17,56 @@ Each item in the briefing receives a sequential ID: `B1`, `B2`, etc. IDs are ass
 
 Each briefing item follows a decision-forcing structure. Two formats depending on whether a decision is needed.
 
-### Decision Items (Ask → Signal → Recommended Action)
+### Decision Items (Ask → Signal → Recommended Action → Confidence)
 
 1. **Ask** — What you need to decide or do. Forced choice, brief.
 2. **Signal** — Factual context for why this is in front of you. Sourced, timestamped. Just enough to understand — not a full narrative.
 3. **Recommended Action** — The AI's recommended disposition and concrete action. When the recommendation is to delegate, includes pre-filled fields: delegatee, specific ask, due date, accountability. When multiple options exist, pre-compare alternatives with tradeoffs and state which is recommended and why (derived from brain context — entity history, commitment patterns, prior decisions).
-4. **References** — Wiki-linked situation and entity page titles that provide context for this item. The triage client pulls these live at decision time for dynamic context assembly.
+4. **Confidence** — `high` or `low`. The heartbeat's assessment of how certain the recommended action is.
+   - `high` — Single clear recommendation. One reasonable disposition dominates. Routes to Tier 2 (propose/approve) during triage.
+   - `low` — Multiple viable paths exist, or the AI lacks sufficient context to strongly recommend one. Routes to Tier 3 (escalate with structured alternatives) during triage.
+5. **References** — Wiki-linked situation and entity page titles that provide context for this item. The triage client pulls these live at decision time for dynamic context assembly.
 
 ### Awareness Items (Signal → Recommended Action)
 
-No Ask — no decision needed. Builds the running model.
+No Ask — no decision needed. Builds the running model. Routes to Tier 1 (auto-advance batch) during triage.
 
 1. **Signal** — What changed. Sourced, timestamped.
 2. **Recommended Action** — Typically "noted — no action required." The AI flags any awareness item that warrants escalation to a decision item.
 3. **References** — Wiki-linked situation and entity page titles.
 
+Awareness items do not carry a Confidence field — they are always Tier 1 by definition.
+
 ### Implication
 
 Not stored in the briefing. Computed at triage time by the client using dynamic context assembly — pulling referenced situation pages, entity pages, and running `search` for additional connections. This ensures context is always current at the moment of decision, not stale from creation time.
+
+## Confidence Assessment Guidelines
+
+The heartbeat sets the `confidence` field per Decision item using these criteria:
+
+**High confidence** (single clear recommendation dominates):
+- One disposition is clearly superior given brain context (entity history, situation state, commitment patterns, prior decisions on similar items)
+- Low risk of the recommended action being wrong — cost of error is recoverable
+- No competing considerations that would reasonably lead to a different disposition
+
+**Low confidence** (multiple viable paths, genuine uncertainty):
+- Two or more dispositions are defensible with different tradeoffs
+- The item involves a judgment call that depends on context the AI may not have (political considerations, unstated preferences, in-person context)
+- High risk — cost of the wrong disposition is significant or irreversible
+- The AI lacks sufficient brain context to strongly differentiate between options
+
+When in doubt, mark `low` — it is better to escalate an item for human judgment than to auto-advance a genuinely ambiguous decision.
+
+## Triage Tier Routing Summary
+
+| Item type | Confidence | Triage tier | Interaction |
+|---|---|---|---|
+| Awareness | — | Tier 1 (auto-advance) | Batch summary, blanket approve |
+| Decision | high | Tier 2 (propose) | One at a time, single recommendation, approve/override |
+| Decision | low | Tier 3 (escalate) | One at a time, full context, structured numbered alternatives |
+
+See config-triage for the full triage protocol.
 
 ## Ordering
 
@@ -62,7 +94,7 @@ After triage, the client appends a `## Triage Results` section to the briefing p
 
 Valid dispositions: `approved`, `overridden`, `held`, `discarded`, `noted` (awareness items only).
 
-The Improve phase reads this table to compare Recommended Action vs Disposition per item. Overrides are the primary calibration signal.
+The Improve phase reads this table to compare Recommended Action vs Disposition per item. Overrides are the primary calibration signal. Tier 1 pull-outs (items moved from auto-advance to individual review) are a secondary signal — they indicate the heartbeat's confidence assessment was too high.
 
 ## Briefing Boundary Rules
 
@@ -74,4 +106,4 @@ The Improve phase reads this table to compare Recommended Action vs Disposition 
 
 - The briefing is an output mode of the heartbeat tick (config-heartbeat), not a separate task. The first tick after the configured briefing hour (config-heartbeat) in the user's timezone (config-user) produces the full briefing.
 - Briefing output is a brain page (type: briefing, title: `briefing-YYYY-MM-DD`). One page per day. Previous day's page is set to `status: superseded` when the new one is created. Historical briefings are preserved.
-- Triage is performed by a client-side skill/command that reads the briefing via brain MCP tools, assembles live context from referenced pages, presents items for governance, writes dispositions back, and executes approved actions via external MCPs (Slack, Jira, Gmail, GCal).
+- Triage is performed by any client with brain MCP access. The client reads the briefing via `get_page`, assembles live context from referenced pages, presents items per the three-tier flow in config-triage, writes dispositions back via `update_page`, and executes approved actions via external MCPs (Slack, Jira, Gmail, GCal).
