@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-triage
 created: "2026-04-12T03:09:55Z"
-summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly and governance-by-exception.
-updated: "2026-04-12T16:13:12Z"
+summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, and numbered response options in Tier 2 and Tier 3.
+updated: "2026-04-12T16:38:28Z"
 cssclasses:
   - "config"
 ---
@@ -66,12 +66,19 @@ Decision items where the heartbeat has a single clear recommendation and high co
 Present **one item at a time**. For each item:
 1. Item ID and Ask
 2. Computed Implication (from Step 2 context assembly)
-3. "**Recommend:** [specific action with rationale]"
+3. Numbered response options:
 
-The user responds:
-- **Approve** — "ok", "yes", "approved" (accept the recommendation as-is)
-- **Override** — states a different disposition in natural language (e.g., "delegate to Felix, due Friday", "defer to Monday", "discard"). The AI confirms the override, clarifying any missing fields (e.g., delegatee, due date) before executing.
-- **Question** — asks for more context. The AI answers using brain search, then re-presents the item for disposition.
+```
+1. Approve — [specific recommended action restated concisely]
+2. Override — state different disposition
+3. Hold
+```
+
+The user responds with a number (e.g., `1`) or natural language:
+- **1 (Approve)** — accept the recommendation as-is and execute
+- **2 (Override)** — user states the override in natural language (e.g., `2 delegate to Felix, due Friday`). The AI confirms the override, clarifying any missing fields (e.g., delegatee, due date) before executing.
+- **3 (Hold)** — no action; item remains untriaged for revisiting
+- **Question** — user asks for more context without picking a number. The AI answers using brain search, then re-presents the item with the same numbered options.
 
 After each item is dispositioned, advance to the next Tier 2 item. After all Tier 2 items, advance to Tier 3.
 
