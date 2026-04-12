@@ -3,15 +3,15 @@ type:
   - "config"
 title: config-triage
 created: "2026-04-12T03:09:55Z"
-summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, and numbered response options in Tier 2 and Tier 3.
-updated: "2026-04-12T16:38:28Z"
+summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, numbered response options, and direct lint findings triage.
+updated: "2026-04-12T16:53:45Z"
 cssclasses:
   - "config"
 ---
 
 ## Purpose
 
-Triage is the governance workflow for the daily briefing. The AI pre-resolves every item with a recommended disposition and confidence assessment. The user governs by exception — approving batches, confirming recommendations, or providing judgment on genuinely ambiguous items.
+Triage is the governance workflow for the daily briefing and lint findings. The AI pre-resolves every item with a recommended disposition and confidence assessment. The user governs by exception — approving batches, confirming recommendations, or providing judgment on genuinely ambiguous items.
 
 This protocol works in any client with brain MCP access (Cowork, Claude Code, claude.ai, future clients). The client owns presentation and interaction; the brain owns state.
 
@@ -27,7 +27,7 @@ Read today's briefing page from brain MCP: `get_page` with title `briefing-YYYY-
 
 If no briefing page exists for today, inform the user and exit.
 
-If the briefing page already has a `## Triage Results` section with all items dispositioned, inform the user that today's briefing has already been triaged.
+If the briefing page already has a `## Triage Results` section with all items dispositioned, inform the user that today's briefing has already been triaged. Proceed to Step 3b (Lint Findings) — lint may have new findings even if the briefing is fully triaged.
 
 ### 2. Assemble Context
 
@@ -116,6 +116,68 @@ Rules for structured alternatives:
 
 After each Tier 3 item is dispositioned, advance to the next.
 
+### 3b. Lint Findings
+
+After all briefing tiers are complete (or if the briefing was already fully triaged), check for unprocessed lint findings.
+
+Read the `lint-report` page via `get_page`. Compare its `updated` timestamp against the `last_triaged` field in lint-report frontmatter. If `last_triaged` does not exist or `updated` > `last_triaged`, there are new findings to triage.
+
+If no new findings, skip to Step 4.
+
+Present lint findings grouped by type, using the same tier system:
+
+#### Alias Fixes — Tier 1 (batch)
+
+Present as a batch summary table:
+
+```
+| # | Term | Occurrences | Existing Page | Action |
+|---|---|---|---|---|
+| 1 | TeamApt | 67 | TeamApt Limited | Add alias |
+| 2 | Mastercard | 11 | MasterCard | Add alias (casing) |
+| ... | ... | ... | ... | ... |
+```
+
+The user responds:
+- **Approve all** — "ok" or "approved". Execute all alias fixes via `update_page` (add alias to existing page frontmatter).
+- **Exclude items** — "skip 3" or "all except 3". Execute the rest.
+
+After execution, report: "Fixed N aliases: [list]."
+
+#### Concept Gaps — Tier 2 or Tier 3 (one at a time)
+
+Present high-value gaps (10+ occurrences) one at a time with numbered options:
+
+```
+1. Create — create concept page for [term] with content derived from [N] existing references
+2. Skip — not worth a page right now
+3. Alias — this is actually a variant of [existing page]
+```
+
+The user responds with a number. On `1`, execute `create_page` with type `["concept"]`, summary and body derived from existing references found via `search`. On `3`, user names the target page and the alias is added.
+
+Medium-value gaps (5–9 occurrences) are presented as a batch table after high-value items, with the option to pull individual items out for creation.
+
+#### Synthesis Candidates — Tier 3 (one at a time)
+
+Present each candidate with full context:
+1. Proposed title
+2. Key pages and source count (from lint-report)
+3. Why this synthesis matters (cross-cutting value)
+4. Numbered options:
+
+```
+1. Create — synthesize now from listed key pages
+2. Defer — not yet, revisit next lint cycle
+3. Skip — not valuable
+```
+
+On `1`, the triage client creates the synthesis page via `create_page` (type `["synthesis"]`), assembling content from the listed key pages via `get_page` and `search`.
+
+#### Stale Claims — Tier 1 (batch)
+
+Present as a batch table (same as Awareness items). Typically "noted" — stale claims resolve on next ingest cycle. User can pull items out if a specific page needs immediate attention.
+
 ### 4. Execute
 
 For each dispositioned item:
@@ -139,6 +201,8 @@ After execution, append a `## Triage Results` section to the briefing page via `
 
 Valid dispositions: `approved`, `overridden`, `held`, `discarded`, `noted`.
 
+For lint findings: update the `lint-report` page frontmatter with `last_triaged: [ISO-8601 timestamp]` via `update_page`. This marks the findings as processed so they are not re-presented on the next triage.
+
 ### 6. Report
 
 After all items are dispositioned and executed, provide a brief summary:
@@ -149,10 +213,13 @@ After all items are dispositioned and executed, provide a brief summary:
 - Items held: N
 - Actions executed: list concrete actions taken
 - Commitments created: list with page titles
+- Lint findings processed: N alias fixes, N concept pages created, N syntheses created
 
 ## Notes
 
 - The client assembles context at triage time, not at briefing creation time. This ensures all context is current — signals may have arrived between briefing creation and triage.
 - The Improve phase of the heartbeat reads the Triage Results table to calibrate. Overrides (where the user rejected the AI's recommendation) are the primary learning signal. Tier 1 pull-outs (items the user moved from auto-advance to individual review) are a secondary signal — they indicate the item should have been a Decision item.
 - Held items can be revisited by running triage again — the client checks which items lack a disposition in the Triage Results table.
+- Lint findings are surfaced directly by the triage client, not folded into the briefing. This decouples lint timing from the briefing tick — findings appear at the next triage session after lint runs, regardless of when the briefing was created.
+- Completed lint fixes (alias additions, page creations) will not appear in the next lint run, closing the loop automatically. No manual tracking needed beyond the `last_triaged` timestamp.
 - No new brain MCP tools are needed. Triage uses existing tools: `get_page`, `update_page`, `search`, `create_page`.
