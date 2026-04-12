@@ -1,13 +1,13 @@
 ---
-title: source-config-google-drive
 type:
   - "source-config"
+title: source-config-google-drive
+created: "2026-04-12T20:46:37Z"
+summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
+updated: "2026-04-12T21:14:10Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T00:00:00Z"
-created: "2026-04-12T20:46:37Z"
-updated: "2026-04-12T20:46:37Z"
-summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
+last_processed: "2026-04-12T21:10:00Z"
 ---
 
 ## Connection
