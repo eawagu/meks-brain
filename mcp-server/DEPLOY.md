@@ -168,7 +168,7 @@ claude mcp add brain --transport http \
 ## Token security
 
 - **TOKEN_READ**: Grants search, get_page, list_commitments, get_stats, check_ingress, get_config
-- **TOKEN_WRITE**: Grants all read tools plus create_page, update_page, delete_page, mark_processed, append_log, update_config
+- **TOKEN_WRITE**: Grants all read tools plus create_page, update_page, delete_page, mark_processed, capture_note, update_config
 - Rotate tokens by updating `.env` and restarting the server
 - OAuth login page accepts either token as the passphrase — the matching access level is returned to Claude
 - All operations are logged to the `audit_log` table in Postgres

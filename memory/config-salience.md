@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-12T21:26:15Z"
+updated: "2026-04-12T22:15:14Z"
 cssclasses:
   - "config"
 ---
@@ -119,3 +119,8 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 ## Tuning Log
 
 *(Tuples appended by the Improve phase, triage client, and ingest pipeline)*
+
+- [2026-04-12, B2, acted, pattern_significance]
+- [2026-04-12, B3, acted, accountability_alignment]
+- [2026-04-12, B4, acted, urgency]
+- [2026-04-12, B5, acted, urgency]

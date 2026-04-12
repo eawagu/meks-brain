@@ -263,20 +263,11 @@ def pdf_to_md(filepath: str) -> str:
 
 
 def image_to_md(filepath: str) -> str:
-    """OCR an image using tesseract."""
-    tesseract_cmd = os.environ.get("TESSERACT_CMD", "tesseract")
-    result = subprocess.run(
-        [tesseract_cmd, filepath, "stdout", "-l", "eng", "--psm", "1"],
-        capture_output=True, timeout=120
+    """Images are handled natively by Claude vision via read_ingress — should not reach converter."""
+    raise RuntimeError(
+        f"Image files are processed via Claude vision, not converter.py. "
+        f"This path should not be reached: {filepath}"
     )
-    if result.returncode != 0:
-        stderr = result.stderr.decode("utf-8", errors="replace") if result.stderr else ""
-        raise RuntimeError(f"tesseract failed: {stderr}")
-
-    text = result.stdout.decode("utf-8", errors="replace").strip() if result.stdout else ""
-    if not text:
-        return f"*[Image: {Path(filepath).name} — no text detected by OCR]*"
-    return text
 
 
 def eml_to_md(filepath: str) -> str:

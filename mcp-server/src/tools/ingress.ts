@@ -134,12 +134,26 @@ export const scanIngress: ToolDef = {
   },
 };
 
+// Image extensions handled natively (returned as MCP image content blocks for Claude vision)
+const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".tiff", ".tif", ".bmp", ".webp", ".gif"]);
+const IMAGE_MIME: Record<string, string> = {
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".tiff": "image/tiff",
+  ".tif": "image/tiff",
+  ".bmp": "image/bmp",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
+};
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 5MB — oversized images moved to review/
+
 // ─── read_ingress ─────────────────────────────────────────────
 
 export const readIngress: ToolDef = {
   name: "read_ingress",
   description:
-    "Read a file from the ingress folder, converting it to markdown on the fly. Supports all common formats: text, documents (docx, doc, rtf, epub), slides (pptx, ppt), spreadsheets (xlsx, xls), PDF, images (OCR), email (eml, msg), audio/video (transcription), and archives (zip, tar.gz, rar, 7z). Unknown formats return an error and the file is moved to review/.",
+    "Read a file from the ingress folder, converting it to markdown on the fly. Supports all common formats: text, documents (docx, doc, rtf, epub), slides (pptx, ppt), spreadsheets (xlsx, xls), PDF, images (returned as vision content for Claude to process directly), email (eml, msg), audio/video (transcription), and archives (zip, tar.gz, rar, 7z). Unknown formats return an error and the file is moved to review/.",
   schema: z.object({
     file_path: z
       .string()
@@ -165,6 +179,52 @@ export const readIngress: ToolDef = {
     }
 
     const stat = await fs.stat(resolved);
+    const ext = path.extname(file_path).toLowerCase();
+
+    // ── Image files: return as MCP image content block for Claude vision ──
+    if (IMAGE_EXTS.has(ext)) {
+      if (stat.size > MAX_IMAGE_BYTES) {
+        const reviewDest = path.join(config.ingressReviewPath, file_path);
+        await fs.mkdir(path.dirname(reviewDest), { recursive: true });
+        try {
+          await fs.rename(resolved, reviewDest);
+        } catch {
+          await fs.copyFile(resolved, reviewDest);
+          await fs.unlink(resolved);
+        }
+        return {
+          file_path,
+          error: "image_too_large",
+          max_bytes: MAX_IMAGE_BYTES,
+          actual_bytes: stat.size,
+          moved_to: path.relative(config.ingressPath, reviewDest),
+          message: `Image exceeds 5MB limit (${(stat.size / 1024 / 1024).toFixed(1)}MB) — moved to review/ for manual processing`,
+        };
+      }
+
+      const data = await fs.readFile(resolved);
+      const mimeType = IMAGE_MIME[ext] || "image/jpeg";
+
+      return {
+        _content: [
+          {
+            type: "image" as const,
+            data: data.toString("base64"),
+            mimeType,
+          },
+          {
+            type: "text" as const,
+            text: JSON.stringify({
+              file_path,
+              size: stat.size,
+              modified: stat.mtime.toISOString(),
+              format: "image",
+              mimeType,
+            }),
+          },
+        ],
+      };
+    }
 
     try {
       const { stdout, stderr } = await execFileAsync(

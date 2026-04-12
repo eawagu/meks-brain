@@ -5,15 +5,15 @@ import { config } from "./config.js";
 const execAsync = promisify(exec);
 
 /**
- * Stage changed files in memory/ and log.md, then commit with a descriptive message.
+ * Stage all changed files in the vault (respects .gitignore), then commit with a descriptive message.
  * No-ops if there are no changes to commit.
  */
 export async function gitCommit(message: string): Promise<boolean> {
   const cwd = config.vaultPath;
 
   try {
-    // Stage memory/ and log.md
-    await execAsync("git add memory/ log.md .trash/", { cwd });
+    // Stage memory/
+    await execAsync("git add memory/ .trash/", { cwd });
 
     // Check if there's anything staged
     const { stdout: status } = await execAsync(

@@ -18,8 +18,7 @@ MUST complete before any other action, including responding to the user's messag
    - Page counts by type
    - 10 most recently updated pages (title, type, updated)
    - Open commitments (status: open, ordered by due date)
-2. Read last 10 entries in `log.md`
-3. Read `lint-report.md` (skip if file does not exist)
+2. Read `lint-report.md` (skip if file does not exist)
 
 ---
 
@@ -29,7 +28,6 @@ MUST complete before any other action, including responding to the user's messag
 CLAUDE.md              ← this file
 .claude/agents/        ← custom agents (legacy — MCP server is now the single write authority)
 dashboard.md           ← Dataview queries (human browsing, do not edit)
-log.md                 ← operations log (append-only)
 lint-report.md         ← judgment check output
 memory/                ← all brain pages (flat, no subfolders)
 ```
@@ -192,7 +190,7 @@ cssclasses: [briefing]
 **Rules:**
 - Title convention: `briefing-YYYY-MM-DD`. One page per day — only the first heartbeat tick after 06:00 WAT produces a full briefing.
 - On creation, the heartbeat updates the previous day's briefing page to `status: superseded`.
-- Decision items follow Ask → Signal → Implication format (config-briefing). Awareness items follow Signal → Implication.
+- Decision items follow the format defined in config-briefing. Awareness items follow the format defined in config-briefing.
 - Items are ordered by salience score (config-salience), decision items first.
 - The heartbeat Perceive phase MUST exclude briefing pages from retrieval (`type_filter` must not include `briefing`) to avoid circularity.
 - The Improve phase queries briefing pages to compare what was surfaced vs. what was acted on — this is the only retrieval path that reads briefing pages.
@@ -228,7 +226,7 @@ updated: YYYY-MM-DD
 - Directives MUST live under a `## Directives` heading.
 - Each directive is a single bullet point — one rule per bullet.
 - Order implies priority: when two directives conflict, the earlier one wins.
-- Adding, removing, or modifying directives = editing the bullet list (through Dispatch or direct edit). The overall page structure does not change.
+- Adding, removing, or modifying directives = editing the bullet list via `update_page`. The overall page structure does not change.
 - The heartbeat loads the `## Directives` section for each source before checking it for deltas.
 - `## Connection` and `## Notes` are stable sections — the heartbeat reads Connection for access details, Notes for context.
 
@@ -248,16 +246,15 @@ No pauses, no user interaction. Default for scheduled processing.
    - If page exists: rewrite to incorporate (not append). When new info contradicts existing content, add the competing frame with evidence — do not overwrite.
    - If page does not exist: create it.
    - Run semantic similarity search via pgvector against full brain. Update or cross-link related pages not explicitly referenced in the source.
-4. **Log** — append to `log.md`: timestamp, source file, pages created (list), pages updated (list), cross-references discovered, contradictions flagged
-5. **Mark processed** — upsert Postgres record for this source file: file path, file modification timestamp, ingested timestamp. On subsequent scans, a file is "new" if no Postgres record exists for its path, and "modified" if the file's modification timestamp is newer than the recorded one. Modified files are re-ingested through the full pipeline (steps 1–5); the existing source page is updated, not duplicated.
+4. **Mark processed** — upsert Postgres record for this source file: file path, file modification timestamp, ingested timestamp. On subsequent scans, a file is "new" if no Postgres record exists for its path, and "modified" if the file's modification timestamp is newer than the recorded one. Modified files are re-ingested through the full pipeline (steps 1–4); the existing source page is updated, not duplicated.
 
 The scan uses a last-scan timestamp (stored in Postgres) to filter: only files with filesystem modification timestamps newer than the last scan are candidates. Candidates are then checked against Postgres for new-or-modified status. This scales regardless of how many files accumulate in the ingress folder — the scan always finds only what changed since it last looked.
 
-Batch express produces a summary report at end: files processed, pages created, pages updated, contradictions flagged, with pointer to log.md.
+Batch express produces a summary report at end: files processed, pages created, pages updated, contradictions flagged.
 
 ### Full Ingest (conversational)
 
-Same steps as express, but pause after step 1 for discussion. User guides emphasis, reviews proposed memory changes. Resume steps 2–5 after user confirmation.
+Same steps as express, but pause after step 1 for discussion. User guides emphasis, reviews proposed memory changes. Resume steps 2–4 after user confirmation.
 
 ### Note Capture
 
@@ -293,11 +290,10 @@ All page creates, updates, and deletes in `memory/` MUST go through the brain MC
 The MCP server enforces on every write operation:
 1. **Frontmatter validation** — required fields present, type values valid, type-specific fields match declared types
 2. **Postgres sync** — content, frontmatter, and embeddings synced to Postgres index
-3. **Orphan detection** — flag pages with zero inbound wiki-links after update (flag in log, do not delete)
+3. **Orphan detection** — flag pages with zero inbound wiki-links after update (warn in git commit message, do not delete)
 4. **Git commit** — one commit per operation that changes vault state. Commit message describes what changed (e.g., "express-ingest: 3 files, 2 entities created, 1 synthesis updated"). No-delta operations produce no commit.
-5. **Log entry** — append to `log.md` per the format below
 
-This is a code boundary, not a guideline. Validation, Postgres sync, embeddings, and git commits are enforced in the MCP server's write tools — structural violations are impossible regardless of which client invokes the operation.
+This is a code boundary, not a guideline. Validation, Postgres sync, embeddings, and git commits are enforced in the MCP server's write tools — structural violations are impossible regardless of which client invokes the operation. Git commit history serves as the audit trail for all operations.
 
 ---
 
@@ -331,22 +327,5 @@ The exec assistant reads from and writes to this brain. It is not a foreign syst
 
 **Write:** All page modifications go through the brain MCP server. The exec assistant invokes MCP write tools (`create_page`, `update_page`, `delete_page`) for commitment creates/updates, entity updates from signal-check, and any other page modifications. Raw material can also be dropped in the OneDrive folder for express ingest.
 
-**Config:** This brain governs the exec assistant's config pages (`type: config`) with full understanding. Config pages define: heartbeat logic, briefing format (Ask → Signal → Implication structure, salience ordering), triage thresholds, salience weights. The brain can propose behavioral modifications to any of these. Human approves. Config changes go through the MCP server like any other page modification.
+**Config:** This brain governs the exec assistant's config pages (`type: config`) with full understanding. Config pages define: heartbeat logic, briefing format, triage protocol, salience weights, task prompts, page type registry. The brain can propose behavioral modifications to any of these. Human approves. Config changes go through the MCP server like any other page modification.
 
----
-
-## log.md Format
-
-Append-only. One entry per operation.
-
-```markdown
-## YYYY-MM-DD HH:MM UTC — [operation type]
-
-**Source:** [filename or description]
-**Created:** [list of page titles]
-**Updated:** [list of page titles]
-**Cross-references discovered:** [list or "none"]
-**Contradictions flagged:** [list or "none"]
-```
-
-Operation types: `express-ingest`, `full-ingest`, `inbox-processing`, `structural-lint`, `judgment-lint`, `synthesis-created`, `config-updated`.

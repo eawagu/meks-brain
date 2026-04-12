@@ -323,4 +323,174 @@ export const triage: ToolDef = {
   },
 };
 
-export const readTools = [search, getPage, listCommitments, getStats, checkIngress, triage];
+// ─── lint_queries ─────────────────────────────────────────────
+export const lintQueries: ToolDef = {
+  name: "lint_queries",
+  description:
+    "Run structured judgment-lint queries against the brain. Returns candidates for review: stale claims, concept gaps, synthesis candidates, or stale syntheses. Used by the judgment-lint scheduled task and on-demand analysis.",
+  schema: z.object({
+    query_type: z
+      .enum([
+        "stale_claims",
+        "concept_gaps",
+        "synthesis_candidates",
+        "stale_syntheses",
+      ])
+      .describe(
+        "Which lint check to run: stale_claims (entity/concept pages outdated by newer sources), concept_gaps (wiki-linked terms without their own page), synthesis_candidates (pages with many source references but no synthesis), stale_syntheses (syntheses outdated by newer related pages)"
+      ),
+    min_occurrences: z
+      .number()
+      .int()
+      .min(1)
+      .default(3)
+      .describe("Minimum wiki-link occurrences to flag a concept gap (concept_gaps only, default 3)"),
+    min_sources: z
+      .number()
+      .int()
+      .min(1)
+      .default(3)
+      .describe("Minimum source references to flag a synthesis candidate (synthesis_candidates only, default 3)"),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(100)
+      .default(50)
+      .describe("Maximum number of results (default 50)"),
+  }),
+  accessLevel: "read",
+  handler: async (params) => {
+    const { query_type, min_occurrences, min_sources, limit } = params;
+
+    switch (query_type) {
+      case "stale_claims": {
+        const result = await query(
+          `SELECT p.id, p.title, p.type, p.updated_at AS page_updated,
+                  MAX(s.updated_at) AS newest_source_updated,
+                  EXTRACT(DAY FROM MAX(s.updated_at) - p.updated_at)::int AS gap_days
+           FROM pages p
+           JOIN pages s ON s.body LIKE '%[[' || p.title || ']]%'
+             AND 'source' = ANY(s.type) AND s.deleted = FALSE
+           WHERE p.deleted = FALSE
+             AND (p.type && ARRAY['entity','concept'])
+           GROUP BY p.id, p.title, p.type, p.updated_at
+           HAVING MAX(s.updated_at) > p.updated_at
+           ORDER BY EXTRACT(DAY FROM MAX(s.updated_at) - p.updated_at) DESC
+           LIMIT $1`,
+          [limit]
+        );
+        return {
+          query_type,
+          count: result.rows.length,
+          results: result.rows.map((r) => ({
+            id: r.id,
+            title: r.title,
+            type: r.type,
+            page_updated: r.page_updated,
+            newest_source_updated: r.newest_source_updated,
+            gap_days: r.gap_days,
+          })),
+        };
+      }
+
+      case "concept_gaps": {
+        const result = await query(
+          `WITH links AS (
+             SELECT DISTINCT
+               (regexp_matches(body, '\\[\\[([^\\]]+)\\]\\]', 'g'))[1] AS term,
+               id AS page_id
+             FROM pages WHERE deleted = FALSE
+           )
+           SELECT l.term, COUNT(DISTINCT l.page_id) AS occurrence_count,
+                  (ARRAY_AGG(DISTINCT p.title ORDER BY p.title))[1:5] AS sample_pages
+           FROM links l
+           LEFT JOIN pages existing ON existing.title = l.term AND existing.deleted = FALSE
+           JOIN pages p ON p.id = l.page_id
+           WHERE existing.id IS NULL
+           GROUP BY l.term
+           HAVING COUNT(DISTINCT l.page_id) >= $1
+           ORDER BY COUNT(DISTINCT l.page_id) DESC
+           LIMIT $2`,
+          [min_occurrences, limit]
+        );
+        return {
+          query_type,
+          count: result.rows.length,
+          results: result.rows.map((r) => ({
+            term: r.term,
+            occurrence_count: parseInt(r.occurrence_count),
+            sample_pages: r.sample_pages,
+          })),
+        };
+      }
+
+      case "synthesis_candidates": {
+        const result = await query(
+          `SELECT p.id, p.title, p.type, COUNT(DISTINCT s.id) AS source_count
+           FROM pages p
+           JOIN pages s ON s.body LIKE '%[[' || p.title || ']]%'
+             AND 'source' = ANY(s.type) AND s.deleted = FALSE
+           WHERE p.deleted = FALSE
+             AND (p.type && ARRAY['entity','concept'])
+             AND NOT EXISTS (
+               SELECT 1 FROM pages syn
+               WHERE 'synthesis' = ANY(syn.type)
+                 AND syn.deleted = FALSE
+                 AND syn.body LIKE '%[[' || p.title || ']]%'
+             )
+           GROUP BY p.id, p.title, p.type
+           HAVING COUNT(DISTINCT s.id) >= $1
+           ORDER BY COUNT(DISTINCT s.id) DESC
+           LIMIT $2`,
+          [min_sources, limit]
+        );
+        return {
+          query_type,
+          count: result.rows.length,
+          results: result.rows.map((r) => ({
+            id: r.id,
+            title: r.title,
+            type: r.type,
+            source_count: parseInt(r.source_count),
+          })),
+        };
+      }
+
+      case "stale_syntheses": {
+        const result = await query(
+          `WITH syn_refs AS (
+             SELECT s.id AS synthesis_id, s.title AS synthesis_title,
+                    s.updated_at AS synthesis_updated,
+                    (regexp_matches(s.body, '\\[\\[([^\\]]+)\\]\\]', 'g'))[1] AS ref_title
+             FROM pages s
+             WHERE 'synthesis' = ANY(s.type) AND s.deleted = FALSE
+           )
+           SELECT sr.synthesis_id, sr.synthesis_title, sr.synthesis_updated,
+                  MAX(p.updated_at) AS newest_related_updated,
+                  EXTRACT(DAY FROM MAX(p.updated_at) - sr.synthesis_updated)::int AS gap_days
+           FROM syn_refs sr
+           JOIN pages p ON p.title = sr.ref_title AND p.deleted = FALSE
+           GROUP BY sr.synthesis_id, sr.synthesis_title, sr.synthesis_updated
+           HAVING MAX(p.updated_at) > sr.synthesis_updated
+           ORDER BY EXTRACT(DAY FROM MAX(p.updated_at) - sr.synthesis_updated) DESC
+           LIMIT $1`,
+          [limit]
+        );
+        return {
+          query_type,
+          count: result.rows.length,
+          results: result.rows.map((r) => ({
+            synthesis_id: r.synthesis_id,
+            synthesis_title: r.synthesis_title,
+            synthesis_updated: r.synthesis_updated,
+            newest_related_updated: r.newest_related_updated,
+            gap_days: r.gap_days,
+          })),
+        };
+      }
+    }
+  },
+};
+
+export const readTools = [search, getPage, listCommitments, getStats, checkIngress, triage, lintQueries];

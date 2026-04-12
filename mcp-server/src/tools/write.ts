@@ -34,101 +34,164 @@ function sanitizeFilename(title: string): string {
     .slice(0, 80);
 }
 
-const VALID_TYPES = [
-  "entity",
-  "concept",
-  "source",
-  "synthesis",
-  "commitment",
-  "source-config",
-  "config",
-  "situation",
-  "briefing",
-];
+// ─── Data-driven type & frontmatter validation ───────────────
 
-function validateTypes(types: string[]): void {
-  for (const t of types) {
-    if (!VALID_TYPES.includes(t)) {
-      throw new Error(`Invalid page type: "${t}". Valid types: ${VALID_TYPES.join(", ")}`);
-    }
-  }
+interface FieldSpec {
+  name: string;
+  type: "string" | "string[]" | "date" | "enum";
+  values?: string[];
+  required: boolean;
 }
 
-function validateFrontmatter(fm: Record<string, any>, types: string[]): void {
-  // Commitment-specific required fields
-  if (types.includes("commitment")) {
-    for (const f of ["owner", "due", "status"]) {
-      if (!fm[f]) throw new Error(`Commitment pages require frontmatter field: ${f}`);
+interface PageTypeConfig {
+  commonFields: FieldSpec[];
+  types: Map<string, FieldSpec[]>;
+}
+
+function parseFieldSpec(line: string): FieldSpec | null {
+  // Parse: "- name: type, required|optional" or "- name: enum [v1, v2], required|optional"
+  const match = line.match(
+    /^-\s+(\w[\w_]*)\s*:\s*(string\[\]|string|date|enum\s*\[([^\]]+)\])\s*,\s*(required|optional)\s*$/
+  );
+  if (!match) return null;
+
+  const name = match[1];
+  const rawType = match[2];
+  const required = match[4] === "required";
+
+  if (rawType.startsWith("enum")) {
+    const values = match[3].split(",").map((v) => v.trim());
+    return { name, type: "enum", values, required };
+  }
+
+  return { name, type: rawType as "string" | "string[]" | "date", required };
+}
+
+function parsePageTypeConfig(body: string): PageTypeConfig {
+  const config: PageTypeConfig = { commonFields: [], types: new Map() };
+  let currentSection: string | null = null;
+
+  for (const line of body.split("\n")) {
+    const heading = line.match(/^##\s+(.+)$/);
+    if (heading) {
+      currentSection = heading[1].trim().toLowerCase();
+      if (currentSection !== "common") {
+        config.types.set(currentSection, []);
+      }
+      continue;
     }
-    const validStatuses = ["open", "fulfilled", "broken", "cancelled"];
-    if (fm.status && !validStatuses.includes(fm.status)) {
-      throw new Error(`Commitment status must be one of: ${validStatuses.join(", ")}`);
+
+    if (!currentSection) continue;
+
+    const field = parseFieldSpec(line.trim());
+    if (!field) continue;
+
+    if (currentSection === "common") {
+      config.commonFields.push(field);
+    } else {
+      config.types.get(currentSection)!.push(field);
     }
   }
 
-  // Synthesis-specific
-  if (types.includes("synthesis")) {
-    if (fm.coverage && !["high", "medium", "low"].includes(fm.coverage)) {
-      throw new Error("Synthesis coverage must be: high, medium, or low");
+  return config;
+}
+
+async function loadPageTypeConfig(): Promise<PageTypeConfig> {
+  const result = await query(
+    `SELECT body FROM pages WHERE title = 'config-page-types' AND deleted = FALSE`,
+    []
+  );
+  if (result.rows.length === 0) {
+    throw new Error(
+      "config-page-types page not found in brain — cannot validate. Create this config page to define valid types."
+    );
+  }
+  return parsePageTypeConfig(result.rows[0].body);
+}
+
+async function validateTypes(types: string[]): Promise<PageTypeConfig> {
+  const ptc = await loadPageTypeConfig();
+  for (const t of types) {
+    if (!ptc.types.has(t)) {
+      throw new Error(
+        `Invalid page type: "${t}". Valid types: ${[...ptc.types.keys()].join(", ")}`
+      );
     }
-    if (fm.status) {
-      const validStatuses = ["draft", "current", "superseded"];
-      if (!validStatuses.includes(fm.status)) {
-        throw new Error(`Synthesis status must be one of: ${validStatuses.join(", ")}`);
+  }
+  return ptc;
+}
+
+function validateFrontmatter(
+  fm: Record<string, any>,
+  types: string[],
+  ptc: PageTypeConfig
+): void {
+  // Collect all fields declared across the page's types
+  const allowedTypeFields = new Map<string, FieldSpec>();
+  for (const t of types) {
+    const fields = ptc.types.get(t) || [];
+    for (const f of fields) {
+      // If same field appears on multiple types, the first wins (most restrictive)
+      if (!allowedTypeFields.has(f.name)) {
+        allowedTypeFields.set(f.name, f);
       }
     }
   }
 
-  // Situation-specific
-  if (types.includes("situation")) {
-    for (const f of ["status", "accountability", "role"]) {
-      if (!fm[f]) throw new Error(`Situation pages require frontmatter field: ${f}`);
-    }
-    const validStatuses = ["developing", "stable", "resolving", "retired"];
-    if (!validStatuses.includes(fm.status)) {
-      throw new Error(`Situation status must be one of: ${validStatuses.join(", ")}`);
+  // Common field names (skip these in type-specific checks)
+  const commonNames = new Set(ptc.commonFields.map((f) => f.name));
+  // Shared optional fields that can appear on any page (Obsidian-native)
+  const sharedOptional = new Set([
+    "aliases",
+    "cssclasses",
+    "tags",
+    "summary",
+    "related",
+  ]);
+
+  // Check required fields are present
+  for (const [name, spec] of allowedTypeFields) {
+    if (spec.required && !fm[name]) {
+      const ownerTypes = types.filter((t) =>
+        (ptc.types.get(t) || []).some((f) => f.name === name && f.required)
+      );
+      throw new Error(
+        `${ownerTypes.join("/")} pages require frontmatter field: ${name}`
+      );
     }
   }
 
-  // Briefing-specific
-  if (types.includes("briefing")) {
-    if (!fm.status) throw new Error("Briefing pages require frontmatter field: status");
-    const validStatuses = ["current", "superseded"];
-    if (!validStatuses.includes(fm.status)) {
-      throw new Error(`Briefing status must be one of: ${validStatuses.join(", ")}`);
-    }
-  }
-
-  // Prevent commitment-only fields on non-commitment/non-situation pages
-  // "role" and "accountability" are shared between commitment and situation
-  const commitmentExclusiveFields = ["owner", "counterparty", "due"];
-  const sharedCommitSituationFields = ["role", "accountability"];
-  if (!types.includes("commitment")) {
-    for (const f of commitmentExclusiveFields) {
-      if (fm[f] !== undefined) {
-        throw new Error(`Field "${f}" is only valid on commitment pages`);
-      }
-    }
-  }
-  if (!types.includes("commitment") && !types.includes("situation")) {
-    for (const f of sharedCommitSituationFields) {
-      if (fm[f] !== undefined) {
-        throw new Error(`Field "${f}" is only valid on commitment or situation pages`);
+  // Check enum values
+  for (const [name, spec] of allowedTypeFields) {
+    if (spec.type === "enum" && fm[name] && spec.values) {
+      if (!spec.values.includes(fm[name])) {
+        throw new Error(
+          `Field "${name}" must be one of: ${spec.values.join(", ")}`
+        );
       }
     }
   }
 
-  // status field — valid on commitment, synthesis, and situation only
-  if (fm.status && !types.includes("commitment") && !types.includes("synthesis") && !types.includes("situation") && !types.includes("briefing")) {
-    throw new Error('Field "status" is only valid on commitment, synthesis, or situation pages');
-  }
+  // Check for fields that don't belong on this page's types
+  for (const key of Object.keys(fm)) {
+    if (commonNames.has(key)) continue;
+    if (sharedOptional.has(key)) continue;
+    if (allowedTypeFields.has(key)) continue;
 
-  // Source-specific
-  if (types.includes("source") && !fm.source_path) {
-    throw new Error("Source pages require frontmatter field: source_path");
-  }
-  if (!types.includes("source") && fm.source_path !== undefined) {
-    throw new Error('Field "source_path" is only valid on source pages');
+    // Check if this field belongs to ANY type (to give a useful error)
+    const ownerTypes: string[] = [];
+    for (const [typeName, fields] of ptc.types) {
+      if (fields.some((f) => f.name === key)) {
+        ownerTypes.push(typeName);
+      }
+    }
+
+    if (ownerTypes.length > 0) {
+      throw new Error(
+        `Field "${key}" is only valid on ${ownerTypes.join(" or ")} pages`
+      );
+    }
+    // Unknown fields not in any type spec are allowed (forward-compatible)
   }
 }
 
@@ -195,7 +258,7 @@ export const createPage: ToolDef = {
   handler: async (params) => {
     const { title, type: types, body, frontmatter: extraFm, summary } = params;
 
-    validateTypes(types);
+    const ptc = await validateTypes(types);
 
     const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
     const fullFm: Record<string, any> = {
@@ -208,7 +271,7 @@ export const createPage: ToolDef = {
     };
     if (summary) fullFm.summary = summary;
 
-    validateFrontmatter(fullFm, types);
+    validateFrontmatter(fullFm, types, ptc);
 
     // Check for duplicate
     const existing = await query(
@@ -302,8 +365,8 @@ export const updatePage: ToolDef = {
     };
 
     const types = mergedFm.type || page.type;
-    validateTypes(types);
-    validateFrontmatter(mergedFm, types);
+    const ptc = await validateTypes(types);
+    validateFrontmatter(mergedFm, types, ptc);
 
     const effectiveSummary = summary ?? page.summary;
     if (effectiveSummary) mergedFm.summary = effectiveSummary;
@@ -429,70 +492,6 @@ export const markProcessed: ToolDef = {
   },
 };
 
-// ─── append_log ────────────────────────────────────────────────
-export const appendLog: ToolDef = {
-  name: "append_log",
-  description:
-    "Append an entry to the brain's log.md. Follows the standard log format: timestamp, operation type, source, pages created/updated, cross-references, contradictions.",
-  schema: z.object({
-    operation_type: z
-      .enum([
-        "express-ingest",
-        "full-ingest",
-        "inbox-processing",
-        "structural-lint",
-        "judgment-lint",
-        "synthesis-created",
-        "config-updated",
-      ])
-      .describe("Operation type"),
-    source: z.string().describe("Source filename or description"),
-    pages_created: z.array(z.string()).default([]).describe("Titles of pages created"),
-    pages_updated: z.array(z.string()).default([]).describe("Titles of pages updated"),
-    cross_references: z
-      .array(z.string())
-      .default([])
-      .describe("Cross-references discovered"),
-    contradictions: z
-      .array(z.string())
-      .default([])
-      .describe("Contradictions flagged"),
-  }),
-  accessLevel: "write",
-  handler: async (params) => {
-    const {
-      operation_type,
-      source,
-      pages_created,
-      pages_updated,
-      cross_references,
-      contradictions,
-    } = params;
-
-    const now = new Date();
-    const timestamp = now.toISOString().replace("T", " ").replace(/\.\d+Z/, " UTC");
-
-    const entry = [
-      `\n## ${timestamp} — ${operation_type}\n`,
-      `**Source:** ${source}`,
-      `**Created:** ${pages_created.length > 0 ? pages_created.join(", ") : "none"}`,
-      `**Updated:** ${pages_updated.length > 0 ? pages_updated.join(", ") : "none"}`,
-      `**Cross-references discovered:** ${cross_references.length > 0 ? cross_references.join(", ") : "none"}`,
-      `**Contradictions flagged:** ${contradictions.length > 0 ? contradictions.join(", ") : "none"}`,
-    ].join("\n");
-
-    await fs.appendFile(config.logPath, entry + "\n", "utf-8");
-
-    // Git commit (log entries are lightweight — commit bundles with the operation that triggered them)
-    await gitCommit(`log: ${operation_type} — ${source}`);
-
-    return {
-      message: `Logged ${operation_type} for "${source}"`,
-      timestamp,
-    };
-  },
-};
-
 // ─── capture_note ─────────────────────────────────────────────
 export const captureNote: ToolDef = {
   name: "capture_note",
@@ -513,4 +512,4 @@ export const captureNote: ToolDef = {
   },
 };
 
-export const writeTools = [createPage, updatePage, deletePage, markProcessed, appendLog, captureNote];
+export const writeTools = [createPage, updatePage, deletePage, markProcessed, captureNote];

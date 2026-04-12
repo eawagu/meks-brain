@@ -25,6 +25,11 @@ function createMcpServer(): McpServer {
       tool.schema.shape,
       async (params) => {
         const result = await tool.handler(params);
+        // If the handler returns a _content array, pass it through directly
+        // (used by read_ingress for image files — returns image + metadata content blocks)
+        if (result?._content) {
+          return { content: result._content };
+        }
         return {
           content: [
             {

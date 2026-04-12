@@ -23,7 +23,6 @@ export const config = {
   // Vault
   vaultPath: required("VAULT_PATH"),
   memoryPath: path.join(required("VAULT_PATH"), "memory"),
-  logPath: path.join(required("VAULT_PATH"), "log.md"),
   inboxPath: path.join(required("VAULT_PATH"), "inbox.md"),
 
   // Ingress (OneDrive-synced folder for raw sources)
