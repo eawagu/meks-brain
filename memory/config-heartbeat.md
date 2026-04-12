@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
-summary: Heartbeat configuration — cadence, phase order, briefing tick detection (timezone from config-user, existence check), error isolation, early exit rules.
-updated: "2026-04-12T03:08:37Z"
+summary: "Heartbeat configuration — cadence, phase order, briefing tick detection (timezone from config-user, existence check), error isolation, early exit rules. Lint-report integration: Perceive checks freshness, Plan classifies findings, Act folds into briefing."
+updated: "2026-04-12T08:06:06Z"
 cssclasses:
   - "config"
 ---
@@ -25,7 +25,8 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 
 ### Perceive
 - Load all source-config pages (`type: source-config`). For each source, check for deltas since `last_processed` timestamp.
-- **Early exit:** If zero deltas across all sources, skip Predict/Plan/Act. Proceed directly to Improve (to check for absence-of-signal triggers per config-salience), then exit.
+- **Lint-report freshness check:** On briefing ticks only — retrieve the `lint-report` page and compare its `updated` timestamp against the most recent briefing page's `created` timestamp. If lint-report is newer (i.e., updated since the last briefing was generated), flag it as a pending input for the Plan phase. This is a metadata check, not a full read — the Plan phase reads content only when the flag is set.
+- **Early exit:** If zero deltas across all sources AND no lint-report flag, skip Predict/Plan/Act. Proceed directly to Improve (to check for absence-of-signal triggers per config-salience), then exit.
 - For every new signal, run semantic similarity search against the full brain via pgvector — perfect cross-referencing, zero recall decay.
 - **Exclusion:** MUST NOT include `briefing` in type_filter during Perceive retrieval — briefing pages are output, not input.
 
@@ -36,13 +37,15 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - Classify each signal against triage tiers in config-salience (Immediate / Briefing / Awareness).
 - When signals contradict existing brain narratives, surface the tension — do not overwrite.
 - When multiple options exist for an action item, pre-compare alternatives with tradeoffs and a recommendation.
+- **Lint-report integration (briefing ticks only, when flag is set):** Read lint-report body. Select top findings by priority: (1) alias fixes — batch as a single Awareness item with count, (2) high-value concept gaps — one Decision item per gap if 10+ occurrences, Awareness otherwise, (3) synthesis candidates — one Decision item per recommended synthesis, (4) stale claims — Awareness item only if any page has a gap ≥ 3 days. Apply config-salience scoring to lint-derived items the same as signal-derived items — they compete on the same salience scale, not in a separate section.
 
 ### Act
 - **Immediate tier signals:** Send triage alert to Dispatch.
 - **Briefing tier + Awareness tier signals:** Accumulate for next briefing tick.
 - **State updates:** Write new/updated commitment pages, entity updates, situation page updates to brain via MCP write tools.
 - **Briefing tick detection:** Read the briefing hour from this config and the timezone from config-user. If current hour (in configured timezone) >= briefing hour, search for `briefing-YYYY-MM-DD` (today's date). If no such page exists, this is the briefing tick.
-- **Briefing tick:** Create a briefing brain page via `create_page` (type: `["briefing"]`, title: `briefing-YYYY-MM-DD`, status: `current`). Format per config-briefing (Decision items: Ask → Signal → Recommended Action → References; Awareness items: Signal → Recommended Action → References; sequential item IDs B1, B2, etc.; ordered by salience score). Update the previous day's briefing page to `status: superseded` via `update_page`.
+- **Briefing tick:** Create a briefing brain page via `create_page` (type: `[\"briefing\"]`, title: `briefing-YYYY-MM-DD`, status: `current`). Format per config-briefing (Decision items: Ask → Signal → Recommended Action → References; Awareness items: Signal → Recommended Action → References; sequential item IDs B1, B2, etc.; ordered by salience score). Lint-derived items use `Signal: lint-report, YYYY-MM-DD` as their source reference. Update the previous day's briefing page to `status: superseded` via `update_page`.
+- **Lint-report items — user approval drives execution:** When the user approves a lint-derived Decision item (alias fix, page creation, synthesis creation), execute the action in that session via MCP write tools. Completed actions will no longer appear in the next lint run, closing the loop automatically.
 
 ### Improve
 - Compare surfaced items against user actions since last tick (acted on / dismissed / missed).
@@ -62,3 +65,4 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - Source registration is governed by source-config pages — adding/removing sources does not require changes to this config.
 - Notes are captured via `capture_note` which drops timestamped files directly into the ingress folder. The ingest phase picks them up like any other source file.
 - Timezone is read from config-user — not hardcoded. When the user travels, updating config-user propagates to all time-sensitive operations.
+- Lint-report integration adds no new scheduled tasks. The weekly judgment-lint task writes findings; the heartbeat folds them into the next briefing. User approval in the briefing session triggers execution. Completed fixes disappear from the next lint run — no manual tracking needed.
