@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
-updated: "2026-04-12T14:12:41Z"
+updated: "2026-04-12T15:14:27Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T14:09:00Z"
+last_processed: "2026-04-12T15:10:00Z"
 ---
 
 ## Connection
@@ -77,19 +77,4 @@ These are recurring patterns the heartbeat should watch for:
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
 - **AUTH FAILURE 2026-04-11T22:09 UTC:** Jira connector returned "requires authentication" — signals missed this tick. Needs user re-auth.
-- **AUTH FAILURE 2026-04-11T23:09 UTC:** Jira connector still requires authentication — second consecutive tick missed. User re-auth required.
-- **AUTH FAILURE 2026-04-12T00:00 UTC:** Jira connector still requires authentication — third consecutive tick missed. User re-auth required. All Jira monitoring blind since 22:09 UTC Apr 11.
-- **AUTH FAILURE 2026-04-12T01:09 UTC:** Jira connector still requires authentication — fourth consecutive tick missed. >3 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T02:10 UTC:** Jira connector still requires authentication — fifth consecutive tick missed. >4 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T03:10 UTC:** Jira connector still requires authentication — sixth consecutive tick missed. >5 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T04:09 UTC:** Jira connector still requires authentication — seventh consecutive tick missed. >6 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T05:09 UTC:** Jira connector still requires authentication — eighth consecutive tick missed. >7 hours of complete Jira blindness. User re-auth required. Surfaced as B1 in briefing-2026-04-12.
-- **AUTH FAILURE 2026-04-12T06:10 UTC:** Jira connector still requires authentication — ninth consecutive tick missed. >8 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T07:09 UTC:** Jira connector still requires authentication — tenth consecutive tick missed. >9 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T08:09 UTC:** Jira connector still requires authentication — eleventh consecutive tick missed. >10 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T09:09 UTC:** Jira connector still requires authentication — twelfth consecutive tick missed. >11 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T10:09 UTC:** Jira connector still requires authentication — thirteenth consecutive tick missed. >12 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T11:09 UTC:** Jira connector still requires authentication — fourteenth consecutive tick missed. >13 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T12:09 UTC:** Jira connector still requires authentication — fifteenth consecutive tick missed. >14 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T13:09 UTC:** Jira connector still requires authentication — sixteenth consecutive tick missed. >15 hours of complete Jira blindness. User re-auth required.
-- **AUTH FAILURE 2026-04-12T14:09 UTC:** Jira connector still requires authentication — seventeenth consecutive tick missed. >16 hours of complete Jira blindness. User re-auth required.
+- **AUTH FAILURE 2026-04-12T15:10 UTC:** Jira connector still requires authentication — eighteenth consecutive tick missed. >17 hours of complete Jira blindness. User re-auth required.
