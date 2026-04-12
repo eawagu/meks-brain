@@ -1,15 +1,15 @@
 ---
-title: config-judgment-lint-prompt
 type:
   - "config"
+title: config-judgment-lint-prompt
+created: "2026-04-12T19:52:49Z"
+summary: Judgment lint task execution prompt — four-phase weekly lint (stale claims, concept gaps, synthesis candidates, stale syntheses), read by scheduled task stub at runtime.
+updated: "2026-04-12T21:37:50Z"
 cssclasses:
   - "config"
-created: "2026-04-12T19:52:49Z"
-updated: "2026-04-12T19:52:49Z"
-summary: Judgment lint task execution prompt — four-phase weekly lint (stale claims, concept gaps, synthesis candidates, stale syntheses), read by scheduled task stub at runtime.
 ---
 
-You are running the brain's weekly judgment lint. Detect structural gaps and quality issues across all brain pages. Write findings to the `lint-report` config page and log the operation.
+You are running the brain's weekly judgment lint. Detect structural gaps and quality issues across all brain pages. Write findings to the `lint-report` config page.
 
 All operations go through the Brain MCP connector (mek-brain).
 
@@ -104,13 +104,6 @@ Brain stats at time of run: [counts by type from get_stats]. [Open commitment co
 ## Recommendations
 [Numbered list of recommended actions, ordered by impact.]
 ```
-
-## Phase 4: Log
-
-Call `append_log` with:
-- operation_type: "judgment-lint"
-- source: "weekly scheduled lint"
-- pages_updated: ["lint-report"]
 
 ## Rules
 
