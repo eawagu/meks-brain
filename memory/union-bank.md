@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS — recurring settlement batch failures (TDSD-6276, weekend/holiday ₦20M limit); new RC91 cycle on Apr 12 (TDSD-6519, Qazim filed). MPGS settlement bank (ICA 34150)."
-updated: "2026-04-12T13:12:37Z"
+summary: "Nigerian bank on Moniepoint's ATS — recurring settlement batch failures (TDSD-6276, weekend/holiday ₦20M limit); RC91 cycle on Apr 12 (TDSD-6519) filed 13:58 WAT, resolved 14:14 WAT (~16min). MPGS settlement bank (ICA 34150)."
+updated: "2026-04-12T14:11:52Z"
 cssclasses:
   - "entity"
 ---
@@ -15,7 +15,7 @@ cssclasses:
 
 ## ATS RC91
 
-**TDSD-6519** (Apr 12, 2026): [[Qazim Adedigba]] filed RC91 failure at 14:02 WAT. Email to Union Bank FEP Administration (ITeChannels), Babajide Aloba, Toluwalogo Oladipo, Omoye Okobiemen. CC: aptpaytechnicalsupport. Victor Iyama (Union Bank Card Infrastructure) responded at 14:02 WAT requesting status reconfirmation.
+**TDSD-6519** (Apr 12, 2026): [[Qazim Adedigba]] filed RC91 failure at 13:58 WAT. Email to Union Bank FEP Administration (ITeChannels), Babajide Aloba, Toluwalogo Oladipo, Omoye Okobiemen. CC: aptpaytechnicalsupport. Victor Iyama (Union Bank Card Infrastructure) responded at 14:02 WAT requesting status reconfirmation. [[Qazim Adedigba]] confirmed resolution at 14:14 WAT: "Transactions are processing fine now." Duration: ~16 min.
 
 This is the first formally filed RC91 incident for Union Bank in the current tracking period. Part of the broader multi-bank RC91 pattern on Apr 12 ([[Stanbic Bank]], [[Access Bank]], [[Wema Bank]], Union Bank — four banks in one day). NIBSS attribution of RC91 to Moniepoint timeout (08:56 WAT Apr 12, Moses Ajani) applies to all NIBSS-routed banks including Union Bank.
 
