@@ -1073,3 +1073,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** Emeka Obiorah Awagu
 **Cross-references discovered:** Emeka Obiorah Awagu ↔ Solhigson Ltd (founder, 98% owner), Emeka Obiorah Awagu ↔ Awagu Osita Uchenna (brothers, co-directors), Solhigson Ltd ↔ Awagu Osita Uchenna (2% shareholder, co-director), All 9 source pages ↔ Emeka Obiorah Awagu, All 6 Solhigson source pages ↔ Solhigson Ltd
 **Contradictions flagged:** none
+
+## 2026-04-12 17:15:06 UTC — express-ingest
+
+**Source:** Long Image 12-04-2026 18.08.58.jpg
+**Created:** Long Image 12-04-2026 18.08.58, Celio Nigeria, The Palms Mall
+**Updated:** Opay, Emeka Obiorah Awagu
+**Cross-references discovered:** OPay — additional merchant (Celio) using OPay payment processing
+**Contradictions flagged:** none
