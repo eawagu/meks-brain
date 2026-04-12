@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
-updated: "2026-04-12T16:12:59Z"
+updated: "2026-04-12T17:13:49Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T16:09:00Z"
+last_processed: "2026-04-12T17:09:00Z"
 ---
 
 ## Connection
@@ -80,3 +80,4 @@ These are recurring patterns the heartbeat should watch for:
 - **AUTH FAILURE 2026-04-12T15:10 UTC:** Jira connector still requires authentication — eighteenth consecutive tick missed. >17 hours of complete Jira blindness. User re-auth required.
 - **AUTH FAILURE 2026-04-12T15:24 UTC:** Jira connector still requires authentication — nineteenth consecutive tick missed. >17 hours of complete Jira blindness. User re-auth required.
 - **AUTH FAILURE 2026-04-12T16:09 UTC:** Jira connector still requires authentication — twentieth consecutive tick missed. >18 hours of complete Jira blindness. User re-auth required.
+- **AUTH FAILURE 2026-04-12T17:09 UTC:** Jira connector still requires authentication — twenty-first consecutive tick missed. >19 hours of complete Jira blindness. User re-auth required.
