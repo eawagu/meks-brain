@@ -977,3 +977,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** config-heartbeat
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-12 08:14:54 UTC — inbox-processing
+
+**Source:** heartbeat tick 2026-04-12 09:09 WAT (non-briefing)
+**Created:** none
+**Updated:** Stanbic Bank ATS — Persistent RC91 Pattern, source-config-email, source-config-slack, source-config-jira, source-config-calendar
+**Cross-references discovered:** NIBSS RC91 timeout attribution → Stanbic RC91 situation, Access Bank RC91, Wema Bank RC91
+**Contradictions flagged:** NIBSS attributes RC91 to Moniepoint timeout (08:56 WAT) — contradicts longstanding framing as bank-side ATS issue. Both frames held pending engineering investigation.
