@@ -857,3 +857,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-12 00:16:17 UTC — inbox-processing
+
+**Source:** heartbeat tick 2026-04-12 ~01:00 WAT (non-briefing)
+**Created:** none
+**Updated:** Fidelity Bank ATS — RC91 Failure Ongoing, Wema Bank — RC91 After Settlement Resolution, Account Switch — Extended Portal Outage with Zero Documentation, source-config-email, source-config-slack, source-config-jira, source-config-calendar
+**Cross-references discovered:** Fidelity RC91 cycle 2 concurrent with Wema RC91 cycle 4 — two simultaneous bank ATS failures, Duty Handover #20260412 confirms Account Switch still down (504), Sterling still off, Access settlements failed
+**Contradictions flagged:** Fidelity Bank claims emergency maintenance at 00:24 WAT — unclear if cycle 1 (21h+ old) ever resolved or cycle 2 is continuation
