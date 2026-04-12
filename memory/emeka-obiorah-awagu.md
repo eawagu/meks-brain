@@ -1,19 +1,19 @@
 ---
+tags:
+  - "personal"
+  - "identity"
 type:
   - "entity"
 title: Emeka Obiorah Awagu
-created: "2026-04-11T15:11:23Z"
-summary: "Mek's full legal identity — Nigerian national, founder/majority owner of Solhigson Ltd, frequent international traveller, fully vaccinated against COVID-19 and Yellow Fever."
-updated: "2026-04-12T16:17:52Z"
-cssclasses:
-  - "entity"
 aliases:
   - "Mek"
   - "AWAGU EMEKA OBIORAH"
   - "Awagu, Emeka Obiorah"
-tags:
-  - "personal"
-  - "identity"
+created: "2026-04-11T15:11:23Z"
+summary: "Mek's full legal identity — Nigerian national, founder/majority owner of Solhigson Ltd, frequent international traveller, fully vaccinated against COVID-19 and Yellow Fever."
+updated: "2026-04-12T17:14:57Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Identity
@@ -42,6 +42,10 @@ tags:
 - Mentioned in [[AWAGU - EMEKA OBIORAH]] — Virgin Atlantic Lagos–London round-trip booking.
 - Passport visa pages contain entry/exit stamps and visa records (details in source pages).
 
+## Personal
+
+- Client account at [[Celio Nigeria]] ([[The Palms Mall]], Lekki) — 26-item clothing purchase, NGN 1,132,800, 10 Apr 2026, paid via [[OPay]].
+
 ## Sources
 
-[[COVID-19 Vaccination Card — Emeka Obiorah Awagu]], [[International Certificate of Vaccination — Emeka Obiorah Awagu]], [[Passport Visa Pages — Emeka Obiorah Awagu]], [[SOLHIGSON LTD — CAC Application]], [[SOLHIGSON LTD — CAC Certificate]], [[SOLHIGSON LTD — Application for Registration]], [[SOLHIGSON LTD — Memorandum and Articles of Association]], [[Solhigson Ltd — Memart (Scanned)]], [[Solhigson Ltd — Stamp Duty Receipt]]
+[[COVID-19 Vaccination Card — Emeka Obiorah Awagu]], [[International Certificate of Vaccination — Emeka Obiorah Awagu]], [[Passport Visa Pages — Emeka Obiorah Awagu]], [[SOLHIGSON LTD — CAC Application]], [[SOLHIGSON LTD — CAC Certificate]], [[SOLHIGSON LTD — Application for Registration]], [[SOLHIGSON LTD — Memorandum and Articles of Association]], [[Solhigson Ltd — Memart (Scanned)]], [[Solhigson Ltd — Stamp Duty Receipt]], [[Long Image 12-04-2026 18.08.58]]
