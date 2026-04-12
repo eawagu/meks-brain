@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
-summary: "Heartbeat configuration — cadence, phase order, briefing tick detection (timezone from config-user, existence check), error isolation, early exit rules. Lint-report integration: Perceive checks freshness, Plan classifies findings, Act folds into briefing."
-updated: "2026-04-12T08:06:06Z"
+summary: "Heartbeat configuration — cadence, phase order, briefing tick detection (timezone from config-user, existence check), error isolation, early exit rules, confidence assessment per Decision item. Lint-report integration: Perceive checks freshness, Plan classifies findings, Act folds into briefing."
+updated: "2026-04-12T16:37:26Z"
 cssclasses:
   - "config"
 ---
@@ -44,7 +44,7 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - **Briefing tier + Awareness tier signals:** Accumulate for next briefing tick.
 - **State updates:** Write new/updated commitment pages, entity updates, situation page updates to brain via MCP write tools.
 - **Briefing tick detection:** Read the briefing hour from this config and the timezone from config-user. If current hour (in configured timezone) >= briefing hour, search for `briefing-YYYY-MM-DD` (today's date). If no such page exists, this is the briefing tick.
-- **Briefing tick:** Create a briefing brain page via `create_page` (type: `[\"briefing\"]`, title: `briefing-YYYY-MM-DD`, status: `current`). Format per config-briefing (Decision items: Ask → Signal → Recommended Action → References; Awareness items: Signal → Recommended Action → References; sequential item IDs B1, B2, etc.; ordered by salience score). Lint-derived items use `Signal: lint-report, YYYY-MM-DD` as their source reference. Update the previous day's briefing page to `status: superseded` via `update_page`.
+- **Briefing tick:** Create a briefing brain page via `create_page` (type: `[\"briefing\"]`, title: `briefing-YYYY-MM-DD`, status: `current`). Format per config-briefing (Decision items: Ask → Signal → Recommended Action → Confidence → References; sequential item IDs B1, B2, etc.; ordered by salience score). Confidence per item assessed using Confidence Assessment Guidelines in config-briefing. Update the previous day's briefing page to `status: superseded` via `update_page`.
 - **Lint-report items — user approval drives execution:** When the user approves a lint-derived Decision item (alias fix, page creation, synthesis creation), execute the action in that session via MCP write tools. Completed actions will no longer appear in the next lint run, closing the loop automatically.
 
 ### Improve
