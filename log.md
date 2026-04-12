@@ -873,3 +873,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-12 01:13:54 UTC — express-ingest
+
+**Source:** scheduled scan — no new files
+**Created:** none
+**Updated:** Stanbic Bank ATS — Persistent RC91 Pattern, Stanbic Bank, source-config-jira, source-config-email, source-config-slack, source-config-calendar
+**Cross-references discovered:** none
+**Contradictions flagged:** none

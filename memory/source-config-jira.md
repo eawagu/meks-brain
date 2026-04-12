@@ -7,7 +7,7 @@ summary: Signal source registration and filtering directives for Jira (Atlassian
 updated: 2026-04-12
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T00:00:00Z"
+last_processed: "2026-04-12T01:09:00Z"
 ---
 
 ## Connection
@@ -79,3 +79,4 @@ These are recurring patterns the heartbeat should watch for:
 - **AUTH FAILURE 2026-04-11T22:09 UTC:** Jira connector returned "requires authentication" — signals missed this tick. Needs user re-auth.
 - **AUTH FAILURE 2026-04-11T23:09 UTC:** Jira connector still requires authentication — second consecutive tick missed. User re-auth required.
 - **AUTH FAILURE 2026-04-12T00:00 UTC:** Jira connector still requires authentication — third consecutive tick missed. User re-auth required. All Jira monitoring blind since 22:09 UTC Apr 11.
+- **AUTH FAILURE 2026-04-12T01:09 UTC:** Jira connector still requires authentication — fourth consecutive tick missed. >3 hours of complete Jira blindness. User re-auth required.

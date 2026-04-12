@@ -7,7 +7,7 @@ summary: Signal source registration and filtering directives for Google Calendar
 updated: 2026-04-12
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T00:00:00Z"
+last_processed: "2026-04-12T01:09:00Z"
 ---
 
 ## Connection
