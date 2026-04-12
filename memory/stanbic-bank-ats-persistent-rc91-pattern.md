@@ -5,14 +5,16 @@ type:
 title: Stanbic Bank ATS — Persistent RC91 Pattern
 status: developing
 created: "2026-04-11T16:42:02Z"
-summary: 19 P1 RC91 cycles in 11 days (Apr 3–12). Cycle 18 disputed — bank claims resolved, Olamide says failure persists. ATS JAR deployment pending Stanbic action. Escalation posture decision 6+ days overdue.
-updated: "2026-04-12T02:12:00Z"
+summary: "19 P1 RC91 cycles in 11 days (Apr 3–12). Cycle 18 now >2.5h — bank claims resolved, Olamide confirms failure persists, 03:40 WAT follow-up still pending. ATS JAR deployment pending Stanbic action. Escalation posture decision 6+ days overdue."
+updated: "2026-04-12T03:12:35Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
 ---
 
-Nineteen confirmed P1 cycles Apr 3–12 (11 days), all bank-resolved, same root cause unfixed. [[TDSD-6425]] administratively closed Apr 10 — closure does NOT resolve the strategic escalation posture decision. "Decide [[Stanbic Bank]] ATS escalation posture" state item 6+ days overdue (due Apr 6). Cycle 18 on Apr 12 early morning: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time at 01:39 WAT. [[Peace Ikhuenbor]] (Stanbic SRE) acknowledged at 01:47 WAT — support team working towards resolution. At 02:40 UTC, Peace asked Olamide to "reconfirm as this has been resolved." At 02:48 WAT, Olamide responded that **failure still persists** — direct contradiction of the bank's claim. Resolution status disputed. Settlement validation thread active: [[Emeka Joseph]] confirming DCIR transaction migration to Stanbic team; Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure at 16:37 WAT Apr 11. ATS JAR deployment: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye) at 20:11 WAT Apr 11 — deployment session pending Stanbic action. If jars were not deployed, this cycle is expected.
+Nineteen confirmed P1 cycles Apr 3–12 (11 days), all bank-resolved, same root cause unfixed. [[TDSD-6425]] administratively closed Apr 10 — closure does NOT resolve the strategic escalation posture decision. "Decide [[Stanbic Bank]] ATS escalation posture" state item 6+ days overdue (due Apr 6). Cycle 18 on Apr 12 early morning: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time at 01:39 WAT. [[Peace Ikhuenbor]] (Stanbic SRE) acknowledged at 01:47 WAT — support team working towards resolution. At 02:40 WAT, Peace asked Olamide to "reconfirm as this has been resolved." At 02:48 WAT, Olamide responded that **failure still persists** — direct contradiction of the bank's claim. At 03:40 WAT, Olamide sent another follow-up to Peace requesting update — still no resolution confirmation. Cycle 18 is now >2.5 hours with disputed resolution status. **Immediate threshold breached: P1 duration >2h with no confirmed resolution.**
+
+Settlement validation thread active: [[Emeka Joseph]] confirming DCIR transaction migration to Stanbic team; Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure at 16:37 WAT Apr 11. ATS JAR deployment: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye) at 20:11 WAT Apr 11 — deployment session pending Stanbic action. If jars were not deployed, this cycle is expected.
 
 ## Sources
 email Stanbic RC91 thread Apr 3–12; slack #teamapt-tech-operations; jira TDSD-6425 (Completed Apr 10); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11
@@ -30,3 +32,4 @@ email Stanbic RC91 thread Apr 3–12; slack #teamapt-tech-operations; jira TDSD-
 - 2026-04-11 20:11 WAT — ATS JAR deployment follow-up: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye). Deployment session pending Stanbic action.
 - 2026-04-12 01:39 WAT — Cycle 18: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time. Email to Stanbic IT Service Management and Service Monitoring. [[Peace Ikhuenbor]] acknowledged at 01:47 WAT.
 - 2026-04-12 02:40 WAT — [[Peace Ikhuenbor]] asked to reconfirm, claiming issue resolved. [[Olamide Ajibulu]] disputed at 02:48 WAT — failure still persists. Bank/Moniepoint contradiction on resolution status.
+- 2026-04-12 03:40 WAT — [[Olamide Ajibulu]] sent another follow-up to Stanbic requesting update. No response received. Cycle 18 now >2h — Immediate threshold breached.
