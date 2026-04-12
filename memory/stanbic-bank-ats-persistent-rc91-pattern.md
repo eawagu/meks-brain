@@ -5,17 +5,17 @@ type:
 title: Stanbic Bank ATS — Persistent RC91 Pattern
 status: developing
 created: "2026-04-11T16:42:02Z"
-summary: 17+ P1 RC91 cycles in 10 days (Apr 3–11). Settlement validation with CBN pressure. ATS JAR deployment in progress — Babajide sent jars to Stanbic.
-updated: "2026-04-11T20:12:34Z"
+summary: 18+ P1 RC91 cycles in 11 days (Apr 3–12). ATS JAR deployment pending Stanbic action. Escalation posture decision 6+ days overdue.
+updated: "2026-04-12T01:11:27Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
 ---
 
-Seventeen confirmed P1 cycles Apr 3–11 (10 days), all bank-resolved, same root cause unfixed. [[TDSD-6425]] administratively closed Apr 10 — closure does NOT resolve the strategic escalation posture decision. "Decide [[Stanbic Bank]] ATS escalation posture" state item 5+ days overdue (due Apr 6). Cycle 17 on Apr 11 morning: [[Daniel Armstrong]] reported resurgence at 10:25 WAT, [[Stanbic Bank]] (Samson Ibekwe) asked to reconfirm at 10:52 WAT, Daniel confirmed resolved at 11:39 WAT. Settlement validation thread active: [[Emeka Joseph]] confirming DCIR transaction migration to Stanbic team; Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure at 16:37 WAT. ATS JAR deployment: [[Babajide Ojoboorun]] requested Stanbic (Oluwatobi Meshioye) to move jars to realtime server at 17:01 WAT; follow-up at 20:11 WAT with link to jars — deployment session pending Stanbic action.
+Eighteen confirmed P1 cycles Apr 3–12 (11 days), all bank-resolved, same root cause unfixed. [[TDSD-6425]] administratively closed Apr 10 — closure does NOT resolve the strategic escalation posture decision. "Decide [[Stanbic Bank]] ATS escalation posture" state item 6+ days overdue (due Apr 6). Cycle 18 on Apr 12 early morning: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time at 01:39 WAT. [[Peace Ikhuenbor]] (AptPay Technical Support) acknowledged at 01:47 WAT — support team working towards resolution. Email sent to Stanbic IT Service Management and Service Monitoring teams. Settlement validation thread active: [[Emeka Joseph]] confirming DCIR transaction migration to Stanbic team; Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure at 16:37 WAT Apr 11. ATS JAR deployment: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye) at 20:11 WAT Apr 11 — deployment session pending Stanbic action. If jars were not deployed, this cycle is expected.
 
 ## Sources
-email Stanbic RC91 thread; slack #teamapt-tech-operations; jira TDSD-6425 (Completed Apr 10); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11
+email Stanbic RC91 thread Apr 3–12; slack #teamapt-tech-operations; jira TDSD-6425 (Completed Apr 10); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11
 
 ## Deltas
 - 2026-04-09 17:02 WAT — Jira TDSD-6425 confirmed still Work in Progress, last updated Apr 3 09:23 WAT, single comment ("Escalating to the bank"), no new activity in 6+ days. Ravi/Emeka meeting declined — escalation posture decision did not occur.
@@ -28,3 +28,4 @@ email Stanbic RC91 thread; slack #teamapt-tech-operations; jira TDSD-6425 (Compl
 - 2026-04-11 17:01 WAT — ATS JAR deployment request sent to Stanbic (Oluwatobi Meshioye) by [[Babajide Ojoboorun]].
 - 2026-04-11 19:32 WAT — Settlement thread: Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure. [[Emeka Joseph]] confirmed DCIR migration complete at 17:32 WAT.
 - 2026-04-11 20:11 WAT — ATS JAR deployment follow-up: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye). Deployment session pending Stanbic action.
+- 2026-04-12 01:39 WAT — Cycle 18: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time. Email to Stanbic IT Service Management and Service Monitoring. [[Peace Ikhuenbor]] acknowledged at 01:47 WAT.
