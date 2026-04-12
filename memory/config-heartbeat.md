@@ -4,7 +4,7 @@ type:
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
 summary: "Heartbeat configuration — cadence, phase order, briefing tick detection (timezone from config-user, existence check), error isolation, early exit rules, confidence assessment per Decision item. Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). MISS: note routing in ingest."
-updated: "2026-04-12T21:28:15Z"
+updated: "2026-04-12T21:29:16Z"
 cssclasses:
   - "config"
 ---
@@ -62,6 +62,6 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - Heartbeat runs first because it is time-sensitive (triage alerts). Ingest runs last so any new files dropped during the heartbeat phase get picked up in the same tick.
 - Early exit on zero deltas keeps cost minimal on quiet ticks. The Improve phase still runs on early-exit ticks to process pending triage dispositions and catch absence-of-signal conditions.
 - Source registration is governed by source-config pages — adding/removing sources does not require changes to this config.
-- Notes are captured via `capture_note` which drops timestamped files directly into the ingress folder. The ingest phase picks them up like any other source file. Notes with a `MISS:` prefix are routed to the config-salience Tuning Log instead of creating source pages.
+- Missed signal capture has two paths: triage-time prompt (primary — config-triage Step 5b asks "Anything I should have caught?" and writes tuples directly) and async `MISS:` notes (secondary — `capture_note` with `MISS:` prefix, routed to config-salience Tuning Log by the ingest pipeline instead of creating source pages). The primary path captures misses noticed at decision time; the secondary path captures misses discovered later from any runtime.
 - Timezone is read from config-user — not hardcoded. When the user travels, updating config-user propagates to all time-sensitive operations.
 - Lint findings are surfaced directly by the triage client (config-triage), not folded into the briefing. This decouples lint timing from the briefing tick.
