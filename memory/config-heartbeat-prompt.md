@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
-summary: Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest), read by scheduled task stub at runtime.
-updated: "2026-04-12T20:47:49Z"
+summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log."
+updated: "2026-04-12T21:27:30Z"
 cssclasses:
   - "config"
 ---
@@ -19,7 +19,7 @@ All persistent state lives in the brain. All page writes go through the Brain MC
 Read config pages from brain MCP before any signal checks:
 - `config-heartbeat` — cadence, phase order, error isolation, early exit rules
 - `config-briefing` — Ask → Signal → Recommended Action → Confidence → References format, ordering, source attribution, triage disposition annotations, confidence assessment guidelines
-- `config-salience` — triage tiers, Immediate triggers, dimension weights, absence-of-signal rules
+- `config-salience` — triage tiers, Immediate triggers, dimension weights, absence-of-signal rules, tuning mechanism
 - `config-user` — user timezone (IANA identifier), used for briefing timestamps and briefing-tick detection
 
 Read all source-config pages from brain MCP (`search` with type_filter: `["source-config"]`). Each defines: connection details (which MCP connector + access pattern), filtering directives, and `last_processed` timestamp.
@@ -47,10 +47,31 @@ Classify each signal against triage tiers in config-salience (Immediate / Briefi
 - **Non-briefing ticks:** Only dispatch Immediate alerts. Briefing + Awareness items accumulate on situation and entity pages for the next briefing tick.
 
 ### Improve
-- Compare surfaced items against user actions since last tick (acted on / dismissed / missed).
-- Write tuning tuple to config-salience: `[date, item_hash, action, dominant_dimension]`.
-- Check absence-of-signal rules (config-salience) — fire alerts as specified.
-- Query briefing pages (type: briefing) to compare what was surfaced vs. what was acted on — this is the only retrieval path that reads briefing pages.
+
+The Improve phase reads triage dispositions and writes calibration tuples. This phase runs on every tick, including early-exit ticks (for absence-of-signal checks).
+
+**Step 1 — Read recent Triage Results.** Query briefing pages from the last 7 days via `search` (type_filter: `["briefing"]`). For each briefing page that has a `## Triage Results` section, read the disposition table. Skip briefing pages with no Triage Results section (not yet triaged).
+
+**Step 2 — Classify dispositions into tuples.** For each dispositioned item not already recorded in the config-salience Tuning Log (compare item IDs against existing tuples to avoid duplicates):
+- `approved` → action: `acted`, dominant_dimension: the salience dimension that scored highest for this item
+- `overridden` → action: `acted`, dominant_dimension: the salience dimension that scored highest (the override indicates the recommendation was wrong, but the item was correctly surfaced — the dimension worked)
+- `discarded` → action: `dismissed`, dominant_dimension: the salience dimension that scored highest (over-weighted for this signal)
+- `noted` on a Decision item → action: `dismissed`, dominant_dimension: same as discarded
+- `held` → no tuple (item is not yet resolved)
+- Tier 1 pull-outs (items the user moved from auto-advance to individual review, identifiable by an Awareness item with a non-`noted` disposition) → action: `missed`, dominant_dimension: infer which dimension would have classified this as a Decision item if weighted higher
+
+**Step 3 — Write tuples.** For each classified disposition, append a tuple to config-salience `## Tuning Log` via `update_page`. Format per config-salience: `[date, item_identifier, action: acted|dismissed|missed, dominant_dimension]`.
+
+**Step 4 — Declaration.** After processing, emit one of:
+- "Improve: wrote N tuples (X acted, Y dismissed, Z missed)" — if tuples were written
+- "Improve: no triaged briefings to process" — if no briefing pages in the 7-day window have Triage Results
+- "Improve: all dispositions already recorded" — if all dispositioned items were already in the Tuning Log
+
+This declaration is the Improve phase's completion signal. If it is absent from the tick output, the Improve phase did not run — treat as a structural failure and log a warning.
+
+**Step 5 — Recalculation check.** Count tuples in config-salience Tuning Log. If the count is 20 or more, include a Decision item in the next briefing: "Salience recalculation due — N tuples accumulated." Confidence: `high`. Recommended action: approve recalculation per the protocol in config-salience.
+
+**Step 6 — Absence-of-signal check.** Evaluate absence-of-signal rules from config-salience. Fire alerts (Immediate or Briefing tier) as specified for any rule whose silence threshold has been exceeded.
 
 ## Phase 2 — Ingest (Express Mode)
 
@@ -73,6 +94,17 @@ Call `scan_ingress` with `include_review: false`. This returns only files in the
 
 If no files are returned, log a no-op entry and exit:
 - Call `append_log` with operation_type "express-ingest", source "scheduled scan", and empty pages_created/pages_updated.
+
+### Step 1b: MISS: Routing
+Before processing files through the normal ingest pipeline, check each file for the `MISS:` prefix. For files whose content starts with `MISS:` (case-insensitive):
+
+1. Extract the description after the prefix.
+2. Run `search` with the description to identify which salience dimension would have caught this signal. Map to the most relevant dimension: urgency, impact_scope, cto_specificity, pattern_significance, or accountability_alignment.
+3. Read config-salience via `get_page`. Append a tuple to the `## Tuning Log` section via `update_page`: `[date, user_description, missed, inferred_dimension]`.
+4. Call `mark_processed` for the file.
+5. Do NOT create a source page for this file — it is a calibration signal, not a knowledge source.
+
+Continue to Step 2 with the remaining (non-MISS) files.
 
 ### Step 2: Process each file (batch limit: 20 files per run)
 For each file returned by scan, in order:
@@ -122,6 +154,7 @@ For each file returned by scan, in order:
 ### Step 3: Summary
 After processing all files (or hitting the 20-file batch limit), report:
 - Files processed: N
+- Files routed as MISS tuples: N
 - Files skipped (error): N (list filenames, error types, and whether moved to review/)
 - Files stuck (error without move): N (list filenames — these need manual intervention)
 - Pages created: N (list titles)
@@ -132,8 +165,8 @@ After processing all files (or hitting the 20-file batch limit), report:
 ### Ingest Rules
 
 - BATCH LIMIT: Process at most 20 files per run. If more files are pending, they will be picked up on the next scheduled run. This prevents context window overflow.
-- NEVER skip the source page — every successfully read file gets exactly one source page.
-- NEVER call `mark_processed` for files that failed to read — only for files that were successfully processed into source pages.
+- NEVER skip the source page — every successfully read file gets exactly one source page (except MISS: files which route to the tuning log instead).
+- NEVER call `mark_processed` for files that failed to read — only for files that were successfully processed into source pages or routed as MISS tuples.
 - Wiki-link all entity and concept references in page bodies: `[[Entity Name]]`.
 - If `create_page` fails with "already exists", call `update_page` instead.
 - If any tool call fails, log the error and continue to the next file. Do not stop the batch.
