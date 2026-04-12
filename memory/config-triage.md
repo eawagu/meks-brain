@@ -1,17 +1,17 @@
 ---
-title: config-triage
 type:
   - "config"
+title: config-triage
+created: "2026-04-12T03:09:55Z"
+summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly and governance-by-exception.
+updated: "2026-04-12T16:11:07Z"
 cssclasses:
   - "config"
-created: "2026-04-12T03:09:55Z"
-updated: "2026-04-12T03:09:55Z"
-summary: Triage protocol — how any brain-connected client walks through a briefing, assembles live context, collects governance decisions, writes dispositions, and executes approved actions.
 ---
 
 ## Purpose
 
-Triage is the governance workflow for the daily briefing. The AI pre-resolves every item with a recommended disposition and concrete action. The user approves, overrides, or redirects. The AI executes approved actions.
+Triage is the governance workflow for the daily briefing. The AI pre-resolves every item with a recommended disposition and confidence assessment. The user governs by exception — approving batches, confirming recommendations, or providing judgment on genuinely ambiguous items.
 
 This protocol works in any client with brain MCP access (Cowork, Claude Code, claude.ai, future clients). The client owns presentation and interaction; the brain owns state.
 
@@ -35,26 +35,87 @@ For each briefing item, read the pages listed in its **References** field via `g
 
 Compute the **Implication** for each item in real time — why this item matters given the current state of referenced situations, entity history, commitment patterns, and any new connections found via search. This is the dynamic context assembly step.
 
-### 3. Present
+### 3. Present — Three-Tier Confidence-Based Flow
 
-Present all items in a single view with their computed Implications and the heartbeat's Recommended Actions. The user scans the full set and governs by exception.
+Group items by their `confidence` field (set by the heartbeat in the briefing page — see config-briefing). Present tiers in order: Tier 1 first, then Tier 2, then Tier 3. Within each tier, preserve the salience ordering from the briefing page.
 
-For each item, show:
-- Item ID and Ask (or Signal for awareness items)
-- Computed Implication (from step 2)
-- Recommended Action (from the briefing page)
+#### Tier 1 — Auto-Advance (confidence: high, no action needed OR obvious disposition)
 
-The user can respond with:
-- **"approved"** or **"go"** — approve all recommendations at once
-- **Item-level overrides** — e.g., "override B3: defer to Monday", "hold B7"
-- **Questions** — the client answers using brain context, then re-presents the item for disposition
+All Awareness items plus any Decision items the heartbeat marked `confidence: high` where the recommended action is low-risk.
+
+Present as a **batch summary table** — one line per item: ID, Signal/Ask summary, Recommended Disposition. Example:
+
+```
+| ID | Summary | Disposition |
+|---|---|---|
+| B5 | Sterling route restored — no CTO action | Noted |
+| B6 | Jira sprint velocity normal | Noted |
+| B8 | Team handling DNS propagation | Discard |
+```
+
+The user scans the batch and either:
+- **Approves all** — "ok" or "approved" (blanket approval for entire Tier 1 batch)
+- **Pulls items out** — "hold B5" (moves B5 to Tier 2 or 3 for individual treatment)
+
+After Tier 1 disposition, advance to Tier 2.
+
+#### Tier 2 — Propose (confidence: high, action needed)
+
+Decision items where the heartbeat has a single clear recommendation and high confidence.
+
+Present **one item at a time**. For each item:
+1. Item ID and Ask
+2. Computed Implication (from Step 2 context assembly)
+3. "**Recommend:** [specific action with rationale]"
+
+The user responds:
+- **Approve** — "ok", "yes", "approved" (accept the recommendation as-is)
+- **Override** — states a different disposition in natural language (e.g., "delegate to Felix, due Friday", "defer to Monday", "discard"). The AI confirms the override, clarifying any missing fields (e.g., delegatee, due date) before executing.
+- **Question** — asks for more context. The AI answers using brain search, then re-presents the item for disposition.
+
+After each item is dispositioned, advance to the next Tier 2 item. After all Tier 2 items, advance to Tier 3.
+
+#### Tier 3 — Escalate (confidence: low, judgment needed)
+
+Decision items where the heartbeat identified multiple viable paths or flagged genuine uncertainty.
+
+Present **one item at a time** with full context assembly. For each item:
+1. Item ID and Ask
+2. Computed Implication (from Step 2 context assembly) — more detailed than Tier 2, including competing considerations
+3. **Structured alternatives** under disposition headers, with continuous numbering across all groups:
+
+**Act**
+1. [AI's top recommendation — specific named action with rationale]
+2. [Alternative action with tradeoff explanation]
+
+**Delegate**
+3. [Specific delegatee + ask + suggested due date with rationale]
+
+**Defer**
+4. [Suggested date with rationale derived from deadline, dependency, or next review point]
+
+**Resolve** *(only when item references a tracked situation with status != retired, or an open commitment)*
+5. [Retire situation / fulfill commitment — with evidence justification]
+
+**Discard**
+6. Discard — [reason this is a valid option, e.g., "team already handling, no CTO leverage point"]
+
+Rules for structured alternatives:
+- Numbering is continuous across all groups (e.g., Act: 1–2, Delegate: 3, Defer: 4, Resolve: 5, Discard: 6).
+- Every option names a specific action or destination derived from the item's content — never generic labels like "Act on this item."
+- Resolve only appears when the item references a tracked situation or open commitment. Otherwise omitted entirely.
+- Defer options include at least one suggested date with a rationale derived from the item's deadline, dependency, or next review point. If no date signal exists, prompt the user to provide a date.
+- The user responds with just the number, or with natural language.
+
+After each Tier 3 item is dispositioned, advance to the next.
 
 ### 4. Execute
 
-For each approved or overridden item:
-- **Act:** Execute the action via the appropriate external MCP (Slack, Jira, Gmail, GCal — depends on the action).
+For each dispositioned item:
+- **Act:** Execute the action via the appropriate external MCP (Slack, Jira, Gmail, GCal — depends on the action). For actions that write to external systems, draft and wait for user approval before executing.
 - **Delegate:** Create a commitment page in the brain via `create_page` (type: `["commitment"]`, fields: owner, counterparty/delegatee, specific ask, due date, accountability). Send the delegation via external MCP if specified.
 - **Defer:** Create or update a commitment page with the deferred due date.
+- **Resolve:** Update the referenced situation page status (e.g., to `retired`) or commitment status (e.g., to `fulfilled`) via `update_page`.
 - **Discard / Noted:** No external action.
 - **Hold:** No action; item remains untriaged for revisiting.
 
@@ -74,16 +135,17 @@ Valid dispositions: `approved`, `overridden`, `held`, `discarded`, `noted`.
 ### 6. Report
 
 After all items are dispositioned and executed, provide a brief summary:
-- Items approved: N
+- Items auto-advanced (Tier 1): N
+- Items approved (Tier 2): N
+- Items with structured alternatives (Tier 3): N
 - Items overridden: N
-- Items held: N (these can be revisited later)
-- Items discarded/noted: N
+- Items held: N
 - Actions executed: list concrete actions taken
 - Commitments created: list with page titles
 
 ## Notes
 
 - The client assembles context at triage time, not at briefing creation time. This ensures all context is current — signals may have arrived between briefing creation and triage.
-- The Improve phase of the heartbeat reads the Triage Results table to calibrate. Overrides (where the user rejected the AI's recommendation) are the primary learning signal.
+- The Improve phase of the heartbeat reads the Triage Results table to calibrate. Overrides (where the user rejected the AI's recommendation) are the primary learning signal. Tier 1 pull-outs (items the user moved from auto-advance to individual review) are a secondary signal — they indicate the confidence assessment was too high.
 - Held items can be revisited by running triage again — the client checks which items lack a disposition in the Triage Results table.
 - No new brain MCP tools are needed. Triage uses existing tools: `get_page`, `update_page`, `search`, `create_page`.
