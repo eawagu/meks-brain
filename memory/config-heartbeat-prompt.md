@@ -4,7 +4,7 @@ type:
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
 summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log."
-updated: "2026-04-12T21:27:30Z"
+updated: "2026-04-12T21:37:24Z"
 cssclasses:
   - "config"
 ---
@@ -67,7 +67,7 @@ The Improve phase reads triage dispositions and writes calibration tuples. This 
 - "Improve: no triaged briefings to process" — if no briefing pages in the 7-day window have Triage Results
 - "Improve: all dispositions already recorded" — if all dispositioned items were already in the Tuning Log
 
-This declaration is the Improve phase's completion signal. If it is absent from the tick output, the Improve phase did not run — treat as a structural failure and log a warning.
+This declaration is the Improve phase's completion signal. If it is absent from the tick output, the Improve phase did not run — treat as a structural failure.
 
 **Step 5 — Recalculation check.** Count tuples in config-salience Tuning Log. If the count is 20 or more, include a Decision item in the next briefing: "Salience recalculation due — N tuples accumulated." Confidence: `high`. Recommended action: approve recalculation per the protocol in config-salience.
 
@@ -87,13 +87,11 @@ All operations go through the Brain MCP connector (mek-brain). You have these to
 - `update_page` — update an existing brain page
 - `get_page` — retrieve a page by title
 - `mark_processed` — record that a file has been ingested
-- `append_log` — write to the brain's operations log
 
 ### Step 1: Scan
 Call `scan_ingress` with `include_review: false`. This returns only files in the root ingress folder (not review/).
 
-If no files are returned, log a no-op entry and exit:
-- Call `append_log` with operation_type "express-ingest", source "scheduled scan", and empty pages_created/pages_updated.
+If no files are returned, exit Phase 2.
 
 ### Step 1b: MISS: Routing
 Before processing files through the normal ingest pipeline, check each file for the `MISS:` prefix. For files whose content starts with `MISS:` (case-insensitive):
@@ -110,8 +108,8 @@ Continue to Step 2 with the remaining (non-MISS) files.
 For each file returned by scan, in order:
 
 1. **Read**: Call `read_ingress` with the file_path.
-   - If it returns a response with an `error` field (`"unknown_format"`, `"conversion_failed"`, `"image_too_large"`, or any other error): the file should have been moved to review/ automatically. Verify the response contains a `moved_to` field confirming the move. If `moved_to` is present, log the skip with the error type, reason, and destination. If `error` is present but `moved_to` is absent, log a warning — the file is stuck in ingress and needs manual intervention. In either case, do NOT call `mark_processed` for this file. Continue to the next file.
-   - If the tool call itself fails (MCP error / exception rather than a structured error response), log the failure and continue to the next file. Do NOT call `mark_processed`.
+   - If it returns a response with an `error` field (`"unknown_format"`, `"conversion_failed"`, `"image_too_large"`, or any other error): the file should have been moved to review/ automatically. Verify the response contains a `moved_to` field confirming the move. If `moved_to` is present, note the skip with the error type, reason, and destination. If `error` is present but `moved_to` is absent, note a warning — the file is stuck in ingress and needs manual intervention. In either case, do NOT call `mark_processed` for this file. Continue to the next file.
+   - If the tool call itself fails (MCP error / exception rather than a structured error response), note the failure and continue to the next file. Do NOT call `mark_processed`.
    - **Image files** return vision content blocks (not markdown text). The response contains the image directly and a JSON metadata block with `format: "image"`. Proceed to step 2 using the image content — examine it directly with vision.
 
 2. **Create source page**: Call `create_page` with:
@@ -143,14 +141,6 @@ For each file returned by scan, in order:
 
 6. **Mark processed**: Call `mark_processed` with the file_path, file_modified timestamp (from scan results), and the source page's ID.
 
-7. **Log**: Call `append_log` with:
-   - operation_type: "express-ingest"
-   - source: the filename
-   - pages_created: titles of all pages created in this file's processing
-   - pages_updated: titles of all pages updated
-   - cross_references: any new cross-references discovered
-   - contradictions: any contradictions flagged during entity/concept updates
-
 ### Step 3: Summary
 After processing all files (or hitting the 20-file batch limit), report:
 - Files processed: N
@@ -169,7 +159,7 @@ After processing all files (or hitting the 20-file batch limit), report:
 - NEVER call `mark_processed` for files that failed to read — only for files that were successfully processed into source pages or routed as MISS tuples.
 - Wiki-link all entity and concept references in page bodies: `[[Entity Name]]`.
 - If `create_page` fails with "already exists", call `update_page` instead.
-- If any tool call fails, log the error and continue to the next file. Do not stop the batch.
+- If any tool call fails, note the error and continue to the next file. Do not stop the batch.
 - Keep summaries concise — one sentence for the summary field, 2-3 sentences for the Summary section.
 
 ## Error Isolation
