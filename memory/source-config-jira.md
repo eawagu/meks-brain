@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
-updated: "2026-04-12T15:14:27Z"
+updated: "2026-04-12T15:28:15Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T15:10:00Z"
+last_processed: "2026-04-12T15:24:00Z"
 ---
 
 ## Connection
@@ -78,3 +78,4 @@ These are recurring patterns the heartbeat should watch for:
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
 - **AUTH FAILURE 2026-04-11T22:09 UTC:** Jira connector returned "requires authentication" — signals missed this tick. Needs user re-auth.
 - **AUTH FAILURE 2026-04-12T15:10 UTC:** Jira connector still requires authentication — eighteenth consecutive tick missed. >17 hours of complete Jira blindness. User re-auth required.
+- **AUTH FAILURE 2026-04-12T15:24 UTC:** Jira connector still requires authentication — nineteenth consecutive tick missed. >17 hours of complete Jira blindness. User re-auth required.
