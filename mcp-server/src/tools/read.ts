@@ -231,4 +231,96 @@ export const checkIngress: ToolDef = {
   },
 };
 
-export const readTools = [search, getPage, listCommitments, getStats, checkIngress];
+// ─── triage ───────────────────────────────────────────────────
+export const triage: ToolDef = {
+  name: "triage",
+  description:
+    "Load the daily briefing triage session. Returns the triage protocol (config-triage), briefing format (config-briefing), user config (config-user), and today's briefing page. Call this when the user wants to triage their briefing.",
+  schema: z.object({
+    date: z
+      .string()
+      .optional()
+      .describe(
+        "Override date in YYYY-MM-DD format to triage a past briefing. Defaults to today in user's configured timezone."
+      ),
+  }),
+  accessLevel: "read",
+  handler: async (params) => {
+    const { date } = params;
+
+    // Load config pages
+    const configPages = await query(
+      `SELECT title, type, frontmatter, body, summary, updated_at
+       FROM pages
+       WHERE title = ANY($1)
+         AND deleted = FALSE
+         AND 'config' = ANY(type)`,
+      [["config-triage", "config-briefing", "config-user"]]
+    );
+
+    const configs: Record<string, any> = {};
+    for (const row of configPages.rows) {
+      configs[row.title] = {
+        title: row.title,
+        type: row.type,
+        frontmatter: row.frontmatter,
+        body: row.body,
+        summary: row.summary,
+        updated_at: row.updated_at,
+      };
+    }
+
+    // Determine briefing date
+    let briefingDate = date;
+    if (!briefingDate) {
+      // Read timezone from config-user, default to UTC
+      const tz =
+        configs["config-user"]?.body?.match(
+          /Current timezone:\s*`([^`]+)`/
+        )?.[1] || "UTC";
+      briefingDate = new Date().toLocaleDateString("en-CA", {
+        timeZone: tz,
+      }); // en-CA gives YYYY-MM-DD
+    }
+
+    const briefingTitle = `briefing-${briefingDate}`;
+
+    // Load today's briefing page
+    const briefingResult = await query(
+      `SELECT id, title, file_path, type, frontmatter, body, summary,
+              created_at, updated_at
+       FROM pages
+       WHERE title = $1
+         AND deleted = FALSE`,
+      [briefingTitle]
+    );
+
+    const briefingPage =
+      briefingResult.rows.length > 0
+        ? {
+            id: briefingResult.rows[0].id,
+            title: briefingResult.rows[0].title,
+            file_path: briefingResult.rows[0].file_path,
+            type: briefingResult.rows[0].type,
+            frontmatter: briefingResult.rows[0].frontmatter,
+            body: briefingResult.rows[0].body,
+            summary: briefingResult.rows[0].summary,
+            created_at: briefingResult.rows[0].created_at,
+            updated_at: briefingResult.rows[0].updated_at,
+          }
+        : null;
+
+    return {
+      briefing_date: briefingDate,
+      briefing_page: briefingPage,
+      config_triage: configs["config-triage"] || null,
+      config_briefing: configs["config-briefing"] || null,
+      config_user: configs["config-user"] || null,
+      missing_configs: ["config-triage", "config-briefing", "config-user"].filter(
+        (c) => !configs[c]
+      ),
+    };
+  },
+};
+
+export const readTools = [search, getPage, listCommitments, getStats, checkIngress, triage];

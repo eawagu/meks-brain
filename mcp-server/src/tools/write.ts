@@ -43,6 +43,7 @@ const VALID_TYPES = [
   "source-config",
   "config",
   "situation",
+  "briefing",
 ];
 
 function validateTypes(types: string[]): void {
@@ -89,6 +90,15 @@ function validateFrontmatter(fm: Record<string, any>, types: string[]): void {
     }
   }
 
+  // Briefing-specific
+  if (types.includes("briefing")) {
+    if (!fm.status) throw new Error("Briefing pages require frontmatter field: status");
+    const validStatuses = ["current", "superseded"];
+    if (!validStatuses.includes(fm.status)) {
+      throw new Error(`Briefing status must be one of: ${validStatuses.join(", ")}`);
+    }
+  }
+
   // Prevent commitment-only fields on non-commitment/non-situation pages
   // "role" and "accountability" are shared between commitment and situation
   const commitmentExclusiveFields = ["owner", "counterparty", "due"];
@@ -109,7 +119,7 @@ function validateFrontmatter(fm: Record<string, any>, types: string[]): void {
   }
 
   // status field — valid on commitment, synthesis, and situation only
-  if (fm.status && !types.includes("commitment") && !types.includes("synthesis") && !types.includes("situation")) {
+  if (fm.status && !types.includes("commitment") && !types.includes("synthesis") && !types.includes("situation") && !types.includes("briefing")) {
     throw new Error('Field "status" is only valid on commitment, synthesis, or situation pages');
   }
 
@@ -483,21 +493,24 @@ export const appendLog: ToolDef = {
   },
 };
 
-// ─── append_to_inbox ──────────────────────────────────────────
-export const appendToInbox: ToolDef = {
-  name: "append_to_inbox",
+// ─── capture_note ─────────────────────────────────────────────
+export const captureNote: ToolDef = {
+  name: "capture_note",
   description:
-    "Append raw text to the brain's inbox.md for the ingest pipeline to process. No format constraints, no Postgres sync — pure capture.",
+    "Capture a note by writing it as a timestamped file in the ingress folder. The next ingest cycle picks it up automatically. No format constraints, no Postgres sync — pure capture.",
   schema: z.object({
-    content: z.string().describe("Raw text content to append"),
+    content: z.string().describe("Raw text content to capture"),
   }),
   accessLevel: "write",
   handler: async (params) => {
     const { content } = params;
-    const timestamp = new Date().toISOString();
-    await fs.appendFile(config.inboxPath, `\n${content}\n`, "utf-8");
-    return { message: "Appended to inbox.md", timestamp };
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/[:.]/g, "-");
+    const filename = `note_${timestamp}.md`;
+    const filePath = path.join(config.ingressPath, filename);
+    await fs.writeFile(filePath, content, "utf-8");
+    return { message: `Captured note as ${filename}`, timestamp: now.toISOString(), file: filename };
   },
 };
 
-export const writeTools = [createPage, updatePage, deletePage, markProcessed, appendLog, appendToInbox];
+export const writeTools = [createPage, updatePage, deletePage, markProcessed, appendLog, captureNote];

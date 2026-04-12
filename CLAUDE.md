@@ -28,8 +28,6 @@ MUST complete before any other action, including responding to the user's messag
 ```
 CLAUDE.md              ← this file
 .claude/agents/        ← custom agents (legacy — MCP server is now the single write authority)
-inbox.md               ← quick text capture (cleared after processing)
-briefing.md            ← heartbeat output (overwritten on briefing tick, appended on update ticks)
 dashboard.md           ← Dataview queries (human browsing, do not edit)
 log.md                 ← operations log (append-only)
 lint-report.md         ← judgment check output
@@ -44,7 +42,7 @@ Both root and `review/` are scanned recursively. Dropped folders are not treated
 
 ## Page Types
 
-Eight types. Add new types only when use proves them necessary.
+Nine types. Add new types only when use proves them necessary.
 
 | Type | What it holds |
 |---|---|
@@ -56,6 +54,7 @@ Eight types. Add new types only when use proves them necessary.
 | situation | A developing operational condition being actively tracked. Links to involved entities, tracks deltas over time, has a lifecycle. Retired situations become historical knowledge — they compound on entity pages and feed synthesis. |
 | source-config | Registration and directives for a signal source. Contains last-processed timestamp and natural-language filtering rules. |
 | config | Exec assistant behavioral spec (heartbeat, briefing format, triage thresholds, salience weights). Excluded from ingest, lint, and synthesis. |
+| briefing | Morning briefing output. One per day. Preserves the judgment record — what was surfaced, how it was framed, what was recommended. Feeds the Improve phase. |
 
 ---
 
@@ -65,7 +64,7 @@ Eight types. Add new types only when use proves them necessary.
 
 ```yaml
 title: string
-type: [string]       # array, primary type first. Valid: entity, concept, source, synthesis, commitment, situation, source-config, config
+type: [string]       # array, primary type first. Valid: entity, concept, source, synthesis, commitment, situation, source-config, config, briefing
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ```
@@ -103,6 +102,11 @@ role: string             # role slug (e.g., cto-teamapt)
 **source-config:**
 ```yaml
 last_processed: ISO-8601  # datetime of last signal check
+```
+
+**briefing:**
+```yaml
+status: current | superseded
 ```
 
 ### Shared Optional (any type)
@@ -155,6 +159,44 @@ summary: [one sentence]
 - Wiki-links to entity pages are mandatory for every entity mentioned. This enables cross-referencing: "what situations involve this entity?"
 - Status lifecycle: `developing` → `stable` (no new deltas but still active) → `resolving` (resolution signals received) → `retired` (no new signals for 2+ consecutive scans). Retired pages are not deleted.
 - The heartbeat queries active situations via Postgres: `type = situation AND status != retired`.
+
+---
+
+## Briefing Page Structure
+
+Briefing pages preserve the judgment record of each morning briefing — what was surfaced, how it was framed, what was recommended. The Improve phase queries them to compare surfaced items against user actions.
+
+```markdown
+---
+title: briefing-YYYY-MM-DD
+type: [briefing]
+status: current
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+summary: "Morning briefing — N decision items, N awareness items"
+cssclasses: [briefing]
+---
+
+## Decision Items
+
+### [Ask — forced choice statement]
+**Signal:** [source type, timestamp WAT, key identifier]
+**Implication:** [why this matters in context]
+
+## Awareness Items
+
+### [Signal — what changed]
+**Implication:** [connection to tracked situations, entities, patterns]
+```
+
+**Rules:**
+- Title convention: `briefing-YYYY-MM-DD`. One page per day — only the first heartbeat tick after 06:00 WAT produces a full briefing.
+- On creation, the heartbeat updates the previous day's briefing page to `status: superseded`.
+- Decision items follow Ask → Signal → Implication format (config-briefing). Awareness items follow Signal → Implication.
+- Items are ordered by salience score (config-salience), decision items first.
+- The heartbeat Perceive phase MUST exclude briefing pages from retrieval (`type_filter` must not include `briefing`) to avoid circularity.
+- The Improve phase queries briefing pages to compare what was surfaced vs. what was acted on — this is the only retrieval path that reads briefing pages.
+- Briefing pages are excluded from ingest, lint, and synthesis (same as config pages).
 
 ---
 
@@ -217,20 +259,9 @@ Batch express produces a summary report at end: files processed, pages created, 
 
 Same steps as express, but pause after step 1 for discussion. User guides emphasis, reviews proposed memory changes. Resume steps 2–5 after user confirmation.
 
-### inbox.md Processing
+### Note Capture
 
-Split entries on `-` separator. Process each entry through express ingest pipeline. Clear `inbox.md` after all entries are processed. Entries that fail processing remain in inbox.md — do not clear what hasn't been processed.
-
-### Dispatch Captures
-
-In Dispatch, any message starting with `-` is a brain capture, not conversation. On receiving a `-` message, the exec assistant creates an `.md` file in the OneDrive folder with this frontmatter:
-
-```yaml
-source: dispatch
-captured: ISO-8601  # timestamp of the message
-```
-
-Multiple `-` entries in a single message → one `.md` file with `-` as entry separator (same convention as `inbox.md`). Express ingest processes dispatch captures like any other raw source. The `source: dispatch` metadata is preserved on the resulting source page.
+Notes are captured via the `capture_note` MCP tool, which writes a timestamped file (`note_{timestamp}.md`) directly into the ingress folder. The ingest phase picks it up like any other source file. No intermediary — capture goes straight to the ingest pipeline.
 
 ### Query-Driven Synthesis
 
