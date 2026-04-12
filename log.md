@@ -1065,3 +1065,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-12 16:18:25 UTC — express-ingest
+
+**Source:** 9 files from ingress: 3 images (vaccination card, international vaccination certificate, passport visa pages), 6 PDFs (Solhigson CAC Application, Solhigson CAC Certificate, SOLHIGSON LTD Application, SOLHIGSON LTD Memart, Solhigson Memart, Stamp Duty Receipt)
+**Created:** COVID-19 Vaccination Card — Emeka Obiorah Awagu, International Certificate of Vaccination — Emeka Obiorah Awagu, Passport Visa Pages — Emeka Obiorah Awagu, SOLHIGSON LTD — CAC Application, SOLHIGSON LTD — CAC Certificate, SOLHIGSON LTD — Application for Registration, SOLHIGSON LTD — Memorandum and Articles of Association, Solhigson Ltd — Memart (Scanned), Solhigson Ltd — Stamp Duty Receipt, Solhigson Ltd, Awagu Osita Uchenna
+**Updated:** Emeka Obiorah Awagu
+**Cross-references discovered:** Emeka Obiorah Awagu ↔ Solhigson Ltd (founder, 98% owner), Emeka Obiorah Awagu ↔ Awagu Osita Uchenna (brothers, co-directors), Solhigson Ltd ↔ Awagu Osita Uchenna (2% shareholder, co-director), All 9 source pages ↔ Emeka Obiorah Awagu, All 6 Solhigson source pages ↔ Solhigson Ltd
+**Contradictions flagged:** none
