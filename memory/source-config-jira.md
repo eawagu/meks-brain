@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP).
-updated: "2026-04-12T03:13:25Z"
+updated: "2026-04-12T03:15:18Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T02:10:00Z"
+last_processed: "2026-04-12T03:10:00Z"
 ---
 
 ## Connection
