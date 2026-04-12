@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-triage
 created: "2026-04-12T03:09:55Z"
-summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, numbered response options, and direct lint findings triage.
-updated: "2026-04-12T16:53:45Z"
+summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, numbered response options, direct lint findings triage, and missed signal capture (Step 5b).
+updated: "2026-04-12T21:25:28Z"
 cssclasses:
   - "config"
 ---
@@ -203,6 +203,15 @@ Valid dispositions: `approved`, `overridden`, `held`, `discarded`, `noted`.
 
 For lint findings: update the `lint-report` page frontmatter with `last_triaged: [ISO-8601 timestamp]` via `update_page`. This marks the findings as processed so they are not re-presented on the next triage.
 
+### 5b. Missed Signal Capture
+
+After annotation, ask the user: "Anything I should have caught?"
+
+- If the user provides one or more missed signals: for each, write a tuning tuple to config-salience `## Tuning Log` via `update_page`. Format: `[date, user_description, missed, inferred_dimension]`. The `inferred_dimension` is the salience dimension that would have caught this signal if weighted higher — infer from the user's description and brain context (run `search` to understand what the signal relates to, then map to the dimension: urgency, impact_scope, cto_specificity, pattern_significance, or accountability_alignment).
+- If the user says no or skips, proceed to Step 6.
+
+This is the primary path for missed signal capture. A secondary path exists for late-discovered misses: notes captured via `capture_note` with a `MISS:` prefix are routed to the tuning log by the ingest pipeline instead of creating source pages (see config-heartbeat-prompt Phase 2).
+
 ### 6. Report
 
 After all items are dispositioned and executed, provide a brief summary:
@@ -214,6 +223,7 @@ After all items are dispositioned and executed, provide a brief summary:
 - Actions executed: list concrete actions taken
 - Commitments created: list with page titles
 - Lint findings processed: N alias fixes, N concept pages created, N syntheses created
+- Missed signals captured: N (if any were reported in Step 5b)
 
 ## Notes
 
@@ -223,3 +233,4 @@ After all items are dispositioned and executed, provide a brief summary:
 - Lint findings are surfaced directly by the triage client, not folded into the briefing. This decouples lint timing from the briefing tick — findings appear at the next triage session after lint runs, regardless of when the briefing was created.
 - Completed lint fixes (alias additions, page creations) will not appear in the next lint run, closing the loop automatically. No manual tracking needed beyond the `last_triaged` timestamp.
 - No new brain MCP tools are needed. Triage uses existing tools: `get_page`, `update_page`, `search`, `create_page`.
+- Missed signal capture has two paths: in-flow (Step 5b prompt during triage) for misses noticed at decision time, and async (`capture_note` with `MISS:` prefix) for misses discovered later from any runtime. Both write tuning tuples to config-salience.
