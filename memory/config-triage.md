@@ -4,7 +4,7 @@ type:
 title: config-triage
 created: "2026-04-12T03:09:55Z"
 summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly and governance-by-exception.
-updated: "2026-04-12T16:11:07Z"
+updated: "2026-04-12T16:13:12Z"
 cssclasses:
   - "config"
 ---
@@ -37,29 +37,29 @@ Compute the **Implication** for each item in real time — why this item matters
 
 ### 3. Present — Three-Tier Confidence-Based Flow
 
-Group items by their `confidence` field (set by the heartbeat in the briefing page — see config-briefing). Present tiers in order: Tier 1 first, then Tier 2, then Tier 3. Within each tier, preserve the salience ordering from the briefing page.
+Group items by type and confidence (set by the heartbeat in the briefing page — see config-briefing). Present tiers in order: Tier 1 first, then Tier 2, then Tier 3. Within each tier, preserve the salience ordering from the briefing page.
 
-#### Tier 1 — Auto-Advance (confidence: high, no action needed OR obvious disposition)
+#### Tier 1 — Auto-Advance (Awareness items only)
 
-All Awareness items plus any Decision items the heartbeat marked `confidence: high` where the recommended action is low-risk.
+All Awareness items. No Decision items route here — every decision gets explicit disposition.
 
-Present as a **batch summary table** — one line per item: ID, Signal/Ask summary, Recommended Disposition. Example:
+Present as a **batch summary table** — one line per item: ID, Signal summary, Recommended Disposition. Example:
 
 ```
 | ID | Summary | Disposition |
 |---|---|---|
 | B5 | Sterling route restored — no CTO action | Noted |
 | B6 | Jira sprint velocity normal | Noted |
-| B8 | Team handling DNS propagation | Discard |
+| B8 | Team handling DNS propagation — resolved | Noted |
 ```
 
 The user scans the batch and either:
 - **Approves all** — "ok" or "approved" (blanket approval for entire Tier 1 batch)
-- **Pulls items out** — "hold B5" (moves B5 to Tier 2 or 3 for individual treatment)
+- **Pulls items out** — "hold B5" (moves B5 to Tier 2 for individual treatment)
 
 After Tier 1 disposition, advance to Tier 2.
 
-#### Tier 2 — Propose (confidence: high, action needed)
+#### Tier 2 — Propose (Decision items, confidence: high)
 
 Decision items where the heartbeat has a single clear recommendation and high confidence.
 
@@ -75,7 +75,7 @@ The user responds:
 
 After each item is dispositioned, advance to the next Tier 2 item. After all Tier 2 items, advance to Tier 3.
 
-#### Tier 3 — Escalate (confidence: low, judgment needed)
+#### Tier 3 — Escalate (Decision items, confidence: low)
 
 Decision items where the heartbeat identified multiple viable paths or flagged genuine uncertainty.
 
@@ -146,6 +146,6 @@ After all items are dispositioned and executed, provide a brief summary:
 ## Notes
 
 - The client assembles context at triage time, not at briefing creation time. This ensures all context is current — signals may have arrived between briefing creation and triage.
-- The Improve phase of the heartbeat reads the Triage Results table to calibrate. Overrides (where the user rejected the AI's recommendation) are the primary learning signal. Tier 1 pull-outs (items the user moved from auto-advance to individual review) are a secondary signal — they indicate the confidence assessment was too high.
+- The Improve phase of the heartbeat reads the Triage Results table to calibrate. Overrides (where the user rejected the AI's recommendation) are the primary learning signal. Tier 1 pull-outs (items the user moved from auto-advance to individual review) are a secondary signal — they indicate the item should have been a Decision item.
 - Held items can be revisited by running triage again — the client checks which items lack a disposition in the Triage Results table.
 - No new brain MCP tools are needed. Triage uses existing tools: `get_page`, `update_page`, `search`, `create_page`.
