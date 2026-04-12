@@ -5,19 +5,19 @@ type:
 title: Stanbic Bank ATS — Persistent RC91 Pattern
 status: developing
 created: "2026-04-11T16:42:02Z"
-summary: "19 P1 RC91 cycles in 11 days (Apr 3–12). Cycle 18 now >3.5h — bank claims resolved, Olamide confirms failure persists, NIBSS PTSA escalated at 04:49 WAT for failures at 04:41 WAT on NIBSS node. ATS JAR deployment pending Stanbic action. Escalation posture decision 6+ days overdue."
-updated: "2026-04-12T04:11:54Z"
+summary: "19 P1 RC91 cycles in 11 days (Apr 3–12). Cycle 18 now >5h — Stanbic (Peace Ikhuenbor) asked to reconfirm status a second time at 06:15 WAT, suggesting bank believes resolved. Olamide's earlier contradiction (02:48 WAT) stands. NIBSS PTSA escalated at 04:49 WAT. ATS JAR deployment pending Stanbic action. Escalation posture decision 6+ days overdue."
+updated: "2026-04-12T06:12:05Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
 ---
 
-Nineteen confirmed P1 cycles Apr 3–12 (11 days), all bank-resolved, same root cause unfixed. [[TDSD-6425]] administratively closed Apr 10 — closure does NOT resolve the strategic escalation posture decision. "Decide [[Stanbic Bank]] ATS escalation posture" state item 6+ days overdue (due Apr 6). Cycle 18 on Apr 12 early morning: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time at 01:39 WAT. [[Peace Ikhuenbor]] (Stanbic SRE) acknowledged at 01:47 WAT — support team working towards resolution. At 02:40 WAT, Peace asked Olamide to "reconfirm as this has been resolved." At 02:48 WAT, Olamide responded that **failure still persists** — direct contradiction of the bank's claim. At 03:40 WAT, Olamide sent another follow-up to Peace requesting update — still no resolution confirmation. At 04:49 WAT, [[Olamide Ajibulu]] escalated to [[NIBSS]] PTSA reporting failures on transactions sent to NIBSS's node at 04:41 WAT on Apr 12. This NIBSS escalation may indicate the failure has broadened beyond Stanbic's ATS to the NIBSS routing layer, or that Stanbic's unresolved cycle is causing NIBSS-level transaction failures. Cycle 18 is now >3.5 hours with disputed resolution status and NIBSS involvement. **Immediate threshold breached: P1 duration >2h with no confirmed resolution.**
+Nineteen confirmed P1 cycles Apr 3–12 (11 days), all bank-resolved, same root cause unfixed. [[TDSD-6425]] administratively closed Apr 10 — closure does NOT resolve the strategic escalation posture decision. "Decide [[Stanbic Bank]] ATS escalation posture" state item 6+ days overdue (due Apr 6). Cycle 18 on Apr 12 early morning: [[Olamide Ajibulu]] reported Stanbic card transactions failing with RC91 and high processing time at 01:39 WAT. [[Peace Ikhuenbor]] (Stanbic SRE) acknowledged at 01:47 WAT — support team working towards resolution. At 02:40 WAT, Peace asked Olamide to "reconfirm as this has been resolved." At 02:48 WAT, Olamide responded that **failure still persists** — direct contradiction of the bank's claim. At 03:40 WAT, Olamide sent another follow-up to Peace requesting update — still no resolution confirmation. At 04:49 WAT, [[Olamide Ajibulu]] escalated to [[NIBSS]] PTSA reporting failures on transactions sent to NIBSS's node at 04:41 WAT on Apr 12. At 06:15 WAT, [[Peace Ikhuenbor]] again asked to "reconfirm status" — second reconfirmation request, implying Stanbic believes the issue is resolved on their end. No confirmation from Moniepoint ops yet. Cycle 18 is now >5 hours with disputed resolution status and NIBSS involvement. **Immediate threshold breached: P1 duration >2h with no confirmed resolution.**
 
 Settlement validation thread active: [[Emeka Joseph]] confirming DCIR transaction migration to Stanbic team; Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure at 16:37 WAT Apr 11. ATS JAR deployment: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye) at 20:11 WAT Apr 11 — deployment session pending Stanbic action. If jars were not deployed, this cycle is expected.
 
 ## Sources
-email Stanbic RC91 thread Apr 3–12; slack #teamapt-tech-operations; jira TDSD-6425 (Completed Apr 10); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11; email NIBSS PTSA RC91 04:49 WAT Apr 12
+email Stanbic RC91 thread Apr 3–12; slack #teamapt-tech-operations; jira TDSD-6425 (Completed Apr 10); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11; email NIBSS PTSA RC91 04:49 WAT Apr 12; email Stanbic reconfirmation 06:15 WAT Apr 12
 
 ## Deltas
 - 2026-04-09 17:02 WAT — Jira TDSD-6425 confirmed still Work in Progress, last updated Apr 3 09:23 WAT, single comment ("Escalating to the bank"), no new activity in 6+ days. Ravi/Emeka meeting declined — escalation posture decision did not occur.
@@ -34,3 +34,4 @@ email Stanbic RC91 thread Apr 3–12; slack #teamapt-tech-operations; jira TDSD-
 - 2026-04-12 02:40 WAT — [[Peace Ikhuenbor]] asked to reconfirm, claiming issue resolved. [[Olamide Ajibulu]] disputed at 02:48 WAT — failure still persists. Bank/Moniepoint contradiction on resolution status.
 - 2026-04-12 03:40 WAT — [[Olamide Ajibulu]] sent another follow-up to Stanbic requesting update. No response received. Cycle 18 now >2h — Immediate threshold breached.
 - 2026-04-12 04:49 WAT — [[Olamide Ajibulu]] escalated to [[NIBSS]] PTSA: failures on transactions sent to NIBSS node at 04:41 WAT. NIBSS-level involvement suggests routing-layer impact beyond Stanbic ATS alone. Cycle 18 now >3h, still unresolved.
+- 2026-04-12 06:15 WAT — [[Peace Ikhuenbor]] again asked to "reconfirm status" — second reconfirmation request from Stanbic in this cycle. Bank maintains issue is resolved on their end. No confirmation from Moniepoint ops. Cycle 18 now >4.5h.
