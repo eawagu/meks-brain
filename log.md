@@ -1057,3 +1057,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** Rack Centre Edge Firewall — Approval Gate Mismatch, Sterling + Polaris — Routes Degraded, NIBSS, source-config-email, source-config-slack, source-config-calendar, source-config-jira
 **Cross-references discovered:** NIBSS Citrix LB migration linked to Rack Centre situation (rescheduled activity)
 **Contradictions flagged:** none
+
+## 2026-04-12 15:29:57 UTC — express-ingest
+
+**Source:** scheduled scan — 3 files found, all previously processed but missing mark_processed
+**Created:** none
+**Updated:** none
+**Cross-references discovered:** none
+**Contradictions flagged:** none
