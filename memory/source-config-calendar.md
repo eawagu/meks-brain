@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-12T07:13:02Z"
+updated: "2026-04-12T08:14:32Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-12T07:09:00Z"
+last_processed: "2026-04-12T08:09:00Z"
 ---
 
 ## Connection
