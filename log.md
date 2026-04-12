@@ -961,3 +961,11 @@ Append-only. One entry per operation. Do not edit existing entries.
 **Updated:** none
 **Cross-references discovered:** none
 **Contradictions flagged:** none
+
+## 2026-04-12 08:00:39 UTC — judgment-lint
+
+**Source:** Scheduled judgment-lint task — 2026-04-12
+**Created:** none
+**Updated:** lint-report
+**Cross-references discovered:** 6 alias collisions identified (TeamApt↔TeamApt Limited, Mastercard↔MasterCard, Ravi Kiran Veluguleti↔Ravi Veluguleti, MoniePoint↔Moniepoint, TeamApt / Moniepoint↔TeamApt Limited, Alex↔Alex Adeyemo)
+**Contradictions flagged:** none
