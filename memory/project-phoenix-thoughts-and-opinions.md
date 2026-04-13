@@ -1,28 +1,32 @@
 ---
-title: Project Phoenix Thoughts and Opinions
 type:
   - "source"
+title: Project Phoenix Thoughts and Opinions
 created: 2026-04-11
-updated: 2026-04-11
+summary: "Frank Atashili's strategic perspectives on Project Phoenix: multi-tenancy, platform architecture, group structure, and engineering realignment priorities."
+updated: "2026-04-13T22:38:27Z"
 cssclasses:
   - "source"
-source_path: TeamApt Context\Project Phoenix\Project_Phoenix_Thoughts_and_Opinions.md
-summary: "Perspective document on Phoenix: TSP as foundation, leverage existing resources + AI, TeamApt as CBN-licensed processor (not just MFB tech arm), proposed group structure (OpCos/IPCo/DevCos), three-layer architecture (Core Systems, Cloud Platforms, On-Prem)."
+source_path: Project_Phoenix_Thoughts_and_Opinions.md
 ---
 
 ## Summary
-
-Perspective document capturing core beliefs, group structure, product engineering realignment, and proposed platform architecture.
+Frank Atashili's collected strategic perspectives on Project Phoenix and TeamApt's platform strategy, covering core architectural beliefs, organizational structure, and platform engineering realignment.
 
 ## Key Points
+- Core beliefs: multi-tenancy by design, leverage existing infrastructure, comprehensive documentation, reliability as foundation
+- Group structure: OpCos (operating companies), IPCo (IP company), DevCos (development companies)
+- Product Engineering realignment into platform teams for shared infrastructure
+- Proposed platform architecture: Core Systems, Cloud Platforms, On-Prem Deployments
+- Key stakeholders: Frank Atashili (architect), Dennis Ajalie, Kevin Ng'Eno, Wycliffe Ochieng', Ravi Veluguleti, Ketan Dhamasana
 
-- TSP is Phoenix foundation; must serve full group and multiple countries
-- Leverage existing resources powered by AI (not rebuild)
-- TeamApt is CBN-licensed processor, not just MFB's tech arm
-- Group structure: Operating companies (licenses), IP company (platform ownership), Development companies (engineering)
-- Product engineering teams move to IPCo/platform alignment; non-engineering stays with OpCos
-- Three-layer architecture: Core Systems, Cloud Platforms, On-Prem deployments
+## Entities Mentioned
+- [[Frank Atashili]]
+- [[Project Phoenix]]
+- [[Moniepoint Inc.]]
+- [[TeamApt]]
 
 ## Concepts
-
-- [[Engineering Leadership]], [[Regulatory Compliance]]
+- [[Platform Architecture]]
+- [[Multi-Tenancy]]
+- [[Organizational Structure]]
