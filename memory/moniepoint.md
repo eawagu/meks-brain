@@ -2,18 +2,35 @@
 type:
   - "entity"
 title: Moniepoint
-created: 2026-04-11
-summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; operates Monnify payment gateway, Direct Debit, ACT acquiring, and GoSubscribe; building multi-market card issuance platform (Project Phoenix); 13-level job framework.
-updated: "2026-04-12T22:46:30Z"
-cssclasses:
-  - "entity"
 aliases:
   - "MoniePoint"
+created: 2026-04-11
+summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; 4 business lines (DD/CDD, Monnify, TPP, Domestic Switching); 2025 revenue ₦24.2B target, ~₦10-12B actual (~35-50%); building multi-market card issuance platform (Project Phoenix); 13-level job framework.
+updated: "2026-04-13T23:23:04Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Overview
 
 Moniepoint is a Nigerian fintech group (Moniepoint Inc.). It operates payment and banking infrastructure across multiple products. TeamApt Ltd is a subsidiary where [[Emeka Awagu]] serves as CTO, reporting to [[Dennis Ajalie]] (CEO, TeamApt) with a dotted line to [[Felix Ike]] (Group CTO, Moniepoint Inc.).
+
+## Business Lines (2026 structure)
+
+Restructured from 5 units (2025) to 4 departments:
+
+| Department | Lead | Products | Key Systems |
+|---|---|---|---|
+| DD/CDD | [[Daniel Ojinaka]] | MADD, GoSubscribe, SAFE | ACS, GoSubscribe, SAFE, TACHA |
+| [[Monnify]] | [[Damilare Ogunnaike]] | Collections (VA, web card, DD), Disbursements, VAS, International (MPGS, Cybersource) | Monnify Gateway, Loom, Limit Engine, MPGS |
+| TPP | [[Tracy Ojaigho]] | Acquirer processing, Issuer processing (CMS, EMV Data Prep), ACT, MPGS dashboard, Non-Bank Acquiring | Aptent, ACT, EMV Data Prep, Rsync CMS |
+| Domestic Switching | [[Babatunde Okufi]] | [[Juliana]] Card/Account Switch, ATS, PTSP/PTAD, [[TACHA]] | Juliana, ATS, TACHA, NSS |
+
+Revenue Drivers: DD/CDD and Monnify. Enablers: TPP and Domestic Switching.
+
+## CBN Licenses
+
+Switching & Processing (foundation), Non-Bank Acquiring (TPP + Monnify), PTSP (Domestic Switching), SuperAgent (Domestic Switching). CBN IT Standards maturity level 4 (benchmark: 2 for PSSPs).
 
 ## Products & Platforms
 
@@ -23,6 +40,41 @@ Moniepoint is a Nigerian fintech group (Moniepoint Inc.). It operates payment an
 - **GoSubscribe** — subscription product; RC91 routing dependency; CEO-level visibility Apr 2026; see [[GoSubscribe]]
 - **AptPay** — payment routing layer; Fidelity UAT dependency (blocked as of Apr 9, 2026)
 - **Card Issuance & Processing Platform** — under [[Project Phoenix]]; multi-market (Nigeria, UK, Kenya); Spine-and-Module architecture; Phase 1 kick-off Apr 7, 2026
+- **[[TACHA]]** — centralized clearing and settlement platform; 6 microservices, 5 platform consumers, 4 daily settlement windows
+- **[[Juliana]]** — domestic switching (Card Switch + Account Switch); 37% of Moniepoint POS traffic
+
+## Financial Performance
+
+### 2024
+- Revenue baseline: $510K quarterly → $1M target (at ₦1,500/USD ≈ ₦6B annualized)
+- DCIR: 7 banks live (targeted 12; 0 new banks added — bank expansion was biggest bottleneck)
+- Direct Debit: 0→1 bank by mid-year (target was 7)
+- Consolidated Switch (now Juliana): best-performing new product — 10 issuers, 2 domestic processors
+- Reliability improved: transaction success rate 70%→96.3%, incident response 240→60 min
+- Sprint velocity systemic issue: DCIR 72.3%, DD 50.5%, Switch 75% (all below targets)
+
+### 2025
+- Revenue targets: Monnify ₦11B, DD ₦6B, Direct to Bank ₦3.7B, Switch ₦2.5B, TPP ₦1B = ₦24.2B (legal entity target ₦30B)
+- Starting position: ₦422M annual revenue, -134% EBITDA
+- Actual: estimated ₦10–12B (~35–50% attainment)
+- Monnify: ₦9.05B achieved vs ₦13B target (79%); VTU merchant exits (MTN/Airtel) drove decline
+- Direct Debit: revenue exceeded 200% of KR driven by Access Bank; auth success 95.19%
+- TPP: Visa + Mastercard acquirer processor certifications completed; MPGS live
+- Domestic Switching: 37% of Moniepoint POS via Juliana (target 70%); TACHA beta released
+- Key lesson: Integration ≠ Activation (20 DD billers onboarded, 0% transacting)
+- DevRel: CSAT 94% (vs 50% target), NPS 88% (vs 20% target)
+
+## Customer & Partner Ecosystem
+
+30+ entities across 4 business lines. Key relationships:
+
+- **[[Access Bank]]** — active across all 4 business lines; primary DD volume driver
+- **[[Polaris Bank]]** — primary settlement bank; NSS live; DD live; PTSP first non-Moniepoint client (planned)
+- **[[Fidelity Bank]]** — settlement bank; first external ACT client (live); Juliana issuer; DD pilot-ready
+- **[[Moniepoint MFB]]** — largest customer by volume (37% POS traffic); PTSP services (₦150M monthly activations)
+- **[[CoralPay]]** — switch-to-switch partner (FirstBank, Zenith, Providus, Unity)
+- **[[HabariPay]]** — switch-to-switch partner (GTBank); DD Payment Facilitator
+- Card schemes: [[Visa]] (acquirer cert ✅, license ✅), [[Mastercard]] (acquirer cert ✅, license pending), Verve (active), Afrigo (established)
 
 ## Infrastructure
 
@@ -80,12 +132,17 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 - [[Emeka Awagu]] — CTO, TeamApt Ltd
 - [[Felix Ike]] — Group CTO, Moniepoint Inc.
 - [[Tolulope Obianwu]] — Direct report to Emeka; operations leadership; on PIP
+- [[Daniel Ojinaka]] — DD/CDD department lead
+- [[Damilare Ogunnaike]] — Monnify department lead
+- [[Tracy Ojaigho]] — TPP department lead
+- [[Babatunde Okufi]] — Domestic Switching department lead
 
 ## Notes
 
 - Level numbers are not contiguous — gaps between 040/051/061/071 and 050/060/070 reflect the branching of IC vs. management paths at the senior level
 - IC and management tracks share the 050/051 number range, indicating organizational equivalence at that band
 - TeamApt Ltd is the operational subsidiary; Moniepoint Inc. is the group parent
+- Nigeria removed from FATF grey list Oct 2025
 
 ## Sources
 
@@ -93,4 +150,8 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 - [[001-CI_P-exec-overview_v1.1]] — Project Phoenix executive overview
 - [[003_CMS_Core_Features_Overview_v1.0]] — CMS authored by Tracy Ojaigho, Moniepoint
 - [[Source: accountabilities]] — CTO accountability framework
+- [[TeamApt_2024_Business]] — 2024 business context and performance
+- [[TeamApt_2025_Business]] — 2025 business context and performance
+- [[TeamApt_Businesses]] — business line index
+- [[TeamApt_Customer_Registry]] — customer and partner registry
 - [[Source: notes-2026-04-01]] through [[Source: notes-2026-04-10]] — daily CTO signals
