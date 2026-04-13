@@ -12,8 +12,8 @@ export async function gitCommit(message: string): Promise<boolean> {
   const cwd = config.vaultPath;
 
   try {
-    // Stage memory/
-    await execAsync("git add memory/ .trash/", { cwd });
+    // Stage all changes (.gitignore excludes .obsidian/, .trash/, .claude/)
+    await execAsync("git add -A", { cwd });
 
     // Check if there's anything staged
     const { stdout: status } = await execAsync(

@@ -1,12 +1,15 @@
 ---
-title: Direct Debit Program
 type:
   - "concept"
+title: Direct Debit Program
 created: 2026-04-11
-updated: 2026-04-11
+summary: "Moniepoint's mandate-based bank debit capability — NIBSS-integrated, multi-bank, with a complex reconciliation and exception-handling process across Fidelity, Access, Polaris, and other banks."
+updated: "2026-04-12T22:49:13Z"
 cssclasses:
   - "concept"
-summary: "Moniepoint's mandate-based bank debit capability — NIBSS-integrated, multi-bank, with a complex reconciliation and exception-handling process across Fidelity, Access, Polaris, and other banks."
+aliases:
+  - "Direct Debit"
+  - "DD"
 ---
 
 ## Overview

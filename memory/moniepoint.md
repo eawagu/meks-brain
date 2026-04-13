@@ -4,9 +4,11 @@ type:
 title: Moniepoint
 created: 2026-04-11
 summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; operates Monnify payment gateway, Direct Debit, ACT acquiring, and GoSubscribe; building multi-market card issuance platform (Project Phoenix); 13-level job framework.
-updated: 2026-04-11
+updated: "2026-04-12T22:46:30Z"
 cssclasses:
   - "entity"
+aliases:
+  - "MoniePoint"
 ---
 
 ## Overview

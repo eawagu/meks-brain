@@ -1,17 +1,21 @@
 ---
-title: Paystack
 type:
   - "entity"
+title: Paystack
 created: 2026-04-11
-updated: 2026-04-11
+summary: Nigerian fintech (Stripe-acquired) — competitor and transfer integration partner to Moniepoint. Direct debit product, ₦4.4B halt on Easter Saturday Apr 5, and transfer traffic disruption reported Apr 13.
+updated: "2026-04-13T00:13:12Z"
 cssclasses:
   - "entity"
-summary: "Nigerian fintech competitor to Moniepoint — operates a direct debit product; experienced a ₦4.4B halt on Easter Saturday Apr 5; proactively reached out to Moniepoint's product team on DD."
 ---
 
 ## Overview
 
-Paystack is a Nigerian fintech company (acquired by Stripe) and a direct competitor to [[TeamApt / Moniepoint]] in payment infrastructure, particularly direct debit.
+Paystack is a Nigerian fintech company (acquired by Stripe) and a direct competitor to [[TeamApt / Moniepoint]] in payment infrastructure, particularly direct debit. Also operates as a transfer integration partner — Moniepoint routes transfer traffic through Paystack.
+
+## Transfer Integration
+
+- **Apr 13, 2026 (00:48 WAT):** Daniel Armstrong (Paystack) reported in #teamapt-x-paystack-transfer-support: "We stopped getting your traffic, please check." Tagged [[Jezreel]] and [[Dayo]]. Transfer route from Moniepoint to Paystack appears disrupted. Pending investigation by operations team.
 
 ## Competitive Signals
 
@@ -26,6 +30,6 @@ Paystack is a Nigerian fintech company (acquired by Stripe) and a direct competi
 
 ## Relationships
 
-- [[TeamApt / Moniepoint]] — primary competitive counterpart
+- [[TeamApt / Moniepoint]] — primary competitive counterpart and transfer integration partner
 - [[Direct Debit Program]] — overlapping product area
 - [[Monnify]] — competing payment gateway

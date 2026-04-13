@@ -1,16 +1,16 @@
 ---
-title: Tolulope Obianwu
 type:
   - "entity"
+title: Tolulope Obianwu
 created: 2026-04-11
-updated: 2026-04-11
+summary: Head, Core Operations at TeamApt; on a Performance Improvement Plan as of March 2026; PIP posture decision due April 14, 2026 on return from bereavement leave. NDS Ops Lead role filled by Oluwadamilola Odugbesan.
+updated: "2026-04-13T06:41:19Z"
 cssclasses:
   - "entity"
-summary: Head, Core Operations at TeamApt; acting NDS Ops Lead; on a Performance Improvement Plan as of March 2026; PIP posture decision due April 14, 2026 on return from bereavement leave.
 ---
 
 ## Overview
-Tolulope Obianwu is Head of Core Operations at [[TeamApt]], also carrying the acting NDS Ops Lead role — a double load that [[Emeka Awagu]]'s accountability framework flags as the highest transition risk among direct reports. She was placed on a PIP (Performance Improvement Plan) in March 2026.
+Tolulope Obianwu is Head of Core Operations at [[TeamApt]]. She was placed on a PIP (Performance Improvement Plan) in March 2026. The acting NDS Ops Lead role she previously carried has been filled by [[Oluwadamilola Odugbesan]].
 
 ## PIP Timeline
 - PIP document created: March 10, 2026
