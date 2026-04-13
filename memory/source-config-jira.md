@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 33+ consecutive ticks missed since 2026-04-11T22:09 UTC (>31 hours blind)."
-updated: "2026-04-13T21:58:52Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 34+ consecutive ticks missed since 2026-04-11T22:09 UTC (>32 hours blind)."
+updated: "2026-04-13T22:32:54Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-13T21:30:00Z"
+last_processed: "2026-04-13T22:31:00Z"
 ---
 
 ## Connection
@@ -77,4 +77,4 @@ These are recurring patterns the heartbeat should watch for:
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
 - **AUTH FAILURE 2026-04-11T22:09 UTC:** Jira connector returned "requires authentication" — signals missed this tick. Needs user re-auth.
-- **AUTH FAILURE 2026-04-13T21:30 UTC:** Jira connector still requires authentication — thirty-third+ consecutive tick missed. >31 hours of complete Jira blindness. User re-auth required.
+- **AUTH FAILURE 2026-04-13T22:31 UTC:** Jira connector still requires authentication — thirty-fourth+ consecutive tick missed. >32 hours of complete Jira blindness. User re-auth required.
