@@ -1,12 +1,13 @@
 ---
-title: Appraisal Writing Guide
 type:
-  - "entity"
+  - "source"
+title: Appraisal Writing Guide
+created: "2026-04-13T22:37:14Z"
+summary: "Appraisal writing guide: rating scale 1.0-6.0, SBI framework, SMART expectations, worked examples, pre-submission checklist."
+updated: "2026-04-13T22:38:51Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:37:14Z"
-updated: "2026-04-13T22:37:14Z"
-summary: "Appraisal writing guide: rating scale 1.0-6.0, SBI framework, SMART expectations, worked examples, pre-submission checklist."
+source_path: appraisal writing-guide.md
 ---
 
 ## Summary
