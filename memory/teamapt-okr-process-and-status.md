@@ -1,12 +1,13 @@
 ---
-title: TeamApt OKR Process and Status
 type:
-  - "entity"
+  - "source"
+title: TeamApt OKR Process and Status
+created: "2026-04-13T22:38:20Z"
+summary: "TeamApt OKR framework: annual and quarterly cadence, available 2026 OKRs by department, scoring convention, missing OKRs (Domestic Switching business, multiple product teams, pillar departments)."
+updated: "2026-04-13T22:38:57Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:38:20Z"
-updated: "2026-04-13T22:38:20Z"
-summary: "TeamApt OKR framework: annual and quarterly cadence, available 2026 OKRs by department, scoring convention, missing OKRs (Domestic Switching business, multiple product teams, pillar departments)."
+source_path: TeamApt_OKR_Process.md
 ---
 
 ## Summary
