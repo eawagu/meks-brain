@@ -1,27 +1,34 @@
 ---
-title: TACHA System Specification
 type:
   - "source"
+title: TACHA System Specification
 created: 2026-04-11
-updated: 2026-04-11
+summary: "TACHA system spec v2.1.0: centralized clearing, settlement, fee management, six services, four daily windows, roadmap through Phase 6."
+updated: "2026-04-13T22:38:31Z"
 cssclasses:
   - "source"
-source_path: TeamApt Context\TeamApt\Systems\TACHA\TACHA_System_Specification.md
-summary: "TACHA is TeamApt's centralized clearing, settlement, and reporting backoffice platform serving all transaction systems. Six core services: Control Plane, Fee Service, Clearing, Settlement Workflow, Backoffice, Liquidity Manager. Four daily settlement windows. v2.0.0 deployed February 2026."
+source_path: TeamApt\Systems\TACHA\TACHA_System_Specification.md
 ---
 
 ## Summary
-
-TACHA is TeamApt's centralized clearing, settlement, and reporting backoffice platform serving all transaction systems (Juliana Card/Account Switch, Monnify, Direct Debit, ATS, PTSP, TPP). Released beta 2025, v2.0.0 February 2026.
+TACHA (TeamApt Automated Clearing House and Settlement) specification v2.1.0, defining centralized clearing, settlement, fee management, and disbursement orchestration for all TeamApt platforms.
 
 ## Key Points
+- Centralized clearing and settlement engine for all TeamApt platforms
+- Six key services: Control Plane, Fee Service, Clearing Service, Backoffice, Settlement Workflow, Liquidity Manager
+- Four daily clearing windows with automated processing
+- Settlement categorization: Primary, Secondary, Merchant
+- Collections-Only and Collections+Disbursement operational modes
+- NSS Smart Det centralization for network-wide clearing
+- Reversal, Refund, and Dispute management capabilities
+- Roadmap through Phase 6 with incremental feature releases
 
-- Post-authorization layer processing transaction data from upstream platforms
-- Six core services: Control Plane, Fee Service, Clearing, Settlement Workflow, Backoffice, Liquidity Manager
-- Four daily settlement windows: 5:00 AM, 9:00 AM, 12:00 PM, 3:00 PM WAT
-- Three settlement modes: Primary (NSS interbank), Secondary (API-based), Merchant (instant/T+1)
-- Dual-approval (Maker-Checker) workflows; Kafka-based event pipeline with topic-level ACLs
+## Entities Mentioned
+- [[TACHA]]
+- [[TeamApt]]
+- [[NSS]]
 
 ## Concepts
-
-- [[Regulatory Compliance]]
+- [[Clearing and Settlement]]
+- [[Disbursement Orchestration]]
+- [[Payment Processing]]
