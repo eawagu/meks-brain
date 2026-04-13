@@ -1,12 +1,13 @@
 ---
-title: TeamApt Business Context
 type:
-  - "entity"
+  - "source"
+title: TeamApt Business Context
+created: "2026-04-13T22:37:02Z"
+summary: "Comprehensive TeamApt business overview: founded 2015, four core businesses, 2026 strategy, bank relationships, technology platforms, regulatory context."
+updated: "2026-04-13T22:38:42Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:37:02Z"
-updated: "2026-04-13T22:37:02Z"
-summary: "Comprehensive TeamApt business overview: founded 2015, four core businesses, 2026 strategy, bank relationships, technology platforms, regulatory context."
+source_path: TeamApt\TeamApt_Business.md
 ---
 
 ## Summary
