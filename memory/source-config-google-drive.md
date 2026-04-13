@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-13T03:14:44Z"
+updated: "2026-04-13T21:58:14Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-13T03:10:00Z"
+last_processed: "2026-04-13T15:53:11Z"
 ---
 
 ## Connection
@@ -57,3 +57,4 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
 - Meeting notes are created once by Gemini post-meeting and not modified. `createdTime` is the correct delta signal.
 - `capture_note` generates its own timestamped filename. The metadata header inside the content provides traceability back to the original Google Doc.
+- Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch via google_drive_fetch — skipped this tick. Will retry next tick or flag for manual review.
