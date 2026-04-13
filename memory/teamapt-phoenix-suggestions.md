@@ -1,12 +1,13 @@
 ---
-title: TeamApt Phoenix Suggestions
 type:
-  - "entity"
+  - "source"
+title: TeamApt Phoenix Suggestions
+created: "2026-04-13T22:37:19Z"
+summary: "Phoenix operationalization: PM plugin with five work types, mandatory outputs (Change Spec, C4 inputs, Participant Matrix), cross-platform project coordination, data standardization prerequisite."
+updated: "2026-04-13T22:39:13Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:37:19Z"
-updated: "2026-04-13T22:37:19Z"
-summary: "Phoenix operationalization: PM plugin with five work types, mandatory outputs (Change Spec, C4 inputs, Participant Matrix), cross-platform project coordination, data standardization prerequisite."
+source_path: TeamApt-Phoenix Suggestions.md
 ---
 
 ## Summary
