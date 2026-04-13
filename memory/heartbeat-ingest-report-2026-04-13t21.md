@@ -1,12 +1,13 @@
 ---
-title: Heartbeat Ingest Report 2026-04-13T21
 type:
-  - "entity"
+  - "source"
+title: Heartbeat Ingest Report 2026-04-13T21
+created: "2026-04-13T22:36:56Z"
+summary: Previous heartbeat tick ingest summary — 20 files processed, 20 source pages created, 1 entity created, 3 entities updated, 4 contradictions flagged.
+updated: "2026-04-13T22:38:40Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:36:56Z"
-updated: "2026-04-13T22:36:56Z"
-summary: Previous heartbeat tick ingest summary — 20 files processed, 20 source pages created, 1 entity created, 3 entities updated, 4 contradictions flagged.
+source_path: note_2026-04-13T22-24-21-721Z.md
 ---
 
 ## Summary
