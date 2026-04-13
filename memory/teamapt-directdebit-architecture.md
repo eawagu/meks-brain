@@ -1,12 +1,13 @@
 ---
-title: TeamApt DirectDebit Architecture
 type:
-  - "entity"
+  - "source"
+title: TeamApt DirectDebit Architecture
+created: "2026-04-13T22:37:05Z"
+summary: "C4 architecture for Consolidated Direct Debit: three-tier system, MADD/GoSubscribe/SAFE products, 25 diagram tabs, bank network integration."
+updated: "2026-04-13T22:38:46Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:37:05Z"
-updated: "2026-04-13T22:37:05Z"
-summary: "C4 architecture for Consolidated Direct Debit: three-tier system, MADD/GoSubscribe/SAFE products, 25 diagram tabs, bank network integration."
+source_path: TeamApt\TeamApt_DirectDebit_Architecture.md
 ---
 
 ## Summary
