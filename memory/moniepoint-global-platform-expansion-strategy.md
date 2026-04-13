@@ -1,12 +1,13 @@
 ---
-title: Moniepoint Global Platform Expansion Strategy
 type:
-  - "entity"
+  - "source"
+title: Moniepoint Global Platform Expansion Strategy
+created: "2026-04-13T22:37:11Z"
+summary: "Moniepoint global expansion: Nigeria (base), UK (diaspora), Kenya (mobile money), multi-currency, compliance engine, platform-first approach."
+updated: "2026-04-13T22:38:48Z"
 cssclasses:
   - "entity"
-created: "2026-04-13T22:37:11Z"
-updated: "2026-04-13T22:37:11Z"
-summary: "Moniepoint global expansion: Nigeria (base), UK (diaspora), Kenya (mobile money), multi-currency, compliance engine, platform-first approach."
+source_path: Path_to_Global_Platform.md
 ---
 
 ## Summary
