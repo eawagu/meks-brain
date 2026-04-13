@@ -1,12 +1,12 @@
 ---
-title: Transaction Switching Platform
 type:
   - "concept"
+title: Transaction Switching Platform
+created: "2026-04-13T12:07:01Z"
+summary: "The Transaction Switching Platform (TSP) is Moniepoint's foundational payment processing kernel — a market-agnostic Layer 1 switch handling all fund movement (19 transaction types) via a Spine + Module architecture, being built under Project Phoenix as the organization's core system. Gap analysis identifies a critical architectural distinction: TSP currently designed as a payment orchestrator but also needs a transaction switching layer for inter-institutional ISO 8583 routing, HSM, and scheme connectivity."
+updated: "2026-04-13T22:23:42Z"
 cssclasses:
   - "concept"
-created: "2026-04-13T12:07:01Z"
-updated: "2026-04-13T12:07:01Z"
-summary: "The Transaction Switching Platform (TSP) is Moniepoint's foundational payment processing kernel — a market-agnostic Layer 1 switch handling all fund movement (19 transaction types) via a Spine + Module architecture, being built under Project Phoenix as the organization's core system."
 ---
 
 ## What It Is
@@ -45,11 +45,72 @@ Three deployment tiers, designed from day one but shipped in sequence:
 
 Six shared platform dependencies: CBA, Cosmos, Loom, Treasury/FX, Notifi, and one additional (per v1 briefing).
 
+## Orchestrator vs Switch: The Architectural Distinction
+
+The [[source — Phoenix Gap Analysis Complete|gap analysis]] identifies a critical architectural distinction:
+
+**TSP as currently designed is a payment orchestrator** — it manages payment lifecycle (state machine, fee calculation, posting construction, routing) within a controlled ecosystem. This is correct and needed.
+
+**But TSP also needs a transaction switching layer** — real-time inter-institutional message routing between independent financial institutions, with:
+- ISO 8583 message handling (parsing, construction, format translation)
+- Sub-500ms authorization (scheme-mandated latency)
+- HSM integration (PIN translation, MAC generation, PAN tokenization)
+- Direct scheme connectivity (persistent TCP, network management messages, scheme certification)
+- Stand-in processing (local approval when issuer/scheme unavailable)
+- Hot lists (sub-millisecond lookup in authorization path)
+- BIN table routing (tenant → country → global hierarchy)
+
+**Phoenix has the orchestrator but is missing the switch.** The TeamApt Transaction Switch specification describes this missing layer. Both capabilities are needed — the orchestrator for payment lifecycle management AND the switch for real-time inter-institutional routing.
+
+Key capabilities already built for the switching layer: ISO 8583 switching (jPOS 3.0 + Netty 4.2), direct Visa & Mastercard scheme connections, HSM integration, 21-step workflow engine, config-driven Fee Engine (replacing 5 legacy libraries), 493 passing tests across 14 modules.
+
 ## Unified Platform Strategy
 
 TSP is a unified switch for all token types (card, account, wallet) and all transaction directions (push/pull), with country-specific adapters. This is a deliberate "one platform" strategy — not separate switches per product. AptPay's five products are being migrated into TSP under [[Project Phoenix]].
 
-Mapping: Account/Card Switching, VAS Processing, Settlement & Clearing, Dispute Resolution, Tokenisation (ownership TBD).
+### Products Becoming Platform Capabilities
+
+| Current Product | TSP Capability | Status |
+|---|---|---|
+| Juliana (Account) | Account Switching & Processing | Strategy paper complete; C4 current |
+| Juliana (Card) | Card Switching & Processing | ~42-50% POS market share — highest risk asset |
+| AptPay ATS | Integrations (Country-Agnostic) | Adapter model defined, not built |
+| VAS (bill pay, airtime) | VAS Switching & Processing | 44 provider integrations moving to TSP |
+| AptPay Direct Debit | **Decision Required** | Placement unresolved — blocks team formation |
+| [[TACHA]] / Juliana Backoffice | Settlement & Clearing | In production — needs formal governance |
+| Dispute logic (fragmented) | Centralized Dispute Resolution (Proposed) | Being workshopped |
+
+### Platform Modernisation Sequence (Proposed)
+
+1. **Account Switching & Processing** — PoC transition; lessons de-risk all others. Blind spot: dual switch (Juliana vs [[Atlas]])
+2. **Centralized Clearing & Settlement (TACHA)** — cross-cutting foundation; must have formal ownership, API contracts, SLOs first
+3. **Centralized Dispute Resolution** — consolidate fragmented logic across Juliana, TPP, AptPay Suite
+4. **Card Switching & Processing** — highest commercial risk (~42-50% POS share), sequenced after playbook proven
+5. **Direct Debit** — last among core, allows tokenisation conflict resolution
+6. **Remaining** (Integrations/ATS, VAS Switching) — based on dependency mapping
+
+## Critical Open Risks
+
+| Risk | Status |
+|---|---|
+| Direct Debit placement unresolved | CRITICAL — blocks team formation and Git hierarchy |
+| TACS unrecognised as cross-cutting auth service | CRITICAL — auth logic will fragment |
+| Three-way tokenisation conflict (ATS, DD Issuer Module, Card Switch) | CRITICAL |
+| External tenant model absent — all callers internal | CRITICAL — B2B switching business architecturally homeless |
+| Card fee ownership (TSP Fee Engine or FEP?) | PENDING — blocks Card Phase 4 |
+| Juliana "~60% of ATS" claim unspecified | HIGH — account switch routing capability may be uncovered |
+| Sub-platform senior roles all TBH | HIGH — Layer 1 program unstaffed |
+| PTSP running parallel transition without TSP coordination | CRITICAL |
+
+## Team Impact Assessment
+
+**HIGH Impact teams** (fundamental scope change — from owning full flow to being "callers"):
+- **Account Payments** — 5 of 19 types; PAY_OUT is Phase 1 critical path
+- **Card Issuance** — 6 of 19 types; TSP takes card switching layer
+- **VAS Platform** — 44 provider integrations moving to TSP
+
+**MEDIUM Impact** (complementary scope, well-defined boundaries):
+- Cross-Border Payments, Card Acceptance, Payment Gateway ([[Monnify]])
 
 ## Delivery
 
@@ -69,11 +130,25 @@ Small SEAL team model. 65 total headcount (2 leadership + 3 PMs + 5 APMs + 4 EMs
 
 Selection method: data-driven via GitLab/Jira analytics.
 
+### Team Realignment Into TSP
+
+| Current Team | PM | Target TSP Capability |
+|---|---|---|
+| Switching Solutions | [[Kevin Ng'Eno]] | Card/Account Switching & Processing |
+| AptPay Suite | [[Abdulgafar Obeitor]] | Integrations / Settlement & Clearing |
+| Switch Engineering | [[Oluwabunmi Oyefisayo]] | Core switch platform engineering |
+| CDD | [[Abiodun Famoye]] | Direct Debit (within TSP) |
+| PMO | [[Idris Aliyu]] | TSP-wide product operations |
+
 ## Strategic Position
 
 TSP is the "circulatory system" of Moniepoint's platform (Frank Atashili's framing from the April 7, 2026 kick-off). It is the highest-priority engineering initiative in the organization as of Q2 2026, consuming the best engineers and receiving direct executive mandate from Tosin (Group CEO).
 
 The [[Card Issuance & Processing Platform]] (Layer 2) delegates all fund movement to TSP — never posts directly to [[CBA]]. This is a hard architectural boundary.
+
+### Non-Negotiable Constraint
+
+[[Juliana]] Card Switch holds ~42–50% of Nigeria's POS (agent/merchant) market. Zero disruption during transition — parallel-run validation, SRE sign-off, maintained scheme certifications, same-day settlement commitments.
 
 ## Key People
 
@@ -84,6 +159,9 @@ The [[Card Issuance & Processing Platform]] (Layer 2) delegates all fund movemen
 
 ## Sources
 
+- [[source — Phoenix Gap Analysis Complete]] — switching vs orchestration distinction, capability gaps, business line impact
+- [[source — Project Phoenix PM Briefing Deck]] — team impact, modernisation sequence, critical risks, team realignment
+- [[source — Project Phoenix Initiative]] — comprehensive Phoenix planning document
 - [[TSP Executive Briefing v1]] — Feb 27, 2026; Layer 1 kernel, 16 tx types, 6-phase migration
 - [[TSP Executive Briefing v2]] — March 2026; 19 tx types, 14-module monorepo, dual-country adapters
 - [[TSP Executive Roadmap Idris]] — AptPay migration roadmap, 5 products → 6 capabilities
