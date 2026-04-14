@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 58+ consecutive ticks missed since 2026-04-11T22:09 UTC (>58 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
-updated: "2026-04-14T13:14:35Z"
+updated: 2026-04-14
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T13:09:00Z"
+last_processed: "2026-04-14T13:21:00Z"
 ---
 
 ## Connection
@@ -85,3 +85,4 @@ These are recurring patterns the heartbeat should watch for:
 - **AUTH FAILURE 2026-04-14T11:09 UTC:** Heartbeat runtime still has no Atlassian MCP tool available. 61+ consecutive ticks blind (>61 hours). B3 in briefing-2026-04-14 still not triaged. During this blind window: Stanbic cycle 23 (Slack P1 09:46–09:58 BST), UBA cycles 3–4 (Slack P1s 10:16 and 12:00 WAT; Olamide reports 36h of intermittent UBA degradation), Polaris RC91 cycle (Slack P1 10:50 BST), Access 3DS server unreachable RC 504 (email 11:58 WAT). NIBSS DD P1 silent 5h+ on a 9h+ incident. None of these have Jira ticket correlation — fourth day of zero Jira visibility.
 - **AUTH FAILURE 2026-04-14T12:09 UTC:** Heartbeat runtime still has no Atlassian MCP tool available. 62+ consecutive ticks blind (>62 hours). B3 in briefing-2026-04-14 still not triaged. User is at Strategy Retreat Day 1 in London (08:00–18:00 BST). During this blind window: email-only updates on existing Stanbic/Fidelity/Union/Premium Trust/FCMB operational threads; zero new P1 filings in #teamapt-tech-operations. UBA P1 (11:00 WAT start) and Polaris P1 (10:50 WAT start) from prior tick remain ongoing. NIBSS DD P1 now 10h+ old with silence rule continuously exceeded. Every B3-less hour compounds the blind window.
 - **AUTH FAILURE 2026-04-14T13:09 UTC:** Heartbeat runtime still has no Atlassian MCP tool available. 63+ consecutive ticks blind (>63 hours). B3 in briefing-2026-04-14 still not triaged. Current tick is zero-delta across email/Slack DM sweep/Slack P1 search — quiet window. Retreat is mid-afternoon block (13:09 UTC = 14:09 WAT). NIBSS DD P1 now 11h+ silent on a 13h+ incident; Fidelity "failing generally" 18h44min+ silent. Both continue to accrue Jira correlation debt.
+- **AUTH FAILURE 2026-04-14T13:21 UTC:** Heartbeat runtime still has no Atlassian MCP tool available. 64+ consecutive ticks blind (>64 hours). Off-cadence tick. Email window 13:09–13:21 UTC showed 4 messages: Chris Purkis recurring meeting invite update, 2 Revent marketing pitches (skip), Pivot invoice approval NGN913,750 (Layer 1, Briefing-tier). No new P1 filings, no Jira-referencing signals. NIBSS DD P1 now 11h+ silent on a 13h+ incident; Fidelity "failing generally" 18h56min+ silent. Jira correlation debt continues to accrue on both.

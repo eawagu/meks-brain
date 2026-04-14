@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-14T13:13:22Z"
+updated: 2026-04-14
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T13:09:00Z"
+last_processed: "2026-04-14T13:21:00Z"
 ---
 
 ## Connection
@@ -71,3 +71,4 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
 - **TOOL FAILURE 2026-04-14T13:09 UTC:** `gcal_list_events` call returned "This Google Workspace integration was just upgraded and the tool you tried to call no longer exists. Your tool definitions are stale." Calendar connector is effectively blind this tick until the runtime picks up new tool definitions. Cannot verify whether briefing-2026-04-14 B5 conflicts (Zone Switching 14:00 WAT — starts in <1h, Exec Catch-up 16:00 WAT, Product-Eng Sync 18:00 WAT) were resolved. Tolulope 1:1 missed slot at 11:30 WAT confirmed still unreschedule (third tick carrying). If tool signature remains incompatible on next tick, escalate as structural connector failure (parallel to Jira auth gap).
+- **TOOL UNAVAILABLE 2026-04-14T13:21 UTC:** Heartbeat runtime has no `gcal_*` tool available at all in this session (not even a renamed successor). 2nd consecutive tick blind. Email at 13:16 UTC (Chris Purkis "Updated invitation: Blocker: Head of Engineering (VP+) Slots") is the only visible calendar-related signal in this window, surfaced via email source. B5 conflict window now breached for Tolulope 1:1 (11:00 WAT passed, 3h+ ago); Zone Switching starts at 14:00 WAT (in ~39 min from tick time) — cannot verify if declined/accepted. Gap compounds each tick until tool definitions refresh or new calendar tool is registered. Brain-surface as Decision item in next briefing tick (proposed: "Calendar connector structurally failed — tool definitions stale; either refresh MCP or disable source-config-calendar until repaired").

@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-14T13:12:11Z"
+updated: 2026-04-14
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T13:09:00Z"
+last_processed: "2026-04-14T13:21:00Z"
 ---
 
 ## Connection
@@ -75,3 +75,4 @@ last_processed: "2026-04-14T13:09:00Z"
 - Bank escalation threads often span days with multiple participants. Track thread continuity, not just individual messages.
 - HR/admin split: surface anything requiring my judgment or approval. Skip routine employee compliance (benefits, training, all-hands).
 - 2026-04-14 14:09 WAT tick: Zero new messages in 12:09–13:09 UTC window. Quiet inbox coincident with Strategy Retreat Day 1 mid-afternoon block. No briefing/immediate dispatch.
+- 2026-04-14 14:21 WAT tick (off-cadence): 4 messages in 13:09–13:21 UTC window. (1) Chris Purkis updated invitation for recurring "Blocker: Head of Engineering (VP+) Slots" — calendar invite update, handled by calendar source. (2–3) Patrick Okonkwo / Revent Technologies — two marketing pitches ("Transforming Teamapt Limited's Digital Journey", "Accelerate Teamapt Ltd Digital Transformation Initiative") — Tier 3 skip. (4) Pivot invoice approval, NGN913,750 to MAXITECH GLOBAL INVESTMENT LIMITED, requested by Benjamin Musa (DevOps & Infrastructure), invoice date Apr 7, due Apr 20, To: emeka.awagu — Layer 1 To-addressed, requires CTO approval; Briefing-tier (not Immediate, due date Apr 20). Accumulated for next briefing. No Immediate dispatch this tick.
