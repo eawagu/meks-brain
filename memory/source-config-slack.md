@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-14T12:14:42Z"
+updated: "2026-04-14T13:12:50Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T12:09:00Z"
+last_processed: "2026-04-14T13:09:00Z"
 ---
 
 ## Connection
@@ -110,4 +110,4 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- 2026-04-14 13:09 WAT tick: #teamapt-tech-operations read succeeded — zero new P1 filings or resolutions in 11:09–12:09 UTC window (latest P1 filing was 10:19 UTC UBA RC91, already processed last tick). DM sweep query `to:<@U080PEXEZ0E> after:2026-04-14` returned zero results. #account-switch-alerts read rate-limited — retry next tick. No new Slack signals this tick.
+- 2026-04-14 14:09 WAT tick: DM sweep `to:<@U080PEXEZ0E> after:2026-04-14` returned zero results. #teamapt-tech-operations P1 search `in:<#C0ABU8GMW75> P1 after:2026-04-14` returned zero results — no new P1 filings in 12:09–13:09 UTC window. No new Slack signals this tick.
