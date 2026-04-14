@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 70+ consecutive ticks missed since 2026-04-11T22:09 UTC (>70 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
-updated: "2026-04-14T20:16:14Z"
+updated: "2026-04-14T22:14:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T20:09:00Z"
+last_processed: "2026-04-14T22:09:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project. Other projects may become relevant — the heartbeat should note when a Tier 1 Slack or email message references a non-TDSD ticket and flag it for possible addition.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. 70+ consecutive ticks blind (>70 hours) as of 2026-04-14T20:09 UTC. Heartbeat runtime has no Atlassian MCP tool available. Briefing-2026-04-14 B3 (3rd consecutive Decision-item surface, confidence: high) still not triaged. 21:09 WAT tick: TDSD-6552 Fidelity RC91 Cycle 4 filed AND resolved entirely via email (filed 19:05 WAT, resolved 20:35 WAT) — cannot verify Jira ticket was closed, assignee, or RCA. Correlation debt list unchanged since last tick — no reconciliation possible: TDSD-6552 Fidelity RC91 Cycle 4 (now resolved in email but Jira status unverifiable), TDSD-6548 + TDSD-6385 Sterling RC91, TDSD-6276 Union, TDSD-6540 Eco settlements, TDSD-6493 Polaris, TDSD-6479 Harness, TDSD-6506 Rack Centre firewall, TDSD-6425 Stanbic closure, TDSD-6492 UBA RC91.
+- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. **71+ consecutive ticks blind (>72 hours)** as of 2026-04-14T22:09 UTC. Heartbeat runtime has no Atlassian MCP tool available. Briefing-2026-04-14 B3 (3rd consecutive Decision-item surface, confidence: high) still not triaged. 23:09 WAT tick: No new email/Slack references to Jira tickets this window. Correlation debt list unchanged — cannot reconcile: TDSD-6552 Fidelity RC91 Cycle 4 (resolved in email but Jira status unverifiable), TDSD-6548 + TDSD-6385 Sterling RC91, TDSD-6276 Union, TDSD-6540 Eco settlements, TDSD-6493 Polaris, TDSD-6479 Harness, TDSD-6506 Rack Centre firewall (retired per briefing-2026-04-13 B5), TDSD-6425 Stanbic closure, TDSD-6492 UBA RC91.
