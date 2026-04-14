@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-14T20:15:01Z"
+updated: "2026-04-14T22:14:44Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T20:09:00Z"
+last_processed: "2026-04-14T22:09:00Z"
 ---
 
 ## Connection
@@ -57,6 +57,6 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
-- 2026-04-14 21:09 WAT tick: Zero new Gemini docs in the 18:09–19:09 UTC window. Eighth consecutive quiet Drive tick — Retreat Day 1 winding down (Hawksmoor dinner concluded or concluding in London).
+- 2026-04-14 23:09 WAT tick: Zero new Gemini docs in the 20:09–22:09 UTC window. **Ninth consecutive quiet Drive tick** — Retreat Day 1 fully wound down (Hawksmoor dinner concluding in London).
+- 2026-04-14 21:09 WAT tick: Zero new Gemini docs. Eighth consecutive quiet Drive tick — Retreat Day 1 winding down.
 - 2026-04-14 19:09 WAT tick: Zero new Gemini docs. Seventh consecutive quiet Drive tick.
-- 2026-04-14 18:09 WAT tick: Zero new Gemini docs. Sixth consecutive quiet Drive tick.
