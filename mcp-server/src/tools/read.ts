@@ -327,7 +327,7 @@ export const triage: ToolDef = {
 export const lintQueries: ToolDef = {
   name: "lint_queries",
   description:
-    "Run structured judgment-lint queries against the brain. Returns candidates for review: stale claims, concept gaps, synthesis candidates, or stale syntheses. Used by the judgment-lint scheduled task and on-demand analysis.",
+    "Run structured judgment-lint queries against the brain. Returns candidates for review ranked by relevance (occurrence count for concept_gaps, source count for synthesis_candidates, gap_days for stale queries). No fixed quality thresholds — AI judges each candidate per-item. Used by the judgment-lint scheduled task and on-demand analysis.",
   schema: z.object({
     query_type: z
       .enum([
@@ -339,29 +339,17 @@ export const lintQueries: ToolDef = {
       .describe(
         "Which lint check to run: stale_claims (entity/concept pages outdated by newer sources), concept_gaps (wiki-linked terms without their own page), synthesis_candidates (pages with many source references but no synthesis), stale_syntheses (syntheses outdated by newer related pages)"
       ),
-    min_occurrences: z
-      .number()
-      .int()
-      .min(1)
-      .default(3)
-      .describe("Minimum wiki-link occurrences to flag a concept gap (concept_gaps only, default 3)"),
-    min_sources: z
-      .number()
-      .int()
-      .min(1)
-      .default(3)
-      .describe("Minimum source references to flag a synthesis candidate (synthesis_candidates only, default 3)"),
     limit: z
       .number()
       .int()
       .min(1)
       .max(100)
       .default(50)
-      .describe("Maximum number of results (default 50)"),
+      .describe("Maximum number of results — cost cap, not a quality threshold (default 50)"),
   }),
   accessLevel: "read",
   handler: async (params) => {
-    const { query_type, min_occurrences, min_sources, limit } = params;
+    const { query_type, limit } = params;
 
     switch (query_type) {
       case "stale_claims": {
@@ -409,10 +397,9 @@ export const lintQueries: ToolDef = {
            JOIN pages p ON p.id = l.page_id
            WHERE existing.id IS NULL
            GROUP BY l.term
-           HAVING COUNT(DISTINCT l.page_id) >= $1
            ORDER BY COUNT(DISTINCT l.page_id) DESC
-           LIMIT $2`,
-          [min_occurrences, limit]
+           LIMIT $1`,
+          [limit]
         );
         return {
           query_type,
@@ -440,10 +427,9 @@ export const lintQueries: ToolDef = {
                  AND syn.body LIKE '%[[' || p.title || ']]%'
              )
            GROUP BY p.id, p.title, p.type
-           HAVING COUNT(DISTINCT s.id) >= $1
            ORDER BY COUNT(DISTINCT s.id) DESC
-           LIMIT $2`,
-          [min_sources, limit]
+           LIMIT $1`,
+          [limit]
         );
         return {
           query_type,

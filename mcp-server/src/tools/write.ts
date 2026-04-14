@@ -512,4 +512,93 @@ export const captureNote: ToolDef = {
   },
 };
 
-export const writeTools = [createPage, updatePage, deletePage, markProcessed, captureNote];
+// ─── capture_reminder ─────────────────────────────────────────
+export const captureReminder: ToolDef = {
+  name: "capture_reminder",
+  description:
+    "Capture a reminder as a brain page. Writes directly as a reminder page (skips the ingest pipeline). The heartbeat reasons per-tick whether to surface each open reminder by time, context, or age. Use wiki-links in the body to tie the reminder to entities/concepts/situations — this enables context-match surfacing.",
+  schema: z.object({
+    title: z
+      .string()
+      .describe("Reminder statement — what to be reminded of (e.g., \"Follow up with Oladapo on RC91 RCA findings\")"),
+    body: z
+      .string()
+      .optional()
+      .default("")
+      .describe(
+        "Context for the heartbeat to reason about surfacing — what the reminder is about, what signals would make it relevant, any dependencies. Use wiki-links to related entities/concepts/situations."
+      ),
+    due: z
+      .string()
+      .optional()
+      .describe("Optional due date YYYY-MM-DD. Omit for time-less reminders that rely on context-match or periodic judgment."),
+    summary: z
+      .string()
+      .optional()
+      .describe("One-sentence summary"),
+  }),
+  accessLevel: "write",
+  handler: async (params) => {
+    const { title, body, due, summary } = params;
+    const types = ["reminder"];
+
+    const ptc = await validateTypes(types);
+
+    const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+    const fullFm: Record<string, any> = {
+      title,
+      type: types,
+      cssclasses: ["reminder"],
+      status: "pending",
+      created: now,
+      updated: now,
+    };
+    if (due) fullFm.due = due;
+    if (summary) fullFm.summary = summary;
+
+    validateFrontmatter(fullFm, types, ptc);
+
+    // Check for duplicate
+    const existing = await query(
+      "SELECT id FROM pages WHERE title = $1 AND deleted = FALSE",
+      [title]
+    );
+    if (existing.rows.length > 0) {
+      throw new Error(`Page with title "${title}" already exists (id: ${existing.rows[0].id})`);
+    }
+
+    // Write markdown file
+    const filename = `${sanitizeFilename(title)}.md`;
+    const filePath = path.join(config.memoryPath, filename);
+
+    const markdown = buildMarkdown(fullFm, body);
+    await fs.writeFile(filePath, markdown, "utf-8");
+
+    // Sync to Postgres
+    const relPath = filename;
+    const pageId = await syncToPostgres(
+      title,
+      relPath,
+      types,
+      fullFm,
+      body,
+      summary || null,
+      now,
+      now
+    );
+
+    // Git commit
+    await gitCommit(`capture-reminder: ${title}`);
+
+    return {
+      id: pageId,
+      title,
+      file_path: relPath,
+      status: "pending",
+      due: due || null,
+      message: `Captured reminder "${title}"${due ? ` (due ${due})` : ""}`,
+    };
+  },
+};
+
+export const writeTools = [createPage, updatePage, deletePage, markProcessed, captureNote, captureReminder];

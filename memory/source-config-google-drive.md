@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: 2026-04-14
+updated: "2026-04-14T20:15:01Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T13:21:00Z"
+last_processed: "2026-04-14T20:09:00Z"
 ---
 
 ## Connection
@@ -55,7 +55,8 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 
 - `google_drive_fetch` only reads Google Docs. Gemini meeting notes are Google Docs, so this is not a limitation for this source.
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
-- Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch via google_drive_fetch — skipped; will retry or flag for manual review.
-- Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; the equivalent content is under "Details" plus "Next steps" plus "Decisions" and is handled as transcript content for `capture_note`.
-- 2026-04-14 14:09 WAT tick: Zero new Gemini docs in the 12:09–13:09 UTC window.
-- 2026-04-14 14:21 WAT tick (off-cadence): Zero new Gemini docs in the 13:09–13:21 UTC window.
+- Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
+- Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
+- 2026-04-14 21:09 WAT tick: Zero new Gemini docs in the 18:09–19:09 UTC window. Eighth consecutive quiet Drive tick — Retreat Day 1 winding down (Hawksmoor dinner concluded or concluding in London).
+- 2026-04-14 19:09 WAT tick: Zero new Gemini docs. Seventh consecutive quiet Drive tick.
+- 2026-04-14 18:09 WAT tick: Zero new Gemini docs. Sixth consecutive quiet Drive tick.

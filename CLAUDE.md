@@ -40,7 +40,7 @@ Both root and `review/` are scanned recursively. Dropped folders are not treated
 
 ## Page Types
 
-Nine types. Add new types only when use proves them necessary.
+Ten types. Add new types only when use proves them necessary.
 
 | Type | What it holds |
 |---|---|
@@ -50,6 +50,7 @@ Nine types. Add new types only when use proves them necessary.
 | synthesis | Higher-order analysis across multiple sources/entities. Created when content richness warrants it. |
 | commitment | A specific promise: owner, counterparty, role, accountability, due date, status. Resolved commitments compound as history on entity pages. |
 | situation | A developing operational condition being actively tracked. Links to involved entities, tracks deltas over time, has a lifecycle. Retired situations become historical knowledge — they compound on entity pages and feed synthesis. |
+| reminder | A prompt the user wants surfaced later — either at a time (`due` set) or when context warrants. The heartbeat reasons per-tick whether to surface each open reminder. Auto-resolve candidates flagged when ingest sees semantically matching content. |
 | source-config | Registration and directives for a signal source. Contains last-processed timestamp and natural-language filtering rules. |
 | config | Exec assistant behavioral spec (heartbeat, briefing format, triage thresholds, salience weights). Excluded from ingest, lint, and synthesis. |
 | briefing | Morning briefing output. One per day. Preserves the judgment record — what was surfaced, how it was framed, what was recommended. Feeds the Improve phase. |
@@ -62,7 +63,7 @@ Nine types. Add new types only when use proves them necessary.
 
 ```yaml
 title: string
-type: [string]       # array, primary type first. Valid: entity, concept, source, synthesis, commitment, situation, source-config, config, briefing
+type: [string]       # array, primary type first. Valid: entity, concept, source, synthesis, commitment, situation, reminder, source-config, config, briefing
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ```
@@ -87,7 +88,6 @@ source_path: string   # path to raw file in OneDrive folder
 **synthesis:**
 ```yaml
 status: draft | current | superseded
-coverage: high | medium | low   # 5+ sources, 2-4, 0-1
 ```
 
 **situation:**
@@ -95,6 +95,12 @@ coverage: high | medium | low   # 5+ sources, 2-4, 0-1
 status: developing | stable | resolving | retired
 accountability: string   # maps to role accountabilities
 role: string             # role slug (e.g., cto-teamapt)
+```
+
+**reminder:**
+```yaml
+status: pending | done | dismissed | auto-resolved
+due: YYYY-MM-DD          # optional — omit for time-less reminders
 ```
 
 **source-config:**
@@ -155,7 +161,7 @@ summary: [one sentence]
 - Title names the entity and condition (e.g., "Stanbic Bank ATS — Persistent RC91 Pattern").
 - Narrative body is rewritten on each full review to incorporate accumulated deltas. Deltas accumulate between reviews.
 - Wiki-links to entity pages are mandatory for every entity mentioned. This enables cross-referencing: "what situations involve this entity?"
-- Status lifecycle: `developing` → `stable` (no new deltas but still active) → `resolving` (resolution signals received) → `retired` (no new signals for 2+ consecutive scans). Retired pages are not deleted.
+- Status lifecycle: `developing` → `stable` (no new deltas but still active) → `resolving` (resolution signals received) → `retired` (heartbeat judges the situation no longer active — resolution confirmed, dependency removed, or monitoring adds no further value). Retired pages are not deleted. Retirement is per-tick judgment with a bias toward retiring: when uncertain, retire. The active set is only as valuable as the signal it carries — stale situations dilute attention.
 - The heartbeat queries active situations via Postgres: `type = situation AND status != retired`.
 
 ---
@@ -198,6 +204,38 @@ cssclasses: [briefing]
 
 ---
 
+## Reminder Page Structure
+
+Reminder pages hold prompts the user wants surfaced later. The heartbeat reasons per-tick whether to surface each open reminder — by time (if `due` is set and near), by context (if related entities/concepts are active), or by age (if pending long enough to ask "still live?"). Auto-resolve candidates are flagged during ingest when new content semantically matches an open reminder.
+
+```markdown
+---
+title: [Reminder statement — what to be reminded of]
+type: [reminder]
+status: pending
+due: YYYY-MM-DD    # optional
+created: ISO-8601
+updated: ISO-8601
+summary: [one sentence]
+---
+
+[Body — context the heartbeat needs to reason about surfacing. What the reminder is about, what signals would make it relevant, any dependencies. Wiki-links to related entities, concepts, situations — these enable context-match surfacing.]
+
+## Surfacing history
+- [YYYY-MM-DD HH:MM TZ] — [why surfaced / where surfaced / user action]
+```
+
+**Rules:**
+- Title is the reminder statement itself (e.g., "Follow up with Oladapo on RC91 RCA findings").
+- Body carries the reasoning context — the heartbeat reads it per-tick to judge relevance against current state.
+- Wiki-links in the body enable context-match surfacing — the heartbeat surfaces reminders whose wiki-links overlap with entities or concepts active in current signals. Reminders without wiki-links surface only by time (if `due` is set) or by age — context-match does not apply.
+- `due` is optional. Time-less reminders rely on context-match or periodic judgment.
+- Status lifecycle: `pending` → `done` (user completed action) | `dismissed` (user decided not to act) | `auto-resolved` (semantic match during ingest flagged it, user confirmed the underlying need was met).
+- Auto-resolve never marks `done` directly. The flow is: ingest flags candidate → briefing Decision item → user confirms or rejects. User rejection keeps status `pending`.
+- Surfacing history is append-only bookkeeping for the Improve phase.
+
+---
+
 ## Source-Config Page Structure
 
 Source-config pages follow a fixed body structure for cross-session consistency. Directives are natural-language rules — content is free-form, structure is governed.
@@ -215,8 +253,7 @@ updated: YYYY-MM-DD
 [How the heartbeat accesses this source — MCP name, API endpoint, folder path, etc.]
 
 ## Directives
-- [One natural-language rule per bullet]
-- [Order implies priority — first directive wins on conflict]
+[Natural-language filtering, prioritization, and scope rules for this source. Organize under `###` sub-headings for thematic grouping (e.g., Priority model, Sender tiers, Keyword rules, Skip rules). Content is free-form prose and bullets — whatever expresses the rules clearly.]
 
 ## Notes
 [Optional — context about this source, quirks, known limitations]
@@ -224,9 +261,8 @@ updated: YYYY-MM-DD
 
 **Rules:**
 - Directives MUST live under a `## Directives` heading.
-- Each directive is a single bullet point — one rule per bullet.
-- Order implies priority: when two directives conflict, the earlier one wins.
-- Adding, removing, or modifying directives = editing the bullet list via `update_page`. The overall page structure does not change.
+- When precedence matters, MUST make it explicit in the directive content itself — via named layers ("Layer 1 takes precedence"), numbered priority lists ("1. Highest priority"), or tiered labels ("Tier 1 — Immediate") — rather than relying on implicit ordering.
+- Adding, removing, or modifying directives = editing the section content via `update_page`. The overall page structure does not change.
 - The heartbeat loads the `## Directives` section for each source before checking it for deltas.
 - `## Connection` and `## Notes` are stable sections — the heartbeat reads Connection for access details, Notes for context.
 

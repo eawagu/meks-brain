@@ -4,7 +4,7 @@ type:
 title: Project Phoenix
 created: 2026-04-11
 summary: "Moniepoint's group-wide transformation initiative — platformization of all infrastructure into 6 clusters with AI-native mandate (Eywa); One Platform migration via Strangler Fig pattern targeting Nigeria/UK/Kenya in 6 months; Card Issuance & Processing Platform (Spine-and-Module) formally kicked off Apr 7, 2026."
-updated: "2026-04-14T13:33:02Z"
+updated: "2026-04-14T18:24:27Z"
 cssclasses:
   - "entity"
 ---
@@ -21,6 +21,7 @@ Project Phoenix is [[Moniepoint]]'s group-wide transformation initiative with tw
 - **Feb 16–20, 2026**: AI-native mandate — all functional managers rebuild workflows using AI (Eywa). Claude access via [[Michael Afolabi]]
 - **Mar 24, 2026**: Tosin authored Project_Phoenix_v3 — comprehensive strategic document defining 6 platform clusters, execution governance, extreme reliability (99.99% uptime), talent density standards
 - **Mar 27, 2026**: Phase 1 start confirmed — build for Nigeria, UK, Kenya. Full production in **6 months ("sacrosanct")**. [[Ravi Jakhodia]] leads program
+- **Apr 14, 2026 (Retreat Day 1, London):** Tosin publicly confirmed Phase 1 TSP launch in progress (account transfers, cards, other services consolidated), core platform + Phoenix design system starting across POS and web. **Phase 2 begins June** — company-wide adoption of new design system + AI-native processes. Phase 3 — beta new app + parallel backend to "strangle" legacy, progressive traffic cutover. Team leads own June scope definitions and transition planning. Kenya launch 2026 confirmed via [[Sumac Microfinance Bank]] acquisition. Moneywalls shifts to business-led platform model (business team operates, central team runs platform). Org split target: one configurable global product + global platform team vs country business entities. See [[source — Retreat Day 1 Profitability Phoenix Kenya Competitive Strategy Summary (Apr 14 2026)]].
 
 ## Platform Cluster Architecture (Official — Tosin's Project_Phoenix_v3)
 
@@ -53,7 +54,7 @@ Strangler Fig pattern. Led by [[Ravi Jakhodia]]. Total timeline: 6 months.
 | Stage 2 | All Platforms + Alpha Launch | Months 3–5 | End of August 2026 |
 | Stage 3 | Beta + Commercial Roll-Out | Month 6 | September 2026 |
 
-**Stage 2 imposes ~4-month change freeze** — only must-have exceptions approved by PM Governance Body (Tosin).
+**Stage 2 imposes ~4-month change freeze** — only must-have exceptions approved by PM Governance Body (Tosin). Day 1 retreat reconfirmation: Phase 2 starts June; pre-June teams must clear regulatory, reliability, innovation priorities; BAU maintained during freeze; OKRs rely on product shipped by June; sales/local GTM drive 2025 680 goal.
 
 Key risks: Design components slip (HIGH), informal freeze workarounds (HIGH), PM artefact format not finalized (MEDIUM).
 
@@ -143,3 +144,5 @@ Phoenix described as "calibration moment." Primary dimensions tested: Customer O
 - [[002-CI_P_Platform_Team_Structure_v1_6]] — CI&P team structure
 - [[Source: notes-2026-04-07]] — Phase 1 kick-off signal
 - [[Source: notes-2026-04-08]] — architecture in progress
+- [[source — Retreat Day 1 Profitability Phoenix Kenya Competitive Strategy Summary (Apr 14 2026)]] — Tosin's public Day 1 confirmation of Phase 2 June start, Kenya launch via Sumac, Moneywalls business-led platform model, org split post-platformization
+- [[source — Retreat Day 1 Management Framework Loan Portfolio Risk Summary (Apr 14 2026)]] — Tosin's 7-principle management framework (cascade goals → structure → people → incentives → context → systems → governance)
