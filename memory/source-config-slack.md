@@ -7,7 +7,7 @@ summary: Signal source registration and filtering directives for Slack (Slack MC
 updated: 2026-04-14
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T06:10:00Z"
+last_processed: "2026-04-14T07:09:00Z"
 ---
 
 ## Connection
