@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-14T12:14:02Z"
+updated: "2026-04-14T13:12:11Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T12:09:00Z"
+last_processed: "2026-04-14T13:09:00Z"
 ---
 
 ## Connection
@@ -74,4 +74,4 @@ last_processed: "2026-04-14T12:09:00Z"
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
 - Bank escalation threads often span days with multiple participants. Track thread continuity, not just individual messages.
 - HR/admin split: surface anything requiring my judgment or approval. Skip routine employee compliance (benefits, training, all-hands).
-- 2026-04-14 13:09 WAT tick: 9 new messages in 11:09–12:09 UTC window — all Layer 2 bank operational threads (Stanbic DCIR account routing, Fidelity DD/FEP routing ack, Fidelity daily DD report, Premium Trust DD server requirements ack + CAB approval loop, Union Bank transaction-status resolution confirmation, FCMB DCIR re-query pending list, Union settlement-difference review). None match Critical keyword rules; none from Tier 1 senders in escalation posture. All classified Awareness — accumulate on entity pages, no briefing/immediate dispatch. Premium Trust DD thread touches the DCIR/ACS/DD credential remediation situation peripherally (production deployment preparation) but is operational, not CTO decision.
+- 2026-04-14 14:09 WAT tick: Zero new messages in 12:09–13:09 UTC window. Quiet inbox coincident with Strategy Retreat Day 1 mid-afternoon block. No briefing/immediate dispatch.
