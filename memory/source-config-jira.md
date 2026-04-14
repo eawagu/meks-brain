@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 35+ consecutive ticks missed since 2026-04-11T22:09 UTC (>37 hours blind)."
-updated: "2026-04-14T01:14:54Z"
+updated: "2026-04-14T02:16:21Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T01:09:00Z"
+last_processed: "2026-04-14T02:14:00Z"
 ---
 
 ## Connection
