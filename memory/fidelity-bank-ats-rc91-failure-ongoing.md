@@ -5,8 +5,8 @@ type:
 title: Fidelity Bank ATS — RC91 Failure Ongoing
 status: developing
 created: "2026-04-11T16:45:01Z"
-summary: "Fidelity Bank ATS — escalated to \\"failing generally\\" on Apr 13 (19:25 WAT). Beyond RC91 — multiple transaction types affected. No resolution signal 5h44min+ as of 01:09 WAT Apr 14. ACT platform go-live targeted same day. Three concurrent failure tracks."
-updated: "2026-04-14T00:13:25Z"
+summary: "Fidelity Bank ATS — escalated to \"failing generally\" on Apr 13 (19:25 WAT). Beyond RC91 — multiple transaction types affected. No resolution signal 8h46min+ as of 04:11 WAT Apr 14. ACT platform go-live and AptPay UAT window (Apr 14–15) starting today. Three concurrent failure tracks."
+updated: "2026-04-14T03:15:52Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -14,7 +14,7 @@ accountability: Technology Reliability and Security
 
 [[Fidelity Bank]] ATS — escalated beyond RC91 to "failing generally" on Apr 13.
 
-**Current (Apr 14, 01:09 WAT):** No resolution signal received since [[Daniel Armstrong]] escalated at 19:25 WAT Apr 13. Now **5h44min+ open** with zero bank response. This is nighttime (low transaction volume), which may mask the failure severity — morning traffic will reveal whether the issue persists or self-resolved overnight.
+**Current (Apr 14, 04:11 WAT):** No resolution signal received since [[Daniel Armstrong]] escalated at 19:25 WAT Apr 13. Now **8h46min+ open** with zero bank response. Still overnight (low transaction volume). Morning traffic starting ~06:00–07:00 WAT will test whether the issue persists or self-resolved. AptPay UAT window (Apr 14–15) begins today — first day of scheduled Fidelity testing while bank is potentially still in failure state.
 
 **Previous (Apr 13):** [[Daniel Armstrong]] emailed Fidelity FEP Support at 19:25 WAT: "transactions are failing generally. Kindly assist to review." Sent to Christian Okeke, Ikenna Shonowo, John Uguru-Okorie (FEP & POS Support). CC: aptpaytechnicalsupport, [[Oladapo Onayemi]]. This is a broader failure than RC91 — "failing generally" indicates multiple transaction types affected.
 
@@ -24,7 +24,7 @@ accountability: Technology Reliability and Security
 **Cycle 2:** Filed by [[Olamide Ajibulu]] at 00:17 WAT Apr 12. Fidelity ([[Oluwafunsho Oyefeso]]) responded at 00:24 WAT: "currently carrying out an emergency system maintenance." Reconfirmation exchange at 00:36–00:47 WAT. Resolution not confirmed.
 
 **Multi-front exposure on Apr 13–14:**
-1. "Failing generally" — active, no resolution 5h44min+ (this page)
+1. "Failing generally" — active, no resolution 8h46min+ (this page)
 2. RC91 pattern (2 previous cycles, unclear if resolved)
 3. ACT platform go-live targeted Apr 13 per ATPP standup (Olawale Adegboyega: "testing should be completed today, deployments targeted for same day")
 4. DD null mandate errors ([[TDSD-6504]] at [[NIBSS]])
@@ -43,3 +43,4 @@ email [[Daniel Armstrong]] → fepsupport@fidelitybank.ng 19:25 WAT Apr 13; emai
 - 2026-04-12 00:47 WAT — 2nd RC91 cycle filed. Fidelity acknowledged emergency maintenance.
 - 2026-04-13 19:25 WAT — Escalated to "failing generally" — [[Daniel Armstrong]] reported broader failure beyond RC91. No resolution signal 3h+. Concurrent ACT go-live targeted same day.
 - 2026-04-14 01:09 WAT — No resolution signal. 5h44min+ open. Overnight low-volume period — morning traffic will test whether issue persists.
+- 2026-04-14 04:11 WAT — No resolution signal. 8h46min+ open. Zero bank response since escalation. AptPay UAT window (Apr 14–15) starts today — Fidelity testing may be impacted. Absence-of-signal: exceeds 1-hour threshold for active P1 (first flagged multiple ticks ago, still unresolved).
