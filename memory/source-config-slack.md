@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-14T04:13:11Z"
+updated: "2026-04-14T05:20:33Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T04:09:00Z"
+last_processed: "2026-04-14T05:10:00Z"
 ---
 
 ## Connection
