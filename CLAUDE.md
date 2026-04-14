@@ -319,6 +319,14 @@ These are operational rules, not aspirations. Apply on every ingest, every heart
 
 ---
 
+## Design Principles
+
+Design principles govern the activity of proposing and modifying brain mechanisms — page types, heartbeat behaviors, lifecycle states, surfacing rules, ingest pipelines, lint queries, capture tools, briefing formats, triage flows. They fire in design conversations, not at runtime. Enforcement is user-in-the-loop probing, not mechanical verification. The verification gate in `directive-language.md` applies advisory here, not as a hard gate — design principles are judgment-oriented by nature, and mechanical specificity would collapse the judgment into the pre-AI scaffolding the principles warn against.
+
+1. **AI-native judgment over pre-AI scaffolding.** Pre-AI patterns — type taxonomies forcing upfront classification, fixed numeric thresholds, batch review phases, static state tiers, calendar-driven cadences, global defaults applied uniformly — exist because pre-AI tools cannot reason about individual items. This brain reasons about every item on every tick. When designing or modifying brain mechanisms, MUST default to minimal structured classification and judgment-driven behavior. MUST introduce rules, thresholds, tiers, or fixed cadences only when the decision is a schema invariant required by tools/queries, cross-cutting infrastructure with no per-item surface, or requires deterministic consistency that reasoning cannot guarantee — and MUST state which applies in the design rationale.
+
+---
+
 ## Exec Assistant Interface
 
 The exec assistant reads from and writes to this brain. It is not a foreign system — it is the brain's operational arm.
