@@ -7,7 +7,7 @@ summary: Signal source registration and filtering directives for Google Drive (G
 updated: 2026-04-14
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T09:09:00Z"
+last_processed: "2026-04-14T10:09:00Z"
 ---
 
 ## Connection
@@ -55,6 +55,5 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 
 - `google_drive_fetch` only reads Google Docs. Gemini meeting notes are Google Docs, so this is not a limitation for this source.
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
-- Meeting notes are created once by Gemini post-meeting and not modified. `createdTime` is the correct delta signal.
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch via google_drive_fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; the equivalent content is under "Details" plus "Next steps" plus "Decisions" and is handled as transcript content for `capture_note`.
