@@ -4,7 +4,7 @@ type:
 title: Project Phoenix
 created: 2026-04-11
 summary: "Moniepoint's group-wide transformation initiative — platformization of all infrastructure into 6 clusters with AI-native mandate (Eywa); One Platform migration via Strangler Fig pattern targeting Nigeria/UK/Kenya in 6 months; Card Issuance & Processing Platform (Spine-and-Module) formally kicked off Apr 7, 2026."
-updated: "2026-04-13T22:19:59Z"
+updated: "2026-04-14T13:33:02Z"
 cssclasses:
   - "entity"
 ---
@@ -41,7 +41,7 @@ Plus cross-cutting **Design System & UI Frameworks**.
 
 **TeamApt proposed ownership**: Card/Account/VAS Switching & Processing, Card Issuance & Processing, Card Acceptance & Processing, CBA, Loom, Clearing & Settlement, Tokenisation, Mandate Management, EMV Authentication stack, TSP.
 
-**Core belief statement**: "TeamApt builds switching and processing systems that connect banks, fintechs, and regulators. TeamApt is not limited to building systems for a single bank."
+**Core belief statement**: "TeamApt builds switching and processing systems that connect banks, fintechs, and regulators. TeamApt is not limited to building systems for a single bank." Distinguishes TeamApt from being seen as "Moniepoint MFB's technology arm."
 
 ## One Platform Migration Strategy (Mar 27, 2026)
 
@@ -56,6 +56,8 @@ Strangler Fig pattern. Led by [[Ravi Jakhodia]]. Total timeline: 6 months.
 **Stage 2 imposes ~4-month change freeze** — only must-have exceptions approved by PM Governance Body (Tosin).
 
 Key risks: Design components slip (HIGH), informal freeze workarounds (HIGH), PM artefact format not finalized (MEDIUM).
+
+Stage 1 workstreams (per [[Phoenix Stage 1 Consolidated Project Plan]]): 5 core (CBA, Cosmos, App Shell, Notifications, TSP) + 3 head-starts (Kenya Onboarding Discovery under [[Ope Adeyemi]]+[[Emir Emanetoglu]], Kenya Core Discovery under [[Kaushal Shukla]], Unified UX Framework under [[Astrid Decrop]]).
 
 ## Card Issuance & Processing Platform (Phase 1 — Kicked Off)
 
@@ -90,9 +92,21 @@ Two teams under [[Digital Banking Platforms]]:
 - Change failure rate: <5%
 - Zero money-loss incidents
 
+## TSP Phase 1 Status (as of April 10, 2026)
+
+Per [[TSP Phase 1 Project Plan DRAFT (Apr 10)]] (Frank's business-layer plan) and Alex's April 9 technical delivery plan ratified at TSP Dev Kickoff. Full details in [[TSP]] and [[Transaction Switching Platform]].
+
+- Scope formally agreed: clean transaction switching (auth, clearing, settlement, dispute routing), all 19 transaction types, both NG+GB markets, continuous delivery 12 weeks.
+- Team: 2 strike teams (15 people). Team Spine ([[Sulaiman Adeeyo]] EM) + Team Adapters ([[Sunday Ayodele]] EM). [[Alex Adeyemo]] Tech Lead, [[Frank Atashili]] Product Lead, [[Ravi Jakhodia]] Program Lead, [[Ravi Veluguleti]] Card Switching Domain Owner. PM: [[Bunmi Oyefisayo]]. No dedicated MoniePoint engineers (best-effort only — [[Felix Ike]] committed to context-sharing).
+- Milestones: M1 First Live Transaction wk 3 (Apr 24) PAY_OUT NG via NIP; M2 Two Markets Six Products wk 6 (May 15); M3 Full Catalogue & Ops-Ready wk 9 (Jun 5) all 19 types; M4 Cutover Begun wk 12 (Jun 26).
+- Foundation already built: 15-module Maven monorepo, 9-part LLD (21k+ lines), workflow engine, state machine, ISO 8583 stack (PostBridge/TwoBridge/IPM/Netty/HSM), 6 step executors, 493 passing tests (85% line/80% branch).
+- Integration landscape: 23+ external integrations across 6 protocols — NG (9 rails), GB (7 rails), global+core (7: CBA, Treasury/FX, Loom gRPC, Visa, Mastercard, HSM, scheme clearing files).
+- Integration Problems (from Mar 30 Frank–Ravi sync): #1 People (blocked on architecture), #2 Tools (Ravi, deferred), #3+4 Architecture+Overlapping Systems RESOLVED Apr 7. See [[Ravi J Expectations and Prep (Apr 7)]] for Frank's explicit/implicit deliverables and 7-day prep.
+- Leadership presentation: Monday April 14 afternoon (Tosin + Felix).
+
 ## MFB Systems Blindspot
 
-[[Moniepoint MFB]] operates parallel card infrastructure NOT in any Phoenix platform spec: Postilion/PostCard (ACI/Interswitch), Smart Card Process, Safe Token, [[CMS Manager]] (~12-person team), Aptent (authorization routing). Beyond cards: [[Iris]] (group reconciliation, 15–27B+ txn/month), [[Atlas]] (transfer orchestration, ~500M txn/month). Critical dependency: TeamApt's Monnify uses Iris and Atlas rather than TACHA and Juliana — cross-entity entanglement Phoenix was created to eliminate.
+[[Moniepoint MFB]] operates parallel card infrastructure NOT in any Phoenix platform spec: Postilion/PostCard (ACI/Interswitch), Smart Card Process, Safe Token, [[CMS Manager]] (~12-person team), Aptent (authorization routing). Beyond cards: [[Iris]] (group reconciliation, 15–27B+ txn/month — recommended: Absorb), [[Atlas]] (transfer orchestration, ~500M txn/month, 12+ downstream providers — recommended: Evaluate). Critical dependency: TeamApt's Monnify uses Iris and Atlas rather than TACHA and Juliana — cross-entity entanglement Phoenix was created to eliminate. Both sit in [[Damilare Ogunnaike]]'s Monnify org.
 
 ## Eywa (AI Layer)
 
@@ -111,10 +125,15 @@ Phoenix described as "calibration moment." Primary dimensions tested: Customer O
 - **Extend vs. rebuild**: [[Frank Atashili]]'s original framing ("extend and formalize, not rebuild") vs. [[Alex Adeyemo]]'s endorsed position (TSP as new build from scratch — composable FinOps platform)
 - **MFB migration risk**: Phoenix platforms could launch alongside rather than replacing existing MFB systems, creating more duplication
 - **Timeline ambition**: 6-month "sacrosanct" deadline vs. scope of transformation. [[source — One Platform Migration Plan Analysis]] flags risks in Ravi's plan
+- **Resources vs. mandate**: No dedicated MoniePoint engineers on TSP despite initial commitments from Tosin and Felix. Ravi J advocates through structure (OKRs, formal sign-offs) rather than direct resource confrontation — "safer route" per Frank/Alex private read
 
 ## Sources
 
-- [[source — Project Phoenix Initiative]] — comprehensive planning document
+- [[Project Phoenix Initiative (compiled March 2026)]] — Frank's comprehensive planning document (Apr 10 version)
+- [[Phoenix Stage 1 Consolidated Project Plan]] — Ravi J's mastersheet companion (Apr 10)
+- [[TSP Phase 1 Project Plan DRAFT (Apr 10)]] — Frank's business-layer plan aligned to Alex's 4-phase technical delivery
+- [[Ravi J Expectations and Prep (Apr 7)]] — Frank's deliverable consolidation after Apr 7 meetings
+- [[source — Project Phoenix Initiative]] — earlier comprehensive planning document
 - [[source — Platform Strategy and Vision]] — "One Platform Many Markets" vision, technical architecture rules, governance
 - [[source — Org Structure Changes — Project Phoenix]] — platform-centric transition
 - [[source — TSP Executive Briefing Analysis]] — TSP gaps and blindspots
