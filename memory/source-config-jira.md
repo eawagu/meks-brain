@@ -3,8 +3,8 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 58+ consecutive ticks missed since 2026-04-11T22:09 UTC (>58 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
-updated: "2026-04-14T08:17:19Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 59+ consecutive ticks missed since 2026-04-11T22:09 UTC (>59 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
+updated: 2026-04-14
 cssclasses:
   - "source-config"
 last_processed: "2026-04-14T04:09:00Z"
@@ -80,3 +80,4 @@ These are recurring patterns the heartbeat should watch for:
 - **AUTH FAILURE 2026-04-14T04:09 UTC:** Jira connector still requires authentication — 54th+ consecutive tick missed.
 - **AUTH FAILURE 2026-04-14T07:09 UTC:** Heartbeat runtime has no Atlassian MCP tool available in this session; cannot probe to confirm status. Assumed still failed. 57+ consecutive ticks blind since 2026-04-11T22:09 UTC (>57 hours).
 - **AUTH FAILURE 2026-04-14T08:09 UTC:** Heartbeat runtime again has no Atlassian MCP tool available. 58+ consecutive ticks blind (>58 hours). Briefing-2026-04-14 B3 surfaced re-auth as 3rd consecutive Decision item with confidence: high; still not re-authenticated.
+- **AUTH FAILURE 2026-04-14T09:09 UTC:** Heartbeat runtime still has no Atlassian MCP tool available. 59+ consecutive ticks blind (>59 hours). B3 in briefing-2026-04-14 still not triaged. During this blind window, new Stanbic, UBA, Fidelity RC91 P1s observed in email but not correlated against Jira for ticket-filing gap detection.

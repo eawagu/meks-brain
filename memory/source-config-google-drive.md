@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-14T08:16:39Z"
+updated: 2026-04-14
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T08:09:00Z"
+last_processed: "2026-04-14T09:09:00Z"
 ---
 
 ## Connection
