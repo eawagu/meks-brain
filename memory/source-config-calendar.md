@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-14T11:19:48Z"
+updated: "2026-04-14T12:15:12Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T11:09:00Z"
+last_processed: "2026-04-14T12:09:00Z"
 ---
 
 ## Connection
@@ -70,4 +70,4 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
-- 2026-04-14 12:09 WAT tick: No new invites, cancellations, or response changes in the 10:09–11:09 UTC window. Briefing-2026-04-14 B5 conflicts (Tolulope 1:1 at 11:00 WAT, Zone Switching 14:00, Exec Catch-up 16:00, Product-Eng Sync 18:00) remain unresolved — all four still on the calendar with original responseStatus. Tolulope 1:1 slot has now passed (current time 12:09 WAT > 11:30 end time) without reschedule or cancellation signal.
+- 2026-04-14 13:09 WAT tick: No new invites, cancellations, or response changes in the 11:09–12:09 UTC window. Briefing-2026-04-14 B5 conflicts remain: Zone Switching 14:00 WAT still `needsAction` (1h away), Exec Catch-up 16:00 WAT still `accepted`, Product-Eng Sync 18:00 WAT still `accepted` — all three still unresolved while retreat is active. Tolulope 1:1 slot passed at 11:30 WAT without reschedule/cancellation (second tick carrying this). Hawksmoor dinner 19:30 BST and Strategy Retreat Day 2 (Wed) confirmed.
