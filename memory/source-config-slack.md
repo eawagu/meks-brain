@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-14T20:14:43Z"
+updated: "2026-04-14T22:13:14Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T20:09:00Z"
+last_processed: "2026-04-14T22:09:00Z"
 ---
 
 ## Connection
@@ -110,6 +110,6 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- 2026-04-14 21:09 WAT tick: DM sweep returned zero results. Tier 1 ops channel (#teamapt-tech-operations C0ABU8GMW75) returned zero messages since last_processed. **Eighth consecutive quiet Slack tick.** Meanwhile email carried two signals (Fidelity TDSD-6552 resolution + Sterling hourly reconfirmation). Email-only P1 pattern continues — Fidelity RC91 Cycle 4 filed AND resolved via email without any #teamapt-tech-operations entry. Decision-item proposal for briefing-2026-04-15 reinforced: "P1 declarations migrating to email-only channels, #teamapt-tech-operations monitoring effectiveness degraded — should channel scope be redefined or retire this Tier 1 channel?"
+- 2026-04-14 23:09 WAT tick: DM sweep returned zero results. Tier 1 ops channel (#teamapt-tech-operations C0ABU8GMW75) returned zero messages since last_processed. **Ninth consecutive quiet Slack tick.** Meanwhile email carried two user-sent approvals (Rack Centre Wednesday logistics). Email-only P1 pattern pause tonight — no P1 activity anywhere since Fidelity resolution at 20:35 WAT. Carry-forward Decision-item proposal for briefing-2026-04-15: "P1 declarations migrating to email-only channels, #teamapt-tech-operations monitoring effectiveness degraded — should channel scope be redefined or retire this Tier 1 channel?"
+- 2026-04-14 21:09 WAT tick: DM sweep returned zero results. Eighth consecutive quiet Slack tick. Fidelity RC91 Cycle 4 filed AND resolved via email without any #teamapt-tech-operations entry.
 - 2026-04-14 19:09 WAT tick: DM sweep returned zero results. Seventh consecutive quiet Slack tick during Retreat Day 1 evening. All bank activity visible via email only.
-- 2026-04-14 18:09 WAT tick: DM sweep returned zero results. Sixth consecutive quiet Slack tick.
