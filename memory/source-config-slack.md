@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-15T13:15:02Z"
+updated: "2026-04-15T14:15:34Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T13:09:00Z"
+last_processed: "2026-04-15T14:09:00Z"
 ---
 
 ## Connection
@@ -110,13 +110,14 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- **2026-04-15 14:09 WAT tick:** DM sweep (`to:<@U080PEXEZ0E> after:2026-04-15`) zero results. **Seventeenth consecutive quiet DM tick.** Retreat Day 2 continuing in London (08:00–18:00 BST). Tier 1 channel not re-sampled this tick (prior tick verified active-but-low-volume — Olamide NIBSS P1 posting 10:03 WAT still the most recent). Any in-flight P1/RC91 activity visible via email exclusively this tick.
-- 2026-04-15 13:09 WAT tick: DM sweep zero results. Tier 1 #teamapt-tech-operations read: Olamide Ajibulu P1 posting at 10:03 WAT Apr 15 NIBSS PTSA brief downtime (4 min, 09:49–09:53 WAT). Channel re-tiered from "channel-stale" to "active but low volume."
+- **2026-04-15 15:09 WAT tick:** DM sweep (`to:<@U080PEXEZ0E> after:2026-04-15`) zero results. **Eighteenth consecutive quiet DM tick.** Retreat Day 2 continuing; user in CTO/Abayomi 1:1 15:00–15:30 WAT. Union Bank RC91 P1 filing came in via email exclusively — no Slack crossover. Tier 1 channel read with oldest filter returned old join-messages only (filter may not be honoring `oldest`); relying on prior-tick baseline (channel active but low volume). Slack DM draft queued to self for the Immediate alert.
+- 2026-04-15 14:09 WAT tick: DM sweep zero results. Seventeenth consecutive quiet DM tick.
+- 2026-04-15 13:09 WAT tick: DM sweep zero results. Olamide Ajibulu P1 posting at 10:03 WAT Apr 15 NIBSS PTSA brief downtime (4 min, 09:49–09:53 WAT). Channel re-tiered from "channel-stale" to "active but low volume."
 - 2026-04-15 12:09 WAT tick: DM sweep zero results. Fifteenth consecutive quiet Slack tick.
 - 2026-04-15 11:09 WAT tick: Tier 1 no new messages. Slack search MCP rate-limited; DM/discovery sweep skipped.
 - 2026-04-15 10:09 WAT tick: DM sweep zero results. Thirteenth consecutive quiet tick.
-- 2026-04-15 09:09 WAT tick: DM sweep zero results. Twelfth consecutive quiet tick.
-- 2026-04-15 08:10 WAT tick: DM sweep zero results. Eleventh consecutive quiet tick.
-- 2026-04-15 07:10 WAT briefing tick: DM sweep zero results. Tenth consecutive quiet tick.
+- 2026-04-15 09:09 WAT tick: DM sweep zero results.
+- 2026-04-15 08:10 WAT tick: DM sweep zero results.
+- 2026-04-15 07:10 WAT briefing tick: DM sweep zero results.
 - 2026-04-14 23:09 WAT tick: Ninth consecutive quiet tick.
 - 2026-04-14 21:09 WAT tick: Eighth consecutive quiet tick. Fidelity RC91 Cycle 4 filed AND resolved via email without any #teamapt-tech-operations entry.

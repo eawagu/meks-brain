@@ -25,6 +25,12 @@ CREATE TABLE IF NOT EXISTS pages (
     indexed_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Raw content blob for sources labeled retention_label = 'postgres' (Ingress Retention design).
+-- Holds the converted-to-markdown raw content alongside the derived source page (pages.body).
+-- NULL for source pages with retention_label = 'fs' or 'discard', and for non-source pages.
+-- Phase 2 will wire embedding-based semantic search over chunks of this column.
+ALTER TABLE pages ADD COLUMN IF NOT EXISTS raw_content TEXT;
+
 -- Full-text search index (BM25 approximation via tsvector)
 ALTER TABLE pages ADD COLUMN IF NOT EXISTS tsv tsvector
     GENERATED ALWAYS AS (
