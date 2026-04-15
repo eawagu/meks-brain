@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "0fadf9f3ad7f7275",
+        "id": "365e9de27652c07a",
         "type": "tabs",
         "children": [
           {
-            "id": "3d24f75004fae7e7",
+            "id": "22148c01f51c7023",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -176,8 +176,21 @@
       "bases:Create new base": false
     }
   },
-  "active": "3d24f75004fae7e7",
+  "active": "22148c01f51c7023",
   "lastOpenFiles": [
+    "memory/frank-atashili.md",
+    "Chloe.md",
+    "memory/glory-alioha.md",
+    "memory/globalpay.md",
+    "memory/direct-to-bank-daily-stand-up-2026-04-02-gemini-notes.md",
+    "memory/devadas-prabhu-vp-engineering.md",
+    "memory/digital-banking-platforms.md",
+    "memory/dangote-non-disclosure-agreement-draft.md",
+    "memory/daily-briefing-2026-04-01.md",
+    "memory/aws.md",
+    "memory/config-heartbeat-prompt.md",
+    "memory/config-heartbeat.md",
+    "CLAUDE.md",
     "dashboard.md",
     "memory/direct-to-bank-daily-standup-2026-04-01-0824.md",
     "memory/direct-to-bank-daily-standup-2026-03-31.md",
@@ -190,10 +203,6 @@
     "memory/victor-madu.md",
     "memory/emmanuel-eke.md",
     "memory/opeyemi-animashaun.md",
-    "memory/chiamaka-ofomata.md",
-    "memory/bukola-taiwo.md",
-    "memory/direct-debit-production-issues-weekly-analysis-2026-04-02.md",
-    "memory/platform-engineering.md",
-    "memory/devadas-prabhu-vp-engineering-interview.md"
+    "memory/chiamaka-ofomata.md"
   ]
 }

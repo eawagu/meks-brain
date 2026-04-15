@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
-summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log."
-updated: "2026-04-12T21:37:24Z"
+summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Perceive adds reminder evaluation (unified surface-now + auto-resolve inline per-item judgment, no fixed thresholds). Act renders reminder briefing items (surface-only, auto-resolve, combined) and writes Surfacing history at emission. Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log."
+updated: 2026-04-15
 cssclasses:
   - "config"
 ---
@@ -25,17 +25,47 @@ Read config pages from brain MCP before any signal checks:
 Read all source-config pages from brain MCP (`search` with type_filter: `["source-config"]`). Each defines: connection details (which MCP connector + access pattern), filtering directives, and `last_processed` timestamp.
 
 ### Perceive
-For each source-config page, read its `## Connection` section for MCP tool names and access patterns, and its `## Directives` section for filtering rules. Check for new signals since `last_processed` using the connection details specified in each source-config page.
+
+**Step 1 — Source signals.** For each source-config page, read its `## Connection` section for MCP tool names and access patterns, and its `## Directives` section for filtering rules. Check for new signals since `last_processed` using the connection details specified in each source-config page.
 
 For every new signal, run `search` (brain MCP) for semantic similarity against the full brain — perfect cross-referencing, zero recall decay. MUST NOT include `briefing` in any type_filter during Perceive — briefing pages are output, not input.
 
-**Early exit:** If zero deltas across all sources, skip Predict/Plan/Act. Proceed directly to Improve (absence-of-signal check), then Phase 2.
+**Step 2 — Reminder evaluation.** Query open reminders via `search` with `type_filter: ["reminder"]`; filter the results to those with `status: pending`. For each open reminder, reason per-item using the inputs and outputs below. Do not apply fixed age or similarity thresholds — judge each reminder fresh this tick against its own context.
+
+Inputs for each reminder:
+- Reminder fields: title, body (with wiki-links), `due` (if set), `created`, `## Surfacing history` (if any)
+- Current tick state: today's date, all signals collected in Step 1, pages updated in the last 7 days (via `search`)
+- Semantic match: run `search` with the reminder's title + body to find the top pages by similarity
+
+Per-reminder reasoning:
+- (a) Should this reminder surface in today's briefing?
+  - **Time:** `due` is today, past, or near enough that the user needs a nudge
+  - **Context-match:** wiki-links in the reminder body overlap with entities or concepts named in current-tick signals or recently updated pages
+  - **Age:** reminder has been pending long enough relative to its subject-area activity and last surfacing (from `## Surfacing history`) to warrant a "still live?" ask. When uncertain, lean toward surfacing — an aging reminder that silently piles up carries less signal than one that forces the user to confirm it is still live
+- (b) Has recent brain content plausibly resolved the reminder's underlying need?
+  - Look at pages updated in the last 7 days that semantically match the reminder
+  - Evidence quality: a passing mention does not resolve; a concrete action or outcome on the reminder's subject does
+
+Output per reminder (emit as a signal into the heartbeat stream only if `surface_now` OR `auto_resolve_candidate` is true):
+- `item_type`: `reminder_surfacing`
+- `reminder_title`: the reminder's title (used to locate the page for Surfacing history updates in Act)
+- `surface_now`: boolean
+- `surface_reason`: `time` | `context-match` | `age` | null
+- `surface_why`: a one-phrase explanation (e.g., "due 2026-04-17", "matches [[Stanbic Bank ATS]] in current signal", "pending 45 days, last surfaced 2026-03-10")
+- `auto_resolve_candidate`: boolean
+- `auto_resolve_evidence`: `{ page_title, brief_quote }` | null
+
+If both `surface_now` and `auto_resolve_candidate` fire for the same reminder, emit a single signal with both fields populated — the Plan phase renders one combined briefing item, not two.
+
+**Early exit:** If zero source deltas AND zero reminder surfacings, skip Predict/Plan/Act. Proceed directly to Improve (absence-of-signal check), then Phase 2.
 
 ### Predict
 Lightweight context assembly for classification and recommendation. For each signal: run `search` to find related situations, commitments, and entities. Enough to classify the signal's triage tier and generate a recommendation — not full multi-hop context assembly (that happens at triage time when the user makes decisions).
 
 ### Plan
 Classify each signal against triage tiers in config-salience (Immediate / Briefing / Awareness). When signals contradict existing brain content, surface the tension — do not overwrite. When multiple action options exist, pre-compare with tradeoffs and a recommendation.
+
+**Reminder surfacings:** Classify per config-salience like any other signal. Exception: when `auto_resolve_candidate` is true, force the item to Decision tier regardless of salience score — the user must confirm or reject the auto-resolve, so awareness-only routing is not valid.
 
 ### Act
 - **Immediate tier:** Send triage alert via Slack MCP — `slack_send_message_draft` to user DM (user ID from config-user).
@@ -44,7 +74,12 @@ Classify each signal against triage tiers in config-salience (Immediate / Briefi
 - Update `last_processed` on each source-config page via `update_page` with current timestamp.
 - **Briefing tick detection:** Read the briefing hour from config-heartbeat and the timezone from config-user. Determine the current local time. If the current hour (in configured timezone) >= the briefing hour, run `search` for a page titled `briefing-YYYY-MM-DD` (today's date in configured timezone). If no such page exists, this is the briefing tick. If the page already exists, skip briefing creation.
 - **Briefing tick:** Create a briefing brain page via `create_page` (type: `["briefing"]`, title: `briefing-YYYY-MM-DD`, frontmatter: `{ status: "current" }`). Format per config-briefing: each item gets a sequential ID (B1, B2, etc.). Decision items: Ask → Signal → Recommended Action → Confidence → References. For each Decision item, assess confidence as `high` or `low` per the Confidence Assessment Guidelines in config-briefing — `high` when one disposition clearly dominates, `low` when multiple paths are defensible or context is insufficient. Confidence routes triage tier (high → Tier 2 propose, low → Tier 3 escalate). Awareness items: Signal → Recommended Action → References (no Confidence field — always Tier 1). No Implication field — that is computed at triage time. Order by salience score per config-salience. Update the previous day's briefing page to `status: superseded` via `update_page`.
-- **Non-briefing ticks:** Only dispatch Immediate alerts. Briefing + Awareness items accumulate on situation and entity pages for the next briefing tick.
+- **Reminder surfacings — briefing item content:**
+  - **Surface-only** (`surface_now` true, `auto_resolve_candidate` false): Ask is the reminder's title (the action to take). Signal is `surface_why` plus `surface_reason`. Recommended Action is the reminder body or a user-facing restatement. References: `[[reminder title]]`.
+  - **Auto-resolve candidate** (`auto_resolve_candidate` true, `surface_now` false): Ask is `Reminder "[title]" — resolved by recent content?`. Signal: `Semantic match against [[page_title]] updated YYYY-MM-DD` with the brief_quote. Recommended Action: `Mark reminder as auto-resolved`. Confidence per Confidence Assessment Guidelines. References: `[[reminder title]]`, `[[page_title]]`.
+  - **Combined** (`surface_now` AND `auto_resolve_candidate` both true): single item framed as `[title] — resolved by [[page_title]], or still live?`. Present both paths; user chooses in triage.
+- **Reminder surfacing history:** For each reminder included in the briefing (any reminder whose `reminder_surfacing` signal was emitted in Perceive Step 2), call `update_page` on the reminder to append an entry to `## Surfacing history`: `[ISO timestamp] — surfaced via {time|context-match|age|auto-resolve}: {surface_why or evidence.page_title}`. Use `auto-resolve` as the reason when only `auto_resolve_candidate` fired; use `surface_reason` when `surface_now` fired; use both separated by `+` for combined items. This runs on every briefing tick regardless of user disposition — history records the heartbeat's emission-time judgment, not the triage outcome.
+- **Non-briefing ticks:** Only dispatch Immediate alerts. Briefing + Awareness items (including reminder surfacings) accumulate for the next briefing tick. Surfacing history updates run only at the briefing tick when the item is actually emitted to a briefing page.
 
 ### Improve
 

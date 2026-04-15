@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
-summary: "Heartbeat configuration — tiered cadence (06:00 briefing, 07–18 hourly active, 20:00/22:00 wind-down, skip 23:00–05:00 overnight; 15 ticks/day), phase order, briefing tick detection (timezone from config-user, existence check), error isolation, early exit rules, confidence assessment per Decision item. Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). MISS: note routing in ingest. Overnight monitoring delegated to ops team."
-updated: 2026-04-14
+summary: "Heartbeat configuration — cadence, phase order, briefing tick detection, error isolation, early exit rules (source deltas AND reminder surfacings), confidence assessment per Decision item. Perceive adds unified reminder evaluation (surface-now + auto-resolve inline). Act writes Surfacing history on emission. Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). MISS: note routing in ingest."
+updated: 2026-04-15
 cssclasses:
   - "config"
 ---
@@ -35,8 +35,9 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 
 ### Perceive
 - Load all source-config pages (`type: source-config`). For each source, check for deltas since `last_processed` timestamp.
-- **Early exit:** If zero deltas across all sources, skip Predict/Plan/Act. Proceed directly to Improve (to check for absence-of-signal triggers per config-salience and process any pending triage dispositions), then exit.
 - For every new signal, run semantic similarity search against the full brain via pgvector — perfect cross-referencing, zero recall decay.
+- **Reminder evaluation:** After source-signal collection, enumerate open reminders (`type: reminder`, `status: pending`). Per-reminder reasoning simultaneously answers (a) surface now (time / context-match via wiki-link overlap / age) and (b) is the reminder plausibly resolved by recent brain content (auto-resolve candidate). Outputs join the signal stream; auto-resolve candidates are always Decision items. No fixed age or similarity thresholds — per-item judgment each tick.
+- **Early exit:** If zero source deltas AND zero reminder surfacings, skip Predict/Plan/Act. Proceed directly to Improve (to check for absence-of-signal triggers per config-salience and process any pending triage dispositions), then exit.
 - **Exclusion:** MUST NOT include `briefing` in type_filter during Perceive retrieval — briefing pages are output, not input.
 
 ### Predict
@@ -46,6 +47,7 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - Classify each signal against triage tiers in config-salience (Immediate / Briefing / Awareness).
 - When signals contradict existing brain narratives, surface the tension — do not overwrite.
 - When multiple options exist for an action item, pre-compare alternatives with tradeoffs and a recommendation.
+- **Reminder surfacings:** Classify per config-salience like any other signal. Exception: when `auto_resolve_candidate` is true, force Decision tier regardless of salience score — the user must confirm or reject the auto-resolve.
 
 ### Act
 - **Immediate tier signals:** Send triage alert to Dispatch.
@@ -53,6 +55,7 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - **State updates:** Write new/updated commitment pages, entity updates, situation page updates to brain via MCP write tools.
 - **Briefing tick detection:** Read the briefing hour from this config and the timezone from config-user. If current hour (in configured timezone) >= briefing hour, search for `briefing-YYYY-MM-DD` (today's date). If no such page exists, this is the briefing tick.
 - **Briefing tick:** Create a briefing brain page via `create_page` (type: `["briefing"]`, title: `briefing-YYYY-MM-DD`, status: `current`). Format per config-briefing (Decision items: Ask → Signal → Recommended Action → Confidence → References; sequential item IDs B1, B2, etc.; ordered by salience score). Confidence per item assessed using Confidence Assessment Guidelines in config-briefing. Update the previous day's briefing page to `status: superseded` via `update_page`.
+- **Reminder surfacing history:** When a reminder-derived item is included in the briefing, update the reminder page via `update_page` to append an entry to `## Surfacing history` recording tick timestamp and surface_reason (time / context-match / age / auto-resolve, or a combined value). History records the heartbeat's emission-time judgment; user triage actions update status via the existing config-triage flow.
 
 ### Improve
 - **Read recent Triage Results:** Query briefing pages from the last 7 days (type: briefing). For each with a `## Triage Results` section, read the disposition table.
@@ -76,3 +79,4 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 - Timezone is read from config-user — not hardcoded. When the user travels, updating config-user propagates to all time-sensitive operations.
 - Lint findings are surfaced directly by the triage client (config-triage), not folded into the briefing. This decouples lint timing from the briefing tick.
 - Ingest (Phase 2) runs in the same ticks as heartbeat (Phase 1). Files dropped in the ingress folder overnight are picked up at the 06:00 tick — there is no separate overnight ingest cadence.
+- Reminder surfacing is unified — a single Perceive-phase pass per reminder answers both "surface now?" and "resolved by recent content?" in the same reasoning step. No separate ingest-time auto-resolve mechanism. Reminders that fire both signals produce one combined briefing item.
