@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-15T06:16:52Z"
+updated: "2026-04-15T07:12:09Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T06:10:00Z"
+last_processed: "2026-04-15T07:09:00Z"
 ---
 
 ## Connection
@@ -72,6 +72,7 @@ last_processed: "2026-04-15T06:10:00Z"
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
+- 2026-04-15 08:10 WAT tick: 3 new signals in 06:10–07:09 UTC (07:10–08:09 WAT) window. (1) **Faith Cyril 08:07 WAT — Re: TRIP TO RACK CENTER** — "This was well received" courtesy close-out of Rack Centre approval thread. Layer 1 (To me). Awareness — routine ack, no CTO action. (2) **Nonso Ezigbo via aptpaytechnicalsupport 08:02 WAT — VALIDATION OF CLAIMS ABOVE 6 MONTHS 15/04/2026** — disputes workflow, To Moniepoint Dispute, CC aptpay group. Layer 2, no keyword match. Awareness. (3) **Confluence digest 07:32 WAT — Oladapo updates to Teamapt IT-Service-Management** — automated daily digest, skip (automated). No Immediate alerts. No tracked-situation updates needed.
 - 2026-04-15 07:10 WAT briefing tick: 3 new signals in 22:09 UTC Apr 14 – 06:10 UTC Apr 15 overnight window. (1) **Fumbi Lawrence 04:55 WAT Apr 15 — Re: Request For Access To The Rack Center** — "Access granted" reply addressed to Emeka, CC Lateefat + Ekene Udodi. Layer 1 signal. Awareness B7. (2) **Qazim Adedigba 23:57 WAT Apr 14 — Re: Hourly Reports 20260414** — 16/17 routes operational, Sterling off, 3 open tickets (TDSD-6276, TDSD-6385, TDSD-6548). Awareness B6. (3) **AWS Marketplace 01:10 WAT Apr 15 — F5 BIG-IP product update** — skipped per marketing rule. Awareness B9. **DCIR Monitoring silence 27h+ since 04:06 WAT Apr 14 100% spike** — implicit recovery. B8 awareness + B3 structural retro carry-forward.
 - 2026-04-14 23:09 WAT tick: 2 new signals in 20:09–22:09 UTC window (21:09–23:09 WAT), both SENT by Emeka (user approvals, not inbound asks). (1) **Emeka 22:06 WAT — Re: Request For Access To The Rack Center** — "Approved" reply to Lateefat Adedeji-Oyedeji re: data centre access for Wednesday Apr 15 Key Loading activities. (2) **Emeka 21:57 WAT — Re: TRIP TO RACK CENTER** — "Approved" reply to Lateefat Adedeji-Oyedeji re: Wednesday Apr 15 11:00 AM ride to Rack Centre Plot 18, Jagal Close, Oregun. Both routine logistics approvals. No inbound actions. Awareness tier; no Immediate alerts.
 - 2026-04-14 21:09 WAT tick: 3 new signals + 1 marketing skip. Qazim Fidelity RC91 Cycle 4 (TDSD-6552) RESOLVED 20:35 WAT; routine reconfirm loop. Situations [[Fidelity Bank ATS — RC91 Failure Ongoing]] + [[Sterling + Polaris — Routes Degraded]] updated.
