@@ -64,6 +64,15 @@ Five dimensions, scored 0.0–1.0 per signal. Weighted sum determines ordering w
 - Maximum adjustment per recalculation cycle: ±0.05 per dimension
 - If a weight adjustment hits a cap, flag in the next briefing as a potential structural issue — the dimension definition may need revision, not just the weight.
 
+## Source-Specific Factors
+
+Source-config pages may enumerate per-message factors specific to that signal source (e.g., source-config-slack lists channel identity, keyword floor, active-situation entity match, @mention, DM, sender weighting). These factors are source-specific inputs that feed the five general dimensions above and drive the initial Immediate/Briefing/Awareness classification at emission time.
+
+The source-config page is the authoritative enumeration — this file does not restate factors. Two obligations follow from the enumeration:
+
+1. **Per-item factor trace.** The heartbeat Act phase appends a `Factors:` line to each briefing item's References section naming every factor that triggered the item's surfacing or tier assignment. Items without a Factors line cannot contribute to per-factor calibration.
+2. **Per-factor calibration.** The Improve phase reads the Factors line and records the raw factor list alongside the Tuning Log tuple. Recalculation cycles can then surface factor-level patterns (e.g., "keyword floor over-fires for `failed` in CI channels") in addition to dimension-level patterns.
+
 ## Absence-of-Signal Rules
 
 | Context | Silence threshold | Triage tier | Alert format |
@@ -73,6 +82,17 @@ Five dimensions, scored 0.0–1.0 per signal. Weighted sum determines ordering w
 | Delegation with due date | Due date + 0 days, no completion signal | Briefing | "[person] [item] was due [date], no completion signal" |
 | Tracked situational context entry | 48 hours no new delta | Awareness | "[situation] no new signals in [N] days" |
 | Source-config source (channel/inbox) | 7 days zero messages | Awareness | "[source] silent for [N] days — confirm still relevant" |
+
+## Periodic Reviews
+
+Cadenced Decision items emitted at fixed intervals to audit mechanisms that the Improve phase's surfaced-vs-acted comparison cannot observe. A false-positive in a drop-stage mechanism (skip list, cheap-heuristic filter) silently removes signal before it ever becomes a briefing item, so the Tuning Log is blind to that failure mode. Periodic reviews are the structural guard.
+
+| Review | Cadence | Owner source-config | Surface format |
+|---|---|---|---|
+| Slack skip-list regression | First briefing tick of each calendar month | source-config-slack | One Decision item per skip-list channel with added-date, confirmed-by-user-date, and last-traffic-signature (bot-only % over trailing 30 days). Action per row: keep / reconsider / surface sample. |
+| Slack suspected-bot bulk-confirm | Monday 07:00 WAT briefing tick weekly | source-config-slack | One Decision item listing all pending suspected-bot candidates with each channel's last-traffic-signature. Action per channel: approve (move to skip list) / reject (remove from candidate set). Per-briefing per-channel surfacing is explicitly disallowed. |
+
+When a new drop-stage mechanism is added to any source-config, MUST add a matching periodic review row here — the review cadence is the only defense against silent signal loss in that mechanism.
 
 ## Tuning Mechanism
 
@@ -98,6 +118,8 @@ Format: `[date, item_identifier, action: acted|dismissed|missed, dominant_dimens
 - `item_identifier`: briefing item ID (e.g., `B3`) for acted/dismissed tuples, or a short description for missed tuples.
 - `dominant_dimension`: the salience dimension most responsible for the outcome — the dimension that scored highest for acted/dismissed items, or the dimension that would have caught the signal for missed items.
 
+When the source item included a `Factors:` line (per Source-Specific Factors above), append `| factors: <comma-separated factors>` to the tuple so per-factor patterns can be computed at recalculation time alongside per-dimension patterns.
+
 Tuples are written by: the Improve phase (acted/dismissed from Triage Results), the triage client (missed from Step 5b), and the ingest pipeline (missed from `MISS:` notes).
 
 Tuples accumulate in the `## Tuning Log` section below.
@@ -108,9 +130,10 @@ The Improve phase checks the tuple count in the Tuning Log on each tick. When th
 
 1. Read all tuples from the Tuning Log.
 2. Compute frequency-weighted adjustments: for each dimension, count how often it appears as `dominant_dimension` across each action type. Increase weight for dimensions dominant in `missed` tuples (system under-weighted them). Decrease weight for dimensions dominant in `dismissed` tuples (system over-weighted them). `acted` tuples confirm current weights.
-3. Apply weight constraints (min 0.05, max 0.40, total 1.00, max ±0.05 per dimension per cycle).
-4. Present proposed weight changes to the user with before/after comparison table.
-5. On user approval: update the Salience Dimensions table above via `update_page`. Compress processed tuples into a summary line: `[date_range, N acted, N dismissed, N missed, weight_deltas_applied]`. Remove processed tuples from the Tuning Log.
+3. When factor traces are present, also compute per-factor frequency across action types. Factor-level patterns inform source-config directive refinement (e.g., narrowing keyword floor lists) rather than dimension weight changes.
+4. Apply weight constraints (min 0.05, max 0.40, total 1.00, max ±0.05 per dimension per cycle).
+5. Present proposed weight changes to the user with before/after comparison table. Include factor-level observations as a separate section (no automatic action — source-config edits are always user-gated).
+6. On user approval: update the Salience Dimensions table above via `update_page`. Compress processed tuples into a summary line: `[date_range, N acted, N dismissed, N missed, weight_deltas_applied]`. Remove processed tuples from the Tuning Log.
 
 ### Threshold Tuning
 
