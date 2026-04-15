@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-15T13:14:14Z"
+updated: "2026-04-15T14:14:45Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T13:09:00Z"
+last_processed: "2026-04-15T14:09:00Z"
 ---
 
 ## Connection
@@ -72,12 +72,12 @@ last_processed: "2026-04-15T13:09:00Z"
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
-- **2026-04-15 14:09 WAT tick: ~4 genuinely new signals in 12:09–13:09 UTC window. No Immediate alerts.** Briefing-tier: (1) **Fidelity MEMORY RESOURCE INCREASE COMPLETED 14:02 WAT** — Christian Okeke confirmed server memory now at 48GB; Emeka Joseph ack 14:04 WAT. Closes 20h escalation; 3h08min from Fidelity ack to fulfillment. Logged to [[Fidelity Bank ATS — RC91 Failure Ongoing]]; exposure item #9 closed. (2) **Pivot invoice approvals — 2 pending, addressed to Emeka:** INV-6056 Samuel Olulope (DevOps) Internet Solutions Nigeria NGN1,935,000 (14:00 WAT) and INV-6038 Kehinde Lawrence (Infra) Rack Centre NGN2,249,437.50 (13:19 WAT). Routine finance approvals but layer-1 To-addressed; surface as awareness-to-briefing items. (3) **Zone-TeamApt Juliana Account Transfer Agreement summary** — Taiwo Baptista 13:56 WAT to Chizoba Nwokedinobi, CC Emeka. Zone looking to route transactions to TeamApt as POS issuer. CC only, informational. Awareness-tier: Ecobank Core Banking Planned Maintenance notification 13:39 WAT (DL); Stanbic DCIR Portal wrong account number 260408258334 chaser cycle (Nosarieme 12:23 WAT → Emeka Joseph 13:25 WAT); Stanbic Settlement Account 0001409339 (David Oseji/Emeka Joseph 13:29-13:31 WAT requesting session with Stanbic Godwin Ajiboye, Toluwase Shorun); Moniepoint Disputes ack thread (Latifat Saka 13:53 WAT); FCMB pending DCIR re-query list (Joel Olowo 12:57 WAT); Florence Olarinde DAILY BANK STATEMENT thread continued. **Stanbic commitment due today — Oladapo 1:1 concluded ~13:00 WAT; no post-1:1 email from Oladapo in this window.** Carry to next briefing if still silent at 15:09 WAT tick.
-- 2026-04-15 13:09 WAT tick: ~30 signals in 11:09–12:09 UTC window. No Immediate alerts. Briefing-tier: NIBSS Moses Ajani explicit denial 12:51 WAT on RC91 attribution; CEO KPI Scorecard FY2025 shared; Persistent Balance Disparities escalation; CMS Project Resync chaser; Direct Card Servers Restart maintenance. Awareness: multiple DCIR/settlement items. Skip: Azure, Lotus Beta Analytics webinars.
-- 2026-04-15 12:09 WAT tick: ~10 new signals. Wema remediation script EXECUTED; NIBSS RC91 reconfirmation loop; Gemini Direct to Bank standup notes received.
-- 2026-04-15 11:09 WAT tick: 12 signals. Parallex DCIR DB INDEX JOB FAILURE; Fidelity MEMORY RESOURCE acked; Jeje NSS pushback; Ecobank DCIR claims in progress.
+- **2026-04-15 15:09 WAT tick: 6 new signals in 13:09–14:09 UTC window. ONE IMMEDIATE.** (1) **IMMEDIATE: Olamide Ajibulu 15:07 WAT "Union Bank | RC91 | 20260415"** — new Union Bank RC91 P1 filing. Keywords: "RC 91", "failing", "high processing time". Routing oddity — addressed to `fepsupport@fidelitybank.ng` (Fidelity, not Union) — likely template error. Cycle 2 in 3 days for Union (cycle 1 was TDSD-6519 Apr 12, ~16min). Slack DM draft queued to U080PEXEZ0E. [[Union Bank]] entity updated. (2) Florence Olarinde 14:57 WAT Fidelity bank statement chaser to Justin Ighodaro — CC only, awareness. (3) Emeka Joseph 14:57 WAT Zenith vulnerability reconfirmation ask to Onyinye Nweke — Emeka not on CC, skip. (4) Abraham Isinguzoro 14:56 WAT Fidelity UAT rescheduling support to Tunde Okufi — CC Emeka, awareness. (5) Latifat Saka 14:41 WAT Moniepoint dispute investigation complete — DL only, awareness. (6) Moses Ajani 14:32 WAT "BIN BROADCAST FOR FIRST BANK 7218239" — routine tech broadcast, skip.
+- 2026-04-15 14:09 WAT tick: ~4 genuinely new signals. Fidelity MEMORY RESOURCE INCREASE COMPLETED (48GB). Pivot INV-6056/INV-6038 layer-1 approvals. Zone-TeamApt Juliana Account Transfer Agreement summary. Stanbic commitment due today — Oladapo 1:1 concluded ~13:00 WAT; no post-1:1 email from Oladapo.
+- 2026-04-15 13:09 WAT tick: ~30 signals. NIBSS Moses Ajani RC91 denial; CEO KPI Scorecard FY2025; Persistent Balance Disparities escalation; CMS Project Resync chaser; Direct Card Servers Restart maintenance.
+- 2026-04-15 12:09 WAT tick: ~10 signals. Wema remediation script EXECUTED; NIBSS RC91 reconfirmation loop; Gemini Direct to Bank standup notes.
+- 2026-04-15 11:09 WAT tick: 12 signals. Parallex DCIR DB INDEX JOB FAILURE; Fidelity MEMORY RESOURCE acked.
 - 2026-04-15 10:09 WAT tick: ~30 signals. NIBSS RC91 window 09:49–09:53 WAT; Fidelity Afrigo card routing error.
-- 2026-04-15 09:09 WAT tick: 11 signals. Access Bank vulnerability jar shared; MEMORY RESOURCE chaser 1; Juro NDA Dangote PRP fully signed.
+- 2026-04-15 09:09 WAT tick: 11 signals. Access Bank vulnerability jar; MEMORY RESOURCE chaser 1; Juro NDA Dangote PRP fully signed.
 - 2026-04-15 08:10 WAT tick: 3 new signals. No Immediate alerts.
 - 2026-04-15 07:10 WAT briefing tick: 3 new signals. Rack Centre access granted (B7); Qazim hourly report (B6); AWS Marketplace F5 BIG-IP (B9 skip).
-- 2026-04-14 23:09 WAT tick: 2 outbound approvals by Emeka.
