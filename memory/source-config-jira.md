@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 70+ consecutive ticks missed since 2026-04-11T22:09 UTC (>70 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
-updated: "2026-04-15T12:18:25Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 88+ consecutive ticks missed since 2026-04-11T22:09 UTC (>88 hours blind). Briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~19h remaining."
+updated: "2026-04-15T13:16:16Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T12:09:00Z"
+last_processed: "2026-04-15T13:09:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. **87+ consecutive ticks blind (>87 hours)** as of 2026-04-15T12:09 UTC. 13:09 WAT tick: no change, still blind. Calendar MCP remains restored — Jira is the sole remaining structural MCP failure. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~20h remaining. New signals this tick all reference Jira-side tracking that remains unverifiable: Parallex DCIR DB Index session confirmed for 16:00 WAT today (no TDSD for Parallex DCIR); Stanbic DCIR portal wrong account number dispute (RRN 260408258334) handled by Emeka Joseph (no Jira trackable); NIBSS Moses Ajani pushback on 09:49–09:53 WAT RC91 window (no NIBSS-side Jira visible). Documentation gap continues to compound with each new operational signal.
+- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **88+ consecutive ticks blind (>88 hours)** as of 2026-04-15T13:09 UTC. 14:09 WAT tick: no change, still blind. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~19h remaining. New signals this tick reference Jira-side state that remains unverifiable: Fidelity MEMORY RESOURCE INCREASE completion (no TDSD trackable), Pivot INV-6056/INV-6038 approvals (non-Jira finance workflow), Ecobank maintenance notification. Documentation gap continues to compound.
