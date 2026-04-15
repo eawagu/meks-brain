@@ -4,7 +4,7 @@ type:
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
 summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log."
-updated: "2026-04-15T14:22:14Z"
+updated: 2026-04-15
 cssclasses:
   - "config"
 ---
@@ -26,9 +26,11 @@ Read all source-config pages from brain MCP (`search` with type_filter: `["sourc
 
 ### Perceive
 
-**Step 1 — Source signals.** For each source-config page, read its `## Connection` section for MCP tool names and access patterns, and its `## Directives` section for filtering rules. Check for new signals since `last_processed` using the connection details specified in each source-config page.
+**Step 1 — Source signals.** For each source-config page, read its `## Connection` section for MCP tool names, access patterns, and any format rules (e.g., date-format conversion for search modifiers), and its `## Directives` section for the sweep order and filtering rules. When a source-config defines an explicit sweep order (e.g., source-config-slack's Tier 1 read-by-default → search-all → pre-filter pipeline → per-message salience reasoning → cost cap), MUST execute the steps in the order specified — each step's output feeds the next.
 
 For every new signal, run `search` (brain MCP) for semantic similarity against the full brain — perfect cross-referencing, zero recall decay. MUST NOT include `briefing` in any type_filter during Perceive — briefing pages are output, not input.
+
+When a source-config directive specifies per-message salience factors (e.g., source-config-slack salience factors: channel identity, keyword floor, active-situation entity match, @mention, DM, sender weighting), MUST record the triggering factors alongside the signal metadata so they can be emitted with the briefing item in Act.
 
 **Step 2 — Reminder evaluation.** Query open reminders via `search` with `type_filter: ["reminder"]`; filter the results to those with `status: pending`. For each open reminder, reason per-item using the inputs and outputs below. Do not apply fixed age or similarity thresholds — judge each reminder fresh this tick against its own context.
 
@@ -74,6 +76,7 @@ Classify each signal against triage tiers in config-salience (Immediate / Briefi
 - Update `last_processed` on each source-config page via `update_page` with current timestamp.
 - **Briefing tick detection:** Read the briefing hour from config-heartbeat and the timezone from config-user. Determine the current local time. If the current hour (in configured timezone) >= the briefing hour, run `search` for a page titled `briefing-YYYY-MM-DD` (today's date in configured timezone). If no such page exists, this is the briefing tick. If the page already exists, skip briefing creation.
 - **Briefing tick:** Create a briefing brain page via `create_page` (type: `["briefing"]`, title: `briefing-YYYY-MM-DD`, frontmatter: `{ status: "current" }`). Format per config-briefing: each item gets a sequential ID (B1, B2, etc.). Decision items: Ask → Signal → Recommended Action → Confidence → References. For each Decision item, assess confidence as `high` or `low` per the Confidence Assessment Guidelines in config-briefing — `high` when one disposition clearly dominates, `low` when multiple paths are defensible or context is insufficient. Confidence routes triage tier (high → Tier 2 propose, low → Tier 3 escalate). Awareness items: Signal → Recommended Action → References (no Confidence field — always Tier 1). No Implication field — that is computed at triage time. Order by salience score per config-salience. Update the previous day's briefing page to `status: superseded` via `update_page`.
+- **Salience factor trace (calibration substrate):** For every briefing item derived from a signal whose source-config enumerates per-message salience factors (e.g., source-config-slack), MUST append a `Factors: <factor-name>[, <factor-name>...]` line to the item's References section, naming each factor that triggered the item's surfacing or tier assignment. This replaces the previous declarative tier-trace ("surfaced because Tier 1 @channel") with a per-item reasoning trace. The Improve phase reads the Factors line when classifying the item's disposition into a Tuning Log tuple — items without a Factors line cannot contribute to per-factor calibration.
 - **Reminder surfacings — briefing item content:**
   - **Surface-only** (`surface_now` true, `auto_resolve_candidate` false): Ask is the reminder's title (the action to take). Signal is `surface_why` plus `surface_reason`. Recommended Action is the reminder body or a user-facing restatement. References: `[[reminder title]]`.
   - **Auto-resolve candidate** (`auto_resolve_candidate` true, `surface_now` false): Ask is `Reminder "[title]" — resolved by recent content?`. Signal: `Semantic match against [[page_title]] updated YYYY-MM-DD` with the brief_quote. Recommended Action: `Mark reminder as auto-resolved`. Confidence per Confidence Assessment Guidelines. References: `[[reminder title]]`, `[[page_title]]`.
@@ -95,7 +98,9 @@ The Improve phase reads triage dispositions and writes calibration tuples. This 
 - `held` → no tuple (item is not yet resolved)
 - Tier 1 pull-outs (items the user moved from auto-advance to individual review, identifiable by an Awareness item with a non-`noted` disposition) → action: `missed`, dominant_dimension: infer which dimension would have classified this as a Decision item if weighted higher
 
-**Step 3 — Write tuples.** For each classified disposition, append a tuple to config-salience `## Tuning Log` via `update_page`. Format per config-salience: `[date, item_identifier, action: acted|dismissed|missed, dominant_dimension]`.
+When the item's References section includes a `Factors:` line (per the Salience factor trace directive above), MUST include the raw factor list in the tuple's notes so per-factor calibration is possible alongside per-dimension calibration.
+
+**Step 3 — Write tuples.** For each classified disposition, append a tuple to config-salience `## Tuning Log` via `update_page`. Format per config-salience: `[date, item_identifier, action: acted|dismissed|missed, dominant_dimension]`. When a `Factors:` line is present, append `| factors: <comma-separated factors>` to the tuple.
 
 **Step 4 — Declaration.** After processing, emit one of:
 - "Improve: wrote N tuples (X acted, Y dismissed, Z missed)" — if tuples were written
