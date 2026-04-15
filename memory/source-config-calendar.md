@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: 2026-04-15
+updated: "2026-04-15T22:15:10Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T20:09:00Z"
+last_processed: "2026-04-15T22:09:00Z"
 ---
 
 ## Connection
@@ -70,6 +70,7 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
+- **2026-04-15 23:09 WAT tick (overnight):** Calendar healthy — 12th consecutive tick restored. Zero new invites, zero new conflicts, zero new declines since 21:09 WAT tick. Most recent event metadata update: Ketan/Emeka 20:44 WAT Apr 15 (already seen prior tick). Madison Dinner in progress ending 21:50 WAT. Tomorrow Apr 16 schedule unchanged from 21:09 WAT tick observation.
 - **2026-04-15 21:09 WAT tick:** Calendar healthy — 11th consecutive tick restored. Madison Dinner in progress 19:30 BST / 20:30 WAT (ends 20:50 BST / 21:50 WAT). Minor updates since last tick: Felix/Emeka bi-weekly updated 19:33 WAT (Felix declined — standing pattern, recurring routing confirmation); Madison Dinner metadata refresh 19:44 WAT (no attendee-list change material); Retreat Day 3 metadata refresh 19:44 WAT (no attendee-list change material). Zero new invites, zero new conflicts, zero new declines. Apr 16 tomorrow confirmed schedule: Direct to Bank standup 08:30 WAT (declined), Ravi/Emeka 10:00 WAT (accepted), Felix/Emeka 11:00 WAT (accepted — Felix declined), Ketan sync 11:30 WAT (declined — Kolkata tz), Juliana Switch standup 11:30 WAT (declined), Retreat Day 3 all-day 08:00–18:00 BST (declined — Strategy Retreat comment), Weekly Check-ins DD 13:00 Toronto (declined), ATPP standup 14:00 WAT (declined — Strategy Retreat), DD Weekly Analysis (needsAction), Product-Engineering Sync 18:00 WAT (accepted), Retreat Day 3 Dinner Capital Pleasure Boats 19:00–22:20 BST (accepted, Blackfriars Pier, Vessel Golden Flame). Lattice Review still pending (8 downward reviews; updated 15:57 WAT today, no response recorded).
 - **2026-04-15 19:09 WAT tick:** Calendar healthy — 10th consecutive tick restored. Product-Engineering Sync 18:00–19:00 WAT just concluded (Frank Atashili declined — standing pattern). Upcoming today: Strategy Retreat Dinner Madison 19:30 BST / 20:30 WAT (Pawel Swiatek & Dennis Ajalie hosts, Dennis declined). NEW event detected: Strategy Retreat Day 3 Dinner Capital Pleasure Boats Apr 16 19:00–22:20 BST (updated 17:50 WAT today; Emeka accepted) — Blackfriars Pier, Vessel Golden Flame. Tomorrow Apr 16: Felix/Emeka bi-weekly 11:00–12:00 WAT (accepted), Ravi/Emeka 10:00–10:30 WAT (accepted), Ketan sync 11:30 WAT (declined — Kolkata tz), Retreat Day 3 all-day 08:00–18:00 BST, Juliana Switch standup (declined), Direct Debit Weekly Analysis (needsAction), Direct to Bank standup (declined), Lattice Review pending. No new invites requiring decision, no new cancellations, no new conflicts beyond pre-existing retreat overlaps.
 - 2026-04-15 18:09 WAT tick: Calendar healthy — 9th consecutive tick restored. In progress NOW: Product-Engineering Sync 18:00–19:00 WAT. Upcoming today: Strategy Retreat Dinner Madison 19:30 BST / 20:30 WAT.
