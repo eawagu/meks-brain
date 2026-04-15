@@ -601,4 +601,135 @@ export const captureReminder: ToolDef = {
   },
 };
 
-export const writeTools = [createPage, updatePage, deletePage, markProcessed, captureNote, captureReminder];
+// ─── dispatch_raw ─────────────────────────────────────────────
+// Per Ingress Retention design: at end of ingest, every successfully processed
+// file gets a disposition based on its retention_label. This tool centralises
+// the move/delete logic and reads discard_mode from config-ingress-retention
+// so the MCP server (not the heartbeat) is the single point that gates
+// irreversible discard actions.
+
+const VALID_RETENTION_LABELS = ["postgres", "fs", "discard"] as const;
+type RetentionLabel = (typeof VALID_RETENTION_LABELS)[number];
+
+async function loadDiscardMode(): Promise<"shadow" | "live"> {
+  const result = await query(
+    `SELECT body FROM pages WHERE title = 'config-ingress-retention' AND deleted = FALSE`,
+    []
+  );
+  if (result.rows.length === 0) {
+    // Fail closed — if the config page does not exist, behave as shadow.
+    // Asymmetric risk: shadowing a discard is recoverable; deleting without config is not.
+    return "shadow";
+  }
+  const body: string = result.rows[0].body;
+  // Match: "- **discard_mode:** `value`" (settings block) or "discard_mode: value" anywhere.
+  const m =
+    body.match(/discard_mode[^\n`]*`(shadow|live)`/i) ||
+    body.match(/discard_mode\s*:\s*(shadow|live)/i);
+  if (!m) return "shadow";
+  return m[1].toLowerCase() === "live" ? "live" : "shadow";
+}
+
+export const dispatchRaw: ToolDef = {
+  name: "dispatch_raw",
+  description:
+    "Dispose of a successfully ingested raw file per its retention_label. Called at end of ingest after the source page has been created. Three live dispositions: 'postgres' writes raw markdown to pages.raw_content AND moves the original from ingress to raw/; 'fs' moves the original from ingress to raw/ only; 'discard' deletes the original from ingress. The 'discard' disposition is gated by config-ingress-retention.discard_mode — when 'shadow', it behaves as 'fs' (move to raw/) so the irreversible action can be observed before going live. Returns the effective disposition actually performed.",
+  schema: z.object({
+    file_path: z
+      .string()
+      .describe("Relative path of the source file in the ingress folder (as returned by scan_ingress)"),
+    label: z
+      .enum(VALID_RETENTION_LABELS)
+      .describe("Retention label assigned by ingest-time judgment: postgres | fs | discard"),
+    raw_content: z
+      .string()
+      .optional()
+      .describe(
+        "Markdown-converted raw content. Required when label is 'postgres' (written to pages.raw_content). Ignored for 'fs' and 'discard'."
+      ),
+    page_id: z
+      .number()
+      .int()
+      .optional()
+      .describe(
+        "ID of the source page created from this file. Required when label is 'postgres' (target of the raw_content write). Ignored for 'fs' and 'discard'."
+      ),
+  }),
+  accessLevel: "write",
+  handler: async (params) => {
+    const { file_path, label, raw_content, page_id } = params;
+
+    // Resolve and guard against path traversal — same protection as read_ingress.
+    const absolutePath = path.join(config.ingressPath, file_path);
+    const resolved = path.resolve(absolutePath);
+    if (!resolved.startsWith(path.resolve(config.ingressPath))) {
+      throw new Error("Path traversal detected — file must be within ingress folder");
+    }
+
+    // Determine effective label after applying discard_mode gate.
+    const discardMode = await loadDiscardMode();
+    const effectiveLabel: RetentionLabel =
+      label === "discard" && discardMode === "shadow" ? "fs" : label;
+
+    // Helper to move a file from ingress into raw/ subfolder, preserving relative path.
+    const moveToRaw = async () => {
+      const rawRoot = path.join(config.ingressPath, "raw");
+      const rawDest = path.join(rawRoot, file_path);
+      await fs.mkdir(path.dirname(rawDest), { recursive: true });
+      try {
+        await fs.rename(resolved, rawDest);
+      } catch {
+        // Cross-device rename can fail — fall back to copy + unlink.
+        await fs.copyFile(resolved, rawDest);
+        await fs.unlink(resolved);
+      }
+      return path.relative(config.ingressPath, rawDest);
+    };
+
+    let postgresWritten = false;
+    let movedTo: string | null = null;
+    let deleted = false;
+
+    if (effectiveLabel === "postgres") {
+      if (!page_id) {
+        throw new Error("dispatch_raw: page_id is required when label is 'postgres'");
+      }
+      if (raw_content === undefined) {
+        throw new Error("dispatch_raw: raw_content is required when label is 'postgres'");
+      }
+      // Write raw content to the existing source page row.
+      const updateResult = await query(
+        `UPDATE pages SET raw_content = $1, indexed_at = NOW() WHERE id = $2 AND deleted = FALSE RETURNING id`,
+        [raw_content, page_id]
+      );
+      if (updateResult.rows.length === 0) {
+        throw new Error(`dispatch_raw: page id ${page_id} not found or deleted — raw_content not written`);
+      }
+      postgresWritten = true;
+      movedTo = await moveToRaw();
+    } else if (effectiveLabel === "fs") {
+      movedTo = await moveToRaw();
+    } else if (effectiveLabel === "discard") {
+      // Live discard — irreversible delete from ingress.
+      try {
+        await fs.unlink(resolved);
+        deleted = true;
+      } catch (err: any) {
+        throw new Error(`dispatch_raw: failed to delete ${file_path}: ${err.message}`);
+      }
+    }
+
+    return {
+      file_path,
+      requested_label: label,
+      effective_label: effectiveLabel,
+      discard_mode: discardMode,
+      shadow_applied: label === "discard" && effectiveLabel === "fs",
+      postgres_written: postgresWritten,
+      moved_to: movedTo,
+      deleted,
+    };
+  },
+};
+
+export const writeTools = [createPage, updatePage, deletePage, markProcessed, captureNote, captureReminder, dispatchRaw];

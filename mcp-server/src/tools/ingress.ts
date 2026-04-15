@@ -22,13 +22,13 @@ const PYTHON_CMD = config.pythonCmd;
 export const scanIngress: ToolDef = {
   name: "scan_ingress",
   description:
-    "Scan the ingress folder for new or modified files. Compares filesystem against ingested_sources in Postgres. Returns files that need processing. Excludes the review/ subfolder (per D8 — scheduled ingest ignores review/).",
+    "Scan the ingress folder for new or modified files. Compares filesystem against ingested_sources in Postgres. Returns files that need processing. Always excludes the raw/ subfolder (Ingress Retention persistence layer — never re-ingest). Excludes the review/ subfolder unless include_review=true (per D8 — scheduled ingest ignores review/).",
   schema: z.object({
     include_review: z
       .boolean()
       .default(false)
       .describe(
-        "Include files in the review/ subfolder (default: false — only set true for manual full ingest)"
+        "Include files in the review/ subfolder (default: false — only set true for manual full ingest). The raw/ subfolder is always excluded regardless of this flag."
       ),
   }),
   accessLevel: "read",
@@ -73,6 +73,10 @@ export const scanIngress: ToolDef = {
         }
 
         if (stat.isDirectory()) {
+          // Always skip raw/ — Ingress Retention persistence layer, never re-ingest.
+          if (entry.name === "raw" || relPath.startsWith("raw" + path.sep)) {
+            continue;
+          }
           // Skip review/ unless explicitly included
           if (
             !include_review &&
@@ -82,6 +86,10 @@ export const scanIngress: ToolDef = {
           }
           await walk(fullPath);
         } else if (stat.isFile()) {
+          // Always skip files inside raw/
+          if (relPath.startsWith("raw" + path.sep)) {
+            continue;
+          }
           // Skip review/ files unless included
           if (!include_review && relPath.startsWith("review" + path.sep)) {
             continue;
