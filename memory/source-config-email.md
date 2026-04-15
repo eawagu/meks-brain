@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-14T22:12:29Z"
+updated: "2026-04-15T06:16:52Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-14T22:09:00Z"
+last_processed: "2026-04-15T06:10:00Z"
 ---
 
 ## Connection
@@ -72,6 +72,6 @@ last_processed: "2026-04-14T22:09:00Z"
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
+- 2026-04-15 07:10 WAT briefing tick: 3 new signals in 22:09 UTC Apr 14 – 06:10 UTC Apr 15 overnight window. (1) **Fumbi Lawrence 04:55 WAT Apr 15 — Re: Request For Access To The Rack Center** — "Access granted" reply addressed to Emeka, CC Lateefat + Ekene Udodi. Layer 1 signal. Awareness B7. (2) **Qazim Adedigba 23:57 WAT Apr 14 — Re: Hourly Reports 20260414** — 16/17 routes operational, Sterling off, 3 open tickets (TDSD-6276, TDSD-6385, TDSD-6548). Awareness B6. (3) **AWS Marketplace 01:10 WAT Apr 15 — F5 BIG-IP product update** — skipped per marketing rule. Awareness B9. **DCIR Monitoring silence 27h+ since 04:06 WAT Apr 14 100% spike** — implicit recovery. B8 awareness + B3 structural retro carry-forward.
 - 2026-04-14 23:09 WAT tick: 2 new signals in 20:09–22:09 UTC window (21:09–23:09 WAT), both SENT by Emeka (user approvals, not inbound asks). (1) **Emeka 22:06 WAT — Re: Request For Access To The Rack Center** — "Approved" reply to Lateefat Adedeji-Oyedeji re: data centre access for Wednesday Apr 15 Key Loading activities. (2) **Emeka 21:57 WAT — Re: TRIP TO RACK CENTER** — "Approved" reply to Lateefat Adedeji-Oyedeji re: Wednesday Apr 15 11:00 AM ride to Rack Centre Plot 18, Jagal Close, Oregun. Both routine logistics approvals. No inbound actions. Awareness tier; no Immediate alerts.
-- 2026-04-14 21:09 WAT tick: 3 new signals in 18:09–19:09 UTC window (19:09–20:09 WAT), + 1 marketing skip. Key signals: (1) **Qazim Adedigba 20:35 WAT — Fidelity RC91 Cycle 4 (TDSD-6552) RESOLVED** — reply to John Uguru-Okorie reconfirm request, "Transactions are processing fine now." Both Apr 14 RC91 cycles (morning + evening) now closed. Situation [[Fidelity Bank ATS — RC91 Failure Ongoing]] updated. No Immediate alert — resolution signal. (2) **John Uguru-Okorie 20:14 WAT — Fidelity reconfirm ask on TDSD-6552** — routine reconfirmation loop. (3) **Qazim Adedigba 20:33 WAT / 21:01 WAT — Hourly Report #20260414** — fourth reconfirmation of the day (16/17 routes, Sterling off with CoralPay engagement). Situation [[Sterling + Polaris — Routes Degraded]] updated. (4) Hilton Honors promo — skipped per marketing rule.
-- 2026-04-14 19:09 WAT tick: 6 new messages in 17:09–18:09 UTC window (18:09–19:09 WAT). Key signals: (1) **Qazim Adedigba 19:05 WAT — Fidelity Bank | ATS | RC 91 Failures | 20260414 | TDSD-6552** — second Fidelity RC91 P1 of the day. Immediate-tier trigger. Situation [[Fidelity Bank ATS — RC91 Failure Ongoing]] updated with cycle 4. (2) **Samuel Adewole 18:44 WAT — Fidelity Cards BIN 56400206 routing "configured already"** — resolution signal on the ISW PTSA→ATS workaround. (3) **Qazim Adedigba 18:33 WAT — Hourly Reports 20260414** — 16/17 routes operational, Sterling off with CoralPay engagement ongoing. (4) **Lateefat Adedeji-Oyedeji 18:42/18:34 WAT — Rack Center access + Trip** (CC Emeka). (5) **Mariam Bakare 18:48 WAT — Union Bank reconciliation follow-up**.
+- 2026-04-14 21:09 WAT tick: 3 new signals + 1 marketing skip. Qazim Fidelity RC91 Cycle 4 (TDSD-6552) RESOLVED 20:35 WAT; routine reconfirm loop. Situations [[Fidelity Bank ATS — RC91 Failure Ongoing]] + [[Sterling + Polaris — Routes Degraded]] updated.
