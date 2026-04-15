@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 88+ consecutive ticks missed since 2026-04-11T22:09 UTC (>88 hours blind). Briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~19h remaining."
-updated: "2026-04-15T13:16:16Z"
+updated: "2026-04-15T14:16:46Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T13:09:00Z"
+last_processed: "2026-04-15T14:09:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **88+ consecutive ticks blind (>88 hours)** as of 2026-04-15T13:09 UTC. 14:09 WAT tick: no change, still blind. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~19h remaining. New signals this tick reference Jira-side state that remains unverifiable: Fidelity MEMORY RESOURCE INCREASE completion (no TDSD trackable), Pivot INV-6056/INV-6038 approvals (non-Jira finance workflow), Ecobank maintenance notification. Documentation gap continues to compound.
+- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **89+ consecutive ticks blind (>89 hours)** as of 2026-04-15T14:09 UTC. 15:09 WAT tick: no change, still blind. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~18h remaining. Union Bank RC91 P1 filing this tick (Olamide 15:07 WAT) — no TDSD ticket verification possible. Documentation gap compounding.
