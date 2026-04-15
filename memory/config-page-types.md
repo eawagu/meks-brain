@@ -4,7 +4,7 @@ type:
 title: config-page-types
 created: "2026-04-12T19:57:07Z"
 summary: Page type registry and frontmatter validation spec — read by MCP server on every create/update to validate types and type-specific fields.
-updated: 2026-04-14
+updated: "2026-04-15T14:15:13Z"
 cssclasses:
   - "config"
 ---
@@ -36,6 +36,8 @@ No type-specific fields.
 ## source
 
 - source_path: string, required
+- retention_label: enum [postgres, fs, discard], optional
+- retention_rationale: string, optional
 
 ## synthesis
 
