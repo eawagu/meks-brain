@@ -3,10 +3,10 @@ role: cto-teamapt
 type:
   - "situation"
 title: NIBSS DD — Pending Mandate P1 Active
-status: developing
+status: stable
 created: "2026-04-14T06:12:52Z"
 summary: "NIBSS Direct Debit P1 — high count of pending mandate creation requests returning Null errors. Started 03:00 WAT Apr 14, filed 07:05 WAT, escalated to NIBSS. Same root cause (NIBSS response latency) also caused disbursement delays overnight and likely contributed to the DCIR/Wema 100% failure episode 01:00–04:06 WAT."
-updated: "2026-04-14T11:15:11Z"
+updated: "2026-04-15T20:19:19Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -24,6 +24,8 @@ accountability: Technology Reliability and Security
 
 **Tied investigations.** [[Oladapo Onayemi]]'s Stanbic RC91 commitment (due Apr 15) is investigating Moniepoint processing latency to NIBSS node. That investigation surface overlaps with this incident's root cause diagnosis — findings likely inform both.
 
+**Apr 15 21:09 WAT — Silence pattern extended.** No delta in 33h+ since the 12:09 WAT Apr 14 Immediate-tier draft. Status downgraded from `developing` to `stable` to reflect accumulated silence. No explicit resolution email received. The silence trajectory mirrors the DCIR/Wema implicit-resolved pattern (Apr 14 04:06 WAT → 27h silent → treated as implicit-recovered in briefing-2026-04-15 B8). Retire candidacy assessment at next briefing tick: (a) if >40h silent by 06:00 WAT Apr 16, classify as implicit-resolved and transition to `retired`; (b) if any new signal lands between now and briefing, reassess status. Retire-candidate framing feeds B3-style retro ask into tomorrow's briefing — second structural instance of the same "silent recovery without human closure" pattern this week.
+
 ## Sources
 - Slack, #teamapt-tech-operations, 2026-04-14 07:05 WAT, Frances Omelu, P1 filing
 - Slack, #monieworld-monnify, 2026-04-14 03:15 WAT, Frances Omelu, NIBSS response time disbursement delay notice
@@ -34,3 +36,4 @@ accountability: Technology Reliability and Security
 ## Deltas
 - [2026-04-14 07:09 WAT] — Situation opened. P1 filed 07:05 WAT. Active ~4h10min. NIBSS escalation ongoing, no resolution signal.
 - [2026-04-14 12:09 WAT] — Silence rule crossed. No Slack update in 5h04min on a P1 now 9h09min old. Immediate-tier Slack DM drafted to user. Third instance of the escalation-gap structural defect within 12h (overnight DCIR/Wema monitoring→escalation gap, the 4h filing-gap on this P1, now the 5h post-filing management silence).
+- [2026-04-15 21:09 WAT] — 33h+ silent. Status changed `developing` → `stable`. Implicit-recovery inference consistent with DCIR/Wema Apr 14 pattern. Retire-candidate at next briefing tick.
