@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 88+ consecutive ticks missed since 2026-04-11T22:09 UTC (>88 hours blind). Briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~19h remaining."
-updated: "2026-04-15T14:16:46Z"
+updated: "2026-04-15T15:17:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T14:09:00Z"
+last_processed: "2026-04-15T15:09:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,5 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **89+ consecutive ticks blind (>89 hours)** as of 2026-04-15T14:09 UTC. 15:09 WAT tick: no change, still blind. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~18h remaining. Union Bank RC91 P1 filing this tick (Olamide 15:07 WAT) — no TDSD ticket verification possible. Documentation gap compounding.
+- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **90+ consecutive ticks blind (>90 hours)** as of 2026-04-15T15:09 UTC. 16:09 WAT tick: no change, still blind. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~17h remaining. Monnify Atlas NIP Outwards Transit duplicate-debit situation this tick — no TDSD ticket verification possible for Odunayo/Oluwafemi's reconciliation escalation (prior March occurrence also not verifiable against historical TDSD record). Documentation gap continues to compound.
+- **AUTH/TOOL FAILURE STATE prior ticks:** 2026-04-15T14:09 UTC — 89+ ticks blind. Union Bank RC91 P1 filing this tick (Olamide 15:07 WAT) — no TDSD ticket verification possible. Documentation gap compounding.
