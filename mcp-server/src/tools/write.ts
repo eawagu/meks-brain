@@ -719,6 +719,34 @@ export const dispatchRaw: ToolDef = {
       }
     }
 
+    // Clean up empty parent directories walking up from the file's original parent.
+    // Stop at the ingress root (never remove ingressPath itself) or at a non-empty directory.
+    // Rationale: dropped folders contain heterogeneous retention labels — files move
+    // individually, leaving the parent directory behind. Cleanup here keeps the ingress
+    // root visually clean. rmdir fails on non-empty directories (including OS metadata
+    // like .DS_Store / Thumbs.db), which is a feature — if anything remains, leave it.
+    const ingressRoot = path.resolve(config.ingressPath);
+    const rawRoot = path.resolve(path.join(config.ingressPath, "raw"));
+    const reviewRoot = path.resolve(path.join(config.ingressPath, "review"));
+    let parentsCleaned = 0;
+    let parent = path.dirname(resolved);
+    while (
+      parent !== ingressRoot &&
+      parent.startsWith(ingressRoot + path.sep) &&
+      parent !== rawRoot &&
+      parent !== reviewRoot &&
+      !parent.startsWith(rawRoot + path.sep) &&
+      !parent.startsWith(reviewRoot + path.sep)
+    ) {
+      try {
+        await fs.rmdir(parent);
+        parentsCleaned++;
+      } catch {
+        break; // directory not empty or other error — stop climbing
+      }
+      parent = path.dirname(parent);
+    }
+
     return {
       file_path,
       requested_label: label,
@@ -728,6 +756,7 @@ export const dispatchRaw: ToolDef = {
       postgres_written: postgresWritten,
       moved_to: movedTo,
       deleted,
+      empty_parents_cleaned: parentsCleaned,
     };
   },
 };
