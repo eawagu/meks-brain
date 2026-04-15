@@ -4,7 +4,7 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-15T12:17:41Z"
+updated: "2026-04-15T13:16:38Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-15T10:51:42Z"
@@ -57,12 +57,13 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
-- **2026-04-15 13:09 WAT tick:** Search with `createdTime > '2026-04-15T10:51:41Z'` returned the same "Direct to Bank : Daily stand up 2026/04/15 11:02 WAT" doc (createdTime 10:51:41.888Z). Query filter granularity at second-level matches the timestamp boundary. Advancing `last_processed` to 2026-04-15T10:51:42Z to exclude this already-seen-and-skipped doc on future ticks. Still too large to fetch; flagged for manual review previously. **Fourteenth consecutive quiet Drive tick** (no processable new content). Retreat Day 2 in-person sessions not captured by Gemini.
-- **2026-04-15 12:09 WAT tick:** 1 new Gemini doc detected — "Direct to Bank : Daily stand up 2026/04/15 11:02 WAT" (createdTime 10:51 UTC, size 688,757 bytes). **Too large to fetch** — same failure mode as Cards and Account All Hands Apr 13. Skipped for now; flagged for manual review. last_processed advanced past this doc to avoid re-detection each tick. No Gemini transcript routed to ingress this tick.
-- 2026-04-15 11:09 WAT tick: Zero new Gemini docs since last_processed (createdTime > 2026-04-15T08:31:58Z). **Thirteenth consecutive quiet Drive tick.** Retreat Day 2 sessions still underway in-person in London — Gemini not capturing in-person retreat sessions. Direct to Bank standup already processed prev tick.
-- 2026-04-15 10:09 WAT tick: 1 new Gemini doc — Direct to Bank Daily Stand up 2026/04/15 08:22 WAT processed. Yasir Syed Ali's Jira ticket management gap callout aligned with briefing-2026-04-15 B3 retro ask.
+- **2026-04-15 14:09 WAT tick:** Search `createdTime > '2026-04-15T10:51:42Z'` returned zero new Gemini docs. **Fifteenth consecutive quiet Drive tick** (no new in-person Retreat Day 2 notes being captured by Gemini). last_processed unchanged.
+- **2026-04-15 13:09 WAT tick:** Same Direct to Bank standup doc at second-level boundary. Advanced last_processed to 2026-04-15T10:51:42Z.
+- **2026-04-15 12:09 WAT tick:** 1 new Gemini doc "Direct to Bank : Daily stand up 2026/04/15 11:02 WAT" — too large to fetch.
+- 2026-04-15 11:09 WAT tick: Zero new Gemini docs.
+- 2026-04-15 10:09 WAT tick: 1 new Gemini doc processed.
 - 2026-04-15 09:09 WAT tick: Zero new Gemini docs. Twelfth consecutive quiet tick.
-- 2026-04-15 08:10 WAT tick: Zero new Gemini docs. Eleventh consecutive quiet tick.
+- 2026-04-15 08:10 WAT tick: Zero new Gemini docs.
 - 2026-04-15 07:10 WAT briefing tick: Zero new Gemini docs. Tenth consecutive quiet tick.
 - 2026-04-14 23:09 WAT: Zero new Gemini docs — Retreat Day 1 Hawksmoor dinner concluding.
 - 2026-04-14 21:09 WAT: Zero new Gemini docs. Eighth consecutive quiet tick.
