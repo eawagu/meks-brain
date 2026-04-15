@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 70+ consecutive ticks missed since 2026-04-11T22:09 UTC (>70 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
-updated: "2026-04-15T07:13:35Z"
+updated: 2026-04-15
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T07:09:00Z"
+last_processed: "2026-04-15T08:09:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. **81+ consecutive ticks blind (>81 hours)** as of 2026-04-15T07:09 UTC. Heartbeat runtime has no Atlassian MCP tool available. Briefing-2026-04-15 B2 bundled this with source-config-calendar as the MCP health crisis — 48h SLA forcing function proposed, disable-source deadline Thu Apr 16 09:00 WAT. 08:10 WAT tick: no change, still blind. Confluence daily digest email (07:32 WAT) mentioned Oladapo updates to Teamapt IT-Service-Management space — adjacent signal that the broader Atlassian auth context is partially working for forum-style emails, not for MCP.
+- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. **82+ consecutive ticks blind (>82 hours)** as of 2026-04-15T08:09 UTC. Heartbeat runtime has no Atlassian MCP tool available. Briefing-2026-04-15 B2 bundled this with source-config-calendar as the MCP health crisis — 48h SLA forcing function proposed, disable-source deadline Thu Apr 16 09:00 WAT. 09:09 WAT tick: no change, still blind. Access Bank vulnerability remediation jar shared 09:07 WAT (email signal) — Jira-side tracking unverifiable.

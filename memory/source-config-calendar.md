@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-15T07:14:07Z"
+updated: 2026-04-15
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T07:09:00Z"
+last_processed: "2026-04-15T08:09:00Z"
 ---
 
 ## Connection
@@ -70,7 +70,8 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
-- **TOOL UNAVAILABLE 2026-04-15T07:09 UTC (08:10 WAT):** Heartbeat runtime still has no `gcal_*` tool available. **11th consecutive tick blind.** 51 minutes to Retreat Day 2 start (09:00 WAT); Oladapo 1:1 at 12:30 WAT unverifiable in live state. Briefing-2026-04-15 B2 proposed 48h SLA forcing function; B4 recommended delegation to EA / Kevin Ng'Eno for bulk Day 2 + Day 3 decline.
+- **TOOL UNAVAILABLE 2026-04-15T08:09 UTC (09:09 WAT):** Heartbeat runtime still has no `gcal_*` tool available. **12th consecutive tick blind.** Retreat Day 2 now active (started 09:00 WAT); Oladapo 1:1 at 12:30 WAT still unverifiable in live state. Stanbic commitment (B1) due TODAY — no calendar verification possible. Adjacent email signal this tick: Ruth Adetunji "Updated invitation: Core Switch Engineering Standup Meeting" (07:57 UTC) came through email calendar-notification path, skipped per email source rule (should be handled here — but tool blind).
+- **TOOL UNAVAILABLE 2026-04-15T07:09 UTC (08:10 WAT):** Heartbeat runtime still has no `gcal_*` tool available. 11th consecutive tick blind. 51 minutes to Retreat Day 2 start (09:00 WAT); Oladapo 1:1 at 12:30 WAT unverifiable in live state. Briefing-2026-04-15 B2 proposed 48h SLA forcing function; B4 recommended delegation to EA / Kevin Ng'Eno for bulk Day 2 + Day 3 decline.
 - **TOOL UNAVAILABLE 2026-04-15T06:10 UTC (07:10 WAT):** Heartbeat runtime still has no `gcal_*` tool available. 10th consecutive tick blind. Briefing-2026-04-15 B2 bundles this with source-config-jira as a structural MCP connector health crisis — recommended 48h SLA on connector owner; disable source-config if not fixed by Thu Apr 16 09:00 WAT. Briefing-2026-04-15 B4 also flags Retreat Day 2 today (09:00 WAT start) — conflict status unverifiable; recommended delegation to EA / Kevin Ng'Eno for bulk decline covering Day 2 + Day 3.
 - 2026-04-14T22:09 UTC (23:09 WAT) tick: 9th consecutive tick blind.
 - 2026-04-14T20:09 UTC (21:09 WAT) tick: 8th consecutive tick blind.
