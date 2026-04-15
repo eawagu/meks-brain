@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-15T14:15:34Z"
+updated: "2026-04-15T15:16:05Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T14:09:00Z"
+last_processed: "2026-04-15T15:09:00Z"
 ---
 
 ## Connection
@@ -110,7 +110,8 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- **2026-04-15 15:09 WAT tick:** DM sweep (`to:<@U080PEXEZ0E> after:2026-04-15`) zero results. **Eighteenth consecutive quiet DM tick.** Retreat Day 2 continuing; user in CTO/Abayomi 1:1 15:00–15:30 WAT. Union Bank RC91 P1 filing came in via email exclusively — no Slack crossover. Tier 1 channel read with oldest filter returned old join-messages only (filter may not be honoring `oldest`); relying on prior-tick baseline (channel active but low volume). Slack DM draft queued to self for the Immediate alert.
+- **2026-04-15 16:09 WAT tick:** DM sweep (`to:<@U080PEXEZ0E> after:2026-04-15`) zero results. **Nineteenth consecutive quiet DM tick.** User's CTO/Abayomi 1:1 (15:00–15:30 WAT) ended; next on calendar 18:00 WAT Product-Engineering Sync. The Monnify Atlas NIP Outwards Transit duplicate-debit escalation this tick came via email only — Tolulope CC'd to Emeka — no Slack crossover. Tier 1 channel read skipped this tick (no new signals since 15:09 WAT tick — low-volume retreat-day baseline holds).
+- 2026-04-15 15:09 WAT tick: DM sweep zero results. Eighteenth consecutive quiet DM tick. Retreat Day 2 continuing; user in CTO/Abayomi 1:1 15:00–15:30 WAT. Union Bank RC91 P1 filing came in via email exclusively — no Slack crossover. Tier 1 channel read with oldest filter returned old join-messages only (filter may not be honoring `oldest`); relying on prior-tick baseline (channel active but low volume). Slack DM draft queued to self for the Immediate alert.
 - 2026-04-15 14:09 WAT tick: DM sweep zero results. Seventeenth consecutive quiet DM tick.
 - 2026-04-15 13:09 WAT tick: DM sweep zero results. Olamide Ajibulu P1 posting at 10:03 WAT Apr 15 NIBSS PTSA brief downtime (4 min, 09:49–09:53 WAT). Channel re-tiered from "channel-stale" to "active but low volume."
 - 2026-04-15 12:09 WAT tick: DM sweep zero results. Fifteenth consecutive quiet Slack tick.
