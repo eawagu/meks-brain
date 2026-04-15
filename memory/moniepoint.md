@@ -6,7 +6,7 @@ aliases:
   - "MoniePoint"
 created: 2026-04-11
 summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; 4 business lines (DD/CDD, Monnify, TPP, Domestic Switching); 2025 revenue ₦24.2B target, ~₦10-12B actual (~35-50%); building multi-market card issuance platform (Project Phoenix); 13-level job framework.
-updated: "2026-04-13T23:23:04Z"
+updated: "2026-04-15T21:54:13Z"
 cssclasses:
   - "entity"
 ---
@@ -117,7 +117,7 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 
 ## Active Issues (as of Apr 2026)
 
-- [[RC91 Multi-Bank Failure Pattern]] — 13+ banks, structural routing gap
+- [[RC91 Multi-Bank Failure Pattern]] — 13+ banks, structural routing gap. **Specific mechanism confirmed 2026-04-14** via [[Oladapo Onayemi]] DM: during a bank CBA failure, Moniepoint routes card requests to the inactive bank node; when the bank recovers, Moniepoint's routing-config restoration process is manual and slow, so Moniepoint-side failures persist on terminals after the bank is actually back up. The automation gap (automated detection of bank recovery + automated config restoration) is a Primitive 4 (Systems) responsibility of Moniepoint's [[Domestic Switching]] department (led by [[Babatunde Okufi]]; owns ATS and routing config). [[Oladapo Onayemi]] has escalated to the Moniepoint team "severally" without a Moniepoint-side fix; Oladapo's escalation level has demonstrably not been sufficient to force the automation onto the backlog. Open: which intra-group leverage path (direct peer to Babatunde Okufi, dotted-line to [[Felix Ike]] as Group CTO, or up through [[Dennis Ajalie]] to group-level roadmap) has the highest chance of landing the fix.
 - [[NIBSS]] DD compound failures — TDSD-6437
 - Settlement integrity — TDSD-6424, TDSD-6431, TDSD-6276 active
 - [[DCIR Security Vulnerabilities]] — 5 CRITICAL Access Bank findings; remediation in progress
@@ -155,3 +155,4 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 - [[TeamApt_Businesses]] — business line index
 - [[TeamApt_Customer_Registry]] — customer and partner registry
 - [[Source: notes-2026-04-01]] through [[Source: notes-2026-04-10]] — daily CTO signals
+- [[Commitment — Stanbic RC91 Internal Processing Latency Investigation]] — 2026-04-15 resolution confirmed the routing-restoration automation gap
