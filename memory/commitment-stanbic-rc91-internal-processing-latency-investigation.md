@@ -7,7 +7,7 @@ title: Commitment — Stanbic RC91 Internal Processing Latency Investigation
 status: fulfilled
 created: "2026-04-12T16:28:31Z"
 summary: Oladapo Onayemi to investigate whether Moniepoint processing latency to NIBSS node is anomalous, per NIBSS attribution of RC91 to Moniepoint timeout. Due Wed Apr 15.
-updated: "2026-04-15T21:42:00Z"
+updated: "2026-04-15T21:52:40Z"
 cssclasses:
   - "commitment"
 counterparty: Oladapo Onayemi
@@ -49,15 +49,16 @@ Root cause is two-part:
 
 **Not a processing-latency problem.** Deliverable #4 satisfied — evidence contradicts NIBSS attribution. Deliverables #1–3 are moot under the new root cause.
 
-**Moniepoint is aware.** Oladapo confirms Moniepoint team has been escalated to "severally" without resolution. The config-restoration process is manual and slow; no automation exists on the Moniepoint side.
+**Moniepoint is aware.** Oladapo confirms the Moniepoint team has been escalated to "severally" without resolution. The config-restoration process is manual and slow; no automation exists on the Moniepoint side.
 
 **Note on signal routing:** This DM sat in the brain's Slack sweep blind spot for 19 ticks due to the date-format bug diagnosed in Session 54. The Slack Sweep Hybrid Design (deployed 2026-04-15) fixes the bug and prevents recurrence — see [[source-config-slack]] Connection section's Date format rule.
 
 ## Downstream Actions (not part of this commitment)
 
-- Formal Stanbic escalation letter is now orthogonal — Stanbic CBA is a contributor, but Moniepoint's routing-restoration gap is the structural fix. Escalate inside Moniepoint, not outward to Stanbic.
+- Formal Stanbic escalation letter is now orthogonal — Stanbic CBA is a contributor, but Moniepoint's routing-restoration gap is the structural fix. Escalation should target inside the Moniepoint group, not outward to Stanbic.
 - ATS JAR deployment to Stanbic remains pending Oluwatobi Meshioye's action — unaffected by this finding.
-- **Open question for CTO:** Is Moniepoint-side automated routing restoration a capacity that belongs on the Technology Reliability roadmap? Oladapo's escalations have not produced a Moniepoint-side fix.
+- **Automation is Moniepoint's to build, not TeamApt's.** The automated routing-restoration capacity is a Primitive 4 (Systems) gap inside [[Moniepoint]]'s [[Domestic Switching]] department (led by [[Babatunde Okufi]], which owns ATS and the routing config). Not a TeamApt roadmap item. Oladapo's escalations to the Moniepoint team have produced no fix after multiple attempts.
+- **Open question for CTO — intra-group leverage.** Which path has the highest chance of forcing the automation onto Moniepoint's backlog: direct peer escalation to [[Babatunde Okufi]] (Domestic Switching lead), dotted-line escalation to [[Felix Ike]] (Group CTO, Moniepoint Inc.), or raising through [[Dennis Ajalie]] to push onto a group-level roadmap? Oladapo's level of escalation has demonstrably not been sufficient — the fix needs higher-altitude sponsorship to land.
 
 ## References
 
@@ -65,4 +66,7 @@ Root cause is two-part:
 - [[Stanbic Bank]]
 - [[Oladapo Onayemi]]
 - [[NIBSS]]
+- [[Moniepoint]]
+- [[Babatunde Okufi]]
+- [[Felix Ike]]
 - [[source-config-slack]] — Slack sweep blind-spot fix
