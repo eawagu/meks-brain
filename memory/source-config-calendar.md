@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: 2026-04-15
+updated: "2026-04-15T12:17:11Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T11:09:00Z"
+last_processed: "2026-04-15T12:09:00Z"
 ---
 
 ## Connection
@@ -70,6 +70,7 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
+- **2026-04-15 13:09 WAT tick:** Calendar healthy — 4th consecutive tick restored. Oladapo 1:1 12:30–13:00 WAT just concluded ~9 min ago (commitment-due-today forcing function — Stanbic RC91 investigation findings should have been discussed). No post-1:1 email signal yet. Remaining day: Tolu.A Infra 13:30 WAT (21 min), Emeka/Lateefat 14:00 WAT, ATPP Standup 14:00 WAT (declined), CTO/Abayomi 15:00 WAT, Product-Engineering Sync 18:00 WAT, Strategy Retreat Dinner Madison 20:30 WAT. No new events, no new conflicts, no back-to-back <15 min overload. Strategy Retreat Day 2 continues in London until 19:00 WAT.
 - **2026-04-15 12:09 WAT tick:** Calendar healthy — 3rd consecutive tick restored. No new events or changes vs prev tick. Oladapo 1:1 12:30–13:00 WAT confirmed on calendar (21 min away from tick time) — commitment-due-today forcing function intact. Remaining day: Tolu.A Infra 13:30 WAT, Emeka/Lateefat 14:00 WAT, CTO/Abayomi 15:00 WAT, Product-Engineering Sync 18:00 WAT, Strategy Retreat Dinner Madison 20:30 WAT. Declines confirmed on Juliana Switch 11:30 WAT and ATPP Standup 14:00 WAT. No conflicts, no back-to-back <15 min overload.
 - **2026-04-15 11:09 WAT tick:** `gcal_list_events` returning results — 2nd consecutive tick with calendar restored. No new events since prev tick check (same schedule verified): Busy 10:00 WAT, Oladapo 1:1 12:30–13:00 WAT (Stanbic commitment forcing function — unchanged), Tolu.A Infra Check-In 13:30 WAT, Emeka/Lateefat 14:00 WAT, CTO/Abayomi 15:00 WAT, Product-Engineering Sync 18:00 WAT, Strategy Retreat Dinner @ Madison 19:30 BST (20:30 WAT). Declines already applied: Juliana Switch Standup 11:30 WAT, ATPP Standup 14:00 WAT. **One awareness item noted:** Lattice Review calendar event ("Hi Emeka - 8 Pending Downward Reviews") appearing in today's listing, all-day through Apr 28; not a meeting conflict but a Lattice deadline reminder — tracked as awareness, deadline Apr 28. No new conflicts, no back-to-back overload (gaps between accepted events are >15 min). Briefing-2026-04-15 B4 recommendation to delegate Day 2+3 decline to Kevin Ng'Eno remains optional — existing declines hold.
 - **2026-04-15 10:09 WAT tick — TOOL RESTORED:** After 12 consecutive ticks blind. Today's schedule verified live. No new Day 2 conflicts to bulk-decline — declines already applied.
