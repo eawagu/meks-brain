@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-15T14:16:09Z"
+updated: "2026-04-15T15:16:43Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T14:09:00Z"
+last_processed: "2026-04-15T15:09:00Z"
 ---
 
 ## Connection
@@ -70,6 +70,7 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
+- **2026-04-15 16:09 WAT tick:** Calendar healthy — 7th consecutive tick restored. CTO/Abayomi Weekly Session 15:00–15:30 WAT concluded. Upcoming today: Product-Engineering Sync 18:00–19:00 WAT (Frank Atashili declined — standing pattern, no new signal), Strategy Retreat Dinner Madison 19:30 BST / 20:30 WAT (Pawel Swiatek & Dennis Ajalie hosts). Retreat Day 2 continuing 08:00–18:00 BST (~17:00–18:00 BST = 18:00–19:00 WAT overlap with Product-Eng Sync). No new conflicts detected this tick beyond pre-existing retreat overlap (already known). Lattice Review (end Apr 28) still `needsAction`. No new invites requiring decision.
 - **2026-04-15 15:09 WAT tick:** Calendar healthy — 6th consecutive tick restored. **In progress NOW:** CTO/Abayomi Weekly Session 15:00–15:30 WAT (user in meeting during this tick). Upcoming: Product-Engineering Sync 18:00–19:00 WAT (organized by Emeka, Frank Atashili declined — standing pattern), Strategy Retreat Dinner Madison 19:30 BST/20:30 WAT (host: Pawel Swiatek & Dennis Ajalie). Retreat Day 2 continuing 08:00–18:00 BST. ATPP Standup already declined per retreat. No new conflicts, no overload. Lattice Review (end Apr 28) still `needsAction` — not surfaced this tick (not in decision window). No calendar artifact from post-Oladapo 1:1 (concluded ~13:00 WAT).
 - **2026-04-15 14:09 WAT tick:** Calendar healthy — 5th consecutive tick restored. Emeka/Lateefat 14:00–14:30 WAT IN PROGRESS.
 - **2026-04-15 13:09 WAT tick:** Calendar healthy — 4th consecutive tick. Oladapo 1:1 12:30–13:00 WAT just concluded.
