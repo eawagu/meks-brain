@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 70+ consecutive ticks missed since 2026-04-11T22:09 UTC (>70 hours blind). Briefing-2026-04-14 B3 re-auth call still unaddressed."
-updated: "2026-04-15T09:17:49Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 85+ consecutive ticks missed since 2026-04-11T22:09 UTC (>85 hours blind). Briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~22h remaining."
+updated: 2026-04-15
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T09:09:00Z"
+last_processed: "2026-04-15T10:09:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. **83+ consecutive ticks blind (>83 hours)** as of 2026-04-15T09:09 UTC. 10:09 WAT tick: no change, still blind. Calendar MCP restored this tick — Jira is now the sole structural MCP failure. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT approaching (~23h remaining). New RC91 signal this tick (NIBSS 09:49–09:53 WAT window, bank unspecified) — Jira-side correlation unverifiable. Fidelity Afrigo routing error this tick — Jira-side ticket tracking unverifiable. Access Bank vulnerability remediation (jar shared 09:07 WAT Apr 15) — Jira-side tracking unverifiable.
+- **AUTH/TOOL FAILURE STATE:** Jira connector has been unavailable since 2026-04-11T22:09 UTC. **85+ consecutive ticks blind (>85 hours)** as of 2026-04-15T10:09 UTC. 11:09 WAT tick: no change, still blind. Calendar MCP restored prev tick — Jira is the sole remaining structural MCP failure. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~22h remaining. New signals this tick all reference Jira-side tracking that remains unverifiable: Parallex DCIR DB INDEX JOB FAILURE (no Parallex ticket trackable), Ecobank DCIR Claims (no dispute ticket trackable), FCMB User Credentials chaser (no FCMB Jira trackable), Fidelity multi-front (Afrigo, MEMORY, NSS admin — none trackable).

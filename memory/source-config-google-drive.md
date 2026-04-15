@@ -4,7 +4,7 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-15T09:18:20Z"
+updated: 2026-04-15
 cssclasses:
   - "source-config"
 last_processed: "2026-04-15T08:31:58Z"
@@ -57,9 +57,10 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
-- 2026-04-15 10:09 WAT tick: **1 new Gemini doc** — "Direct to Bank : Daily stand up – 2026/04/15 08:22 WAT" (doc 1F02ISo8a60F3rDhWT0DMPlt3smfUlgx48elt_FE3Ldk, createdTime 2026-04-15T08:31:58Z). Summary (routine — Zenit vulnerability deploy, GT Bank API integration, UBA/Echo Bank SLA, Polaris utilization, Premium Trust card impl) classified as Awareness tier — no tracked situations directly impacted, but Yasir Syed Ali's Jira ticket management gap callout aligns with briefing-2026-04-15 B3 retro ask (monitoring-to-human-pickup gap) as a parallel documentation failure pattern. Details + Decisions + Next steps routed to ingress via `capture_note` (note_2026-04-15T09-12-36-153Z.md). `last_processed` bumped to doc createdTime. Retreat Day 2 sessions underway — more Gemini notes expected later today from retreat segments that are recorded.
-- 2026-04-15 09:09 WAT tick: Zero new Gemini docs in the 07:09–08:08 UTC window. **Twelfth consecutive quiet Drive tick** — Retreat Day 2 meetings now underway in London; first Gemini notes expected late afternoon WAT (retreat sessions are in-person, not all will be recorded by Gemini).
-- 2026-04-15 08:10 WAT tick: Zero new Gemini docs in the 06:10–07:09 UTC window. **Eleventh consecutive quiet Drive tick** — Retreat Day 2 begins 09:00 WAT London; first Gemini notes expected late afternoon WAT.
-- 2026-04-15 07:10 WAT briefing tick: Zero new Gemini docs in the 22:09 UTC Apr 14 – 06:10 UTC Apr 15 window. **Tenth consecutive quiet Drive tick** — retreat Day 1 evening + overnight fully wound down; Day 2 meetings begin 09:00 WAT today.
-- 2026-04-14 23:09 WAT tick: Zero new Gemini docs — Retreat Day 1 Hawksmoor dinner concluding in London.
-- 2026-04-14 21:09 WAT tick: Zero new Gemini docs. Eighth consecutive quiet Drive tick.
+- 2026-04-15 11:09 WAT tick: Zero new Gemini docs since last_processed (createdTime > 2026-04-15T08:31:58Z). **Thirteenth consecutive quiet Drive tick.** Retreat Day 2 sessions still underway in-person in London — Gemini not capturing in-person retreat sessions. Direct to Bank standup already processed prev tick.
+- 2026-04-15 10:09 WAT tick: 1 new Gemini doc — Direct to Bank Daily Stand up 2026/04/15 08:22 WAT processed. Yasir Syed Ali's Jira ticket management gap callout aligned with briefing-2026-04-15 B3 retro ask.
+- 2026-04-15 09:09 WAT tick: Zero new Gemini docs. Twelfth consecutive quiet tick.
+- 2026-04-15 08:10 WAT tick: Zero new Gemini docs. Eleventh consecutive quiet tick.
+- 2026-04-15 07:10 WAT briefing tick: Zero new Gemini docs. Tenth consecutive quiet tick.
+- 2026-04-14 23:09 WAT: Zero new Gemini docs — Retreat Day 1 Hawksmoor dinner concluding.
+- 2026-04-14 21:09 WAT: Zero new Gemini docs. Eighth consecutive quiet tick.

@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-15T09:16:31Z"
+updated: 2026-04-15
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T09:09:00Z"
+last_processed: "2026-04-15T10:09:00Z"
 ---
 
 ## Connection
@@ -110,9 +110,10 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- 2026-04-15 10:09 WAT tick: DM sweep (`to:@me after:2026-04-15`) zero results. Tier 1 `#teamapt-tech-operations` no new messages in window (channel stale — last human activity Feb). **Thirteenth consecutive quiet Slack tick.** Email-only P1 visibility pattern continues — fresh NIBSS RC91 failure window 09:49–09:53 WAT surfaced via email (Olamide → NIBSS), not Slack. Retreat Day 2 meetings underway in London.
-- 2026-04-15 09:09 WAT tick: DM sweep (`to:@me after:2026-04-15`) zero results. Tier 1 `#teamapt-tech-operations` zero messages in window. **Twelfth consecutive quiet Slack tick.** Email-only P1 visibility pattern continues. Retreat Day 2 Day 2 now active (started 09:00 WAT London — substantive content per Dennis deck shared Apr 14 04:05 WAT).
-- 2026-04-15 08:10 WAT tick: DM sweep zero results. Tier 1 zero messages since Feb 3 (channel stale). **Eleventh consecutive quiet Slack tick.** Retreat Day 2 starts 09:00 WAT.
-- 2026-04-15 07:10 WAT briefing tick: DM sweep zero results (overnight window). Tier 1 zero messages. **Tenth consecutive quiet Slack tick.** Cross-workspace P1/RC91/outage search returned noise only. Email-only P1 visibility pattern continues.
-- 2026-04-14 23:09 WAT tick: Ninth consecutive quiet Slack tick.
-- 2026-04-14 21:09 WAT tick: Eighth consecutive quiet Slack tick. Fidelity RC91 Cycle 4 filed AND resolved via email without any #teamapt-tech-operations entry.
+- 2026-04-15 11:09 WAT tick: Tier 1 `#teamapt-tech-operations` no new messages in window (channel stale — last human activity Feb). Slack search MCP rate-limited this tick (DM/discovery sweep skipped — will retry next tick). **Fourteenth consecutive quiet Slack tick** (inferred from Tier 1 + persistent channel-stale pattern). Email-only P1 visibility continues — Parallex DCIR DB Index Job Failure and Ecobank DCIR Claims both surfaced via email, not Slack. Retreat Day 2 in progress (London).
+- 2026-04-15 10:09 WAT tick: DM sweep zero results. Thirteenth consecutive quiet tick. NIBSS RC91 window surfaced via email only.
+- 2026-04-15 09:09 WAT tick: DM sweep zero results. Twelfth consecutive quiet tick.
+- 2026-04-15 08:10 WAT tick: DM sweep zero results. Eleventh consecutive quiet tick.
+- 2026-04-15 07:10 WAT briefing tick: DM sweep zero results. Tenth consecutive quiet tick.
+- 2026-04-14 23:09 WAT tick: Ninth consecutive quiet tick.
+- 2026-04-14 21:09 WAT tick: Eighth consecutive quiet tick. Fidelity RC91 Cycle 4 filed AND resolved via email without any #teamapt-tech-operations entry.
