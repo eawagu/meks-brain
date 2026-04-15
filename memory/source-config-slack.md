@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: 2026-04-15
+updated: "2026-04-15T22:13:10Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T20:09:00Z"
+last_processed: "2026-04-15T22:09:00Z"
 ---
 
 ## Connection
@@ -110,8 +110,9 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- **2026-04-15 21:09 WAT tick:** DM sweep zero results (to: and from: queries both empty). **Twenty-third consecutive quiet DM tick.** Tier 1 read on #teamapt-tech-operations returned zero new messages in the 2h window. No new P1 keywords, no @mentions. All Slack activity in this window appears routed via email only (consistent with pattern: DCIR monitoring alerts, Onyinye vulnerability confirmation, Pivot invoice approvals — all email-exclusive). Strategy Retreat Day 2 London wraps at 19:00 WAT; user at Madison Dinner 20:30 WAT / 19:30 BST. Off-channel evening expected.
-- **2026-04-15 19:09 WAT tick:** DM sweep zero results. **Twenty-second consecutive quiet DM tick.** Tier 1 P1-keyword search in #teamapt-tech-operations zero hits for this hour. User just exited Product-Engineering Sync (18:00–19:00 WAT). DCIR/Wema 40.65% monitoring alert at 19:06 WAT came via email only — no Slack crossover yet (consistent with Apr 14 pattern: monitoring alerts don't route to Slack P1). Low-volume retreat-day baseline continues.
+- **2026-04-15 23:09 WAT tick (overnight, should normally be skipped per config-heartbeat — ran anyway):** DM sweep zero results. **Twenty-fourth consecutive quiet DM tick.** Tier 1 read on #teamapt-tech-operations returned zero new messages in the 2h window since 21:09 WAT. Latest channel message remains Qazim 17:41 WAT CoralPay P1 resolution (seen previous ticks). No new P1 keywords, no @mentions. User at Madison Dinner 20:30 WAT / 19:30 BST (wraps 21:50 WAT / 20:50 BST). Evening quiet as expected.
+- **2026-04-15 21:09 WAT tick:** DM sweep zero results (to: and from: queries both empty). Twenty-third consecutive quiet DM tick. Tier 1 read on #teamapt-tech-operations returned zero new messages in the 2h window. No new P1 keywords, no @mentions. All Slack activity in this window appears routed via email only (consistent with pattern: DCIR monitoring alerts, Onyinye vulnerability confirmation, Pivot invoice approvals — all email-exclusive). Strategy Retreat Day 2 London wraps at 19:00 WAT; user at Madison Dinner 20:30 WAT / 19:30 BST. Off-channel evening expected.
+- **2026-04-15 19:09 WAT tick:** DM sweep zero results. Twenty-second consecutive quiet DM tick. Tier 1 P1-keyword search in #teamapt-tech-operations zero hits for this hour. User just exited Product-Engineering Sync (18:00–19:00 WAT). DCIR/Wema 40.65% monitoring alert at 19:06 WAT came via email only — no Slack crossover yet (consistent with Apr 14 pattern: monitoring alerts don't route to Slack P1). Low-volume retreat-day baseline continues.
 - 2026-04-15 18:09 WAT tick: DM sweep zero results. Twenty-first consecutive quiet DM tick. User in Product-Engineering Sync 18:00–19:00 WAT during this tick.
 - 2026-04-15 17:09 WAT tick: DM sweep zero results. Twentieth consecutive quiet DM tick.
 - 2026-04-15 16:09 WAT tick: DM sweep zero results. Nineteenth consecutive quiet DM tick. Monnify Atlas NIP Outwards Transit duplicate-debit escalation came via email only.
@@ -124,5 +125,3 @@ When multiple messages across different channels reference the same entity (bank
 - 2026-04-15 09:09 WAT tick: DM sweep zero results.
 - 2026-04-15 08:10 WAT tick: DM sweep zero results.
 - 2026-04-15 07:10 WAT briefing tick: DM sweep zero results.
-- 2026-04-14 23:09 WAT tick: Ninth consecutive quiet tick.
-- 2026-04-14 21:09 WAT tick: Eighth consecutive quiet tick. Fidelity RC91 Cycle 4 filed AND resolved via email without any #teamapt-tech-operations entry.
