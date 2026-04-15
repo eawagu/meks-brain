@@ -32,9 +32,16 @@ lint-report.md         ← judgment check output
 memory/                ← all brain pages (flat, no subfolders)
 ```
 
-**Raw sources** are in a OneDrive-synced folder outside this vault. Path: `C:\Users\mek\OneDrive\mek-brain-ingress`. Express ingest reads from this folder. The `review/` subfolder is ignored by scheduled ingest — those files are for conversational full ingest only.
+**Raw sources** are in a OneDrive-synced folder outside this vault. Path: `C:\Users\mek\OneDrive\mek-brain-ingress`. Express ingest reads from this folder. The `review/` subfolder is ignored by scheduled ingest — those files are for conversational full ingest only. The `raw/` subfolder is the persistence layer for retained raw content (per Ingress Retention design) — also ignored by scheduled scans.
 
 Both root and `review/` are scanned recursively. Dropped folders are not treated as single sources — every file within them is processed individually. Folder structure is ignored for processing purposes; `source_path` records the relative path (e.g., `project-x/report.pdf`) to preserve traceability.
+
+**Ingress Retention.** At end of ingest, every successfully processed file is dispositioned by its `retention_label`:
+- `postgres` — raw content written to `pages.raw_content` blob; original moved from ingress to `raw/` mirror (dual-store for resilience + future semantic-search-over-raw).
+- `fs` — original moved from ingress to `raw/` only.
+- `discard` — original deleted from ingress (source page is the only retained representation). Gated by `config-ingress-retention.discard_mode` — when `shadow`, behaves as `fs` (move to `raw/`) so the calibration loop can be observed before any irreversible action.
+
+Ingress is therefore transient — every file is moved or deleted by end-of-ingest. `raw/` is the durable filesystem persistence. `MISS:` notes (calibration signals) are treated as implicit `discard` and follow the same shadow-mode gate.
 
 ---
 
@@ -82,7 +89,9 @@ status: open | fulfilled | broken | cancelled
 
 **source:**
 ```yaml
-source_path: string   # path to raw file in OneDrive folder
+source_path: string         # path to raw file in OneDrive folder (relative to ingress root)
+retention_label: string     # optional. One of: postgres | fs | discard. Set by ingest-time judgment per Ingress Retention design.
+retention_rationale: string # optional. One-sentence reason for the chosen retention_label.
 ```
 
 **synthesis:**
