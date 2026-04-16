@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-16T07:16:19Z"
+updated: "2026-04-16T08:16:13Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T10:51:42Z"
+last_processed: "2026-04-16T08:03:43Z"
 ---
 
 ## Connection
@@ -59,3 +59,4 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
 - **2026-04-16 06:23 WAT briefing tick:** Search returned zero new Gemini docs. **Twenty-third consecutive quiet Drive tick.** last_processed unchanged at 2026-04-15T10:51:42Z. Strategy Retreat Day 3 in-person — Gemini not capturing in-person sessions (expected).
 - **2026-04-16 08:09 WAT tick:** Zero new Gemini docs. **Twenty-fourth consecutive quiet Drive tick.** last_processed unchanged. Retreat Day 3 in-person.
+- **2026-04-16 09:09 WAT tick:** One new Gemini doc: "Direct to Bank : Daily stand up – 2026/04/16 08:14 WAT". Summary processed as Phase 1 signal (Awareness — D2B project status updates: Zenit ATS vuln resolved, Union DD access granted, 4 Felix agreements pending, Polaris extension to next week, GT Bank infra challenge, V2 Jazz regression almost done). Transcript routed to ingress via `capture_note` for Phase 2. last_processed updated to 2026-04-16T08:03:43Z.
