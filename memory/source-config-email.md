@@ -4,80 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T13:16:15Z"
+updated: "2026-04-16T15:16:46Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T13:09:00Z"
+last_processed: "2026-04-16T14:15:00Z"
 ---
 
-## Connection
-
-- **Connector:** Gmail MCP
-- **Accounts:** `emeka.awagu@teamapt.com` (primary), `eawagu@gmail.com`
-- **Access pattern:** `gmail_search_messages` for delta detection; `gmail_read_message` / `gmail_read_thread` for content
-
-## Directives
-
-### Priority model — two layers
-
-**Layer 1 — Addressed to me (To field):** Always surface. Someone directed this to me specifically — it expects a response, decision, or action. Do not apply keyword filtering. Assess and include in briefing regardless of content.
-
-**Layer 2 — CC'd / distribution list / inbox-wide:** Apply sender tier and keyword filtering below. Only surface if a rule matches.
-
-### Sender tiers
-
-**Tier 1 — Immediate (surface on any heartbeat tick):**
-- Board members and investors
-- CEO / COO / Dennis Ajalie
-- Direct reports (Tolu Aina, Tolulope Obianwu, and others per roles registry)
-- Regulatory bodies (CBN, NYDFS, NIBSS, PCIDSS, external auditors)
-- Bank counterparties when escalation thread (Stanbic, UBA, Access, Fidelity, Ecobank, Sterling, Polaris, Union, Habari)
-
-**Tier 2 — Same-day (surface in next briefing):**
-- Peer executives and department heads
-- Engineering leads (Ekene Udodi, Oladapo Onayemi, Wycliffe Ochieng, Yasir Syed Ali)
-- Compliance (Ibukun Atoyebi)
-- Vendor escalations
-- AWS (health events, account notifications)
-
-**Tier 3 — Batch (daily digest only):**
-- Distribution lists (unless content matches keyword rules)
-- Internal team-wide announcements
-- Vendor routine communications
-
-### Keyword rules (apply to Layer 2 messages)
-
-**Critical — surface immediately:**
-- Incident: RC91, P1, outage, down, incident, emergency, production, SEV-1, settlement failure, transaction failure, ATS failure, DCIR failure
-- Security: breach, compromised, vulnerability, credential, CVE, penetration test
-- Regulatory: CBN, compliance violation, audit, investigation, subpoena, NYDFS, PCI
-- Escalation: escalated to CTO, escalation, requires CTO approval, approval required
-
-**High — surface in next briefing:**
-- Operational: SLA breach, deploy window, maintenance window, duty handover, daily report
-- HR/people decisions: PIP, performance improvement, termination, resignation, offer letter, headcount approval, Lattice review, exit interview
-- Finance: budget approval, spending approval, contract approval
-- Project: Phoenix, GoSubscribe, AptPay
-
-**Skip — do not surface:**
-- Marketing newsletters and promotional emails
-- Automated calendar notification emails (handled by calendar source)
-- Benefits enrollment, mandatory training reminders
-- Automated system receipts and purchase confirmations
-- All-hands meeting invites (unless agenda contains decision items)
-- Out-of-office auto-replies
-
-## Notes
-
-- Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
-- When a thread is surfaced, include the full thread context, not just the latest message.
-- Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
-- **2026-04-16 06:23 WAT briefing tick:** 9 messages via `newer_than:8h` query. Key signals: (1) DCIR TEAMAPT Monitoring Service 23:36 WAT — 66.0% failure rate (Wema DCIR route); (2) DCIR TEAMAPT Monitoring Service 23:20 WAT — 20.4% (Wema); (3) Segun Ogunsola (Parallex Bank) 02:29 WAT — server restart completed, awaiting DCIR interchange routing; (4) Rasheed Olanrewaju (UBA) 02:46 WAT — Direct Card servers restart completed; (5) Qazim Adedigba 00:06 WAT — Duty Handover Note 20260415 (16/17 routes, Sterling off); (6) Chris Purkis 22:57 UTC — two Head of Engineering events cancelled Fri Apr 17. All signals routed to briefing-2026-04-16.
-- **2026-04-16 07:09 WAT tick:** 1 message via `newer_than:2h`: Ben Cowen (Lorum Ledger) 05:34 UTC — vendor pitch re virtual accounts/correspondent clearing (Re: USD, AED, GBP, EURO Clearing & Local Accounts). Layer 1 (To-addressed), Awareness tier. Accumulates for next briefing.
-- **2026-04-16 08:09 WAT tick:** 4 messages via `newer_than:2h`: Monnify auto-ticket #38844 (skip — automated system receipt), Mariam Davies PayFac Settlement report (CC'd routine), Florence Olarinde ×2 Fidelity + Access bank statement requests (CC'd routine). All filtered by Layer 2 rules — no sender tier match, no keyword match. Zero actionable deltas.
-- **2026-04-16 09:09 WAT tick:** 17 messages via `newer_than:2h`. Key signals: (1) FCMB RC91 20260416 — Afeez Kazeem filed 08:19 WAT, FCMB reconfirm request 08:35, Afeez confirmed resolved 09:02 WAT (~43 min cycle). Layer 2 keyword "RC91" match → Awareness (resolved, no CTO action). (2) Blessing Abel-Oguche re HSM key generation — asking Ekene for update, Emeka CC'd. Card infrastructure. (3) Access Bank ONUS POS User Management Review — Adeolu Atilade (Access) raised 5 security gaps (no AD, no MFA, no SoD, excessive admin, no user export); Babajide acknowledged. (4) Zone<>TeamApt Juliana Account Transfer — Zone acknowledged, will progress with Imo Akpanuwa. (5) TDSD-6572 new Jira ticket (Afeez/FCMB RC91 related). (6) Routine: bank statement requests, PayFac settlement, claims validation, unauthorized debit response — all filtered. Accumulates for next briefing.
-- **2026-04-16 10:20 WAT tick:** 21 messages via `newer_than:2h`. New signals since 09:09 WAT: (1) **BambooHR time off approval — Layer 1 (To: Emeka):** Ravi Kiran Veluguleti (Sick, 1 day) and Babatunde Ademusire pending approval. HR action item, Briefing tier. (2) **FCMB RC91 recurrence** — Afeez Kazeem 09:26 WAT: "still experiencing intermittent RC91 failures" after 09:02 resolution. Initial resolution was premature. Awareness tier (ops handling). (3) **Zenith CISO vulnerability acknowledged** — Festus Amede (CISO) 10:06 WAT thanked for closing vulnerabilities. Also escalated internally to Daniel Eneh then recalled. Security keyword "vulnerability" match. Awareness tier (positive). (4) **UBA DCIR 2FA deployment approved** — Christian Uchegbu (UBA) 09:58 WAT: production deployment approved, weekend implementation. DCIR credential remediation progress. Briefing tier. (5) Emeka Joseph — Wema Bank checklist review (routine). (6) Routine: Sterling DCIR claims, bank statement requests, unauthorized debit — filtered. All accumulate for next briefing.
-- **2026-04-16 11:15 WAT tick:** 23 messages via `newer_than:2h`. New signals since 10:20 WAT: (1) **Union Bank RC91 P1** — Afeez Kazeem 11:04 WAT, filed to Union Bank FEP Administration. Victor Iyama (Union Bank) 10:09 UTC requested reconfirmation. Ongoing. Layer 2 keyword "RC91" match. (2) **UBA RC91** — Afeez Kazeem 10:35 WAT, filed to UBA Channel Switching. Layer 2 keyword "RC91" match. (3) **TDSD-6576** — new Jira ticket (Afeez Kazeem, 10:05 UTC). Jira blind — visible via email only. (4) **Panel Interview Head of Engineering Round 2** — Oluwatobilola Fasanya 09:59 UTC, calendar invite for Akshya Kumar, Tue Apr 21 9:30–10:30 WAT. Emeka + Chukwudum Ekwueme + Chris Purkis on panel. Layer 1 (To: Emeka). Briefing tier. (5) **McKinsey webinar invite** — Agentic AI in Retail Banking. Skip (promotional). (6) Stanbic settlement account reconciliation (Emeka Joseph / Stanbic reconciliation unit) — routine ops. (7) Routine: PayFac settlement, claims, disputes, bank statements — filtered. RC91 signals classified Awareness (ops handling). Panel Interview accumulates for next briefing.
-- **2026-04-16 12:09 WAT tick:** 26 messages via `newer_than:2h`. New signals since 11:15 WAT: (1) **Union Bank RC91 RESOLVED** — Afeez Kazeem 12:00 WAT confirmed "Transactions are now processing successfully" to Victor Iyama. ~56min cycle. Awareness (resolved). (2) **UBA VPN TUNNEL DOWN → retracted** — Olayinka Ajayi 11:40 WAT filed, then 11:43 WAT "Please ignore this email." 3-min false alarm. Possible UBA infrastructure instability related to ongoing UBA RC91. (3) **ATS Reconciliation scope expansion** — Khadijat Musa 11:52 WAT to Damilola Odugbesan, CC'd Emeka+Frank+Dennis+Tolulope: "engineering team has uncovered new findings that have broadened the scope." Layer 2 CC'd. Awareness tier. (4) **SystemSpecs/Remita integration follow-up** — Taiwo Baptista 11:37 WAT to SystemSpecs, CC'd Emeka+Frank+Dennis. Resuming previously initiated funds transfer API integration. Layer 2 CC'd. Awareness tier. (5) **Access Bank audit exception follow-up** — Adeolu Atilade (Access) to Babajide, requesting expedited feedback on ONUS POS audit. Layer 2 filtered. (6) Routine: Fidelity Bank NSS meeting, Stanbic settlement reconciliation, PayFac settlements, disputes — filtered. Stanbic and UBA RC91 exceeded silence thresholds → Immediate alerts dispatched.
-- **2026-04-16 13:09 WAT tick:** 17 messages via `newer_than:2h`. No new actionable signals since 12:09 WAT. All messages are routine ops: FID Daily DD Transfer Report (Chika Okoli, Fidelity), FCMB ATS credential retrieval (Gabriel Oluwagbemiga), Stanbic Interbank Transfer API follow-up (Ifeoluwa Oguntona — CC'd Emeka, Layer 2), FCMB pending failed DCIR re-query (Joel Olowo), DCIR wrong account with CBN mention (Faluyi/Nosarieme to Emeka Joseph — not addressed to Emeka Awagu), plus repeat messages from prior tick window. Zero new actionable deltas.
-- **2026-04-16 14:09 WAT tick:** 14 messages via `newer_than:2h`. Key new signals: (1) **NIBSS PTSA Transaction Failure (NEW P1)** — Afeez Kazeem 13:12 WAT filed to NIBSS PTSA (ptsa@nibss-plc.com.ng): "We are experiencing Failure on transactions routed via the PTSA route." NIBSS acknowledged (Mary Orajaka 13:16 WAT, Abayomi Fagbayi 13:16 WAT). Mary Orajaka reconfirmation request 13:25 WAT. TDSD-6578 filed 13:14 WAT. Layer 2 keyword "transaction failure" match → Immediate (new P1, systemic scope). (2) **Stanbic DCIR wrong account — CBN pressure** — Faluyi (Stanbic) 12:13 WAT escalating to Emeka Joseph/Tolulope Obianwu citing CBN regulation for reversals, requesting same-day resolution. Abdulgafar Obeitor 13:34 WAT: resolution in progress, ~1h estimate, fix for multi-account card PANs under review. Layer 2 keyword "CBN" match → Awareness (ops handling, not addressed to CTO). (3) Zone<>TeamApt Juliana transfer — Anastacia Odogwu (Zone) looping in Eunice Ajibola and Ndifreke Essien. Routine progression. (4) Routine: Stanbic settlement RRN mismatch (Emeka Joseph), FID DD report, FCMB ATS credentials, pending DCIR re-query — filtered.
+## Connection\n\n- **Connector:** Gmail MCP\n- **Accounts:** `emeka.awagu@teamapt.com` (primary), `eawagu@gmail.com`\n- **Access pattern:** `gmail_search_messages` for delta detection; `gmail_read_message` / `gmail_read_thread` for content\n\n## Directives\n\n### Priority model — two layers\n\n**Layer 1 — Addressed to me (To field):** Always surface. Someone directed this to me specifically — it expects a response, decision, or action. Do not apply keyword filtering. Assess and include in briefing regardless of content.\n\n**Layer 2 — CC'd / distribution list / inbox-wide:** Apply sender tier and keyword filtering below. Only surface if a rule matches.\n\n### Sender tiers\n\n**Tier 1 — Immediate (surface on any heartbeat tick):**\n- Board members and investors\n- CEO / COO / Dennis Ajalie\n- Direct reports (Tolu Aina, Tolulope Obianwu, and others per roles registry)\n- Regulatory bodies (CBN, NYDFS, NIBSS, PCIDSS, external auditors)\n- Bank counterparties when escalation thread (Stanbic, UBA, Access, Fidelity, Ecobank, Sterling, Polaris, Union, Habari)\n\n**Tier 2 — Same-day (surface in next briefing):**\n- Peer executives and department heads\n- Engineering leads (Ekene Udodi, Oladapo Onayemi, Wycliffe Ochieng, Yasir Syed Ali)\n- Compliance (Ibukun Atoyebi)\n- Vendor escalations\n- AWS (health events, account notifications)\n\n**Tier 3 — Batch (daily digest only):**\n- Distribution lists (unless content matches keyword rules)\n- Internal team-wide announcements\n- Vendor routine communications\n\n### Keyword rules (apply to Layer 2 messages)\n\n**Critical — surface immediately:**\n- Incident: RC91, P1, outage, down, incident, emergency, production, SEV-1, settlement failure, transaction failure, ATS failure, DCIR failure\n- Security: breach, compromised, vulnerability, credential, CVE, penetration test\n- Regulatory: CBN, compliance violation, audit, investigation, subpoena, NYDFS, PCI\n- Escalation: escalated to CTO, escalation, requires CTO approval, approval required\n\n**High — surface in next briefing:**\n- Operational: SLA breach, deploy window, maintenance window, duty handover, daily report\n- HR/people decisions: PIP, performance improvement, termination, resignation, offer letter, headcount approval, Lattice review, exit interview\n- Finance: budget approval, spending approval, contract approval\n- Project: Phoenix, GoSubscribe, AptPay\n\n**Skip — do not surface:**\n- Marketing newsletters and promotional emails\n- Automated calendar notification emails (handled by calendar source)\n- Benefits enrollment, mandatory training reminders\n- Automated system receipts and purchase confirmations\n- All-hands meeting invites (unless agenda contains decision items)\n- Out-of-office auto-replies\n\n## Notes\n\n- Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.\n- When a thread is surfaced, include the full thread context, not just the latest message.\n- Duty Handover emails follow a numbered pattern (e.g., \"Duty Handover #20260411\") — always surface regardless of sender tier.\n- **2026-04-16 ~15:15 WAT tick:** 11 messages via `newer_than:2h`. Key new signals: (1) **AWS Outposts connectivity lost [ACTION REQUIRED]** — 14:15 UTC (15:15 WAT). SERVICE_LINK_DOWN on Outpost op-005dbfcfaadc1740b, eu-west-2. Support case 177635165100470 + \"unable to reach some instances.\" Layer 2, AWS Tier 2 sender + keyword \"connectivity lost.\" Briefing tier (infrastructure, not direct banking P1). (2) **Daily Report #20260416** — Afeez Kazeem 15:50 WAT. 13/17 PTSAs operational. UBA RC91 ongoing (TDSD-6574). NIBSS PTSA ongoing (TDSD-6578). FCMB RC91 intermittent (TDSD-6572). Union resolved (TDSD-6576). **Account switch portal unreachable (TDSD-6586, NEW)**. Layer 2, keyword \"daily report.\" Briefing tier. (3) **Drata policy acknowledgment** — To: Emeka. TA-IMS Policy Statement. Layer 1. Awareness (compliance, no urgency). (4) **Lattice review nudge** — To: Emeka. Automated. 8 pending. Already tracked in B5. (5) **Blessing Abel-Oguche** — Issuing BIN/VISA Test Keys for card production. CC'd Emeka. Layer 2, filtered. (6) **Abdulgafar Obeitor** — Stanbic DCIR wrong account confirmed resolved. Progression. (7) **Patrick Okonkwo (Revvent)** — vendor pitch. Skip. (8) **PayFac Settlement** — routine. Filtered.
