@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T05:33:21Z"
+updated: "2026-04-16T06:14:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T05:23:00Z"
+last_processed: "2026-04-16T06:09:00Z"
 ---
 
 ## Connection
@@ -73,3 +73,4 @@ last_processed: "2026-04-16T05:23:00Z"
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
 - **2026-04-16 06:23 WAT briefing tick:** 9 messages via `newer_than:8h` query. Key signals: (1) DCIR TEAMAPT Monitoring Service 23:36 WAT — 66.0% failure rate (Wema DCIR route); (2) DCIR TEAMAPT Monitoring Service 23:20 WAT — 20.4% (Wema); (3) Segun Ogunsola (Parallex Bank) 02:29 WAT — server restart completed, awaiting DCIR interchange routing; (4) Rasheed Olanrewaju (UBA) 02:46 WAT — Direct Card servers restart completed; (5) Qazim Adedigba 00:06 WAT — Duty Handover Note 20260415 (16/17 routes, Sterling off); (6) Chris Purkis 22:57 UTC — two Head of Engineering events cancelled Fri Apr 17. All signals routed to briefing-2026-04-16.
+- **2026-04-16 07:09 WAT tick:** 1 message via `newer_than:2h`: Ben Cowen (Lorum Ledger) 05:34 UTC — vendor pitch re virtual accounts/correspondent clearing (Re: USD, AED, GBP, EURO Clearing & Local Accounts). Layer 1 (To-addressed), Awareness tier. Accumulates for next briefing.
