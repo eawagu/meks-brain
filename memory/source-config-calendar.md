@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-16T12:16:15Z"
+updated: "2026-04-16T13:17:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T12:09:00Z"
+last_processed: "2026-04-16T13:09:00Z"
 ---
 
 ## Connection
@@ -77,3 +77,4 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - **2026-04-16 11:15 WAT tick:** Calendar HEALTHY — 17th consecutive tick. One new invite detected via email (not calendar delta): **Round 2 Panel Interview for Head of Engineering — Akshya Kumar, Tue Apr 21 9:30–10:30 WAT.** Organizer: Oluwatobilola Fasanya. Panel: Emeka Awagu, Chukwudum Ekwueme, Chris Purkis. RSVP: needsAction. Briefing tier — accumulates for next briefing. No other event deltas. Retreat Day 3 ongoing.
 - **2026-04-16 12:09 WAT tick:** Calendar HEALTHY — 18th consecutive tick. Zero event deltas since last tick. Schedule unchanged. Retreat Day 3 ongoing. Juliana Switch standup (11:30 WAT) passed — Emeka declined. DD Weekly Analysis and Weekly Check-ins DD both at 13:00 WAT approaching — both needsAction (should decline for Retreat).
 - **2026-04-16 13:09 WAT tick:** Calendar HEALTHY — 19th consecutive tick. Zero new event deltas. DD Weekly Analysis (13:00 WAT) and Weekly Check-ins DD (13:00 WAT) now in progress — both still needsAction. ATPP standup (14:00 WAT) approaching — already declined. Product-Engineering Sync (18:00 WAT) and Retreat Dinner (19:00 BST) later today. Retreat Day 3 ongoing.
+- **2026-04-16 14:09 WAT tick:** Calendar HEALTHY — 20th consecutive tick. Zero new event deltas. ATPP standup (14:00 WAT) now — already declined. Product-Engineering Sync (18:00 WAT) and Retreat Dinner (19:00 BST, Blackfriars Pier, Golden Flame vessel) later today. Retreat Day 3 ongoing.
