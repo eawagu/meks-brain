@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 93+ consecutive ticks missed since 2026-04-11T22:09 UTC (>93 hours blind). Briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~14h remaining."
-updated: "2026-04-15T22:15:54Z"
+updated: "2026-04-16T05:34:32Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T22:09:00Z"
+last_processed: "2026-04-16T05:23:00Z"
 ---
 
 ## Connection
@@ -76,5 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **95+ consecutive ticks blind (>96 hours)** as of 2026-04-15T22:09 UTC. 23:09 WAT overnight tick: no change, still blind. briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~10h remaining. Vulnerability-chain closure signal arrived via email (Onyinye Nweke 19:24 WAT — Access Bank CRITICAL VULNERABILITY confirmed all issues fixed) but cannot be cross-referenced against TDSD credential-remediation family (TDSD-6439 / TDSD-6477 / TDSD-6479). Documentation continuity gap widens through 4th day.
-- **AUTH/TOOL FAILURE STATE prior ticks:** 2026-04-15T20:09 UTC — 94+ ticks blind. Access Bank CRITICAL VULNERABILITY closure signal (Onyinye Nweke 19:24 WAT) unverifiable against TDSD. 2026-04-15T18:09 UTC — 93+ ticks blind. Wema DCIR 40.65% alert — no TDSD ticket verification. 2026-04-15T17:09 UTC — 92+ ticks blind. 2026-04-15T16:09 UTC — 91+ ticks blind. 2026-04-15T15:09 UTC — 90+ ticks blind. Monnify Atlas NIP Outwards Transit duplicate-debit situation — no TDSD ticket verification possible. 2026-04-15T14:09 UTC — 89+ ticks blind. Union Bank RC91 P1 filing — no TDSD ticket verification possible. Documentation gap compounding.
+- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **100+ consecutive ticks blind (~103 hours)** as of 2026-04-16T05:23 UTC. Day 5. Briefing-2026-04-16 B4 — fifth consecutive briefing surface. Access Bank vulnerability closure signal (Onyinye Nweke 19:24 WAT Apr 15) still unverifiable against TDSD credential-remediation family. Parallex server restart completed but DCIR interchange routing status unverifiable via Jira. Documentation continuity gap through 5th day.
