@@ -601,9 +601,9 @@ export const captureReminder: ToolDef = {
   },
 };
 
-// ─── dispatch_raw ─────────────────────────────────────────────
+// ─── Retention disposition (internal) ─────────────────────────
 // Per Ingress Retention design: at end of ingest, every successfully processed
-// file gets a disposition based on its retention_label. This tool centralises
+// file gets a disposition based on its retention_label. This logic centralises
 // the move/delete logic and reads discard_mode from config-ingress-retention
 // so the MCP server (not the heartbeat) is the single point that gates
 // irreversible discard actions.
@@ -630,14 +630,148 @@ async function loadDiscardMode(): Promise<"shadow" | "live"> {
   return m[1].toLowerCase() === "live" ? "live" : "shadow";
 }
 
-export const dispatchRaw: ToolDef = {
-  name: "dispatch_raw",
+// Internal retention dispatch handler — shared by finalize_ingest and dispatch_raw.
+async function dispatchRetention(params: {
+  file_path: string;
+  label: RetentionLabel;
+  raw_content?: string;
+  page_id?: number;
+}): Promise<{
+  file_path: string;
+  requested_label: RetentionLabel;
+  effective_label: RetentionLabel;
+  discard_mode: "shadow" | "live";
+  shadow_applied: boolean;
+  postgres_written: boolean;
+  moved_to: string | null;
+  deleted: boolean;
+  empty_parents_cleaned: number;
+}> {
+  const { file_path, label, raw_content, page_id } = params;
+
+  // Resolve and guard against path traversal — same protection as read_ingress.
+  const absolutePath = path.join(config.ingressPath, file_path);
+  const resolved = path.resolve(absolutePath);
+  if (!resolved.startsWith(path.resolve(config.ingressPath))) {
+    throw new Error("Path traversal detected — file must be within ingress folder");
+  }
+
+  // Determine effective label after applying discard_mode gate.
+  const discardMode = await loadDiscardMode();
+  const effectiveLabel: RetentionLabel =
+    label === "discard" && discardMode === "shadow" ? "fs" : label;
+
+  // Helper to move a file from ingress into raw/ subfolder, preserving relative path.
+  const moveToRaw = async () => {
+    const rawRoot = path.join(config.ingressPath, "raw");
+    const rawDest = path.join(rawRoot, file_path);
+    await fs.mkdir(path.dirname(rawDest), { recursive: true });
+    try {
+      await fs.rename(resolved, rawDest);
+    } catch {
+      // Cross-device rename can fail — fall back to copy + unlink.
+      await fs.copyFile(resolved, rawDest);
+      await fs.unlink(resolved);
+    }
+    return path.relative(config.ingressPath, rawDest);
+  };
+
+  let postgresWritten = false;
+  let movedTo: string | null = null;
+  let deleted = false;
+
+  if (effectiveLabel === "postgres") {
+    if (!page_id) {
+      throw new Error("dispatch_raw: page_id is required when label is 'postgres'");
+    }
+    if (raw_content === undefined) {
+      throw new Error("dispatch_raw: raw_content is required when label is 'postgres'");
+    }
+    // Write raw content to the existing source page row.
+    const updateResult = await query(
+      `UPDATE pages SET raw_content = $1, indexed_at = NOW() WHERE id = $2 AND deleted = FALSE RETURNING id`,
+      [raw_content, page_id]
+    );
+    if (updateResult.rows.length === 0) {
+      throw new Error(`dispatch_raw: page id ${page_id} not found or deleted — raw_content not written`);
+    }
+    postgresWritten = true;
+    movedTo = await moveToRaw();
+  } else if (effectiveLabel === "fs") {
+    movedTo = await moveToRaw();
+  } else if (effectiveLabel === "discard") {
+    // Live discard — irreversible delete from ingress.
+    try {
+      await fs.unlink(resolved);
+      deleted = true;
+    } catch (err: any) {
+      throw new Error(`dispatch_raw: failed to delete ${file_path}: ${err.message}`);
+    }
+  }
+
+  // Clean up empty parent directories walking up from the file's original parent.
+  // Stop at the ingress root (never remove ingressPath itself) or at a non-empty directory.
+  // Rationale: dropped folders contain heterogeneous retention labels — files move
+  // individually, leaving the parent directory behind. Cleanup here keeps the ingress
+  // root visually clean. rmdir fails on non-empty directories (including OS metadata
+  // like .DS_Store / Thumbs.db), which is a feature — if anything remains, leave it.
+  const ingressRoot = path.resolve(config.ingressPath);
+  const rawRoot = path.resolve(path.join(config.ingressPath, "raw"));
+  const reviewRoot = path.resolve(path.join(config.ingressPath, "review"));
+  let parentsCleaned = 0;
+  let parent = path.dirname(resolved);
+  while (
+    parent !== ingressRoot &&
+    parent.startsWith(ingressRoot + path.sep) &&
+    parent !== rawRoot &&
+    parent !== reviewRoot &&
+    !parent.startsWith(rawRoot + path.sep) &&
+    !parent.startsWith(reviewRoot + path.sep)
+  ) {
+    try {
+      await fs.rmdir(parent);
+      parentsCleaned++;
+    } catch {
+      break; // directory not empty or other error — stop climbing
+    }
+    parent = path.dirname(parent);
+  }
+
+  return {
+    file_path,
+    requested_label: label,
+    effective_label: effectiveLabel,
+    discard_mode: discardMode,
+    shadow_applied: label === "discard" && effectiveLabel === "fs",
+    postgres_written: postgresWritten,
+    moved_to: movedTo,
+    deleted,
+    empty_parents_cleaned: parentsCleaned,
+  };
+}
+
+// ─── finalize_ingest ──────────────────────────────────────────
+// Atomic merge of mark_processed + dispatch_raw. Single tool call per file
+// at end of ingest — marks the file as processed in Postgres AND disposes
+// the raw file per its retention label. Eliminates the gap where mark_processed
+// succeeds but dispatch_raw is skipped under execution pressure.
+
+export const finalizeIngest: ToolDef = {
+  name: "finalize_ingest",
   description:
-    "Dispose of a successfully ingested raw file per its retention_label. Called at end of ingest after the source page has been created. Three live dispositions: 'postgres' writes raw markdown to pages.raw_content AND moves the original from ingress to raw/; 'fs' moves the original from ingress to raw/ only; 'discard' deletes the original from ingress. The 'discard' disposition is gated by config-ingress-retention.discard_mode — when 'shadow', it behaves as 'fs' (move to raw/) so the irreversible action can be observed before going live. Returns the effective disposition actually performed.",
+    "Atomically mark a file as processed AND dispose of the raw file per its retention label. Single call replaces the former mark_processed + dispatch_raw two-step. Called once per successfully ingested file at end of ingest. Three retention dispositions: 'postgres' writes raw markdown to pages.raw_content AND moves original to raw/; 'fs' moves original to raw/ only; 'discard' deletes original (gated by config-ingress-retention.discard_mode — 'shadow' mode redirects to 'fs').",
   schema: z.object({
     file_path: z
       .string()
       .describe("Relative path of the source file in the ingress folder (as returned by scan_ingress)"),
+    file_modified: z
+      .string()
+      .describe("ISO-8601 filesystem modification timestamp of the source file"),
+    page_id: z
+      .number()
+      .int()
+      .optional()
+      .describe("ID of the source page created from this file. Required for normal ingest; omit for MISS: routing (no source page created)."),
     label: z
       .enum(VALID_RETENTION_LABELS)
       .describe("Retention label assigned by ingest-time judgment: postgres | fs | discard"),
@@ -645,120 +779,46 @@ export const dispatchRaw: ToolDef = {
       .string()
       .optional()
       .describe(
-        "Markdown-converted raw content. Required when label is 'postgres' (written to pages.raw_content). Ignored for 'fs' and 'discard'."
-      ),
-    page_id: z
-      .number()
-      .int()
-      .optional()
-      .describe(
-        "ID of the source page created from this file. Required when label is 'postgres' (target of the raw_content write). Ignored for 'fs' and 'discard'."
+        "Markdown-converted raw content. Required when label is 'postgres' (written to pages.raw_content). Omit for 'fs' and 'discard'."
       ),
   }),
   accessLevel: "write",
   handler: async (params) => {
-    const { file_path, label, raw_content, page_id } = params;
+    const { file_path, file_modified, page_id, label, raw_content } = params;
 
-    // Resolve and guard against path traversal — same protection as read_ingress.
-    const absolutePath = path.join(config.ingressPath, file_path);
-    const resolved = path.resolve(absolutePath);
-    if (!resolved.startsWith(path.resolve(config.ingressPath))) {
-      throw new Error("Path traversal detected — file must be within ingress folder");
-    }
+    // Step 1: Mark processed (same logic as former mark_processed tool)
+    await query(
+      `INSERT INTO ingested_sources (file_path, file_modified, ingested_at, page_id)
+       VALUES ($1, $2, NOW(), $3)
+       ON CONFLICT (file_path) DO UPDATE SET
+         file_modified = EXCLUDED.file_modified,
+         ingested_at = NOW(),
+         page_id = COALESCE(EXCLUDED.page_id, ingested_sources.page_id)`,
+      [file_path, file_modified, page_id || null]
+    );
 
-    // Determine effective label after applying discard_mode gate.
-    const discardMode = await loadDiscardMode();
-    const effectiveLabel: RetentionLabel =
-      label === "discard" && discardMode === "shadow" ? "fs" : label;
+    await query(
+      `UPDATE scan_state SET value = NOW() WHERE key = 'last_ingress_scan'`
+    );
 
-    // Helper to move a file from ingress into raw/ subfolder, preserving relative path.
-    const moveToRaw = async () => {
-      const rawRoot = path.join(config.ingressPath, "raw");
-      const rawDest = path.join(rawRoot, file_path);
-      await fs.mkdir(path.dirname(rawDest), { recursive: true });
-      try {
-        await fs.rename(resolved, rawDest);
-      } catch {
-        // Cross-device rename can fail — fall back to copy + unlink.
-        await fs.copyFile(resolved, rawDest);
-        await fs.unlink(resolved);
-      }
-      return path.relative(config.ingressPath, rawDest);
-    };
-
-    let postgresWritten = false;
-    let movedTo: string | null = null;
-    let deleted = false;
-
-    if (effectiveLabel === "postgres") {
-      if (!page_id) {
-        throw new Error("dispatch_raw: page_id is required when label is 'postgres'");
-      }
-      if (raw_content === undefined) {
-        throw new Error("dispatch_raw: raw_content is required when label is 'postgres'");
-      }
-      // Write raw content to the existing source page row.
-      const updateResult = await query(
-        `UPDATE pages SET raw_content = $1, indexed_at = NOW() WHERE id = $2 AND deleted = FALSE RETURNING id`,
-        [raw_content, page_id]
-      );
-      if (updateResult.rows.length === 0) {
-        throw new Error(`dispatch_raw: page id ${page_id} not found or deleted — raw_content not written`);
-      }
-      postgresWritten = true;
-      movedTo = await moveToRaw();
-    } else if (effectiveLabel === "fs") {
-      movedTo = await moveToRaw();
-    } else if (effectiveLabel === "discard") {
-      // Live discard — irreversible delete from ingress.
-      try {
-        await fs.unlink(resolved);
-        deleted = true;
-      } catch (err: any) {
-        throw new Error(`dispatch_raw: failed to delete ${file_path}: ${err.message}`);
-      }
-    }
-
-    // Clean up empty parent directories walking up from the file's original parent.
-    // Stop at the ingress root (never remove ingressPath itself) or at a non-empty directory.
-    // Rationale: dropped folders contain heterogeneous retention labels — files move
-    // individually, leaving the parent directory behind. Cleanup here keeps the ingress
-    // root visually clean. rmdir fails on non-empty directories (including OS metadata
-    // like .DS_Store / Thumbs.db), which is a feature — if anything remains, leave it.
-    const ingressRoot = path.resolve(config.ingressPath);
-    const rawRoot = path.resolve(path.join(config.ingressPath, "raw"));
-    const reviewRoot = path.resolve(path.join(config.ingressPath, "review"));
-    let parentsCleaned = 0;
-    let parent = path.dirname(resolved);
-    while (
-      parent !== ingressRoot &&
-      parent.startsWith(ingressRoot + path.sep) &&
-      parent !== rawRoot &&
-      parent !== reviewRoot &&
-      !parent.startsWith(rawRoot + path.sep) &&
-      !parent.startsWith(reviewRoot + path.sep)
-    ) {
-      try {
-        await fs.rmdir(parent);
-        parentsCleaned++;
-      } catch {
-        break; // directory not empty or other error — stop climbing
-      }
-      parent = path.dirname(parent);
-    }
+    // Step 2: Dispatch retention (same logic as former dispatch_raw tool)
+    const retention = await dispatchRetention({
+      file_path,
+      label,
+      raw_content,
+      page_id,
+    });
 
     return {
-      file_path,
-      requested_label: label,
-      effective_label: effectiveLabel,
-      discard_mode: discardMode,
-      shadow_applied: label === "discard" && effectiveLabel === "fs",
-      postgres_written: postgresWritten,
-      moved_to: movedTo,
-      deleted,
-      empty_parents_cleaned: parentsCleaned,
+      ...retention,
+      page_id,
+      marked_processed: true,
+      message: `Finalized "${file_path}" — marked processed + ${retention.effective_label} disposition`,
     };
   },
 };
 
-export const writeTools = [createPage, updatePage, deletePage, markProcessed, captureNote, captureReminder, dispatchRaw];
+// dispatch_raw removed as standalone tool — finalize_ingest handles both
+// normal ingest (with page_id) and MISS: routing (without page_id, label: "discard").
+
+export const writeTools = [createPage, updatePage, deletePage, finalizeIngest, captureNote, captureReminder];
