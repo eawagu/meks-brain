@@ -1,16 +1,24 @@
 ---
-title: GoSubscribe
 type:
   - "concept"
+title: GoSubscribe
 created: 2026-04-11
-updated: 2026-04-11
+summary: TeamApt Direct Debit product for recurring subscriptions via POS — one of 6 strategic growth levers in CEO diversification plan; agent-led distribution via 25K+ agents for DSTV/GOTV, utilities, IPOs, micro-pensions, micro-health insurance; staging validation issues (RC91 routing reverting, POS amount hardcoding) as of Apr 10; CEO Dennis aggressively pushing execution.
+updated: "2026-04-16T05:45:57Z"
 cssclasses:
   - "concept"
-summary: A TeamApt Direct Debit mandate product enabling recurring bank debit subscriptions via POS terminals; currently in staging validation with multiple blocking defects and a CEO-visible launch commitment.
 ---
 
 ## Overview
 GoSubscribe is a [[TeamApt]] product that enables recurring direct debit subscriptions via POS terminals, using the Direct Debit mandate infrastructure. Currently only Zenith Bank and WEMA are enabled on ATS for GoSubscribe; [[Dennis Ajalie]] (CEO) asked for expansion to other banks on April 1. The product has undergone war-room-level debugging in early April 2026 ahead of a CEO demo with Dennis on April 7.
+
+## Strategic Position (Apr 15, 2026 — CEO Strategy Deck)
+
+GoSubscribe is one of 6 growth levers in [[Dennis Ajalie]]'s diversification strategy to reduce TeamApt's 86% Moniepoint revenue dependency. Positioned as: DD + niche payments on POS, with agent-led distribution via 25K+ agents.
+
+**Target verticals:** DSTV/GOTV subscriptions, utilities, IPOs, micro-pensions, micro-health insurance for the informal sector.
+
+Dennis explicitly named GoSubscribe execution (alongside international card payments) as a top priority: "Aggressively push GoSubscribe working with VAS team."
 
 ## Status Timeline
 | Date | Event |
@@ -44,9 +52,11 @@ GoSubscribe is a [[TeamApt]] product that enables recurring direct debit subscri
 - [[Direct Debit Reconciliation]] — operational backend
 - [[RC91 Multi-Bank Failure Pattern]] — TMS/HA Proxy failures producing RC91/RC68 are related
 - [[Paystack]] — commercial integration being established via #teamapt-x-paystack-transfer-support
+- [[Value-Added Services Retention Effect]] — VAS-first strategy aligns with GoSubscribe's agent-led VAS distribution
 
 ## Sources
 - [[notes-2026-04-02]] — CEO GoSubscribe bank expansion ask
 - [[notes-2026-04-07]] — GoSubscribe CEO demo at risk; two root causes confirmed; RC68 persists
 - [[notes-2026-04-08]] — mandate activation confirmed; wrong-PIN P0; RC91 routing config reverting; POS amount hardcoding
 - [[notes-2026-04-09]] — RC91 routing config confirmed structural; POS amount gap; NIBSS RC96 threat
+- [[source — TeamApt Strategy Retreat 2026 CEO Deck (Dennis Ajalie, Apr 15)]]
