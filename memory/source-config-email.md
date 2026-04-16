@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T19:14:49Z"
+updated: "2026-04-16T21:15:59Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T19:09:00Z"
+last_processed: "2026-04-16T21:14:00Z"
 ---
 
 ## Connection
@@ -72,4 +72,4 @@ last_processed: "2026-04-16T19:09:00Z"
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
-- **2026-04-16 ~20:09 WAT tick:** 11 messages via `newer_than:2h`. New signals since last tick: (1) **Ecobank RC91** — Olamide filed 18:54 WAT, follow-up 19:23 WAT, no Ecobank response. Unresolved >1h. (2) **Ecobank monitoring portal down (502)** — Olamide reported 19:31 WAT. Infrastructure instability. (3) **Wema Bank RC91 cycle 6** — Filed 19:06 WAT, Wema confirmed processing 19:33 WAT, Olamide confirmed resolved 19:46 WAT. ~40 min cycle. (4) **DCIR monitoring alerts** — 25.26% (19:06 WAT) → 26.68% (20:06 WAT). Rising, above 20% threshold. Down from 66% overnight peak but persistent. (5) DigiCert marketing email — skipped. All non-Immediate. State updates applied to brain pages.
+- **2026-04-16 ~22:14 WAT tick:** 7 messages via `newer_than:3h`. Two new signals since 20:09 WAT tick: (1) **Ecobank RC91 persistence — Immediate** — Olamide's third follow-up at 21:04 WAT ("failure still persists, treat as urgent"). Filed 18:54 WAT; zero Ecobank response across the full thread; now 2h10min unresolved. Crosses config-salience Immediate #2 (P1 duration >2h) + absence-of-signal (active-P1 no counterparty update >1h). Slack DM draft dispatched to CTO. Situation page `Ecobank — RC91 on NUS Nodes` updated. (2) **Ecobank Core Banking maintenance inquiry** at 20:32 WAT — Olamide asking Ecobank AllENG-ITServicedesk to confirm maintenance completion. Unacknowledged. Awareness. Other 5 messages in-window were already processed at the 20:09 WAT tick (Wema RC91 resolution 19:46 WAT, Ecobank portal 502 at 19:31 WAT, DCIR alert 26.68% at 20:06 WAT, Ecobank RC91 19:23 WAT reminder, Wema Olusegun 18:33 UTC).
