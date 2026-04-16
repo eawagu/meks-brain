@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-16T09:26:55Z"
+updated: "2026-04-16T10:19:20Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T09:20:00Z"
+last_processed: "2026-04-16T10:15:00Z"
 ---
 
 ## Connection
@@ -69,8 +69,9 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - All times in Africa/Lagos (WAT, UTC+1). No DST changes.
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
-- Frank Atashili's calendar (reader access) is the only other calendar currently visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
+- Frank Atashili's calendar (reader access) is the only other calendar visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
 - **2026-04-16 06:23 WAT briefing tick:** Calendar HEALTHY — 13th consecutive tick restored. Two cancellations from Chris Purkis (moniepoint.com) 22:57 UTC Apr 15: "Blocker: Head of Engineering (VP+) Slots" 11:00–12:00 WAT and "Deliberation: Head of Engineering batch interviews" 12:00–12:40 WAT on Fri Apr 17 — frees 1h40min. Today's schedule: Strategy Retreat Day 3 all-day (08:00–18:00 BST), Ravi/Emeka 10:00, Felix/Emeka 11:00 (Felix declined), Ketan sync 11:30 (declined), Juliana Switch 11:30 (declined), DD Weekly Analysis 13:00 (needsAction), Weekly Check-ins DD 13:00 (needsAction), ATPP standup 14:00 (declined), Product-Engineering Sync 18:00, Retreat Dinner 19:00–22:20 BST (Capital Pleasure Boats). Lattice Review all-day (needsAction, 8 pending).
 - **2026-04-16 08:09 WAT tick:** Calendar HEALTHY — 14th consecutive tick. Zero event deltas since briefing tick. Today's schedule unchanged.
 - **2026-04-16 09:09 WAT tick:** Calendar HEALTHY — 15th consecutive tick. Zero event deltas. D2B standup (08:30–09:30 WAT) occurred — Emeka declined (Strategy Retreat). Strategy Retreat Day 3 in progress.
 - **2026-04-16 10:20 WAT tick:** Calendar HEALTHY — 16th consecutive tick. Zero event deltas since last tick. Schedule unchanged. Strategy Retreat Day 3 ongoing. Ravi/Emeka 10:00 WAT window passed (Emeka declined for retreat). Lattice Review event updated at 08:50 UTC (no substantive change).
+- **2026-04-16 11:15 WAT tick:** Calendar HEALTHY — 17th consecutive tick. One new invite detected via email (not calendar delta): **Round 2 Panel Interview for Head of Engineering — Akshya Kumar, Tue Apr 21 9:30–10:30 WAT.** Organizer: Oluwatobilola Fasanya. Panel: Emeka Awagu, Chukwudum Ekwueme, Chris Purkis. RSVP: needsAction. Briefing tier — accumulates for next briefing. No other event deltas. Retreat Day 3 ongoing.
