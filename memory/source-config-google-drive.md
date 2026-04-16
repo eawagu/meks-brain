@@ -4,7 +4,7 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-16T12:17:20Z"
+updated: "2026-04-16T13:18:04Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-16T08:03:43Z"
@@ -64,3 +64,4 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - **2026-04-16 11:15 WAT tick:** Zero new Gemini docs. **Twenty-sixth quiet Drive tick.** last_processed unchanged at 2026-04-16T08:03:43Z. Retreat Day 3 in-person.
 - **2026-04-16 12:09 WAT tick:** Zero new Gemini docs. **Twenty-seventh quiet Drive tick.** last_processed unchanged at 2026-04-16T08:03:43Z. Retreat Day 3 in-person.
 - **2026-04-16 13:09 WAT tick:** Zero new Gemini docs. **Twenty-eighth quiet Drive tick.** last_processed unchanged at 2026-04-16T08:03:43Z. Retreat Day 3 in-person.
+- **2026-04-16 14:09 WAT tick:** Zero new Gemini docs. **Twenty-ninth quiet Drive tick.** last_processed unchanged at 2026-04-16T08:03:43Z. Retreat Day 3 in-person.
