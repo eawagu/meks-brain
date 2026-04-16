@@ -5,8 +5,8 @@ type:
 title: DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked
 status: resolving
 created: "2026-04-11T16:42:32Z"
-summary: Five CRITICAL vulnerabilities. TDSD-6479 Harness migration CTO-approved Apr 12. DCIR/Wema failure rate 66% overnight — remediation failed. UBA DCIR 2FA production deployment approved for weekend Apr 18–19. Zenith Bank CISO acknowledged vulnerability closure. Access Bank vulnerabilities confirmed all closed.
-updated: "2026-04-16T09:24:22Z"
+summary: "Five CRITICAL vulnerabilities. TDSD-6479 Harness migration CTO-approved Apr 12. DCIR failure rate persistent: 25.26%→26.68% Apr 16 evening (down from 66% peak but above 20% threshold). UBA DCIR 2FA production deployment approved for weekend Apr 18–19. Zenith CISO acknowledged. Access Bank all closed."
+updated: "2026-04-16T19:14:09Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -20,7 +20,7 @@ Five CRITICAL vulnerabilities across [[ACS (Access Control Server)]], DCIR, [[Di
 
 **UBA — DCIR 2FA production deployment APPROVED.** Christian Uchegbu ([[UBA]]) at 09:58 WAT Apr 16: "We have the approval to deploy on production. Kindly confirm your availability to implement this coming weekend." Addressed to [[Oluwatofunmi Obafemi]] and [[Ifeoluwa Oguntona]]. This is the pentest 2FA on DCIR portal — a key security remediation item. Weekend deployment window Apr 18–19.
 
-**DCIR/Wema — remediation failed, rate escalating.** Overnight Apr 15–16: DCIR failure rate 20.4% (23:20 WAT) → **66.0% (23:36 WAT)**. This follows the 40.65% alert at 19:06 WAT. Three data points post-remediation (Wema DB script 11:43 WAT Apr 15) confirm the DB script did NOT fix the underlying DCIR failure-rate generator. The rate is volatile and trending worse — 2 in 3 transactions failing at the 66% peak. See [[Wema Bank — RC91 After Settlement Resolution]] for full trajectory.
+**DCIR failure rate — persistent above threshold.** After the 66% overnight peak (23:36 WAT Apr 15), the DCIR failure rate has stabilized lower but remains above the 20% threshold. Evening Apr 16: 25.26% (19:06 WAT) → 26.68% (20:06 WAT). The underlying failure generator is still active — rate is volatile but not recovering to baseline. See [[Wema Bank — RC91 After Settlement Resolution]] for full trajectory.
 
 **Parallex Bank server restart completed.** Segun Ogunsola (Parallex Bank, Channels Switching) confirmed 02:29 WAT Apr 16 that server restart is done and service restored successfully. Awaiting transaction routing back to DCIR interchange — [[Daniel Armstrong]] to confirm Moniepoint-side routing.
 
@@ -29,7 +29,7 @@ Five CRITICAL vulnerabilities across [[ACS (Access Control Server)]], DCIR, [[Di
 **Apr 14 overnight — DCIR COMPLETE FAILURE:** Transaction failure rate escalated through the night: 80% (00:48 WAT) → declined to 33% (01:06) → re-elevated to 50–57% (01:22–01:54) → **100% (03:50 WAT) → 100% (04:06 WAT)**. No human escalation filed at any point.
 
 ## Sources
-email DCIR TEAMAPT Monitoring Service Alerts 19:06 WAT (40.65%), 23:20 WAT (20.4%), 23:36 WAT (66.0%) Apr 15; email Segun Ogunsola (Parallex) 02:29 WAT Apr 16 (server restart completed); email Rasheed Olanrewaju (UBA) 02:46 WAT Apr 16 (Direct Card restart completed); email Onyinye Nweke 19:24 WAT Apr 15 (Access Bank vulnerabilities all closed); email Festus Amede (Zenith CISO) 10:06 WAT Apr 16 (vulnerability closure acknowledged); email Christian Uchegbu (UBA) 09:58 WAT Apr 16 (DCIR 2FA production deployment approved); email Segun Ogunsola → [[Babajide Ojoboorun]] 11:09 WAT Apr 15 (DCIR DB INDEX JOB FAILURE); email [[Babajide Ojoboorun]] → Segun Ogunsola 11:07 WAT Apr 15 (Re: Authentication Error Message Exposure — remediation in flight); email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; jira TDSD-6439, TDSD-6477, TDSD-6479, TDSD-6497, TDSD-6499; email DCIR monitoring alerts 00:48–04:06 WAT Apr 14; briefing-2026-04-16 B1
+email DCIR TEAMAPT Monitoring Service Alerts 19:06 WAT (40.65%), 23:20 WAT (20.4%), 23:36 WAT (66.0%) Apr 15; email Segun Ogunsola (Parallex) 02:29 WAT Apr 16 (server restart completed); email Rasheed Olanrewaju (UBA) 02:46 WAT Apr 16 (Direct Card restart completed); email Onyinye Nweke 19:24 WAT Apr 15 (Access Bank vulnerabilities all closed); email Festus Amede (Zenith CISO) 10:06 WAT Apr 16 (vulnerability closure acknowledged); email Christian Uchegbu (UBA) 09:58 WAT Apr 16 (DCIR 2FA production deployment approved); email Segun Ogunsola → [[Babajide Ojoboorun]] 11:09 WAT Apr 15 (DCIR DB INDEX JOB FAILURE); email [[Babajide Ojoboorun]] → Segun Ogunsola 11:07 WAT Apr 15 (Re: Authentication Error Message Exposure — remediation in flight); email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; jira TDSD-6439, TDSD-6477, TDSD-6479, TDSD-6497, TDSD-6499; email DCIR monitoring alerts 00:48–04:06 WAT Apr 14; email DCIR TEAMAPT Monitoring Service Alert 19:06 WAT Apr 16 (25.26%); email DCIR TEAMAPT Monitoring Service Alert 20:06 WAT Apr 16 (26.68%); briefing-2026-04-16 B1
 
 ## Deltas
 - 2026-04-09 17:02 WAT — [[Access Bank]] ACS P1: mandate creation failed 09:20–13:40 WAT.
@@ -44,3 +44,4 @@ email DCIR TEAMAPT Monitoring Service Alerts 19:06 WAT (40.65%), 23:20 WAT (20.4
 - 2026-04-15 19:09 WAT — DCIR monitoring resumed: 40.65% failure warning.
 - 2026-04-16 06:23 WAT — **DCIR/Wema overnight escalation: 20.4% → 66.0%.** Remediation demonstrably failed. Parallex server restart completed, awaiting DCIR interchange routing. UBA Direct Card restart completed. Access Bank vulnerabilities confirmed all closed.
 - 2026-04-16 10:20 WAT — **UBA DCIR 2FA deployment approved for production** (weekend window Apr 18–19). Zenith CISO acknowledged vulnerability closure. Positive remediation momentum across two banks.
+- 2026-04-16 19:09 WAT — **DCIR failure rate persistent above threshold.** 25.26% (19:06 WAT) → 26.68% (20:06 WAT). Down from 66% peak but not recovering to baseline. Underlying failure generator still active.
