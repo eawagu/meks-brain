@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending), recurring settlement batch failures (TDSD-6276). RC91 cycle 3 Apr 16 11:04 WAT (ongoing, Union Bank reconfirm requested). Three RC91 cycles in 5 days (Apr 12, 15, 16). TDSD-6576 new ticket (Jira blind). MPGS settlement bank (ICA 34150)."
-updated: "2026-04-16T10:15:14Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending). RC91 cycle 4 filed 17:23 WAT Apr 16, Victor Iyama responded 'check now' 17:52 WAT — likely resolved by NIBSS PTSA restoration. Four RC91 cycles in 5 days (Apr 12, 15, 16×2). MPGS settlement bank (ICA 34150)."
+updated: "2026-04-16T17:14:46Z"
 cssclasses:
   - "entity"
 ---
@@ -19,19 +19,21 @@ cssclasses:
 
 ## ATS RC91
 
-### Cycle 3 — Apr 16, 2026 (active)
+### Cycle 4 — Apr 16, 2026 (17:23 WAT, likely resolved)
 
-**2026-04-16 11:04 WAT:** [[Afeez Kazeem]] (Application Monitoring Engineer) filed RC91 failure. Subject: "Union Bank | ATS | RC 91 Failure | 20260416". Message: "Union Bank transactions are failing with RC 91 and high processing time. Kindly assist to investigate." Sent to Union Bank FEP Administration (ITeChannels), Babajide Aloba, Victor Iyama, Toluwalogo Oladipo, Omoye Okobiemen. CC: aptpaytechnicalsupport. Victor Iyama (Union Bank Card Infrastructure) responded at 10:09 UTC requesting reconfirmation from Afeez. TDSD-6576 new Jira ticket created (visible via email only — Jira blind Day 5). P1 also posted in #teamapt-tech-operations at 11:07 BST. Part of 4-bank simultaneous RC91 pattern Apr 16 (FCMB, Stanbic, [[UBA]], Union Bank).
+**2026-04-16 17:23 WAT:** [[Olamide Ajibulu]] filed RC91 failure. Subject: "Union Bank| RC91 | 20260416". Message: "Union Bank transactions are failing with RC 91 and high processing time. Kindly assist to investigate." Sent to Union Bank FEP Administration (ITeChannels). CC: aptpaytechnicalsupport. [[Victor Iyama]] (Union Bank Card Infrastructure) responded at 17:52 WAT: "Please check now." Timing aligns with [[NIBSS PTSA — Route Failure Apr 16]] resolution (17:50 WAT) — likely resolved by NIBSS PTSA restoration rather than independent bank fix.
+
+### Cycle 3 — Apr 16, 2026 (11:04 WAT, resolved 12:00 WAT)
+
+**2026-04-16 11:04 WAT:** [[Afeez Kazeem]] (Application Monitoring Engineer) filed RC91 failure. Subject: "Union Bank | ATS | RC 91 Failure | 20260416". Sent to Union Bank FEP Administration (ITeChannels), Babajide Aloba, Victor Iyama, Toluwalogo Oladipo, Omoye Okobiemen. CC: aptpaytechnicalsupport. Victor Iyama responded at 10:09 UTC requesting reconfirmation from Afeez. TDSD-6576 new Jira ticket created (visible via email only — Jira blind Day 5). P1 also posted in #teamapt-tech-operations at 11:07 BST. Part of 4-bank simultaneous RC91 pattern Apr 16 (FCMB, Stanbic, [[UBA]], Union Bank).
 
 ### Cycle 2 — Apr 15, 2026 (active)
 
-**2026-04-15 15:07 WAT:** [[Olamide Ajibulu]] (Application Monitoring Engineer) filed new RC91 failure. Subject: "Union Bank | RC91 | 20260415". Message: "Union Bank transactions are failing with RC 91 and high processing time. Kindly assist to investigate." Recipient: `fepsupport@fidelitybank.ng` — **routing oddity** (addressed to Fidelity's FEP support, not Union Bank's FEP Administration). Template error likely; CC `aptpaytechnicalsupport@teamapt.com` is standard. Jira blind (89+ ticks) — no TDSD ticket verification possible. Part of the [[RC91 Multi-Bank Failure Pattern]].
+**2026-04-15 15:07 WAT:** [[Olamide Ajibulu]] filed RC91 failure. Subject: "Union Bank | RC91 | 20260415". **Routing oddity** — addressed to `fepsupport@fidelitybank.ng` (Fidelity's FEP support, not Union Bank's FEP Administration). Template error likely. Jira blind — no TDSD ticket verification possible. Part of the [[RC91 Multi-Bank Failure Pattern]].
 
 ### Cycle 1 — Apr 12, 2026 (resolved ~16min)
 
-**TDSD-6519** (Apr 12, 2026): [[Qazim Adedigba]] filed RC91 failure at 13:58 WAT. Email to Union Bank FEP Administration (ITeChannels), Babajide Aloba, Toluwalogo Oladipo, Omoye Okobiemen. CC: aptpaytechnicalsupport. Victor Iyama (Union Bank Card Infrastructure) responded at 14:02 WAT requesting status reconfirmation. [[Qazim Adedigba]] confirmed resolution at 14:14 WAT: "Transactions are processing fine now." Duration: ~16 min.
-
-Part of the broader multi-bank RC91 pattern on Apr 12 ([[Stanbic Bank]], [[Access Bank]], [[Wema Bank]], Union Bank — four banks in one day). NIBSS attribution of RC91 to Moniepoint timeout (08:56 WAT Apr 12, Moses Ajani) applies to all NIBSS-routed banks including Union Bank.
+**TDSD-6519** (Apr 12, 2026): [[Qazim Adedigba]] filed RC91 failure at 13:58 WAT. Victor Iyama requested reconfirmation at 14:02 WAT. Qazim confirmed resolution at 14:14 WAT. Duration: ~16 min. Part of broader multi-bank pattern on Apr 12.
 
 ## Settlement
 
@@ -51,3 +53,4 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 - [[NIBSS]]
 - [[Monnify]]
 - [[Direct to Bank Daily Stand Up 2026-04-16]]
+- [[NIBSS PTSA — Route Failure Apr 16]]
