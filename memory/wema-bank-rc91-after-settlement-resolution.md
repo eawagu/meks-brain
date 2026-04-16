@@ -5,8 +5,8 @@ type:
 title: Wema Bank — RC91 After Settlement Resolution
 status: developing
 created: "2026-04-11T16:44:43Z"
-summary: "Settlement track completed Apr 8. Five RC91 cycles Apr 8–12. Apr 15 11:43 WAT: Wema DB remediation script executed. Apr 15 19:06 WAT: DCIR 40.65% failure warning (2x threshold) — first breach since Apr 14 04:06 WAT 100% episode; ~7h23min after remediation. Remediation did not fix underlying DCIR failure generator."
-updated: "2026-04-15T18:13:17Z"
+summary: "Settlement track completed Apr 8. Five RC91 cycles Apr 8–12. Apr 15 remediation script executed but DCIR failure rate escalated overnight: 40.65% → 20.4% → 66.0% (23:36 WAT Apr 15). Remediation demonstrably failed — DCIR failure-rate generator still active and worsening."
+updated: "2026-04-16T05:30:52Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -20,21 +20,25 @@ Settlement track ([[TDSD-6446]]) completed Apr 8 by [[Emeka Joseph]]. Five RC91 
 4. **Apr 12 midnight:** Filed 00:30 WAT by [[Olamide Ajibulu]] (email to Wema Switching and Payments, 00:40 WAT). Slack P1 posted at 00:43 WAT. Resolution status unknown — no confirmation signal received before cycle 5 began.
 5. **Apr 12 03:41 WAT:** Filed by [[Olamide Ajibulu]] (email to [[Wema Bank]] Switching and Payments Services at 03:41 WAT). Transactions failing with RC91 and high processing time.
 
-**Apr 15 remediation:** [[Emeka Joseph]] had a call with [[Amonetsone Gbubemi]] (Wema Switching and Payment Officer, Enterprise Technology Management) and followed up via email at 11:30 WAT Apr 15 asking Wema DB team to execute the outlined script so the completed settlement transactions could be updated to successful status. Amonetsone responded 11:43 WAT Apr 15: "This has been treated." — Wema-side remediation script EXECUTED. This closes the settlement-update loop that followed the five RC91 cycles.
+**Apr 15 remediation:** [[Emeka Joseph]] had a call with [[Amonetsone Gbubemi]] (Wema Switching and Payment Officer, Enterprise Technology Management) and followed up via email at 11:30 WAT Apr 15 asking Wema DB team to execute the outlined script so the completed settlement transactions could be updated to successful status. Amonetsone responded 11:43 WAT Apr 15: "This has been treated." — Wema-side remediation script EXECUTED.
 
-**Apr 15 19:06 WAT — REMEDIATION POST-CHECK SIGNAL (NEW):** DCIR Monitoring Service alert fired — Transaction High Failure Warning at **40.65%** (threshold 20%). Reply-To `wemaalert@wemabank.com` identifies the source route as Wema DCIR. This is the first Wema DCIR threshold breach since the Apr 14 overnight 100% episode (28+ hours of silence prior to this alert), and arrives **~7h23min after** the Wema DB remediation script was executed. Implication: remediation addressed the stuck-state settlement-update loop but did NOT fix the underlying RC91 / DCIR failure-rate generator. Tactical signal to watch — not an Immediate alert (single breach, not escalating, no P1 filed in Slack/email) but pattern-significant. Briefing tier for next briefing.
+**Apr 15–16 DCIR failure rate trajectory (post-remediation):** Three monitoring alerts confirming remediation DID NOT FIX the underlying DCIR failure-rate generator:
+- 19:06 WAT Apr 15: **40.65%** (2× threshold) — first breach since Apr 14 04:06 WAT 100% episode
+- 23:20 WAT Apr 15: **20.4%** (just above threshold) — brief dip
+- 23:36 WAT Apr 15: **66.0%** (3.3× threshold) — sharp overnight escalation
 
-Pattern: Four cycles in ~27 hours (Apr 11–12). Cycle 5 began less than 3 hours after cycle 4 was filed. [[Wema Bank]] AIR reversal timeouts (SRE L2 escalation from Duty Handover Apr 7) still unconfirmed resolved.
+The DB remediation script addressed stuck-state settlement transactions but is a different layer from the DCIR failure root cause. The failure rate is volatile and trending worse, not improving. This is now a confirmed remediation failure — the working hypothesis (stuck settlements causing DCIR failures) is falsified.
 
-No Jira tickets filed for any of the five RC91 cycles. This is a documentation gap — recurring P1s with zero Jira trail. Jira connector blindness (source-config-jira 92+ ticks) means any post-hoc filings are unverifiable.
+Pattern: Four cycles in ~27 hours (Apr 11–12). No Jira tickets filed for any of the five RC91 cycles. Jira connector blindness (source-config-jira 100+ ticks) means any post-hoc filings are unverifiable.
 
 ## Sources
-email Wema RC91 thread 19:48–20:01 WAT Apr 8; jira TDSD-6446 Completed; slack #teamapt-tech-operations; email Wema RC91 19:21–19:32 WAT Apr 11; email Wema RC91 00:40 WAT Apr 12; slack #teamapt-tech-operations 00:43 WAT Apr 12; email Wema RC91 03:41 WAT Apr 12; email STATUS UPDATE thread Emeka Joseph ↔ Amonetsone Gbubemi 11:30–11:43 WAT Apr 15; email DCIR TEAMAPT Monitoring Service Alert 19:06 WAT Apr 15 (Reply-To wemaalert@wemabank.com) — 40.65% failure rate
+email Wema RC91 thread 19:48–20:01 WAT Apr 8; jira TDSD-6446 Completed; slack #teamapt-tech-operations; email Wema RC91 19:21–19:32 WAT Apr 11; email Wema RC91 00:40 WAT Apr 12; slack #teamapt-tech-operations 00:43 WAT Apr 12; email Wema RC91 03:41 WAT Apr 12; email STATUS UPDATE thread Emeka Joseph ↔ Amonetsone Gbubemi 11:30–11:43 WAT Apr 15; email DCIR TEAMAPT Monitoring Service Alert 19:06 WAT Apr 15 (40.65%); email DCIR TEAMAPT Monitoring Service Alert 23:20 WAT Apr 15 (20.4%); email DCIR TEAMAPT Monitoring Service Alert 23:36 WAT Apr 15 (66.0%)
 
 ## Deltas
-- 2026-04-11 01:09 WAT — New RC91 cycle overnight: 00:30–01:00 WAT (30 min, bank-resolved). [[Olamide Ajibulu]] posted resolution at 00:39 WAT. No Jira ticket filed. Second Wema RC91 cycle.
-- 2026-04-11 19:32 WAT — Third RC91 cycle: [[Innocent Nwaokorie]] reported RC91 and high processing time at 19:21 WAT. Korede Oladunjoye ([[Wema Bank]]) confirmed transactions processing successfully at 19:32 WAT. Duration ~11 min. Two cycles in one day — frequency increasing.
-- 2026-04-12 00:43 WAT — Fourth RC91 cycle filed. [[Olamide Ajibulu]] reported RC91 and high processing time (email 00:40 WAT, Slack P1 00:43 WAT). Three cycles in 28 hours. Concurrent with Fidelity RC91 P1.
-- 2026-04-12 03:41 WAT — Fifth RC91 cycle filed. [[Olamide Ajibulu]] reported RC91 and high processing time (email to Wema Switching and Payments Services). Four cycles in ~27 hours. Inter-cycle gap shrinking.
-- 2026-04-15 12:09 WAT — **Remediation executed.** [[Emeka Joseph]] asked [[Amonetsone Gbubemi]] (Wema) via email 11:30 WAT Apr 15 to nudge Wema DB team to run the outlined script. Amonetsone confirmed 11:43 WAT Apr 15: "This has been treated." Settlement-update script EXECUTED by Wema DB. This addresses stuck-state settlement transactions; RC91 root cause recurrence is still to be observed.
-- 2026-04-15 19:09 WAT — **Post-remediation DCIR failure signal.** DCIR Monitoring Service alert 19:06 WAT: Transaction High Failure Warning, rate 40.65%, threshold 20%. Reply-To wemaalert@wemabank.com (Wema DCIR route). First threshold breach since Apr 14 04:06 WAT 100% episode — 28+ hours of silence broken. Arrives ~7h23min after remediation script execution. Implication: remediation did not close the underlying failure-rate generator — stuck-settlement remediation is independent of DCIR failure root cause. Single data point — not yet a cycle, not yet a P1. Flag for Apr 16 briefing as pattern signal.
+- 2026-04-11 01:09 WAT — New RC91 cycle overnight: 00:30–01:00 WAT (30 min, bank-resolved). Second Wema RC91 cycle.
+- 2026-04-11 19:32 WAT — Third RC91 cycle: ~11 min. Two cycles in one day — frequency increasing.
+- 2026-04-12 00:43 WAT — Fourth RC91 cycle filed. Three cycles in 28 hours.
+- 2026-04-12 03:41 WAT — Fifth RC91 cycle filed. Four cycles in ~27 hours.
+- 2026-04-15 12:09 WAT — Remediation executed. Wema DB script run.
+- 2026-04-15 19:09 WAT — Post-remediation DCIR failure signal. 40.65% failure warning.
+- 2026-04-16 06:23 WAT — **Overnight DCIR escalation confirmed remediation failure.** Two alerts overnight: 20.4% (23:20 WAT) → 66.0% (23:36 WAT). Rate peaked at 3.3× threshold — 2 in 3 transactions failing. Three data points post-remediation confirm the DB script did not address the DCIR failure root cause. Briefing-2026-04-16 B1 Decision item — route disposition needed.
