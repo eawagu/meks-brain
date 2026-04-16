@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T08:15:05Z"
+updated: "2026-04-16T09:26:23Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T08:09:00Z"
+last_processed: "2026-04-16T09:20:00Z"
 ---
 
 ## Connection
@@ -76,3 +76,4 @@ last_processed: "2026-04-16T08:09:00Z"
 - **2026-04-16 07:09 WAT tick:** 1 message via `newer_than:2h`: Ben Cowen (Lorum Ledger) 05:34 UTC — vendor pitch re virtual accounts/correspondent clearing (Re: USD, AED, GBP, EURO Clearing & Local Accounts). Layer 1 (To-addressed), Awareness tier. Accumulates for next briefing.
 - **2026-04-16 08:09 WAT tick:** 4 messages via `newer_than:2h`: Monnify auto-ticket #38844 (skip — automated system receipt), Mariam Davies PayFac Settlement report (CC'd routine), Florence Olarinde ×2 Fidelity + Access bank statement requests (CC'd routine). All filtered by Layer 2 rules — no sender tier match, no keyword match. Zero actionable deltas.
 - **2026-04-16 09:09 WAT tick:** 17 messages via `newer_than:2h`. Key signals: (1) FCMB RC91 20260416 — Afeez Kazeem filed 08:19 WAT, FCMB reconfirm request 08:35, Afeez confirmed resolved 09:02 WAT (~43 min cycle). Layer 2 keyword "RC91" match → Awareness (resolved, no CTO action). (2) Blessing Abel-Oguche re HSM key generation — asking Ekene for update, Emeka CC'd. Card infrastructure. (3) Access Bank ONUS POS User Management Review — Adeolu Atilade (Access) raised 5 security gaps (no AD, no MFA, no SoD, excessive admin, no user export); Babajide acknowledged. (4) Zone<>TeamApt Juliana Account Transfer — Zone acknowledged, will progress with Imo Akpanuwa. (5) TDSD-6572 new Jira ticket (Afeez/FCMB RC91 related). (6) Routine: bank statement requests, PayFac settlement, claims validation, unauthorized debit response — all filtered. Accumulates for next briefing.
+- **2026-04-16 10:20 WAT tick:** 21 messages via `newer_than:2h`. New signals since 09:09 WAT: (1) **BambooHR time off approval — Layer 1 (To: Emeka):** Ravi Kiran Veluguleti (Sick, 1 day) and Babatunde Ademusire pending approval. HR action item, Briefing tier. (2) **FCMB RC91 recurrence** — Afeez Kazeem 09:26 WAT: "still experiencing intermittent RC91 failures" after 09:02 resolution. Initial resolution was premature. Awareness tier (ops handling). (3) **Zenith CISO vulnerability acknowledged** — Festus Amede (CISO) 10:06 WAT thanked for closing vulnerabilities. Also escalated internally to Daniel Eneh then recalled. Security keyword "vulnerability" match. Awareness tier (positive). (4) **UBA DCIR 2FA deployment approved** — Christian Uchegbu (UBA) 09:58 WAT: production deployment approved, weekend implementation. DCIR credential remediation progress. Briefing tier. (5) Emeka Joseph — Wema Bank checklist review (routine). (6) Routine: Sterling DCIR claims, bank statement requests, unauthorized debit — filtered. All accumulate for next briefing.
