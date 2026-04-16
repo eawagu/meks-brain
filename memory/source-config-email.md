@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T17:16:46Z"
+updated: "2026-04-16T19:14:49Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T18:09:00Z"
+last_processed: "2026-04-16T19:09:00Z"
 ---
 
 ## Connection
@@ -72,4 +72,4 @@ last_processed: "2026-04-16T18:09:00Z"
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
-- **2026-04-16 ~18:09 WAT tick:** 20 messages via `newer_than:2h`. New signals since last tick: (1) **NIBSS PTSA RESOLVED** — Abayomi Fagbayi confirmed restoration 17:50 WAT; Olamide confirmed transactions processing 18:09 WAT. Situation updated to resolving. (2) **Stanbic RC91 cycle 25** — Olamide filed 17:48 WAT. Peace Ikhuenbor requesting reconfirmation 17:55 WAT. Post-PTSA restoration — confirms independent cause. (3) **Union Bank RC91 cycle 4** — Olamide filed 17:23 WAT. Victor Iyama replied "check now" 17:52 WAT. Likely resolved by PTSA restoration. (4) **Stanbic DCIR new wrong account** — RRN 260411995618, Ekene Umechiedo. Emeka Joseph acknowledged, routing to Godwin Ajiboye. Recurring pattern. (5) **AWS Outposts** — Goodhope (Outposts team Dublin) took ownership of case 177635165100470. First Outpost specialist. (6) **Wycliffe/NPS integration** — Teams notification, Precious Okiemen checklist update in TEAMAPT-NPS INTEGRATION channel. Routine. (7) **FCMB DCIR dispute** — Aanu Akinola exposure data. Routine. (8) **Polaris DD transaction report** — Feyisayo follow-up. (9) **PayFac Settlement Access Bank** — routine acknowledgment. All non-Immediate. State updates applied to brain pages.
+- **2026-04-16 ~20:09 WAT tick:** 11 messages via `newer_than:2h`. New signals since last tick: (1) **Ecobank RC91** — Olamide filed 18:54 WAT, follow-up 19:23 WAT, no Ecobank response. Unresolved >1h. (2) **Ecobank monitoring portal down (502)** — Olamide reported 19:31 WAT. Infrastructure instability. (3) **Wema Bank RC91 cycle 6** — Filed 19:06 WAT, Wema confirmed processing 19:33 WAT, Olamide confirmed resolved 19:46 WAT. ~40 min cycle. (4) **DCIR monitoring alerts** — 25.26% (19:06 WAT) → 26.68% (20:06 WAT). Rising, above 20% threshold. Down from 66% overnight peak but persistent. (5) DigiCert marketing email — skipped. All non-Immediate. State updates applied to brain pages.
