@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T07:14:57Z"
+updated: "2026-04-16T08:15:05Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T07:09:00Z"
+last_processed: "2026-04-16T08:09:00Z"
 ---
 
 ## Connection
@@ -75,3 +75,4 @@ last_processed: "2026-04-16T07:09:00Z"
 - **2026-04-16 06:23 WAT briefing tick:** 9 messages via `newer_than:8h` query. Key signals: (1) DCIR TEAMAPT Monitoring Service 23:36 WAT — 66.0% failure rate (Wema DCIR route); (2) DCIR TEAMAPT Monitoring Service 23:20 WAT — 20.4% (Wema); (3) Segun Ogunsola (Parallex Bank) 02:29 WAT — server restart completed, awaiting DCIR interchange routing; (4) Rasheed Olanrewaju (UBA) 02:46 WAT — Direct Card servers restart completed; (5) Qazim Adedigba 00:06 WAT — Duty Handover Note 20260415 (16/17 routes, Sterling off); (6) Chris Purkis 22:57 UTC — two Head of Engineering events cancelled Fri Apr 17. All signals routed to briefing-2026-04-16.
 - **2026-04-16 07:09 WAT tick:** 1 message via `newer_than:2h`: Ben Cowen (Lorum Ledger) 05:34 UTC — vendor pitch re virtual accounts/correspondent clearing (Re: USD, AED, GBP, EURO Clearing & Local Accounts). Layer 1 (To-addressed), Awareness tier. Accumulates for next briefing.
 - **2026-04-16 08:09 WAT tick:** 4 messages via `newer_than:2h`: Monnify auto-ticket #38844 (skip — automated system receipt), Mariam Davies PayFac Settlement report (CC'd routine), Florence Olarinde ×2 Fidelity + Access bank statement requests (CC'd routine). All filtered by Layer 2 rules — no sender tier match, no keyword match. Zero actionable deltas.
+- **2026-04-16 09:09 WAT tick:** 17 messages via `newer_than:2h`. Key signals: (1) FCMB RC91 20260416 — Afeez Kazeem filed 08:19 WAT, FCMB reconfirm request 08:35, Afeez confirmed resolved 09:02 WAT (~43 min cycle). Layer 2 keyword "RC91" match → Awareness (resolved, no CTO action). (2) Blessing Abel-Oguche re HSM key generation — asking Ekene for update, Emeka CC'd. Card infrastructure. (3) Access Bank ONUS POS User Management Review — Adeolu Atilade (Access) raised 5 security gaps (no AD, no MFA, no SoD, excessive admin, no user export); Babajide acknowledged. (4) Zone<>TeamApt Juliana Account Transfer — Zone acknowledged, will progress with Imo Akpanuwa. (5) TDSD-6572 new Jira ticket (Afeez/FCMB RC91 related). (6) Routine: bank statement requests, PayFac settlement, claims validation, unauthorized debit response — all filtered. Accumulates for next briefing.
