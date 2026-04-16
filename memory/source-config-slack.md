@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-16T09:25:28Z"
+updated: "2026-04-16T10:17:02Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T09:20:00Z"
+last_processed: "2026-04-16T10:15:00Z"
 ---
 
 ## Connection
@@ -115,3 +115,4 @@ When multiple messages across different channels reference the same entity (bank
 - **2026-04-16 08:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Twenty-eighth consecutive quiet DM tick.** Retreat Day 3 continues.
 - **2026-04-16 09:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Twenty-ninth consecutive quiet DM tick.** Retreat Day 3 continues — low Slack activity expected.
 - **2026-04-16 10:20 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Thirtieth consecutive quiet DM tick.** Retreat Day 3 continues.
+- **2026-04-16 11:15 WAT tick:** #teamapt-tech-operations — TWO new P1 posts: (1) Stanbic Bank RC91 (Afeez Kazeem, 10:20 BST, Start 10:11 AM, ongoing); (2) Union Bank RC91 (Afeez Kazeem, 11:07 BST, Start 11:04 AM, ongoing). #account-switch-alerts empty. #teamapt-executives empty. DM sweep zero (to: and from: queries). P1 keyword search zero results (search lag — P1s visible via channel read). **Thirty-first consecutive quiet DM tick.** Retreat Day 3 continues. Two P1s classified Awareness (ops handling, same recurring pattern; 4-bank systemic pattern noted for next briefing).
