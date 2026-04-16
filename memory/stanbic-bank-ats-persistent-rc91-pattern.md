@@ -5,8 +5,8 @@ type:
 title: Stanbic Bank ATS — Persistent RC91 Pattern
 status: developing
 created: "2026-04-11T16:42:02Z"
-summary: "24+ P1 RC91 cycles Apr 3–16. Cycle 24 filed Apr 16 10:11 WAT — ~3h active at 13:09 WAT, no resolution signal. Second Immediate alert dispatched. Investigation fulfilled — root cause CBA instability + inactive-node routing. Structural fix not deployed. Part of 4-bank simultaneous RC91 pattern Apr 16."
-updated: "2026-04-16T12:17:51Z"
+summary: "24+ P1 RC91 cycles Apr 3–16. Cycle 24 filed Apr 16 10:11 WAT — ~4h active at 14:09 WAT, no resolution signal. Third Immediate alert dispatched. NIBSS PTSA route failure filed 13:12 WAT — potential systemic root cause of simultaneous RC91s. Investigation fulfilled — CBA instability + inactive-node routing. Structural fix not deployed."
+updated: "2026-04-16T13:13:45Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -20,7 +20,9 @@ Twenty-four+ confirmed P1 cycles Apr 3–16 (14 days), all bank-resolved, same r
 
 **Apr 16 — 4-bank simultaneous RC91 pattern:** FCMB (morning, intermittent after initial resolution 08:19–09:02 WAT), Stanbic (cycle 24, 10:11 WAT ongoing), [[Union Bank]] (11:04 WAT → resolved 12:00 WAT, ~56min), [[UBA]] (10:35 WAT filed, ongoing). Four banks in one day exceeds the systemic-pattern threshold. Reinforces the NIBSS-side / Moniepoint-infrastructure root cause over per-bank explanations.
 
-Cycle 24 on Apr 16: [[Afeez Kazeem]] posted P1 in #teamapt-tech-operations at 10:20 BST: "P1: Stanbic Bank RC 91 failures across processors. Cause: From the bank. Ongoing. Start Time 10:11 AM." Escalated to bank for investigation and resolution. **2h+ threshold exceeded at 12:09 WAT — first Immediate alert dispatched. 3h+ active at 13:09 WAT — second Immediate alert dispatched.** No resolution signal as of 13:09 WAT. This is the longest-running cycle in the recent pattern — prior cycles typically resolve in 30–90 minutes. Extended duration may indicate a different failure mode or Stanbic-side operational delay.
+**NEW — NIBSS PTSA route failure filed 13:12 WAT:** [[Afeez Kazeem]] reported PTSA route transactions failing. [[NIBSS]] (Mary Orajaka, Abayomi Fagbayi) acknowledged and working to restore. TDSD-6578 filed. This is a switch-level failure — if PTSA is the routing layer for these banks, this single NIBSS failure explains all three simultaneous RC91s. See [[NIBSS PTSA — Route Failure Apr 16]]. Prior NIBSS PTSA attribution on Apr 12 and Apr 15 blamed Moniepoint timeout; today NIBSS explicitly acknowledged the failure is on their side — a significant shift.
+
+Cycle 24 on Apr 16: [[Afeez Kazeem]] posted P1 in #teamapt-tech-operations at 10:20 BST: "P1: Stanbic Bank RC 91 failures across processors. Cause: From the bank. Ongoing. Start Time 10:11 AM." Escalated to bank for investigation and resolution. **2h+ threshold exceeded at 12:09 WAT — first Immediate alert dispatched. 3h+ active at 13:09 WAT — second Immediate alert dispatched. ~4h active at 14:09 WAT — third Immediate alert dispatched with NIBSS PTSA systemic root cause hypothesis.** No resolution signal as of 14:09 WAT. Extended duration likely explained by NIBSS PTSA infrastructure failure rather than bank-specific operational delay.
 
 Cycle 23 on Apr 14 morning (brief): Slack P1 log 09:51 BST recorded Start 09:46 → End 09:58 BST, **12-minute duration**, bank-resolved. Separate from and shorter than cycle 22 filed earlier by [[Olamide Ajibulu]]. Standard short-cycle pattern.
 
@@ -33,7 +35,7 @@ NIBSS Citrix LB migration completed successfully overnight Apr 12–13: [[Oladap
 Settlement validation thread active: [[Emeka Joseph]] confirming DCIR transaction migration to Stanbic team; Stanbic (Lucky Ohiorenuan) requesting failed transaction list citing CBN timeline pressure at 16:37 WAT Apr 11. ATS JAR deployment: [[Babajide Ojoboorun]] sent jar link to Stanbic (Oluwatobi Meshioye) at 20:11 WAT Apr 11 — deployment session pending Stanbic action.
 
 ## Sources
-email Stanbic RC91 thread Apr 3–16; slack #teamapt-tech-operations (cycle 24 Apr 16, cycle 22 + cycle 23 Apr 14); jira TDSD-6425 (Completed Apr 10); jira TDSD-6518 (filed Apr 12); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11; email NIBSS PTSA RC91 Apr 12 + Apr 15; **slack #teamapt-tech-operations cycle 24 10:20 BST Apr 16 ([[Afeez Kazeem]])**
+email Stanbic RC91 thread Apr 3–16; slack #teamapt-tech-operations (cycle 24 Apr 16, cycle 22 + cycle 23 Apr 14); jira TDSD-6425 (Completed Apr 10); jira TDSD-6518 (filed Apr 12); email settlement validation Apr 10–11; email ATS JAR deployment Apr 11; email NIBSS PTSA RC91 Apr 12 + Apr 15; **slack #teamapt-tech-operations cycle 24 10:20 BST Apr 16 ([[Afeez Kazeem]])**; **email NIBSS PTSA failure 13:12 WAT Apr 16 (TDSD-6578)**
 
 ## Deltas
 - 2026-04-09 17:02 WAT — Jira TDSD-6425 confirmed still Work in Progress, last updated Apr 3 09:23 WAT, single comment ("Escalating to the bank"), no new activity in 6+ days.
@@ -55,3 +57,4 @@ email Stanbic RC91 thread Apr 3–16; slack #teamapt-tech-operations (cycle 24 A
 - 2026-04-16 11:20 WAT — Cycle 24: [[Afeez Kazeem]] filed P1 in #teamapt-tech-operations 10:20 BST (Start 10:11 AM WAT, ongoing). Part of 4-bank simultaneous RC91 pattern (FCMB, Stanbic, Union, UBA).
 - 2026-04-16 12:09 WAT — Cycle 24 exceeded 2h threshold. No resolution signal. First Immediate alert dispatched to CTO Slack DM. Union Bank RC91 resolved at 12:00 WAT (~56min). Stanbic and UBA still active.
 - 2026-04-16 13:09 WAT — Cycle 24 ~3h active. No resolution signal. Second Immediate alert dispatched. Longest-running cycle in recent pattern — prior cycles resolve in 30–90 min. Extended duration anomalous.
+- 2026-04-16 14:09 WAT — Cycle 24 ~4h active. No resolution signal. Third Immediate alert dispatched. **NEW: NIBSS PTSA route failure filed 13:12 WAT (TDSD-6578). NIBSS acknowledged failure on their side. Systemic hypothesis: PTSA failure is root cause of simultaneous Stanbic/UBA/Union RC91s.** Extended cycle duration now explained by infrastructure-level failure rather than bank-specific delay.
