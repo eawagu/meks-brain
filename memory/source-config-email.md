@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T16:15:14Z"
+updated: "2026-04-16T17:16:46Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T16:09:00Z"
+last_processed: "2026-04-16T18:09:00Z"
 ---
 
 ## Connection
@@ -72,4 +72,4 @@ last_processed: "2026-04-16T16:09:00Z"
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
-- **2026-04-16 ~17:09 WAT tick:** 18 messages via `newer_than:3h`. New signals since last tick: (1) **Hakeem Ogunbona → Emeka (To field)** — ArgoCD vulnerability fix approval request (CVE-2024-37152, high/critical severity, Wiz finding). Change window Friday Apr 17. TISD-480. CC: Tolu Aina. Layer 1 CTO approval. Briefing tier (window >24h). (2) **NIBSS PTSA persists** — Daniel Fetuga → Mary Orajaka 16:21 WAT confirming issue persists. Situation delta. (3) **AWS case 177635165100470** — Engineer Nikhil routing to Outpost team. Situation delta. (4) **Stanbic DCIR wrong account** — Ekene Umechiedo confirms dispute portal fixed. Resolution. (5) **Blessing Abel-Oguche** — card BIN/VISA test keys. CC'd Emeka. Layer 2 filtered. (6) **Polaris DD transaction report** — Feyisayo Oyeniran follow-up. Layer 2. (7) **Patrick Okonkwo (Revvent)** — vendor pitch. Skip. (8) **PayFac Settlement** — routine. Filtered. (9) **Drata policy acknowledgment** — already captured in today's briefing B11. (10) **Lattice review nudge** — already tracked in B5.
+- **2026-04-16 ~18:09 WAT tick:** 20 messages via `newer_than:2h`. New signals since last tick: (1) **NIBSS PTSA RESOLVED** — Abayomi Fagbayi confirmed restoration 17:50 WAT; Olamide confirmed transactions processing 18:09 WAT. Situation updated to resolving. (2) **Stanbic RC91 cycle 25** — Olamide filed 17:48 WAT. Peace Ikhuenbor requesting reconfirmation 17:55 WAT. Post-PTSA restoration — confirms independent cause. (3) **Union Bank RC91 cycle 4** — Olamide filed 17:23 WAT. Victor Iyama replied "check now" 17:52 WAT. Likely resolved by PTSA restoration. (4) **Stanbic DCIR new wrong account** — RRN 260411995618, Ekene Umechiedo. Emeka Joseph acknowledged, routing to Godwin Ajiboye. Recurring pattern. (5) **AWS Outposts** — Goodhope (Outposts team Dublin) took ownership of case 177635165100470. First Outpost specialist. (6) **Wycliffe/NPS integration** — Teams notification, Precious Okiemen checklist update in TEAMAPT-NPS INTEGRATION channel. Routine. (7) **FCMB DCIR dispute** — Aanu Akinola exposure data. Routine. (8) **Polaris DD transaction report** — Feyisayo follow-up. (9) **PayFac Settlement Access Bank** — routine acknowledgment. All non-Immediate. State updates applied to brain pages.
