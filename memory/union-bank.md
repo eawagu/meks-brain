@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending), recurring settlement batch failures (TDSD-6276), RC91 cycle Apr 12 (~16min), RC91 cycle Apr 15. MPGS settlement bank (ICA 34150)."
-updated: "2026-04-16T08:18:15Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending), recurring settlement batch failures (TDSD-6276). RC91 cycle 3 Apr 16 11:04 WAT (ongoing, Union Bank reconfirm requested). Three RC91 cycles in 5 days (Apr 12, 15, 16). TDSD-6576 new ticket (Jira blind). MPGS settlement bank (ICA 34150)."
+updated: "2026-04-16T10:15:14Z"
 cssclasses:
   - "entity"
 ---
@@ -19,6 +19,10 @@ cssclasses:
 
 ## ATS RC91
 
+### Cycle 3 — Apr 16, 2026 (active)
+
+**2026-04-16 11:04 WAT:** [[Afeez Kazeem]] (Application Monitoring Engineer) filed RC91 failure. Subject: "Union Bank | ATS | RC 91 Failure | 20260416". Message: "Union Bank transactions are failing with RC 91 and high processing time. Kindly assist to investigate." Sent to Union Bank FEP Administration (ITeChannels), Babajide Aloba, Victor Iyama, Toluwalogo Oladipo, Omoye Okobiemen. CC: aptpaytechnicalsupport. Victor Iyama (Union Bank Card Infrastructure) responded at 10:09 UTC requesting reconfirmation from Afeez. TDSD-6576 new Jira ticket created (visible via email only — Jira blind Day 5). P1 also posted in #teamapt-tech-operations at 11:07 BST. Part of 4-bank simultaneous RC91 pattern Apr 16 (FCMB, Stanbic, [[UBA]], Union Bank).
+
 ### Cycle 2 — Apr 15, 2026 (active)
 
 **2026-04-15 15:07 WAT:** [[Olamide Ajibulu]] (Application Monitoring Engineer) filed new RC91 failure. Subject: "Union Bank | RC91 | 20260415". Message: "Union Bank transactions are failing with RC 91 and high processing time. Kindly assist to investigate." Recipient: `fepsupport@fidelitybank.ng` — **routing oddity** (addressed to Fidelity's FEP support, not Union Bank's FEP Administration). Template error likely; CC `aptpaytechnicalsupport@teamapt.com` is standard. Jira blind (89+ ticks) — no TDSD ticket verification possible. Part of the [[RC91 Multi-Bank Failure Pattern]].
@@ -31,7 +35,7 @@ Part of the broader multi-bank RC91 pattern on Apr 12 ([[Stanbic Bank]], [[Acces
 
 ## Settlement
 
-Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TDSD-6276]]). NIBSS-flagged ATS timeout outstanding as of Apr 2026.
+Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TDSD-6276]]). NIBSS-flagged ATS timeout outstanding as of Apr 2026. Stanbic settlement account reconciliation thread active Apr 16 (Emeka Joseph / Stanbic reconciliation unit).
 
 ## Key Contacts
 - Victor Iyama — Card Infrastructure, IT (vniyama@unionbankng.com)
