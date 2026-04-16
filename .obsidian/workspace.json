@@ -183,6 +183,7 @@
   },
   "active": "22148c01f51c7023",
   "lastOpenFiles": [
+    "memory/call-the-event-planner-for-dads-birthday.md",
     "memory/config-ingest-prompt.md",
     "memory/config-heartbeat.md",
     "memory/config-heartbeat-prompt.md",
@@ -208,7 +209,6 @@
     "memory/aws.md",
     "CLAUDE.md",
     "dashboard.md",
-    "memory/direct-to-bank-daily-standup-2026-04-01-0824.md",
-    "memory/direct-to-bank-daily-standup-2026-03-31.md"
+    "memory/direct-to-bank-daily-standup-2026-04-01-0824.md"
   ]
 }
