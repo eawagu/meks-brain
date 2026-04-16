@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-16T17:16:11Z"
+updated: "2026-04-16T19:15:33Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T18:09:00Z"
+last_processed: "2026-04-16T19:09:00Z"
 ---
 
 ## Connection
@@ -110,4 +110,4 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- **2026-04-16 ~18:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). #teamapt-executives empty. **Thirty-seventh consecutive quiet DM tick.** Retreat Day 3 continues — dinner at Blackfriars Pier (Golden Flame) starting 19:00 BST. No Slack-sourced signals this tick.
+- **2026-04-16 ~20:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). #teamapt-executives empty. **Thirty-eighth consecutive quiet DM tick.** Retreat Day 3 — dinner at Blackfriars Pier (Golden Flame) in progress. No Slack-sourced signals this tick.
