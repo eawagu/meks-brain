@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-15T22:13:10Z"
+updated: "2026-04-16T05:32:52Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-15T22:09:00Z"
+last_processed: "2026-04-16T05:23:00Z"
 ---
 
 ## Connection
@@ -110,18 +110,4 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- **2026-04-15 23:09 WAT tick (overnight, should normally be skipped per config-heartbeat — ran anyway):** DM sweep zero results. **Twenty-fourth consecutive quiet DM tick.** Tier 1 read on #teamapt-tech-operations returned zero new messages in the 2h window since 21:09 WAT. Latest channel message remains Qazim 17:41 WAT CoralPay P1 resolution (seen previous ticks). No new P1 keywords, no @mentions. User at Madison Dinner 20:30 WAT / 19:30 BST (wraps 21:50 WAT / 20:50 BST). Evening quiet as expected.
-- **2026-04-15 21:09 WAT tick:** DM sweep zero results (to: and from: queries both empty). Twenty-third consecutive quiet DM tick. Tier 1 read on #teamapt-tech-operations returned zero new messages in the 2h window. No new P1 keywords, no @mentions. All Slack activity in this window appears routed via email only (consistent with pattern: DCIR monitoring alerts, Onyinye vulnerability confirmation, Pivot invoice approvals — all email-exclusive). Strategy Retreat Day 2 London wraps at 19:00 WAT; user at Madison Dinner 20:30 WAT / 19:30 BST. Off-channel evening expected.
-- **2026-04-15 19:09 WAT tick:** DM sweep zero results. Twenty-second consecutive quiet DM tick. Tier 1 P1-keyword search in #teamapt-tech-operations zero hits for this hour. User just exited Product-Engineering Sync (18:00–19:00 WAT). DCIR/Wema 40.65% monitoring alert at 19:06 WAT came via email only — no Slack crossover yet (consistent with Apr 14 pattern: monitoring alerts don't route to Slack P1). Low-volume retreat-day baseline continues.
-- 2026-04-15 18:09 WAT tick: DM sweep zero results. Twenty-first consecutive quiet DM tick. User in Product-Engineering Sync 18:00–19:00 WAT during this tick.
-- 2026-04-15 17:09 WAT tick: DM sweep zero results. Twentieth consecutive quiet DM tick.
-- 2026-04-15 16:09 WAT tick: DM sweep zero results. Nineteenth consecutive quiet DM tick. Monnify Atlas NIP Outwards Transit duplicate-debit escalation came via email only.
-- 2026-04-15 15:09 WAT tick: DM sweep zero results. Eighteenth consecutive quiet DM tick. Union Bank RC91 P1 filing came in via email exclusively — no Slack crossover.
-- 2026-04-15 14:09 WAT tick: DM sweep zero results. Seventeenth consecutive quiet DM tick.
-- 2026-04-15 13:09 WAT tick: Olamide Ajibulu P1 posting at 10:03 WAT Apr 15 NIBSS PTSA brief downtime (4 min, 09:49–09:53 WAT).
-- 2026-04-15 12:09 WAT tick: DM sweep zero results. Fifteenth consecutive quiet Slack tick.
-- 2026-04-15 11:09 WAT tick: Tier 1 no new messages. Slack search MCP rate-limited; DM/discovery sweep skipped.
-- 2026-04-15 10:09 WAT tick: DM sweep zero results. Thirteenth consecutive quiet tick.
-- 2026-04-15 09:09 WAT tick: DM sweep zero results.
-- 2026-04-15 08:10 WAT tick: DM sweep zero results.
-- 2026-04-15 07:10 WAT briefing tick: DM sweep zero results.
+- **2026-04-16 06:23 WAT briefing tick:** DM sweep zero results (to: and from: queries both empty). **Twenty-sixth consecutive quiet DM tick.** Tier 1 read on #teamapt-tech-operations returned zero new messages in the overnight window since 23:09 WAT Apr 15. P1 keyword search returned zero relevant results. Overnight quiet as expected (23:00–06:00 WAT skip window per config-heartbeat). Strategy Retreat Day 3 London today.
