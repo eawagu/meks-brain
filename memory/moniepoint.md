@@ -6,7 +6,7 @@ aliases:
   - "MoniePoint"
 created: 2026-04-11
 summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; 4 business lines (DD/CDD, Monnify, TPP, Domestic Switching); 2025 revenue ₦24.2B target, ~₦10-12B actual (~35-50%); building multi-market card issuance platform (Project Phoenix); 13-level job framework.
-updated: "2026-04-15T21:54:13Z"
+updated: "2026-04-16T16:31:36Z"
 cssclasses:
   - "entity"
 ---
@@ -19,12 +19,12 @@ Moniepoint is a Nigerian fintech group (Moniepoint Inc.). It operates payment an
 
 Restructured from 5 units (2025) to 4 departments:
 
-| Department | Lead | Products | Key Systems |
+| Department | Business Owner | Products | Key Systems |
 |---|---|---|---|
 | DD/CDD | [[Daniel Ojinaka]] | MADD, GoSubscribe, SAFE | ACS, GoSubscribe, SAFE, TACHA |
 | [[Monnify]] | [[Damilare Ogunnaike]] | Collections (VA, web card, DD), Disbursements, VAS, International (MPGS, Cybersource) | Monnify Gateway, Loom, Limit Engine, MPGS |
 | TPP | [[Tracy Ojaigho]] | Acquirer processing, Issuer processing (CMS, EMV Data Prep), ACT, MPGS dashboard, Non-Bank Acquiring | Aptent, ACT, EMV Data Prep, Rsync CMS |
-| Domestic Switching | [[Babatunde Okufi]] | [[Juliana]] Card/Account Switch, ATS, PTSP/PTAD, [[TACHA]] | Juliana, ATS, TACHA, NSS |
+| Domestic Switching | [[Babatunde Okufi]] (CBDO, TeamApt) | [[Juliana]] Card/Account Switch, ATS, PTSP/PTAD, [[TACHA]] | Juliana, ATS, TACHA, NSS |
 
 Revenue Drivers: DD/CDD and Monnify. Enablers: TPP and Domestic Switching.
 
@@ -71,7 +71,7 @@ Switching & Processing (foundation), Non-Bank Acquiring (TPP + Monnify), PTSP (D
 - **[[Access Bank]]** — active across all 4 business lines; primary DD volume driver
 - **[[Polaris Bank]]** — primary settlement bank; NSS live; DD live; PTSP first non-Moniepoint client (planned)
 - **[[Fidelity Bank]]** — settlement bank; first external ACT client (live); Juliana issuer; DD pilot-ready
-- **[[Moniepoint MFB]]** — largest customer by volume (37% POS traffic); PTSP services (₦150M monthly activations)
+- **[[Moniepoint MFB]]** — largest customer by volume (37% POS traffic); PTSP services (₦150M monthly activations); bank-side Payments Business owned by [[Solomon Amadi]]
 - **[[CoralPay]]** — switch-to-switch partner (FirstBank, Zenith, Providus, Unity)
 - **[[HabariPay]]** — switch-to-switch partner (GTBank); DD Payment Facilitator
 - Card schemes: [[Visa]] (acquirer cert ✅, license ✅), [[Mastercard]] (acquirer cert ✅, license pending), Verve (active), Afrigo (established)
@@ -117,7 +117,7 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 
 ## Active Issues (as of Apr 2026)
 
-- [[RC91 Multi-Bank Failure Pattern]] — 13+ banks, structural routing gap. **Specific mechanism confirmed 2026-04-14** via [[Oladapo Onayemi]] DM: during a bank CBA failure, Moniepoint routes card requests to the inactive bank node; when the bank recovers, Moniepoint's routing-config restoration process is manual and slow, so Moniepoint-side failures persist on terminals after the bank is actually back up. The automation gap (automated detection of bank recovery + automated config restoration) is a Primitive 4 (Systems) responsibility of Moniepoint's [[Domestic Switching]] department (led by [[Babatunde Okufi]]; owns ATS and routing config). [[Oladapo Onayemi]] has escalated to the Moniepoint team "severally" without a Moniepoint-side fix; Oladapo's escalation level has demonstrably not been sufficient to force the automation onto the backlog. Open: which intra-group leverage path (direct peer to Babatunde Okufi, dotted-line to [[Felix Ike]] as Group CTO, or up through [[Dennis Ajalie]] to group-level roadmap) has the highest chance of landing the fix.
+- [[RC91 Multi-Bank Failure Pattern]] — 13+ banks, structural routing gap. **Specific mechanism confirmed 2026-04-14** via [[Oladapo Onayemi]] DM: during a bank CBA failure, Moniepoint routes card requests to the inactive bank node; when the bank recovers, Moniepoint's routing-config restoration process is manual and slow, so Moniepoint-side failures persist on terminals after the bank is actually back up. The automation gap (automated detection of bank recovery + automated config restoration) is a Primitive 4 (Systems) responsibility of the [[Domestic Switching]] department (business owner: [[Babatunde Okufi]], Chief Business Development Officer at TeamApt, reports to [[Dennis Ajalie]]). [[Oladapo Onayemi]] has escalated to the Moniepoint team "severally" without a Moniepoint-side fix; Oladapo's escalation level has demonstrably not been sufficient to force the automation onto the backlog. Open: which intra-group leverage path (direct peer CTO→CBDO to Babatunde Okufi, dotted-line to [[Felix Ike]] as Group CTO, direct up through [[Dennis Ajalie]], or business-owner pressure via [[Solomon Amadi]] as Payments Business owner at Moniepoint MFB) has the highest chance of landing the fix.
 - [[NIBSS]] DD compound failures — TDSD-6437
 - Settlement integrity — TDSD-6424, TDSD-6431, TDSD-6276 active
 - [[DCIR Security Vulnerabilities]] — 5 CRITICAL Access Bank findings; remediation in progress
@@ -132,10 +132,11 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 - [[Emeka Awagu]] — CTO, TeamApt Ltd
 - [[Felix Ike]] — Group CTO, Moniepoint Inc.
 - [[Tolulope Obianwu]] — Direct report to Emeka; operations leadership; on PIP
-- [[Daniel Ojinaka]] — DD/CDD department lead
-- [[Damilare Ogunnaike]] — Monnify department lead
-- [[Tracy Ojaigho]] — TPP department lead
-- [[Babatunde Okufi]] — Domestic Switching department lead
+- [[Daniel Ojinaka]] — DD/CDD department business owner
+- [[Damilare Ogunnaike]] — Monnify department business owner
+- [[Tracy Ojaigho]] — TPP department business owner
+- [[Babatunde Okufi]] — CBDO, TeamApt; Domestic Switching business owner
+- [[Solomon Amadi]] — Business Owner, Payments Business, Moniepoint MFB
 
 ## Notes
 
@@ -156,3 +157,4 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 - [[TeamApt_Customer_Registry]] — customer and partner registry
 - [[Source: notes-2026-04-01]] through [[Source: notes-2026-04-10]] — daily CTO signals
 - [[Commitment — Stanbic RC91 Internal Processing Latency Investigation]] — 2026-04-15 resolution confirmed the routing-restoration automation gap
+- User correction 2026-04-16 (Babatunde Okufi title as CBDO; Solomon Amadi role at Moniepoint MFB)
