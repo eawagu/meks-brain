@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-16T12:14:12Z"
+updated: "2026-04-16T13:14:45Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T12:09:00Z"
+last_processed: "2026-04-16T13:09:00Z"
 ---
 
 ## Connection
@@ -118,3 +118,4 @@ When multiple messages across different channels reference the same entity (bank
 - **2026-04-16 11:15 WAT tick:** #teamapt-tech-operations — TWO new P1 posts: (1) Stanbic Bank RC91 (Afeez Kazeem, 10:20 BST, Start 10:11 AM, ongoing); (2) Union Bank RC91 (Afeez Kazeem, 11:07 BST, Start 11:04 AM, ongoing). #account-switch-alerts empty. #teamapt-executives empty. DM sweep zero (to: and from: queries). P1 keyword search zero results (search lag — P1s visible via channel read). **Thirty-first consecutive quiet DM tick.** Retreat Day 3 continues. Two P1s classified Awareness (ops handling, same recurring pattern; 4-bank systemic pattern noted for next briefing).
 - **2026-04-16 12:09 WAT tick:** All Tier 1 channels empty (no new messages since last tick). DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Thirty-second consecutive quiet DM tick.** Stanbic RC91 (cycle 24) exceeded 2h threshold — Immediate alert dispatched. UBA RC91 >1h silence — Immediate alert dispatched. Union Bank RC91 resolved at 12:00 WAT (email confirmation from Afeez Kazeem). Retreat Day 3 continues.
 - **2026-04-16 13:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Thirty-third consecutive quiet DM tick.** Stanbic RC91 ~3h active (no resolution signal). UBA RC91 ~2.5h active (no resolution signal). Continued-silence Immediate alert re-dispatched for both. Retreat Day 3 continues.
+- **2026-04-16 14:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Thirty-fourth consecutive quiet DM tick.** NIBSS PTSA route failure detected via email (13:12 WAT) — Immediate alert dispatched with systemic root-cause hypothesis linking Stanbic/UBA/Union RC91s. Retreat Day 3 continues.
