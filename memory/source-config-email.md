@@ -4,10 +4,72 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T15:16:46Z"
+updated: "2026-04-16T16:15:14Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T14:15:00Z"
+last_processed: "2026-04-16T16:09:00Z"
 ---
 
-## Connection\n\n- **Connector:** Gmail MCP\n- **Accounts:** `emeka.awagu@teamapt.com` (primary), `eawagu@gmail.com`\n- **Access pattern:** `gmail_search_messages` for delta detection; `gmail_read_message` / `gmail_read_thread` for content\n\n## Directives\n\n### Priority model — two layers\n\n**Layer 1 — Addressed to me (To field):** Always surface. Someone directed this to me specifically — it expects a response, decision, or action. Do not apply keyword filtering. Assess and include in briefing regardless of content.\n\n**Layer 2 — CC'd / distribution list / inbox-wide:** Apply sender tier and keyword filtering below. Only surface if a rule matches.\n\n### Sender tiers\n\n**Tier 1 — Immediate (surface on any heartbeat tick):**\n- Board members and investors\n- CEO / COO / Dennis Ajalie\n- Direct reports (Tolu Aina, Tolulope Obianwu, and others per roles registry)\n- Regulatory bodies (CBN, NYDFS, NIBSS, PCIDSS, external auditors)\n- Bank counterparties when escalation thread (Stanbic, UBA, Access, Fidelity, Ecobank, Sterling, Polaris, Union, Habari)\n\n**Tier 2 — Same-day (surface in next briefing):**\n- Peer executives and department heads\n- Engineering leads (Ekene Udodi, Oladapo Onayemi, Wycliffe Ochieng, Yasir Syed Ali)\n- Compliance (Ibukun Atoyebi)\n- Vendor escalations\n- AWS (health events, account notifications)\n\n**Tier 3 — Batch (daily digest only):**\n- Distribution lists (unless content matches keyword rules)\n- Internal team-wide announcements\n- Vendor routine communications\n\n### Keyword rules (apply to Layer 2 messages)\n\n**Critical — surface immediately:**\n- Incident: RC91, P1, outage, down, incident, emergency, production, SEV-1, settlement failure, transaction failure, ATS failure, DCIR failure\n- Security: breach, compromised, vulnerability, credential, CVE, penetration test\n- Regulatory: CBN, compliance violation, audit, investigation, subpoena, NYDFS, PCI\n- Escalation: escalated to CTO, escalation, requires CTO approval, approval required\n\n**High — surface in next briefing:**\n- Operational: SLA breach, deploy window, maintenance window, duty handover, daily report\n- HR/people decisions: PIP, performance improvement, termination, resignation, offer letter, headcount approval, Lattice review, exit interview\n- Finance: budget approval, spending approval, contract approval\n- Project: Phoenix, GoSubscribe, AptPay\n\n**Skip — do not surface:**\n- Marketing newsletters and promotional emails\n- Automated calendar notification emails (handled by calendar source)\n- Benefits enrollment, mandatory training reminders\n- Automated system receipts and purchase confirmations\n- All-hands meeting invites (unless agenda contains decision items)\n- Out-of-office auto-replies\n\n## Notes\n\n- Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.\n- When a thread is surfaced, include the full thread context, not just the latest message.\n- Duty Handover emails follow a numbered pattern (e.g., \"Duty Handover #20260411\") — always surface regardless of sender tier.\n- **2026-04-16 ~15:15 WAT tick:** 11 messages via `newer_than:2h`. Key new signals: (1) **AWS Outposts connectivity lost [ACTION REQUIRED]** — 14:15 UTC (15:15 WAT). SERVICE_LINK_DOWN on Outpost op-005dbfcfaadc1740b, eu-west-2. Support case 177635165100470 + \"unable to reach some instances.\" Layer 2, AWS Tier 2 sender + keyword \"connectivity lost.\" Briefing tier (infrastructure, not direct banking P1). (2) **Daily Report #20260416** — Afeez Kazeem 15:50 WAT. 13/17 PTSAs operational. UBA RC91 ongoing (TDSD-6574). NIBSS PTSA ongoing (TDSD-6578). FCMB RC91 intermittent (TDSD-6572). Union resolved (TDSD-6576). **Account switch portal unreachable (TDSD-6586, NEW)**. Layer 2, keyword \"daily report.\" Briefing tier. (3) **Drata policy acknowledgment** — To: Emeka. TA-IMS Policy Statement. Layer 1. Awareness (compliance, no urgency). (4) **Lattice review nudge** — To: Emeka. Automated. 8 pending. Already tracked in B5. (5) **Blessing Abel-Oguche** — Issuing BIN/VISA Test Keys for card production. CC'd Emeka. Layer 2, filtered. (6) **Abdulgafar Obeitor** — Stanbic DCIR wrong account confirmed resolved. Progression. (7) **Patrick Okonkwo (Revvent)** — vendor pitch. Skip. (8) **PayFac Settlement** — routine. Filtered.
+## Connection
+
+- **Connector:** Gmail MCP
+- **Accounts:** `emeka.awagu@teamapt.com` (primary), `eawagu@gmail.com`
+- **Access pattern:** `gmail_search_messages` for delta detection; `gmail_read_message` / `gmail_read_thread` for content
+
+## Directives
+
+### Priority model — two layers
+
+**Layer 1 — Addressed to me (To field):** Always surface. Someone directed this to me specifically — it expects a response, decision, or action. Do not apply keyword filtering. Assess and include in briefing regardless of content.
+
+**Layer 2 — CC'd / distribution list / inbox-wide:** Apply sender tier and keyword filtering below. Only surface if a rule matches.
+
+### Sender tiers
+
+**Tier 1 — Immediate (surface on any heartbeat tick):**
+- Board members and investors
+- CEO / COO / Dennis Ajalie
+- Direct reports (Tolu Aina, Tolulope Obianwu, and others per roles registry)
+- Regulatory bodies (CBN, NYDFS, NIBSS, PCIDSS, external auditors)
+- Bank counterparties when escalation thread (Stanbic, UBA, Access, Fidelity, Ecobank, Sterling, Polaris, Union, Habari)
+
+**Tier 2 — Same-day (surface in next briefing):**
+- Peer executives and department heads
+- Engineering leads (Ekene Udodi, Oladapo Onayemi, Wycliffe Ochieng, Yasir Syed Ali)
+- Compliance (Ibukun Atoyebi)
+- Vendor escalations
+- AWS (health events, account notifications)
+
+**Tier 3 — Batch (daily digest only):**
+- Distribution lists (unless content matches keyword rules)
+- Internal team-wide announcements
+- Vendor routine communications
+
+### Keyword rules (apply to Layer 2 messages)
+
+**Critical — surface immediately:**
+- Incident: RC91, P1, outage, down, incident, emergency, production, SEV-1, settlement failure, transaction failure, ATS failure, DCIR failure
+- Security: breach, compromised, vulnerability, credential, CVE, penetration test
+- Regulatory: CBN, compliance violation, audit, investigation, subpoena, NYDFS, PCI
+- Escalation: escalated to CTO, escalation, requires CTO approval, approval required
+
+**High — surface in next briefing:**
+- Operational: SLA breach, deploy window, maintenance window, duty handover, daily report
+- HR/people decisions: PIP, performance improvement, termination, resignation, offer letter, headcount approval, Lattice review, exit interview
+- Finance: budget approval, spending approval, contract approval
+- Project: Phoenix, GoSubscribe, AptPay
+
+**Skip — do not surface:**
+- Marketing newsletters and promotional emails
+- Automated calendar notification emails (handled by calendar source)
+- Benefits enrollment, mandatory training reminders
+- Automated system receipts and purchase confirmations
+- All-hands meeting invites (unless agenda contains decision items)
+- Out-of-office auto-replies
+
+## Notes
+
+- Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
+- When a thread is surfaced, include the full thread context, not just the latest message.
+- Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
+- **2026-04-16 ~17:09 WAT tick:** 18 messages via `newer_than:3h`. New signals since last tick: (1) **Hakeem Ogunbona → Emeka (To field)** — ArgoCD vulnerability fix approval request (CVE-2024-37152, high/critical severity, Wiz finding). Change window Friday Apr 17. TISD-480. CC: Tolu Aina. Layer 1 CTO approval. Briefing tier (window >24h). (2) **NIBSS PTSA persists** — Daniel Fetuga → Mary Orajaka 16:21 WAT confirming issue persists. Situation delta. (3) **AWS case 177635165100470** — Engineer Nikhil routing to Outpost team. Situation delta. (4) **Stanbic DCIR wrong account** — Ekene Umechiedo confirms dispute portal fixed. Resolution. (5) **Blessing Abel-Oguche** — card BIN/VISA test keys. CC'd Emeka. Layer 2 filtered. (6) **Polaris DD transaction report** — Feyisayo Oyeniran follow-up. Layer 2. (7) **Patrick Okonkwo (Revvent)** — vendor pitch. Skip. (8) **PayFac Settlement** — routine. Filtered. (9) **Drata policy acknowledgment** — already captured in today's briefing B11. (10) **Lattice review nudge** — already tracked in B5.
