@@ -3,43 +3,43 @@ type:
   - "entity"
 title: Frank Atashili
 created: 2026-04-11
-summary: "Peer executive of Emeka Awagu at TeamApt/Moniepoint — frequent meeting co-attendee (Product-Engineering Sync, Exec Catch-up, Strategy Retreat 2026). Apr 14, 2026 user-captured sentiment: \"awesome.\" Role inferred CPO/senior product leader per CPO Prep Brief naming."
-updated: "2026-04-14T10:19:07Z"
+summary: CPO/COO at TeamApt/Moniepoint — co-presented CEO strategy deck at 2026 Strategy Retreat (Apr 15) alongside Dennis Ajalie and Damilare Ogunnaike; owns Product Division with 7 OKRs across 4 businesses (DD/CDD, Monnify, TPP, Domestic Switching); peer executive to Emeka Awagu.
+updated: "2026-04-16T05:45:20Z"
 cssclasses:
   - "entity"
 ---
 
 ## Overview
 
-Frank Atashili is a named key relationship in [[Emeka Awagu]]'s CTO accountability framework and a peer executive at [[TeamApt / Moniepoint]]. Specific role not yet verified from primary source content.
+Frank Atashili is the CPO/COO at [[TeamApt Limited]] / [[Moniepoint]] and a peer executive to [[Emeka Awagu]] (CTO). Named key relationship in Emeka's CTO accountability framework.
+
+## Role
+- **Title:** CPO/COO (inferred from CPO Prep Brief naming and retreat presentation role)
+- **Organization:** [[TeamApt Limited]] / [[Moniepoint]]
+- **Scope:** Product Division — 7 division-level OKRs across 4 businesses: [[Direct Debit Program]] (CDD), [[Monnify]], [[Third Party Processing]] (TPP), [[Transaction Switching]] (Domestic Switching)
+
+## Strategy Retreat (Apr 15, 2026)
+
+Co-presented the TeamApt CEO strategy deck at the [[2026 Executive Strategy Retreat]] alongside [[Dennis Ajalie]] (CEO) and [[Damilare Ogunnaike]] (Monnify Lead). The deck covered scale & economics, financial performance, Monnify review, strategic pivot, and execution plan.
+
+Also preparing his own Product Division presentation covering Q1 progress and Q2-Q4 plan across all 4 business lines.
 
 ## Signals
 
-- **Apr 3, 2026:** Frank-Tolulope accountability exchange — Frank was party to a direct accountability discussion involving [[Tolulope Obianwu]]; context suggests escalation or performance accountability.
-- **Apr 13, 2026 (20:35–20:36 UTC):** Declined Product-Engineering Sync (Apr 14, 15, 16) and Exec Catch-up (Apr 14). Rationale inferred: attendance at Strategy Retreat in London Apr 14–15.
-- **Apr 14, 2026:** Attending Strategy Retreat Day 1 (London, Chicago Booth) alongside Emeka. Shared dinner at Hawksmoor Guildhall same evening.
-- **Apr 14, 2026 (09:35 UTC / 10:35 WAT):** User-captured sentiment note — "Frank is awesome." Recorded during Retreat Day 1. See [[note-2026-04-14 Frank sentiment]].
-- Named explicitly in the accountabilities document as one of 12 key relationships.
-
-## Inferences (labeled as assumptions)
-
-- Assumption: Frank is a peer executive, likely senior product leadership (the "CPO Prep Brief" framing of the Strategy Retreat suggests CPO or equivalent product-side counterpart to the CTO).
-- Assumption: The Apr 3 accountability exchange may relate to [[Tolulope Obianwu|Tolulope]]'s PIP context, given co-occurrence in notes.
-
-## Open Items
-
-- Role title and org position not formally verified from primary source.
-- Relationship nature (peer / report / executive) strongly suggested to be peer-executive by meeting cadence and retreat parity, but not explicitly confirmed.
+- **Apr 14, 2026:** User-captured sentiment: "awesome."
+- **Apr 13, 2026 (20:35–20:36 UTC):** Declined Product-Engineering Sync meeting — context suggests retreat travel preparation.
+- **Apr 3, 2026:** Frank-Tolulope accountability exchange — party to a direct accountability discussion involving [[Tolulope Obianwu]]; context suggests escalation or performance accountability.
 
 ## Relationships
 
-- [[Emeka Awagu]] — key relationship in accountability framework; peer meeting cadence.
-- [[Tolulope Obianwu]] — accountability exchange Apr 3.
-- [[TeamApt / Moniepoint]] — shared organization.
-- [[2026 Strategy Retreat CPO Prep Brief]] — co-attendee, Apr 14–15 London.
+- [[Emeka Awagu]] — peer executive (CTO)
+- [[Dennis Ajalie]] — CEO, TeamApt (reporting line)
+- [[Damilare Ogunnaike]] — Monnify Lead (direct or dotted report)
+- [[Tolulope Obianwu]] — accountability exchange participant
+- [[TeamApt Limited]] — organization
+- [[Moniepoint]] — parent group
 
 ## Sources
 
-- [[note-2026-04-14 Frank sentiment]]
-- [[briefing-2026-04-13]] B8 (Frank declined Sync + Catch-up)
-- [[briefing-2026-04-14]] B9 (Frank declined 3 consecutive Syncs + today's Exec Catch-up)
+- [[source — 2026 Strategy Retreat CPO Prep Brief]]
+- [[source — TeamApt Strategy Retreat 2026 CEO Deck (Dennis Ajalie, Apr 15)]]
