@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-triage
 created: "2026-04-12T03:09:55Z"
-summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, numbered response options, direct lint findings triage, and missed signal capture (Step 5b).
-updated: "2026-04-12T21:25:28Z"
+summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, universal numbered option presentation rule, direct lint findings triage, and missed signal capture (Step 5b).
+updated: 2026-04-16
 cssclasses:
   - "config"
 ---
@@ -14,6 +14,10 @@ cssclasses:
 Triage is the governance workflow for the daily briefing and lint findings. The AI pre-resolves every item with a recommended disposition and confidence assessment. The user governs by exception — approving batches, confirming recommendations, or providing judgment on genuinely ambiguous items.
 
 This protocol works in any client with brain MCP access (Cowork, Claude Code, claude.ai, future clients). The client owns presentation and interaction; the brain owns state.
+
+## Option Presentation
+
+Every point where the user is asked to choose between dispositions MUST present numbered options in a single flat sequence (1, 2, 3…). This applies to all tiers and all lint finding types. Sub-options under a parent option continue the sequence and are visually indented, never nested or restarted. Natural-language responses remain valid alongside numbers — e.g., "ok", "approved", "hold B5", or a free-text override description.
 
 ## Trigger
 
@@ -53,9 +57,14 @@ Present as a **batch summary table** — one line per item: ID, Signal summary, 
 | B8 | Team handling DNS propagation — resolved | Noted |
 ```
 
-The user scans the batch and either:
-- **Approves all** — "ok" or "approved" (blanket approval for entire Tier 1 batch)
-- **Pulls items out** — "hold B5" (moves B5 to Tier 2 for individual treatment)
+After the table, present numbered options (per Option Presentation rule):
+
+```
+1. Approve all
+2. Pull items out — name IDs to move to Tier 2
+```
+
+The user responds with a number or natural language. Natural-language shortcuts ("ok", "approved" for option 1; "hold B5" for option 2) remain valid.
 
 After Tier 1 disposition, advance to Tier 2.
 
@@ -138,9 +147,14 @@ Present as a batch summary table:
 | ... | ... | ... | ... | ... |
 ```
 
-The user responds:
-- **Approve all** — "ok" or "approved". Execute all alias fixes via `update_page` (add alias to existing page frontmatter).
-- **Exclude items** — "skip 3" or "all except 3". Execute the rest.
+After the table, present numbered options (per Option Presentation rule):
+
+```
+1. Approve all
+2. Exclude items — name row numbers to skip
+```
+
+The user responds with a number or natural language ("ok", "approved", "skip 3", "all except 3"). Execute the approved alias fixes via `update_page` (add alias to existing page frontmatter).
 
 After execution, report: "Fixed N aliases: [list]."
 
@@ -156,7 +170,13 @@ Present high-value gaps (10+ occurrences) one at a time with numbered options:
 
 The user responds with a number. On `1`, execute `create_page` with type `["concept"]`, summary and body derived from existing references found via `search`. On `3`, user names the target page and the alias is added.
 
-Medium-value gaps (5–9 occurrences) are presented as a batch table after high-value items, with the option to pull individual items out for creation.
+Medium-value gaps (5–9 occurrences) are presented as a batch table after high-value items, followed by numbered options (per Option Presentation rule):
+
+```
+1. Approve all — create pages for all listed gaps
+2. Pull items out — name row numbers to create individually, skip rest
+3. Skip all — none worth a page right now
+```
 
 #### Synthesis Candidates — Tier 3 (one at a time)
 
@@ -176,7 +196,14 @@ On `1`, the triage client creates the synthesis page via `create_page` (type `["
 
 #### Stale Claims — Tier 1 (batch)
 
-Present as a batch table (same as Awareness items). Typically "noted" — stale claims resolve on next ingest cycle. User can pull items out if a specific page needs immediate attention.
+Present as a batch table. After the table, present numbered options (per Option Presentation rule):
+
+```
+1. Approve all — noted, resolve on next ingest cycle
+2. Pull items out — name row numbers needing immediate attention
+```
+
+Typically "approve all" — stale claims resolve on next ingest cycle. User can pull items out if a specific page needs immediate attention.
 
 ### 4. Execute
 
@@ -205,10 +232,15 @@ For lint findings: update the `lint-report` page frontmatter with `last_triaged:
 
 ### 5b. Missed Signal Capture
 
-After annotation, ask the user: "Anything I should have caught?"
+After annotation, ask the user: "Anything I should have caught?" followed by numbered options (per Option Presentation rule):
 
-- If the user provides one or more missed signals: for each, write a tuning tuple to config-salience `## Tuning Log` via `update_page`. Format: `[date, user_description, missed, inferred_dimension]`. The `inferred_dimension` is the salience dimension that would have caught this signal if weighted higher — infer from the user's description and brain context (run `search` to understand what the signal relates to, then map to the dimension: urgency, impact_scope, cto_specificity, pattern_significance, or accountability_alignment).
-- If the user says no or skips, proceed to Step 6.
+```
+1. No misses to capture
+2. Yes — describe in natural language
+```
+
+- If the user picks `2` or provides one or more missed signals in natural language: for each, write a tuning tuple to config-salience `## Tuning Log` via `update_page`. Format: `[date, user_description, missed, inferred_dimension]`. The `inferred_dimension` is the salience dimension that would have caught this signal if weighted higher — infer from the user's description and brain context (run `search` to understand what the signal relates to, then map to the dimension: urgency, impact_scope, cto_specificity, pattern_significance, or accountability_alignment).
+- If the user picks `1` or says no, proceed to Step 6.
 
 This is the primary path for missed signal capture. A secondary path exists for late-discovered misses: notes captured via `capture_note` with a `MISS:` prefix are routed to the tuning log by the ingest pipeline instead of creating source pages (see config-heartbeat-prompt Phase 2).
 
