@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 93+ consecutive ticks missed since 2026-04-11T22:09 UTC (>93 hours blind). Briefing-2026-04-15 B2 48h SLA deadline Thu Apr 16 09:00 WAT ~14h remaining."
-updated: "2026-04-16T09:27:33Z"
+updated: "2026-04-16T10:18:42Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T09:20:00Z"
+last_processed: "2026-04-16T10:15:00Z"
 ---
 
 ## Connection
@@ -76,4 +76,4 @@ These are recurring patterns the heartbeat should watch for:
 - 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
 - Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
 - JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **110+ consecutive ticks blind (~110 hours)** as of 2026-04-16T09:20 UTC. Day 5. TDSD-6572 new ticket visible via email (Afeez Kazeem, FCMB RC91 related) but unverifiable via Jira. Documentation continuity gap through 5th day.
+- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **112+ consecutive ticks blind (~112 hours)** as of 2026-04-16T10:15 UTC. Day 5. TDSD-6576 new ticket visible via email (Afeez Kazeem, Union Bank RC91 related, 10:05 UTC Apr 16) but unverifiable via Jira. Documentation continuity gap through 5th day.
