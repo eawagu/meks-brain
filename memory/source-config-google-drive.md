@@ -4,7 +4,7 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-15T22:16:19Z"
+updated: "2026-04-16T05:34:52Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-15T10:51:42Z"
@@ -57,18 +57,4 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
-- **2026-04-15 23:09 WAT tick (overnight):** Search returned zero new Gemini docs. **Twenty-second consecutive quiet Drive tick.** last_processed unchanged at 2026-04-15T10:51:42Z (last doc createdTime).
-- **2026-04-15 21:09 WAT tick:** Search `createdTime > '2026-04-15T10:51:42Z'` returned zero new Gemini docs. Twenty-first consecutive quiet Drive tick (Retreat Day 2 in-person, Gemini not capturing in-person sessions). last_processed unchanged.
-- **2026-04-15 19:09 WAT tick:** Search `createdTime > '2026-04-15T10:51:42Z'` returned zero new Gemini docs. Twentieth consecutive quiet Drive tick (Retreat Day 2 in-person, Gemini not capturing in-person sessions). last_processed unchanged.
-- **2026-04-15 18:09 WAT tick:** Zero new Gemini docs. Nineteenth consecutive quiet Drive tick.
-- **2026-04-15 17:09 WAT tick:** Zero new Gemini docs. Eighteenth consecutive quiet Drive tick.
-- **2026-04-15 16:09 WAT tick:** Zero new Gemini docs. Seventeenth consecutive quiet Drive tick.
-- **2026-04-15 15:09 WAT tick:** Zero new Gemini docs. Sixteenth consecutive quiet Drive tick.
-- **2026-04-15 14:09 WAT tick:** Zero new Gemini docs. Fifteenth consecutive quiet tick.
-- **2026-04-15 13:09 WAT tick:** Same Direct to Bank standup doc. Advanced last_processed to 2026-04-15T10:51:42Z.
-- **2026-04-15 12:09 WAT tick:** 1 new Gemini doc "Direct to Bank : Daily stand up 2026/04/15 11:02 WAT" — too large to fetch.
-- 2026-04-15 11:09 WAT tick: Zero new Gemini docs.
-- 2026-04-15 10:09 WAT tick: 1 new Gemini doc processed.
-- 2026-04-15 09:09 WAT tick: Zero new Gemini docs.
-- 2026-04-15 08:10 WAT tick: Zero new Gemini docs.
-- 2026-04-15 07:10 WAT briefing tick: Zero new Gemini docs.
+- **2026-04-16 06:23 WAT briefing tick:** Search returned zero new Gemini docs. **Twenty-third consecutive quiet Drive tick.** last_processed unchanged at 2026-04-15T10:51:42Z. Strategy Retreat Day 3 in-person — Gemini not capturing in-person sessions (expected).
