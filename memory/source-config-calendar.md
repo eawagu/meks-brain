@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-16T17:17:14Z"
+updated: "2026-04-16T19:16:01Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T18:09:00Z"
+last_processed: "2026-04-16T19:09:00Z"
 ---
 
 ## Connection
@@ -70,4 +70,4 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The observer detection heuristic (recurring meetings where I have no follow-up actions) is deferred to the Improve phase — requires cross-source correlation between calendar events and email/Slack/Jira activity.
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
-- **2026-04-16 ~18:09 WAT tick:** Calendar HEALTHY. Zero new event deltas since last tick. Product-Engineering Sync (18:00–19:00 WAT) currently in session — Frank declined. Strategy Retreat Dinner (19:00–22:20 BST, Blackfriars Pier, Golden Flame) upcoming — walk to pier at 18:45. Retreat Day 3 concluded at 18:00 BST.
+- **2026-04-16 ~20:09 WAT tick:** Calendar HEALTHY. Zero new event deltas since last tick. Strategy Retreat Dinner (19:00–22:20 BST, Blackfriars Pier, Golden Flame) in progress. Lattice Review reminder (8 Pending Downward Reviews, Apr 13–28) still active — no new update.
