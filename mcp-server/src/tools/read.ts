@@ -479,4 +479,61 @@ export const lintQueries: ToolDef = {
   },
 };
 
-export const readTools = [search, getPage, listCommitments, getStats, checkIngress, triage, lintQueries];
+// ─── batch_get_pages ──────────────────────────────────────────
+export const batchGetPages: ToolDef = {
+  name: "batch_get_pages",
+  description:
+    "Retrieve multiple brain pages by title in a single call. Returns each page's existence status, body, frontmatter, and metadata. Replaces N × (search + get_page) calls during ingest when checking which entities/concepts already exist.",
+  schema: z.object({
+    titles: z
+      .array(z.string())
+      .min(1)
+      .max(50)
+      .describe("Array of page titles to look up (exact match, max 50)"),
+  }),
+  accessLevel: "read",
+  handler: async (params) => {
+    const { titles } = params;
+
+    const result = await query(
+      `SELECT id, title, file_path, type, frontmatter, body, summary,
+              created_at, updated_at
+       FROM pages
+       WHERE title = ANY($1) AND deleted = FALSE`,
+      [titles]
+    );
+
+    // Index found pages by title for O(1) lookup
+    const found = new Map<string, any>();
+    for (const r of result.rows) {
+      found.set(r.title, {
+        id: r.id,
+        title: r.title,
+        file_path: r.file_path,
+        type: r.type,
+        frontmatter: r.frontmatter,
+        body: r.body,
+        summary: r.summary,
+        created_at: r.created_at,
+        updated_at: r.updated_at,
+      });
+    }
+
+    // Build response preserving input order, marking missing titles
+    const pages = titles.map((t: string) => {
+      const page = found.get(t);
+      return page
+        ? { exists: true, ...page }
+        : { exists: false, title: t };
+    });
+
+    return {
+      requested: titles.length,
+      found: found.size,
+      missing: titles.length - found.size,
+      pages,
+    };
+  },
+};
+
+export const readTools = [search, getPage, batchGetPages, listCommitments, getStats, checkIngress, triage, lintQueries];

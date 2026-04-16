@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
-summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log."
-updated: "2026-04-16T06:29:57Z"
+summary: "Heartbeat task execution prompt — two-phase hourly tick (Heartbeat → Ingest). Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). Ingest: MISS: prefix routing to tuning log. Batch tools: batch_get_pages + batch_upsert_pages replace per-entity sequential calls."
+updated: "2026-04-16T08:55:12Z"
 cssclasses:
   - "config"
 ---
@@ -22,7 +22,7 @@ Read config pages from brain MCP before any signal checks:
 - `config-salience` — triage tiers, Immediate triggers, dimension weights, absence-of-signal rules, tuning mechanism
 - `config-user` — user timezone (IANA identifier), used for briefing timestamps and briefing-tick detection
 
-Read all source-config pages from brain MCP (`search` with type_filter: `[\"source-config\"]`). Each defines: connection details (which MCP connector + access pattern), filtering directives, and `last_processed` timestamp.
+Read all source-config pages from brain MCP (`search` with type_filter: `["source-config"]`). Each defines: connection details (which MCP connector + access pattern), filtering directives, and `last_processed` timestamp.
 
 ### Perceive
 
@@ -32,7 +32,7 @@ For every new signal, run `search` (brain MCP) for semantic similarity against t
 
 When a source-config directive specifies per-message salience factors (e.g., source-config-slack salience factors: channel identity, keyword floor, active-situation entity match, @mention, DM, sender weighting), MUST record the triggering factors alongside the signal metadata so they can be emitted with the briefing item in Act.
 
-**Step 2 — Reminder evaluation.** Query open reminders via `search` with `type_filter: [\"reminder\"]`; filter the results to those with `status: pending`. For each open reminder, reason per-item using the inputs and outputs below. Do not apply fixed age or similarity thresholds — judge each reminder fresh this tick against its own context.
+**Step 2 — Reminder evaluation.** Query open reminders via `search` with `type_filter: ["reminder"]`; filter the results to those with `status: pending`. For each open reminder, reason per-item using the inputs and outputs below. Do not apply fixed age or similarity thresholds — judge each reminder fresh this tick against its own context.
 
 Inputs for each reminder:
 - Reminder fields: title, body (with wiki-links), `due` (if set), `created`, `## Surfacing history` (if any)
@@ -71,11 +71,11 @@ Classify each signal against triage tiers in config-salience (Immediate / Briefi
 
 ### Act
 - **Immediate tier:** Send triage alert via Slack MCP — `slack_send_message_draft` to user DM (user ID from config-user).
-- **State updates:** Write new/updated pages to brain via MCP. Update situation pages (query with `search` type_filter: `[\"situation\"]`) when signals relate to tracked situations. Create new situation pages when a developing condition emerges that doesn't match an existing one.
+- **State updates:** Write new/updated pages to brain via MCP. Update situation pages (query with `search` type_filter: `["situation"]`) when signals relate to tracked situations. Create new situation pages when a developing condition emerges that doesn't match an existing one.
 - **Ingress routing:** Some source-config directives specify that part of a signal's content should be routed to the ingress folder for Phase 2 processing rather than handled as a Phase 1 signal. When a source-config directive specifies ingress routing, call `capture_note` (brain MCP) with the designated content. Include any metadata header specified in the directive. The content will be picked up by the next Phase 2 ingest cycle.
 - Update `last_processed` on each source-config page via `update_page` with current timestamp.
 - **Briefing tick detection:** Read the briefing hour from config-heartbeat and the timezone from config-user. Determine the current local time. If the current hour (in configured timezone) >= the briefing hour, run `search` for a page titled `briefing-YYYY-MM-DD` (today's date in configured timezone). If no such page exists, this is the briefing tick. If the page already exists, skip briefing creation.
-- **Briefing tick:** Create a briefing brain page via `create_page` (type: `[\"briefing\"]`, title: `briefing-YYYY-MM-DD`, frontmatter: `{ status: \"current\" }`). Format per config-briefing: each item gets a sequential ID (B1, B2, etc.). Decision items: Ask → Signal → Recommended Action → Confidence → References. For each Decision item, assess confidence as `high` or `low` per the Confidence Assessment Guidelines in config-briefing — `high` when one disposition clearly dominates, `low` when multiple paths are defensible or context is insufficient. Confidence routes triage tier (high → Tier 2 propose, low → Tier 3 escalate). Awareness items: Signal → Recommended Action → References (no Confidence field — always Tier 1). No Implication field — that is computed at triage time. Order by salience score per config-salience. Update the previous day's briefing page to `status: superseded` via `update_page`.
+- **Briefing tick:** Create a briefing brain page via `create_page` (type: `["briefing"]`, title: `briefing-YYYY-MM-DD`, frontmatter: `{ status: "current" }`). Format per config-briefing: each item gets a sequential ID (B1, B2, etc.). Decision items: Ask → Signal → Recommended Action → Confidence → References. For each Decision item, assess confidence as `high` or `low` per the Confidence Assessment Guidelines in config-briefing — `high` when one disposition clearly dominates, `low` when multiple paths are defensible or context is insufficient. Confidence routes triage tier (high → Tier 2 propose, low → Tier 3 escalate). Awareness items: Signal → Recommended Action → References (no Confidence field — always Tier 1). No Implication field — that is computed at triage time. Order by salience score per config-salience. Update the previous day's briefing page to `status: superseded` via `update_page`.
 - **Salience factor trace (calibration substrate):** For every briefing item derived from a signal whose source-config enumerates per-message salience factors (e.g., source-config-slack), MUST append a `Factors: <factor-name>[, <factor-name>...]` line to the item's References section, naming each factor that triggered the item's surfacing or tier assignment. This replaces the previous declarative tier-trace ("surfaced because Tier 1 @channel") with a per-item reasoning trace. The Improve phase reads the Factors line when classifying the item's disposition into a Tuning Log tuple — items without a Factors line cannot contribute to per-factor calibration.
 - **Reminder surfacings — briefing item content:**
   - **Surface-only** (`surface_now` true, `auto_resolve_candidate` false): Ask is the reminder's title (the action to take). Signal is `surface_why` plus `surface_reason`. Recommended Action is the reminder body or a user-facing restatement. References: `[[reminder title]]`.
@@ -88,7 +88,7 @@ Classify each signal against triage tiers in config-salience (Immediate / Briefi
 
 The Improve phase reads triage dispositions and writes calibration tuples. This phase runs on every tick, including early-exit ticks (for absence-of-signal checks).
 
-**Step 1 — Read recent Triage Results.** Query briefing pages from the last 7 days via `search` (type_filter: `[\"briefing\"]`). For each briefing page that has a `## Triage Results` section, read the disposition table. Skip briefing pages with no Triage Results section (not yet triaged).
+**Step 1 — Read recent Triage Results.** Query briefing pages from the last 7 days via `search` (type_filter: `["briefing"]`). For each briefing page that has a `## Triage Results` section, read the disposition table. Skip briefing pages with no Triage Results section (not yet triaged).
 
 **Step 2 — Classify dispositions into tuples.** For each dispositioned item not already recorded in the config-salience Tuning Log (compare item IDs against existing tuples to avoid duplicates):
 - `approved` → action: `acted`, dominant_dimension: the salience dimension that scored highest for this item
@@ -128,6 +128,8 @@ All operations go through the Brain MCP connector (mek-brain). You have these to
 - `create_page` — create a new brain page
 - `update_page` — update an existing brain page
 - `get_page` — retrieve a page by title
+- `batch_get_pages` — retrieve multiple pages by title in a single call (replaces N × search + get_page for entity/concept lookups)
+- `batch_upsert_pages` — bulk create-or-update pages with pre-reasoned body text in a single call, single git commit (replaces N × create_page/update_page for entity/concept writes)
 - `finalize_ingest` — atomically mark a file as processed AND dispose of the raw file per its `retention_label` (move to `raw/`, write Postgres blob, or delete — gated by `config-ingress-retention.discard_mode`). Single call replaces the former `mark_processed` + `dispatch_raw` two-step.
 
 ### Step 1: Scan
@@ -142,7 +144,7 @@ Before processing files through the normal ingest pipeline, check each file for 
 2. Run `search` with the description to identify which salience dimension would have caught this signal. Map to the most relevant dimension: urgency, impact_scope, cto_specificity, pattern_significance, or accountability_alignment.
 3. Read config-salience via `get_page`. Append a tuple to the `## Tuning Log` section via `update_page`: `[date, user_description, missed, inferred_dimension]`.
 4. Do NOT create a source page for this file — it is a calibration signal, not a knowledge source.
-5. Call `finalize_ingest` with `file_path`, `file_modified`, `label: \"discard\"`, and no `page_id` — MISS: notes are implicit discards. The MCP server's `discard_mode` gate determines whether the file is deleted (live) or moved to `raw/` (shadow).
+5. Call `finalize_ingest` with `file_path`, `file_modified`, `label: "discard"`, and no `page_id` — MISS: notes are implicit discards. The MCP server's `discard_mode` gate determines whether the file is deleted (live) or moved to `raw/` (shadow).
 
 Continue to Step 2 with the remaining (non-MISS) files.
 
@@ -172,21 +174,18 @@ For each file returned by scan, in order:
    - The `retention_rationale` is a single sentence stating WHY this label was chosen (e.g., "Multi-stakeholder transcript with named decisions; future retrieval likely.", "Routine vendor invoice — totals captured in source page.", "One-line ack; no further utility."). Be specific to this file, not generic. The rationale is the calibration substrate — the Improve phase reads it.
    - **For image files:** examine the image visually. Extract all readable text (amounts, dates, names, reference numbers, addresses). Identify document type (receipt, passport page, invoice, photo, etc.). Use extracted content for Key Points and Entities. If text is partially legible, include best-effort reading with a note. Apply the same retention judgment — most images default to `fs` (worth keeping the original visual) unless the source page fully captures the content (then `discard`) or the image is reference material likely to drive future retrieval (then `postgres`).
 
-3. **Update or create entity pages**:
-   For each entity mentioned:
-   - Call `search` with the entity name to check if a page exists.
-   - If it exists: call `get_page` to read the current content, then call `update_page` to incorporate the new information from this source. Rewrite the page to integrate — do not just append. When new info contradicts existing content, add both frames with evidence. Always add a wiki-link back to the source page.
-   - If it does not exist: call `create_page` with type ["entity"], a summary, and body content drawn from what this source reveals about the entity. Include a wiki-link to the source page.
+3. **Batch entity/concept update**:
+   Collect all entity names and concept names from the source page extraction (step 2's `## Entities Mentioned` and `## Concepts` sections).
+   - Call `batch_get_pages` with all entity + concept titles. This returns each page's existence status, current body, and frontmatter in a single call.
+   - For each title in the result, reason about the target body:
+     - **Existing pages** (`exists: true`): read the current body from the response. Compose a new body that integrates the new information from this source. Rewrite to incorporate — do not just append. When new info contradicts existing content, add both frames with evidence. Always add a wiki-link back to the source page.
+     - **New pages** (`exists: false`): compose a body drawn from what this source reveals about the entity or concept. Include a wiki-link to the source page.
+   - Call `batch_upsert_pages` with all pages at once. Each entry includes: title, type (`["entity"]` or `["concept"]`), the pre-reasoned body, and a summary. The tool handles create-or-update mechanics, embedding generation, and Postgres sync. Single git commit for the entire batch.
 
-4. **Update or create concept pages**:
-   Same pattern as entities, but with type ["concept"]. Concepts are patterns, themes, domains, or recurring ideas — not specific people or organizations.
-   - If it exists: call `get_page` to read the current content, then call `update_page` to incorporate the new information. Rewrite to integrate. When new info contradicts, add both frames with evidence.
-   - If it does not exist: call `create_page` with type ["concept"], a summary, and body content drawn from what this source reveals. Include a wiki-link to the source page.
-
-5. **Cross-reference search**:
+4. **Cross-reference search**:
    After creating/updating entity and concept pages, call `search` with the source's key themes to find related pages not already linked. If strong matches are found (rrf_score > 0.3), update those pages to add a wiki-link to the new source or related entities/concepts.
 
-6. **Finalize ingest**: Call `finalize_ingest` with:
+5. **Finalize ingest**: Call `finalize_ingest` with:
    - `file_path`: the file_path from scan results
    - `file_modified`: the file_modified timestamp from scan results
    - `page_id`: the source page ID returned by `create_page` in step 2
@@ -212,7 +211,7 @@ After processing all files (or hitting the 20-file batch limit), report:
 - BATCH LIMIT: Process at most 20 files per run. If more files are pending, they will be picked up on the next scheduled run. This prevents context window overflow.
 - NEVER skip the source page — every successfully read file gets exactly one source page (except MISS: files which route to the tuning log instead).
 - NEVER call `finalize_ingest` for files that failed to read — those files are either stuck in ingress (needs manual intervention) or already moved to `review/` by `read_ingress`.
-- ALWAYS call `finalize_ingest` for every successfully processed file (including MISS: files with `label: \"discard\"`). This is the single atomic operation that marks the file as processed AND moves/deletes the raw file from ingress.
+- ALWAYS call `finalize_ingest` for every successfully processed file (including MISS: files with `label: "discard"`). This is the single atomic operation that marks the file as processed AND moves/deletes the raw file from ingress.
 - Wiki-link all entity and concept references in page bodies: `[[Entity Name]]`.
 - If `create_page` fails with "already exists", call `update_page` instead.
 - If any tool call fails, note the error and continue to the next file. Do not stop the batch.

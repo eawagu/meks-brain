@@ -821,4 +821,201 @@ export const finalizeIngest: ToolDef = {
 // dispatch_raw removed as standalone tool — finalize_ingest handles both
 // normal ingest (with page_id) and MISS: routing (without page_id, label: "discard").
 
-export const writeTools = [createPage, updatePage, deletePage, finalizeIngest, captureNote, captureReminder];
+// ─── batch_upsert_pages ──────────────────────────────────────
+// Bulk create-or-update for entity/concept pages during ingest.
+// The caller reasons about merges, competing interpretations, and body
+// composition BEFORE calling this tool. The tool only handles the mechanical
+// upsert: frontmatter validation, file write, embedding, Postgres sync.
+// Single git commit at end for the entire batch.
+
+const batchUpsertPageSchema = z.object({
+  pages: z
+    .array(
+      z.object({
+        title: z.string().describe("Page title (exact match for update, new title for create)"),
+        type: z
+          .array(z.string())
+          .min(1)
+          .describe("Page type array, primary type first"),
+        body: z
+          .string()
+          .describe(
+            "Complete markdown body — pre-reasoned by the caller. For updates, this is the full merged body incorporating existing + new content. For creates, this is the initial body."
+          ),
+        summary: z
+          .string()
+          .optional()
+          .describe("One-sentence summary"),
+        frontmatter: z
+          .record(z.any())
+          .optional()
+          .default({})
+          .describe(
+            "Additional frontmatter fields beyond title/type/created/updated"
+          ),
+      })
+    )
+    .min(1)
+    .max(30)
+    .describe("Array of pages to upsert (max 30 per call)"),
+});
+
+export const batchUpsertPages: ToolDef = {
+  name: "batch_upsert_pages",
+  description:
+    "Bulk create-or-update brain pages in a single call. For each page: if it exists, updates body/frontmatter/embedding; if not, creates it. Validates frontmatter, writes markdown files, syncs to Postgres with embeddings. Single git commit for the entire batch. The caller is responsible for all reasoning — merges, competing interpretations, body composition — before calling. This tool is mechanical only.",
+  schema: batchUpsertPageSchema,
+  accessLevel: "write",
+  handler: async (params) => {
+    const { pages } = params;
+
+    // Load page type config once for the entire batch
+    const ptc = await loadPageTypeConfig();
+
+    // Check which titles already exist
+    const allTitles = pages.map((p: { title: string }) => p.title);
+    const existingResult = await query(
+      `SELECT id, title, file_path, type, frontmatter, summary
+       FROM pages
+       WHERE title = ANY($1) AND deleted = FALSE`,
+      [allTitles]
+    );
+    const existingMap = new Map<string, any>();
+    for (const row of existingResult.rows) {
+      existingMap.set(row.title, row);
+    }
+
+    const results: Array<{
+      title: string;
+      id: number;
+      action: "created" | "updated";
+      file_path: string;
+      orphan?: boolean;
+    }> = [];
+    const errors: Array<{ title: string; error: string }> = [];
+
+    for (const page of pages) {
+      try {
+        const { title, type: types, body, summary, frontmatter: extraFm } = page;
+
+        // Validate types against config
+        for (const t of types) {
+          if (!ptc.types.has(t)) {
+            throw new Error(
+              `Invalid page type: "${t}". Valid types: ${[...ptc.types.keys()].join(", ")}`
+            );
+          }
+        }
+
+        const existing = existingMap.get(title);
+        const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+
+        if (existing) {
+          // UPDATE path — merge frontmatter, replace body
+          const mergedFm: Record<string, any> = {
+            ...existing.frontmatter,
+            ...extraFm,
+            updated: now,
+          };
+
+          validateFrontmatter(mergedFm, types, ptc);
+
+          const effectiveSummary = summary ?? existing.summary;
+          if (effectiveSummary) mergedFm.summary = effectiveSummary;
+
+          // Write file
+          const filePath = path.join(config.memoryPath, existing.file_path);
+          const markdown = buildMarkdown(mergedFm, body);
+          await fs.writeFile(filePath, markdown, "utf-8");
+
+          // Sync to Postgres
+          const pageId = await syncToPostgres(
+            title,
+            existing.file_path,
+            types,
+            mergedFm,
+            body,
+            effectiveSummary,
+            mergedFm.created,
+            now
+          );
+
+          results.push({
+            title,
+            id: pageId,
+            action: "updated",
+            file_path: existing.file_path,
+          });
+        } else {
+          // CREATE path
+          const fullFm: Record<string, any> = {
+            title,
+            type: types,
+            cssclasses: [types[0]],
+            ...extraFm,
+            created: now,
+            updated: now,
+          };
+          if (summary) fullFm.summary = summary;
+
+          validateFrontmatter(fullFm, types, ptc);
+
+          const filename = `${sanitizeFilename(title)}.md`;
+          const filePath = path.join(config.memoryPath, filename);
+
+          const markdown = buildMarkdown(fullFm, body);
+          await fs.writeFile(filePath, markdown, "utf-8");
+
+          const pageId = await syncToPostgres(
+            title,
+            filename,
+            types,
+            fullFm,
+            body,
+            summary || null,
+            now,
+            now
+          );
+
+          // Orphan check
+          const linkPattern = `[[${title}]]`;
+          const linkCheck = await query(
+            "SELECT COUNT(*) AS count FROM pages WHERE body LIKE $1 AND title != $2 AND deleted = FALSE",
+            [`%${linkPattern}%`, title]
+          );
+          const isOrphan = parseInt(linkCheck.rows[0].count) === 0;
+
+          results.push({
+            title,
+            id: pageId,
+            action: "created",
+            file_path: filename,
+            orphan: isOrphan,
+          });
+        }
+      } catch (err: any) {
+        errors.push({ title: page.title, error: err.message });
+      }
+    }
+
+    // Single git commit for the entire batch
+    if (results.length > 0) {
+      const created = results.filter((r) => r.action === "created").length;
+      const updated = results.filter((r) => r.action === "updated").length;
+      const parts: string[] = [];
+      if (created > 0) parts.push(`${created} created`);
+      if (updated > 0) parts.push(`${updated} updated`);
+      await gitCommit(`batch-upsert: ${parts.join(", ")} (${results.map((r) => r.title).join(", ")})`);
+    }
+
+    return {
+      total: pages.length,
+      succeeded: results.length,
+      failed: errors.length,
+      results,
+      errors: errors.length > 0 ? errors : undefined,
+    };
+  },
+};
+
+export const writeTools = [createPage, updatePage, deletePage, finalizeIngest, batchUpsertPages, captureNote, captureReminder];
