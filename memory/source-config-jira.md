@@ -3,77 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE: 124+ consecutive ticks missed since 2026-04-11T22:09 UTC (>124 hours blind). TDSD-6578 visible via email only."
-updated: "2026-04-16T16:16:17Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE Day 5+: 125+ consecutive ticks missed since 2026-04-11T22:09 UTC. Investigation owner: Nicolaas Taljaard (engaged 2026-04-16)."
+updated: 2026-04-16
 cssclasses:
   - "source-config"
 last_processed: "2026-04-16T16:09:00Z"
 ---
 
-## Connection
-
-- **Connector:** Atlassian MCP
-- **Cloud ID:** 15be6fd4-ef3b-4d52-ab1b-e6e706a38e06
-- **Site:** teamapt.atlassian.net
-- **Primary project:** TDSD (Tech Service Desk — incidents and operations)
-- **Access patterns:**
-  - `searchJiraIssuesUsingJql` — JQL queries for delta detection and pattern monitoring
-  - `getJiraIssue` — full ticket detail when flagged
-  - `getTransitionsForJiraIssue` — check available status transitions
-
-## Directives
-
-### Priority model — signal types ordered by CTO relevance
-
-**1. Approval gate bottlenecks (highest priority):**
-Tickets in Authorize status where CTO (Emeka Awagu) is a required approver. These block delivery — every hour in Authorize is a missed window.
-- JQL: `project = TDSD AND status = Authorize`
-- Surface: ticket key, summary, how long in Authorize, who else has approved, what it blocks
-- Escalation signal: if in Authorize > 4 hours during business hours, flag as blocking
-
-**2. SLA breach — leading indicator:**
-Surface tickets approaching SLA breach before they breach, not after. Post-breach tickets surfaced as process failure documentation.
-- JQL: `project = TDSD AND "Time to first response" = breached() OR "Time to resolution" = breached()`
-- Also flag: tickets where first response SLA will breach within 2 hours
-
-**3. P1/P2 incident lifecycle:**
-Track incident tickets from filing through resolution. Key signals: new P1/P2 filed, status transitions, resolution, RCA posted.
-- JQL: `project = TDSD AND priority in (Highest, High) AND status != Closed ORDER BY updated DESC`
-- Surface: new filings, status changes, resolution messages, time-to-resolution
-
-**4. Zero-activity tickets (process failure signal):**
-Tickets with no comments or status changes after defined thresholds. Indicates dropped work or silent failure.
-- P1/P2: zero comments after 1 hour → flag immediately
-- P3 and below: zero comments after 24 hours → flag in daily briefing
-- Any ticket: no activity for 5+ days regardless of priority → flag as stale
-- JQL for stale: `project = TDSD AND updated < -5d AND status NOT IN (Closed, Done, Completed, Resolved)`
-
-**5. Status transitions of interest:**
-- Moved to Completed/Closed: track resolution, note if RCA was posted
-- Moved to Awaiting Scheme Update / Awaiting Implementation: external dependency — track for staleness
-- Moved backward (e.g., from Work in Progress back to Initial Review): regression signal
-
-**6. Ticket volume patterns:**
-If more than 3 P1 tickets are filed within a 24-hour window, surface as a systemic pattern, not individual incidents. Cross-reference with brain entity pages for bank/service correlation.
-
-### Monitored ticket patterns (from current operational context)
-
-These are recurring patterns the heartbeat should watch for:
-- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay routes. Track cycle count per bank.
-- **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval is pending and window is within 4 hours.
-- **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.
-- **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.
-
-### Skip rules
-
-- Sub-task updates on tickets already being tracked at parent level
-- Routine Jira automation messages (workflow transitions with no human comment)
-- Tickets in projects other than TDSD unless explicitly referenced in a Tier 1 email or Slack message
-
-## Notes
-
-- The Jira MCP requires `cloudId` on every call. Use `15be6fd4-ef3b-4d52-ab1b-e6e706a38e06`.
-- 374 projects visible on this Atlassian instance. TDSD is the primary operational project.
-- Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.
-- JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
-- **AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **127+ consecutive ticks blind (~127 hours)** as of 2026-04-16T16:09 UTC. Day 5. TDSD-6576, TDSD-6578, TDSD-6586, TISD-480 tickets visible via email only but unverifiable via Jira. Documentation continuity gap through 5th day.
+## Connection\n\n- **Connector:** Atlassian MCP\n- **Cloud ID:** 15be6fd4-ef3b-4d52-ab1b-e6e706a38e06\n- **Site:** teamapt.atlassian.net\n- **Primary project:** TDSD (Tech Service Desk — incidents and operations)\n- **Access patterns:**\n  - `searchJiraIssuesUsingJql` — JQL queries for delta detection and pattern monitoring\n  - `getJiraIssue` — full ticket detail when flagged\n  - `getTransitionsForJiraIssue` — check available status transitions\n\n## Directives\n\n### Priority model — signal types ordered by CTO relevance\n\n**1. Approval gate bottlenecks (highest priority):**\nTickets in Authorize status where CTO (Emeka Awagu) is a required approver. These block delivery — every hour in Authorize is a missed window.\n- JQL: `project = TDSD AND status = Authorize`\n- Surface: ticket key, summary, how long in Authorize, who else has approved, what it blocks\n- Escalation signal: if in Authorize > 4 hours during business hours, flag as blocking\n\n**2. SLA breach — leading indicator:**\nSurface tickets approaching SLA breach before they breach, not after. Post-breach tickets surfaced as process failure documentation.\n- JQL: `project = TDSD AND \"Time to first response\" = breached() OR \"Time to resolution\" = breached()`\n- Also flag: tickets where first response SLA will breach within 2 hours\n\n**3. P1/P2 incident lifecycle:**\nTrack incident tickets from filing through resolution. Key signals: new P1/P2 filed, status transitions, resolution, RCA posted.\n- JQL: `project = TDSD AND priority in (Highest, High) AND status != Closed ORDER BY updated DESC`\n- Surface: new filings, status changes, resolution messages, time-to-resolution\n\n**4. Zero-activity tickets (process failure signal):**\nTickets with no comments or status changes after defined thresholds. Indicates dropped work or silent failure.\n- P1/P2: zero comments after 1 hour → flag immediately\n- P3 and below: zero comments after 24 hours → flag in daily briefing\n- Any ticket: no activity for 5+ days regardless of priority → flag as stale\n- JQL for stale: `project = TDSD AND updated < -5d AND status NOT IN (Closed, Done, Completed, Resolved)`\n\n**5. Status transitions of interest:**\n- Moved to Completed/Closed: track resolution, note if RCA was posted\n- Moved to Awaiting Scheme Update / Awaiting Implementation: external dependency — track for staleness\n- Moved backward (e.g., from Work in Progress back to Initial Review): regression signal\n\n**6. Ticket volume patterns:**\nIf more than 3 P1 tickets are filed within a 24-hour window, surface as a systemic pattern, not individual incidents. Cross-reference with brain entity pages for bank/service correlation.\n\n### Monitored ticket patterns (from current operational context)\n\nThese are recurring patterns the heartbeat should watch for:\n- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay routes. Track cycle count per bank.\n- **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval is pending and window is within 4 hours.\n- **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.\n- **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.\n\n### Skip rules\n\n- Sub-task updates on tickets already being tracked at parent level\n- Routine Jira automation messages (workflow transitions with no human comment)\n- Tickets in projects other than TDSD unless explicitly referenced in a Tier 1 email or Slack message\n\n## Connector Health\n\n**AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **125+ consecutive ticks blind (~125 hours)** as of 2026-04-16T14:15 UTC. Day 5. TDSD-6576, TDSD-6578, TDSD-6586 new tickets visible via email only but unverifiable via Jira. Documentation continuity gap through 5th day.\n\n**Investigation owner:** [[Nicolaas Taljaard]] (Head, Technology Strategy and Partnerships). Engaged 2026-04-16 by [[Emeka Awagu]] to diagnose root cause of the persistent auth failure and restore connectivity.\n\n## Notes\n\n- The Jira MCP requires `cloudId` on every call. Use `15be6fd4-ef3b-4d52-ab1b-e6e706a38e06`.\n- 374 projects visible on this Atlassian instance. TDSD is the primary operational project.\n- Approval gate monitoring is the most CTO-relevant Jira signal. The TDSD-6479 pattern (five consecutive missed deploy windows, CTO approval sole blocker) is the canonical example of what this source-config is designed to catch early.\n- JQL `breached()` function requires Jira Service Management SLA configuration. If SLA fields are not available, fall back to created-date-based heuristics (P1 open > 4h = likely breached).
