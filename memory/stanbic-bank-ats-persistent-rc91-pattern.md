@@ -5,8 +5,8 @@ type:
 title: Stanbic Bank ATS — Persistent RC91 Pattern
 status: developing
 created: "2026-04-11T16:42:02Z"
-summary: "24+ P1 RC91 cycles Apr 3–16. Cycle 24 filed Apr 16 10:11 WAT — exceeded 2h threshold at 12:09 WAT, Immediate alert dispatched. No resolution signal. Investigation fulfilled — root cause CBA instability + inactive-node routing. Structural fix not deployed. Part of 4-bank simultaneous RC91 pattern Apr 16."
-updated: "2026-04-16T11:50:51Z"
+summary: "24+ P1 RC91 cycles Apr 3–16. Cycle 24 filed Apr 16 10:11 WAT — ~3h active at 13:09 WAT, no resolution signal. Second Immediate alert dispatched. Investigation fulfilled — root cause CBA instability + inactive-node routing. Structural fix not deployed. Part of 4-bank simultaneous RC91 pattern Apr 16."
+updated: "2026-04-16T12:17:51Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -20,7 +20,7 @@ Twenty-four+ confirmed P1 cycles Apr 3–16 (14 days), all bank-resolved, same r
 
 **Apr 16 — 4-bank simultaneous RC91 pattern:** FCMB (morning, intermittent after initial resolution 08:19–09:02 WAT), Stanbic (cycle 24, 10:11 WAT ongoing), [[Union Bank]] (11:04 WAT → resolved 12:00 WAT, ~56min), [[UBA]] (10:35 WAT filed, ongoing). Four banks in one day exceeds the systemic-pattern threshold. Reinforces the NIBSS-side / Moniepoint-infrastructure root cause over per-bank explanations.
 
-Cycle 24 on Apr 16: [[Afeez Kazeem]] posted P1 in #teamapt-tech-operations at 10:20 BST: "P1: Stanbic Bank RC 91 failures across processors. Cause: From the bank. Ongoing. Start Time 10:11 AM." Escalated to bank for investigation and resolution. **2h+ threshold exceeded at 12:09 WAT — Immediate alert dispatched to CTO Slack DM.** No resolution signal as of 12:09 WAT.
+Cycle 24 on Apr 16: [[Afeez Kazeem]] posted P1 in #teamapt-tech-operations at 10:20 BST: "P1: Stanbic Bank RC 91 failures across processors. Cause: From the bank. Ongoing. Start Time 10:11 AM." Escalated to bank for investigation and resolution. **2h+ threshold exceeded at 12:09 WAT — first Immediate alert dispatched. 3h+ active at 13:09 WAT — second Immediate alert dispatched.** No resolution signal as of 13:09 WAT. This is the longest-running cycle in the recent pattern — prior cycles typically resolve in 30–90 minutes. Extended duration may indicate a different failure mode or Stanbic-side operational delay.
 
 Cycle 23 on Apr 14 morning (brief): Slack P1 log 09:51 BST recorded Start 09:46 → End 09:58 BST, **12-minute duration**, bank-resolved. Separate from and shorter than cycle 22 filed earlier by [[Olamide Ajibulu]]. Standard short-cycle pattern.
 
@@ -53,4 +53,5 @@ email Stanbic RC91 thread Apr 3–16; slack #teamapt-tech-operations (cycle 24 A
 - 2026-04-15 10:09 WAT — Fresh NIBSS-wide RC91 signal: 4-min failure window 09:49–09:53 WAT.
 - 2026-04-15 14:09 WAT — Investigation commitment FULFILLED. Oladapo finding: Stanbic CBA instability + Moniepoint inactive-node routing amplifier. Structural fix: routing-restoration automation (Domestic Switching / Babatunde Okufi).
 - 2026-04-16 11:20 WAT — Cycle 24: [[Afeez Kazeem]] filed P1 in #teamapt-tech-operations 10:20 BST (Start 10:11 AM WAT, ongoing). Part of 4-bank simultaneous RC91 pattern (FCMB, Stanbic, Union, UBA).
-- 2026-04-16 12:09 WAT — Cycle 24 exceeded 2h threshold. No resolution signal. Immediate alert dispatched to CTO Slack DM. Union Bank RC91 resolved at 12:00 WAT (~56min). Stanbic and UBA still active.
+- 2026-04-16 12:09 WAT — Cycle 24 exceeded 2h threshold. No resolution signal. First Immediate alert dispatched to CTO Slack DM. Union Bank RC91 resolved at 12:00 WAT (~56min). Stanbic and UBA still active.
+- 2026-04-16 13:09 WAT — Cycle 24 ~3h active. No resolution signal. Second Immediate alert dispatched. Longest-running cycle in recent pattern — prior cycles resolve in 30–90 min. Extended duration anomalous.
