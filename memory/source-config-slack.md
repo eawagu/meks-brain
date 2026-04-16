@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-16T05:32:52Z"
+updated: "2026-04-16T06:15:03Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T05:23:00Z"
+last_processed: "2026-04-16T06:09:00Z"
 ---
 
 ## Connection
@@ -111,3 +111,4 @@ When multiple messages across different channels reference the same entity (bank
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
 - **2026-04-16 06:23 WAT briefing tick:** DM sweep zero results (to: and from: queries both empty). **Twenty-sixth consecutive quiet DM tick.** Tier 1 read on #teamapt-tech-operations returned zero new messages in the overnight window since 23:09 WAT Apr 15. P1 keyword search returned zero relevant results. Overnight quiet as expected (23:00–06:00 WAT skip window per config-heartbeat). Strategy Retreat Day 3 London today.
+- **2026-04-16 07:09 WAT tick:** All Tier 1 channels empty. DM sweep zero (to: and from: queries). P1 keyword search zero. #teamapt-executives empty. **Twenty-seventh consecutive quiet DM tick.** Retreat Day 3 in-person — low Slack activity expected.
