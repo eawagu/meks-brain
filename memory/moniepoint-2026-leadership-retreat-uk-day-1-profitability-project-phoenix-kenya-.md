@@ -1,15 +1,15 @@
 ---
-title: Moniepoint 2026 Leadership Retreat UK - Day 1 Profitability Project Phoenix Kenya Launch - Summary
 type:
   - "source"
+title: Moniepoint 2026 Leadership Retreat UK - Day 1 Profitability Project Phoenix Kenya Launch - Summary
+created: "2026-04-17T14:46:31Z"
+summary: "Day 1 retreat: 20% PAT by end-2026 / 30% PAT by Q2 2026; Project Phoenix platformization program (Ravi PM, Phase 1 TSP with Alex/Phil/Frank); Kenya launch via Sumac acquisition; \u20241.5B revenue gap vs benchmark; MoneyBook 80% M1 retention gate; market list: SA/Morocco/Kenya/DRC."
+updated: "2026-04-17T14:52:47Z"
 cssclasses:
   - "source"
 source_path: Moniepoint Inc 2026 Leadership Retreat - UK - Day 1_ Profitability Targets, Platformization (Project Phoenix), Kenya Launch, and Competitive Strategy-Summary.md
 retention_label: postgres
 retention_rationale: Summary sets the 2026 profitability gates (20% PAT, 30% PAT), platformization program structure, Kenya launch via Sumac, MoneyBook retention gate, and market-expansion target list — multiple discrete decisions likely to be queried individually.
-created: "2026-04-17T14:46:31Z"
-updated: "2026-04-17T14:46:31Z"
-summary: "Day 1 retreat: 20% PAT by end-2026 / 30% PAT by Q2 2026; Project Phoenix platformization program (Ravi PM, Phase 1 TSP with Alex/Phil/Frank); Kenya launch via Sumac acquisition; \u20241.5B revenue gap vs benchmark; MoneyBook 80% M1 retention gate; market list: SA/Morocco/Kenya/DRC."
 ---
 
 ## Summary
@@ -51,7 +51,7 @@ Day 1 retreat session on profitability discipline, multi-country platformization
 
 - **Verve pricing shock (Q4 2025)**: switched from flat pricing via regulatory loophole. Acquirers are capped and must accept all schemes, but schemes aren't price-regulated — creates rent-seeking leverage.
 - **Action**: Dennis to negotiate Verve pricing down in exchange for committed volumes.
-- **No rent-seeking posture** by Moniepoint — recognize [[InterSwitch]] / Verve heritage but reject current tactics.
+- **No rent-seeking posture** by Moniepoint — recognize [[Interswitch]] / Verve heritage but reject current tactics.
 - **Price hikes not viable** — agent/merchant thin margins, price-sensitive; even small fee increases cause attrition to transfers/cash.
 - **Regulatory strategy**: educating regulators on systemic risks, capital adequacy, foreclosure of demand, monopoly concerns. Central bank prioritizes systemic stability; [[FCCPC]] mandate constrained by CBN carve-outs. Pursuing legal reforms.
 - **Predatory pricing watch**: 0% commercial bank offers currently ~0.3–0.4% share (from 0.2%). If a bank hits ~10% acquiring share, dominance/cross-subsidy concerns would apply.
@@ -64,7 +64,7 @@ Day 1 retreat session on profitability discipline, multi-country platformization
 - **Real-time customer qualitative feedback systems** needed (CSAT pipelines into product teams).
 - **Reliability and uptime as first-class metrics**.
 - **VAS**: 27% MoM growth but far from potential. Improve UX + add rewards.
-- **MoneyBook (AI-native)**: current M1 retention reportedly 60% → 67%, still considered poor. Target 80% M1 leading to 60% M6 before aggressive CAC. If retained well, opens millions of non-POS small businesses (Instagram sellers, neighborhood shops) — potential defensible differentiator.
+- **[[Moneybook]] (AI-native)**: current M1 retention reportedly 60% → 67%, still considered poor. Target 80% M1 leading to 60% M6 before aggressive CAC. If retained well, opens millions of non-POS small businesses (Instagram sellers, neighborhood shops) — potential defensible differentiator.
 - **Key Account Management**: Pareto-aligned (10% of customers = 55% revenue) for white-glove service on large clients.
 - **Full stack**: payments + credit + savings + insurance + software.
 - **Pre-June deliverables**: VAS, account transfers ("Pay with MoneyPoint"), lending, POS device experience fixes, international launch, contactless, time-to-pay, middle-market lending readiness.
@@ -91,7 +91,7 @@ Day 1 retreat session on profitability discipline, multi-country platformization
 - [[Tosin Eniolorunda]]
 - [[Dennis Ajalie]] (Verve negotiations lead)
 - [[Verve]]
-- [[InterSwitch]]
+- [[Interswitch]]
 - [[FCCPC]] (Federal Competition and Consumer Protection Commission)
 - [[Sumac Microfinance Bank]]
 - [[Peter]] (Sumac acquisition actor)
@@ -113,7 +113,7 @@ Day 1 retreat session on profitability discipline, multi-country platformization
 - [[Profitability Targets 2026]]
 - [[Platformization]]
 - [[MoneyWalls]]
-- [[MoneyBook]]
+- [[Moneybook]]
 - [[TSP]]
 - [[VAS]]
 - [[Class Strategy]]
