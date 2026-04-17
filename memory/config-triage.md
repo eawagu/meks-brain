@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-triage
 created: "2026-04-12T03:09:55Z"
-summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly, governance-by-exception, universal numbered option presentation rule, direct lint findings triage, and missed signal capture (Step 5b).
-updated: 2026-04-16
+summary: Triage protocol — three-tier confidence-based flow (auto-advance / propose / escalate) with dynamic context assembly including time-window reconciliation against current wall-clock time, governance-by-exception, universal numbered option presentation rule, direct lint findings triage, and missed signal capture (Step 5b).
+updated: 2026-04-17
 cssclasses:
   - "config"
 ---
@@ -38,6 +38,8 @@ If the briefing page already has a `## Triage Results` section with all items di
 For each briefing item, read the pages listed in its **References** field via `get_page` (situation pages, entity pages). Then run `search` with the item's Ask or Signal text to find additional connections the heartbeat may have missed.
 
 Compute the **Implication** for each item in real time — why this item matters given the current state of referenced situations, entity history, commitment patterns, and any new connections found via search. This is the dynamic context assembly step.
+
+**Time-window reconciliation:** Triage may run hours after the briefing was emitted. When a briefing item proposes a specific time slot, same-day window, or any time-bounded action, the client MUST check the slot against current time in the config-user timezone before presenting. If the slot has passed, it MUST be omitted from the Recommended Action and replaced with a still-valid alternative (later today, tomorrow, or next suitable window derived from the day's remaining calendar). The Implication MUST flag this explicitly: "Original suggested window (HH:MM–HH:MM WAT) has passed at triage time (HH:MM WAT)." This rule applies to all tiers.
 
 ### 3. Present — Three-Tier Confidence-Based Flow
 
