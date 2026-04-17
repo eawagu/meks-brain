@@ -11,7 +11,7 @@ aliases:
   - "Awagu, Emeka Obiorah"
 created: "2026-04-11T15:11:23Z"
 summary: "Mek's legal identity — Nigerian national, founder/majority owner of Solhigson Ltd, frequent international traveller, fully vaccinated against COVID-19 and Yellow Fever."
-updated: "2026-04-13T02:58:11Z"
+updated: "2026-04-17T20:37:47Z"
 cssclasses:
   - "entity"
 ---
@@ -39,6 +39,7 @@ cssclasses:
 
 - Mentioned in [[AWAGU - EMEKA OBIORAH]] — Virgin Atlantic Lagos–London round-trip booking.
 - Passport visa pages contain entry/exit stamps and visa records (details in source pages).
+- Invitation letter from [[Visa Europe Limited]] signed by [[Florence Mélique]] (Group Country Manager, [[Visa France]]) supports an active [[French Schengen visa application]] for [[Visa Payments Forum Paris]] (30 Jun – 2 Jul 2026). See [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]].
 
 ## Personal
 
@@ -46,4 +47,4 @@ cssclasses:
 
 ## Sources
 
-[[COVID-19 Vaccination Card — Emeka Awagu]], [[International Vaccination Certificate — Emeka Awagu]], [[Passport Visa Pages — Emeka Awagu]], [[SOLHIGSON LTD — CAC Application]], [[SOLHIGSON LTD — CAC Certificate]], [[SOLHIGSON LTD — Application for Registration]], [[SOLHIGSON LTD — Memorandum and Articles of Association]], [[Solhigson Ltd — Memart (Scanned)]], [[Solhigson Ltd — Stamp Duty Receipt]], [[Long Image 12-04-2026 18.08.58]]
+[[COVID-19 Vaccination Card — Emeka Awagu]], [[International Vaccination Certificate — Emeka Awagu]], [[Passport Visa Pages — Emeka Awagu]], [[SOLHIGSON LTD — CAC Application]], [[SOLHIGSON LTD — CAC Certificate]], [[SOLHIGSON LTD — Application for Registration]], [[SOLHIGSON LTD — Memorandum and Articles of Association]], [[Solhigson Ltd — Memart (Scanned)]], [[Solhigson Ltd — Stamp Duty Receipt]], [[Long Image 12-04-2026 18.08.58]], [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]]

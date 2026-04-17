@@ -9,7 +9,7 @@ related:
   - "Passport Visa Pages — Emeka Awagu"
   - "Travel Dates — Personal Record (Emeka Awagu)"
 summary: "Chronological travel ledger for Emeka Awagu — atomic legs (append-only) and derived trip rollup. Primary source: passport visa/stamp composite; flight bookings and domestic tickets supplement."
-updated: "2026-04-17T18:39:59Z"
+updated: "2026-04-17T20:37:47Z"
 cssclasses:
   - "synthesis"
 ---
@@ -31,6 +31,7 @@ Evidence sources are abbreviated:
 - `BOOKING` — e-ticket or booking record (medium confidence — pre-travel or not-yet-stamped)
 - `FEE` — fee / revenue / cashier stamp (medium — proves presence but not port-of-entry)
 - `USER-LOG` — user's personal travel record (e.g., [[Travel Dates — Personal Record (Emeka Awagu)]]) — medium confidence (date-precise recall but not stamp-verified)
+- `INVITATION` — formal invitation / visa-application supporting letter with explicit dates (low-medium — proves intent and planned window, does not prove entry)
 
 | # | start | end | origin | destination | cross_border | evidence | confidence |
 |---|---|---|---|---|---|---|---|
@@ -68,45 +69,48 @@ Evidence sources are abbreviated:
 | 32 | 2019-08-27 (approx) | — | UK (Heathrow, implied) | Nigeria (Lagos, implied) | Y | USER-LOG Travel Dates.xlsx (UK trip 23-27 Aug 2019, Interswitch company-sponsored event); no Nigeria arrival stamp found on composite | medium — user-record only |
 | 33 | 2024-11-10 (approx) | — | UK (Heathrow, implied) | Nigeria (Lagos, implied) | Y | USER-LOG Travel Dates.xlsx (UK trip 3-10 Nov 2024, TeamApt business, 7 days); no Nigeria arrival stamp found on composite | medium — user-record only |
 | 34 | 2025-03-18 (approx) | — | UK (Heathrow, implied) | Nigeria (Lagos, implied) | Y | USER-LOG Travel Dates.xlsx (UK trip 9-18 Mar 2025, TeamApt business, 10 days); no Nigeria arrival stamp found on composite | medium — user-record only |
+| 35 | 2026-06-30 (planned) | — | Nigeria (implied) | France (Paris, CDG/ORY implied) | Y | INVITATION [[Visa Europe Limited]] letter for [[Visa Payments Forum Paris]] 30 Jun – 2 Jul 2026 (ref [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]]); [[French Schengen visa application]] in progress; no flights booked yet | low — invitation only, visa + booking pending |
+| 36 | — | 2026-07-02 (planned) | France (Paris, implied) | Nigeria (implied) | Y | INVITATION — conference end date; return leg inferred from event window | low — invitation only, visa + booking pending |
 
 ## Trips (derived rollup)
 
 Country cell carries user's destination (primary stay). Schengen transit stops and intra-Schengen side-stays are captured in Summary, not as separate Trips rows. Reason format: `{tag} — {detail}` where tag ∈ {business, personal, education, transit} and detail is free text (optional).
 
-| Year | Country                       | Arrival               | Departure                      | Reason                             | Company     | Summary                                                                                                                                                                    |
-| ---- | ----------------------------- | --------------------- | ------------------------------ | ---------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2001 | UK                            | (pre-Mexico, unknown) | (end unknown — spans the year) | ?                                  | ?           | London base throughout 2001; Leave to Remain granted 30 Oct 2001; Home Office stamp 24 Nov 2001                                                                            |
-| 2001 | Mexico                        | 2001-06-13            | 2001-06-19 (inferred)          | ?                                  | ?           | Sub-trip from London base; CAJA fee stamp confirms presence 13 Jun; end inferred from Spain visa start 20 Jun                                                              |
-| 2001 | Spain                         | 2001-06-20            | 2001-06-29                     | ?                                  | ?           | Sub-trip from London base; Schengen window (London-issued visa); no entry/exit stamps on composite                                                                         |
-| 2003 | Nigeria (base re-established) | 2003-01-05            | (ongoing from here)            | ?                                  | ?           | Return to Lagos after unlogged prior travel                                                                                                                                |
-| 2017 | Germany & Belgium             | 2017-03-27            | 2017-04-06                     | business                           | Interswitch | Frankfurt stamps entry/exit; Belgium visited overland from Germany (intra-Schengen, no separate stamps or dates). Belgian-issued Schengen visa (Abuja)                     |
-| 2018 | South Africa                  | 2018-03-13            | 2018-03-17                     | business — conference              | Interswitch | OR Tambo entry/exit; 7-day visitor visa DHA-1635A                                                                                                                          |
-| 2018 | Kenya                         | 2018-04-23            | 2018-04-27                     | business                           | Interswitch | JKIA entry/exit; single-journey visa SAA 0657465                                                                                                                           |
-| 2019 | UK                            | 2019-08-23            | ~2019-08-27                    | business — company-sponsored event | Interswitch | 4 days; Heathrow entry stamped; Nigeria-return stamp missing from composite (date from user personal record)                                                               |
-| 2019 | UK                            | 2019-09-26            | 2019-10-01                     | personal — brother's wedding       | Personal    | ~6 days; both stamps present (Heathrow entry + MMIA1 arrival)                                                                                                              |
-| 2019 | UAE                           | 2019-11-14            | 2019-11-18                     | business — company-sponsored event | Interswitch | ~5 days; UAE entry stamp smudged, exit stamp clear                                                                                                                         |
-| 2023 | Kenya                         | 2023-01-31            | 2023-02-04                     | business                           | Hydrogen    | ~5 days; visa used on final valid day (17-31 Jan window)                                                                                                                   |
-| 2024 | UK                            | 2024-11-03            | ~2024-11-10                    | business                           | TeamApt     | 7 days; Heathrow entry stamped; Nigeria-return stamp missing from composite. UKVI 180-day visa, valid 28/10/24–28/04/25                                                    |
-| 2025 | UK                            | 2025-03-09            | ~2025-03-18                    | business                           | TeamApt     | ~10 days; Nigeria-departure stamp DTD 0679 re-classified per user personal record (code is officer/desk identifier, not direction indicator); Nigeria-return stamp missing |
-| 2025 | Spain                         | 2025-06-15            | 2025-06-19                     | business — conference              | TeamApt     | 5 days; Schengen transit in via AMS, out via CDG (KLM). Spain was the actual destination — Netherlands and France were airport transit only                                |
-| 2025 | China                         | 2025-09-15            | 2025-09-21                     | business — conference              | TeamApt     | 7 days; M-visa single entry (Lagos embassy)                                                                                                                                |
-| 2025 | UK                            | 2025-11-16            | 2025-11-22                     | business                           | TeamApt     | ~7 days; UKVI 180-day visa valid 01/08/25–01/08/27                                                                                                                         |
-| 2026 | UK                            | 2026-03-08            | 2026-03-14                     | business                           | TeamApt     | 7 days                                                                                                                                                                     |
-| 2026 | UK (current)                  | 2026-04-13            | 2026-04-22 (planned)           | business                           | TeamApt     | Current trip; booking-only evidence. Today: 17 Apr 2026                                                                                                                    |
-| 2026 | Nigeria (Port Harcourt)       | 2026-05-26            | 2026-05-29                     | personal — Ernest wedding          | Personal    | Upcoming domestic trip                                                                                                                                                     |
+| Year | Country | Arrival | Departure | Reason | Company | Summary |
+|---|---|---|---|---|---|---|
+| 2001 | UK | (pre-Mexico, unknown) | (end unknown — spans the year) | ? | ? | London base throughout 2001; Leave to Remain granted 30 Oct 2001; Home Office stamp 24 Nov 2001 |
+| 2001 | Mexico | 2001-06-13 | 2001-06-19 (inferred) | ? | ? | Sub-trip from London base; CAJA fee stamp confirms presence 13 Jun; end inferred from Spain visa start 20 Jun |
+| 2001 | Spain | 2001-06-20 | 2001-06-29 | ? | ? | Sub-trip from London base; Schengen window (London-issued visa); no entry/exit stamps on composite |
+| 2003 | Nigeria (base re-established) | 2003-01-05 | (ongoing from here) | ? | ? | Return to Lagos after unlogged prior travel |
+| 2017 | Germany & Belgium | 2017-03-27 | 2017-04-06 | business | Interswitch | Frankfurt stamps entry/exit; Belgium visited overland from Germany (intra-Schengen, no separate stamps or dates). Belgian-issued Schengen visa (Abuja) |
+| 2018 | South Africa | 2018-03-13 | 2018-03-17 | business — conference | Interswitch | OR Tambo entry/exit; 7-day visitor visa DHA-1635A |
+| 2018 | Kenya | 2018-04-23 | 2018-04-27 | business | Interswitch | JKIA entry/exit; single-journey visa SAA 0657465 |
+| 2019 | UK | 2019-08-23 | ~2019-08-27 | business — company-sponsored event | Interswitch | 4 days; Heathrow entry stamped; Nigeria-return stamp missing from composite (date from user personal record) |
+| 2019 | UK | 2019-09-26 | 2019-10-01 | personal — brother's wedding | Personal | ~6 days; both stamps present (Heathrow entry + MMIA1 arrival) |
+| 2019 | UAE | 2019-11-14 | 2019-11-18 | business — company-sponsored event | Interswitch | ~5 days; UAE entry stamp smudged, exit stamp clear |
+| 2023 | Kenya | 2023-01-31 | 2023-02-04 | business | Hydrogen | ~5 days; visa used on final valid day (17-31 Jan window) |
+| 2024 | UK | 2024-11-03 | ~2024-11-10 | business | TeamApt | 7 days; Heathrow entry stamped; Nigeria-return stamp missing from composite. UKVI 180-day visa, valid 28/10/24–28/04/25 |
+| 2025 | UK | 2025-03-09 | ~2025-03-18 | business | TeamApt | ~10 days; Nigeria-departure stamp DTD 0679 re-classified per user personal record (code is officer/desk identifier, not direction indicator); Nigeria-return stamp missing |
+| 2025 | Spain | 2025-06-15 | 2025-06-19 | business — conference | TeamApt | 5 days; Schengen transit in via AMS, out via CDG (KLM). Spain was the actual destination — Netherlands and France were airport transit only |
+| 2025 | China | 2025-09-15 | 2025-09-21 | business — conference | TeamApt | 7 days; M-visa single entry (Lagos embassy) |
+| 2025 | UK | 2025-11-16 | 2025-11-22 | business | TeamApt | ~7 days; UKVI 180-day visa valid 01/08/25–01/08/27 |
+| 2026 | UK | 2026-03-08 | 2026-03-14 | ? | ? | 7 days |
+| 2026 | UK (current) | 2026-04-13 | 2026-04-22 (planned) | ? | ? | Current trip; booking-only evidence. Today: 17 Apr 2026 |
+| 2026 | Nigeria (Port Harcourt) | 2026-05-26 | 2026-05-29 | personal — Ernest wedding | Personal | Upcoming domestic trip |
+| 2026 | France (Paris) | 2026-06-30 (planned) | 2026-07-02 (planned) | business — conference | Visa (self-funded travel; [[TeamApt]] context) | Planned attendance at [[Visa Payments Forum Paris]] at [[Paris Convention Centre]]; invitation letter from [[Visa Europe Limited]] supports [[French Schengen visa application]] (see [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]]). No flights booked yet. Travel + accommodation self-funded per invitation terms |
 
 ## Lifetime Patterns
 
 - **Most-visited foreign country:** UK (9 distinct entries recorded across the record): 2001-11 (1), 2019-08 + 2019-09 (2), 2024-11 (1), 2025-03 + 2025-11 (2), 2026-03 + 2026-04 current (2). (Note: 2025-06 was Spain via Schengen transit, not UK.)
-- **First-visit countries by year:** 2001 (Mexico, Spain, UK), 2017 (Germany, Belgium), 2018 (South Africa, Kenya), 2019 (UAE), 2025 (Spain as destination; Netherlands + France as Schengen transit; China)
+- **First-visit countries by year:** 2001 (Mexico, Spain, UK), 2017 (Germany, Belgium), 2018 (South Africa, Kenya), 2019 (UAE), 2025 (Spain as destination; Netherlands + France as Schengen transit; China), 2026 (France as destination — planned, Jun–Jul)
 - **Travel frequency has accelerated** — 2024 onwards shows ≥5 international trips per year vs. 1-3 per year earlier
-- **Schengen access:** Visa issuance has rotated — Spain 2001 (London post), Belgium 2017 (Abuja post), France 2025 (Lagos post). Consistent with Lagos becoming primary base of issuance
+- **Schengen access:** Visa issuance has rotated — Spain 2001 (London post), Belgium 2017 (Abuja post), France 2025 (Lagos post), France 2026 (planned — Lagos post, in application). Consistent with Lagos becoming primary base of issuance
 - **Employer timeline of business trips (from user personal record):**
   - Interswitch era: 2017 Germany/Belgium, 2018 SA, 2018 Kenya, 2019 UK (Aug), 2019 UAE
   - Personal (non-employer): 2019 UK Sep–Oct (brother's wedding)
   - Hydrogen era: 2023 Kenya
-  - TeamApt era: 2024 UK, 2025 UK (Mar), 2025 Spain, 2025 China, 2025 UK (Nov)
-  - Pre-2017 and 2026 employer mapping not yet populated
+  - TeamApt era: 2024 UK, 2025 UK (Mar), 2025 Spain, 2025 China, 2025 UK (Nov), 2026 France (planned — Visa-hosted industry forum, self-funded)
+  - Pre-2017 and other 2026 employer mapping not yet populated
 
 ## Coverage Gaps and Confidence Notes
 
@@ -122,6 +126,7 @@ Country cell carries user's destination (primary stay). Schengen transit stops a
 - **Missing Nigeria-arrival stamps (user record only):** Three UK-return legs have no Nigeria arrival stamp on the composite despite zoom re-pass — legs #32 (~27 Aug 2019), #33 (~10 Nov 2024), #34 (~18 Mar 2025). Dates from user personal record; confidence medium (USER-LOG only).
 - **2017 Nigeria return from Germany:** No Nigeria arrival stamp for Apr 2017 found on composite. Leg #6 `end` unrecoverable from this source.
 - **Belgium 2017:** Visited overland from Germany (intra-Schengen); no dates, no stamps. Captured in Trips row narrative only — not added as separate Legs (would encode fabricated temporal precision).
+- **Paris 2026 (planned):** Only evidence on file is the Visa Europe invitation letter (dates 30 Jun – 2 Jul 2026) — no flights booked, visa not yet issued. Legs #35/#36 entered as `INVITATION` evidence, low confidence; to be refined when flight bookings land and the French Schengen visa is granted.
 
 ## Session 60 Re-Pass Log
 
@@ -156,6 +161,16 @@ User's personal travel log `Travel Dates.xlsx` ingested via review folder 2026-0
 
 **Research gap logged:** Nigerian immigration stamp codes (DTD/SOD/SOA/DPD/ARD) have no authoritative public documentation; directions derived from stamp text + corroborating records rather than the codes themselves.
 
+## Session 60c — Paris 2026 Invitation Ingest (2026-04-17)
+
+Visa Europe invitation letter for [[Visa Payments Forum Paris]] ingested 17 April 2026. Introduced new `INVITATION` evidence category in the Legs legend to represent planned-but-unbooked trips whose only evidence is a formal invitation / visa-application support letter with explicit dates.
+
+**Changes applied:**
+- Legs #35 (LOS → Paris, 30 Jun 2026 planned) and #36 (Paris → LOS, 2 Jul 2026 planned) appended with `INVITATION` evidence, low confidence
+- Trips rollup: new row `2026 | France (Paris) | 2026-06-30 (planned) | 2026-07-02 (planned) | business — conference | Visa (self-funded)`
+- Lifetime Patterns: Schengen issuance line extended with France 2026 (Lagos post, in application); TeamApt-era employer timeline extended with 2026 France (Visa-hosted, self-funded)
+- Coverage gap note added: Paris 2026 is invitation-only evidence; refine when flights book and visa issues
+
 ## Sources
 
 - [[Passport Visa Pages — Emeka Awagu]] — primary stamp/visa extraction (tiles 00–40 of composite `Long Image 12-04-2026 16.33.11.jpg`; session 60 re-pass applied)
@@ -163,3 +178,4 @@ User's personal travel log `Travel Dates.xlsx` ingested via review folder 2026-0
 - [[Emeka Obiorah Awagu]] — identity entity
 - [[AWAGU - EMEKA OBIORAH]] — Virgin Atlantic booking for current UK trip (13–22 Apr 2026)
 - [[Ibom Air Flight Ticket — Ernest Wedding May 2026]] — domestic PHC booking (May 2026)
+- [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]] — Visa Europe invitation for Paris 2026 (session 60c ingest)
