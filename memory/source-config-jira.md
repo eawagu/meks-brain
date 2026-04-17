@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE Day 7+: 129+ consecutive ticks missed since 2026-04-11T22:09 UTC (~138 hours blind). Gmail MCP now at 4th consecutive failure — consolidating under Nicolaas Taljaard's investigation."
-updated: "2026-04-17T17:15:32Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). RECOVERED at 20:09 WAT tick after 131+ consecutive blind ticks (~139 hours / 5.8 days since 2026-04-11T22:09 UTC). Briefing-2026-04-18 Decision framing flips from outage remediation to RCA confirmation with Nicolaas."
+updated: "2026-04-17T20:06:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T17:09:00Z"
+last_processed: "2026-04-17T19:09:00Z"
 ---
 
 ## Connection
@@ -72,11 +72,24 @@ These are recurring patterns the heartbeat should watch for:
 
 ## Connector Health
 
-**AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **130+ consecutive ticks blind (~139 hours / 5.8 days)** as of 2026-04-17T17:09 UTC. TDSD-6576, TDSD-6578, TDSD-6586 and subsequent new tickets visible via email only but unverifiable via Jira. Documentation continuity gap in 6th day.
+**RECOVERED 2026-04-17 20:09 WAT** after **131+ consecutive blind ticks (~139 hours / 5.8 days)** since 2026-04-11T22:09 UTC. `searchJiraIssuesUsingJql` returned a successful response this tick — first successful Jira query since the outage began. Recovery concurrent with Gmail MCP recovery (see [[source-config-email]]) — same underlying maintenance action likely restored both.
 
-**Investigation owner:** [[Nicolaas Taljaard]] (Head, Technology Strategy and Partnerships). Engaged 2026-04-16 by [[Emeka Awagu]] to diagnose root cause of the persistent auth failure and restore connectivity.
+**Initial post-recovery query captured the following TDSD tickets visible this tick:**
 
-**Second MCP failure continues — 5th consecutive tick:** Gmail MCP returned tool-upgrade error for the 5th consecutive tick at 18:09 WAT (see [[source-config-email]]). Briefing-2026-04-18 Decision item remains queued alongside the Jira blindness pattern, consolidated under Nicolaas Taljaard's MCP-layer reliability scope. Framing: two MCPs broken on the same observability surface is one investigation, not two.
+- **TDSD-6429** — Resolved (Monnify refund debit no settlement). Terminal state.
+- **TDSD-6611** — Awaiting Scheme Update (backoffice disbursement preference). External dependency — track for staleness.
+- **TDSD-5700** — Awaiting Scheme Update (backoffice limit profile). External dependency — track for staleness.
+- **TDSD-6608** — Awaiting Scheme Update (Paystack 4B NGN balance adjustment). External dependency.
+- **TDSD-6575** — Initial Review (Pending Settlement). Needs triage owner.
+- **TDSD-6610** — Work in Progress (Incident: Failed disbursements with no reversal, Apr 14–17). Active incident — cross-reference with Slack-surfaced Polaris/Wema/NIBSS RC91 P1s to determine whether disbursement-reversal failure is upstream, downstream, or independent.
+
+No Immediate-tier Jira signals (no Authorize-status tickets with CTO gate surfaced in initial query, no P1 breaching SLA in the <1h window). Briefing-2026-04-18 will carry the post-recovery ticket inventory plus the TDSD-6610 cross-reference question as Decision items.
+
+**Investigation owner:** [[Nicolaas Taljaard]] (Head, Technology Strategy and Partnerships). Engaged 2026-04-16 by [[Emeka Awagu]] to diagnose root cause of the persistent auth failure and restore connectivity — recovery within ~28 hours of engagement suggests the investigation succeeded or the underlying maintenance action aligned with Nicolaas's scope.
+
+**Briefing-2026-04-18 Decision item framing flips:** from "MCP-layer outage remediation" (pre-recovery) to "RCA confirmation with Nicolaas" (post-recovery). Ask Nicolaas what was done, what the dependency was, and whether MCP-layer health checks should be wired into the heartbeat to prevent the next regression from running 5.8 days silent. Confidence: high — two concurrent MCP recoveries confirm a shared root cause worth a single RCA.
+
+**Observability gap closed:** 139h of Jira blindness ends. TDSD-6576, TDSD-6578, TDSD-6586, and any other newly-filed tickets that were email-visible but Jira-unverifiable during the outage are now queryable. Follow-up pass next tick: cross-reference those ticket IDs against the post-recovery inventory to confirm no regressions.
 
 ## Notes
 
