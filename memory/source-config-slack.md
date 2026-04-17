@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T16:09:00Z."
-updated: "2026-04-17T16:18:05Z"
+updated: "2026-04-17T17:14:41Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T16:09:00Z"
+last_processed: "2026-04-17T17:09:00Z"
 ---
 
 ## Connection
@@ -37,9 +37,9 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 5. **Per-message** salience reasoning + brain-wide similarity search.
 
 ### Known limitations
-- `slack_search_public_and_private` with space-separated terms is AND-only (no boolean). Use channel reads for authoritative coverage; use search only to confirm specific keyword presence. Boolean OR syntax fails silently (zero results) — confirmed again at 16:09 WAT 2026-04-17 tick.
+- `slack_search_public_and_private` with space-separated terms is AND-only (no boolean). Use channel reads for authoritative coverage; use search only to confirm specific keyword presence. Boolean OR syntax fails silently (zero results) — confirmed again at 18:09 WAT 2026-04-17 tick.
 - Rate-limiting observed on parallelized channel reads + searches. Retry once when encountered; continue the tick if persistent.
 
 ## Notes
 
-Tick 2026-04-17 17:09 WAT window (16:09 → 17:09 WAT): All 5 Tier 1 channels empty (zero parent messages). DM channel empty. Keyword search P1: 18 results, all out of scope — #teamapt_infra_notifications (bot-only infra pings, per skip rule, 17 hits) plus one #pos-channel-deployments deployment notification for pos-channels-jobs referencing "P1 Repo" (deployment, not incident). Keyword search RC91: zero results. Rate-limiting observed on parallel read of C096LCNP26P; serial retry succeeded. Active-P1 trio (Wema 8h17m silent since 08:52 WAT filing, NIBSS 6h06m since 11:03 WAT dispute, Polaris 5h30m since 11:39 WAT filing) continues silent — no Immediate re-dispatched this tick; 15:09 WAT consolidated dispatch remains the authoritative alert and nothing new has emerged. Aging will fold into briefing-2026-04-18.
+Tick 2026-04-17 18:09 WAT window (17:09 → 18:09 WAT): **C0ABU8GMW75 (#teamapt-tech-operations) rate-limited on both initial read and single retry — single-tick visibility gap on the highest-signal Tier 1 channel.** The other 4 Tier 1 channels returned zero parent messages. DM channel empty. Keyword searches (P1, RC91, outage/down/failure) returned zero hits for today in the search index (consistent with known index lag for recent messages), and in:#teamapt-tech-operations after:2026-04-17 returned zero via search modifier. Keyword search timed out once (60s) on a 3-keyword OR syntax — confirmed AND-only limitation again. Active-P1 trio (Wema 9h17m silent since 08:52 WAT filing, NIBSS 7h06m since 11:03 WAT dispute, Polaris 6h30m since 11:39 WAT filing) continues silent per the channels I could read and the search fallback — 15:09 WAT consolidated dispatch remains the authoritative alert and nothing new has emerged. Aging folds into briefing-2026-04-18. C0ABU8GMW75 rate-limit is single-tick; if it persists next tick, consider this a pattern not a transient.
