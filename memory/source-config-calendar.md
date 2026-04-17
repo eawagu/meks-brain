@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T15:09:00Z."
-updated: "2026-04-17T15:17:52Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T16:09:00Z."
+updated: "2026-04-17T16:18:06Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T15:09:00Z"
+last_processed: "2026-04-17T16:09:00Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-17 16:09 WAT window (15:09 → 16:09 WAT): No priority signals. Tech support meeting (16:00–17:00 WAT) starts in ~0 min — accepted, metadata updated 14:50 WAT (minor, not a priority signal). Product-Engineering Sync (18:00–19:00 WAT) accepted, no change. Lattice Review all-day block metadata updated 15:56 WAT (minor — Lattice rendering the "8 pending downward reviews" counter); window closes Apr 27, 10 days remaining. No same-day or next-day new invites, no declined RSVPs, no agenda-less blocks, no overload.
+Tick 2026-04-17 17:09 WAT window (16:09 → 17:09 WAT): No priority signals. Tech support meeting (16:00–17:00 WAT) ending at tick time — accepted, metadata stable. Product-Engineering Sync (18:00–19:00 WAT) upcoming — accepted, metadata stable. Lattice Review all-day block metadata last updated 15:56 WAT (outside window, noted at 16:09 tick); window closes Apr 27 (10 days remaining). No new same-day or next-day invites, no declined RSVPs, no cancellations, no agenda-less blocks, no overload.

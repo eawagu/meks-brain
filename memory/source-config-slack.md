@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T15:09:00Z."
-updated: "2026-04-17T15:17:51Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T16:09:00Z."
+updated: "2026-04-17T16:18:05Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T15:09:00Z"
+last_processed: "2026-04-17T16:09:00Z"
 ---
 
 ## Connection
@@ -42,4 +42,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-17 16:09 WAT window (15:09 → 16:09 WAT): All 5 Tier 1 channels empty (zero parent messages). DM channel empty. Keyword search P1: 10 results, all out of scope — #teamapt_infra_notifications (C08RKF5NHBQ, bot-only infra pings, per skip rule) and one PagerDuty EU resolution for moniepoint-gamification-service (Refs and Rewards, out of scope — not payments/switch). Keyword search RC91: zero results. Rate-limiting observed on two parallel channel reads (C096LCNP26P, C08PH35PLPK); serial retries succeeded. Active-P1 trio (Wema, NIBSS, Polaris) continues silent — no Immediate re-dispatched this tick; 15:09 WAT consolidated dispatch remains the authoritative alert and nothing new has emerged. Aging will fold into briefing-2026-04-18.
+Tick 2026-04-17 17:09 WAT window (16:09 → 17:09 WAT): All 5 Tier 1 channels empty (zero parent messages). DM channel empty. Keyword search P1: 18 results, all out of scope — #teamapt_infra_notifications (bot-only infra pings, per skip rule, 17 hits) plus one #pos-channel-deployments deployment notification for pos-channels-jobs referencing "P1 Repo" (deployment, not incident). Keyword search RC91: zero results. Rate-limiting observed on parallel read of C096LCNP26P; serial retry succeeded. Active-P1 trio (Wema 8h17m silent since 08:52 WAT filing, NIBSS 6h06m since 11:03 WAT dispute, Polaris 5h30m since 11:39 WAT filing) continues silent — no Immediate re-dispatched this tick; 15:09 WAT consolidated dispatch remains the authoritative alert and nothing new has emerged. Aging will fold into briefing-2026-04-18.
