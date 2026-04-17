@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T12:09:37Z."
-updated: "2026-04-17T12:18:51Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T13:10:00Z."
+updated: "2026-04-17T13:16:37Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T12:09:37Z"
+last_processed: "2026-04-17T13:10:00Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-17 12:09 WAT window: no priority signals. Calendar quiet through the early afternoon window.
+Tick 2026-04-17 13:10 WAT window: No priority signals. User currently in TeamApt/New Relic meeting (14:00–14:45 WAT, BST tz). Remainder of day: Tech support meeting 16:00–17:00 WAT (updated 12:50 WAT today — minor metadata change, not a priority signal), Product-Engineering Sync 18:00–19:00 WAT (instance-moved from 19:00 default). Lattice Review all-day block remains (closes Apr 27). No new priority signals for today or tomorrow.
