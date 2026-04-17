@@ -2,14 +2,14 @@
 type:
   - "entity"
 title: Emeka Awagu
-created: 2026-04-11
-summary: "CTO at TeamApt Ltd (subsidiary of Moniepoint Inc.), responsible for technology strategy, reliability, talent, and operations across the Technology Operations division. This is the brain owner's own profile — this brain belongs to Emeka Awagu (Mek)."
-updated: "2026-04-15T12:22:06Z"
-cssclasses:
-  - "entity"
 aliases:
   - "Mek"
   - "Emeka"
+created: 2026-04-11
+summary: "CTO at TeamApt Ltd (subsidiary of Moniepoint Inc.), responsible for technology strategy, reliability, talent, and operations across the Technology Operations division. This is the brain owner's own profile — this brain belongs to Emeka Awagu (Mek)."
+updated: "2026-04-17T20:33:46Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Overview
@@ -62,6 +62,7 @@ Mek's Apr 15 review (see [[note_2026-04-15T11-42-42-517Z]]) characterises this f
 - **Project Phoenix** — Phase 1 kicked off April 7
 - **Paystack DD partnership** — commercial engagement at product team level
 - **CEO Scorecard FY2026 Technology Section Revisions** — two proposed rubric changes logged Apr 15 (see [[note_2026-04-15T11-42-42-517Z]])
+- **[[Visa Payments Forum Paris]] (30 Jun – 2 Jul 2026)** — [[French Schengen visa application]] in progress; [[Visa Europe Limited]] invitation letter received 17 Apr 2026 (see [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]])
 
 ## Action Queue (CTO Authorization Pending)
 - TDSD-6477: Access Bank JAR deployment for DCIR credential remediation
@@ -75,3 +76,4 @@ Mek's Apr 15 review (see [[note_2026-04-15T11-42-42-517Z]]) characterises this f
 - [[note_2026-04-15T11-42-42-517Z]] — CEO Scorecard Technology section review and proposed revisions
 - [[notes-2026-03-30]] through [[notes-2026-04-10]] — daily operational signals
 - [[weekly-digest-2026-03-30]] — week summary
+- [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]] — Visa Europe support letter for French business visa (Apr 17 2026)
