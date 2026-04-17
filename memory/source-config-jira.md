@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). AUTH FAILURE Day 7+: 129+ consecutive ticks missed since 2026-04-11T22:09 UTC (~138 hours blind). Gmail MCP now at 4th consecutive failure — consolidating under Nicolaas Taljaard's investigation."
-updated: "2026-04-17T16:18:07Z"
+updated: "2026-04-17T17:15:32Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T16:09:00Z"
+last_processed: "2026-04-17T17:09:00Z"
 ---
 
 ## Connection
@@ -72,11 +72,11 @@ These are recurring patterns the heartbeat should watch for:
 
 ## Connector Health
 
-**AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **129+ consecutive ticks blind (~138 hours / 5.75 days)** as of 2026-04-17T16:09 UTC. TDSD-6576, TDSD-6578, TDSD-6586 and subsequent new tickets visible via email only but unverifiable via Jira. Documentation continuity gap in 6th day.
+**AUTH/TOOL FAILURE STATE:** Jira connector unavailable since 2026-04-11T22:09 UTC. **130+ consecutive ticks blind (~139 hours / 5.8 days)** as of 2026-04-17T17:09 UTC. TDSD-6576, TDSD-6578, TDSD-6586 and subsequent new tickets visible via email only but unverifiable via Jira. Documentation continuity gap in 6th day.
 
 **Investigation owner:** [[Nicolaas Taljaard]] (Head, Technology Strategy and Partnerships). Engaged 2026-04-16 by [[Emeka Awagu]] to diagnose root cause of the persistent auth failure and restore connectivity.
 
-**Second MCP failure continues — 4th consecutive tick:** Gmail MCP returned tool-upgrade error for the 4th consecutive tick at 17:09 WAT (see [[source-config-email]]). Briefing-2026-04-18 Decision item remains queued alongside the Jira blindness pattern, consolidated under Nicolaas Taljaard's MCP-layer reliability scope. Framing: two MCPs broken on the same observability surface is one investigation, not two.
+**Second MCP failure continues — 5th consecutive tick:** Gmail MCP returned tool-upgrade error for the 5th consecutive tick at 18:09 WAT (see [[source-config-email]]). Briefing-2026-04-18 Decision item remains queued alongside the Jira blindness pattern, consolidated under Nicolaas Taljaard's MCP-layer reliability scope. Framing: two MCPs broken on the same observability surface is one investigation, not two.
 
 ## Notes
 
