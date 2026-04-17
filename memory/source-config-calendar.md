@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-17T09:25:52Z"
+updated: "2026-04-17T10:15:29Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T09:20:00Z"
+last_processed: "2026-04-17T10:09:00Z"
 ---
 
 ## Connection
@@ -72,3 +72,4 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - Frank Atashili's calendar (reader access) is the only other calendar visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
 - **2026-04-17 ~06:09 WAT tick (briefing):** Calendar healthy. Fri Apr 17 schedule: TeamApt All Hands 08:30 WAT, Deliberation Varun Singh 10:30 WET, TeamApt/New Relic 14:00 BST, Tech support meeting 16:00 WAT, Product-Engineering Sync 18:00 WAT. Freed window 11:00–12:40 WAT (Head of Engineering interviews previously cancelled). Lattice Review block held for Fri Apr 24 15:00–17:00 WAT; Lattice window closes Apr 27 (10 days remaining).
 - **2026-04-17 ~10:20 WAT tick (mid-morning, non-briefing):** No new calendar changes since 06:09 WAT briefing tick. Deliberation Varun Singh 10:30 WAT is ~10 minutes out — surfaced in morning briefing schedule, no re-surfacing needed.
+- **2026-04-17 ~11:09 WAT tick (late-morning, non-briefing):** Deliberation Varun Singh ended ~10:45 WAT (10:30–10:45 WAT slot). Lattice Review multi-day event ("Hi Emeka - 8 Pending Downward Reviews," Apr 13 → Apr 28) refreshed 09:48 WAT — non-delta status update (same 8-item count). No new invites, no schedule conflicts, no declined RSVPs. Freed 11:00–12:40 WAT window remains open (candidate for dad's-birthday event-planner call per B2, or other personal/admin work). Next events: TeamApt/New Relic 14:00 WAT, Tech support meeting 16:00 WAT, Product-Engineering Sync 18:00 WAT.
