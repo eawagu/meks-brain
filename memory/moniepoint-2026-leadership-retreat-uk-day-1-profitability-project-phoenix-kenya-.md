@@ -4,7 +4,7 @@ type:
 title: Moniepoint 2026 Leadership Retreat UK - Day 1 Profitability Project Phoenix Kenya Launch - Summary
 created: "2026-04-17T14:46:31Z"
 summary: "Day 1 retreat: 20% PAT by end-2026 / 30% PAT by Q2 2026; Project Phoenix platformization program (Ravi PM, Phase 1 TSP with Alex/Phil/Frank); Kenya launch via Sumac acquisition; \u20241.5B revenue gap vs benchmark; MoneyBook 80% M1 retention gate; market list: SA/Morocco/Kenya/DRC."
-updated: "2026-04-17T14:52:47Z"
+updated: "2026-04-17T18:55:32Z"
 cssclasses:
   - "source"
 source_path: Moniepoint Inc 2026 Leadership Retreat - UK - Day 1_ Profitability Targets, Platformization (Project Phoenix), Kenya Launch, and Competitive Strategy-Summary.md
@@ -102,7 +102,7 @@ Day 1 retreat session on profitability discipline, multi-country platformization
 - [[Phil]] (TSP team)
 - [[Frank]] (TSP team)
 - [[Toby]] (Nigeria CBO-designate)
-- [[Ezequiel]] (sales/GTM lead)
+- [[Ezekiel]] (sales/GTM lead)
 - [[Efe]] (sales/GTM lead)
 
 ## Concepts
