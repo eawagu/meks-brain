@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T16:09:00Z."
-updated: "2026-04-17T17:14:41Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T19:09:00Z."
+updated: "2026-04-17T20:05:08Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T17:09:00Z"
+last_processed: "2026-04-17T19:09:00Z"
 ---
 
 ## Connection
@@ -39,7 +39,18 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 ### Known limitations
 - `slack_search_public_and_private` with space-separated terms is AND-only (no boolean). Use channel reads for authoritative coverage; use search only to confirm specific keyword presence. Boolean OR syntax fails silently (zero results) — confirmed again at 18:09 WAT 2026-04-17 tick.
 - Rate-limiting observed on parallelized channel reads + searches. Retry once when encountered; continue the tick if persistent.
+- Search index lag: recent messages (same-day filings) often return zero even when surfaced via channel-read. Channel-read is authoritative; search is confirmation-only for recent windows.
 
 ## Notes
 
-Tick 2026-04-17 18:09 WAT window (17:09 → 18:09 WAT): **C0ABU8GMW75 (#teamapt-tech-operations) rate-limited on both initial read and single retry — single-tick visibility gap on the highest-signal Tier 1 channel.** The other 4 Tier 1 channels returned zero parent messages. DM channel empty. Keyword searches (P1, RC91, outage/down/failure) returned zero hits for today in the search index (consistent with known index lag for recent messages), and in:#teamapt-tech-operations after:2026-04-17 returned zero via search modifier. Keyword search timed out once (60s) on a 3-keyword OR syntax — confirmed AND-only limitation again. Active-P1 trio (Wema 9h17m silent since 08:52 WAT filing, NIBSS 7h06m since 11:03 WAT dispute, Polaris 6h30m since 11:39 WAT filing) continues silent per the channels I could read and the search fallback — 15:09 WAT consolidated dispatch remains the authoritative alert and nothing new has emerged. Aging folds into briefing-2026-04-18. C0ABU8GMW75 rate-limit is single-tick; if it persists next tick, consider this a pattern not a transient.
+Tick 2026-04-17 20:09 WAT window (18:09 → 20:09 WAT, spans the 19:00 WAT wind-down gap): **C0ABU8GMW75 rate-limit from the 18:09 tick cleared** — single-tick rate-limit confirmed (not a persistent pattern). This tick successfully read 50 messages from #teamapt-tech-operations, picking up three new P1 filings that landed in the evening window:
+
+- **Stanbic RC91 P1** filed 18:05 WAT by Olamide Ajibulu (cycle 27 — tracked on [[Stanbic Bank ATS — Persistent RC91 Pattern]]).
+- **Polaris RC91/06 P1** filed 18:16 WAT by Olamide Ajibulu (second cycle of day — tracked on [[Sterling + Polaris — Routes Degraded]] as delta).
+- **UBA RC91 P1** filed 18:45 WAT by Olamide Ajibulu (first UBA cycle of day — new situation page [[UBA Bank — RC91 P1 Apr 17]] created).
+
+All three new P1s cross into the evening wind-down window and have been noted rather than Immediate-dispatched — calibration precedent from briefing-2026-04-17 16:30 triage (recurring RC91 P1s are expected pattern, re-dispatch = noise). Carries into briefing-2026-04-18.
+
+Morning-active P1s (Wema 11h17m silent since 08:52 filing, NIBSS 9h06m silent since Moses 11:03 dispute, Polaris morning-cycle 8h30m silent since 11:39 filing) remain silent across all Tier 1 channels in this window — 15:09 WAT consolidated dispatch remains the authoritative alert, no fresh Immediate.
+
+DM channel empty. Keyword searches (P1, RC91, outage/down/failure) continued to return zero for today (search index lag is now well-documented — compensating via Tier 1 channel-read). Structural guard from the Wema miss is working as designed: the parent-message sweep caught all three evening P1 filings this tick.
