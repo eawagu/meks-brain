@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-17T14:33:04Z"
+updated: "2026-04-17T20:08:02Z"
 cssclasses:
   - "config"
 ---
@@ -154,3 +154,4 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 - [2026-04-16, B4, acted, urgency]
 - [2026-04-16, B5, acted, urgency]
 - [2026-04-17, wema-bank-rc91-p1-apr17-not-surfaced-until-15:09-wat-tick-6h20m-after-filing, missed, pattern_significance]
+- [2026-04-17, B2, acted, urgency]
