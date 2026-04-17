@@ -5,8 +5,8 @@ type:
 title: Stanbic Bank ATS — Persistent RC91 Pattern
 status: developing
 created: "2026-04-11T16:42:02Z"
-summary: "25+ P1 RC91 cycles Apr 3–16. Cycle 25 filed 17:48 WAT — post-NIBSS PTSA restoration, confirming independent CBA instability root cause per Oladapo's finding. Stanbic requesting reconfirmation. Investigation fulfilled. Structural fix not deployed."
-updated: "2026-04-16T17:14:19Z"
+summary: "25+ P1 RC91 cycles Apr 3–16. Cycle 25 filed 17:48 WAT — post-NIBSS PTSA restoration, confirming independent CBA instability root cause per Oladapo's finding. Apr 17 morning: TDSD-6518 reconfirmation requested by Stanbic SRE; processing confirmed fine. No new ticket. Investigation fulfilled. Structural fix not deployed."
+updated: "2026-04-17T09:25:48Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -22,10 +22,12 @@ Twenty-five+ confirmed P1 cycles Apr 3–16 (14 days), all bank-resolved, same r
 
 **Cycle 24 (Apr 16, 10:11 WAT):** Filed by [[Afeez Kazeem]]. Ran 5+ hours concurrent with UBA, Union Bank, FCMB RC91s and NIBSS PTSA route failure. No explicit resolution email found — may have resolved with or without PTSA restoration.
 
+**Apr 17 morning window:** Stanbic SRE [[Samson Ibekwe]] requested reconfirmation on TDSD-6518 (Apr 12 ticket) at 08:06 WAT Apr 17; [[Qazim Adedigba]] confirmed processing fine at 08:31 WAT. Hourly Report 20260417 (08:02 WAT, Qazim) classifies Stanbic as experiencing intermittent RC91 failures — services restarted, bank engaged. No new Slack P1 filing, no new ticket. Pattern continues at low-grade intermittent intensity through the morning window.
+
 **Daily Report #20260416** (Afeez Kazeem, 15:50 WAT) did NOT list Stanbic-specific ticket for cycle 24. This may indicate Stanbic resolved without explicit confirmation email, or the daily report omitted it.
 
 ## Sources
-Email, Slack DM, Jira (TDSD-6425 closed), brain commitment page, email 2026-04-16 10:20 BST Afeez Kazeem, Daily Report 2026-04-16 15:50 WAT, email 2026-04-16 17:48 WAT Olamide Ajibulu, email 2026-04-16 17:55 WAT Peace Ikhuenbor reconfirmation request
+Email, Slack DM, Jira (TDSD-6425 closed; TDSD-6518 reconfirmation Apr 17), brain commitment page, email 2026-04-16 10:20 BST Afeez Kazeem, Daily Report 2026-04-16 15:50 WAT, email 2026-04-16 17:48 WAT Olamide Ajibulu, email 2026-04-16 17:55 WAT Peace Ikhuenbor reconfirmation request, email 2026-04-17 08:06 WAT Samson Ibekwe (reconfirmation), email 2026-04-17 08:31 WAT Qazim Adedigba (processing fine), email 2026-04-17 08:02 WAT Qazim Adedigba (Hourly Report 20260417)
 
 ## Deltas
 - 2026-04-16 11:15 WAT — Cycle 24 filed. Stanbic RC91 start 10:11 WAT. Concurrent with UBA and Union Bank RC91s (4-bank systemic pattern with FCMB).
@@ -34,3 +36,4 @@ Email, Slack DM, Jira (TDSD-6425 closed), brain commitment page, email 2026-04-1
 - 2026-04-16 14:09 WAT — ~4h active. NIBSS PTSA route failure filed 13:12 WAT. Systemic root-cause hypothesis: PTSA failure driving concurrent RC91s.
 - 2026-04-16 15:15 WAT — ~5h active. Daily Report does not list Stanbic-specific ticket. No resolution signal. UBA confirmed ongoing. NIBSS PTSA confirmed ongoing.
 - 2026-04-16 18:09 WAT — Cycle 25 filed 17:48 WAT by Olamide Ajibulu. Post-NIBSS PTSA resolution (17:50 WAT). Confirms Stanbic CBA instability is independent root cause. Peace Ikhuenbor requesting reconfirmation. No resolution yet.
+- 2026-04-17 10:20 WAT — **TDSD-6518 re-engagement — no new cycle filed.** Stanbic SRE [[Samson Ibekwe]] requested reconfirmation on the Apr 12 ticket at 08:06 WAT; [[Qazim Adedigba]] confirmed processing fine at 08:31 WAT. Hourly Report 20260417 (08:02 WAT) classifies Stanbic as experiencing intermittent RC91 failures — services restarted, bank engaged. Pattern continues at low-grade intermittent intensity; no new Slack P1 or new ticket.

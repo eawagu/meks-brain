@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Google Calendar (GCal MCP).
-updated: "2026-04-17T08:43:28Z"
+updated: "2026-04-17T09:25:52Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T05:09:00Z"
+last_processed: "2026-04-17T09:20:00Z"
 ---
 
 ## Connection
@@ -71,3 +71,4 @@ Nigerian public holidays from the Holidays calendar. Surface 2 days before a hol
 - The `gcal_find_meeting_times` tool can be used to suggest alternative times when a conflict is detected.
 - Frank Atashili's calendar (reader access) is the only other calendar visible. If more direct report calendars are added, extend the direct report decline pattern detection to include them.
 - **2026-04-17 ~06:09 WAT tick (briefing):** Calendar healthy. Fri Apr 17 schedule: TeamApt All Hands 08:30 WAT, Deliberation Varun Singh 10:30 WET, TeamApt/New Relic 14:00 BST, Tech support meeting 16:00 WAT, Product-Engineering Sync 18:00 WAT. Freed window 11:00–12:40 WAT (Head of Engineering interviews previously cancelled). Lattice Review block held for Fri Apr 24 15:00–17:00 WAT; Lattice window closes Apr 27 (10 days remaining).
+- **2026-04-17 ~10:20 WAT tick (mid-morning, non-briefing):** No new calendar changes since 06:09 WAT briefing tick. Deliberation Varun Singh 10:30 WAT is ~10 minutes out — surfaced in morning briefing schedule, no re-surfacing needed.

@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-17T08:45:03Z"
+updated: "2026-04-17T09:25:49Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T05:09:00Z"
+last_processed: "2026-04-17T09:20:00Z"
 ---
 
 ## Connection
@@ -111,3 +111,4 @@ When multiple messages across different channels reference the same entity (bank
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
 - **2026-04-17 ~06:09 WAT tick (briefing):** Tier 1 sweep confirms Ecobank RC91 cycle resolved via 22:01 WAT Apr 16 Slack thread reply (retroactive read — not visible to the 22:14 WAT tick, hence the false-positive Immediate that tick dispatched). Fortieth consecutive quiet DM tick. Retreat Day 4; in-person sessions. Briefing-2026-04-17 B3 flagged the email↔Slack visibility gap as a candidate directive edit for the Improve phase — not applied autonomously.
+- **2026-04-17 ~10:20 WAT tick (mid-morning, non-briefing):** No new Slack Tier-1 signals in the morning window — RC91 activity this window is email-dominant (Afeez/Qazim → bank counterparties). Forty-first consecutive quiet DM tick. Retreat Day 4 in-person continues.

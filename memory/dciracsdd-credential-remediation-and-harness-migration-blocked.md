@@ -5,8 +5,8 @@ type:
 title: DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked
 status: resolving
 created: "2026-04-11T16:42:32Z"
-summary: "Five CRITICAL vulnerabilities. TDSD-6479 Harness migration CTO-approved Apr 12. DCIR failure rate persistent: 25.26%→26.68% Apr 16 evening (down from 66% peak but above 20% threshold). UBA DCIR 2FA production deployment approved for weekend Apr 18–19. Zenith CISO acknowledged. Access Bank all closed."
-updated: "2026-04-16T19:14:09Z"
+summary: "Five CRITICAL vulnerabilities. TDSD-6479 Harness migration CTO-approved Apr 12. DCIR failure rate persistent in 25–27% band: 25.26% → 26.68% → 25.98% (Apr 16 evening → Apr 17 morning). UBA DCIR 2FA production deployment approved for weekend Apr 18–19. Zenith CISO acknowledged. Access Bank pen-test closed; JAR-scan re-opened Apr 17. Sterling Bank joins RC91 pattern (TDSD-6385)."
+updated: "2026-04-17T09:25:49Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -14,13 +14,27 @@ accountability: Technology Reliability and Security
 
 Five CRITICAL vulnerabilities across [[ACS (Access Control Server)]], DCIR, [[DirectDebit]]. ACS connector replacement progressing: [[CoralPay]] service deployed to production ([[TDSD-6047]] Done, 18:45 WAT Apr 10, [[Ekene Udodi]]); [[FCMB]] MFA enrollment for VPN access confirmed. [[Fidelity Bank]] DD P1 ([[TDSD-6499]]) RESOLVED 13:07 WAT Apr 10 (11h7min, root cause: network connection loss to bank transfer API — independent of DCIR chain). TDSD-6504 (DD null mandate errors) escalated to [[NIBSS]] at 15:37 WAT Apr 10 — no resolution. [[TDSD-6479]] (Harness P1 migration) — **CTO approved Apr 12.** Bank Cashout Service and Card transaction routing can now migrate off legacy CI/CD. DCIR Stanbic server memory at 94.97% (threshold 90%) — monitoring alert at 19:46 WAT Apr 11. ATS JAR deployment to [[Stanbic Bank]] requested by [[Babajide Ojoboorun]] at 17:01 WAT.
 
-**Access Bank vulnerabilities — CLOSED.** Onyinye Nweke confirmed 19:24 WAT Apr 15: "Exposed Heap Dump Endpoint Critical Closed; Sensitive Data and Passwords exposed..." — all AptPay web server vulnerability issues fixed. Cannot cross-reference against TDSD credential-remediation family (TDSD-6439 / TDSD-6477 / TDSD-6479) due to Jira blindness.
+**Access Bank — two separate vulnerability tracks.**
+- Track A (pen-test, AptPay web server): CLOSED. Onyinye Nweke confirmed 19:24 WAT Apr 15 (Exposed Heap Dump Endpoint / Sensitive Data / Passwords all closed).
+- Track B (JAR file scan, code artifact): RE-OPENED Apr 17. Adeolu Victory Atilade requested further security-team assessment at 08:32 WAT; Babajide Ojoboorun forwarded to Yasir Syed Ali + engineering and acknowledged at 08:46–08:47 WAT. See [[Access Bank — Multi-Track Failures]] for track detail.
+
+Cannot cross-reference either track against TDSD credential-remediation family (TDSD-6439 / TDSD-6477 / TDSD-6479) due to Jira blindness.
 
 **Zenith Bank CISO acknowledged vulnerability closure.** Festus Amede (CISO, [[Zenith Bank]]) at 10:06 WAT Apr 16: "Thanks for your dedication in closing the vulnerabilities found. Keep it up." Escalated internally to Daniel Eneh before sending thanks — suggests Zenith reviewed the fixes and is satisfied. Positive signal for the remediation chain.
 
 **UBA — DCIR 2FA production deployment APPROVED.** Christian Uchegbu ([[UBA]]) at 09:58 WAT Apr 16: "We have the approval to deploy on production. Kindly confirm your availability to implement this coming weekend." Addressed to [[Oluwatofunmi Obafemi]] and [[Ifeoluwa Oguntona]]. This is the pentest 2FA on DCIR portal — a key security remediation item. Weekend deployment window Apr 18–19.
 
-**DCIR failure rate — persistent above threshold.** After the 66% overnight peak (23:36 WAT Apr 15), the DCIR failure rate has stabilized lower but remains above the 20% threshold. Evening Apr 16: 25.26% (19:06 WAT) → 26.68% (20:06 WAT). The underlying failure generator is still active — rate is volatile but not recovering to baseline. See [[Wema Bank — RC91 After Settlement Resolution]] for full trajectory.
+**DCIR failure rate — persistent above threshold.** After the 66% overnight peak (23:36 WAT Apr 15), the DCIR failure rate has stabilized in the 25–27% band but remains above the 20% threshold. Six consecutive readings above threshold:
+- 40.65% (19:06 WAT Apr 15)
+- 20.4% (23:20 WAT Apr 15)
+- 66.0% (23:36 WAT Apr 15)
+- 25.26% (19:06 WAT Apr 16)
+- 26.68% (20:06 WAT Apr 16)
+- 25.98% (08:50 WAT Apr 17)
+
+The underlying failure generator is still active — rate is volatile but not recovering to baseline. See [[Wema Bank — RC91 After Settlement Resolution]] for full trajectory.
+
+**Multi-bank RC91 snapshot (Apr 17 morning — Hourly Report 20260417, 08:02 WAT, Qazim):** UBA, FCMB, Stanbic Bank experiencing intermittent RC91 failures — services restarted, banks engaged except for FCMB (not bank-engaged yet). [[Sterling Bank]] Persistent RC91 Incidents (TDSD-6385) now listed as open ticket — new bank entering the RC91 pattern. Previously-tracked banks: Access (TDSD-6593 cycle 5 overnight), Wema (cycle 7 08:54 WAT), UBA (TDSD-6574 intermittent), plus Union Bank Settlement Problem (TDSD-6276) and Fidelity DD Name Enquiry Incident (TDSD-6587) as open tickets.
 
 **Parallex Bank server restart completed.** Segun Ogunsola (Parallex Bank, Channels Switching) confirmed 02:29 WAT Apr 16 that server restart is done and service restored successfully. Awaiting transaction routing back to DCIR interchange — [[Daniel Armstrong]] to confirm Moniepoint-side routing.
 
@@ -29,7 +43,7 @@ Five CRITICAL vulnerabilities across [[ACS (Access Control Server)]], DCIR, [[Di
 **Apr 14 overnight — DCIR COMPLETE FAILURE:** Transaction failure rate escalated through the night: 80% (00:48 WAT) → declined to 33% (01:06) → re-elevated to 50–57% (01:22–01:54) → **100% (03:50 WAT) → 100% (04:06 WAT)**. No human escalation filed at any point.
 
 ## Sources
-email DCIR TEAMAPT Monitoring Service Alerts 19:06 WAT (40.65%), 23:20 WAT (20.4%), 23:36 WAT (66.0%) Apr 15; email Segun Ogunsola (Parallex) 02:29 WAT Apr 16 (server restart completed); email Rasheed Olanrewaju (UBA) 02:46 WAT Apr 16 (Direct Card restart completed); email Onyinye Nweke 19:24 WAT Apr 15 (Access Bank vulnerabilities all closed); email Festus Amede (Zenith CISO) 10:06 WAT Apr 16 (vulnerability closure acknowledged); email Christian Uchegbu (UBA) 09:58 WAT Apr 16 (DCIR 2FA production deployment approved); email Segun Ogunsola → [[Babajide Ojoboorun]] 11:09 WAT Apr 15 (DCIR DB INDEX JOB FAILURE); email [[Babajide Ojoboorun]] → Segun Ogunsola 11:07 WAT Apr 15 (Re: Authentication Error Message Exposure — remediation in flight); email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; jira TDSD-6439, TDSD-6477, TDSD-6479, TDSD-6497, TDSD-6499; email DCIR monitoring alerts 00:48–04:06 WAT Apr 14; email DCIR TEAMAPT Monitoring Service Alert 19:06 WAT Apr 16 (25.26%); email DCIR TEAMAPT Monitoring Service Alert 20:06 WAT Apr 16 (26.68%); briefing-2026-04-16 B1
+email DCIR TEAMAPT Monitoring Service Alerts 19:06 WAT (40.65%), 23:20 WAT (20.4%), 23:36 WAT (66.0%) Apr 15; email Segun Ogunsola (Parallex) 02:29 WAT Apr 16 (server restart completed); email Rasheed Olanrewaju (UBA) 02:46 WAT Apr 16 (Direct Card restart completed); email Onyinye Nweke 19:24 WAT Apr 15 (Access Bank pen-test all closed); email Festus Amede (Zenith CISO) 10:06 WAT Apr 16 (vulnerability closure acknowledged); email Christian Uchegbu (UBA) 09:58 WAT Apr 16 (DCIR 2FA production deployment approved); email Segun Ogunsola → [[Babajide Ojoboorun]] 11:09 WAT Apr 15 (DCIR DB INDEX JOB FAILURE); email [[Babajide Ojoboorun]] → Segun Ogunsola 11:07 WAT Apr 15 (Re: Authentication Error Message Exposure — remediation in flight); email [[Babajide Ojoboorun]] 17:55 WAT Apr 8; jira TDSD-6439, TDSD-6477, TDSD-6479, TDSD-6497, TDSD-6499; email DCIR monitoring alerts 00:48–04:06 WAT Apr 14; email DCIR TEAMAPT Monitoring Service Alert 19:06 WAT Apr 16 (25.26%); email DCIR TEAMAPT Monitoring Service Alert 20:06 WAT Apr 16 (26.68%); email DCIR TEAMAPT Monitoring Service Alert 08:50 WAT Apr 17 (25.98%); email Adeolu Victory Atilade 08:32 WAT Apr 17 (JAR vulnerabilities reassessment); email Babajide Ojoboorun fwd + ack 08:46–08:47 WAT Apr 17; email Qazim Adedigba "Re: Hourly Reports 20260417" 08:02 WAT Apr 17; briefing-2026-04-16 B1
 
 ## Deltas
 - 2026-04-09 17:02 WAT — [[Access Bank]] ACS P1: mandate creation failed 09:20–13:40 WAT.
@@ -42,6 +56,7 @@ email DCIR TEAMAPT Monitoring Service Alerts 19:06 WAT (40.65%), 23:20 WAT (20.4
 - 2026-04-14 04:11 WAT — 100% DCIR failure. Immediate alert dispatched.
 - 2026-04-15 11:09 WAT — Parallex DCIR DB INDEX JOB FAILURE; remediation in flight.
 - 2026-04-15 19:09 WAT — DCIR monitoring resumed: 40.65% failure warning.
-- 2026-04-16 06:23 WAT — **DCIR/Wema overnight escalation: 20.4% → 66.0%.** Remediation demonstrably failed. Parallex server restart completed, awaiting DCIR interchange routing. UBA Direct Card restart completed. Access Bank vulnerabilities confirmed all closed.
+- 2026-04-16 06:23 WAT — **DCIR/Wema overnight escalation: 20.4% → 66.0%.** Remediation demonstrably failed. Parallex server restart completed, awaiting DCIR interchange routing. UBA Direct Card restart completed. Access Bank pen-test vulnerabilities confirmed all closed.
 - 2026-04-16 10:20 WAT — **UBA DCIR 2FA deployment approved for production** (weekend window Apr 18–19). Zenith CISO acknowledged vulnerability closure. Positive remediation momentum across two banks.
 - 2026-04-16 19:09 WAT — **DCIR failure rate persistent above threshold.** 25.26% (19:06 WAT) → 26.68% (20:06 WAT). Down from 66% peak but not recovering to baseline. Underlying failure generator still active.
+- 2026-04-17 10:20 WAT — **DCIR 25.98% (Apr 17 08:50 WAT) — sixth consecutive above-threshold reading.** Trajectory across ~38 hours: 40.65% → 20.4% → 66% → 25.26% → 26.68% → 25.98%. Stabilized in 25–27% band. Hourly Report 20260417 surfaces [[Sterling Bank]] Persistent RC91 Incidents (TDSD-6385) as new open ticket — new bank entering the RC91 pattern. UBA/FCMB/Stanbic intermittent RC91 this window; services restarted, banks engaged (FCMB not yet bank-engaged). Access JAR vulnerability track re-opened (see [[Access Bank — Multi-Track Failures]] track 8).

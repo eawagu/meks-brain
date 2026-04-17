@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-17T08:43:28Z"
+updated: "2026-04-17T09:25:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T05:09:00Z"
+last_processed: "2026-04-17T09:20:00Z"
 ---
 
 ## Connection
@@ -58,3 +58,4 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
 - **2026-04-17 ~06:09 WAT tick (briefing):** Zero new Gemini docs since last_processed. **Thirty-fifth consecutive quiet Drive tick.** Retreat Day 4 in-person — no new meeting notes expected. Not yet at the 7-day absence-of-signal threshold (config-salience Awareness row).
+- **2026-04-17 ~10:20 WAT tick (mid-morning, non-briefing):** Zero new Gemini docs. **Thirty-sixth consecutive quiet Drive tick.** Retreat Day 4 in-person continues; no new meeting notes expected.

@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-17T08:45:04Z"
+updated: "2026-04-17T09:25:49Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T05:09:00Z"
+last_processed: "2026-04-17T09:20:00Z"
 ---
 
 ## Connection
@@ -73,3 +73,4 @@ last_processed: "2026-04-17T05:09:00Z"
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
 - **2026-04-17 ~06:09 WAT tick (briefing):** Overnight inbox processed. Key deltas: Duty Handover Note 20260416 (Qazim Adedigba, 00:19 WAT Apr 17) — 13/17 PTSAs operational, CoralPay suite (ZIB, FBN, PVB) off per business decision, Access ATS RC91 cycle 5 (TDSD-6593, 10min), UBA + Habari brief cycles, new tickets TDSD-6587 + TDSD-6591. No new Ecobank RC91 email traffic since 21:04 WAT 'urgent' follow-up (cycle closed via Slack 22:01 WAT). Briefing-2026-04-17 B3 flagged the email↔Slack visibility gap as a candidate directive edit for the Improve phase — not applied autonomously.
+- **2026-04-17 ~10:20 WAT tick (mid-morning, non-briefing):** Morning window deltas: Wema RC91 cycle 7 (filed 08:54 WAT, bank-confirmed 08:58 WAT, ~4 min). NIBSS RC91 20260417 (filed 08:40 WAT, Moses Ajani reviewing). UBA TDSD-6574 intermittent RC91 ongoing (Qazim 06:46 WAT). Stanbic TDSD-6518 reconfirmation (Samson/Qazim 08:06–08:31 WAT) — no new cycle. Access JAR vulnerability reassessment (Adeolu 08:32 WAT → Babajide fwd+ack 08:46–08:47 WAT). DCIR 25.98% alert 08:50 WAT. Hourly Report 20260417 (08:02 WAT) surfaces Sterling Bank Persistent RC91 (TDSD-6385) as new open ticket. No Immediate-tier dispatches warranted — all within established patterns; briefing already issued today.
