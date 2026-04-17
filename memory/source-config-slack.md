@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T11:09:32Z."
-updated: "2026-04-17T11:19:21Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T12:09:37Z."
+updated: "2026-04-17T12:18:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T11:09:32Z"
+last_processed: "2026-04-17T12:09:37Z"
 ---
 
 ## Connection
@@ -34,4 +34,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-17 11:09 WAT window: two concurrent P1s observed (NIBSS intermittent RC91 active 2h40m+; Polaris Bank RC91 new at 11:26 WAT). Stanbic cycle 26 (11:36→11:47 WAT) via #account-switch-alerts. Moses Ajani partial-match attribution dispute at 11:03 WAT in #teamapt-tech-operations.
+Tick 2026-04-17 12:09 WAT window: NIBSS PTSA P1 remained silent (2h06m since Moses Ajani 11:03 WAT) and crossed 3h40m total duration. Polaris Bank P1 silent 1h30m since 11:39 WAT filing. Adewuyi Mayowa pushed back on Ecobank reopen at 12:15 WAT ("Everything looks fine from this end"). No new P1 filings in this window. Two Immediate dispatches sent to user DM (NIBSS, Polaris) on absence-of-signal + >2h thresholds.

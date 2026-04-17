@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-17T11:09:32Z."
-updated: "2026-04-17T11:19:27Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-17T12:09:37Z."
+updated: "2026-04-17T12:18:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T11:09:32Z"
+last_processed: "2026-04-17T12:09:37Z"
 ---
 
 ## Connection
@@ -31,4 +31,4 @@ Gmail MCP. Profile: eawagu@gmail.com.
 
 ## Notes
 
-Tick 2026-04-17 11:09 WAT window: Afeez email 12:01 WAT Ecobank reopen (Layer 1 — direct To:me). No other Layer 1 messages in this window. No Layer 2 keyword matches beyond the Afeez thread.
+Tick 2026-04-17 12:09 WAT window: no new Layer 1 messages and no Layer 2 keyword matches in this window. The Afeez Ecobank thread from the prior tick had a Slack follow-up (Adewuyi pushback) rather than an email reply.

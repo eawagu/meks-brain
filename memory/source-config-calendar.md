@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T11:09:32Z."
-updated: "2026-04-17T11:19:29Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T12:09:37Z."
+updated: "2026-04-17T12:18:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T11:09:32Z"
+last_processed: "2026-04-17T12:09:37Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-17 11:09 WAT window: no priority signals. Calendar quiet through the noon window.
+Tick 2026-04-17 12:09 WAT window: no priority signals. Calendar quiet through the early afternoon window.
