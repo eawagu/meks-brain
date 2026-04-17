@@ -1,14 +1,31 @@
 ---
+title: OPay
 type:
   - "entity"
-title: Opay
-created: 2026-04-11
-summary: "Nigerian fintech competitor — holds more cards than any other entity in Nigeria; #2 in acquiring behind MoniePoint. Also operates POS terminal network (OPay POS v4.1.0)."
-updated: "2026-04-12T17:14:52Z"
 cssclasses:
   - "entity"
+created: "2026-04-17T14:43:57Z"
+updated: "2026-04-17T14:43:57Z"
+summary: "Nigerian payments competitor — actively demarketing Moniepoint in 2026 via claims that Moniepoint's 3G/Android 5 terminals are illegal and by orchestrating swap campaigns. Moniepoint pursuing regulatory intervention in response."
 ---
 
-Nigerian fintech. Holds more cards than any other entity in Nigeria; #2 in acquiring behind [[Moniepoint]]. Also operates a POS terminal network — OPay POS v4.1.0 observed at [[Mitch & Good Supermarket]] (Ikoyi, Lagos) accepting [[Moniepoint]] Verve card payments. Also used as "Cel Opay" payment processor at [[Celio Nigeria]] ([[The Palms Mall]], Lekki) — NGN 1,132,800 clothing purchase processed 10 Apr 2026.
+## Overview
 
-Mentioned in [[Visa-TeamApt Processing Agreement]], [[PHOTO-2026-04-12-14-28-41]], [[Long Image 12-04-2026 18.08.58]].
+**OPay** is a Nigerian payments competitor targeting [[Moniepoint]]'s POS merchant base.
+
+## Competitive Posture (2026)
+
+At the [[Moniepoint 2026 Leadership Retreat UK]] (Day 1), OPay was named as the primary demarketer:
+- Claims that Moniepoint's 3G / Android 5 terminals are illegal.
+- Orchestrates swap campaigns to replace Moniepoint terminals.
+- Replaces Moniepoint terminals regardless of whether Moniepoint retrieves qualifying devices (retrieval alone is not a defense).
+
+## Moniepoint Response Strategy
+
+- Regulatory engagement to curb anti-competitive claims about 3G legality.
+- Controlled 4-year write-off of MP35 contingent on regulatory relief.
+- Proactive retention outreach when retrievals signal accounts to competitors.
+
+## Sources
+
+- [[Moniepoint 2026 Leadership Retreat UK - Day 1 POS Terminal Issues Loan Product Shift - Summary]]
