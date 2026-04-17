@@ -1,23 +1,23 @@
 ---
-title: Babatunde
 type:
   - "entity"
+title: Babatunde
+created: "2026-04-17T15:13:02Z"
+summary: Moniepoint leader personally accompanying team to meet key merchants — multi-layered merchant relationship initiative started late 2023.
+updated: "2026-04-17T15:14:45Z"
 cssclasses:
   - "entity"
 disambiguation_needed: true
-created: "2026-04-17T15:13:02Z"
-updated: "2026-04-17T15:13:02Z"
-summary: Moniepoint leader physically accompanying team members to meet with key merchants — part of the multi-layered merchant relationship initiative started in late 2023.
 ---
 
 ## Role
 
-Babatunde is a Moniepoint leader involved in the multi-layered merchant relationship initiative referenced at the 2026 UK Retreat Day 2 session.
+Babatunde is a Moniepoint leader involved in the multi-layered merchant relationship initiative referenced at the 2026 UK Retreat Day 2.
 
-## Activity (2026 UK Retreat Day 2)
+## Activity
 
-- Personally accompanies team members (with Tosi — likely [[Tosin Eniolorunda]]) to meet with key merchants, strengthening relationships that were previously heavily concentrated at the BRM level.
-- Initiative started in late 2023 to overcome poor connections with higher-level merchant management.
+- Personally accompanies team members (with Tosi — likely [[Tosin Eniolorunda]]) to meet with key merchants, strengthening relationships that were previously concentrated at the BRM level.
+- Initiative started in late 2023.
 
 ## Sources
 

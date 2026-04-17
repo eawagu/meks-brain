@@ -1,28 +1,27 @@
 ---
-title: Honeymoon Rewards
 type:
   - "concept"
+title: Honeymoon Rewards
+created: "2026-04-17T15:13:02Z"
+summary: New-user rewards at Moniepoint — only rewards cohort with A/B-tested incremental retention/engagement lift. To integrate VAS incentives and pair with P2P Referral Program.
+updated: "2026-04-17T15:14:45Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T15:13:02Z"
-updated: "2026-04-17T15:13:02Z"
-summary: New-user rewards at Moniepoint — the only rewards cohort with A/B-tested incremental retention/engagement lift. To be integrated with VAS incentives.
 ---
 
 ## Overview
 
-Honeymoon Rewards are rewards offered to new Moniepoint users during their early onboarding window. Distinct from rewards for existing customers.
+Rewards offered to new Moniepoint users during onboarding window. Distinct from existing-customer rewards.
 
-## Evidence of Effectiveness
+## Evidence
 
-- A/B test data shows clear incremental impact on retention and engagement.
-- New users receiving honeymoon rewards retain longer and engage more in their first few months.
-- Contrasts with existing-customer rewards, which show no clear uplift.
+- A/B test: clear incremental retention + engagement impact.
+- New users receiving honeymoon rewards retain longer, engage more in first few months.
 
-## Strategic Integration (2026 UK Retreat Day 2)
+## Integration (2026 UK Retreat Day 2)
 
-- Will include more [[VAS]] incentives as part of the rewards package.
-- Coupled with [[P2P Referral Program]] (e.g., "buy data to earn money").
+- More [[VAS]] incentives in package.
+- Coupled with [[P2P Referral Program]].
 
 ## Sources
 
