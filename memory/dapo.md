@@ -1,18 +1,23 @@
 ---
-title: DAPO
+title: Dapo
 type:
   - "entity"
 cssclasses:
   - "entity"
-created: "2026-04-17T14:43:59Z"
-updated: "2026-04-17T14:43:59Z"
-summary: Moniepoint stakeholder — convened with Speaker 8 + Speaker 9 to align on POS deployment caps and anti-gaming measures (e.g., discouraging proxy accounts). Named at 2026 UK retreat Day 1.
+disambiguation_needed: true
+created: "2026-04-17T15:13:02Z"
+updated: "2026-04-17T15:13:02Z"
+summary: Moniepoint lead tapped to make MoneyCRM a one-stop service provider for the SACE team — performance/goal tracking, personnel management, internal comms.
 ---
 
 ## Role
 
-**DAPO** is a [[Moniepoint]] stakeholder, likely in operations/deployment given retreat context. Named at the [[Moniepoint 2026 Leadership Retreat UK]] (Day 1) as a participant in the pending alignment meeting on [[Capacity-Based Allocation Model]] implementation and anti-gaming (proxy account) measures.
+Dapo is the action owner for evolving [[MoneyCRM]] into a one-stop service provider for the SACE team at Moniepoint, per 2026 UK Retreat Day 2.
+
+## Action Item (2026 UK Retreat Day 2)
+
+- Work with Dapo to ensure [[MoneyCRM]] includes: performance/goal tracking, personnel management, and internal communication.
 
 ## Sources
 
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 POS Terminal Issues Loan Product Shift - Summary]]
+- [[Moniepoint 2026 Leadership Retreat UK - Day 2 Customer Rewards Sales OKRs Growth Strategy - Summary]]

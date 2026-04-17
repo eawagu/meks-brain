@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "memory/emeka-obiorah-awagu.md",
+                "file": "memory/ezekiel.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "emeka-obiorah-awagu"
+              "title": "ezekiel"
             }
           }
         ]
@@ -182,6 +182,10 @@
   },
   "active": "22148c01f51c7023",
   "lastOpenFiles": [
+    "memory/ezequiel.md",
+    "memory/eight-judgment-traits.md",
+    "memory/emeka-obiorah-awagu.md",
+    "memory/moniepoint-2026-leadership-retreat-uk-day-2-customer-rewards-sales-okrs-growth-s.md",
     "memory/transcript-moniepoint-2026-leadership-retreat-uk-day-1-savings-strategy-rate-fra.md",
     "memory/acquiring-business-2026-targets.md",
     "memory/card-business-2026-targets.md",
@@ -204,10 +208,6 @@
     "memory/solomon.md",
     "memory/moniepoint-2026-leadership-retreat-uk-day-1-savings-strategy-rate-framework-csat.md",
     "memory/transcript-moniepoint-2026-leadership-retreat-uk-day-1-profitability-project-pho.md",
-    "memory/fccpc.md",
-    "memory/key-account-management-strategy.md",
-    "memory/verve-pricing-dispute.md",
-    "memory/nigeria-revenue-outlook.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
