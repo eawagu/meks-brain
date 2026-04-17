@@ -16,30 +16,30 @@ Composite image of passport visa/stamp pages for [[Emeka Obiorah Awagu]], scanne
 
 ## Passport Lineage
 
-| # | Passport | Issued | Expires | Authority | Notes |
-|---|---|---|---|---|---|
-| 1 | (unknown — lost) | 18 Jul 1994 | — | — | Reported lost. Pre-2000 travel history not recoverable. |
-| 2 | A0652413 | 18 Nov 2000 | 17 Nov 2005 | NSUKKA | Replaced the lost passport. Renewed stamp 16.11.2010 present. |
-| 3 | A02275167 | 16 Aug 2010 | 15 Aug 2015 | IKOYI LAGOS | |
-| 4 | A50105000 | 19 Aug 2015 | 18 Aug 2020 | IKOYI LAGOS | |
-| 5 | B50109924 | 10 Sep 2021 | 9 Sep 2031 | IKOYI LAGOS | Current passport. NIN 52321019113. |
+| #   | Passport         | Issued      | Expires     | Authority   | Notes                                                         |
+| --- | ---------------- | ----------- | ----------- | ----------- | ------------------------------------------------------------- |
+| 1   | (unknown — lost) | 18 Jul 1994 | —           | —           | Reported lost. Pre-2000 travel history not recoverable.       |
+| 2   | A0...3           | 18 Nov 2000 | 17 Nov 2005 | NSUKKA      | Replaced the lost passport. Renewed stamp 16.11.2010 present. |
+| 3   | A0...7           | 16 Aug 2010 | 15 Aug 2015 | IKOYI LAGOS |                                                               |
+| 4   | A5...0           | 19 Aug 2015 | 18 Aug 2020 | IKOYI LAGOS |                                                               |
+| 5   | B5...4           | 10 Sep 2021 | 9 Sep 2031  | IKOYI LAGOS | Current passport. NIN 5...3.                                  |
 
 ## Visas Extracted
 
-| Issue date | Country | Type | Serial | Issuing post | Validity | Passport |
-|---|---|---|---|---|---|---|
-| 14 May 2001 | Mexico | Visa Ordinaria (FMT/6 No. 35842) | B2229908 | Embassy of Mexico, London | 45 days | A0652413 |
-| 15 Jun 2001 | Spain (Schengen) | Visado | E04389763 | Cons Gral de España, Londres | 20-06-01 → 29-06-01, 02 entries | A0652413 |
-| 30 Oct 2001 | UK | Leave to Remain (Home Office) | — | UK Home Dept | — | A0652413 |
-| 19 Apr 2017 | Belgium (Schengen) | C, 01 entry | 0117530 49 | Embassy of Belgium, Abuja | Issued Abuja, used for Frankfurt trip | A50105000 |
-| 06 Mar 2018 | South Africa | Visitor's Visa (Single) | A06353789, DHA-1635A | South African High Commission, Lagos | 07 days; enter by 2018-06-05 | A50105000 |
-| ~Apr 2018 | Kenya | Single Journey Visa | SAA 0657465 3 | Kenya (London / Abuja) | Expiry 28/4/2018 | A50105000 |
-| 08 Aug 2019 | UK | UKVI 02 MULT C-Visit | 0118404475 | UK | 08/08/19 → 08/02/20 | A50105000 |
-| ~Jan 2023 | Kenya | Entry (visa window 17–31 Jan 2023) | — | — | — | B50109924 |
-| 28 Oct 2024 | UK | UKVI 01 MULT C-Visit | 024018798 | UK | 28/10/24 → 28/04/25, 180 days | B50109924 |
-| 04 Jun 2025 | France (Schengen) | C, MULT | 611380814 | France, Lagos | 04-06-25 → 19-07-25, 30 days | B50109924 |
-| 01 Aug 2025 | UK | UKVI 01 MULT C-Visit | 027004120 | UK | 01/08/25 → 01/08/27, 180 days | B50109924 |
-| 10 Sep 2025 | China | M (Business), 01 entry | AF996964 | Chinese Embassy, Lagos (拉各斯) | 10SEP2025 → 10DEC2025, 030 day stay | B50109924 |
+| Issue date  | Country            | Type                               | Serial               | Issuing post                         | Validity                              | Passport |
+| ----------- | ------------------ | ---------------------------------- | -------------------- | ------------------------------------ | ------------------------------------- | -------- |
+| 14 May 2001 | Mexico             | Visa Ordinaria (FMT/6 No. 35842)   | B2229908             | Embassy of Mexico, London            | 45 days                               | A0...3   |
+| 15 Jun 2001 | Spain (Schengen)   | Visado                             | E04389763            | Cons Gral de España, Londres         | 20-06-01 → 29-06-01, 02 entries       | A0...3   |
+| 30 Oct 2001 | UK                 | Leave to Remain (Home Office)      | —                    | UK Home Dept                         | —                                     | A0...3   |
+| 19 Apr 2017 | Belgium (Schengen) | C, 01 entry                        | 0117530 49           | Embassy of Belgium, Abuja            | Issued Abuja, used for Frankfurt trip | A5...0   |
+| 06 Mar 2018 | South Africa       | Visitor's Visa (Single)            | A06353789, DHA-1635A | South African High Commission, Lagos | 07 days; enter by 2018-06-05          | A5...0   |
+| ~Apr 2018   | Kenya              | Single Journey Visa                | SAA 0657465 3        | Kenya (London / Abuja)               | Expiry 28/4/2018                      | A5...0   |
+| 08 Aug 2019 | UK                 | UKVI 02 MULT C-Visit               | 0118404475           | UK                                   | 08/08/19 → 08/02/20                   | A5...0   |
+| ~Jan 2023   | Kenya              | Entry (visa window 17–31 Jan 2023) | —                    | —                                    | —                                     | B5...4   |
+| 28 Oct 2024 | UK                 | UKVI 01 MULT C-Visit               | 024018798            | UK                                   | 28/10/24 → 28/04/25, 180 days         | B5...4   |
+| 04 Jun 2025 | France (Schengen)  | C, MULT                            | 611380814            | France, Lagos                        | 04-06-25 → 19-07-25, 30 days          | B5...4   |
+| 01 Aug 2025 | UK                 | UKVI 01 MULT C-Visit               | 027004120            | UK                                   | 01/08/25 → 01/08/27, 180 days         | B5...4   |
+| 10 Sep 2025 | China              | M (Business), 01 entry             | AF996964             | Chinese Embassy, Lagos (拉各斯)         | 10SEP2025 → 10DEC2025, 030 day stay   | B5...4   |
 
 ## Entry / Exit Stamps Extracted
 
