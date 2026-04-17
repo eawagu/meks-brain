@@ -1,12 +1,12 @@
 ---
-title: MoneyCRM
 type:
   - "entity"
+title: MoneyCRM
+created: "2026-04-17T15:13:03Z"
+summary: Moniepoint CRM platform — target one-stop service provider for SACE team. DAPO is the action owner. Also used for merchant onboarding (international card eligibility).
+updated: "2026-04-17T15:16:30Z"
 cssclasses:
   - "entity"
-created: "2026-04-17T15:13:03Z"
-updated: "2026-04-17T15:13:03Z"
-summary: Moniepoint CRM platform — target one-stop service provider for SACE team (performance/goal tracking, personnel management, internal comms). [[Dapo]] is the action owner. Also used for merchant onboarding flows (international card eligibility).
 ---
 
 ## Overview
@@ -22,7 +22,7 @@ MoneyCRM is Moniepoint's CRM platform. Being evolved into a one-stop service pro
 
 ## Ownership
 
-- [[Dapo]] is the named owner for the SACE-oriented evolution.
+- [[DAPO]] is the named owner for the SACE-oriented evolution.
 
 ## Sources
 

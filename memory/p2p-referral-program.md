@@ -1,32 +1,31 @@
 ---
-title: P2P Referral Program
 type:
   - "concept"
+title: P2P Referral Program
+created: "2026-04-17T15:13:03Z"
+summary: "Moniepoint peer-to-peer referral program (2026) — users earn airtime for recommending new users. Separated from sales-team referral. Target: students/universities. Combined growth initiatives projected to add 1M DAU by December."
+updated: "2026-04-17T15:16:30Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T15:13:03Z"
-updated: "2026-04-17T15:13:03Z"
-summary: "Moniepoint peer-to-peer referral program (2026) — users earn airtime for recommending new users. Separated from the existing sales-team referral (which became its own sales channel). Target demographic: students/universities. Combined growth initiatives projected to add 1M DAU by December."
 ---
 
 ## Overview
 
-The P2P Referral Program is a peer-to-peer user referral mechanism distinct from the existing sales team referral program (which was split off into a dedicated sales channel).
+Peer-to-peer user referral mechanism distinct from the existing sales team referral program (which was split off into a dedicated sales channel).
 
 ## Rewards Mechanic
 
 - Users earn airtime for recommending new users.
 - Integrated with [[VAS]] (e.g., "buy data to earn money").
 
-## Target Demographic
+## Target
 
 - Students and universities.
 
 ## Status (2026 UK Retreat Day 2)
 
 - Small test launching the month of retreat.
-- Backend complete.
-- UX incomplete — discoverability concern noted.
+- Backend complete. UX incomplete — discoverability concern.
 
 ## Projected Impact
 

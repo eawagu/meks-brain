@@ -1,12 +1,12 @@
 ---
-title: High-Balance Salary Accounts
 type:
   - "concept"
+title: High-Balance Salary Accounts
+created: "2026-04-17T15:13:03Z"
+summary: "Moniepoint initiative to attract salary accounts WITHOUT direct employer integration — benefits for users >₦120K/month ADB: free transfers, airtime vouchers, Visa-sponsored premium card benefits."
+updated: "2026-04-17T15:16:30Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T15:13:03Z"
-updated: "2026-04-17T15:13:03Z"
-summary: "Moniepoint initiative to attract salary accounts WITHOUT direct employer integration — benefits for users maintaining >₦120K/month average daily balance: free transfers, airtime vouchers, Visa-sponsored premium card benefits."
 ---
 
 ## Overview

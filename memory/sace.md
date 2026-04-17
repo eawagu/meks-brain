@@ -1,12 +1,12 @@
 ---
-title: SACE
 type:
   - "concept"
+title: SACE
+created: "2026-04-17T15:13:03Z"
+summary: Moniepoint Sales / Acquiring / Customer Experience team — owner of 2026 OKRs for BRM relationship, market leadership, revenue, risk/compliance. Co-led by Ezekiel and Ifine.
+updated: "2026-04-17T15:16:29Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T15:13:03Z"
-updated: "2026-04-17T15:13:03Z"
-summary: Moniepoint Sales / Acquiring / Customer Experience team — owner of 2026 OKRs for BRM relationship, market leadership (SME, POS, lending, Moneybook), revenue, risk/compliance. Co-led by Ezekiel and Ifine.
 ---
 
 ## Overview
