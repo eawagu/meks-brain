@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Tosin Eniolorunda
 created: 2026-04-11
-summary: "Moniepoint Inc. CEO — active leadership presence at 2026 Strategy Retreat; challenged lending penetration targets (3.77% too low), mandated percentile metrics over averages, drives data-driven culture ('if you do not have metrics, things walk on vibes'); conducts executive/bar-raising interview round."
-updated: "2026-04-16T05:42:56Z"
+summary: "Moniepoint Inc. CEO — introduced Organizational Framework + Eight Judgment Traits at 2026 UK Retreat as leadership OS. Challenges insufficient targets, demands data precision; philosophy: 'public praise, private admonishment'; stated culture is behavior + incentives, not wall plaques."
+updated: "2026-04-17T14:38:55Z"
 cssclasses:
   - "entity"
 ---
@@ -16,6 +16,20 @@ Tosin Eniolorunda is the CEO of [[Moniepoint]] Inc. (the parent group). [[Dennis
 ## Role
 - **Title:** CEO, Moniepoint Inc.
 - **Organization:** [[Moniepoint]]
+
+## Leadership Framework (2026 UK Retreat Day 1)
+
+Introduced the [[Organizational Framework]] — Goals, Structure, People, Incentives, Context, Systems, Governance — as Moniepoint's leadership operating system. Corresponding [[Eight Judgment Traits]] (Customer Obsession, Craft, Systemization, Urgency, Ownership, No Ego, Candor, Integrity) as expectation for every employee. Stated philosophy: "public praise, private admonishment"; "culture is not what is written on a wall, but what happens when leaders are not looking."
+
+### Retreat Day 1 Positions
+
+- **Structure serves goals, not individuals** — proposals to create structures for specific "superstars" will be rejected.
+- **Meritocracy** ([[Meritocracy Principle]]): promotion is based on performance, not likability to manager.
+- **Talent density over tolerance** ([[Talent Density Principle]]): if actively performance-managing someone, they should be out. No prolonged PIP.
+- **Leaders mandated to define and cascade team goals immediately** — don't wait for [[Project Moose]] or any other infrastructure.
+- **Context is a leader's responsibility** — cited [[Omulu]] (PM) as exemplar; expects [[Ibelieve]] (Engineering), Good (Legal) to produce equivalents.
+- **Single obligor limits are inviolate** — any exception requires Board Credit Committee process.
+- **Risk appetite for big-ticket lending driven by unit economics** — 9% margin over treasury means zero tolerance for defaults; not by copying what banks do.
 
 ## Leadership Style (from Strategy Retreat Apr 15, 2026)
 
@@ -43,8 +57,12 @@ Active, interventionist leadership in strategy sessions. Pattern: challenges tar
 - [[Emeka Awagu]] — CTO, TeamApt (group relationship)
 - [[Frank Atashili]] — CPO, TeamApt
 - [[Moniepoint]] — organization
+- [[Pavel]] — goals lead
+- [[Chloe]] — talent acquisition lead
+- [[Yuki]] — risk/credit modeling lead
 
 ## Sources
 - [[Head of Engineering RSOP Interview Guide]]
+- [[Moniepoint 2026 Leadership Retreat UK - Day 1 Organizational Framework Loan Portfolio Risk - Meeting Minutes]]
 - [[source — Strategy Retreat Day 2: Customer Rewards, Sales OKRs, Growth Strategy (Apr 15)]]
 - [[source — Strategy Retreat Day 2: Platform Performance, Security, Customer Experience (Apr 15)]]
