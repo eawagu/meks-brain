@@ -1,23 +1,23 @@
 ---
+title: Cowrywise
 type:
   - "entity"
-title: CowryWise
-created: 2026-04-11
-summary: Nigerian savings and investment fintech — first live DD merchant; bullish on DD as future payment rail; live pilot at Fidelity Bank and Keystone Bank.
-updated: "2026-04-13T23:26:38Z"
 cssclasses:
   - "entity"
+created: "2026-04-17T15:43:29Z"
+updated: "2026-04-17T15:43:29Z"
+summary: Digital wealth manager; counterparty with NGN35.2M exposure to Moniepoint under active recovery as of 17 Apr 2026.
 ---
 
-## Overview
+# Cowrywise
 
-CowryWise is a Nigerian savings and investment fintech. First live merchant on [[TeamApt]]'s [[Direct Debit Program]] — bullish on DD as a future payment rail.
+Digital wealth management platform, counterparty exposure line for [[Moniepoint]].
 
-## Direct Debit
+## Current exposure (17 Apr 2026 CEO Gazette)
+- Amount to recover: **NGN35.2M**
+- Status: active recovery, weekly reporting
 
-- Live pilot transactions at [[Fidelity Bank]] and [[Keystone Bank]]
-- First DD merchant to go live on the platform
-
-## Sources
-
-[[AptPay Direct Debit - OKR Planning Q2 2026]], [[TeamApt_Customer_Registry]]
+## Related
+- [[Cowrywise Exposure]] — dedicated exposure tracker
+- [[Jumiapay]] — parallel counterparty exposure line
+- [[CEO Gazette]]
