@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only; 39 consecutive quiet ticks as of 2026-04-17 13:09 WAT."
-updated: "2026-04-17T12:18:51Z"
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only; 40 consecutive quiet ticks as of 2026-04-17 14:10 WAT."
+updated: "2026-04-17T13:16:43Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T12:09:37Z"
+last_processed: "2026-04-17T13:10:00Z"
 ---
 
 ## Connection
@@ -25,4 +25,4 @@ Google Drive MCP. Scope: files whose title starts with "Notes by Gemini" (meetin
 
 ## Notes
 
-Tick 2026-04-17 12:09 WAT window: no new or modified Notes-by-Gemini files. This extends the consecutive-quiet-tick streak to 39 ticks. No action.
+Tick 2026-04-17 13:10 WAT window: No new or modified Notes-by-Gemini files. Extends the consecutive-quiet-tick streak to 40 ticks (~2.7 days at 15 ticks/day). Well below the 7-day absence-of-signal threshold. No action.
