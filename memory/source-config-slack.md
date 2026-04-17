@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T13:10:00Z."
-updated: "2026-04-17T14:16:11Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T15:09:00Z."
+updated: "2026-04-17T15:17:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T14:09:00Z"
+last_processed: "2026-04-17T15:09:00Z"
 ---
 
 ## Connection
@@ -37,9 +37,9 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 5. **Per-message** salience reasoning + brain-wide similarity search.
 
 ### Known limitations
-- `slack_search_public_and_private` with space-separated terms is AND-only (no boolean). Use channel reads for authoritative coverage; use search only to confirm specific keyword presence.
+- `slack_search_public_and_private` with space-separated terms is AND-only (no boolean). Use channel reads for authoritative coverage; use search only to confirm specific keyword presence. Boolean OR syntax fails silently (zero results) — confirmed again at 16:09 WAT 2026-04-17 tick.
 - Rate-limiting observed on parallelized channel reads + searches. Retry once when encountered; continue the tick if persistent.
 
 ## Notes
 
-Tick 2026-04-17 15:09 WAT window (14:10 → 15:09 WAT): Tier 1 channel read surfaced a **previously-untracked Wema Bank RC91 P1** filed 08:52 WAT today (start 08:49 WAT, 6h20m active, silent since filing). Not caught by the 12:09, 13:09, or 14:09 WAT ticks. `MISS:` calibration note captured; new situation page created ([[Wema Bank — RC91 P1 Apr 17]]). NIBSS PTSA P1 now 5h40m active (4h06m silent, 4th consecutive silent tick). Polaris Bank P1 now 3h43m active (3h30m silent, 3rd consecutive silent tick). Ecobank reopen silent 2h54m since Adewuyi's 12:15 WAT pushback. FCMB P1 (07:47 WAT start, "services restarted" framing at filing) has no confirmed recovery post — ambiguous, flagged for monitoring. Consolidated Immediate dispatch (Wema + NIBSS + Polaris) sent to user DM. Rate-limiting observed on `slack_search_public_and_private` and one channel read retry; retries per directive. A new Sweep Order directive has been added to the Directives section above to prevent the Wema miss structurally.
+Tick 2026-04-17 16:09 WAT window (15:09 → 16:09 WAT): All 5 Tier 1 channels empty (zero parent messages). DM channel empty. Keyword search P1: 10 results, all out of scope — #teamapt_infra_notifications (C08RKF5NHBQ, bot-only infra pings, per skip rule) and one PagerDuty EU resolution for moniepoint-gamification-service (Refs and Rewards, out of scope — not payments/switch). Keyword search RC91: zero results. Rate-limiting observed on two parallel channel reads (C096LCNP26P, C08PH35PLPK); serial retries succeeded. Active-P1 trio (Wema, NIBSS, Polaris) continues silent — no Immediate re-dispatched this tick; 15:09 WAT consolidated dispatch remains the authoritative alert and nothing new has emerged. Aging will fold into briefing-2026-04-18.
