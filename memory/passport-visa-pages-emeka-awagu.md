@@ -4,7 +4,7 @@ type:
 title: Passport Visa Pages — Emeka Awagu
 created: "2026-04-12T16:14:46Z"
 summary: Composite scan of passport visa/stamp pages for Emeka Awagu covering 4 passports (2000–2031). Contains stamp-level extraction of all legible entries, exits, and visas across 16 trips to 10 foreign countries.
-updated: "2026-04-17T09:54:05Z"
+updated: "2026-04-17T16:09:04Z"
 cssclasses:
   - "source"
 source_path: Long Image 12-04-2026 16.33.11.jpg
@@ -12,7 +12,7 @@ source_path: Long Image 12-04-2026 16.33.11.jpg
 
 ## Summary
 
-Composite image of passport visa/stamp pages for [[Emeka Obiorah Awagu]], scanned 2026-04-12. Spans four Nigerian passports and one reported-lost passport. Extraction covers every legible stamp, visa, and endorsement from tiles 00–17 of the composite.
+Composite image of passport visa/stamp pages for [[Emeka Obiorah Awagu]], scanned 2026-04-12. Spans four Nigerian passports and one reported-lost passport. Extraction covers every legible stamp, visa, and endorsement from the composite. Session 60 full 41-tile re-pass (2026-04-17) extended stamp inventory where zoom evidence warranted.
 
 ## Passport Lineage
 
@@ -49,6 +49,7 @@ Stamps grouped by trip, chronological. See [[Travel History — Emeka Awagu]] fo
 - UK Home Office immigration stamp: 24 NOV 2001 (year partially illegible)
 - Spain: no direct stamp — visa window 20–29 Jun 2001
 - Mexico: ENTRADA stamp present (date not dated to day on stamp)
+- Mexico: CAJA fee/revenue stamp "13/06/01 ** CAJA ** / 6.20 / TO 522935 01" (session 60 zoom on Mexican visa page, rotated 180°) — fee dated 13 Jun 2001, amount $6.20, serial TO 522935 01; fixes Mexico presence to 13 Jun 2001
 
 ### 2003 — Nigeria arrival
 - Nigeria MM Airport Ikeja: SEEN ON ARRIVAL 05 JAN 2003
@@ -78,16 +79,17 @@ Stamps grouped by trip, chronological. See [[Travel History — Emeka Awagu]] fo
 - Nigeria MMIA1 arrival: 01 OCT 2019 (SOA 07411)
 
 ### 2019 — UAE
-- UAE entry (stamp 18159, date smudged — best read 13 NOV 2019)
+- UAE entry (stamp 18159): date remains smudged at session 60 3x zoom. Best read still ambiguous at day level. Inferred 14 NOV 2019 per session 59 directive, basis: Nigeria MMIA1 SOD 0019 departure 13 NOV 2019 + ~8hr flight time to AUH/DXB → arrival lands on 14 NOV local. Confidence: medium (inference-based, not stamp-legible).
 - UAE exit: 18 NOV 2019 (stamp 28196)
 - Nigeria MMIA1: 13 NOV 2019 (SOD 0019) and 16 NOV 2019 (NIG)
 
 ### 2023 — Kenya
-- Nigeria: 19 MAR 2023 MMIA1 (faint)
-- Kenya JKIA: 04 FEB 2023 (Republic of Kenya, exit stamp)
-- Nigeria MMIA arrival: 04 FEB 2023
+- Nigeria: 19 MAR 2023 MMIA1 (faint) — predecessor marker, unrelated to Kenya trip
+- Kenya JKIA exit: 04 FEB 2023 (Republic of Kenya, exit stamp) — clear at session 60 re-pass
+- Nigeria MMIA arrival: 04 FEB 2023 — clear at session 60 re-pass
 
 ### 2024–2025 — UK
+- Nigeria MMIA1 departure: 03 NOV 2024 (SOD, session 60 3x zoom on slice_38 area — Nigeria-side evidence added)
 - UK Heathrow entry: 3 NOV 2024 (IO 3531, Heathrow 3)
 - Nigeria MMIA1 arrival: 09 MAR 2025 (DTD 0679)
 
@@ -116,10 +118,20 @@ Stamps grouped by trip, chronological. See [[Travel History — Emeka Awagu]] fo
 ## Coverage Gaps and Confidence Flags
 
 - **Pre-Nov 2000**: No passport stamps recoverable. First passport (issued 18 Jul 1994) was reported lost.
-- **UAE Nov 2019 entry date**: Stamp 18159 smudged. Best read "13 NOV 2019" but could be 1X NOV. Exit stamp 28196 "18 NOV 2019" is clear.
+- **Mexico 2001 entry**: No ENTRADA-dated entry stamp; CAJA fee stamp 13/06/01 (session 60) anchors Mexico presence to 13 Jun 2001 via fee-payment evidence rather than entry stamp.
+- **Mexico 2001 exit**: Not directly recovered. Inferred 19 Jun 2001 from Spain visa window 20–29 Jun 2001.
+- **Spain 2001**: No direct entry/exit stamps. Dates proxied from visa window 20–29 Jun 2001.
+- **UAE Nov 2019 entry date**: Stamp 18159 remains smudged at 3x zoom (session 60). 14 NOV 2019 inferred from Nigeria SOD 0019 dep 13 NOV + flight time. Exit stamp 28196 "18 NOV 2019" is clear.
 - **UK exits**: UK does not stamp departures. Exit dates for UK trips are inferred from subsequent Nigeria arrival stamps.
-- **Spain 2001 and Mexico 2001**: Entry/exit stamps not legible on composite. Dates are proxied from visa windows.
-- **Kenya Jan 2023 entry date**: Visible visa window shows 17–31 Jan 2023 but the entry stamp date itself is not clearly legible in the tile. Exit stamp 04 FEB 2023 is clear.
+- **Kenya Jan 2023 entry date**: Arrival stamp in Kenya still not clearly legible; visa window 17–31 Jan 2023 provides bound. Return stamps (JKIA exit + Nigeria MMIA arrival) both 04 FEB 2023 are clear at session 60 re-pass — upgrading overall Kenya 2023 trip confidence from low to medium.
+
+## Session 60 Re-Pass Note (2026-04-17)
+
+Full 41-tile re-pass at 600×150 overlap, plus 3x zoom crops on ambiguous regions. Changes propagated above:
+- **Added**: Mexico CAJA fee stamp (13 Jun 2001, $6.20, serial TO 522935 01); Nigeria MMIA1 SOD departure 03 Nov 2024.
+- **Refined**: UAE entry inference note (14 Nov 2019, medium confidence); Kenya 2023 return leg confidence upgrade.
+- **Confirmed (no change)**: Nigeria 09 MAR 2025 DTD serial reads 0679 at zoom (not 0579); Nigeria 26 SEP 2019 = UK entry stamp (already in inventory as 2019 UK re-entry leg); Frankfurt 2017 stamps correctly catalogued.
+- **Not found**: No additional missed legs across full composite (base-rate-undercount hypothesis not confirmed).
 
 ## Entities Mentioned
 
