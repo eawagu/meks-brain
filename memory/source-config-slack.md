@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T12:09:37Z."
-updated: "2026-04-17T12:18:51Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T13:10:00Z."
+updated: "2026-04-17T13:16:12Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T12:09:37Z"
+last_processed: "2026-04-17T13:10:00Z"
 ---
 
 ## Connection
@@ -31,7 +31,8 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ### Known limitations
 - `slack_search_public_and_private` with space-separated terms is AND-only (no boolean). Use channel reads for authoritative coverage; use search only to confirm specific keyword presence.
+- Rate-limiting observed on parallelized channel reads + searches. Retry once when encountered; continue the tick if persistent.
 
 ## Notes
 
-Tick 2026-04-17 12:09 WAT window: NIBSS PTSA P1 remained silent (2h06m since Moses Ajani 11:03 WAT) and crossed 3h40m total duration. Polaris Bank P1 silent 1h30m since 11:39 WAT filing. Adewuyi Mayowa pushed back on Ecobank reopen at 12:15 WAT ("Everything looks fine from this end"). No new P1 filings in this window. Two Immediate dispatches sent to user DM (NIBSS, Polaris) on absence-of-signal + >2h thresholds.
+Tick 2026-04-17 13:10 WAT window (13:09 → 14:10 WAT): Zero activity across all Tier 1 channels. Zero DMs to user. Zero keyword matches for RC91, NIBSS PTSA, Polaris, Ecobank. NIBSS PTSA P1 remained silent (3h07m since Moses Ajani 11:03 WAT, 4h41m total duration). Polaris Bank P1 silent 2h31m since 11:39 WAT filing — crosses Immediate #2 threshold. Ecobank thread silent 1h55m since Adewuyi pushback 12:15 WAT — contested attribution still unresolved. One consolidated Immediate dispatch sent to user DM covering NIBSS + Polaris (third consecutive silent-P1 tick for each). Transient rate-limiting observed on #notifications-support-dev read and one search retry; second attempt succeeded.
