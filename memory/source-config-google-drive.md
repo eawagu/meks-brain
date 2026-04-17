@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: Signal source registration and filtering directives for Google Drive (Google Drive MCP) — Shared with me, Gemini meeting notes only.
-updated: "2026-04-16T21:17:35Z"
+updated: "2026-04-17T08:43:28Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T21:14:00Z"
+last_processed: "2026-04-17T05:09:00Z"
 ---
 
 ## Connection
@@ -57,4 +57,4 @@ Each "Notes by Gemini" document contains two heading-based sections: **Summary**
 - `sharedWithMeTime` is only valid as an `orderBy` field, not as a query filter. `createdTime` is used for delta detection instead.
 - Cards and Account All Hands (Apr 13, 09:57 UTC) was too large to fetch — skipped; will retry or flag for manual review.
 - Some Gemini docs (e.g., Direct to Bank standup 2026-04-14) do not include an explicit "Transcript" heading; equivalent content under "Details" + "Next steps" + "Decisions" is handled as transcript content.
-- **2026-04-16 ~22:14 WAT tick:** Zero new Gemini docs since last_processed. **Thirty-fourth consecutive quiet Drive tick.** Retreat Day 3 in-person — no new meeting notes expected.
+- **2026-04-17 ~06:09 WAT tick (briefing):** Zero new Gemini docs since last_processed. **Thirty-fifth consecutive quiet Drive tick.** Retreat Day 4 in-person — no new meeting notes expected. Not yet at the 7-day absence-of-signal threshold (config-salience Awareness row).

@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: Signal source registration and filtering directives for email (Gmail MCP).
-updated: "2026-04-16T21:15:59Z"
+updated: "2026-04-17T08:43:28Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-16T21:14:00Z"
+last_processed: "2026-04-17T05:09:00Z"
 ---
 
 ## Connection
@@ -67,9 +67,13 @@ last_processed: "2026-04-16T21:14:00Z"
 - All-hands meeting invites (unless agenda contains decision items)
 - Out-of-office auto-replies
 
+### Cross-channel resolution check
+
+Before dispatching an Immediate alert on a long-running email thread (P1/escalation), MUST check whether a Slack P1 thread exists for the same incident and whether its most recent reply is a resolution message. If Slack resolution is observed, suppress the email-only Immediate and route to Awareness instead. (Added 2026-04-17 after 22:14 Apr 16 false-positive Immediate on Ecobank RC91 — email thread was still silent while the Slack P1 thread had a 22:01 WAT resolution reply 13 minutes prior.)
+
 ## Notes
 
 - Layer 1 (To-addressed) takes precedence over all other rules. A skip-listed keyword in a To-addressed email still gets surfaced.
 - When a thread is surfaced, include the full thread context, not just the latest message.
 - Duty Handover emails follow a numbered pattern (e.g., "Duty Handover #20260411") — always surface regardless of sender tier.
-- **2026-04-16 ~22:14 WAT tick:** 7 messages via `newer_than:3h`. Two new signals since 20:09 WAT tick: (1) **Ecobank RC91 persistence — Immediate** — Olamide's third follow-up at 21:04 WAT ("failure still persists, treat as urgent"). Filed 18:54 WAT; zero Ecobank response across the full thread; now 2h10min unresolved. Crosses config-salience Immediate #2 (P1 duration >2h) + absence-of-signal (active-P1 no counterparty update >1h). Slack DM draft dispatched to CTO. Situation page `Ecobank — RC91 on NUS Nodes` updated. (2) **Ecobank Core Banking maintenance inquiry** at 20:32 WAT — Olamide asking Ecobank AllENG-ITServicedesk to confirm maintenance completion. Unacknowledged. Awareness. Other 5 messages in-window were already processed at the 20:09 WAT tick (Wema RC91 resolution 19:46 WAT, Ecobank portal 502 at 19:31 WAT, DCIR alert 26.68% at 20:06 WAT, Ecobank RC91 19:23 WAT reminder, Wema Olusegun 18:33 UTC).
+- **2026-04-17 ~06:09 WAT tick (briefing):** Overnight inbox processed. Key deltas: Duty Handover Note 20260416 (Qazim Adedigba, 00:19 WAT Apr 17) — 13/17 PTSAs operational, CoralPay suite (ZIB, FBN, PVB) off per business decision, Access ATS RC91 cycle 5 (TDSD-6593, 10min), UBA + Habari brief cycles, new tickets TDSD-6587 + TDSD-6591. No new Ecobank RC91 email traffic since 21:04 WAT 'urgent' follow-up (cycle closed via Slack 22:01 WAT — see cross-channel resolution check).
