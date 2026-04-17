@@ -4,7 +4,7 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Slack (Slack MCP).
-updated: "2026-04-17T08:43:28Z"
+updated: "2026-04-17T08:45:03Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-17T05:09:00Z"
@@ -92,7 +92,6 @@ DMs carry implicit urgency — someone chose to message me directly. Always surf
 - Monitor top-level messages in all directed channels.
 - Monitor thread replies only in Tier 1 channels and threads where I'm directly mentioned.
 - If a thread in a Tier 1 channel expands beyond 10 replies, flag it as a developing situation.
-- **When an email-tracked incident also has a Slack P1 thread, MUST check that Slack thread for resolution replies before dispatching Immediate alerts — Slack resolution frequently precedes email close by 10–30 minutes.** (Added 2026-04-17 after 22:14 Apr 16 false-positive Immediate on Ecobank RC91: dispatched 13 min after 22:01 Slack-side resolution reply because the tick checked email only.)
 
 ### Clustering
 
@@ -111,4 +110,4 @@ When multiple messages across different channels reference the same entity (bank
 - Private channels require channel ID for `slack_read_channel`. Discovery sweep via `slack_search_public_and_private` handles finding new private channels.
 - The gap: if I'm added to a private channel, nobody tags me, and I don't post or react, the channel won't be discovered. This is a Slack API limitation — accepted as a narrow edge case.
 - Channel IDs are stable. Channel renames don't break monitoring.
-- **2026-04-17 ~06:09 WAT tick (briefing):** Tier 1 sweep confirms Ecobank RC91 cycle resolved via 22:01 WAT Apr 16 Slack thread reply (retroactive read — not visible to the 22:14 WAT tick, hence the false-positive Immediate that tick dispatched). Fortieth consecutive quiet DM tick. Retreat Day 4; in-person sessions. Briefing-2026-04-17 cited the email↔Slack visibility gap as calibration signal and seeded the Thread handling directive above.
+- **2026-04-17 ~06:09 WAT tick (briefing):** Tier 1 sweep confirms Ecobank RC91 cycle resolved via 22:01 WAT Apr 16 Slack thread reply (retroactive read — not visible to the 22:14 WAT tick, hence the false-positive Immediate that tick dispatched). Fortieth consecutive quiet DM tick. Retreat Day 4; in-person sessions. Briefing-2026-04-17 B3 flagged the email↔Slack visibility gap as a candidate directive edit for the Improve phase — not applied autonomously.
