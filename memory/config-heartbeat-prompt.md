@@ -4,7 +4,7 @@ type:
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
 summary: Heartbeat task execution prompt — Perceive Step 0 work-level judgment (Full/Skim/Minimal/Silent) with floor requirements (briefing tick override, Immediate-tier scan, Improve), source signal check, reminder evaluation, briefing generation, Improve phase. Ingest is now a separate task (config-ingest-prompt).
-updated: "2026-04-18T12:03:51Z"
+updated: "2026-04-18T12:24:44Z"
 cssclasses:
   - "config"
 ---
@@ -30,7 +30,7 @@ Read all source-config pages from brain MCP (`search` with type_filter: `["sourc
 
 **Levels:**
 - `full` — Execute Step 1 (all source-config sweeps) and Step 2 (reminder evaluation). Default during user-active windows.
-- `skim` — Execute Step 1 source-delta check only (fastest-path delta query per source-config — typically the empty-result fast path). If any source reports a delta, upgrade to `full` and execute Step 2. If zero deltas, proceed to Improve.
+- `skim` — Execute Step 1 source-delta check only (fastest-path delta query per source-config — typically the empty-result fast path). If any source reports a delta, continue Step 1 processing for that source in full mode (semantic search, factor recording) and then execute Step 2 — the delta check is not re-run from scratch; the level upgrades in place. If zero deltas across all sources, skip Step 2 and proceed to Improve.
 - `minimal` — Skip Step 1 and Step 2. Execute Floor work only, then Improve, then exit.
 - `silent` — Same execution as `minimal`. Distinct label so sustained-quiet sequences are visible to future Improve-phase analysis.
 
@@ -41,10 +41,10 @@ Read all source-config pages from brain MCP (`search` with type_filter: `["sourc
 - Prior-tick signal density — heuristic from the current heartbeat's recent tick history (if the prior 2 ticks produced zero source deltas and zero reminder surfacings, bias toward `minimal` / `silent`).
 - User activity signal (best-effort) — recent Slack presence, calendar status for the current hour (if accessible via MCP). Skip if unavailable — not required.
 
-**Selection guidance (judgment, not rules):**
-- Weekday, within 09:00–18:00 configured-timezone, with active situations or proximate reminders → `full`.
-- Weekend or off-hours, no active situations, no proximate reminders, prior ticks quiet → `minimal` or `silent`.
-- Anywhere in between → `skim`.
+**Judgment illustrations (examples, not rules — the Judgment inputs above govern):**
+- Weekday working hours + active situations or proximate reminders → typically `full`.
+- Weekend / off-hours + quiet priors + no active situations or proximate reminders → typically `minimal` or `silent`.
+- Mixed inputs (quiet weekday, active weekend, travel, holiday) → `skim` is a common middle ground; any level is valid when inputs support it.
 
 No fixed day-of-week mapping. Signals pull any day into `full` (e.g., active P1 on Saturday). Quiet pulls any day into `minimal` (e.g., holiday on Wednesday).
 
