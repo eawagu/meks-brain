@@ -4,7 +4,7 @@ type:
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
 summary: "Heartbeat configuration — cron as wake-only delivery (15 ticks/day, no weekday/weekend split); per-tick work-level judgment (Full/Skim/Minimal/Silent) via config-heartbeat-prompt Perceive Step 0 with floor requirements (06:00 briefing, Immediate-tier scan, pending-triage processing). Briefing tick detection, error isolation, Improve phase (7-day Triage Results, 20-tuple recalc trigger). Ingest is a separate scheduled task (config-ingest-prompt)."
-updated: "2026-04-18T12:00:05Z"
+updated: "2026-04-18T12:22:54Z"
 cssclasses:
   - "config"
 ---
@@ -18,7 +18,7 @@ Work level per tick is judgment-driven. See config-heartbeat-prompt Perceive Ste
 **Floor requirements (judgment MUST NOT skip):**
 - 06:00 tick — briefing page creation per config-briefing
 - Any tick — Immediate-tier signal scan + dispatch per config-salience
-- Any tick — pending triage disposition processing (Improve phase)
+- Any tick — Improve phase: read recent triage results, classify dispositions into tuples, write to config-salience Tuning Log (per config-heartbeat-prompt Improve section)
 
 **Briefing hour:** 06:00 (local time per config-user timezone). The 06:00 tick produces the briefing. If for any reason 06:00 is missed, the next tick that has not yet produced today's briefing creates it.
 
@@ -27,7 +27,7 @@ Work level per tick is judgment-driven. See config-heartbeat-prompt Perceive Ste
 ## Heartbeat Cycle
 
 ### Perceive
-- **Step 0 — Work-level decision (judgment):** Select Full / Skim / Minimal / Silent per config-heartbeat-prompt Perceive Step 0. Floor requirements above override the level downward — never skip floor work. Subsequent Perceive steps run only at Full or Skim levels.
+- **Step 0 — Work-level decision (judgment):** Select Full / Skim / Minimal / Silent per config-heartbeat-prompt Perceive Step 0. Floor requirements above override the level downward — never skip floor work. Subsequent Perceive steps run only at Full or Skim levels. At Minimal / Silent levels, only Floor work (above) executes — source-config sweeps and reminder evaluation are skipped.
 - Load all source-config pages (`type: source-config`). For each source, check for deltas since `last_processed` timestamp.
 - For every new signal, run semantic similarity search against the full brain via pgvector — perfect cross-referencing, zero recall decay.
 - **Reminder evaluation:** After source-signal collection, enumerate open reminders (`type: reminder`, `status: pending`). Per-reminder reasoning simultaneously answers (a) surface now (time / context-match via wiki-link overlap / age) and (b) is the reminder plausibly resolved by recent brain content (auto-resolve candidate). Outputs join the signal stream; auto-resolve candidates are always Decision items. No fixed age or similarity thresholds — per-item judgment each tick.
