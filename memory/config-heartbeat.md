@@ -3,22 +3,22 @@ type:
   - "config"
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
-summary: "Heartbeat configuration — cadence, phase order, briefing tick detection, error isolation, early exit rules (source deltas AND reminder surfacings), confidence assessment per Decision item. Perceive adds unified reminder evaluation (surface-now + auto-resolve inline). Act writes Surfacing history on emission. Improve phase: structured tuple classification from Triage Results (7-day window), declaration requirement, recalculation trigger (20 tuples). MISS: note routing in ingest."
-updated: 2026-04-15
+summary: "Heartbeat configuration — cron as wake-only delivery (15 ticks/day, no weekday/weekend split); per-tick work-level judgment (Full/Skim/Minimal/Silent) via config-heartbeat-prompt Perceive Step 0 with floor requirements (06:00 briefing, Immediate-tier scan, pending-triage processing). Phase order, briefing tick detection, error isolation, Improve phase (7-day Triage Results, 20-tuple recalc trigger)."
+updated: "2026-04-18T09:58:45Z"
 cssclasses:
   - "config"
 ---
 
 ## Cadence
 
-Heartbeat runs on a tiered schedule aligned with user decision capacity:
+Cron delivers 15 wake opportunities per day: `0 6-18,20,22 * * *` (evaluated in local timezone per config-user). Cron carries no weekday/weekend semantics — every tick is the same wake opportunity.
 
-- **Briefing tick:** 06:00 WAT — full cycle plus briefing creation
-- **Active hours:** 07:00–18:00 WAT hourly (12 ticks) — workday decision window
-- **Wind-down:** 20:00 and 22:00 WAT (2 ticks) — evening sweep, catches late deltas before tomorrow's briefing
-- **Overnight:** 23:00–05:00 WAT — skipped
+Work level per tick is judgment-driven. See config-heartbeat-prompt Perceive Step 0 for the four-level ladder (Full / Skim / Minimal / Silent) and judgment inputs. Weekend, vacation, travel, and working-weekend behavior emerge from per-tick reasoning — no day-of-week rules in this config.
 
-Total: 15 ticks/day. Cron expression: `0 6-18,20,22 * * *` (evaluated in local timezone per config-user).
+**Floor requirements (judgment MUST NOT skip):**
+- 06:00 tick — briefing page creation per config-briefing
+- Any tick — Immediate-tier signal scan + dispatch per config-salience
+- Any tick — pending triage disposition processing (Improve phase)
 
 **Briefing hour:** 06:00 (local time per config-user timezone). The 06:00 tick produces the briefing. If for any reason 06:00 is missed, the next tick that has not yet produced today's briefing creates it.
 
@@ -34,6 +34,7 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 ## Heartbeat Cycle (Phase 1)
 
 ### Perceive
+- **Step 0 — Work-level decision (judgment):** Select Full / Skim / Minimal / Silent per config-heartbeat-prompt Perceive Step 0. Floor requirements above override the level downward — never skip floor work. Subsequent Perceive steps run only at Full or Skim levels.
 - Load all source-config pages (`type: source-config`). For each source, check for deltas since `last_processed` timestamp.
 - For every new signal, run semantic similarity search against the full brain via pgvector — perfect cross-referencing, zero recall decay.
 - **Reminder evaluation:** After source-signal collection, enumerate open reminders (`type: reminder`, `status: pending`). Per-reminder reasoning simultaneously answers (a) surface now (time / context-match via wiki-link overlap / age) and (b) is the reminder plausibly resolved by recent brain content (auto-resolve candidate). Outputs join the signal stream; auto-resolve candidates are always Decision items. No fixed age or similarity thresholds — per-item judgment each tick.
