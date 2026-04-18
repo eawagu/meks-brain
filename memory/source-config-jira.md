@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). RECOVERY HOLDING — 15h01m post-recovery at 11:10 WAT Apr 18 tick; TDSD-6606 resolved routine this window."
-updated: "2026-04-18T10:20:22Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). RECOVERY HOLDING — 16h00m post-recovery at 12:09 WAT Apr 18 tick; TDSD-6564 Medium → Done routine this window."
+updated: "2026-04-18T11:18:54Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T10:10:00Z"
+last_processed: "2026-04-18T11:09:34Z"
 ---
 
 ## Connection
@@ -72,8 +72,8 @@ If more than 3 P1 tickets are filed within a 24-hour window, surface as a system
 
 ## Connector Health
 
-**RECOVERY HOLDING** — 15h01m post-recovery at this tick (recovered 2026-04-17 20:09 WAT after 131+ blind ticks / 5.8 days). `searchJiraIssuesUsingJql` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+**RECOVERY HOLDING** — 16h00m post-recovery at this tick (recovered 2026-04-17 20:09 WAT after 131+ blind ticks / 5.8 days). `searchJiraIssuesUsingJql` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
 
 ## Notes
 
-Tick 2026-04-18 11:10 WAT window (10:29 WAT → 11:10 WAT, Skim tick): **TDSD-6606 resolved** — routine resolution, no RCA flag. No new P1/P2 filings in window. No Authorize-status tickets with CTO gate. No SLA breaches or imminent breach warnings. Tracked tickets TDSD-6611 (Awaiting Scheme Update), TDSD-6610 (Work in Progress), TDSD-6613 (FCMB RC91 new) all unchanged this window.
+Tick 2026-04-18 12:09 WAT window (11:10 WAT → 12:09 WAT, Skim tick): **One delta — [[TDSD-6564]] (SETTLEMENT PAYOUT, Medium priority) transitioned to Done at 11:41 WAT.** Routine resolution, no RCA flag, no active situation linkage, no CTO-relevance. Classification: Awareness-only, below briefing threshold, recorded only here. No new P1/P2 filings in window. No Authorize-status tickets with CTO gate. No SLA breaches or imminent-breach warnings. Tracked tickets TDSD-6611 (Awaiting Scheme Update), TDSD-6610 (Work in Progress), TDSD-6613 (FCMB RC91 Apr 17) all unchanged this window.

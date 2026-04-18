@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-18T10:10:00Z. Connector Health: RECOVERY HOLDING — 15h01m post-recovery."
-updated: "2026-04-18T10:20:22Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-18T11:09:34Z. Connector Health: RECOVERY HOLDING — 16h00m post-recovery."
+updated: "2026-04-18T11:18:54Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T10:10:00Z"
+last_processed: "2026-04-18T11:09:34Z"
 ---
 
 ## Connection
@@ -31,8 +31,8 @@ Gmail MCP. Profile: eawagu@gmail.com.
 
 ## Connector Health
 
-**RECOVERY HOLDING** — 15h01m post-recovery at this tick (recovered 2026-04-17 20:09 WAT). Gmail MCP `search_threads` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+**RECOVERY HOLDING** — 16h00m post-recovery at this tick (recovered 2026-04-17 20:09 WAT). Gmail MCP `search_threads` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
 
 ## Notes
 
-Tick 2026-04-18 11:10 WAT window (10:29 WAT → 11:10 WAT, Skim tick): One Layer 2 keyword catch — [[Daniel Armstrong]] → [[Godwin Ajiboye]] (Stanbic) at 10:43 WAT in the TDSD-6425 thread, continuing internal bank-side escalation on Stanbic cycle 27 during its overnight silence. Delta captured on [[Stanbic Bank ATS — Persistent RC91 Pattern]]. No Layer 1 (To:me) catches this window. No other keyword hits. No Immediate-tier email signals.
+Tick 2026-04-18 12:09 WAT window (11:10 WAT → 12:09 WAT, Skim tick): Zero NEW email deltas in window. Prior-tick TDSD-6425 activity (Stanbic 10:17–10:43 WAT email thread) re-read and re-interpreted — correction applied to [[Stanbic Bank ATS — Persistent RC91 Pattern]]: the sequence was cycle 28 fresh resurface (Daniel 10:17 WAT) → bank-side resolution (Ajiboye 10:24 WAT) → TeamApt confirmation (Daniel 10:43 WAT), a ~7m fast cycle. The 11:10 WAT tick had framed this as "continuing bank-side escalation during cycle 27 silence" — that framing misread a resolution-confirmation email as an escalation email. Calibration signal: email interpretation depth insufficient on single-message reads — when quoting a specific message as a delta, tick MUST scan the surrounding chronology (prior 3–5 messages in thread) to identify whether the message is opening, continuing, or closing an episode. Recommend adding to Sweep order or Directives as a structural fix candidate; not changing config this tick. No Layer 1 (To:me) catches this window. No new Layer 2 keyword hits. No Immediate-tier email signals.
