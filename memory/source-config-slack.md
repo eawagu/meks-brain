@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-18T12:11:47Z. Zero Slack deltas at 13:09 WAT tick."
-updated: "2026-04-18T12:17:57Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-18T13:10:00Z. Zero Slack deltas at 14:09 WAT tick."
+updated: 2026-04-18
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T12:11:47Z"
+last_processed: "2026-04-18T13:10:00Z"
 ---
 
 ## Connection
@@ -43,4 +43,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-18 13:09 WAT window (12:10 WAT → 13:11 WAT, Skim upgraded to Full): **Zero Slack deltas across all Tier 1 channels.** #teamapt-tech-operations empty, DM channel empty, keyword sweep (P1 / outage / RC91 / RC05 / down / breach / CVE after:2026-04-18) zero results. All active P1s (Stanbic cycle 27, Wema, NIBSS PTSA, UBA, Keystone RC05, FCMB RC91) remain silent on Slack — ongoing calibration-hold per briefing-2026-04-18 B6 (no re-dispatch). Parent-message sweep structural guard performed — no new filings missed. Upgrade to Full was driven by Jira delta (TDSD-6539), not Slack.
+Tick 2026-04-18 14:09 WAT window (13:11 WAT → 14:10 WAT, Skim level, no upgrade for Slack): **Zero Slack deltas across all Tier 1 channels.** #teamapt-tech-operations empty, #account-switch-alerts empty, #teamapt-x-paystack-transfer-support empty, #notifications-support-dev empty, #go-subscribe-by-teamapt empty. DM channel (to:<@U080PEXEZ0E> after:2026-04-18) zero results. Keyword sweep (P1 / RC91 / RC05 / outage / breach / CVE after:2026-04-18) zero results. All active P1s (Stanbic cycle 27, Wema, NIBSS PTSA, UBA, Keystone RC05, FCMB) remain silent on Slack — calibration-hold per briefing-2026-04-18 B6. Parent-message sweep structural guard performed — no new filings missed. Empty-result fast path held; tick-level upgrade was driven by Gmail delta (FCMB RC91 14:03 WAT re-filing), not Slack.

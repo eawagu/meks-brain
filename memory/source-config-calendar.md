@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T12:11:47Z."
-updated: "2026-04-18T12:17:58Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T13:10:00Z. Zero calendar deltas at 14:09 WAT tick."
+updated: 2026-04-18
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T12:11:47Z"
+last_processed: "2026-04-18T13:10:00Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-18 13:09 WAT window (12:10 WAT → 13:11 WAT, Skim upgraded to Full): No in-window calendar deltas. Lattice Review all-day block returned by list_events but `updated` 08:49 WAT = pre-window; not a delta. The Gmail-derived HoE Round 2 invite (Wed Apr 22 11:00–12:00 WAT) will surface as a calendar event when/if user RSVPs — captured at email layer this window, not calendar layer. Saturday Retreat Day 5 continues. Forward view — Monday Apr 20 GoSubscribe demo (briefing-2026-04-18 B8); Wed Apr 22 HoE Round 2 panel (new); Lattice Review window closes Apr 27 (9 days remaining).
+Tick 2026-04-18 14:09 WAT window (13:11 WAT → 14:10 WAT, Skim level, no upgrade for Calendar): **Zero calendar deltas.** All listed events pre-window: Lattice Review all-day block (updated 08:49Z Apr 18), Direct to Bank daily standup (03:15Z Apr 18), Cards and Account All Hands (22:55Z Apr 17), Channels Onboarding & Disbursement (14:09Z Apr 17), Juliana Switch Daily (09:59Z Apr 13), ATPP Daily Standup (16:32Z Apr 12), Tech support meeting (12:50Z Apr 17), Product-Engineering Sync (09:06Z Apr 16), Moniepoint Dinner (09:11Z Apr 7). Forward view confirmed: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel (from yesterday's email track, not yet on calendar as confirmed event); Lattice Review window closes Apr 27. Saturday Retreat Day 5 continues — no in-window meeting signals. Empty-result fast path held.

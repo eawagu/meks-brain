@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). RECOVERY HOLDING — 17h02m post-recovery at 13:09 WAT Apr 18 tick; TDSD-6539 Medium Awaiting Scheme Update ping this window."
-updated: "2026-04-18T12:17:58Z"
+summary: Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate.
+updated: "2026-04-18T13:22:16Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T12:11:47Z"
+last_processed: "2026-04-18T13:10:00Z"
 ---
 
 ## Connection
@@ -15,7 +15,33 @@ last_processed: "2026-04-18T12:11:47Z"
 - **Connector:** Atlassian MCP
 - **Cloud ID:** 15be6fd4-ef3b-4d52-ab1b-e6e706a38e06
 - **Site:** teamapt.atlassian.net
-- **Primary project:** TDSD (Tech Service Desk — incidents and operations)
+- **Scope — 18 projects (1 service_desk + 17 software):**
+
+| Display name | Key | Archetype |
+|---|---|---|
+| TeamApt-Service-Desk | TDSD | service_desk |
+| AptPay Consolidated Direct Debit | TCDD | software |
+| Aptpay Core Switching | ATPG | software |
+| AptPay Direct Debit (DTB) | ADD | software |
+| AptPay Switch | AS | software |
+| AptPay Third Party Processing | ATPP | software |
+| Direct to Bank Solutions | AD | software |
+| Monnify - Account Collections | MPDTTPI | software |
+| Monnify - Card Collections | MPD | software |
+| Monnify - Disbursement | MBYDB | software |
+| Monnify - Onboarding and Channels | OCM | software |
+| Monnify - Value Added Services | MNVAS | software |
+| TeamApt - Enterprise Engineering | TM | software |
+| TeamApt - Finance | TAF | software |
+| TeamApt - Infrastructure | TI | software |
+| TeamApt - Non Bank Acquiring | TNBA | software |
+| TeamApt - Operations | TO | software |
+| TeamApt - PTSP | PTSP | software |
+
+Excluded: MV (Monnify - VAS, project id 15979) — redundant with MNVAS per user decision 2026-04-18.
+
+JQL project list (paste-ready): `project IN (TDSD, TCDD, ATPG, ADD, AS, ATPP, AD, MPDTTPI, MPD, MBYDB, OCM, MNVAS, TM, TAF, TI, TNBA, TO, PTSP)`
+
 - **Access patterns:**
   - `searchJiraIssuesUsingJql` — JQL queries for delta detection and pattern monitoring
   - `getJiraIssue` — full ticket detail when flagged
@@ -23,40 +49,69 @@ last_processed: "2026-04-18T12:11:47Z"
 
 ## Directives
 
-### Priority model — signal types ordered by CTO relevance
+Layered filter. Layer A and Layer B are JQL-derivable (no LLM). Layer C is LLM-reasoned with a per-tick cost cap.
 
-**1. Approval gate bottlenecks (highest priority):**
-Tickets in Authorize status where CTO (Emeka Awagu) is a required approver. These block delivery — every hour in Authorize is a missed window.
-- JQL: `project = TDSD AND status = Authorize`
-- Surface: ticket key, summary, how long in Authorize, who else has approved, what it blocks
-- Escalation signal: if in Authorize > 4 hours during business hours, flag as blocking
+### Layer A — Channel filter
 
-**2. SLA breach — leading indicator:**
-Surface tickets approaching SLA breach before they breach, not after. Post-breach tickets surfaced as process failure documentation.
-- JQL: `project = TDSD AND "Time to first response" = breached() OR "Time to resolution" = breached()`
-- Also flag: tickets where first response SLA will breach within 2 hours
+All sweep queries constrained to the 18 project keys above. Any ticket outside this set is discarded before Layer B.
 
-**3. P1/P2 incident lifecycle:**
-Track incident tickets from filing through resolution. Key signals: new P1/P2 filed, status transitions, resolution, RCA posted.
-- JQL: `project = TDSD AND priority in (Highest, High) AND status != Closed ORDER BY updated DESC`
-- Surface: new filings, status changes, resolution messages, time-to-resolution
+### Layer B — Heuristic pre-rank
 
-**4. Zero-activity tickets (process failure signal):**
-Tickets with no comments or status changes after defined thresholds. Indicates dropped work or silent failure.
-- P1/P2: zero comments after 1 hour → flag immediately
-- P3 and below: zero comments after 24 hours → flag in daily briefing
-- Any ticket: no activity for 5+ days regardless of priority → flag as stale
-- JQL for stale: `project = TDSD AND updated < -5d AND status NOT IN (Closed, Done, Completed, Resolved)`
+Score each candidate ticket 0–5 on signal density. Top 20 by score pass to Layer C; the rest cluster into overflow awareness items.
 
-**5. Status transitions of interest:**
-- Moved to Completed/Closed: track resolution, note if RCA was posted
-- Moved to Awaiting Scheme Update / Awaiting Implementation: external dependency — track for staleness
-- Moved backward (e.g., from Work in Progress back to Initial Review): regression signal
+**Archetype-specific signals:**
 
-**6. Ticket volume patterns:**
-If more than 3 P1 tickets are filed within a 24-hour window, surface as a systemic pattern, not individual incidents. Cross-reference with brain entity pages for bank/service correlation.
+*service_desk (TDSD only):*
+- SLA breaching within 2 hours → +2
+- SLA breached → +2
+- Authorize status with CTO as named approver → +3
+- P1/P2 priority, status != Closed → +2
 
-### Monitored ticket patterns (from current operational context)
+*software (17 projects):*
+- P1/P2 priority, status != Done → +2
+- Status transition to blocked / escalated / needs-review → +2
+- Assignee changed mid-sprint → +1
+- Due date ≤ 3 days with status != Done → +2
+- Priority bumped upward in last hour → +1
+
+*Cross-archetype:*
+- Mentioned by key in active situation page body (brain lookup) → +3
+- In last-tick tracked set → +1
+- Stale (no update >5 days, status != Closed/Done) → +1
+
+### Layer C — LLM reasoning
+
+Top 20 from Layer B receive full salience scoring per `config-salience` (five dimensions) with per-ticket `Factors:` line. Output per ticket: surface/suppress, salience score, one-line rationale.
+
+**Per-tick cost cap:** `layer_c_cap: 20`
+
+### Overflow clustering
+
+Tickets beyond the cap grouped by `(project, dominant_signal_type)` — one awareness line per cluster.
+
+Format: `[Project display name] — N ticket updates (K1 <signal-type-1>, K2 <signal-type-2>, ...). Sample IDs: <first-3-keys>.`
+
+Example: `Monnify - Disbursement — 14 ticket updates (8 status transitions, 4 assignee changes, 2 priority bumps). Sample IDs: MBYDB-4421, MBYDB-4422, MBYDB-4430.`
+
+### Archetype signal reference
+
+**service_desk (TDSD) — TDSD-specific patterns preserved from pre-expansion directives:**
+
+- **Approval gate bottlenecks:** Authorize status where CTO is required approver. `project = TDSD AND status = Authorize`. Surface key, summary, time in Authorize, blockers. If > 4h in business hours → flag blocking.
+- **SLA leading indicators:** `project = TDSD AND ("Time to first response" = breached() OR "Time to resolution" = breached())` — and imminent-breach within 2 hours.
+- **P1/P2 incident lifecycle:** `project = TDSD AND priority in (Highest, High) AND status != Closed ORDER BY updated DESC`.
+- **Zero-activity tickets:** P1/P2 no comment >1h (flag immediately); P3 no comment >24h (daily briefing); any ticket no activity >5 days (stale).
+- **Status transitions of interest:** Completed/Closed (resolution + RCA), Awaiting Scheme Update / Awaiting Implementation (external dependency), backward transitions (regression signal).
+- **Volume patterns:** >3 P1 in 24h window surfaced as systemic pattern, not individual incidents.
+
+**software (17 projects) — archetype defaults, refined by data:**
+
+- Status transition to blocked/escalated, priority bumps, assignee churn mid-cycle are primary signals.
+- Sprint/estimate fields available — use for "overdue sprint work" detection in Layer B.
+- Due date ≤ 24h on P1/P2 flagged to Layer C regardless of Layer B rank.
+- No SLA fields — absence-of-signal rules that depend on SLA do not apply.
+
+### Monitored ticket patterns (operational context, TDSD-scoped)
 
 - **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB routes. Track cycle count per bank.
 - **RC05 cycles:** First observed on Keystone Apr 17 — distinct card-layer failure mode from RC91. Track for spread.
@@ -64,16 +119,36 @@ If more than 3 P1 tickets are filed within a 24-hour window, surface as a system
 - **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.
 - **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.
 
-### Skip rules
+Equivalent cross-project patterns for the 17 software projects will accumulate via data as baseline stabilizes.
 
-- Sub-task updates on tickets already being tracked at parent level
+### Skip list
+
+Seeded empty at 2026-04-18 expansion. Grows via weekly bulk-confirm review (Monday 07:00 WAT) — patterns dismissed 3+ consecutive times are proposed for addition. Each entry records: added_date, confirmed_by_user_date, skip_pattern (JQL fragment or key list), last_traffic_signature.
+
+Monthly skip-list regression review (first briefing tick of each month) surfaces each skip entry with last-traffic-signature for keep / reconsider / surface-sample decision.
+
+### Legacy skip rules (apply across all 18 projects)
+
+- Sub-task updates on tickets already tracked at parent level
 - Routine Jira automation messages (workflow transitions with no human comment)
-- Tickets in projects other than TDSD unless explicitly referenced in a Tier 1 email or Slack message
+- Tickets outside the 18-project scope unless explicitly referenced in a Tier 1 email or Slack message
+
+### Phase 2 — anomaly-triggered reasoning
+
+Current architecture uses fixed per-tick cap + layered pre-filter. Research (2026-04-18) flagged this as pre-AI scaffolding for steady-state operation; AI-native pattern is anomaly-triggered deep-dive (baseline per project, reason on deviations, Layer C escalation on anomaly rather than on rank).
+
+**Migration gated on all three conditions met:**
+
+1. **Baseline accumulation:** Minimum 4 weeks of per-project baseline data (priority distribution, status-change rate, assignee churn rolling window). Earliest eligible date: 2026-05-16.
+2. **Cap starvation rate:** Fewer than 2 cap-starvation events per week. Event definition: Layer C cap hit AND a `MISS:` note within 48 hours that names a ticket starved by the cap.
+3. **Baseline drift monitoring:** Statistical test on week-over-week baseline stability in place (detects when baseline tracks noise — the silent-failure mode).
+
+When all three gate conditions verified → propose Phase 2 migration design with concrete implementation. Phase 2 NOT implemented until explicit go signal at that time.
 
 ## Connector Health
 
-**RECOVERY HOLDING** — 17h02m post-recovery at this tick (recovered 2026-04-17 20:09 WAT after 131+ blind ticks / 5.8 days). `searchJiraIssuesUsingJql` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion — `searchJiraIssuesUsingJql` operational, no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
 
 ## Notes
 
-Tick 2026-04-18 13:09 WAT window (12:10 WAT → 13:11 WAT, Skim upgraded to Full): **One delta — [[TDSD-6539]] "Mismatch Between Bulk Settlement Debits and CBA Credits" (Medium, Awaiting Scheme Update) updated at 12:39 WAT.** Different ticket from the merchant settlement situation (TDSD-6431 / TDSD-6444 on merchant 0000228201) — TDSD-6539 references bulk settlement reconciliation generally. Status unchanged (still Awaiting Scheme Update). Classification: Awareness-only, below briefing threshold, recorded only here. Ticket was the trigger for upgrading this tick from Skim to Full. No new P1/P2 filings in window. No Authorize-status tickets with CTO gate. No SLA breaches or imminent-breach warnings. Prior-tick tracked tickets (TDSD-6611 Awaiting Scheme Update, TDSD-6610 Work in Progress, TDSD-6613 FCMB RC91 Apr 17) all unchanged this window.
+Expansion from TDSD-only to 18-project scope (2026-04-18). Layer A/B/C structure introduced, archetype-aware Layer B signals, per-tick cap of 20 with overflow clustering, skip list seeded empty, Phase 2 migration gate documented. 17 new projects start from expansion time — no backlog sweep on first post-expansion tick; historical ticket context accumulates forward. Initial post-expansion ticks expected to hit cap more often as 18-project volume establishes; Layer B weights tuned from MISS: notes.
