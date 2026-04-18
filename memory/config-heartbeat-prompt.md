@@ -4,7 +4,7 @@ type:
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
 summary: Heartbeat task execution prompt — Perceive Step 0 work-level judgment (Full/Skim/Minimal/Silent) with floor requirements (briefing tick override, Immediate-tier scan, Improve), source signal check, reminder evaluation, briefing generation, Improve phase. Ingest is now a separate task (config-ingest-prompt).
-updated: "2026-04-18T12:24:44Z"
+updated: "2026-04-18T12:32:38Z"
 cssclasses:
   - "config"
 ---
@@ -30,7 +30,7 @@ Read all source-config pages from brain MCP (`search` with type_filter: `["sourc
 
 **Levels:**
 - `full` — Execute Step 1 (all source-config sweeps) and Step 2 (reminder evaluation). Default during user-active windows.
-- `skim` — Execute Step 1 source-delta check only (fastest-path delta query per source-config — typically the empty-result fast path). If any source reports a delta, continue Step 1 processing for that source in full mode (semantic search, factor recording) and then execute Step 2 — the delta check is not re-run from scratch; the level upgrades in place. If zero deltas across all sources, skip Step 2 and proceed to Improve.
+- `skim` — Execute a per-source delta-check pass only (fastest-path delta query per source-config — typically the empty-result fast path). For each source that reports a delta, execute that source's full Step 1 processing (semantic search, factor recording) in place. Sources that report zero deltas contribute nothing to the tick. After all sources complete: if any source triggered full processing, also execute Step 2 (reminder evaluation); if zero sources triggered, skip Step 2 and proceed to Improve.
 - `minimal` — Skip Step 1 and Step 2. Execute Floor work only, then Improve, then exit.
 - `silent` — Same execution as `minimal`. Distinct label so sustained-quiet sequences are visible to future Improve-phase analysis.
 
@@ -49,7 +49,7 @@ Read all source-config pages from brain MCP (`search` with type_filter: `["sourc
 No fixed day-of-week mapping. Signals pull any day into `full` (e.g., active P1 on Saturday). Quiet pulls any day into `minimal` (e.g., holiday on Wednesday).
 
 **Floor (MUST NOT skip regardless of level):**
-- **Briefing tick override.** If the current tick is the briefing tick (per config-heartbeat Briefing-hour detection applied to config-user timezone), MUST override the selected level to `full` — the briefing tick ALWAYS runs Step 1, Step 2, Predict, Plan, and Act so the briefing page reflects the freshest source and reminder state.
+- **Briefing tick override.** If the current tick is the briefing tick (per config-heartbeat Briefing-hour detection applied to config-user timezone), MUST set the selected level to `full` before emitting the Step 0 declaration. The declaration MUST output `level=full, rationale=briefing-tick`. The briefing tick ALWAYS runs Step 1, Step 2, Predict, Plan, and Act so the briefing page reflects the freshest source and reminder state.
 - **Immediate-tier scan.** At every level, MUST run a keyword scan against source-config Immediate-tier triggers (e.g., P1, outage, RC91 per config-salience). MUST dispatch any matches to Immediate-tier Act (Slack DM via `slack_send_message_draft`) even when the broader Step 1 sweep is skipped. This is a fast keyword query, not a full sweep.
 - **Improve phase.** At every level, MUST run Improve (pending-triage disposition processing, absence-of-signal checks, recalculation check). Improve does not pause on quiet ticks.
 
