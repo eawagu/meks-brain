@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
-summary: "Heartbeat configuration — cron as wake-only delivery (15 ticks/day, no weekday/weekend split); per-tick work-level judgment (Full/Skim/Minimal/Silent) via config-heartbeat-prompt Perceive Step 0 with floor requirements (06:00 briefing, Immediate-tier scan, pending-triage processing). Phase order, briefing tick detection, error isolation, Improve phase (7-day Triage Results, 20-tuple recalc trigger)."
-updated: "2026-04-18T09:58:45Z"
+summary: "Heartbeat configuration — cron as wake-only delivery (15 ticks/day, no weekday/weekend split); per-tick work-level judgment (Full/Skim/Minimal/Silent) via config-heartbeat-prompt Perceive Step 0 with floor requirements (06:00 briefing, Immediate-tier scan, pending-triage processing). Briefing tick detection, error isolation, Improve phase (7-day Triage Results, 20-tuple recalc trigger). Ingest is a separate scheduled task (config-ingest-prompt)."
+updated: "2026-04-18T12:00:05Z"
 cssclasses:
   - "config"
 ---
@@ -24,14 +24,7 @@ Work level per tick is judgment-driven. See config-heartbeat-prompt Perceive Ste
 
 **Overnight delegation:** Overnight monitoring is delegated to the ops team. Off-hours direct contact (Slack DM, phone) is the Immediate-tier path between 23:00 and 06:00 WAT — heartbeat polling does not cover this window. Active-P1 silence rules and absence-of-signal Immediate alerts do not fire overnight; they resume at the 06:00 tick. Off-hours urgent DM signals (config-salience structural marker) still affect salience scoring at 06:00 triage.
 
-## Phase Order (per tick)
-
-Two phases execute sequentially within each tick. Phase 1 runs first (time-sensitive). Phase 2 runs last (patient, failure-isolated).
-
-1. **Heartbeat** — Perceive → Predict → Plan → Act → Improve
-2. **Ingest** — Scan ingress folder, process unprocessed files (picks up manually dropped files, notes captured via `capture_note`, and any other new content). MISS:-prefixed notes route to config-salience Tuning Log instead of creating source pages.
-
-## Heartbeat Cycle (Phase 1)
+## Heartbeat Cycle
 
 ### Perceive
 - **Step 0 — Work-level decision (judgment):** Select Full / Skim / Minimal / Silent per config-heartbeat-prompt Perceive Step 0. Floor requirements above override the level downward — never skip floor work. Subsequent Perceive steps run only at Full or Skim levels.
@@ -68,16 +61,13 @@ Two phases execute sequentially within each tick. Phase 1 runs first (time-sensi
 
 ## Error Isolation
 
-- Phase 2 (Ingest) is wrapped in try/catch. Ingest failure does not affect Phase 1 (Heartbeat) results.
-- Phase 1 (Heartbeat) failure logs the error and exits. Phase 2 does not run on a failed heartbeat.
+Heartbeat failure logs the error and exits. Ingest runs as a separate scheduled task (see config-ingest-prompt) — ingest failures do not affect heartbeat, and heartbeat failures do not affect ingest.
 
 ## Notes
 
-- Heartbeat runs first because it is time-sensitive (triage alerts). Ingest runs last so any new files dropped during the heartbeat phase get picked up in the same tick.
 - Early exit on zero deltas keeps cost minimal on quiet ticks. The Improve phase still runs on early-exit ticks to process pending triage dispositions and catch absence-of-signal conditions.
 - Source registration is governed by source-config pages — adding/removing sources does not require changes to this config.
 - Missed signal capture has two paths: triage-time prompt (primary — config-triage Step 5b asks "Anything I should have caught?" and writes tuples directly) and async `MISS:` notes (secondary — `capture_note` with `MISS:` prefix, routed to config-salience Tuning Log by the ingest pipeline instead of creating source pages). The primary path captures misses noticed at decision time; the secondary path captures misses discovered later from any runtime.
 - Timezone is read from config-user — not hardcoded. When the user travels, updating config-user propagates to all time-sensitive operations.
 - Lint findings are surfaced directly by the triage client (config-triage), not folded into the briefing. This decouples lint timing from the briefing tick.
-- Ingest (Phase 2) runs in the same ticks as heartbeat (Phase 1). Files dropped in the ingress folder overnight are picked up at the 06:00 tick — there is no separate overnight ingest cadence.
 - Reminder surfacing is unified — a single Perceive-phase pass per reminder answers both "surface now?" and "resolved by recent content?" in the same reasoning step. No separate ingest-time auto-resolve mechanism. Reminders that fire both signals produce one combined briefing item.
