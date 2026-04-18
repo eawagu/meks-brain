@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T14:10:00Z. Zero calendar deltas at 15:09 WAT tick."
-updated: "2026-04-18T14:20:26Z"
+updated: "2026-04-18T15:24:53Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T14:10:00Z"
+last_processed: "2026-04-18T15:09:28Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-18 15:09 WAT window (14:11 WAT → 15:10 WAT, Skim level, no upgrade for Calendar): **Zero calendar deltas fast-path check held.** No new invites in-window, no RSVP changes, no cancellations. Saturday Retreat Day 5 cadence holding. Forward view confirmed: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel (Bhuvnesh Bansal, pending calendar confirmation); Lattice Review window closes Apr 27 (9 days remaining). Empty-result fast path held.
+Tick 2026-04-18 16:09 WAT window (15:10 WAT → 16:09 WAT, Skim level, no upgrade for Calendar): **Zero calendar deltas fast-path check held.** No new invites in-window, no RSVP changes, no cancellations. Saturday Retreat Day 5 cadence holding. Forward view confirmed: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel (Bhuvnesh Bansal, pending calendar confirmation); Lattice Review window closes Apr 27 (9 days remaining). Empty-result fast path held.
