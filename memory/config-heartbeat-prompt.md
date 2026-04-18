@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
-summary: Heartbeat task execution prompt — hourly signal check, briefing generation, Improve phase. Ingest is now a separate task (config-ingest-prompt).
-updated: "2026-04-16T09:19:49Z"
+summary: Heartbeat task execution prompt — Perceive Step 0 work-level judgment (Full/Skim/Minimal/Silent) with floor requirements (briefing tick override, Immediate-tier scan, Improve), source signal check, reminder evaluation, briefing generation, Improve phase. Ingest is now a separate task (config-ingest-prompt).
+updated: "2026-04-18T10:18:03Z"
 cssclasses:
   - "config"
 ---
@@ -25,6 +25,35 @@ Read config pages from brain MCP before any signal checks:
 Read all source-config pages from brain MCP (`search` with type_filter: `["source-config"]`). Each defines: connection details (which MCP connector + access pattern), filtering directives, and `last_processed` timestamp.
 
 ### Perceive
+
+**Step 0 — Work-level decision (judgment).** Before any source-config reads or signal collection, decide this tick's work level. Output one of `full` | `skim` | `minimal` | `silent`. The decision gates which subsequent Perceive steps execute.
+
+**Levels:**
+- `full` — Execute Step 1 (all source-config sweeps) and Step 2 (reminder evaluation). Default during user-active windows.
+- `skim` — Execute Step 1 source-delta check only (fastest-path delta query per source-config — typically the empty-result fast path). If any source reports a delta, upgrade to `full` and execute Step 2. If zero deltas, proceed to Improve.
+- `minimal` — Skip Step 1 and Step 2. Execute Floor work only, then Improve, then exit.
+- `silent` — Same execution as `minimal`. Distinct label so sustained-quiet sequences are visible to future Improve-phase analysis.
+
+**Judgment inputs (gather before deciding):**
+- Current time and day of week in configured timezone (via config-user).
+- Active situations — `search` with `type_filter: ["situation"]`; count those whose status is not `retired` and `updated` is within the last 7 days.
+- Proximate reminders — `search` with `type_filter: ["reminder"]`, filter to `status: pending` with `due` within the next 24h.
+- Prior-tick signal density — heuristic from the current heartbeat's recent tick history (if the prior 2 ticks produced zero source deltas and zero reminder surfacings, bias toward `minimal` / `silent`).
+- User activity signal (best-effort) — recent Slack presence, calendar status for the current hour (if accessible via MCP). Skip if unavailable — not required.
+
+**Selection guidance (judgment, not rules):**
+- Weekday, within 09:00–18:00 configured-timezone, with active situations or proximate reminders → `full`.
+- Weekend or off-hours, no active situations, no proximate reminders, prior ticks quiet → `minimal` or `silent`.
+- Anywhere in between → `skim`.
+
+No fixed day-of-week mapping. Signals pull any day into `full` (e.g., active P1 on Saturday). Quiet pulls any day into `minimal` (e.g., holiday on Wednesday).
+
+**Floor (MUST NOT skip regardless of level):**
+- **Briefing tick override.** If the current tick is the briefing tick (per config-heartbeat Briefing-hour detection applied to config-user timezone), MUST override the selected level to `full` — the briefing tick ALWAYS runs Step 1, Step 2, Predict, Plan, and Act so the briefing page reflects the freshest source and reminder state.
+- **Immediate-tier scan.** At every level, MUST run a keyword scan against source-config Immediate-tier triggers (e.g., P1, outage, RC91 per config-salience). MUST dispatch any matches to Immediate-tier Act (Slack DM via `slack_send_message_draft`) even when the broader Step 1 sweep is skipped. This is a fast keyword query, not a full sweep.
+- **Improve phase.** At every level, MUST run Improve (pending-triage disposition processing, absence-of-signal checks, recalculation check). Improve does not pause on quiet ticks.
+
+**Declaration:** MUST emit `Step 0: level=<level>, rationale=<one-phrase>` in the tick output before executing any subsequent step. Absence of this declaration indicates Step 0 did not run — treat as structural failure.
 
 **Step 1 — Source signals.** For each source-config page, read its `## Connection` section for MCP tool names, access patterns, and any format rules (e.g., date-format conversion for search modifiers), and its `## Directives` section for the sweep order and filtering rules. When a source-config defines an explicit sweep order (e.g., source-config-slack's Tier 1 read-by-default → search-all → pre-filter pipeline → per-message salience reasoning → cost cap), MUST execute the steps in the order specified — each step's output feeds the next.
 
@@ -86,7 +115,7 @@ Classify each signal against triage tiers in config-salience (Immediate / Briefi
 
 ### Improve
 
-The Improve phase reads triage dispositions and writes calibration tuples. This phase runs on every tick, including early-exit ticks (for absence-of-signal checks).
+The Improve phase reads triage dispositions and writes calibration tuples. This phase runs on every tick, including early-exit ticks and Minimal / Silent ticks (for absence-of-signal checks and pending-triage processing).
 
 **Step 1 — Read recent Triage Results.** Query briefing pages from the last 7 days via `search` (type_filter: `["briefing"]`). For each briefing page that has a `## Triage Results` section, read the disposition table. Skip briefing pages with no Triage Results section (not yet triaged).
 
