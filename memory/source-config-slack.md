@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-18T16:09:28Z. Zero Slack deltas at 17:09 WAT tick — 2 consecutive quiet ticks."
-updated: "2026-04-18T16:19:01Z"
+updated: "2026-04-18T19:19:36Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T16:09:28Z"
+last_processed: "2026-04-18T19:09:27Z"
 ---
 
 ## Connection
@@ -43,4 +43,11 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-18 17:09 WAT window (16:10 WAT → 17:09 WAT, Skim level, no upgrade for Slack): **Zero Slack deltas fast-path check held — 2 consecutive quiet ticks.** All Tier 1 channels quiet in-window, no DMs to <@U080PEXEZ0E>, no keyword sweep hits. All active P1s (Stanbic cycle 29 closed two-sided, Wema, UBA, Keystone RC05, FCMB recurrence, Ecobank contested-attribution) remain silent on Slack at this tick — calibration-hold per briefing-2026-04-18 B6 continues to suppress re-dispatch. NIBSS PTSA now retired (TDSD-6597 closed with RCA at tick boundary), no further Slack traffic expected. Tick-level upgrade driven by Gmail (FCMB recovery-then-recurrence, Ecobank follow-up) + Jira (TDSD-6597 NIBSS closure with RCA) deltas, not Slack. Parent-message structural guard nominal — no new P1 filings missed.
+Tick 2026-04-18 20:09 WAT window (17:09 WAT → 20:09 WAT, Skim upgraded to Full for Slack — per-source delta-check fired on Tier 1 channel-read hits): **Quiet streak broken — two filings from [[Afeez Kazeem]] in C0ABU8GMW75 (#teamapt-tech-operations).**
+
+1. **Stanbic cycle 30 filing** (18:39 WAT). RC91 P1 on Stanbic ATS route, triple-track visibility this cycle: Slack filing 18:39 WAT, email 18:40 WAT, Jira [[TDSD-6618]] 18:45 WAT. Resolved 19:37 WAT (~64 minutes end-to-end) — materially slower than cycle 28 (7m) and cycle 29 (4m). [[Stanbic Bank ATS — Persistent RC91 Pattern]] updated with behavioral-signature-shift flag; four cycles in 32h window ≈ 3x historical baseline.
+2. **UBA brief cycle** (18:57 WAT filing). RC91 P1 auto-recovered in ~3 minutes (failure 18:47 WAT → recovery 18:50 WAT). Second UBA cycle in 24h; 14-minute gap behind Stanbic cycle 30 reproduces the evening-wave concurrence pattern first noted 2026-04-17. [[UBA Bank — RC91 P1 Apr 17]] updated (scope expanded to UBA ATS pattern tracker); Apr 17 P1 now 25h+ silent on Slack (implicit-resolve candidate flagged).
+
+No Immediate dispatches fired — both resolved before this tick boundary, and calibration hold precedent (briefing-2026-04-17 B1 held / briefing-2026-04-18 B6) applies to re-dispatch suppression on cyclical RC91 patterns. Both updates accumulate for briefing-2026-04-19 as pattern items.
+
+No DMs to <@U080PEXEZ0E> in-window. Keyword sweep (Tier 3) via `slack_search_public_and_private` returned empty on OR-style queries (known AND-only limitation) — channel-read remained authoritative path. Parent-message structural guard held — both filings surfaced via step 1 channel enumeration.
