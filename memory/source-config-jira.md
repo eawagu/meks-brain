@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). RECOVERED at 20:09 WAT tick after 131+ consecutive blind ticks (~139 hours / 5.8 days since 2026-04-11T22:09 UTC). Briefing-2026-04-18 Decision framing flips from outage remediation to RCA confirmation with Nicolaas."
-updated: "2026-04-18T09:45:17Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). RECOVERY HOLDING — 15h01m post-recovery at 11:10 WAT Apr 18 tick; TDSD-6606 resolved routine this window."
+updated: "2026-04-18T10:20:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T09:29:50Z"
+last_processed: "2026-04-18T10:10:00Z"
 ---
 
 ## Connection
@@ -58,10 +58,9 @@ If more than 3 P1 tickets are filed within a 24-hour window, surface as a system
 
 ### Monitored ticket patterns (from current operational context)
 
-These are recurring patterns the heartbeat should watch for:
 - **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB routes. Track cycle count per bank.
 - **RC05 cycles:** First observed on Keystone Apr 17 — distinct card-layer failure mode from RC91. Track for spread.
-- **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval is pending and window is within 4 hours.
+- **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval pending and window within 4 hours.
 - **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.
 - **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.
 
@@ -73,10 +72,8 @@ These are recurring patterns the heartbeat should watch for:
 
 ## Connector Health
 
-**RECOVERY HOLDING** — 14h20m post-recovery at this tick (recovered 2026-04-17 20:09 WAT after 131+ blind ticks / 5.8 days). `searchJiraIssuesUsingJql` operational in this tick; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+**RECOVERY HOLDING** — 15h01m post-recovery at this tick (recovered 2026-04-17 20:09 WAT after 131+ blind ticks / 5.8 days). `searchJiraIssuesUsingJql` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
 
 ## Notes
 
-Tick 2026-04-18 10:29 WAT window: TDSD delta overnight — **TDSD-6613** filed 23:44 WAT Apr 17 by [[Oladapo Onayemi]] for FCMB RC91 P1. New situation page [[FCMB — RC91 P1 Apr 17]] created. Two related tickets continue to be tracked: TDSD-6611 (Awaiting Scheme Update), TDSD-6610 (Work in Progress, disbursement-reversal failure cross-reference).
-
-No Authorize-status tickets with CTO gate surfaced. No SLA breaches in the <1h window. Initial post-recovery inventory ([[source-config-jira]] Connector Health section above) remains the authoritative baseline for the first full operational Jira day.
+Tick 2026-04-18 11:10 WAT window (10:29 WAT → 11:10 WAT, Skim tick): **TDSD-6606 resolved** — routine resolution, no RCA flag. No new P1/P2 filings in window. No Authorize-status tickets with CTO gate. No SLA breaches or imminent breach warnings. Tracked tickets TDSD-6611 (Awaiting Scheme Update), TDSD-6610 (Work in Progress), TDSD-6613 (FCMB RC91 new) all unchanged this window.

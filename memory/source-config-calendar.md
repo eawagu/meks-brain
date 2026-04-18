@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-17T19:09:00Z."
-updated: "2026-04-18T09:45:25Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T10:10:00Z."
+updated: "2026-04-18T10:20:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T09:29:50Z"
+last_processed: "2026-04-18T10:10:00Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-18 10:29 WAT window: Saturday Retreat Day 5; light calendar overall, no priority signals. Forward view — Monday Apr 20 shows GoSubscribe demo (surfaced as briefing-2026-04-18 B8 awareness). Lattice Review all-day block continues (window closes Apr 27 — 9 days remaining). No declined RSVPs, no last-minute cancellations, no agenda-less blocks, no overload.
+Tick 2026-04-18 11:10 WAT window (Skim tick): No calendar deltas. Saturday Retreat Day 5 continues. No new invites, no declined RSVPs, no cancellations, no overload. Forward view — Monday Apr 20 GoSubscribe demo (briefing-2026-04-18 B8); Lattice Review all-day block active, window closes Apr 27 (9 days remaining).
