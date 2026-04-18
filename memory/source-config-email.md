@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-18T11:09:34Z. Connector Health: RECOVERY HOLDING — 16h00m post-recovery."
-updated: "2026-04-18T11:18:54Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-18T12:11:47Z. Connector Health: RECOVERY HOLDING — 17h02m post-recovery. HoE Round 2 invite (Bhuvnesh Bansal) for Wed Apr 22 received 12:19 WAT."
+updated: "2026-04-18T12:17:58Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T11:09:34Z"
+last_processed: "2026-04-18T12:11:47Z"
 ---
 
 ## Connection
@@ -31,8 +31,8 @@ Gmail MCP. Profile: eawagu@gmail.com.
 
 ## Connector Health
 
-**RECOVERY HOLDING** — 16h00m post-recovery at this tick (recovered 2026-04-17 20:09 WAT). Gmail MCP `search_threads` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+**RECOVERY HOLDING** — 17h02m post-recovery at this tick (recovered 2026-04-17 20:09 WAT). Gmail MCP `search_threads` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
 
 ## Notes
 
-Tick 2026-04-18 12:09 WAT window (11:10 WAT → 12:09 WAT, Skim tick): Zero NEW email deltas in window. Prior-tick TDSD-6425 activity (Stanbic 10:17–10:43 WAT email thread) re-read and re-interpreted — correction applied to [[Stanbic Bank ATS — Persistent RC91 Pattern]]: the sequence was cycle 28 fresh resurface (Daniel 10:17 WAT) → bank-side resolution (Ajiboye 10:24 WAT) → TeamApt confirmation (Daniel 10:43 WAT), a ~7m fast cycle. The 11:10 WAT tick had framed this as "continuing bank-side escalation during cycle 27 silence" — that framing misread a resolution-confirmation email as an escalation email. Calibration signal: email interpretation depth insufficient on single-message reads — when quoting a specific message as a delta, tick MUST scan the surrounding chronology (prior 3–5 messages in thread) to identify whether the message is opening, continuing, or closing an episode. Recommend adding to Sweep order or Directives as a structural fix candidate; not changing config this tick. No Layer 1 (To:me) catches this window. No new Layer 2 keyword hits. No Immediate-tier email signals.
+Tick 2026-04-18 13:09 WAT window (12:10 WAT → 13:11 WAT, Skim upgraded to Full): **One new email delta this window — Round 2 Technical Leadership & Architecture Panel Interview invitation** for the Head of Engineering position (candidate: Bhuvnesh Bansal) scheduled Wed Apr 22 11:00–12:00 WAT, received 12:19 WAT. New candidate not yet in brain — no existing entity page. Classification: Decision-tier candidate for briefing-2026-04-19 (RSVP needed, new candidate enters HoE panel stage, time-boxed Wed Apr 22, CTO is hiring manager). Not Immediate (4 days out). Accumulated for tomorrow's briefing tick. Other in-window messages are pre-window (before 11:09 UTC / 12:09 WAT) and already captured in prior ticks or are low-signal system digests (AWS EBS CSI policy notification, AWS RDS case reminders, Lattice review reminder, Samu PTO request, Ravi Kiran time-off approval, Duty Handover 20260418). No Layer 1 (To:me) catches beyond the interview invite. No other Layer 2 keyword hits this window. No Immediate-tier email signals.

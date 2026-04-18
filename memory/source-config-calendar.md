@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T11:09:34Z."
-updated: "2026-04-18T11:18:54Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T12:11:47Z."
+updated: "2026-04-18T12:17:58Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T11:09:34Z"
+last_processed: "2026-04-18T12:11:47Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-18 12:09 WAT window (11:10 WAT → 12:09 WAT, Skim tick): No calendar deltas. Saturday Retreat Day 5 continues. No new invites, no declined RSVPs, no cancellations, no overload. Forward view — Monday Apr 20 GoSubscribe demo (briefing-2026-04-18 B8); Lattice Review all-day block active, window closes Apr 27 (9 days remaining).
+Tick 2026-04-18 13:09 WAT window (12:10 WAT → 13:11 WAT, Skim upgraded to Full): No in-window calendar deltas. Lattice Review all-day block returned by list_events but `updated` 08:49 WAT = pre-window; not a delta. The Gmail-derived HoE Round 2 invite (Wed Apr 22 11:00–12:00 WAT) will surface as a calendar event when/if user RSVPs — captured at email layer this window, not calendar layer. Saturday Retreat Day 5 continues. Forward view — Monday Apr 20 GoSubscribe demo (briefing-2026-04-18 B8); Wed Apr 22 HoE Round 2 panel (new); Lattice Review window closes Apr 27 (9 days remaining).
