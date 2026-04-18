@@ -4,7 +4,7 @@ type:
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
 summary: Heartbeat task execution prompt — Perceive Step 0 work-level judgment (Full/Skim/Minimal/Silent) with floor requirements (briefing tick override, Immediate-tier scan, Improve), source signal check, reminder evaluation, briefing generation, Improve phase. Ingest is now a separate task (config-ingest-prompt).
-updated: "2026-04-18T10:18:03Z"
+updated: "2026-04-18T12:03:51Z"
 cssclasses:
   - "config"
 ---
@@ -17,7 +17,7 @@ All persistent state lives in the brain. All page writes go through the Brain MC
 
 ### Setup
 Read config pages from brain MCP before any signal checks:
-- `config-heartbeat` — cadence, phase order, error isolation, early exit rules
+- `config-heartbeat` — cadence, floor requirements, error isolation, early exit rules
 - `config-briefing` — Ask → Signal → Recommended Action → Confidence → References format, ordering, source attribution, triage disposition annotations, confidence assessment guidelines
 - `config-salience` — triage tiers, Immediate triggers, dimension weights, absence-of-signal rules, tuning mechanism
 - `config-user` — user timezone (IANA identifier), used for briefing timestamps and briefing-tick detection
