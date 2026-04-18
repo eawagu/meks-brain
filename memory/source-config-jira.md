@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate.
-updated: "2026-04-18T15:24:37Z"
+summary: Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate. TDSD-6597 NIBSS PTSA RC91 closed at tick boundary with full RCA; NIBSS situation retired.
+updated: "2026-04-18T16:20:39Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T15:09:28Z"
+last_processed: "2026-04-18T16:09:28Z"
 ---
 
 ## Connection
@@ -152,6 +152,6 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion — `searchJi
 
 ## Notes
 
-Tick 2026-04-18 16:09 WAT window (15:10 WAT → 16:09 WAT, Skim upgraded to Full for Jira): **One new Jira delta — TDSD-6615 KEYSTONE SETTLEMENT.** Reporter [[Olamide Ajibulu]]; assigned [[Daniel Fetuga]]; description: "Keystone settlement for 17th april is awaiting requery." Created 15:41 WAT Apr 18. Priority Medium, status INITIAL REVIEW. Same-person ownership thread as Apr 17 Keystone RC05 P1 Slack filing (both filed by Olamide) — the Jira is the expected settlement-layer reconciliation consequence of the Apr 17 RC05 operational failure. [[Keystone Bank — RC05 P1 Apr 17]] situation page updated with the TDSD-6615 cross-track signal. Low urgency (settlement is paperwork-resolvable, not funds-blocking); watch for escalation if requery drags past Monday.
+Tick 2026-04-18 17:09 WAT window (16:10 WAT → 17:09 WAT, Skim upgraded to Full for Jira): **One high-signal Jira delta — TDSD-6597 NIBSS PTSA RC91 closed with full RCA.** Closed at tick boundary (17:09 WAT Apr 18). Total active duration 31h18m from Apr 17 09:51 WAT open. RCA (quoted on [[NIBSS PTSA — Intermittent RC91 Apr 17]]) identifies root cause as NIBSS-side node degradation on specific PTSA pathway, confirms end-to-end restoration, no residual action owed TeamApt. [[NIBSS PTSA — Intermittent RC91 Apr 17]] situation page **retired** per bias-toward-retiring rule — RCA definitive, monitoring adds no further signal. Factors for TDSD-6597 closure: urgency 0.2 · impact_scope 0.7 (cross-bank PTSA pathway) · cto_specificity 0.6 · pattern_significance 0.8 (RCA closes 31h pattern definitively) · accountability_alignment 0.4 — net awareness-tier for briefing-2026-04-19 as pattern-closure item.
 
-Additional activity in-window: TDSD-6276 Union Bank historical Problem ticket closure observed (year-old RCA closure, low operational signal — no situation-page mapping). No other Layer B-ranked tickets crossed Layer C threshold this window. Layer B cap starvation: 0. Factors for TDSD-6615: urgency 0.3 · impact_scope 0.4 · cto_specificity 0.4 · pattern_significance 0.6 (cross-track settlement pattern worth naming) · accountability_alignment 0.7.
+No other Layer B-ranked tickets crossed Layer C threshold this window. Layer B cap starvation: 0. TDSD-6615 (Keystone settlement requery, tracked in prior tick) remains INITIAL REVIEW — no new activity in-window.
