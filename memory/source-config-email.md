@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-18T13:10:00Z. RECOVERY HOLDING — 18h01m post-recovery. FCMB RC91 continuation signal 14:03 WAT Apr 18 (Daniel Armstrong → FCMB; Gabriel Oluwagbemiga reply 14:08 WAT)."
-updated: 2026-04-18
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-18T14:10:00Z. RECOVERY HOLDING — 19h01m post-recovery. Stanbic RC91 cycle 29 signal 14:52–14:56 WAT Apr 18 (Daniel Armstrong → Godwin Ajiboye via TDSD-6425)."
+updated: "2026-04-18T14:20:26Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T13:10:00Z"
+last_processed: "2026-04-18T14:10:00Z"
 ---
 
 ## Connection
@@ -31,14 +31,14 @@ Gmail MCP. Profile: eawagu@gmail.com.
 
 ## Connector Health
 
-**RECOVERY HOLDING** — 18h01m post-recovery at this tick (recovered 2026-04-17 20:09 WAT). Gmail MCP `search_threads` operational; no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+**RECOVERY HOLDING** — 19h01m post-recovery at this tick (recovered 2026-04-17 20:09 WAT). Gmail MCP `search_threads` operational; no regression across 4 consecutive ticks since recovery. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
 
 ## Notes
 
-Tick 2026-04-18 14:09 WAT window (13:11 WAT → 14:10 WAT, Skim upgraded to Full for Email): **One new email delta — FCMB RC91 continuation signal** (Layer 2 keyword match on RC91 + FCMB). Thread 19da0b068a16f755, two messages in window:
-1. 2026-04-18 14:03 WAT (13:03Z) — [[Daniel Armstrong]] (daniel.armstrong@teamapt.com) → Bashir.Adeyemi@fcmb.com, SwitchApplicationSupport@fcmb.com, Ogundairo.Tobiloba@fcmb.com; CC aptpaytechnicalsupport@teamapt.com, [[Oladapo Onayemi]]. Subject: `FCMB | RC91 | 20260418`. Body: "Please be informed that transactions are failing with RC91 intermittently. Kindly assist to review."
-2. 2026-04-18 14:08 WAT (13:08Z) — Gabriel Oluwagbemiga (aptpaytechnicalsupport@teamapt.com, FCMB Switch Application Support mailbox) reply: "Kindly reconfirm status and revert."
+Tick 2026-04-18 15:09 WAT window (14:11 WAT → 15:10 WAT, Skim upgraded to Full for Email): **One new email delta — Stanbic RC91 cycle 29 signal** (Layer 2 keyword match on RC91 + Stanbic). Thread TDSD-6425, two messages in window:
+1. 2026-04-18 14:52 WAT (13:52Z) — [[Daniel Armstrong]] → Stanbic team on TDSD-6425 thread: "issue has resurfaced." Cycle 29 fresh report.
+2. 2026-04-18 14:56 WAT (13:56Z) — [[Godwin Ajiboye]] reply: "transactions are processing now." Bank-side resolution confirmation. ~4 minutes end-to-end.
 
-User not in To/CC. Surfaced via Layer 2 keyword match. Signal is continuation/re-filing on [[FCMB — RC91 P1 Apr 17]] (TDSD-6613 still active per morning tick; no resolution signal overnight). Situation page updated with Apr 18 14:03 WAT delta. Not re-dispatched Immediate (calibration precedent briefing-2026-04-18 B6). Accumulated for briefing-2026-04-19 — FCMB profile is shifting from one-off P1 to active-continuing with intra-day re-filing.
+Third cycle observed today on Stanbic (26→29 span Apr 17 11:36 WAT → Apr 18 14:56 WAT, 28.5h window excluding overnight gap) — intra-day cadence acceleration vs. ~2/day historical. [[Stanbic Bank ATS — Persistent RC91 Pattern]] updated with cycle 29 delta. Not re-dispatched Immediate (calibration precedent briefing-2026-04-17 B1 held / briefing-2026-04-18 B6). Accumulates for briefing-2026-04-19 as pattern item — 3-cycle 28.5h cadence warrants surfacing.
 
-No Layer 1 (To:me) catches this window. No other Layer 2 keyword hits.
+No Layer 1 (To:me) catches this window. No other Layer 2 keyword hits in-window.

@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-18T13:10:00Z. Zero Slack deltas at 14:09 WAT tick."
-updated: 2026-04-18
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-18T14:10:00Z. Zero Slack deltas at 15:09 WAT tick."
+updated: "2026-04-18T14:20:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T13:10:00Z"
+last_processed: "2026-04-18T14:10:00Z"
 ---
 
 ## Connection
@@ -43,4 +43,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-18 14:09 WAT window (13:11 WAT → 14:10 WAT, Skim level, no upgrade for Slack): **Zero Slack deltas across all Tier 1 channels.** #teamapt-tech-operations empty, #account-switch-alerts empty, #teamapt-x-paystack-transfer-support empty, #notifications-support-dev empty, #go-subscribe-by-teamapt empty. DM channel (to:<@U080PEXEZ0E> after:2026-04-18) zero results. Keyword sweep (P1 / RC91 / RC05 / outage / breach / CVE after:2026-04-18) zero results. All active P1s (Stanbic cycle 27, Wema, NIBSS PTSA, UBA, Keystone RC05, FCMB) remain silent on Slack — calibration-hold per briefing-2026-04-18 B6. Parent-message sweep structural guard performed — no new filings missed. Empty-result fast path held; tick-level upgrade was driven by Gmail delta (FCMB RC91 14:03 WAT re-filing), not Slack.
+Tick 2026-04-18 15:09 WAT window (14:11 WAT → 15:10 WAT, Skim level, no upgrade for Slack): **Zero Slack deltas fast-path check held.** All Tier 1 channels quiet in-window, no DMs to <@U080PEXEZ0E>, no keyword sweep hits. All active P1s (Stanbic cycle 27 implicit-resolve, Wema, NIBSS PTSA, UBA, Keystone RC05, FCMB) remain silent on Slack at this tick — calibration-hold per briefing-2026-04-18 B6 continues to suppress re-dispatch. Tick-level upgrade driven by Gmail (Stanbic cycle 29) + Jira (TDSD-6614 Monnify Kafka lag) deltas, not Slack. Parent-message structural guard nominal — no new P1 filings missed.

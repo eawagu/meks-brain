@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate.
-updated: "2026-04-18T13:22:16Z"
+updated: "2026-04-18T14:20:26Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T13:10:00Z"
+last_processed: "2026-04-18T14:10:00Z"
 ---
 
 ## Connection
@@ -40,7 +40,7 @@ last_processed: "2026-04-18T13:10:00Z"
 
 Excluded: MV (Monnify - VAS, project id 15979) — redundant with MNVAS per user decision 2026-04-18.
 
-JQL project list (paste-ready): `project IN (TDSD, TCDD, ATPG, ADD, AS, ATPP, AD, MPDTTPI, MPD, MBYDB, OCM, MNVAS, TM, TAF, TI, TNBA, TO, PTSP)`
+JQL project list (paste-ready): `project IN (TDSD, TCDD, ATPG, "ADD", "AS", ATPP, "AD", MPDTTPI, MPD, MBYDB, OCM, MNVAS, TM, TAF, TI, TNBA, "TO", PTSP)`
 
 - **Access patterns:**
   - `searchJiraIssuesUsingJql` — JQL queries for delta detection and pattern monitoring
@@ -118,6 +118,7 @@ Example: `Monnify - Disbursement — 14 ticket updates (8 status transitions, 4 
 - **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval pending and window within 4 hours.
 - **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.
 - **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.
+- **Monnify internal faults:** Kafka lag, disbursement queue, switch latency — TDSD-6614 (Apr 18 15:09–15:12 WAT, Kafka monnify database 2h lag, cloud-engineer fast-resolve) as baseline entry.
 
 Equivalent cross-project patterns for the 17 software projects will accumulate via data as baseline stabilizes.
 
@@ -151,4 +152,4 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion — `searchJi
 
 ## Notes
 
-Expansion from TDSD-only to 18-project scope (2026-04-18). Layer A/B/C structure introduced, archetype-aware Layer B signals, per-tick cap of 20 with overflow clustering, skip list seeded empty, Phase 2 migration gate documented. 17 new projects start from expansion time — no backlog sweep on first post-expansion tick; historical ticket context accumulates forward. Initial post-expansion ticks expected to hit cap more often as 18-project volume establishes; Layer B weights tuned from MISS: notes.
+Tick 2026-04-18 15:09 WAT window (14:11 WAT → 15:10 WAT, Skim upgraded to Full for Jira): **One new Jira delta — TDSD-6614 KAFKA MONNIFY DATABASE LAG.** Reporter Peter Ile; description: "Transaction records on kafka-monnify database are lagging 2 hours behind." Created 15:09 WAT Apr 18. Comment 15:10 WAT "escalated to cloud engineers." Status transitioned to Completed by 15:12 WAT with resolution comment "duly resolved." Priority Medium. End-to-end lifecycle ~3 minutes — fastest observed TDSD resolution in recent window. Not a situation-page candidate (sub-5-min lifecycle); logged here as baseline entry for Monnify internal fault pattern monitoring. Additional closures observed in window: TDSD-6582, TDSD-6610 (details noted in tick output — no situation-page mapping required). Factors: urgency 0.2 (resolved) · impact_scope 0.4 (Kafka DB lag on Monnify pipeline, self-cleared) · cto_specificity 0.2 · pattern_significance 0.5 (first Kafka lag ticket observed — worth baseline entry) · accountability_alignment 0.7 (Technology Reliability and Security).
