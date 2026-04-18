@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-17T20:08:02Z"
+updated: "2026-04-18T13:23:38Z"
 cssclasses:
   - "config"
 ---
@@ -66,7 +66,7 @@ Five dimensions, scored 0.0–1.0 per signal. Weighted sum determines ordering w
 
 ## Source-Specific Factors
 
-Source-config pages may enumerate per-message factors specific to that signal source (e.g., source-config-slack lists channel identity, keyword floor, active-situation entity match, @mention, DM, sender weighting). These factors are source-specific inputs that feed the five general dimensions above and drive the initial Immediate/Briefing/Awareness classification at emission time.
+Source-config pages may enumerate per-message factors specific to that signal source (e.g., source-config-slack lists channel identity, keyword floor, active-situation entity match, @mention, DM, sender weighting; source-config-jira lists archetype signals, Layer B heuristic weights, active-situation entity match). These factors are source-specific inputs that feed the five general dimensions above and drive the initial Immediate/Briefing/Awareness classification at emission time.
 
 The source-config page is the authoritative enumeration — this file does not restate factors. Two obligations follow from the enumeration:
 
@@ -91,6 +91,8 @@ Cadenced Decision items emitted at fixed intervals to audit mechanisms that the 
 |---|---|---|---|
 | Slack skip-list regression | First briefing tick of each calendar month | source-config-slack | One Decision item per skip-list channel with added-date, confirmed-by-user-date, and last-traffic-signature (bot-only % over trailing 30 days). Action per row: keep / reconsider / surface sample. |
 | Slack suspected-bot bulk-confirm | Monday 07:00 WAT briefing tick weekly | source-config-slack | One Decision item listing all pending suspected-bot candidates with each channel's last-traffic-signature. Action per channel: approve (move to skip list) / reject (remove from candidate set). Per-briefing per-channel surfacing is explicitly disallowed. |
+| Jira skip-list regression | First briefing tick of each calendar month | source-config-jira | One Decision item per skip-list entry with added-date, confirmed-by-user-date, and last-traffic-signature (match rate over trailing 30 days). Action per row: keep / reconsider / surface sample. |
+| Jira skip-list bulk-confirm | Monday 07:00 WAT briefing tick weekly | source-config-jira | One Decision item listing all pending skip candidates (patterns dismissed 3+ consecutive times) with each candidate's last-traffic-signature. Action per candidate: approve (move to skip list) / reject (remove from candidate set). Per-briefing per-candidate surfacing is explicitly disallowed. |
 
 When a new drop-stage mechanism is added to any source-config, MUST add a matching periodic review row here — the review cadence is the only defense against silent signal loss in that mechanism.
 
