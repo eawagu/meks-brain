@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate. Tick 2026-04-18 18:09 WAT: TDSD-6617 PENDING DISBURSEMENTS filed — new situation opened for Monnify disbursements stuck IN PROGRESS (distinct failure mode from duplicate-debit recurrence)."
-updated: 2026-04-18
+summary: Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate. TDSD-6597 NIBSS PTSA RC91 closed at tick boundary with full RCA; NIBSS situation retired.
+updated: "2026-04-18T19:21:15Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T17:09:28Z"
+last_processed: "2026-04-18T19:09:27Z"
 ---
 
 ## Connection
@@ -113,7 +113,7 @@ Example: `Monnify - Disbursement — 14 ticket updates (8 status transitions, 4 
 
 ### Monitored ticket patterns (operational context, TDSD-scoped)
 
-- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB routes. Track cycle count per bank.
+- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB routes. Track cycle count per bank. TDSD-6618 (Stanbic cycle 30, Apr 18 18:45 WAT, resolved 19:37 WAT) as latest entry — see [[Stanbic Bank ATS — Persistent RC91 Pattern]].
 - **RC05 cycles:** First observed on Keystone Apr 17 — distinct card-layer failure mode from RC91. Track for spread.
 - **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval pending and window within 4 hours.
 - **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank. TDSD-6615 (Keystone settlement pending requery, Apr 18 15:41 WAT, Medium priority, assigned Daniel Fetuga) as current active entry — downstream of Keystone RC05 Apr 17 P1.
@@ -152,6 +152,6 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion — `searchJi
 
 ## Notes
 
-Tick 2026-04-18 18:09 WAT window (17:10 WAT → 18:09 WAT, Skim level — Jira per-source delta-check fired full processing on hit): **One in-scope Jira delta — TDSD-6617 "PENDING DISBURSEMENTS" (Medium, INITIAL REVIEW, Monnify disbursement surface).** Filed 2026-04-18 18:06:54 WAT by [[Temitope Ojo]] (reporter), assigned [[Emmanuel Eke]]. Description names Apr 17+ disbursement transactions stuck in IN PROGRESS status, Google Sheet linked on ticket. Treated as distinct failure mode from [[Monnify Atlas NIP Outwards Transit — Duplicate Debit Recurrence]] per competing-interpretations principle — new situation [[Monnify Disbursements — Stuck IN PROGRESS Apr 17+]] opened. Factors for TDSD-6617: urgency 0.4 · impact_scope 0.5 (scope unquantified — "several" transactions) · cto_specificity 0.5 · pattern_significance 0.6 (second Monnify-surface defect this week; convergence question open) · accountability_alignment 0.5 — net awareness-tier for briefing-2026-04-19. Immediate-tier scan: does not fire (no P1/outage/RC91/breach/route-off/urgent-DM markers; Medium priority, INITIAL REVIEW status).
+Tick 2026-04-18 20:09 WAT window (18:09 WAT → 20:09 WAT, Skim level — Jira per-source delta-check fired full processing on hit): **One in-scope Jira delta — TDSD-6618 Stanbic RC91 (cycle 30).** Filed 2026-04-18 18:45:00 WAT by [[Afeez Kazeem]], P1, resolved 19:37 WAT (~52 minutes on-ticket, ~64 minutes end-to-end from 18:39 WAT Slack filing). Triple-track visibility this cycle (Slack 18:39 WAT + Email 18:40 WAT + Jira 18:45 WAT) vs. email-only cycles 28/29 — behavioral-signature shift flagged on [[Stanbic Bank ATS — Persistent RC91 Pattern]]. Four Stanbic RC91 cycles in 32h window ≈ 3x historical baseline; salience carries to briefing-2026-04-19 as pattern item (calibration-hold precedent briefing-2026-04-17 B1 / briefing-2026-04-18 B6 suppresses Immediate re-dispatch).
 
-Out-of-scope activity filtered (IN, MNPI, LOOM, IN-*): discarded at Layer A per Channel filter. Layer B cap starvation: 0. No other Layer B-ranked in-scope tickets crossed Layer C threshold this window. TDSD-6615 (Keystone settlement requery, tracked prior tick) remains INITIAL REVIEW — no new activity in-window. TDSD-6597 NIBSS PTSA RC91 remains closed (prior tick).
+TDSD-6617 (Monnify PENDING DISBURSEMENTS, tracked prior tick) — no new activity in-window, still INITIAL REVIEW assigned [[Emmanuel Eke]]. TDSD-6615 (Keystone settlement requery) — no new activity in-window. TDSD-6614 (Kafka monnify database lag) — resolved prior tick, no regression. Out-of-scope activity (IN, MNPI, LOOM, IN-*) filtered at Layer A. Layer B cap starvation: 0. No other Layer B-ranked in-scope tickets crossed Layer C threshold this window.
