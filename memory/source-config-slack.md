@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-17T19:09:00Z."
-updated: "2026-04-17T20:05:08Z"
+updated: "2026-04-18T09:44:26Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-17T19:09:00Z"
+last_processed: "2026-04-18T09:29:50Z"
 ---
 
 ## Connection
@@ -23,7 +23,7 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ### Keyword rules
 - Primary: RC91, P1, outage, degraded, intermittent, failing, failure, down.
-- Issuer names (always): Stanbic, Ecobank, Sterling, Polaris, Wema, NIBSS, PTSA, NUS, CoralPay.
+- Issuer names (always): Stanbic, Ecobank, Sterling, Polaris, Wema, NIBSS, PTSA, NUS, CoralPay, FCMB, Keystone.
 
 ### Skip rules
 - Ignore bot-only status pings that produce no delta vs. the last recorded state.
@@ -43,14 +43,10 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-17 20:09 WAT window (18:09 → 20:09 WAT, spans the 19:00 WAT wind-down gap): **C0ABU8GMW75 rate-limit from the 18:09 tick cleared** — single-tick rate-limit confirmed (not a persistent pattern). This tick successfully read 50 messages from #teamapt-tech-operations, picking up three new P1 filings that landed in the evening window:
+Tick 2026-04-18 10:29 WAT window (first tick after the 23:00–05:00 WAT skip gap; spans from 19:09 WAT Apr 17 to 09:29 WAT Apr 18): Overnight Slack traffic captured three cycle-level events plus steady-state quiet on the evening-active P1s:
 
-- **Stanbic RC91 P1** filed 18:05 WAT by Olamide Ajibulu (cycle 27 — tracked on [[Stanbic Bank ATS — Persistent RC91 Pattern]]).
-- **Polaris RC91/06 P1** filed 18:16 WAT by Olamide Ajibulu (second cycle of day — tracked on [[Sterling + Polaris — Routes Degraded]] as delta).
-- **UBA RC91 P1** filed 18:45 WAT by Olamide Ajibulu (first UBA cycle of day — new situation page [[UBA Bank — RC91 P1 Apr 17]] created).
+- **Access Bank cycle 6** filed by [[Qazim Adedigba]] at 01:10 WAT Apr 18 — start 12:49 WAT Apr 17, resolved 01:02 WAT Apr 18, 11 minutes, bank-auto-recovered. No TDSD raised. Delta captured on [[Access Bank — Multi-Track Failures]].
+- **Keystone RC05 P1** filed by [[Olamide Ajibulu]] at 21:38 WAT Apr 17 — start 21:00 WAT, ongoing at this tick (13h29m). New situation page [[Keystone Bank — RC05 P1 Apr 17]] created. RC05 is distinct failure mode from the RC91 wave — card-layer, not switch-layer — keyword list updated accordingly.
+- **FCMB RC91 cross-reference** (Jira-originated, TDSD-6613 23:44 WAT Apr 17) had no parent-channel filing in this Slack window — picked up via Jira sweep.
 
-All three new P1s cross into the evening wind-down window and have been noted rather than Immediate-dispatched — calibration precedent from briefing-2026-04-17 16:30 triage (recurring RC91 P1s are expected pattern, re-dispatch = noise). Carries into briefing-2026-04-18.
-
-Morning-active P1s (Wema 11h17m silent since 08:52 filing, NIBSS 9h06m silent since Moses 11:03 dispute, Polaris morning-cycle 8h30m silent since 11:39 filing) remain silent across all Tier 1 channels in this window — 15:09 WAT consolidated dispatch remains the authoritative alert, no fresh Immediate.
-
-DM channel empty. Keyword searches (P1, RC91, outage/down/failure) continued to return zero for today (search index lag is now well-documented — compensating via Tier 1 channel-read). Structural guard from the Wema miss is working as designed: the parent-message sweep caught all three evening P1 filings this tick.
+Evening-filed P1s from yesterday (Stanbic cycle 27, Polaris second cycle, UBA Apr 17) remain silent into this tick window — all exceed 1h absence threshold but re-dispatch suppressed per calibration precedent. DM channel empty. Keyword searches continued zero-return for recent filings (index lag pattern holds). The parent-message sweep structural guard continues to perform — caught Keystone and Access-cycle-6 that would have been missed by situation-page-only scanning.
