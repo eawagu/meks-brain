@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-18T14:10:00Z. Zero Slack deltas at 15:09 WAT tick."
-updated: "2026-04-18T14:20:25Z"
+updated: "2026-04-18T15:23:12Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T14:10:00Z"
+last_processed: "2026-04-18T15:09:28Z"
 ---
 
 ## Connection
@@ -43,4 +43,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-18 15:09 WAT window (14:11 WAT → 15:10 WAT, Skim level, no upgrade for Slack): **Zero Slack deltas fast-path check held.** All Tier 1 channels quiet in-window, no DMs to <@U080PEXEZ0E>, no keyword sweep hits. All active P1s (Stanbic cycle 27 implicit-resolve, Wema, NIBSS PTSA, UBA, Keystone RC05, FCMB) remain silent on Slack at this tick — calibration-hold per briefing-2026-04-18 B6 continues to suppress re-dispatch. Tick-level upgrade driven by Gmail (Stanbic cycle 29) + Jira (TDSD-6614 Monnify Kafka lag) deltas, not Slack. Parent-message structural guard nominal — no new P1 filings missed.
+Tick 2026-04-18 16:09 WAT window (15:10 WAT → 16:09 WAT, Skim level, no upgrade for Slack): **Zero Slack deltas fast-path check held.** All Tier 1 channels quiet in-window, no DMs to <@U080PEXEZ0E>, no keyword sweep hits. All active P1s (Stanbic cycle 27 implicit-resolve, Wema, NIBSS PTSA, UBA, Keystone RC05, FCMB, Ecobank contested-attribution) remain silent on Slack at this tick — calibration-hold per briefing-2026-04-18 B6 continues to suppress re-dispatch. Tick-level upgrade driven by Gmail (Ecobank direct-to-bank escalation, Stanbic cycle 29 closure follow-up) + Jira (TDSD-6615 Keystone Settlement pending) deltas, not Slack. Parent-message structural guard nominal — no new P1 filings missed.
