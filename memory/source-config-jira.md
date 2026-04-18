@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate.
-updated: "2026-04-18T14:20:26Z"
+updated: "2026-04-18T15:24:37Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T14:10:00Z"
+last_processed: "2026-04-18T15:09:28Z"
 ---
 
 ## Connection
@@ -116,7 +116,7 @@ Example: `Monnify - Disbursement — 14 ticket updates (8 status transitions, 4 
 - **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB routes. Track cycle count per bank.
 - **RC05 cycles:** First observed on Keystone Apr 17 — distinct card-layer failure mode from RC91. Track for spread.
 - **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval pending and window within 4 hours.
-- **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.
+- **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank. TDSD-6615 (Keystone settlement pending requery, Apr 18 15:41 WAT, Medium priority, assigned Daniel Fetuga) as current active entry — downstream of Keystone RC05 Apr 17 P1.
 - **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.
 - **Monnify internal faults:** Kafka lag, disbursement queue, switch latency — TDSD-6614 (Apr 18 15:09–15:12 WAT, Kafka monnify database 2h lag, cloud-engineer fast-resolve) as baseline entry.
 
@@ -152,4 +152,6 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion — `searchJi
 
 ## Notes
 
-Tick 2026-04-18 15:09 WAT window (14:11 WAT → 15:10 WAT, Skim upgraded to Full for Jira): **One new Jira delta — TDSD-6614 KAFKA MONNIFY DATABASE LAG.** Reporter Peter Ile; description: "Transaction records on kafka-monnify database are lagging 2 hours behind." Created 15:09 WAT Apr 18. Comment 15:10 WAT "escalated to cloud engineers." Status transitioned to Completed by 15:12 WAT with resolution comment "duly resolved." Priority Medium. End-to-end lifecycle ~3 minutes — fastest observed TDSD resolution in recent window. Not a situation-page candidate (sub-5-min lifecycle); logged here as baseline entry for Monnify internal fault pattern monitoring. Additional closures observed in window: TDSD-6582, TDSD-6610 (details noted in tick output — no situation-page mapping required). Factors: urgency 0.2 (resolved) · impact_scope 0.4 (Kafka DB lag on Monnify pipeline, self-cleared) · cto_specificity 0.2 · pattern_significance 0.5 (first Kafka lag ticket observed — worth baseline entry) · accountability_alignment 0.7 (Technology Reliability and Security).
+Tick 2026-04-18 16:09 WAT window (15:10 WAT → 16:09 WAT, Skim upgraded to Full for Jira): **One new Jira delta — TDSD-6615 KEYSTONE SETTLEMENT.** Reporter [[Olamide Ajibulu]]; assigned [[Daniel Fetuga]]; description: "Keystone settlement for 17th april is awaiting requery." Created 15:41 WAT Apr 18. Priority Medium, status INITIAL REVIEW. Same-person ownership thread as Apr 17 Keystone RC05 P1 Slack filing (both filed by Olamide) — the Jira is the expected settlement-layer reconciliation consequence of the Apr 17 RC05 operational failure. [[Keystone Bank — RC05 P1 Apr 17]] situation page updated with the TDSD-6615 cross-track signal. Low urgency (settlement is paperwork-resolvable, not funds-blocking); watch for escalation if requery drags past Monday.
+
+Additional activity in-window: TDSD-6276 Union Bank historical Problem ticket closure observed (year-old RCA closure, low operational signal — no situation-page mapping). No other Layer B-ranked tickets crossed Layer C threshold this window. Layer B cap starvation: 0. Factors for TDSD-6615: urgency 0.3 · impact_scope 0.4 · cto_specificity 0.4 · pattern_significance 0.6 (cross-track settlement pattern worth naming) · accountability_alignment 0.7.
