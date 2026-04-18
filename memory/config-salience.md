@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-18T13:23:38Z"
+updated: "2026-04-18T14:22:12Z"
 cssclasses:
   - "config"
 ---
@@ -157,3 +157,9 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 - [2026-04-16, B5, acted, urgency]
 - [2026-04-17, wema-bank-rc91-p1-apr17-not-surfaced-until-15:09-wat-tick-6h20m-after-filing, missed, pattern_significance]
 - [2026-04-17, B2, acted, urgency]
+- [2026-04-17, B3, acted, accountability_alignment | factors: source=slack+email, situation_delta, resolution_signal, calibration_signal]
+- [2026-04-17, B4, acted, pattern_significance | factors: source=email, sender=Qazim Adedigba, keyword=duty handover+RC91, situation_delta, pattern_significance]
+- [2026-04-17, B5, acted, pattern_significance | factors: source=email, keyword=duty handover+RC91, pattern_significance]
+- [2026-04-17, B6, acted, accountability_alignment | factors: source=email, keyword=duty handover+TDSD, accountability_alignment]
+- [2026-04-17, B7, acted, accountability_alignment | factors: source=calendar, signal_type=day-of schedule, accountability_alignment]
+- [2026-04-17, B8, acted, pattern_significance | factors: source=email, keyword=duty handover, pattern_significance, accountability_alignment=low]
