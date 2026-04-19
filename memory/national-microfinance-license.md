@@ -1,25 +1,16 @@
 ---
-title: National Microfinance License
 type:
   - "concept"
-cssclasses:
-  - "concept"
+title: National Microfinance License
 aliases:
   - "National MMU License"
 created: "2026-04-17T15:38:01Z"
-updated: "2026-04-17T15:38:01Z"
-summary: Moniepoint secured national MMU license in 2025; first-time mandatory ICOFA audit required, diverting resources from half-year financials.
+summary: [STUB] Renamed to [[Moniepoint Group National Microfinance License]].
+updated: "2026-04-19T15:44:55Z"
+cssclasses:
+  - "concept"
 ---
 
-## Overview
+This page has been renamed per Rule 1/Rule 2 of the [[Concept Scope and Disambiguation Convention]].
 
-The National Microfinance License (referred to as National MMU license in Day 3 minutes) was secured by Moniepoint in 2025. It expands Moniepoint's regulated operating scope nationally.
-
-## Trade-off
-
-First-time mandatory ICOFA audit required for the license diverted resources from the 2025 half-year audited financial statement — which was consequently the one missed 2025 finance goal.
-
-## Related
-
-- [[ICOFA]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 3 Financial Performance Growth Strategy Cost Consciousness - Meeting Minutes]]
+**See:** [[Moniepoint Group National Microfinance License]]

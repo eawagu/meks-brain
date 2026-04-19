@@ -1,20 +1,14 @@
 ---
-title: Money Bonds
 type:
   - "concept"
+title: Money Bonds
+created: "2026-04-17T15:37:22Z"
+summary: [STUB] Renamed to [[Moniepoint Group Money Bonds]].
+updated: "2026-04-19T15:44:55Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T15:37:22Z"
-updated: "2026-04-17T15:37:22Z"
-summary: Moniepoint deposit source category surfaced in FTP-based financial reporting structure.
 ---
 
-## Overview
+This page has been renamed per Rule 1/Rule 2 of the [[Concept Scope and Disambiguation Convention]].
 
-Money Bonds is a Moniepoint deposit source category broken out in the new FTP-based granular financial reporting. Treated alongside card business, account training business, and Adriana as a deposit source line for FTP allocation.
-
-## Related
-
-- [[Funds Transfer Pricing]]
-- [[Adriana]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 3 Financial Performance Growth Strategy Cost Consciousness - Meeting Minutes]]
+**See:** [[Moniepoint Group Money Bonds]]
