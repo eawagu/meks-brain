@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 16:09 WAT skim tick: zero transitions in-window across all 18 projects. No P1/P2 deltas. Stanbic cycle 31 bank-side resolution outside Jira. last_processed 2026-04-19T15:09:34Z."
-updated: "2026-04-19T16:20:53Z"
+updated: "2026-04-19T17:21:33Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T16:09:34Z"
+last_processed: "2026-04-19T17:09:34Z"
 ---
 
 ## Connection
@@ -153,10 +153,13 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 17:09 WAT **skim-level**. ~1h window since 16:09 WAT last_processed. JQL sweep surfaced zero transitions in-window across all 18 projects (no P1/P2 deltas, no status changes, no new filings).
+Tick 2026-04-19 18:09 WAT **skim-level**. ~1h window since 17:09 WAT last_processed. JQL sweep surfaced one low-signal transition in-window across 18 projects.
+
+**In-window Jira delta (Awareness-tier, low signal):**
+- **TDSD-6628 → Done.** Documentation-class task; no operational dependency, no P1/P2 connection, no situation-page linkage. Layer B score: 0 (no P1/P2, no blocked transition, no assignee churn, not in active situation body). Not surfaced to Layer C. No briefing-2026-04-20 accumulation.
 
 **Out-of-Jira operational context (no TDSD ticket update):**
-- Ecobank bank-side silence broken this tick — [[Adewuyi Mayowa]] reply on email thread 19da60c7ea537e24; handled on email track only. No TDSD entry created — Ecobank pattern on NUS nodes is not TDSD-tracked (counterparty-owned route).
+- Ecobank sample-delivery cycle advanced this tick — [[Afeez Kazeem]] replied to [[Adewuyi Mayowa]] at 17:24 WAT with RC91 samples; handled on email track only. No TDSD entry created — Ecobank pattern on NUS nodes is not TDSD-tracked (counterparty-owned route).
 - No other operational signals translated to Jira activity this tick.
 
-Zero cap-starvation (0 candidates, 20 cap). Baseline still accumulating (~5.6 days of 28 required before Phase 2 migration gate). Connector health confirmed via empty-result sweep.
+Zero cap-starvation (1 candidate suppressed at Layer B, 20 cap). Baseline still accumulating (~5.7 days of 28 required before Phase 2 migration gate). Connector health confirmed via sweep.
