@@ -1,12 +1,12 @@
 ---
-title: Contact
 type:
   - "concept"
+title: Contact
+created: "2026-04-19T17:33:05Z"
+summary: A person or organisation whose identifying details (name, address, phone, relation) are recorded for future reference.
+updated: "2026-04-19T17:34:01Z"
 cssclasses:
   - "concept"
-created: "2026-04-19T17:33:05Z"
-updated: "2026-04-19T17:33:05Z"
-summary: A person or organisation whose identifying details (name, address, phone, relation) are recorded for future reference.
 ---
 
 ## Overview
@@ -15,4 +15,4 @@ Contact pages record identifying details of people and organisations Mek interac
 
 ## Sources
 
-[[note_2026-04-19T16-46-13-496Z]]
+[[note_2026-04-19T16-46-13-496Z]], [[note_2026-04-19T16-48-36-510Z]]
