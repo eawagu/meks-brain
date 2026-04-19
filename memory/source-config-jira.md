@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 14:09 WAT skim tick: 8 Medium deltas — TDSD-6539/6589 resolves, MPDTTPI-1428/1663/1780 epic-related transitions, TI-445/TCDD-1314/1315 new Todos. All Medium/no-SLA/no-P1. Overflow Awareness cluster for Monday briefing. last_processed 2026-04-19T13:09:49Z."
-updated: "2026-04-19T13:20:36Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 15:09 WAT skim tick: 3 deltas — MPDTTPI-1428 (Highest → Deployed To Prod, NIBSS DD Auth epic), MPDTTPI-1663 (Medium → Ready for Staging Test, Express Checkout Safe), MPDTTPI-1780 (Medium → Deployed To Prod, Airtel Smart Cash). All no-P1/no-SLA epic-level transitions. Awareness cluster for Monday briefing. last_processed 2026-04-19T14:09:34Z."
+updated: "2026-04-19T14:21:13Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T13:09:49Z"
+last_processed: "2026-04-19T14:09:34Z"
 ---
 
 ## Connection
@@ -153,28 +153,13 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 14:09 WAT **skim-level**. ~1h window since 13:09 WAT last_processed. JQL sweep surfaced 8 Medium deltas across 4 projects.
+Tick 2026-04-19 15:09 WAT **skim-level**. ~1h window since 14:09 WAT last_processed. JQL sweep surfaced 3 deltas in MPDTTPI (all epic-level transitions, no P1/P2).
 
-**TDSD — 2 resolves:**
-- TDSD-6539 → resolved (Medium, no-SLA, operational ticket)
-- TDSD-6589 → resolved (Medium, no-SLA, operational ticket)
+**MPDTTPI (Monnify — Account Collections) — 3 epic-level transitions at 14:59 WAT:**
+- MPDTTPI-1428 "NIBSS <> Moniepoint Account as Direct Debit Authorization Account" → Deployed To Prod (**Highest** priority)
+- MPDTTPI-1663 "Express Checkout - Safe" → Ready for Staging Test (Medium)
+- MPDTTPI-1780 "Airtel Smart Cash" → Deployed To Prod (Medium)
 
-Routine resolves — no active-situation match, no P1/P2 escalation. Layer B score ≤1.
+None wired to current active RC91/FCMB/Ecobank tracks. MPDTTPI-1428 is a NIBSS Direct Debit Authorization epic — adjacent to [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] subject area but not on the active remediation chain. Layer B score: MPDTTPI-1428 → 2 (Highest priority + status transition), MPDTTPI-1663 → 1, MPDTTPI-1780 → 1.
 
-**MPDTTPI (Monnify — Account Collections) — 3 epic-related transitions:**
-- MPDTTPI-1428 → status transition (epic-level)
-- MPDTTPI-1663 → status transition
-- MPDTTPI-1780 → status transition
-
-Not wired to tracked situations. All Medium. Layer B score ≤2.
-
-**TI (TeamApt — Infrastructure) — 1 new Todo:**
-- TI-445 → Todo created
-
-**TCDD (AptPay Consolidated Direct Debit) — 2 new Todos:**
-- TCDD-1314 → Todo created
-- TCDD-1315 → Todo created
-
-New infra + consolidated-DD backlog entries. Medium, no sprint placement yet. Layer B score ≤1.
-
-**Cluster classification:** Single Awareness item for briefing-2026-04-20 — `TDSD + MPDTTPI + TI + TCDD — 8 ticket updates (2 resolves, 3 epic-related transitions, 3 new Todos). Sample IDs: TDSD-6539, MPDTTPI-1428, TCDD-1314.` No Immediate-tier dispatch. Connector health: operational. 17 software projects — zero P1/P2 escalations in-window; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate). Zero cap starvation (8 candidates << 20 cap).
+**Cluster classification:** Single Awareness item for briefing-2026-04-20 — `MPDTTPI (Monnify — Account Collections) — 3 epic-level transitions (1 Highest to Deployed To Prod, 1 Medium to Staging, 1 Medium to Deployed To Prod). Sample IDs: MPDTTPI-1428 (NIBSS DD Auth), MPDTTPI-1663, MPDTTPI-1780.` No Immediate-tier dispatch. No P1/P2 escalations in-window; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate). Zero cap starvation (3 candidates << 20 cap).
