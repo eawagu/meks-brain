@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T06:11:27Z. Zero calendar deltas overnight — 5 consecutive quiet ticks. Forward view: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel; Lattice Review window closes Apr 27."
-updated: "2026-04-19T07:40:13Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T09:11:37Z. Zero calendar deltas — 6 consecutive quiet ticks. Forward view: Monday Apr 20 schedule populated with 8 events including a 16:00 WAT conflict (ATPP Standup overlaps Tech Support meeting)."
+updated: "2026-04-19T09:25:42Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T06:11:27Z"
+last_processed: "2026-04-19T09:11:37Z"
 ---
 
 ## Connection
@@ -28,4 +28,21 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-19 07:11 WAT briefing-tick window (22:09 WAT Apr 18 → 07:11 WAT Apr 19, Full work level per briefing-tick override but no delta): **Zero calendar deltas fast-path check held — 5 consecutive quiet ticks.** No new invites in-window, no RSVP changes, no cancellations. Sunday cadence light as expected. Forward view unchanged: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel (Bhuvnesh Bansal, pending calendar confirmation); Lattice Review window closes Apr 27 (8 days remaining). Today (Sun Apr 19) has no high-priority external meetings on record — opens space for overnight-wave RCA follow-up actions. Empty-result fast path held.
+Tick 2026-04-19 10:11 WAT **skim-level**. Zero calendar deltas in the 3h window since 07:11 WAT last_processed. Six consecutive quiet ticks.
+
+No new invites, no RSVP changes, no cancellations. Only metadata update in-window: Lattice Review reminder event at 08:47 UTC — noise, skip per directive.
+
+Forward view (Monday Apr 20):
+- 08:30–09:30 WAT — Direct to Bank : Daily stand up
+- 10:30–11:15 WAT — Cards and Account: All Hands
+- 11:30–12:30 WAT — Channels Onboarding & Disbursement
+- 13:30–14:10 WAT — Juliana Switch Daily Standup
+- 14:30 WAT — Moniepoint Dinner (19:00 IST, accepted)
+- **16:00–17:00 WAT — ATPP Daily Standup (accepted)**
+- **16:00–17:00 WAT — Tech support meeting (accepted)** — **CONFLICT: overlaps ATPP Standup exactly.** User accepted both. Flag in next briefing as Awareness — needs a decline-and-read-notes decision or delegate.
+- 18:00–19:00 WAT — Product - Engineering Sync (self-organized, Frank Atashili pending)
+
+Tue Apr 22 — HoE Round 2 panel (Bhuvnesh Bansal, pending calendar confirmation).
+Lattice Review window closes Apr 27 (8 days remaining).
+
+Today (Sun Apr 19) confirmed quiet — no external meetings. Empty-result fast path held.
