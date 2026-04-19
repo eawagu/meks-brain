@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T14:09:34Z. 15:09 WAT skim tick: zero new Tier 1 deltas across all 5 channels, zero DMs. Fourth consecutive fully-quiet Slack tick — Ecobank 4th-step escalation surfaced on email only, consistent with Sunday support-cadence routing."
-updated: "2026-04-19T14:21:13Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T15:09:34Z. 16:09 WAT skim tick: zero independent Tier 1 deltas; CEO Weekly Gazette 'panic mode' Immediate DM dispatched to U080PEXEZ0E via email-sourced substantive judgment. Fifth consecutive fully-quiet Slack tick for independent operational signal."
+updated: "2026-04-19T15:24:47Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T14:09:34Z"
+last_processed: "2026-04-19T15:09:34Z"
 ---
 
 ## Connection
@@ -43,12 +43,14 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-19 15:09 WAT **skim-level**. ~1h window since 14:09 WAT last_processed.
+Tick 2026-04-19 16:09 WAT **skim-level**. ~1h window since 15:09 WAT last_processed.
 
-Tier 1 channel reads — zero new parent messages across all 5 channels (#teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt).
+Tier 1 channel reads — zero new parent messages across all 5 channels (#teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt) in-window.
 
-DM sweep — zero results.
+DM sweep — zero new DMs to user in-window.
 
 Keyword sweep Tier 3 skipped at skim (channel-read authoritative).
 
-Fourth consecutive fully-quiet Slack tick. The Ecobank 4th-step escalation surfaced this tick is filed exclusively on the email track — consistent with the Sunday observation that bank-escalation routing is being handled outside Slack today (support team routing + direct bank engagement). No Immediate-tier dispatch; nothing accumulates to next briefing from Slack this tick.
+Fifth consecutive fully-quiet Slack tick for independent operational signal. The CEO Weekly Gazette "panic mode" reply Immediate-tier DM dispatched to U080PEXEZ0E this tick was sourced from the email track (Weekly CEO Gazette thread), not Slack — Slack was used as the dispatch channel per config. Sunday support-cadence routing pattern continues: bank-escalation and CEO-thread activity filed on email, Slack quiet.
+
+No Immediate-tier Slack-sourced dispatch. Nothing accumulates to next briefing from Slack as a source this tick.
