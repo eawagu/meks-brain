@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-18T14:22:12Z"
+updated: "2026-04-19T09:20:57Z"
 cssclasses:
   - "config"
 ---
@@ -163,3 +163,4 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 - [2026-04-17, B6, acted, accountability_alignment | factors: source=email, keyword=duty handover+TDSD, accountability_alignment]
 - [2026-04-17, B7, acted, accountability_alignment | factors: source=calendar, signal_type=day-of schedule, accountability_alignment]
 - [2026-04-17, B8, acted, pattern_significance | factors: source=email, keyword=duty handover, pattern_significance, accountability_alignment=low]
+- [2026-04-19, stanbic-and-access-apr19-overnight-maintenance-windows-framed-as-rc91-regime-change-wave, missed, pattern_significance | factors: no-new-source-needed; correlate-existing-slack+gmail+jira-for-maintenance-window-announcements-naming-affected-bank-within-recent-window-before-classifying-duration/timing-signals-as-failure-severity; maintenance-window-correlation-evidence-should-downweight-same-minute-onset-and-multi-hour-duration-as-failure-severity-signals]
