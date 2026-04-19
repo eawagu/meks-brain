@@ -1,13 +1,21 @@
 ---
-title: TeamApt OKR Process
 type:
   - "source"
+title: TeamApt OKR Process
 created: 2026-04-11
-updated: 2026-04-11
+summary: "OKR governance structure — two-level system (Annual Business Department OKRs + Quarterly Product Engineering Team OKRs), scoring conventions, and 2026 OKR submission status. Scope-corrected 2026-04-19: this describes Moniepoint Inc.'s group-level process inherited by TeamApt, not a TeamApt-specific framework. See [[Moniepoint OKR Process]]."
+updated: "2026-04-19T09:50:30Z"
 cssclasses:
   - "source"
 source_path: TeamApt Context\TeamApt Administration\TeamApt_OKR_Process.md
-summary: "OKR governance structure documenting TeamApt's two-level system (Annual Business Department OKRs + Quarterly Product Engineering Team OKRs), scoring conventions, and 2026 OKR submission status."
+---
+
+## Scope Correction (added 2026-04-19)
+
+This source page is titled "TeamApt OKR Process" but the content describes a **[[Moniepoint|Moniepoint Inc.]] group-level process** that TeamApt inherits as a subsidiary. The title is a scope artifact — it reflects the original ingested filename (`TeamApt_OKR_Process.md`) rather than the actual scope of the framework. For the correctly-scoped concept page, see [[Moniepoint OKR Process]].
+
+Source page titles are preserved per ingest-snapshot convention; this note flags the correction without retitling.
+
 ---
 
 ## Summary
@@ -28,4 +36,4 @@ OKR governance structure: two-level system (Annual Business Department OKRs + Qu
 
 ## Concepts
 
-[[OKR Process]], [[Performance Management]]
+[[Moniepoint OKR Process]], [[Performance Management]]
