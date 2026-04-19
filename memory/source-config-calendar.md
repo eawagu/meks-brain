@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T14:09:34Z. 15:09 WAT skim tick: 0 deltas in-window. Monday Apr 20 forward view intact; 16:00 WAT ATPP/Tech-Support conflict still unresolved."
-updated: "2026-04-19T14:21:13Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T15:09:34Z. 16:09 WAT skim tick: 0 deltas in-window. Monday Apr 20 forward view intact; 16:00 WAT ATPP/Tech-Support conflict still unresolved."
+updated: "2026-04-19T15:26:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T14:09:34Z"
+last_processed: "2026-04-19T15:09:34Z"
 ---
 
 ## Connection
@@ -28,9 +28,9 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-19 15:09 WAT **skim-level**. ~1h window since 14:09 WAT last_processed.
+Tick 2026-04-19 16:09 WAT **skim-level**. ~1h window since 15:09 WAT last_processed.
 
-Zero deltas in-window. No RSVP changes, no cancellations, no new same-day/next-day invites, no reschedules. Consistent with Sunday cadence on the everyday meeting axis.
+Zero deltas in-window. No RSVP changes, no cancellations, no new same-day/next-day invites, no reschedules. Consistent with Sunday cadence.
 
 Forward view (Monday Apr 20) unchanged since last tick:
 - 08:30–09:30 WAT — Direct to Bank : Daily stand up
@@ -39,7 +39,7 @@ Forward view (Monday Apr 20) unchanged since last tick:
 - 13:30–14:10 WAT — Juliana Switch Daily Standup
 - 14:30 WAT — Moniepoint Dinner (19:00 IST, accepted)
 - **16:00–17:00 WAT — ATPP Daily Standup (accepted)**
-- **16:00–17:00 WAT — Tech support meeting (accepted)** — **CONFLICT: overlaps ATPP Standup exactly.** Still unresolved; carry forward to next briefing.
+- **16:00–17:00 WAT — Tech support meeting (accepted)** — **CONFLICT: overlaps ATPP Standup exactly.** Still unresolved; carry forward to briefing-2026-04-20.
 - 18:00–19:00 WAT — Product - Engineering Sync (self-organized, Frank Atashili pending)
 
 Tue Apr 21 — no meetings shown in forward view.
