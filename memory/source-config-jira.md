@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 16:09 WAT skim tick: zero transitions in-window across all 18 projects. No P1/P2 deltas. Stanbic cycle 31 bank-side resolution outside Jira. last_processed 2026-04-19T15:09:34Z."
-updated: "2026-04-19T15:26:07Z"
+updated: "2026-04-19T16:20:53Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T15:09:34Z"
+last_processed: "2026-04-19T16:09:34Z"
 ---
 
 ## Connection
@@ -153,12 +153,10 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 16:09 WAT **skim-level**. ~1h window since 15:09 WAT last_processed. JQL sweep surfaced zero transitions in-window across all 18 projects (no P1/P2 deltas, no status changes, no new filings).
+Tick 2026-04-19 17:09 WAT **skim-level**. ~1h window since 16:09 WAT last_processed. JQL sweep surfaced zero transitions in-window across all 18 projects (no P1/P2 deltas, no status changes, no new filings).
 
 **Out-of-Jira operational context (no TDSD ticket update):**
-- Stanbic cycle 31 closed bank-side earlier in the day — [[Stanbic Bank ATS — Persistent RC91 Pattern]] already updated out-of-band on prior tick; no TDSD entry needed this tick.
-- Access RC06 first-observation filed earlier today — already captured on prior ticks.
-- FCMB DCIR portal re-failure at 14:59 WAT captured on the email track, not Jira.
-- Ecobank 55m silence-follow-up captured on the email track, not Jira.
+- Ecobank bank-side silence broken this tick — [[Adewuyi Mayowa]] reply on email thread 19da60c7ea537e24; handled on email track only. No TDSD entry created — Ecobank pattern on NUS nodes is not TDSD-tracked (counterparty-owned route).
+- No other operational signals translated to Jira activity this tick.
 
-Zero cap-starvation (0 candidates, 20 cap). Baseline still accumulating (~5.5 days of 28 required before Phase 2 migration gate). Connector health confirmed via empty-result sweep.
+Zero cap-starvation (0 candidates, 20 cap). Baseline still accumulating (~5.6 days of 28 required before Phase 2 migration gate). Connector health confirmed via empty-result sweep.
