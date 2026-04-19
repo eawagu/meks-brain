@@ -1,12 +1,12 @@
 ---
-title: Concept Scope and Disambiguation Convention
 type:
   - "config"
+title: Concept Scope and Disambiguation Convention
+created: "2026-04-19T09:45:00Z"
+summary: Brain convention governing how concepts are named, scoped, and disambiguated across entities — 12 rules covering entity-prefix naming (always), group-level prefix ("Moniepoint Group"), generic concept pages, bare wikilink resolution, disambiguation pages for Case B terms (lazy), immediate retroactive audit, no bare generic aliases on entity pages, lint signals A/B/C/D, lint-report structure, per-signal triage tiering, reactive generic page creation, hybrid page handling via content movement with empty-stub preservation.
+updated: "2026-04-19T15:26:40Z"
 cssclasses:
   - "config"
-created: "2026-04-19T11:36:19Z"
-updated: "2026-04-19T11:36:19Z"
-summary: Brain convention governing how concepts are named, scoped, and disambiguated across entities — 11 rules covering entity-prefix naming (always), group-level prefix ("Moniepoint Group"), generic concept pages, bare wikilink resolution, disambiguation pages for Case B terms, immediate retroactive audit, no bare generic aliases on entity pages, lint signals A/B/C/D, lint-report structure, per-signal triage tiering, reactive generic page creation.
 ---
 
 ## Purpose
@@ -85,11 +85,13 @@ This is lazy disambiguation — infrastructure is added only when genuine collis
 The audit:
 1. Enumerate all concept pages and entity pages whose titles describe processes/frameworks/practices.
 2. For each: determine scope from body content (which entity is the owner?).
-3. Identify violations of Rules 1, 2, 7.
-4. Propose renames, alias changes, and scope-correction notes.
+3. Identify violations of Rules 1, 2, 7, 12.
+4. Propose renames, alias changes, content-movement operations, and scope-correction notes.
 5. Execute per-page changes with user approval per batch.
 
-This is a dedicated workstream, not opportunistic compliance. Accepted cost: dozens of pages may need retitling.
+This is a dedicated workstream, not opportunistic compliance. Accepted cost: dozens of pages may need retitling or content restructuring.
+
+Per the 2026-04-19 session decision, the audit uses a **Phase 1 targeted search approach** (fast batch searches for likely Rule 1/2/7/12 violations) with a **scheduled 30-day full-enumeration cleanup pass** as a forcing function regardless of lint implementation status. The cleanup pass is tracked as a config-salience periodic review entry.
 
 ## Rule 7 — No Bare Generic Aliases on Entity-Scoped Pages
 
@@ -117,6 +119,8 @@ Current violation: the `OKR Process` alias on [[Moniepoint OKR Process]] (added 
 
 Signal E (missing generic concept page for bare references) is already handled by existing concept-gap detection; not duplicated here.
 
+Rule 12 violations (hybrid pages) are detected via Signal A — a generic-titled page with entity-scoped body content is the same detection pattern. Resolution is governed by Rule 12 rather than simple rename.
+
 ## Rule 9 — Lint-Report Structure
 
 **Lint-report carries a top-level "Convention Violations" section with separate subsections per signal.**
@@ -126,8 +130,8 @@ Structure:
 ```
 ## N. Convention Violations
 
-### N.1 Signal A — Missing Entity Prefix (Rule 1)
-[table of violating pages]
+### N.1 Signal A — Missing Entity Prefix (Rule 1) / Hybrid Page (Rule 12)
+[table of violating pages, with fix-type hint: rename vs split]
 
 ### N.2 Signal B — Bare Generic Aliases on Entity Pages (Rule 7)
 [table of violating pages]
@@ -147,7 +151,8 @@ Findings are distinct from other lint sections (Stale Claims, Concept Gaps, Alia
 
 | Signal | Tier | Presentation |
 |---|---|---|
-| **A** | Tier 2 | One at a time; heartbeat proposes new title; user confirms or overrides per page |
+| **A (Rule 1 rename)** | Tier 2 | One at a time; heartbeat proposes new title; user confirms or overrides per page |
+| **A (Rule 12 hybrid)** | Tier 2 | One at a time; heartbeat proposes content-movement plan per page; user confirms or overrides |
 | **B** | Tier 1 batch | Table of alias removals; approve all / pull items out |
 | **C** | Tier 2 | One at a time; user confirms which entity scope was meant per flagged wikilink |
 | **D** | Tier 1 batch | Table of Moniepoint → Moniepoint Group renames; approve all / pull items out |
@@ -158,17 +163,44 @@ Findings are distinct from other lint sections (Stale Claims, Concept Gaps, Alia
 
 The existing lint flow already flags bare wikilinks with no resolving page as concept gaps. When a bare generic term accumulates enough references to warrant its own page, the user creates it during concept-gap triage. This keeps the convention additive to existing flows rather than adding new friction.
 
+## Rule 12 — Hybrid Page Handling
+
+**Generic concept pages (Rule 3) MUST contain only generic content. Any entity-scoped content on a generic concept page is a convention violation and MUST be resolved via content movement.**
+
+**Trigger:** A concept page whose title is generic but whose body contains any entity-specific content (references to specific entities as owners/implementers, entity-specific implementations, entity-specific metrics, events, or dates).
+
+**Resolution procedure:**
+
+1. Move entity-scoped content to the corresponding entity-prefixed page. If the entity-prefixed page exists, append the content there. If it does not exist, create it.
+2. If the entity-scoped content is not substantive enough to warrant its own entity-prefixed page, absorb it into the existing entity page for the owner (e.g., [[TeamApt|TeamApt Limited]], [[Moniepoint MFB]]). If no such entity page exists, create one.
+3. After content movement, evaluate the original page:
+   - If legitimate generic content remains (per Rule 3's "generic concept with industry meaning" test), the page stays as a pure generic concept page.
+   - If no legitimate generic content remains, the original page is preserved as an **empty-stub generic page** — title unchanged, body reduced to a pointer listing instantiations (e.g., "See: [[TeamApt X]]"). The page persists to preserve source attribution and bare-wikilink resolution.
+
+**Prohibited:** Leaving a hybrid page as-is is not an acceptable outcome. Every flagged hybrid must be resolved.
+
+**Relationship to Rule 5:** A stub page (Rule 12 output) and a disambiguation page (Rule 5 output) are distinct:
+- Stub pages exist post-hybrid regardless of variant count. Triggered by content movement out of a hybrid.
+- Disambiguation pages emerge when 2+ entity variants exist. Triggered by the appearance of a second entity variant.
+- A stub evolves into a disambiguation page naturally when the second entity variant appears.
+
+**Open issues (to be resolved during audit execution):**
+
+- **Source attribution** — how to annotate content that has moved from a generic page to an entity page. Candidate: entity page section includes "Derived from [[original-page-title]], moved YYYY-MM-DD" line. Decision pending first audit case.
+- **Anchor wikilinks** — how to update incoming wikilinks that used section anchors invalidated by content movement (e.g., `[[ITSM#TeamApt Implementation]]` after the TeamApt section moves to [[TeamApt ITSM]]). Candidate: audit-time search-and-replace per moved section. Decision pending first audit case.
+
 ---
 
 ## Implementation Status
 
 - **Convention created:** 2026-04-19 during lint triage pause (post-Gap B-2, pre-Gap B-3)
-- **Rule 6 retroactive audit:** pending — dedicated workstream required before resuming normal lint triage
+- **Rule 12 added:** 2026-04-19 during audit pause (post-first-batch enumeration, which surfaced the hybrid-page gap in the original 11-rule convention)
+- **Rule 6 retroactive audit:** in progress — Phase 1 targeted search approach; 30-day scheduled full-enumeration cleanup pass pending config-salience periodic review entry
 - **Rules 8/9/10 lint implementation:** pending — heartbeat lint code changes required to emit Convention Violations findings
-- **Known violations awaiting audit:**
+- **Known violations awaiting resolution:**
   - [[Moniepoint OKR Process]] — should be [[Moniepoint Group OKR Process]] per Rule 2
   - [[Moniepoint OKR Process]] — has `OKR Process` alias in violation of Rule 7
-  - Broader audit scope TBD at audit kickoff
+  - Multiple hybrid pages identified in Phase 1 first-batch enumeration (ITSM, Performance Management, OKR Planning, Cybersecurity, Regulatory Compliance, Third Party Processing, Bank Integration, SLA Management, Incident Remediation, Collections-Only Processing, AWS Outposts, Data Centre Colocation, Banking Partnerships, Digital Payment Infrastructure, CEO Gazette, T-Switch, UBO Register, Cloud Cost Optimization, Analyst Games, Resource Allocation, AI-Driven Development, Transaction Switching Platform, CTO Role Scope, Organizational Restructuring, and others) — full list to be compiled during audit execution
 
 ## Decision History
 
@@ -180,10 +212,11 @@ Rule-by-rule decision record:
 - Rule 3 (generic pages exist): user selected always-create over entity-only or hybrid for semantic richness
 - Rule 4 (bare allowed + lint flag): user selected lint-flag middle ground over strict-require or writer-discipline-only
 - Rule 5 (lazy disambiguation): user selected 2+-variants threshold over always-create or leave-orphan
-- Rule 6 (immediate audit): user selected dedicated audit over collision-only or lint-surfaced or opportunistic
+- Rule 6 (immediate audit): user selected dedicated audit over collision-only or lint-surfaced or opportunistic. During audit execution, user approved Phase 1 targeted search + 30-day scheduled full-enumeration cleanup pass over full-audit-now or trust-lint-only, on the structural-fix grounds of not making coverage depend on lint implementation timeline.
 - Rule 7 (no generic aliases on entity pages): user selected forbid after confirming body-link preservation of relationships
 - Rule 8 (four signals): user selected A+B+C+D (excluded E as duplicative of existing concept-gap detection)
 - Rule 9 (top-level section with subsections): user selected top-level with subsections over folding-into-existing or flat
 - Rule 10 (per-signal tiering): user approved A Tier 2 / B Tier 1 / C Tier 2 / D Tier 1
 - Rule 11 (reactive generic page creation): user selected existing concept-gap flow over new proactive lint signal or creation-time enforcement
 - Title: user approved "Concept Scope and Disambiguation Convention" over the initial "Multi-Subsidiary Concept Naming Convention" after scope analysis showed the convention covered scope + disambiguation, not just naming.
+- Rule 12 (hybrid page handling): added 2026-04-19 after Phase 1 audit first-batch enumeration surfaced ~15–20 hybrid pages that the original 11-rule convention did not specify handling for. Decision sequence: Sub-1 forbid (d) leave-as-is → Sub-2 (initial) use 4-quadrant matrix with substantiveness thresholds — superseded by user revision "split as long as any entity content exists; absorb non-substantive content into existing entity page; create entity page if none exists" → Sub-3 (initial) delete original if no generic content remains — **reversed** to preserve as empty-stub generic page per user concern about source preservation → Sub-4 marked source-attribution and anchor-wikilink mechanics as open issues (page-history issue resolved by stub preservation decision) → Rule 5 vs Rule 12 relationship clarified (stub vs disambiguation distinct with natural evolution).
