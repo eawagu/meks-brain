@@ -2,15 +2,16 @@
 type:
   - "entity"
 title: Juliana
-created: 2026-04-11
-summary: "TeamApt's domestic switching system — Card Switch (37% of Moniepoint POS, 16 domestic issuers) and Account Switch (99.89% success rate); feeds TACHA for clearing/settlement; part of Domestic Switching department under Babatunde Okufi."
-updated: "2026-04-13T23:21:47Z"
-cssclasses:
-  - "entity"
 aliases:
   - "Juliana Card Switch"
   - "Juliana Account Switch"
+  - "Juliana Switch"
   - "Consolidated Switch"
+created: 2026-04-11
+summary: "TeamApt's domestic switching system — Card Switch (37% of Moniepoint POS, 16 domestic issuers) and Account Switch (99.89% success rate); feeds TACHA for clearing/settlement; part of Domestic Switching department under Babatunde Okufi."
+updated: "2026-04-19T17:03:04Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Overview
