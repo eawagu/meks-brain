@@ -1,32 +1,14 @@
 ---
-title: Capacity-Based Allocation Model
 type:
   - "concept"
+title: Capacity-Based Allocation Model
+created: "2026-04-17T14:43:58Z"
+summary: [STUB] Renamed to [[Moniepoint Group Capacity-Based Allocation Model]].
+updated: "2026-04-19T15:42:54Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T14:43:58Z"
-updated: "2026-04-17T14:43:58Z"
-summary: Moniepoint proposed POS deployment model — capacity-to-deploy as cap, BE as buffer/priority not quantity driver. Monthly caps based on prior deployment; anti-gaming measures required.
 ---
 
-## Proposal
+This page has been renamed per Rule 1/Rule 2 of the [[Concept Scope and Disambiguation Convention]].
 
-Proposed at the [[Moniepoint 2026 Leadership Retreat UK]] (Day 1) to solve runaway idle inventory in POS deployment:
-
-- **Capacity-to-deploy = the cap**. Monthly caps set based on prior deployment performance.
-- **BE retained for buffers/priority**, not as a quantity driver.
-- **Co-location** to support pickup logistics.
-- **Mandate**: maximize inventory turnover; eliminate idle devices.
-
-## Anti-Gaming
-
-Concern: proxy accounts may inflate deployments and shift risk to nonperforming devices. Response: cross-unit collaboration plus hard caps. Pending meeting: Speaker 8, Speaker 9, DAPO.
-
-## Context
-
-As of April 2026: >200K new devices idle; ~664K idle in DNS overall; 163K repaired MP35 undeployed. Existing model had no mechanism to prevent these idle pools from growing.
-
-## Related
-
-- [[POS Fleet Management]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 POS Terminal Issues Loan Product Shift - Summary]]
+**See:** [[Moniepoint Group Capacity-Based Allocation Model]]
