@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 15:09 WAT skim tick: 3 deltas — MPDTTPI-1428 (Highest → Deployed To Prod, NIBSS DD Auth epic), MPDTTPI-1663 (Medium → Ready for Staging Test, Express Checkout Safe), MPDTTPI-1780 (Medium → Deployed To Prod, Airtel Smart Cash). All no-P1/no-SLA epic-level transitions. Awareness cluster for Monday briefing. last_processed 2026-04-19T14:09:34Z."
-updated: "2026-04-19T14:21:13Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 16:09 WAT skim tick: zero transitions in-window across all 18 projects. No P1/P2 deltas. Stanbic cycle 31 bank-side resolution outside Jira. last_processed 2026-04-19T15:09:34Z."
+updated: "2026-04-19T15:26:07Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T14:09:34Z"
+last_processed: "2026-04-19T15:09:34Z"
 ---
 
 ## Connection
@@ -153,13 +153,12 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 15:09 WAT **skim-level**. ~1h window since 14:09 WAT last_processed. JQL sweep surfaced 3 deltas in MPDTTPI (all epic-level transitions, no P1/P2).
+Tick 2026-04-19 16:09 WAT **skim-level**. ~1h window since 15:09 WAT last_processed. JQL sweep surfaced zero transitions in-window across all 18 projects (no P1/P2 deltas, no status changes, no new filings).
 
-**MPDTTPI (Monnify — Account Collections) — 3 epic-level transitions at 14:59 WAT:**
-- MPDTTPI-1428 "NIBSS <> Moniepoint Account as Direct Debit Authorization Account" → Deployed To Prod (**Highest** priority)
-- MPDTTPI-1663 "Express Checkout - Safe" → Ready for Staging Test (Medium)
-- MPDTTPI-1780 "Airtel Smart Cash" → Deployed To Prod (Medium)
+**Out-of-Jira operational context (no TDSD ticket update):**
+- Stanbic cycle 31 closed bank-side earlier in the day — [[Stanbic Bank ATS — Persistent RC91 Pattern]] already updated out-of-band on prior tick; no TDSD entry needed this tick.
+- Access RC06 first-observation filed earlier today — already captured on prior ticks.
+- FCMB DCIR portal re-failure at 14:59 WAT captured on the email track, not Jira.
+- Ecobank 55m silence-follow-up captured on the email track, not Jira.
 
-None wired to current active RC91/FCMB/Ecobank tracks. MPDTTPI-1428 is a NIBSS Direct Debit Authorization epic — adjacent to [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] subject area but not on the active remediation chain. Layer B score: MPDTTPI-1428 → 2 (Highest priority + status transition), MPDTTPI-1663 → 1, MPDTTPI-1780 → 1.
-
-**Cluster classification:** Single Awareness item for briefing-2026-04-20 — `MPDTTPI (Monnify — Account Collections) — 3 epic-level transitions (1 Highest to Deployed To Prod, 1 Medium to Staging, 1 Medium to Deployed To Prod). Sample IDs: MPDTTPI-1428 (NIBSS DD Auth), MPDTTPI-1663, MPDTTPI-1780.` No Immediate-tier dispatch. No P1/P2 escalations in-window; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate). Zero cap starvation (3 candidates << 20 cap).
+Zero cap-starvation (0 candidates, 20 cap). Baseline still accumulating (~5.5 days of 28 required before Phase 2 migration gate). Connector health confirmed via empty-result sweep.
