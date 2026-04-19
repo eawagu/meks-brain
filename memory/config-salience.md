@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-19T09:22:53Z"
+updated: 2026-04-19
 cssclasses:
   - "config"
 ---
@@ -165,3 +165,5 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 - [2026-04-17, B8, acted, pattern_significance | factors: source=email, keyword=duty handover, pattern_significance, accountability_alignment=low]
 - [2026-04-19, B1, acted, pattern_significance]
 - [2026-04-19, B2, acted, accountability_alignment]
+- [2026-04-19, stanbic-and-access-apr19-overnight-maintenance-windows-framed-as-rc91-regime-change-wave, missed, pattern_significance]
+- [2026-04-19, step-3b-lint-triage-skipped-throughout-session-client-did-not-check-lint-report-after-briefing-triage-complete-only-surfaced-after-user-prompt, missed, accountability_alignment]
