@@ -4,9 +4,11 @@ type:
 title: Opay
 created: 2026-04-11
 summary: "Nigerian fintech competitor — holds more cards than any other entity in Nigeria; #2 in acquiring behind Moniepoint. At 2026 UK retreat Day 1 named as primary demarketer of Moniepoint POS base via 3G-illegal claims and orchestrated swap campaigns."
-updated: "2026-04-17T14:44:23Z"
+updated: "2026-04-19T16:46:39Z"
 cssclasses:
   - "entity"
+aliases:
+  - "OPay"
 ---
 
 Nigerian fintech. Holds more cards than any other entity in Nigeria; #2 in acquiring behind [[Moniepoint]]. Also operates a POS terminal network — OPay POS v4.1.0 observed at [[Mitch & Good Supermarket]] (Ikoyi, Lagos) accepting [[Moniepoint]] Verve card payments. Also used as "Cel Opay" payment processor at [[Celio Nigeria]] ([[The Palms Mall]], Lekki) — NGN 1,132,800 clothing purchase processed 10 Apr 2026.
