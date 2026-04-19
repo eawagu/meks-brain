@@ -11,7 +11,7 @@ aliases:
   - "Awagu, Emeka Obiorah"
 created: "2026-04-11T15:11:23Z"
 summary: "Mek's legal identity — Nigerian national, founder/majority owner of Solhigson Ltd, frequent international traveller, fully vaccinated against COVID-19 and Yellow Fever."
-updated: "2026-04-18T13:40:24Z"
+updated: "2026-04-19T17:33:05Z"
 cssclasses:
   - "entity"
 ---
@@ -25,6 +25,11 @@ cssclasses:
 ## Addresses
 
 - **UK address:** Referenced in travel documents (Virgin Atlantic Lagos–London round-trip)
+
+## Family
+
+- **[[Awagu Osita Uchenna]]** — brother. Co-director and minority shareholder (1% / 20,000 shares) of [[Solhigson Ltd]]. Shares Mek's Lagos residential address at 11 Ojomu Road, Ikoyi.
+- **[[Toboy Awagu]]** (Tobe) — brother. Resides in London at 49 Dockside House, SW6 2FN. See [[note_2026-04-19T16-46-13-496Z]].
 
 ## Corporate
 
@@ -48,4 +53,4 @@ cssclasses:
 
 ## Sources
 
-[[COVID-19 Vaccination Card — Emeka Awagu]], [[International Vaccination Certificate — Emeka Awagu]], [[Passport Visa Pages — Emeka Awagu]], [[SOLHIGSON LTD — CAC Application]], [[SOLHIGSON LTD — CAC Certificate]], [[SOLHIGSON LTD — Application for Registration]], [[SOLHIGSON LTD — Memorandum and Articles of Association]], [[Solhigson Ltd — Memart (Scanned)]], [[Solhigson Ltd — Stamp Duty Receipt]], [[Long Image 12-04-2026 18.08.58]], [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]], [[Elfrique Solutions v Optisoft Technology — Judgment (31 Mar 2026)]]
+[[COVID-19 Vaccination Card — Emeka Awagu]], [[International Vaccination Certificate — Emeka Awagu]], [[Passport Visa Pages — Emeka Awagu]], [[SOLHIGSON LTD — CAC Application]], [[SOLHIGSON LTD — CAC Certificate]], [[SOLHIGSON LTD — Application for Registration]], [[SOLHIGSON LTD — Memorandum and Articles of Association]], [[Solhigson Ltd — Memart (Scanned)]], [[Solhigson Ltd — Stamp Duty Receipt]], [[Long Image 12-04-2026 18.08.58]], [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]], [[Elfrique Solutions v Optisoft Technology — Judgment (31 Mar 2026)]], [[note_2026-04-19T16-46-13-496Z]]
