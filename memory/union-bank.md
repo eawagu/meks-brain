@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending). RC91 cycle 4 filed 17:23 WAT Apr 16, Victor Iyama responded 'check now' 17:52 WAT — likely resolved by NIBSS PTSA restoration. Four RC91 cycles in 5 days (Apr 12, 15, 16×2). MPGS settlement bank (ICA 34150)."
-updated: "2026-04-16T17:14:46Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending). ATS RC91: five cycles now in 8 days (Apr 12, 15, 16×2, 19). Cycle 5 Apr 19 overnight — first-time participant on active RC91 wave (00:00–04:50 WAT window, 2h10m duration). MPGS settlement bank (ICA 34150)."
+updated: "2026-04-19T07:34:20Z"
 cssclasses:
   - "entity"
 ---
@@ -18,6 +18,10 @@ cssclasses:
 **2026-04-16:** Access granted for the [[Union Bank]] [[Direct Debit]] project following Emanuel's feedback on Jira. Team expects to make progress on mandate creation and transaction simulation today. [[Abiodun Famoye]] raised a blocker related to Cosmos, which he plans to engage with after the D2B standup call to resolve. Source: [[Direct to Bank Daily Stand Up 2026-04-16]].
 
 ## ATS RC91
+
+### Cycle 5 — Apr 19, 2026 (02:40–04:50 WAT, 2h10m, bank-resolved)
+
+**2026-04-19 overnight:** First-time participant on the active RC91 multi-bank wave. Cycle filed during overnight-delegation window (23:00–06:00 WAT Immediate-dispatch suppression). Start 02:40 WAT, resolved ~04:50 WAT, duration 2h10m. Part of the 5-bank wave Apr 19 (Stanbic cycle 31 7h3m, Access cycle 8 7h50m, NIBSS PTSA 15m, Fidelity 14m, Union 2h10m). Union Bank's 2h10m is intermediate between the Stanbic/Access 7h+ regime-change cycles and the 14m/15m fast resolutions on Fidelity/NIBSS PTSA — suggests Union's routing path sits mid-spectrum on the common-mode driver. Dedicated situation page: [[Union Bank — RC91 P1 Apr 19]].
 
 ### Cycle 4 — Apr 16, 2026 (17:23 WAT, likely resolved)
 
@@ -48,7 +52,9 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 
 ## Related
 - [[Stanbic Bank ATS — Persistent RC91 Pattern]]
+- [[Access Bank — Multi-Track Failures]]
 - [[RC91 Multi-Bank Failure Pattern]]
+- [[Union Bank — RC91 P1 Apr 19]]
 - [[ATS]]
 - [[NIBSS]]
 - [[Monnify]]
