@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD service_desk + 17 software) with layered filter (Layer A channel / Layer B heuristic / Layer C LLM with cap=20) and Phase 2 anomaly-triggered migration gate. This tick: TDSD-6619 (Ecobank NUS RC91, 20:17 WAT) + TDSD-6620 (Access RC91 cycle 7, 20:20 WAT resolved 20:25 WAT) — two in-scope Jira deltas, both part of the evening-wave concurrence pattern."
-updated: "2026-04-18T21:23:50Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD + 17 software). Overnight Apr 19: TDSD-6624 (Stanbic cycle 31, 07:18 WAT) + TDSD-6625 (Access cycle 8, 07:21 WAT) + TDSD-6626 (NIBSS DR Exercise) filed in quick succession. last_processed 2026-04-19T06:11:27Z."
+updated: "2026-04-19T07:40:12Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T21:09:27Z"
+last_processed: "2026-04-19T06:11:27Z"
 ---
 
 ## Connection
@@ -91,8 +91,6 @@ Tickets beyond the cap grouped by `(project, dominant_signal_type)` — one awar
 
 Format: `[Project display name] — N ticket updates (K1 <signal-type-1>, K2 <signal-type-2>, ...). Sample IDs: <first-3-keys>.`
 
-Example: `Monnify - Disbursement — 14 ticket updates (8 status transitions, 4 assignee changes, 2 priority bumps). Sample IDs: MBYDB-4421, MBYDB-4422, MBYDB-4430.`
-
 ### Archetype signal reference
 
 **service_desk (TDSD) — TDSD-specific patterns preserved from pre-expansion directives:**
@@ -113,12 +111,13 @@ Example: `Monnify - Disbursement — 14 ticket updates (8 status transitions, 4 
 
 ### Monitored ticket patterns (operational context, TDSD-scoped)
 
-- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB, Ecobank routes. Track cycle count per bank. TDSD-6619 (Ecobank NUS nodes, Apr 18 20:17 WAT, Olamide Ajibulu) and TDSD-6620 (Access RC91 cycle 7, Apr 18 20:20 WAT resolved 20:25 WAT) as latest entries — see [[Ecobank — RC91 on NUS Nodes]] and [[Access Bank — Multi-Track Failures]]. TDSD-6618 (Stanbic cycle 30) resolved 19:37 WAT prior tick.
+- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB, Ecobank routes. Track cycle count per bank. **TDSD-6624 (Stanbic cycle 31, Apr 19 07:18 WAT, 7h3m UNPRECEDENTED) and TDSD-6625 (Access cycle 8, Apr 19 07:21 WAT, 7h50m UNPRECEDENTED) as latest entries — overnight wave regime change.** See [[Stanbic Bank ATS — Persistent RC91 Pattern]] and [[Access Bank — Multi-Track Failures]]. TDSD-6619 (Ecobank NUS-node RC91) and TDSD-6620 (Access RC91 cycle 7) resolved prior tick.
 - **RC05 cycles:** First observed on Keystone Apr 17 — distinct card-layer failure mode from RC91. Track for spread.
 - **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval pending and window within 4 hours.
-- **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank. TDSD-6615 (Keystone settlement pending requery, Apr 18 15:41 WAT, Medium priority, assigned Daniel Fetuga) as current active entry — downstream of Keystone RC05 Apr 17 P1.
+- **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank. TDSD-6615 (Keystone settlement pending requery) as prior active entry.
 - **Credential remediation:** DCIR/ACS/DD vulnerability chain — TDSD-6439, TDSD-6477, TDSD-6479 family. Track completion status.
-- **Monnify internal faults:** Kafka lag, disbursement queue, switch latency — TDSD-6614 (Apr 18 15:09–15:12 WAT, Kafka monnify database 2h lag, cloud-engineer fast-resolve) and TDSD-6617 (Apr 18 18:06 WAT, PENDING DISBURSEMENTS stuck IN PROGRESS, Medium, INITIAL REVIEW, assigned Emmanuel Eke) as current active entries — see [[Monnify Disbursements — Stuck IN PROGRESS Apr 17+]] situation.
+- **Monnify internal faults:** TDSD-6617 (PENDING DISBURSEMENTS stuck IN PROGRESS, Medium, INITIAL REVIEW, assigned Emmanuel Eke) open — see [[Monnify Disbursements — Stuck IN PROGRESS Apr 17+]] situation.
+- **NIBSS DR Exercise correlation (new Apr 19):** TDSD-6626 (NIBSS DR Exercise) overnight Apr 19 overlaps the 5-bank RC91 wave onset window. Correlation check recommended — DR-exercise routing failover is a plausible common-mode trigger for same-minute multi-bank onset + extended bank-side latency signature.
 
 Equivalent cross-project patterns for the 17 software projects will accumulate via data as baseline stabilizes.
 
@@ -148,16 +147,16 @@ When all three gate conditions verified → propose Phase 2 migration design wit
 
 ## Connector Health
 
-Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion — `searchJiraIssuesUsingJql` operational, no regression. RCA carry-forward for [[Nicolaas Taljaard]] remains open — see briefing-2026-04-18.
+Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraIssuesUsingJql` operational, no regression.
 
 ## Notes
 
-Tick 2026-04-18 22:09 WAT window (20:09 WAT → 22:09 WAT, Skim level — Jira per-source delta-check fired full processing on hit): **Two in-scope Jira deltas — TDSD-6619 (Ecobank NUS RC91) and TDSD-6620 (Access RC91 cycle 7).**
+Tick 2026-04-19 07:11 WAT briefing-tick window (22:09 WAT Apr 18 → 07:11 WAT Apr 19, Full work level per briefing-tick override): **Three in-scope Jira deltas tied to the overnight RC91 wave, plus a DR-exercise correlation candidate.**
 
-1. **TDSD-6619 — Ecobank NUS-node RC91.** Filed 2026-04-18 20:17 WAT by [[Olamide Ajibulu]], with a 20:32 WAT comment tying the ticket to the email thread (16:09 WAT [[Innocent Nwaokorie]] → 16:36 WAT Olamide follow-up → 20:17 WAT Jira filing → 20:32 WAT Jira comment). Third escalation step in the attribution-standoff chain. [[Ecobank — RC91 on NUS Nodes]] updated with the cascade framing. Factors: urgency 0.65 · impact_scope 0.6 · cto_specificity 0.75 · pattern_significance 0.9 · accountability_alignment 0.9. Decision item candidate for briefing-2026-04-19.
+1. **TDSD-6624 — Stanbic cycle 31 RC91.** Filed 2026-04-19 07:18 WAT. 7h3m bank-side resolution (00:00→07:03 WAT Apr 19) — UNPRECEDENTED in the Stanbic pattern. Regime-change signal. [[Stanbic Bank ATS — Persistent RC91 Pattern]] updated.
+2. **TDSD-6625 — Access cycle 8 RC91.** Filed 2026-04-19 07:21 WAT. 7h50m bank-side resolution (00:00→07:50 WAT Apr 19) — UNPRECEDENTED in the Access pattern. Same-minute onset with Stanbic cycle 31 strengthens common-mode hypothesis. [[Access Bank — Multi-Track Failures]] updated.
+3. **TDSD-6626 — NIBSS DR Exercise.** Filed overnight Apr 19, details not exhaustively enumerated at tick time. Correlation candidate for the 5-bank wave: DR-exercise routing failover is a plausible common-mode trigger for same-minute multi-bank onset + extended bank-side latency signature. RCA request recommended as part of briefing-2026-04-19 B1 action.
 
-2. **TDSD-6620 — Access RC91 cycle 7.** Filed 2026-04-18 20:20 WAT by [[Afeez Kazeem]] (Medium, [System] Incident), resolved 20:25 WAT with comment "This was escalated to the bank and transaction recovered in 3 minute". 3-minute brief bank-auto-recovery (20:15–20:18 WAT). [[Access Bank — Multi-Track Failures]] updated with cycle 7 delta. Part of evening-wave concurrence (Stanbic cycle 30 + UBA brief + Access cycle 7 within ~100 min). Awareness item for briefing-2026-04-19.
+Overflow cluster observation: TCDD (AptPay Consolidated Direct Debit) showed an ~8-ticket churn cluster in the overnight window (detail not exhaustively verified at tick time). Surfaced as awareness-level in briefing-2026-04-19. Layer B cap starvation: 0. No other Layer B-ranked in-scope tickets crossed Layer C threshold this window.
 
-TDSD-6618 (Stanbic cycle 30) resolved 19:37 WAT prior tick — no regression in-window. TDSD-6617 (Monnify PENDING DISBURSEMENTS) — no new activity in-window, still INITIAL REVIEW assigned [[Emmanuel Eke]]. TDSD-6615 (Keystone settlement requery) — no new activity in-window. Out-of-scope activity (IN, MNPI, LOOM, IN-*) filtered at Layer A. Layer B cap starvation: 0. No other Layer B-ranked in-scope tickets crossed Layer C threshold this window. Routine TDSD churn (non-P1/P2 without priority/status transitions of interest) processed at overflow-cluster level without surfacing.
-
-Calibration-hold precedent (briefing-2026-04-17 B1 / briefing-2026-04-18 B6) suppresses Immediate re-dispatch for both Ecobank RC91 persistence and Access cycle 7. Both accumulate for briefing-2026-04-19.
+**Calibration hold precedent BROKEN this tick** for the overnight-wave items — the briefing-2026-04-17 B1 / briefing-2026-04-18 B6 hold was anchored on fast-cycle RC91 patterns (cycles resolved bank-side in minutes). The Apr 19 overnight wave's 7h+ resolution across Stanbic + Access is not that pattern. Overnight wave upgraded to Decision tier for briefing-2026-04-19.

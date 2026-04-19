@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-18T21:09:27Z. Zero calendar deltas at 22:09 WAT tick — 4 consecutive quiet ticks."
-updated: "2026-04-18T21:24:01Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T06:11:27Z. Zero calendar deltas overnight — 5 consecutive quiet ticks. Forward view: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel; Lattice Review window closes Apr 27."
+updated: "2026-04-19T07:40:13Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-18T21:09:27Z"
+last_processed: "2026-04-19T06:11:27Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-18 22:09 WAT window (20:09 WAT → 22:09 WAT, Skim level, no upgrade for Calendar): **Zero calendar deltas fast-path check held — 4 consecutive quiet ticks.** No new invites in-window, no RSVP changes, no cancellations. Saturday Retreat Day 5 cadence holding into evening. Forward view unchanged: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel (Bhuvnesh Bansal, pending calendar confirmation); Lattice Review window closes Apr 27 (9 days remaining). Empty-result fast path held.
+Tick 2026-04-19 07:11 WAT briefing-tick window (22:09 WAT Apr 18 → 07:11 WAT Apr 19, Full work level per briefing-tick override but no delta): **Zero calendar deltas fast-path check held — 5 consecutive quiet ticks.** No new invites in-window, no RSVP changes, no cancellations. Sunday cadence light as expected. Forward view unchanged: Monday Apr 20 GoSubscribe demo; Wed Apr 22 HoE Round 2 panel (Bhuvnesh Bansal, pending calendar confirmation); Lattice Review window closes Apr 27 (8 days remaining). Today (Sun Apr 19) has no high-priority external meetings on record — opens space for overnight-wave RCA follow-up actions. Empty-result fast path held.
