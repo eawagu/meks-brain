@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 16:09 WAT skim tick: zero transitions in-window across all 18 projects. No P1/P2 deltas. Stanbic cycle 31 bank-side resolution outside Jira. last_processed 2026-04-19T15:09:34Z."
-updated: "2026-04-19T17:21:33Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 20:09 WAT skim tick: zero substantive transitions across all 18 projects. Stanbic cycle 31 filed on email+Slack only — no TDSD raised (contrasts with cycle 30 triple-track). last_processed 2026-04-19T19:09:34Z."
+updated: "2026-04-19T19:26:46Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T17:09:34Z"
+last_processed: "2026-04-19T19:09:34Z"
 ---
 
 ## Connection
@@ -153,13 +153,12 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 18:09 WAT **skim-level**. ~1h window since 17:09 WAT last_processed. JQL sweep surfaced one low-signal transition in-window across 18 projects.
+Tick 2026-04-19 20:09 WAT **skim-level**. ~2h window since 18:09 WAT last_processed. JQL sweep across 18 projects.
 
-**In-window Jira delta (Awareness-tier, low signal):**
-- **TDSD-6628 → Done.** Documentation-class task; no operational dependency, no P1/P2 connection, no situation-page linkage. Layer B score: 0 (no P1/P2, no blocked transition, no assignee churn, not in active situation body). Not surfaced to Layer C. No briefing-2026-04-20 accumulation.
+**In-window Jira delta:** Zero substantive transitions across all 18 projects. No P1/P2 status changes, no assignee churn, no priority bumps, no SLA breaches.
 
 **Out-of-Jira operational context (no TDSD ticket update):**
-- Ecobank sample-delivery cycle advanced this tick — [[Afeez Kazeem]] replied to [[Adewuyi Mayowa]] at 17:24 WAT with RC91 samples; handled on email track only. No TDSD entry created — Ecobank pattern on NUS nodes is not TDSD-tracked (counterparty-owned route).
+- Stanbic cycle 31 opened this tick via email thread 19da2fa4960db78b (19:25 WAT filing by [[Afeez Kazeem]], bank engaged 19:31 → 19:40 WAT). Filed on email+Slack only; no TDSD ticket raised. Pattern note: bank-engaged fast-cycles often resolve before Jira escalation is needed — Jira raise is a secondary escalation step, not a first-pass filing. Cycle 30 (Apr 18) had TDSD-6618 filed at cycle-open + active 64m; cycle 31 pattern suggests TeamApt is holding Jira escalation pending bank's reconfirm-status response.
 - No other operational signals translated to Jira activity this tick.
 
-Zero cap-starvation (1 candidate suppressed at Layer B, 20 cap). Baseline still accumulating (~5.7 days of 28 required before Phase 2 migration gate). Connector health confirmed via sweep.
+Zero cap-starvation. Baseline still accumulating (~5.8 days of 28 required before Phase 2 migration gate). Connector health confirmed via sweep.
