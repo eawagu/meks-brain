@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope (TDSD + 17 software). 12:17 WAT skim tick: 2 new TDSD updates — TDSD-6627 (NIBSS Disbursements, Medium, Awareness); TDSD-6579 (Axios auth incident, Medium, Awareness). last_processed 2026-04-19T11:17:27Z."
-updated: "2026-04-19T11:20:32Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 13:09 WAT skim tick: 15 ADD + 2 ATPP deltas — Direct-to-Bank Solutions production-phase task cluster (ADD-3413/3424/3432-3440/4556 status transitions) + ATPP-1591 Task Done + ATPP-1609 Bug High Done. All Medium/no-SLA/no-P1. Overflow Awareness cluster for Monday briefing. last_processed 2026-04-19T12:09:29Z."
+updated: "2026-04-19T12:18:03Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T11:17:27Z"
+last_processed: "2026-04-19T12:09:29Z"
 ---
 
 ## Connection
@@ -153,9 +153,21 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 12:17 WAT **skim-level**. 2h06m window since 10:11 WAT last_processed. JQL sweep of TDSD surfaced 2 updates:
+Tick 2026-04-19 13:09 WAT **skim-level**. ~52m window since 12:17 WAT last_processed. JQL sweep surfaced 15 ADD deltas + 2 ATPP deltas + 0 TDSD deltas + 0 other-project deltas.
 
-1. **TDSD-6627 — NIBSS Disbursements signal** — Medium, [System] Incident. **New in-window.** NIBSS-layer disbursement pattern. Semantic-searched against brain: no existing situation match (distinct from Monnify-internal [[Monnify Disbursements — Stuck IN PROGRESS Apr 17+]] which is internal-job fault, not NIBSS route). No CTO action at this tier (Medium, no SLA-breach, no P1/P2 escalation). **Awareness-tier, accumulates to next briefing.** Factors: new-pattern + NIBSS-keyword + Medium-priority + no-situation-match + weekend-cadence.
-2. **TDSD-6579 — Axios auth incident (re-surface)** — Medium, [System] Incident. Semantic-search returned weak correspondence to prior auth incidents; not a tracked situation. **Awareness-tier, accumulates to next briefing.** Factors: Medium-priority + auth-keyword + no-situation-match + weekend-cadence.
+**ADD (AptPay Direct Debit) — 15 production-phase task cluster:**
+- ADD-3433, ADD-3434, ADD-3435, ADD-3436, ADD-3437, ADD-3438, ADD-3439, ADD-3440 → Todo (new production-phase sub-tasks created in-window for: settlement account creation, live transaction simulation, settlement test, report generation, dispute management flow sim, DD portal user creation, training, go-live)
+- ADD-3424, ADD-3432 → Done (API integration + bank server JAR deployment)
+- ADD-3387 → In Progress (production sign-off/approval)
+- ADD-3413 → In Progress (SLA / legal docs)
+- ADD-4556 → Done (settlement account sub-task)
 
-Zero Layer B cap starvation this window (2 candidates << 20 cap). No Immediate-tier dispatch. Connector health: operational. 17 software projects — zero new tickets in-window; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate).
+Profile: a single-bank Direct-to-Bank production deployment progressing through go-live checklist. Not presently wired to a tracked situation; may correlate with UBA DCIR 2FA weekend deployment noted in [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]]. All Medium priority, no SLA, no blocked/escalated transitions, no assignee churn — Layer B score ≤2 for every ticket. Zero cap starvation (17 candidates << 20 cap).
+
+**ATPP — 2 deltas:**
+- ATPP-1591 "Enhancement - Backend - Enforcement of File Approval and Download Restrictions" → Done (Medium task)
+- ATPP-1609 "Permission issue involving Teamapt User role" → Done (High priority Bug)
+
+Both resolved — no open investigation carry-forward.
+
+**Cluster classification:** Single Awareness item for briefing-2026-04-20 — `Direct to Bank Solutions + AptPay Direct Debit — 15 production-phase task transitions on bank deployment checklist; 2 ATPP tickets resolved. Sample IDs: ADD-3440, ADD-3387, ATPP-1609.` No Immediate-tier dispatch. Connector health: operational. 17 software projects — zero new tickets in-window outside ADD/ATPP; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate).

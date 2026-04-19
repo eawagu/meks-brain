@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T11:17:27Z. 12:17 WAT skim tick: zero new Tier 1 deltas, zero DMs to user, zero keyword hits. First fully-quiet Slack tick since overnight RC91 wave closed."
-updated: "2026-04-19T11:20:31Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T12:09:29Z. 13:09 WAT skim tick: zero new Tier 1 deltas across all 5 channels, zero DMs. Second consecutive fully-quiet Slack tick since overnight RC91 wave closed this morning."
+updated: "2026-04-19T12:18:03Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T11:17:27Z"
+last_processed: "2026-04-19T12:09:29Z"
 ---
 
 ## Connection
@@ -43,7 +43,7 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-19 12:17 WAT **skim-level**. 2h06m window since 10:11 WAT last_processed.
+Tick 2026-04-19 13:09 WAT **skim-level**. ~52m window since 12:17 WAT last_processed.
 
 Tier 1 channel reads — zero new parent messages across all 5 channels (#teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt).
 
@@ -51,4 +51,4 @@ DM sweep — zero results.
 
 Keyword sweep Tier 3 skipped at skim (channel-read authoritative).
 
-First fully-quiet Slack tick since overnight RC91 wave closed this morning. Sunday mid-day cadence reasserting. No Immediate-tier dispatch; nothing accumulates to next briefing from Slack this tick.
+Second consecutive fully-quiet Slack tick since overnight RC91 wave closed this morning. Noteworthy that FCMB RC91 day-3 and DCIR portal signals this tick are email-only — Slack has not re-filed the FCMB pattern, suggesting the support team is handling FCMB via the email track exclusively today. Sunday mid-day cadence reasserting on Slack. No Immediate-tier dispatch; nothing accumulates to next briefing from Slack this tick.
