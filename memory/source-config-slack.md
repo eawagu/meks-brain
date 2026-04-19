@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T06:11:27Z. Overnight window 22:09 WAT Apr 18 → 07:11 WAT Apr 19 produced the largest concurrent RC91 wave yet observed — Stanbic cycle 31 (7h3m, UNPRECEDENTED), Access cycle 8 (7h50m, UNPRECEDENTED), NIBSS PTSA (15m), Fidelity (14m), Union Bank (2h10m, first-time wave participant)."
-updated: "2026-04-19T07:40:12Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T09:11:37Z. Post-briefing skim tick observed one new Tier 1 delta: Access RC06 fast-cycle closure notice (18m, bank-resolved) — first RC06 on Access, card-layer failure distinct from RC91."
+updated: "2026-04-19T09:23:27Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T06:11:27Z"
+last_processed: "2026-04-19T09:11:37Z"
 ---
 
 ## Connection
@@ -43,16 +43,12 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-19 07:11 WAT briefing-tick window (22:09 WAT Apr 18 → 07:11 WAT Apr 19 — includes the overnight-delegation gap from 23:00 Apr 18 → 06:00 Apr 19, Full work level per briefing-tick override): **Five Tier 1 RC91 P1 filings across the overnight window — the largest concurrent wave observed in the watch period.**
+Tick 2026-04-19 10:11 WAT **skim-level** (post-briefing Sunday; overnight wave triaged by user at 08:50 WAT). Fast-path Tier 1 channel reads since 07:11 WAT last_processed:
 
-1. **Stanbic cycle 31** (00:00 WAT onset; Slack filing timestamp not confirmed at tick time). 7h3m duration — UNPRECEDENTED bank-side resolution latency. TDSD-6624 filed 07:18 WAT Apr 19. [[Stanbic Bank ATS — Persistent RC91 Pattern]] updated with cycle 31 delta.
-2. **Access cycle 8** (00:00 WAT onset; Slack filing timestamp not confirmed at tick time). 7h50m duration — UNPRECEDENTED. TDSD-6625 filed 07:21 WAT Apr 19. [[Access Bank — Multi-Track Failures]] updated with cycle 8 delta.
-3. **NIBSS PTSA RC91** (01:25–01:40 WAT, 15m fast-resolved). New situation page [[NIBSS PTSA — RC91 Apr 19]] created — prior Apr 17 NIBSS PTSA situation had been retired.
-4. **Fidelity Bank RC91 cycle 5** (01:50–02:04 WAT, 14m bank-resolved). [[Fidelity Bank ATS — RC91 Failure Ongoing]] updated; status change resolving → developing. Re-surface breaks ~3.5-day RC91 quiet window.
-5. **Union Bank RC91** (02:40–04:50 WAT, 2h10m bank-resolved). New situation page [[Union Bank — RC91 P1 Apr 19]] — first-time participant on active RC91 multi-bank wave; fifth Union Bank cycle in 8 days.
+1. **#teamapt-tech-operations** — Daniel Armstrong filed P1 closure notice ~09:50 WAT (09:50:52 BST timestamp). **Access RC06**, Start 09:27 WAT, End 09:45 WAT, 18-minute bank-resolved fast-cycle, identified cause bank-side. This is a **new RC06 observation on Access** — card-layer failure mode distinct from RC91 (acquirer-layer). [[Access Bank — Multi-Track Failures]] updated with new track (9) and 2026-04-19 10:11 WAT delta.
+2. #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt — zero new messages since 07:11 WAT last_processed.
+3. DM sweep via `slack_search_public_and_private query="to:<@U080PEXEZ0E> after:2026-04-19"` — zero results. Consistent with Sunday morning cadence.
 
-**Stanbic + Access same-minute onset at 00:00 WAT** is the new structural signal — prior Stanbic and Access cycles had independent onset timing; concurrent onset + 7h+ resolution across both tracks is a regime-change signature pointing to upstream common-mode cause (candidates: NIBSS-side DR exercise TDSD-6626, Moniepoint routing layer, CoralPay intermediary). Three shorter overnight cycles (NIBSS PTSA 15m, Fidelity 14m, Union 2h10m) resolved on typical timescales — differentiated routing-path exposure hypothesis.
+**No Immediate-tier dispatch.** The RC06 incident carried P1 keyword but was already bank-resolved 2h14m before tick execution (09:45 WAT → 10:11 WAT = 26m; filed at 09:50 WAT as closure). Resolved-already + 18m duration + user active & triaged broader wave 90m prior → accumulates to next briefing as Awareness.
 
-**Overnight-delegation calibration hold does NOT apply to this window's briefing framing** — the overnight-delegation rule suppresses Immediate dispatch during 23:00–06:00 WAT, but items observed post-06:00 WAT still feed briefing-tier assessment. The 7h+ resolution-latency regime change upgrades these items from awareness-tier to Decision tier (breaking the briefing-2026-04-17 B1 / briefing-2026-04-18 B6 calibration-hold precedent, which was anchored on fast-cycle RC91 patterns — the overnight wave is not that pattern).
-
-No DMs to <@U080PEXEZ0E> in-window. Keyword sweep (Tier 3) via `slack_search_public_and_private` — channel-read remained authoritative path. Parent-message structural guard held — all 5 P1 filings surfaced via step 1 channel enumeration.
+Parent-message structural guard held (Wema-miss guard intact). Keyword sweep Tier 3 skipped at skim — channel-read authoritative and the RC06 was caught via Tier 1.
