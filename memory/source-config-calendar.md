@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T15:09:34Z. 16:09 WAT skim tick: 0 deltas in-window. Monday Apr 20 forward view intact; 16:00 WAT ATPP/Tech-Support conflict still unresolved."
-updated: "2026-04-19T15:26:22Z"
+updated: "2026-04-19T16:21:09Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T15:09:34Z"
+last_processed: "2026-04-19T16:09:34Z"
 ---
 
 ## Connection
@@ -28,7 +28,7 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-19 16:09 WAT **skim-level**. ~1h window since 15:09 WAT last_processed.
+Tick 2026-04-19 17:09 WAT **skim-level**. ~1h window since 16:09 WAT last_processed.
 
 Zero deltas in-window. No RSVP changes, no cancellations, no new same-day/next-day invites, no reschedules. Consistent with Sunday cadence.
 
