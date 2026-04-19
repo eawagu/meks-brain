@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T09:11:37Z. Post-briefing skim tick observed one new Tier 1 delta: Access RC06 fast-cycle closure notice (18m, bank-resolved) — first RC06 on Access, card-layer failure distinct from RC91."
-updated: "2026-04-19T09:23:27Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T11:17:27Z. 12:17 WAT skim tick: zero new Tier 1 deltas, zero DMs to user, zero keyword hits. First fully-quiet Slack tick since overnight RC91 wave closed."
+updated: "2026-04-19T11:20:31Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T09:11:37Z"
+last_processed: "2026-04-19T11:17:27Z"
 ---
 
 ## Connection
@@ -43,12 +43,12 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-19 10:11 WAT **skim-level** (post-briefing Sunday; overnight wave triaged by user at 08:50 WAT). Fast-path Tier 1 channel reads since 07:11 WAT last_processed:
+Tick 2026-04-19 12:17 WAT **skim-level**. 2h06m window since 10:11 WAT last_processed.
 
-1. **#teamapt-tech-operations** — Daniel Armstrong filed P1 closure notice ~09:50 WAT (09:50:52 BST timestamp). **Access RC06**, Start 09:27 WAT, End 09:45 WAT, 18-minute bank-resolved fast-cycle, identified cause bank-side. This is a **new RC06 observation on Access** — card-layer failure mode distinct from RC91 (acquirer-layer). [[Access Bank — Multi-Track Failures]] updated with new track (9) and 2026-04-19 10:11 WAT delta.
-2. #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt — zero new messages since 07:11 WAT last_processed.
-3. DM sweep via `slack_search_public_and_private query="to:<@U080PEXEZ0E> after:2026-04-19"` — zero results. Consistent with Sunday morning cadence.
+Tier 1 channel reads — zero new parent messages across all 5 channels (#teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt).
 
-**No Immediate-tier dispatch.** The RC06 incident carried P1 keyword but was already bank-resolved 2h14m before tick execution (09:45 WAT → 10:11 WAT = 26m; filed at 09:50 WAT as closure). Resolved-already + 18m duration + user active & triaged broader wave 90m prior → accumulates to next briefing as Awareness.
+DM sweep — zero results.
 
-Parent-message structural guard held (Wema-miss guard intact). Keyword sweep Tier 3 skipped at skim — channel-read authoritative and the RC06 was caught via Tier 1.
+Keyword sweep Tier 3 skipped at skim (channel-read authoritative).
+
+First fully-quiet Slack tick since overnight RC91 wave closed this morning. Sunday mid-day cadence reasserting. No Immediate-tier dispatch; nothing accumulates to next briefing from Slack this tick.
