@@ -1,14 +1,24 @@
 ---
-title: AI-Driven Development
 type:
   - "concept"
+title: AI-Driven Development
 created: 2026-04-11
-updated: 2026-04-11
+summary: Industry practice of using AI tools in product development workflow — spec-to-artifact generation, code generation, automated review — emerging pattern 2024-2026.
+updated: "2026-04-19T15:46:17Z"
 cssclasses:
   - "concept"
-summary: Mandated use of AI tools (Claude) in product development workflow at TeamApt — change specs feeding into AI to generate Jira tasks, epics, and stories.
 ---
 
-Project Phoenix mandates adoption of AI-driven workflows where detailed "change specs" (similar to BRDs/FRDs) feed into Claude AI to generate implementation artifacts. APMs serve as QA role for requirements with human oversight to mitigate hallucinations.
+AI-Driven Development is the practice of using AI tools (code-generation models, spec-to-artifact generators, automated review assistants) in product development workflows to accelerate delivery and reduce manual implementation overhead. Industry-wide pattern emerging in 2024–2026 with tools like GitHub Copilot, Cursor, Claude Code, and similar.
 
-Referenced in [[Project Phoenix Phase 1 Kick-off 2026-04-07]].
+## Common Pattern
+
+Detailed specifications (similar to BRDs/FRDs) feed into AI models to generate implementation artifacts (Jira tasks, epics, stories, boilerplate code, test scaffolding). Human oversight is applied to mitigate hallucinations and maintain correctness.
+
+## Known Entity Adoptions
+
+- [[TeamApt AI-Driven Development]] — TeamApt Limited's Project Phoenix mandate adopting this pattern with Claude as the primary AI tool.
+
+## Notes
+
+- 2026-04-19: Entity-scoped TeamApt/Phoenix content moved to [[TeamApt AI-Driven Development]] per Rule 12.

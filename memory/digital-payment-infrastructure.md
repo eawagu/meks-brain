@@ -1,12 +1,14 @@
 ---
-title: Digital Payment Infrastructure
 type:
   - "concept"
+title: Digital Payment Infrastructure
 created: 2026-04-11
-updated: 2026-04-11
+summary: [STUB] Renamed to [[TeamApt Digital Payment Infrastructure]].
+updated: "2026-04-19T15:46:17Z"
 cssclasses:
   - "concept"
-summary: "Technology platforms enabling digital payment solutions, subscription/settlement infrastructure, and investor onboarding — TeamApt's proposed role in the DPRP IPO."
 ---
 
-Mentioned in [[Dangote Non Disclosure Agreement (Draft)]].
+This page has been renamed per Rule 1 of the [[Concept Scope and Disambiguation Convention]].
+
+**See:** [[TeamApt Digital Payment Infrastructure]]

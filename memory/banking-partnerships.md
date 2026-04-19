@@ -1,12 +1,14 @@
 ---
-title: Banking Partnerships
 type:
   - "concept"
+title: Banking Partnerships
 created: 2026-04-11
-updated: 2026-04-11
+summary: [STUB] Renamed to [[TeamApt Banking Partnerships]].
+updated: "2026-04-19T15:46:16Z"
 cssclasses:
   - "concept"
-summary: "TeamApt's strategic banking relationships — Access Bank, Stanbic, Union Bank — covering processing deals, BIN acquisition, and facility negotiations."
 ---
 
-Mentioned in [[TeamApt Banking Partnerships]].
+This page has been renamed per Rule 1 of the [[Concept Scope and Disambiguation Convention]].
+
+**See:** [[TeamApt Banking Partnerships]]

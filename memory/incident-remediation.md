@@ -1,12 +1,14 @@
 ---
-title: Incident Remediation
 type:
   - "concept"
+title: Incident Remediation
 created: 2026-04-11
-updated: 2026-04-11
+summary: [STUB] Renamed to [[TeamApt Incident Remediation]].
+updated: "2026-04-19T15:46:16Z"
 cssclasses:
   - "concept"
-summary: "Structural fixes to reverse TeamApt's tripled incident rate in Q1 2026 — multi-processor routing, circuit breakers, redundant connectivity, and incident management maturity improvements."
 ---
 
-Mentioned in [[Tech Ops Incident Remediation]].
+This page has been renamed per Rule 1 of the [[Concept Scope and Disambiguation Convention]].
+
+**See:** [[TeamApt Incident Remediation]]
