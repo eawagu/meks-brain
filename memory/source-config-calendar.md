@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T15:09:34Z. 16:09 WAT skim tick: 0 deltas in-window. Monday Apr 20 forward view intact; 16:00 WAT ATPP/Tech-Support conflict still unresolved."
-updated: "2026-04-19T17:21:48Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T19:09:34Z. 20:09 WAT skim tick: Moniepoint HoE Round 2 panel formal invite landed (Tobilola Fasanya for Bhuvnesh Bansal, Apr 22 16:00 WAT) — formalizes existing confirmed slot. Monday Apr 20 16:00 WAT ATPP/Tech-Support conflict still unresolved."
+updated: "2026-04-19T19:27:08Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T17:09:34Z"
+last_processed: "2026-04-19T19:09:34Z"
 ---
 
 ## Connection
@@ -28,9 +28,11 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-19 18:09 WAT **skim-level**. ~1h window since 17:09 WAT last_processed.
+Tick 2026-04-19 20:09 WAT **skim-level**. ~2h window since 18:09 WAT last_processed.
 
-Zero deltas in-window. No RSVP changes, no cancellations, no new same-day/next-day invites, no reschedules. Consistent with Sunday cadence.
+**One delta in-window:** New/reformalized invite for Apr 22 16:00–17:00 WAT arrived via email thread 19da7253c2ebc76b from [[Tobilola Fasanya]] (moniepoint.com recruiter) at 20:08 WAT — HoE panel for candidate Bhuvnesh Bansal. Most likely the formal invitation for the existing confirmed "HoE Round 2 panel 4pm–5pm WAT" slot (moved from 11am per 13:09 WAT Sunday tick after [[Chris Purkis]]'s earlier proposal). Not a new conflict; calendar slot already accepted. Signal accumulates to briefing-2026-04-20 via email source-config as Awareness (meeting formalization + candidate name capture: Bhuvnesh Bansal).
+
+No RSVP changes, no cancellations, no new same-day (Monday) agenda-less invites, no reschedules on existing meetings. Consistent with Sunday cadence.
 
 Forward view (Monday Apr 20) unchanged since last tick:
 - 08:30–09:30 WAT — Direct to Bank : Daily stand up
@@ -43,5 +45,5 @@ Forward view (Monday Apr 20) unchanged since last tick:
 - 18:00–19:00 WAT — Product - Engineering Sync (self-organized, Frank Atashili pending)
 
 Tue Apr 21 — no meetings shown in forward view.
-Wed Apr 22 — HoE Round 2 panel 4pm–5pm WAT (confirmed 13:09 WAT tick, moved from 11am).
+Wed Apr 22 — **HoE Round 2 panel 4pm–5pm WAT for Bhuvnesh Bansal** (confirmed earlier at 13:09 WAT tick, formal invite from Tobilola Fasanya landed this tick at 20:08 WAT).
 Lattice Review window closes Apr 27 (8 days remaining).
