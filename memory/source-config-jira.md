@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 13:09 WAT skim tick: 15 ADD + 2 ATPP deltas — Direct-to-Bank Solutions production-phase task cluster (ADD-3413/3424/3432-3440/4556 status transitions) + ATPP-1591 Task Done + ATPP-1609 Bug High Done. All Medium/no-SLA/no-P1. Overflow Awareness cluster for Monday briefing. last_processed 2026-04-19T12:09:29Z."
-updated: "2026-04-19T12:18:03Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 14:09 WAT skim tick: 8 Medium deltas — TDSD-6539/6589 resolves, MPDTTPI-1428/1663/1780 epic-related transitions, TI-445/TCDD-1314/1315 new Todos. All Medium/no-SLA/no-P1. Overflow Awareness cluster for Monday briefing. last_processed 2026-04-19T13:09:49Z."
+updated: "2026-04-19T13:20:36Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T12:09:29Z"
+last_processed: "2026-04-19T13:09:49Z"
 ---
 
 ## Connection
@@ -153,21 +153,28 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 13:09 WAT **skim-level**. ~52m window since 12:17 WAT last_processed. JQL sweep surfaced 15 ADD deltas + 2 ATPP deltas + 0 TDSD deltas + 0 other-project deltas.
+Tick 2026-04-19 14:09 WAT **skim-level**. ~1h window since 13:09 WAT last_processed. JQL sweep surfaced 8 Medium deltas across 4 projects.
 
-**ADD (AptPay Direct Debit) — 15 production-phase task cluster:**
-- ADD-3433, ADD-3434, ADD-3435, ADD-3436, ADD-3437, ADD-3438, ADD-3439, ADD-3440 → Todo (new production-phase sub-tasks created in-window for: settlement account creation, live transaction simulation, settlement test, report generation, dispute management flow sim, DD portal user creation, training, go-live)
-- ADD-3424, ADD-3432 → Done (API integration + bank server JAR deployment)
-- ADD-3387 → In Progress (production sign-off/approval)
-- ADD-3413 → In Progress (SLA / legal docs)
-- ADD-4556 → Done (settlement account sub-task)
+**TDSD — 2 resolves:**
+- TDSD-6539 → resolved (Medium, no-SLA, operational ticket)
+- TDSD-6589 → resolved (Medium, no-SLA, operational ticket)
 
-Profile: a single-bank Direct-to-Bank production deployment progressing through go-live checklist. Not presently wired to a tracked situation; may correlate with UBA DCIR 2FA weekend deployment noted in [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]]. All Medium priority, no SLA, no blocked/escalated transitions, no assignee churn — Layer B score ≤2 for every ticket. Zero cap starvation (17 candidates << 20 cap).
+Routine resolves — no active-situation match, no P1/P2 escalation. Layer B score ≤1.
 
-**ATPP — 2 deltas:**
-- ATPP-1591 "Enhancement - Backend - Enforcement of File Approval and Download Restrictions" → Done (Medium task)
-- ATPP-1609 "Permission issue involving Teamapt User role" → Done (High priority Bug)
+**MPDTTPI (Monnify — Account Collections) — 3 epic-related transitions:**
+- MPDTTPI-1428 → status transition (epic-level)
+- MPDTTPI-1663 → status transition
+- MPDTTPI-1780 → status transition
 
-Both resolved — no open investigation carry-forward.
+Not wired to tracked situations. All Medium. Layer B score ≤2.
 
-**Cluster classification:** Single Awareness item for briefing-2026-04-20 — `Direct to Bank Solutions + AptPay Direct Debit — 15 production-phase task transitions on bank deployment checklist; 2 ATPP tickets resolved. Sample IDs: ADD-3440, ADD-3387, ATPP-1609.` No Immediate-tier dispatch. Connector health: operational. 17 software projects — zero new tickets in-window outside ADD/ATPP; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate).
+**TI (TeamApt — Infrastructure) — 1 new Todo:**
+- TI-445 → Todo created
+
+**TCDD (AptPay Consolidated Direct Debit) — 2 new Todos:**
+- TCDD-1314 → Todo created
+- TCDD-1315 → Todo created
+
+New infra + consolidated-DD backlog entries. Medium, no sprint placement yet. Layer B score ≤1.
+
+**Cluster classification:** Single Awareness item for briefing-2026-04-20 — `TDSD + MPDTTPI + TI + TCDD — 8 ticket updates (2 resolves, 3 epic-related transitions, 3 new Todos). Sample IDs: TDSD-6539, MPDTTPI-1428, TCDD-1314.` No Immediate-tier dispatch. Connector health: operational. 17 software projects — zero P1/P2 escalations in-window; baseline still accumulating (~5 days of 28 required before Phase 2 migration gate). Zero cap starvation (8 candidates << 20 cap).
