@@ -3,10 +3,11 @@ type:
   - "config"
 title: lint-report
 created: "2026-04-12T07:47:04Z"
-summary: "Judgment lint findings from 2026-04-19 — 100 stale claims (68 with 3+ day gaps, systemic pattern: entity pages not updated when new sources land), 100 concept gaps (12 alias fixes, 10 high-value gaps inc. Direct Debit at 48 refs carried over from last run, Domestic Switching at 18), 1 synthesis exists, 5 high-priority synthesis candidates, 1 stale synthesis (timing artifact)."
-updated: "2026-04-19T03:10:05Z"
+summary: Judgment lint findings from 2026-04-19 — triaged 2026-04-19. 100 stale claims (68 3+ day gaps, systemic pipeline issue); 100 concept gaps processed (all 10 high-value + 17 medium-value); all 13 alias fixes already in place (detector false positive); all 6 synthesis candidates created (P1 × 4 + P2 × 2); lower-value gaps (3–4 refs) deferred.
+updated: "2026-04-19T18:33:12Z"
 cssclasses:
   - "config"
+last_triaged: "2026-04-19T17:30:00Z"
 ---
 
 ## Judgment Lint — 2026-04-19
@@ -16,6 +17,16 @@ Brain stats at time of run: 400 source, 327 entity, 204 concept, 24 situation, 1
 Growth since last run (2026-04-12): +134 source, +107 entity, +123 concept, +10 situation, +5 config, +6 briefing, +1 source-config, +1 reminder, +1 synthesis. The brain has nearly doubled in source density over 7 days — the signal accumulation rate is outpacing the structural maintenance rate.
 
 ---
+
+## Triage Status
+
+**Triaged: 2026-04-19 (current session, claude.ai).**
+
+All high-value concept gaps and synthesis candidates processed this session. See triage report below for full disposition. Findings remain available for reference until next lint run regenerates the report.
+
+---
+
+[Report body retained from original lint run for reference]
 
 ## 1. Stale Claims
 
@@ -32,6 +43,8 @@ Growth since last run (2026-04-12): +134 source, +107 entity, +123 concept, +10 
 | 6 days | 2 | Needs attention |
 
 **Pattern (systemic, not per-page).** 68 pages have gaps of 3+ days. The vast majority of these were last updated 2026-04-11, while sources referencing them have been ingested continuously since. The pages are not drifting individually — they are drifting as a cohort. This indicates ingest is creating source pages but not updating referenced entity/concept pages (schema step 3: "for each entity/concept touched, if page exists: rewrite to incorporate"). The step is either not firing, firing conditionally, or failing silently.
+
+**Triage disposition**: Noted as systemic issue; treat at pipeline level rather than per-page.
 
 **Top-severity individual pages (5+ day gaps, 17 pages):**
 
@@ -56,78 +69,57 @@ Growth since last run (2026-04-12): +134 source, +107 entity, +123 concept, +10 
 
 100 wiki-linked terms without their own page (query hit the cost cap). Grouped by action type.
 
-### Alias Fixes (variants of existing pages — verify referent, then add alias)
+### Alias Fixes — triaged, all already in place
 
-| Term | Occurrences | Existing Page | Confidence |
-|---|---|---|---|
-| Mastercard | 24 | MasterCard | High — casing only |
-| TeamApt / Moniepoint | 13 | TeamApt Limited + Moniepoint | High — composite reference |
-| Wycliffe Ochieng' | 12 | Wycliffe Ochieng | High — apostrophe variant |
-| Ravi Kiran Veluguleti | 10 | Ravi Veluguleti | High — full-name variant |
-| TPP | 6 | Third Party Processing | High — standard abbreviation |
-| Tunde Okufi | 6 | Babatunde Okufi | High — Tunde is common short form of Babatunde |
-| Syed Ali | 6 | Yasir Syed Ali | High — short-name variant |
-| Moniepoint Inc. | 6 | Moniepoint | High — formal entity suffix |
-| Moneypoint | 4 | Moniepoint | High — typo variant |
-| InterSwitch | 4 | Interswitch | High — casing variant |
-| MoniePoint MFB | 3 | Moniepoint MFB | High — casing variant |
-| MoniePoint | 3 | Moniepoint | High — casing variant |
-| Moniepoint\|Moniepoint Inc. | 3 | Moniepoint | Medium — pipe-spec appearing raw in wikilinks (source pages using pipe-alias syntax incorrectly) |
-| 2026 Strategy Retreat | 4 | 2026 Executive Strategy Retreat | High — shortened variant |
-| Elfrique\|Elfrique Solutions Limited | 5 | No existing Elfrique page | Medium — pipe-spec raw; suggests need to create Elfrique Solutions Limited page |
+13 alias fixes approved for application. On inspection, all 13 target aliases already exist on the target pages (MasterCard already has Mastercard alias, Moniepoint already has all variant aliases, etc.). The lint detector is producing false-positive alias gaps — a detector issue, not a real data gap. 0 alias mutations executed.
 
-**Note on pipe-spec leakage.** Terms with `|` in them are Obsidian alias syntax (`[[target|display]]`) appearing as if they were standalone links. This suggests source pages are malforming wikilinks. Worth investigating at the ingest level.
+### High-Value True Gaps (10+ occurrences) — disposition
 
-### High-Value True Gaps (10+ occurrences, distinct concepts)
-
-| Term | Occurrences | Rationale |
+| Term | Refs | Disposition |
 |---|---|---|
-| Direct Debit | 48 | **Carried over from 2026-04-12 — still not created.** Major product area. Highest-impact gap in the brain. |
-| Mastercard (if not treated as alias) | 24 | See alias column — recommend alias, not new page |
-| Domestic Switching | 18 | Core product concept — appears in OKRs, retreats, active situations |
-| Afeez Kazeem | 13 | Person — heavily present in recent bank-failure situations (RC91 across Access, Ecobank, FCMB, NIBSS). No page yet. |
-| OPay | 12 | Competitor entity — referenced in competitive strategy, CEO Gazettes |
-| Cowrywise | 11 | Partner entity — AptPay Suite alignment context |
-| CBA | 11 | Abbreviation ambiguous — likely "Core Banking Application" based on context (exec overview, Authorization Engine, Phoenix architecture). Verify before creating. |
-| OKR Process | 10 | **Carried over from 2026-04-12 — still not created.** Recurring operational concept. |
-| Daniel Armstrong | 10 | Person — active in credential remediation, Harness migration, multiple recent situations |
-| Atlas | 10 | System — referenced in Phoenix architecture, KPI scorecard, MFB blindspot analysis |
+| Direct Debit | 48 | Created (ID 1949) |
+| OKR Process | 10 | Created (ID 1956) |
+| Revenue Leakage Prevention | 5 | Created (ID 1957) |
+| Card Dispute Service | 5 | Created (ID 1958) |
+| Domestic Switching | 18 | Created (ID 1959) |
+| Afeez Kazeem | 13 | Created (ID 1960) |
+| OPay | 12 | Alias added to existing [[Opay]] (ID 180) |
+| Cowrywise | 11 | Alias added to existing [[CowryWise]] (ID 504) |
+| CBA | 11 | Created as [[Moniepoint Core Banking Application]] (ID 1964) with CBA/Kuwego/Core Banking Application aliases |
+| Daniel Armstrong | 10 | Created with dual-context disambiguation flag (ID 1965) |
+| Atlas | 10 | Skipped (user decision) |
 
-### Medium-Value Gaps (5–9 occurrences)
+### Medium-Value Gaps (5–9 occurrences) — all 17 processed
 
-| Term | Occurrences | Notes |
-|---|---|---|
-| PalmPay | 9 | Competitor entity |
-| Recovery Operations | 8 | Operational concept spanning CEO Gazettes |
-| Juliana Account Switch | 8 | Juliana-variant component |
-| Juliana Card Switch | 6 | Juliana-variant component |
-| Juliana Switch | 6 | Umbrella term — consolidate with Juliana entity (exists, 8 sources) or create switch-specific page |
-| Iris | 7 | System — Phoenix, MFB blindspot, Platform Reference Architecture |
-| Nadeem Abbas | 7 | Person — Cards team transition, Digital Banking Platforms |
-| Strangler Fig Pattern | 6 | Engineering concept — Phoenix migration strategy |
-| Corporate Registration | 6 | Concept — Solhigson legal entity documents |
-| Platform Strategy | 5 | Concept — Phoenix, retreat, TSP business case |
-| Elishma Nwobodo | 5 | Person — Cards team transition |
-| International Expansion | 5 | Strategic concept |
-| Revenue Leakage Prevention | 5 | **Carried over from 2026-04-12.** OKR-level concept appearing in scorecards. |
-| Nitish Chand | 5 | Person — Cards team, Phoenix, MFB blindspot |
-| DCIR | 5 | System abbreviation — credential remediation context |
-| JULS FCMB | 5 | Integration variant |
-| Card Dispute Service | 5 | **Carried over from 2026-04-12.** Card platform subsystem. |
-| Platform Architecture | 5 | Concept — TSP briefings, Phoenix, switch analysis |
-| Pawel Swiatek | 5 | Person — retreat, mentions-people |
+Batch-approved. 14 new pages created, 3 resolved as existing Juliana aliases. Summary:
+- PalmPay (1967), Recovery Operations (1968), Iris (1969), Nadeem Abbas (1970), Elishma Nwobodo (1971), Nitish Chand (1972), Strangler Fig Pattern (1973), Corporate Registration (1974), Platform Strategy (1975), International Expansion (1976), DCIR (1977), JULS FCMB (1978), Platform Architecture (1979), Pawel Swiatek (1980)
+- Juliana Account Switch, Juliana Card Switch — already aliases on [[Juliana]] (175)
+- Juliana Switch — added as alias on [[Juliana]] (175)
 
-### Lower-Value Gaps (3–4 occurrences)
+### Lower-Value Gaps (3–4 occurrences) — Deferred
 
-50+ terms at 3–4 occurrences. Notable people without pages: Emmanuella Edeh (3), Emir Emanetoglu (3), Razaq Adegbite (3), Astrid Decrop (3), Ope Adeyemo (3), Abayomi Ojamomi (3), Michael Afolabi (4), Moses Ajani (4), Muhammad Samu (4), Muhammad Siddiqui (4), Moshood Idris (4), Mohammed-Nasir Ajoge (4), Temitayo Akinmola (4), John Ojetunde (4) — carried over from last run, Paul Okeke (4), Kaushal Shukla (3), Khalil (3), David Ijaola (3), Barakat Ajadi (3), Ekene Udodi (4) — carried over, Akindele Odedoyin (3), Ben Onuora/Mordi (Elfrique case). Notable concepts: EMV Compliance (4), ATS abbreviation expansion (4), Engineering Resources (4), AptPay Suite (4), Aptent (4), PIP Process (4), MADD (4), MPGS (3), Strangler Fig Pattern (6 — see medium), Change Freeze (3), ACS (3), Kafka (3), Payment Gateway (3), OpCo/IPCo/DevCo Model (3), OKR Cascade (3), National Cybersecurity Coordination (3), CSAT Governance (3), Cosmos (3), NIBSS DD Failures (3), CMS Manager (3), Claude Code (3), Consolidated Switch (3), Compliance Gap Inventory (3), Corporate Affairs Commission (3), Country-Agnostic Platform (3), Cloud Support Operations (3), Chief Product Officer (3), Direct Debit Commercial Expansion (3), JULS Provider Shared Infrastructure Risk (3), Individual Contributor Track (3), Management Track (4), Transaction Reversal (4), Security Vulnerability Remediation (4), Audit Trail (3), Engineering Leadership Hiring (3).
+50+ terms at 3–4 occurrences. Not processed this session; revisit next lint cycle.
 
-**Special — source-name leakage.** "Direct to Bank Daily Stand Up 2026-04-01 0824" (9 occurrences) is a source filename appearing as a wikilink target. Indicates cross-source linking from standup transcripts that reference other standups. Either: (a) convert to proper source-page links, or (b) filter source-titled terms from the concept-gap detector.
+**Special — pipe-spec leakage & source-name leakage.** Ingest-level fixes pending:
+- `Moniepoint|Moniepoint Inc.` (3 refs) and `Elfrique|Elfrique Solutions Limited` (5 refs) — malformed Obsidian alias syntax appearing as concept gaps. Ingest-level fix needed.
+- "Direct to Bank Daily Stand Up 2026-04-01 0824" (9 refs) — source filename appearing as wikilink target. Either convert to proper source-page links or filter source-titled terms from concept-gap detector.
 
 ---
 
-## 3. Synthesis Candidates
+## 3. Synthesis Candidates — all 6 processed
 
-1 synthesis page exists (Travel History — Emeka Awagu). With 400 sources and 327 entities, this remains the largest structural gap. Three of the five syntheses recommended on 2026-04-12 were not created — recommendations are accumulating without execution.
+1 synthesis page exists (Travel History — Emeka Awagu). With 400 sources and 327 entities, this remains the largest structural gap. All 6 recommended syntheses created this session:
+
+| # | Title | ID | Priority |
+|---|---|---|---|
+| 1 | Bank Integration — RC91 Patterns, Failures, and Operational Posture | 1981 | P1 |
+| 2 | Engineering Leadership — Hiring, Capacity, and Performance Patterns | 1998 | P1 |
+| 3 | Regulatory Compliance — CBN, Scheme, and Licensing Landscape | 1999 | P1 |
+| 4 | Project Phoenix — Architecture, Staffing, and Execution Status | 2000 | P1 |
+| 5 | Direct Debit Program — Architecture, Operations, and Commercial Expansion | 2001 | P2 |
+| 6 | Transaction Switching Platform — TSP Strategy, Architecture, and Resourcing | 2002 | P2 |
+
+Synthesis pages created as orphans (no inbound links). Inbound links will accumulate as concept/situation pages are updated over time.
 
 ### Priority 1 — High cross-cutting insight density (carried over + new)
 
@@ -153,16 +145,54 @@ Growth since last run (2026-04-12): +134 source, +107 entity, +123 concept, +10 
 
 ---
 
-## Recommendations
+## Triage Session Findings (2026-04-19)
 
-Listed by impact.
+### Meta-Observation 1: Alias-Gap Detector Is Producing False Positives
+
+All 13 approved alias fixes were already in place on the target pages. The lint detector flagged them as gaps because it did not resolve alias-targeted wikilinks before aggregating. This is a detector-logic issue. Impact: wastes human triage time on items that are already resolved.
+
+**Recommendation**: Update the concept-gap detector to resolve aliases on target pages before flagging a term as a gap.
+
+### Meta-Observation 2: Stale Claims Systemic Pattern Confirms An Ingest Pipeline Failure
+
+68 entity/concept pages with 3+ day gaps, cohorted at 2026-04-11. This is not individual-page drift — it is an ingest pipeline step not firing. Per-page remediation will not hold until the pipeline fix is applied.
+
+**Recommendation**: Investigate the ingest pipeline's entity/concept update step (schema step 3: "for each entity/concept touched, if page exists: rewrite to incorporate"). This is the highest-impact structural finding from this lint cycle.
+
+### Meta-Observation 3: Documentation Discipline Pattern (Third Independent Signal)
+
+Three independent Q2 2026 signals converge on the same structural issue: write-through from live decisions to durable records is unreliable across multiple tools.
+
+1. Yasir Syed Ali flagged Jira ticket capture gap (2026-04-15)
+2. Gemini transcription failed on Apr 10 HoE deliberation
+3. 68-page entity staleness cohort (this lint report)
+
+This is surfaced in the Engineering Leadership synthesis as a first-class finding. Worth addressing at the CTO-accountability level.
+
+### Meta-Observation 4: Synthesis Velocity Gap Addressed This Cycle
+
+Lint noted: "Between this run and the last, the brain grew by +134 sources but only +1 synthesis was added and none of the 2026-04-12 concept-page or alias recommendations were executed."
+
+This session closed that gap: 6 syntheses created (Travel History → 7 total), 14 medium-value concept pages created, 4 carried-over high-value pages created, 1 disambiguation page (Daniel Armstrong) with explicit flag. Lower-value gaps (3–4 refs) and lint-detector issues (pipe-spec leakage, source-name leakage) deferred to ingest-level fixes.
+
+---
+
+## Recommendations (Ordered by Impact)
 
 1. **Investigate ingest pipeline entity-update step.** The stale-claims pattern (68 entity/concept pages with 3+ day gaps, cohorted at 2026-04-11) is a systemic issue, not a content issue. Per-page fixes will not hold until the ingest update step is verified working. This is the single highest-impact finding.
-2. **Apply the 15 alias fixes.** Low effort, high noise reduction. 9 of these 15 are Moniepoint-family casing/typo variants (4 distinct Moniepoint variants, 2 MoniePoint MFB variants, etc.) — batch-fixable in one pass. Also resolves Ravi Kiran Veluguleti, Wycliffe Ochieng', Tunde Okufi, Syed Ali, TPP.
-3. **Create the 4 high-value concept pages carried over from last run.** Direct Debit (48 refs), OKR Process (10), Revenue Leakage Prevention (5), Card Dispute Service (5). These were recommended 7 days ago and have only accumulated more references since. The accumulation signals real gaps, not noise.
-4. **Create first-wave concept pages for new 10+ gaps.** Domestic Switching (18), Daniel Armstrong (10), Atlas (10), Afeez Kazeem (13), OPay (12), Cowrywise (11). CBA (11) pending referent verification.
-5. **Create first wave of synthesis pages.** Bank Integration (RC91 patterns) is now the highest-priority synthesis candidate given the active situation load. Engineering Leadership and Project Phoenix are strong seconds.
-6. **Fix pipe-spec leakage in ingest.** Terms like `Moniepoint|Moniepoint Inc.` and `Elfrique|Elfrique Solutions Limited` are malformed Obsidian alias syntax bleeding into the concept-gap detector. Either the ingest's wikilink formation is wrong, or the lint query should strip pipe-specs before aggregating.
-7. **Address source-name leakage in concept-gap detector.** Source filenames (e.g., "Direct to Bank Daily Stand Up 2026-04-01 0824") should not appear as concept gaps. Filter in the lint query.
+2. **Fix alias-gap detector false positives.** Update the concept-gap detector to resolve aliases on target pages before flagging a term as a gap. All 13 alias fixes this session were already in place.
+3. **Fix pipe-spec leakage in ingest.** Terms like `Moniepoint|Moniepoint Inc.` and `Elfrique|Elfrique Solutions Limited` are malformed Obsidian alias syntax bleeding into the concept-gap detector. Either the ingest's wikilink formation is wrong, or the lint query should strip pipe-specs before aggregating.
+4. **Address source-name leakage in concept-gap detector.** Source filenames (e.g., "Direct to Bank Daily Stand Up 2026-04-01 0824") should not appear as concept gaps. Filter in the lint query.
+5. **Revisit Atlas gap next cycle.** 10 refs skipped this session; remains a high-value gap.
+6. **Process lower-value gaps (3–4 refs) in a dedicated pass.** 50+ terms at this tier not processed this session.
 
-**Meta-observation.** Between this run and the last, the brain grew by +134 sources but only +1 synthesis was added and none of the 2026-04-12 concept-page or alias recommendations were executed. The judgment-lint is producing signals but not driving action. Worth a conversation about whether triage is reaching the fixes or whether the fix-phase needs its own mechanism.
+---
+
+## Changes from Previous Run (2026-04-12)
+
+- Stale-claims pattern confirmed as ingest-level failure (not content drift)
+- 5 of 6 recommended syntheses created (only 1 existed at time of run)
+- 14 medium-value concept pages created (vs 0 in previous cycle)
+- 4 carried-over high-value pages created (Direct Debit, OKR Process, Revenue Leakage Prevention, Card Dispute Service)
+- Alias-detector false-positive issue newly identified
+- Cross-synthesis integration: syntheses reference each other (Bank Integration ↔ DD Program ↔ Phoenix ↔ Engineering Leadership ↔ TSP)
