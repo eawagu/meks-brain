@@ -4,9 +4,11 @@ type:
 title: Interswitch
 created: 2026-04-11
 summary: Nigerian payment switching company — domestic Visa POS transactions route through Interswitch/UPSL, bypassing TACHA. Also a former employer of both Emeka Awagu (software engineer, later Head of Commerce & Digital Channels, 2008–2020) and Ina Alogwu (Risk Specialist, later Product Strategy & Innovation lead).
-updated: "2026-04-17T14:51:27Z"
+updated: "2026-04-19T09:36:32Z"
 cssclasses:
   - "entity"
+aliases:
+  - "InterSwitch"
 ---
 
 ## Overview

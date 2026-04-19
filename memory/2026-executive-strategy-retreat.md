@@ -5,9 +5,10 @@ title: 2026 Executive Strategy Retreat
 aliases:
   - "Strategy Retreat"
   - "Strategy Retreat 2026"
+  - "2026 Strategy Retreat"
 created: "2026-04-13T22:10:11Z"
 summary: "Moniepoint 2026 Executive Strategy Retreat — Apr 14-16, London (Chicago Booth). Day 2 sessions captured: TeamApt CEO deck (Dennis Ajalie — 86% dependency, 6 growth levers, ₦8.91B pricing gap), customer rewards A/B testing (no retention impact on existing), sales OKRs (4.36M MAU, ₦864B GLPV), platform performance (88.2% conversion, zero fraud incidents, USSD profitability), account payments (70% revenue growth, P97@5s target)."
-updated: "2026-04-16T05:44:45Z"
+updated: "2026-04-19T09:36:33Z"
 cssclasses:
   - "entity"
 ---

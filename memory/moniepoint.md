@@ -4,9 +4,12 @@ type:
 title: Moniepoint
 aliases:
   - "MoniePoint"
+  - "Moniepoint Inc."
+  - "Moneypoint"
+  - "TeamApt / Moniepoint"
 created: 2026-04-11
 summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; 4 business lines (DD/CDD, Monnify, TPP, Domestic Switching); 2025 revenue ₦24.2B target, ~₦10-12B actual (~35-50%); building multi-market card issuance platform (Project Phoenix); 13-level job framework.
-updated: "2026-04-16T16:31:36Z"
+updated: "2026-04-19T09:36:32Z"
 cssclasses:
   - "entity"
 ---

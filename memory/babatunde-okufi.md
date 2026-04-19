@@ -4,9 +4,11 @@ type:
 title: Babatunde Okufi
 created: 2026-04-11
 summary: Chief Business Development Officer at TeamApt, reports to Dennis Ajalie (CEO). Business owner of Domestic Switching — owns Juliana Card/Account Switch, ATS, PTSP/PTAD, TACHA; also owns CoralPay remediation and NIBSS engagement.
-updated: "2026-04-16T16:29:55Z"
+updated: "2026-04-19T09:36:31Z"
 cssclasses:
   - "entity"
+aliases:
+  - "Tunde Okufi"
 ---
 
 ## Overview

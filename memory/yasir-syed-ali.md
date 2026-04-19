@@ -4,9 +4,11 @@ type:
 title: Yasir Syed Ali
 created: 2026-04-11
 summary: TeamApt owner of the Direct Debit production issues weekly analysis meeting — leads recurring review of DD operational failures, reversal logic, and response code harmonization.
-updated: "2026-04-15T09:21:16Z"
+updated: "2026-04-19T09:36:32Z"
 cssclasses:
   - "entity"
+aliases:
+  - "Syed Ali"
 ---
 
 TeamApt engineering lead. Owner of the Direct Debit production issues weekly analysis meeting — leads recurring review of DD operational failures, reversal logic, and response code harmonization. Participates in Direct to Bank daily standup.
