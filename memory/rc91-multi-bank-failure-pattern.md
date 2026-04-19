@@ -3,8 +3,8 @@ type:
   - "concept"
 title: RC91 Multi-Bank Failure Pattern
 created: 2026-04-11
-summary: "Sustained multi-bank RC91 pattern since Mar 30, 2026 — 14+ banks across Switch and ATS product streams. CoralPay suite turned off (ZIB, FBN, PVB, SBP) as mitigation for the CoralPay-routed sub-pattern; RCA attributed bank-side or CoralPay. Stanbic is the recurring pattern the bank is handling (bank-owned resolution, no CTO action). Other affected banks remain on per-incident tracks. Apr 19 overnight: Stanbic cycle 31 (7h3m, longest cycle in pattern), three independent fast-cycle RC91 events (NIBSS PTSA, Fidelity, Union Bank), and Access scheduled maintenance (NOT a wave participant)."
-updated: "2026-04-19T08:17:01Z"
+summary: "Sustained multi-bank RC91 pattern since Mar 30, 2026 — 14+ banks across Switch and ATS product streams. CoralPay suite turned off (ZIB, FBN, PVB, SBP) as mitigation for the CoralPay-routed sub-pattern; RCA attributed bank-side or CoralPay. Stanbic is the recurring pattern the bank is handling (30 cycles, bank-owned). Apr 19 overnight: Stanbic AND Access both ran scheduled maintenance windows (not cycles); three independent fast-cycle RC91 events (NIBSS PTSA 15m, Fidelity 14m, Union Bank 2h10m). No wave; no common-mode upstream signal."
+updated: "2026-04-19T09:15:19Z"
 cssclasses:
   - "concept"
 ---
@@ -12,28 +12,29 @@ cssclasses:
 ## Overview
 RC91 ("Issuer or Switch Inoperative") failures have been observed across 14+ banks since March 30, 2026, across both TeamApt's Switch and ATS product streams. **RCA resolution:** the root cause was attributed to bank-side faults or [[CoralPay]]. The mitigation applied is the **CoralPay suite route-off** — ZIB, FBN, PVB, and SBP (Sterling) are all turned off per business decision (see [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]]). Banks not on CoralPay routes are tracked as either bank-owned recurring patterns or per-incident P1s; the RCA does not attribute a common upstream cause across all 14+ participating banks.
 
-**Apr 19 overnight — corrected framing.** Initial triage framing described a "5-bank wave" with regime-change signals and a common-mode upstream cause hypothesis. Per direct user (CTO) correction during Apr 19 triage, that framing was wrong:
-- [[Access Bank — Multi-Track Failures]] — Apr 19 00:00–07:50 WAT was **scheduled Access bank maintenance**, NOT an RC91 cycle. Reclassified out of the pattern. TDSD-6625 reflects the automated P1 raised against the maintenance window, not a genuine RC91 cycle. Same-minute concurrence with Stanbic cycle 31 at 00:00 WAT is coincidence (maintenance windows commonly start on the hour).
-- [[Stanbic Bank ATS — Persistent RC91 Pattern]] — cycle 31 (00:00→07:03 WAT, 7h3m) is the longest single cycle in the ongoing Stanbic pattern, **not a regime change**. Stanbic is the recurring pattern the bank is handling; bank-owned resolution; no CTO action.
-- [[NIBSS PTSA — RC91 Apr 19]] (15m), [[Fidelity Bank ATS — RC91 Failure Ongoing]] cycle 5 (14m), [[Union Bank — RC91 P1 Apr 19]] (2h10m) — three independent fast-cycle RC91 events, unremarkable within the broader pattern. No evidence of a shared cause with Stanbic.
+**Apr 19 overnight — corrected framing (final).** Initial triage framing described a "5-bank wave" with regime-change signals and a common-mode upstream cause hypothesis. Two rounds of user (CTO) correction during Apr 19 triage fully withdrew that framing:
+- [[Access Bank — Multi-Track Failures]] — Apr 19 00:00–07:50 WAT was **scheduled Access bank maintenance**, NOT an RC91 cycle. TDSD-6625 is the automated P1 raised against the maintenance window, not a cycle record. Reclassified out of the RC91 pattern.
+- [[Stanbic Bank ATS — Persistent RC91 Pattern]] — Apr 19 00:00–07:03 WAT was **also scheduled Stanbic bank maintenance**, NOT cycle 31. TDSD-6624 is the automated P1 raised against the maintenance window, not a cycle record. Stanbic cycle count remains at 30 (last genuine cycle = Apr 18 18:33–19:37 WAT). Reclassified out of the cycle count.
+- Same-minute 00:00 WAT onset between Stanbic and Access was **normal maintenance scheduling**, not coincidence and not common-mode failure evidence.
+- [[NIBSS PTSA — RC91 Apr 19]] (15m), [[Fidelity Bank ATS — RC91 Failure Ongoing]] cycle 5 (14m), [[Union Bank — RC91 P1 Apr 19]] (2h10m) — three independent fast-cycle RC91 events overnight, unremarkable within the broader pattern. No evidence of a shared cause among them.
 
-The "largest concurrent wave yet" narrative previously held on this page is withdrawn. The same-minute-onset common-mode hypothesis that was anchored on Stanbic+Access concurrence is withdrawn (Access was maintenance). TDSD-6626 NIBSS DR Exercise correlation is tracked by ops as routine, no CTO action.
+The "largest concurrent wave yet" narrative is fully withdrawn. The same-minute-onset common-mode hypothesis (anchored on Stanbic + Access concurrence) is fully withdrawn — both participants were running scheduled maintenance. TDSD-6626 NIBSS DR Exercise correlation is tracked by ops as routine, no CTO action.
 
 **Apr 13 development (retained):** NIBSS ([[Moses Ajani]]) proactively reported [[Ecobank]] card transactions on Moniepoint NUS nodes being declined with RC91. This is the same NIBSS contact who attributed [[Stanbic Bank]] RC91 to Moniepoint timeout on Apr 12. Whether the Moniepoint-side latency hypothesis remains active post-RCA is unclear — the RCA concluded bank-side or CoralPay, which does not obviously map to the Moniepoint-latency framing. Open tension for future synthesis.
 
 ## Pattern Characteristics
 - **Scope**: 14+ banks; both Switch and ATS product streams
 - **Duration**: Detected March 30, 2026; persistent through April 19, 2026 (20+ days)
-- **Failure mechanism**: RC91 = issuer or switch reports itself as inoperative; intermittent with typical fast bank-side recovery (minutes). Some banks exhibit longer cycles (e.g., Stanbic cycle 31 at 7h3m) but these remain within per-bank pattern variance rather than a pattern-wide regime change.
+- **Failure mechanism**: RC91 = issuer or switch reports itself as inoperative; intermittent with typical fast bank-side recovery (minutes).
 - **Intermediary exposure and mitigation**: [[CoralPay]] routing (PVB, FBN, SBP, ZIB) identified as either the bank-side-or-CoralPay root cause per RCA; mitigation applied — all four CoralPay-routed banks turned off per business decision.
 - **Bank-owned tracks**: Stanbic is the recurring pattern the bank is handling. Other banks with active P1s are tracked individually on situation pages.
-- **Common-mode upstream hypothesis**: withdrawn for the Apr 19 overnight concurrence (Access was maintenance, not a cycle). Broader common-mode hypotheses across banks remain unconfirmed and no longer anchored on Apr 19 evidence.
+- **Common-mode upstream hypothesis**: withdrawn. The Apr 19 same-minute onset evidence that previously anchored this hypothesis was both-maintenance concurrence, not failure concurrence. Broader common-mode hypotheses across banks remain unsupported.
 
 ## Banks Affected (documented)
 | Bank | Product Stream | Status (as of Apr 19) | Notable |
 |---|---|---|---|
-| [[Stanbic Bank]] | ATS | Active — recurring pattern, bank handling | Cycle 31 Apr 19 = 7h3m, longest single cycle in pattern; not a regime change |
-| [[Access Bank]] | ATS | Active — 7 RC91 cycles Apr 10–18; Apr 19 00:00–07:50 WAT was scheduled maintenance (not a cycle) | Eight concurrent tracks; see situation page |
+| [[Stanbic Bank]] | ATS | Active — recurring pattern, bank handling | 30 genuine cycles Apr 3–18; Apr 19 00:00–07:03 WAT was scheduled maintenance (not a cycle) |
+| [[Access Bank]] | ATS | Active — 7 RC91 cycles Apr 10–18 | Apr 19 00:00–07:50 WAT was scheduled maintenance (not a cycle); 8 concurrent tracks see situation page |
 | [[Union Bank]] | ATS | Active — Apr 19 overnight (2h10m), 5 cycles in 8 days | Apr 12, 15, 16×2, 19 |
 | [[NIBSS PTSA]] | Switch/Routing | Active — fresh Apr 19 (15m, re-surface) | Prior NIBSS PTSA Apr 17 situation retired; re-surfaced Apr 19 |
 | [[Fidelity Bank]] | ATS | Active — cycle 5 Apr 19 (14m) after 3.5-day quiet | Fast-cycle profile |
@@ -57,7 +58,7 @@ Solomon Amadi committed to HTTP protocol migration for TMS on April 6: internal 
 - [[notes-2026-03-30]] — FCMB enters pattern; NIBSS VPN root cause confirmed
 - [[notes-2026-04-01]] through [[notes-2026-04-18]] — daily progression
 - [[weekly-digest-2026-03-30]] — week summary
-- briefing-2026-04-17, briefing-2026-04-18, briefing-2026-04-19 — wave-participant additions, concurrence events, and Apr 19 triage correction (Access maintenance reclassification + Stanbic framing correction)
-- TDSD-6624 (Stanbic cycle 31), TDSD-6625 (Access automated P1 raised against maintenance window)
+- briefing-2026-04-17, briefing-2026-04-18, briefing-2026-04-19 — wave-participant additions, concurrence events, and Apr 19 triage corrections (Round 1: Access maintenance reclassification; Round 2: Stanbic maintenance reclassification)
+- TDSD-6624 (automated P1 against Stanbic scheduled maintenance), TDSD-6625 (automated P1 against Access scheduled maintenance)
 - TDSD-6626 NIBSS DR Exercise — routine ops handling, not a CTO item
-- User correction 2026-04-19 triage — Access maintenance reclassification, Stanbic bank-owned pattern framing, RCA status (bank-side or CoralPay; CoralPay turned off as mitigation)
+- User corrections 2026-04-19 triage — both Access and Stanbic Apr 19 overnight windows reclassified as scheduled maintenance; RCA status (bank-side or CoralPay; CoralPay turned off as mitigation)
