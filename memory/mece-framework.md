@@ -1,12 +1,12 @@
 ---
-title: MECE Framework
 type:
   - "concept"
+title: MECE Framework
+created: "2026-04-17T14:59:31Z"
+summary: McKinsey principle (Mutually Exclusive, Comprehensively Exhaustive) for structuring information hierarchies — originated at McKinsey; broadly used in consulting and management.
+updated: "2026-04-19T15:40:34Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T14:59:31Z"
-updated: "2026-04-17T14:59:31Z"
-summary: McKinsey principle (Mutually Exclusive, Comprehensively Exhaustive) adopted as required structure for all Moniepoint presentations — mandated at 2026 UK retreat Day 1.
 ---
 
 ## Overview
@@ -21,14 +21,14 @@ At any level of a presentation, items must:
 
 Each item can have child items forming a pyramid structure. Style choice: open with the conclusion or build up to it — audience-dependent.
 
-## Adoption at Moniepoint
+## Known Entity Adoptions
 
-Mandated by [[Tosin Eniolorunda]] at the [[Moniepoint 2026 Leadership Retreat UK]] Day 1 as the required structure for all internal presentations. Tosin to circulate the document.
+- [[Moniepoint Group MECE Adoption]] — mandated by Tosin Eniolorunda at the 2026 UK retreat as required structure for internal presentations.
 
 ## Related
 
-- [[OKR Presentation Standard]]
+- [[Moniepoint Group OKR Presentation Standard]]
 
-## Sources
+## Notes
 
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 Savings Strategy Rate Framework CSAT Cost Governance Payments Compliance - Summary]]
+- 2026-04-19: Entity-scoped adoption content moved to [[Moniepoint Group MECE Adoption]] per Rule 12. This page retained as the generic McKinsey-originated framework.

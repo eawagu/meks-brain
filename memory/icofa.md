@@ -1,30 +1,28 @@
 ---
-title: ICOFA
 type:
   - "concept"
+title: ICOFA
+created: "2026-04-17T15:33:29Z"
+summary: Internal Control over Financial Reporting (ICOFA) — industry-standard framework for internal controls over financial reporting, rooted in SOX Section 404 and equivalent regulatory requirements.
+updated: "2026-04-19T15:40:35Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T15:33:29Z"
-updated: "2026-04-17T15:33:29Z"
-summary: Internal Control over Financial Reporting — Moniepoint internal control directive tracing financial statement line items to source processes.
 ---
 
 ## Overview
 
-ICOFA (Internal Control over Financial Reporting) is the internal control department's primary directive at Moniepoint. Supports the Finance function by testing controls through traceability.
+ICOFA (Internal Control over Financial Reporting) is an industry-standard framework for internal controls over financial reporting, originating in regulatory requirements such as Sarbanes-Oxley Section 404 and adopted broadly across financial institutions. It involves identifying, testing, and maintaining controls over processes that produce financial statement data.
 
-## Approach
+## Core Approach
 
 - Trace financial statement line items to source processes (bottom-up from core banking; top-down from product)
-- Maturity dashboard tracks progress
+- Identify control points, test effectiveness, track remediation of findings
+- Maturity assessment via dashboard or scorecard tracking control coverage and gap closure
 
-## Tosin Feedback
+## Known Entity Adoptions
 
-Criticized the maturity dashboard for lacking outcome-based metrics — project traction is not the same as business outcome.
+- [[Moniepoint Group ICOFA Adoption]] — Moniepoint Inc.'s internal control program targeting financial statement traceability.
 
-External audit reports (previously showed process "100% broken") provide valid baseline. Metric example: "16 issues found, 14 fixed" is quantifiable and testable.
+## Notes
 
-## Related
-
-- [[Project Mapo]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 3 Feature Discovery Compliance Uplift Cross-Market Platformization - Meeting Minutes]]
+- 2026-04-19: Entity-scoped Moniepoint content moved to [[Moniepoint Group ICOFA Adoption]] per Rule 12 split. This page retained as the generic industry framework.

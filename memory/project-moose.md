@@ -1,23 +1,22 @@
 ---
-title: Project Moose
 type:
   - "concept"
+title: Project Moose
+created: "2026-04-17T14:38:04Z"
+summary: [STUB] Renamed to [[Moniepoint Group Project Moose]]. Preserved for source attribution.
+updated: "2026-04-19T15:40:35Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T14:38:04Z"
-updated: "2026-04-17T14:38:04Z"
-summary: Moniepoint internal platform (in development April 2026) for collecting KPIs and metrics — named by Tosin at 2026 UK retreat. Leaders must define/cascade goals now, not wait for Moose.
 ---
 
-## Overview
+This page has been renamed per Rule 1/Rule 2 of the [[Concept Scope and Disambiguation Convention]].
 
-**Project Moose** is a Moniepoint internal platform under development to collect KPIs and metrics organization-wide. Referenced by [[Tosin Eniolorunda]] at the [[Moniepoint 2026 Leadership Retreat UK]] (Day 1).
+**See:** [[Moniepoint Group Project Moose]]
 
-## Directive
+Old title preserved as stub for source attribution and incoming wikilink resolution per Rule 12 stub pattern.
 
-Leaders are mandated to define and cascade team goals **now**, without waiting for Moose or any other formal infrastructure. Infrastructure readiness must not stall progress.
+---
 
-## Related
+## Rename History
 
-- [[Organizational Framework]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 Organizational Framework Loan Portfolio Risk - Meeting Minutes]]
+- 2026-04-19: Renamed from `Project Moose` to [[Moniepoint Group Project Moose]].

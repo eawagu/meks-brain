@@ -1,42 +1,24 @@
 ---
-title: Project Mapo
 type:
   - "concept"
-cssclasses:
-  - "concept"
+title: Project Mapo
 aliases:
   - "Project Maple"
 created: "2026-04-17T15:33:29Z"
-updated: "2026-04-17T15:33:29Z"
-summary: "Moniepoint initiative centralizing process/policy documentation on Confluence to address 'dumpster fire' state and support audit requirements."
+summary: [STUB] Renamed to [[Moniepoint Group Project Mapo]]. Preserved for source attribution.
+updated: "2026-04-19T15:40:35Z"
+cssclasses:
+  - "concept"
 ---
 
-## Overview
+This page has been renamed per Rule 1/Rule 2 of the [[Concept Scope and Disambiguation Convention]].
 
-Project Mapo (also referenced as Project Maple) is a Moniepoint initiative to institutionalize process and policy documentation using Confluence.
+**See:** [[Moniepoint Group Project Mapo]]
 
-## Motivation
+Old title preserved as stub for source attribution and incoming wikilink resolution per Rule 12 stub pattern.
 
-Current state described as "dumpster fire":
-- Scattered Google Docs
-- Inconsistent formatting
-- Some documents signed via pasted image signatures, others not
+---
 
-## Approach
+## Rename History
 
-- Centralize documentation on a dedicated Confluence space
-- Prioritize processes that are audited or subject to review
-- Key metric: burndown of the documentation gap
-- Partner with business units to identify their most important processes to document first
-
-## Reframing (Tosin)
-
-Do not sell on risk/control alone — perceived as punitive. Frame from multiple angles:
-- Discoverability across the org
-- AI enablement (context for models like Claude)
-- Governance & partnership with risk team at scale
-
-## Related
-
-- [[ICOFA]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 3 Feature Discovery Compliance Uplift Cross-Market Platformization - Meeting Minutes]]
+- 2026-04-19: Renamed from `Project Mapo` to [[Moniepoint Group Project Mapo]]. Moniepoint-specific initiative.

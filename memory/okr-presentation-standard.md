@@ -1,40 +1,22 @@
 ---
-title: OKR Presentation Standard
 type:
   - "concept"
+title: OKR Presentation Standard
+created: "2026-04-17T14:59:31Z"
+summary: [STUB] Renamed to [[Moniepoint Group OKR Presentation Standard]] per Rule 1/Rule 2. Preserved for source attribution and incoming wikilink resolution.
+updated: "2026-04-19T15:40:34Z"
 cssclasses:
   - "concept"
-created: "2026-04-17T14:59:31Z"
-updated: "2026-04-17T14:59:31Z"
-summary: Moniepoint-mandated presentation format — every presentation must state Objectives (aligned with 4 company goals), Key Results, and Initiatives.
 ---
 
-## Overview
+This page has been renamed per Rule 1/Rule 2 of the [[Concept Scope and Disambiguation Convention]].
 
-The mandated presentation format at [[Moniepoint]]. Every presentation must state:
+**See:** [[Moniepoint Group OKR Presentation Standard]]
 
-1. **Objectives** — aligned with the four company goals.
-2. **Key Results** — how each objective is measured.
-3. **Initiatives** — concrete actions taken to drive the key results.
+Old title preserved as stub for source attribution and incoming wikilink resolution per Rule 12 stub pattern.
 
-## Four Company Goals (Anchors)
+---
 
-1. Be a product people love.
-2. Drive revenue.
-3. Manage operations, risk, and compliance.
-4. Manage costs.
+## Rename History
 
-(A fifth goal — "sustainable market leadership" — is paused for most departments due to unreliable market-share measurement; Card business retains it.)
-
-## Standard Set At
-
-Mandated by [[Tosin Eniolorunda]] at the [[Moniepoint 2026 Leadership Retreat UK]] Day 1. All future presentations must follow this format and explicitly link to company goals.
-
-## Related
-
-- [[MECE Framework]]
-- [[Monthly Performance Reviews]]
-
-## Sources
-
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 Savings Strategy Rate Framework CSAT Cost Governance Payments Compliance - Summary]]
+- 2026-04-19: Renamed from `OKR Presentation Standard` to [[Moniepoint Group OKR Presentation Standard]]. Original was pure Moniepoint-scoped content on a generic-titled page.

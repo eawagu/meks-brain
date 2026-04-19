@@ -1,14 +1,22 @@
 ---
-title: Moniepoint Hiring Process
 type:
   - "concept"
+title: Moniepoint Hiring Process
 created: 2026-04-11
-updated: 2026-04-11
+summary: [STUB] Renamed to [[Moniepoint Group Hiring Process]] per Rule 2. Preserved for source attribution.
+updated: "2026-04-19T15:40:35Z"
 cssclasses:
   - "concept"
-summary: Standardized recruitment and interview framework at Moniepoint — covers sourcing, multi-round evaluation, deliberation, and offer processes for engineering leadership roles.
 ---
 
-Covers the end-to-end recruitment pipeline for senior engineering hires at Moniepoint.
+This page has been renamed per Rule 2 of the [[Concept Scope and Disambiguation Convention]] (Moniepoint → Moniepoint Group).
 
-Referenced in [[Head of Engineering RSOP Interview Guide]], [[Panel Interview Head of Engineering VP 2026-04-01]].
+**See:** [[Moniepoint Group Hiring Process]]
+
+Old title preserved as stub for source attribution and incoming wikilink resolution per Rule 12 stub pattern.
+
+---
+
+## Rename History
+
+- 2026-04-19: Renamed from `Moniepoint Hiring Process` to [[Moniepoint Group Hiring Process]] per Rule 2.
