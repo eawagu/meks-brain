@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T05:09:34Z. 06:09 WAT Monday briefing tick: overnight delegation window quiet — zero new Tier 1 parent messages, zero DMs, zero Tier 3 keyword matches. Sunday support-cadence routing held through evening; Stanbic cycle 31 closure traveled via Jira not Slack."
-updated: 2026-04-20
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T07:09:34Z. 08:09 WAT Skim tick: Tier 1 quiet, zero DMs, zero Tier 3 Immediate matches — Slack contributed zero surfacings as P1 cycles traveled via email/Jira tracks."
+updated: "2026-04-20T07:20:20Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T06:09:34Z"
+last_processed: "2026-04-20T07:09:34Z"
 ---
 
 ## Connection
@@ -33,4 +33,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-20 07:09 WAT Skim-level (post-06:09 briefing). Tier 1 channels quiet — zero new parent messages since 06:09 WAT. DMs to user: zero. Tier 3 keyword sweep: 2 matches, neither Tier 1 nor CTO-relevant (ng-ort onboarding UI issue; monnify-infra-support imagePullBack) — discarded. Slack signal source contributed zero surfacings this tick. Concurrent tick discovery: Union Bank RC91 cycle (email-only track, no Slack activity) missed by briefing sweep — calibration MISS note captured.
+Tick 2026-04-20 08:09 WAT Skim-level. Tier 1 channels: no new parent messages since 07:09 tick. DMs to user: zero. Tier 3 keyword sweep: no Immediate-tier matches (P1, outage, RC91, RC05, breach, NIBSS). Slack signal source contributed zero surfacings this tick — active P1 cycles (Union Bank RC91, NIBSS DD, Keystone settlement) traveled via email/Jira tracks, not Slack. 07:09 tick's Union Bank MISS-calibration note remains the operative correction for the Slack-silence-while-email-active pattern.

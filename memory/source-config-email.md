@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-20T05:09:34Z. 06:09 WAT Monday briefing tick: Stanbic cycle 31 closed overnight (inferred from TDSD-6629 Completed); Ecobank wait-state held (no overnight activity); DCIR portal carryforward; Nicolaas RCA 5d overdue. RECOVERY HOLDING — 60h post-recovery, 20+ clean ticks."
-updated: 2026-04-20
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-20T07:09:34Z. 08:09 WAT Skim tick: Union Bank RC91 cycle closed by Olamide at 07:56 WAT after bank 07:33 response (6h39m cycle); situation page updated to resolving."
+updated: "2026-04-20T07:20:20Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T06:09:34Z"
+last_processed: "2026-04-20T07:09:34Z"
 ---
 
 ## Connection
@@ -32,4 +32,4 @@ Gmail MCP. Profile: eawagu@gmail.com.
 
 ## Notes
 
-Tick 2026-04-20 07:09 WAT Skim-level (post-06:09 briefing). 5 new threads since 06:09 tick: 4 weekly project status reports (Polaris DD Pilot, Zone Account Switch, Premium Trust DD, Sterling Account Switch — Awareness-tier, accumulate for next briefing) + 1 critical operational thread — **Union Bank RC91 | 20260420** (Olamide Ajibulu email thread, filed 01:17 WAT, 3 outreach messages, bank silent 5h52m). Union Bank cycle was missed by the 06:09 briefing sweep despite being in window — calibration MISS note captured via `capture_note` MISS: prefix. Immediate-tier DM dispatched from this tick.
+Tick 2026-04-20 08:09 WAT Skim-level. Primary operational delta: **Union Bank RC91 | 20260420** thread closed — bank response received 07:33 WAT; Olamide Ajibulu closed the loop at 07:56 WAT (total cycle 6h39m, 3x longest prior cycle of 2h10m on Apr 19). Situation page updated to status=resolving. TDSD-6632 Jira track documented on situation page. No other Layer 1 (To:me) threads of operational weight since 07:09 tick. Weekly-status-report backlog (Polaris DD Pilot, Zone Account Switch, Premium Trust DD, Sterling Account Switch) from 07:09 tick remains Awareness-accumulating for next briefing.
