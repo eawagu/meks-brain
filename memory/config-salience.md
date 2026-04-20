@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-salience
 created: "2026-04-11T15:44:57Z"
-summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol. 6 fresh tuples appended from briefing-2026-04-20 triage (post-recalc)."
-updated: "2026-04-20T08:21:23Z"
+summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol. 7 tuples accumulated post-recalc (1 new MISS: Union Bank RC91 Apr 20 cycle not surfaced in briefing)."
+updated: "2026-04-20T08:33:51Z"
 cssclasses:
   - "config"
 ---
@@ -152,3 +152,4 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 - [2026-04-20, B4, acted, cto_specificity | factors: source=email, situation_delta, wait-state, 24h-heuristic, contested-attribution-risk, cto_specificity]
 - [2026-04-20, B5, acted, urgency | factors: source=calendar, signal_type=new-invite+unresolved-conflict-carryforward, urgency=same-day, impact_scope=schedule-integrity]
 - [2026-04-20, B6, acted, accountability_alignment | factors: source=config-salience, tuple_count=22, threshold_crossed, periodic_maintenance]
+- [2026-04-20, Union Bank RC91 Apr 20 cycle filed 01:17 WAT via email (Olamide Ajibulu → itechannels@) not surfaced in briefing-2026-04-20 06:09 WAT despite email sweep window; briefing A2 falsely claimed "no new RC91 P1s beyond Stanbic cycle 31"; 6th Union Bank RC91 cycle in 9 days; 5h52m active at discovery exceeds typical 14m–2h10m envelope, missed, pattern_significance | factors: source=email, keyword=RC91+Union, filed_during_overnight_delegation_window, multi_message_outreach_without_bank_response, accumulating_cycle_count=6_in_9_days, duration_exceeds_historical_envelope, accountability_alignment_secondary]
