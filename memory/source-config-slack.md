@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-19T19:09:34Z. 20:09 WAT skim tick: one Tier 1 delta — Afeez Kazeem RC91 filing ~19:18 WAT in #teamapt-tech-operations (Stanbic cycle 31 opening, within-pattern fast-cycle). Zero DMs to user. Sunday support-cadence routing: operational traffic on email, Slack fires only for new P1 cycle openings."
-updated: "2026-04-19T19:24:49Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T05:09:34Z. 06:09 WAT Monday briefing tick: overnight delegation window quiet — zero new Tier 1 parent messages, zero DMs, zero Tier 3 keyword matches. Sunday support-cadence routing held through evening; Stanbic cycle 31 closure traveled via Jira not Slack."
+updated: "2026-04-20T05:36:54Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T19:09:34Z"
+last_processed: "2026-04-20T05:09:34Z"
 ---
 
 ## Connection
@@ -43,16 +43,16 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-19 20:09 WAT **skim-level**. ~2h window since 18:09 WAT last_processed.
+Tick 2026-04-20 06:09 WAT **full-level (06:00 briefing floor)**. Window: 20:09 WAT Apr 19 → 06:09 WAT Apr 20 (~10h, includes overnight delegation window 23:00–06:00 WAT).
 
-Tier 1 channel reads — one new parent message in-window: #teamapt-tech-operations [[Afeez Kazeem]] ~19:18 WAT filing Stanbic RC91 (cycle 31 opening). Followed on email track (thread 19da2fa4960db78b) at 19:25 WAT with bank engagement 19:31 → 19:40 WAT. Cross-referenced to [[Stanbic Bank ATS — Persistent RC91 Pattern]] which has been updated with cycle 31 body + delta. Within-pattern fast-cycle; B6 calibration precedent (bank-owned recurring pattern, no CTO action) holds. No Immediate dispatch.
-
-Other Tier 1 channels (#account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt) — zero new parent messages in-window.
+Tier 1 channel reads — **zero new parent messages in-window** across all five Tier 1 channels (#teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt). Overnight delegation quiet confirmed.
 
 DM sweep — zero new DMs to user in-window.
 
-Keyword sweep Tier 3 skipped at skim (channel-read authoritative).
+Keyword sweep Tier 3 — zero new matches on RC91, RC05, P1, outage, or issuer names across public+private.
 
-Sunday support-cadence routing pattern continues: operational traffic primarily on email (Stanbic cycle 31 authoritative track is email thread 19da2fa4960db78b); Slack fires only as the lightweight P1-cycle-opening signal. Pattern hardens — quiet Slack + active email is the weekend default, with Slack firing at cycle boundaries only.
+Pattern note: Stanbic cycle 31 closed overnight via [[TDSD-6629]] Completion (~00:08 WAT Apr 20, inferred from Jira transition) — no Slack closure marker observed, contrasting prior cycles where #teamapt-tech-operations often carried closure confirmations. Within-pattern variance, not an anomaly — closure-carrier channel varies cycle-to-cycle.
 
-One Slack-sourced signal accumulates to briefing-2026-04-20 via the Stanbic situation page update (Awareness tier, within-pattern fast-cycle).
+Weekend-to-Monday transition: Sunday support-cadence pattern (quiet Slack + active email) held through Sunday evening and overnight. Monday activation not yet observed at 06:09 WAT — team typically starts ~08:30 WAT with DTB standup.
+
+No Immediate dispatch. No Slack signals accumulated to briefing-2026-04-20 as primary source; indirect accumulation via the Stanbic situation page update (Awareness A1) whose closure signal arrived through Jira.
