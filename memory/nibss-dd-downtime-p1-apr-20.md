@@ -5,8 +5,8 @@ type:
 title: NIBSS DD — Downtime P1 Apr 20
 status: developing
 created: "2026-04-20T05:23:14Z"
-summary: "NIBSS DD downtime P1 (TDSD-6630) filed 05:18 WAT Apr 20 by Frances Omelu during overnight delegation window. 09:09 WAT tick: 08:18 WAT non-comment Jira update (status/assignee change, still Work in progress) — silence clock on comments 3h42m since 05:27 WAT NIBSS escalation, but any-update silence reset to 51m. No Immediate re-dispatch (unchanged state from 07:09 WAT dispatch). Continues to match retired Apr 14 NIBSS DD Pending Mandate P1 silent-recovery pattern."
-updated: "2026-04-20T08:17:20Z"
+summary: "NIBSS DD downtime P1 (TDSD-6630) filed 05:18 WAT Apr 20 by Frances Omelu. 10:09 WAT tick: no TDSD-6630 update since 08:18 WAT — any-update silence 1h51m, comment silence 4h42m since 05:27 WAT NIBSS escalation. User overrode B1 in briefing-2026-04-20 triage deferring to 2026-04-21 briefing — no Immediate re-dispatch per triage-deferred state. Silent-recovery pattern match with retired Apr 14 NIBSS DD precedent continues."
+updated: "2026-04-20T09:15:41Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -22,24 +22,25 @@ accountability: Technology Reliability and Security
 - 05:27 WAT — Frances: *"This has been escalated to NIBSS for review and resolution"* (last comment)
 - 05:59 WAT — Last status update pre-briefing
 - 06:09 WAT → 08:09 WAT — ZERO activity (Jira comments, Slack thread, email all silent)
-- **08:18 WAT — Non-comment status/assignee update** (ticket still Work in progress, no resolution signal)
-- 08:18 WAT → 09:09 WAT — 51m silent since last update; 3h42m silent since last comment
+- 08:18 WAT — Non-comment status/assignee update (ticket still Work in progress, no resolution signal)
+- 08:18 WAT → 10:09 WAT — No further updates; any-update silence 1h51m, comment silence 4h42m
 
 **Silence threshold crossed at 07:09 WAT Skim tick.** briefing-2026-04-20 B1 pre-registered this promotion rule: *"If no Slack update or resolution signal within 1h of tick time → absence-of-signal rule promotes to Immediate."* 1h post-briefing-tick elapsed at 07:09 WAT with zero signals. Rule fired — Immediate-tier DM dispatched at 07:09 WAT.
 
-**No re-dispatch at 08:09 WAT or 09:09 WAT.** Immediate was dispatched at 07:09 WAT for this same pattern. Re-firing Immediate for unchanged state (continued silence, same signal) would be noise — calibration precedent established by the Stanbic Bank ATS situation (see [[Stanbic Bank ATS — Persistent RC91 Pattern]] cycle 27 delta 2026-04-17 20:09 WAT: *"**No Immediate re-dispatch:** briefing-2026-04-17 16:30 triage noted all recurring RC91 P1s as expected recurring-pattern; re-firing Immediate for the same pattern would be noise"*). Apply the same rule here.
+**No re-dispatch at 08:09 WAT, 09:09 WAT, or 10:09 WAT.** Immediate was dispatched at 07:09 WAT for this same pattern. User triaged B1 at 08:47 WAT with override disposition: *"Deferred to 2026-04-21 briefing; no action, no commitment"* — explicit acceptance of silent-recovery pattern, deferring active tracking to the next briefing cycle. Re-firing Immediate for unchanged state is both redundant (calibration precedent from [[Stanbic Bank ATS — Persistent RC91 Pattern]] cycle 27) and contradicts the user's explicit defer disposition.
 
-**09:09 WAT tick interpretation.** The 08:18 WAT Jira update was a status/assignee change — not a comment, not a resolution. It resets the absence-of-signal clock on "any update" to 51m at 09:09 WAT (below the 1h threshold), but the comment-silence clock remains at 3h42m. Continued pattern match with Apr 14 NIBSS DD retired precedent (47h silent resolution). No new action at this tick.
+**10:09 WAT tick interpretation.** Continued any-update silence (1h51m) and comment silence (4h42m). State unchanged from 09:09 WAT. User defer override via B1 triage means this situation is explicitly on hold until 2026-04-21 briefing tick re-surfaces it. Heartbeat surfaces no new action.
 
-**Priority framing note.** TDSD-6630 carries Medium priority on the Jira ticket, but structurally this is a P1 (matches Apr 14 NIBSS DD Pending Mandate P1 retired after 47h silent-recovery). Config-salience absence-of-signal rule "Active P1 (unresolved) | 1 hour no update" applies by incident nature, not ticket priority field.
+**Priority framing note.** TDSD-6630 carries Medium priority on the Jira ticket, but structurally this is a P1 (matches Apr 14 NIBSS DD Pending Mandate P1 retired after 47h silent-recovery). Config-salience absence-of-signal rule "Active P1 (unresolved) | 1 hour no update" applies by incident nature, not ticket priority field — but user triage has explicitly overridden the promotion.
 
-**Duration at 09:09 WAT tick:** 3h51m active from 05:18 WAT filing. Any-update silence 51m (below 1h threshold — no promotion). Comment silence 3h42m since 05:27 WAT NIBSS escalation. Silent-recovery pattern still consistent with Apr 14 precedent. Resolution signal, if any, expected from Frances or NIBSS bank-side — monitor via Jira comment channel.
+**Duration at 10:09 WAT tick:** 4h51m active from 05:18 WAT filing. Any-update silence 1h51m. Comment silence 4h42m since 05:27 WAT NIBSS escalation. Silent-recovery pattern still consistent with Apr 14 precedent (47h silent resolution). Resolution signal, if any, expected from Frances or NIBSS bank-side — monitor via Jira comment channel through 2026-04-21 briefing tick.
 
 ## Sources
-Jira [[TDSD-6630]] created 05:18 WAT, last comment 05:27 WAT, status update 08:18 WAT Apr 20; heartbeat briefing tick 06:09 WAT Apr 20; heartbeat Skim tick 07:09 WAT Apr 20; heartbeat Skim tick 08:09 WAT Apr 20; heartbeat Skim tick 09:09 WAT Apr 20
+Jira [[TDSD-6630]] created 05:18 WAT, last comment 05:27 WAT, last status update 08:18 WAT Apr 20; heartbeat briefing tick 06:09 WAT Apr 20; heartbeat Skim tick 07:09 WAT Apr 20; heartbeat Skim tick 08:09 WAT Apr 20; heartbeat Skim tick 09:09 WAT Apr 20; heartbeat Skim tick 10:09 WAT Apr 20; briefing-2026-04-20 B1 triage disposition 08:47 WAT (override → defer to 2026-04-21)
 
 ## Deltas
 - [2026-04-20 06:09 WAT] — Situation created from briefing tick. New NIBSS DD P1 filed overnight. Surfaced as briefing-2026-04-20 B1 (Medium priority → Briefing-tier watch with 1h silence promotion rule).
 - [2026-04-20 07:09 WAT] — 1h post-briefing silence rule triggered. Zero Jira/Slack/thread activity since 05:59 WAT. Immediate-tier DM dispatched.
 - [2026-04-20 08:09 WAT] — Silence continues (2h10m since last update). No new Jira comments, no Slack activity, no email. No Immediate re-dispatch per calibration precedent (unchanged state from 07:09 WAT dispatch). Awareness-tier accumulation for next briefing tick. Factors: source=jira+heartbeat, absence_of_signal_continuation, calibration_precedent_no_redispatch, silent_recovery_pattern_match.
 - [2026-04-20 09:09 WAT] — 08:18 WAT non-comment Jira update (status/assignee change) — any-update silence clock resets to 51m (below 1h threshold); comment silence 3h42m since 05:27 WAT NIBSS escalation. Ticket still Work in progress, no resolution signal. No Immediate re-dispatch (unchanged state). Continued pattern match with retired Apr 14 NIBSS DD precedent. Factors: source=jira, non_comment_update, any_update_silence_reset, calibration_precedent_no_redispatch, silent_recovery_pattern_match.
+- [2026-04-20 10:09 WAT] — No TDSD-6630 update since 08:18 WAT — any-update silence 1h51m, comment silence 4h42m. User B1 triage override at 08:47 WAT explicitly deferred to 2026-04-21 briefing; no Immediate re-dispatch (triage-deferred state overrides promotion rule). Silent-recovery pattern match with Apr 14 precedent continues. Monitor via Jira comment channel. Factors: source=jira, continued_silence, triage_deferred_state, calibration_precedent_no_redispatch, silent_recovery_pattern_match.
