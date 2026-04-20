@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. last_processed 2026-04-20T13:09:00Z. 14:09 WAT Full tick: TDSD-6638 pattern-expansion signal — second merchant account (0000221603, Romoke Ojo reporter, Dominic Usiabulu assignee) with identical IRIS/CBA failure mode to TDSD-6431/6444 on account 0000228201 — recorded as scope expansion on Merchant Settlement systemic-reconciliation-disparity situation. Plus 10 routine transitions across TDSD/TCDD/ATPP/ADD. TDSD-6630 NIBSS DD any-update silence extends to 5h51m, comment silence 8h42m — user-deferred per B1 triage, no Immediate re-dispatch. No new P1/outage filings."
-updated: "2026-04-20T13:20:10Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. last_processed 2026-04-20T14:09:00Z. 15:09 WAT Full tick: 30 deltas, dominated by ATPP MDRS spec-phase continuation (Ruth Adetunji 22 new tickets ATPP-1659 through ATPP-1680, covering Second Presentment/Arbitration/Reason Code Change/Auto-Accept/Collaboration flows). TDSD-6630 NIBSS DD silence extends to 6h51m any-update, 9h42m comment — still user-deferred per B1 triage, no re-dispatch. TDSD-6612 Settlement Payout, TCDD metadata refreshes, ATPP-1607 Done. No new P1/outage filings."
+updated: "2026-04-20T14:19:38Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T13:09:00Z"
+last_processed: "2026-04-20T14:09:00Z"
 ---
 
 ## Connection
@@ -46,26 +46,31 @@ When a Jira ticket from an out-of-scope project (not in the 18-project scope abo
 
 ## Notes
 
-Tick 2026-04-20 14:09 WAT Full-level. TDSD + software-project sweep since 13:09 WAT surfaced 11 in-scope deltas.
+Tick 2026-04-20 15:09 WAT Full-level. TDSD + software-project sweep since 14:09 WAT surfaced 30 deltas.
 
-**Key signal — Merchant Settlement scope expansion (TDSD-6638):**
-- **TDSD-6638 Settlement disparity — account 0000221603** — new ticket filed in 13:09→14:09 window. Reporter [[Romoke Ojo]], assignee [[Dominic Usiabulu]]. Same failure mode as TDSD-6431/6444 on account 0000228201 (IRIS/CBA reconciliation disparity, Providus statement report + NIBSS confirmation evidencing). **Second merchant account with identical failure mode.** This is pattern-expansion that reframes the existing [[Merchant Settlement — Systemic Reconciliation Disparity]] situation from single-merchant defect to systemic reconciliation gap. Situation page already updated this tick with the delta. Factors: source=jira, archetype=service_desk, pattern_expansion, cluster_member=reconciliation_disparity, active_situation_entity_match.
+**Dominant signal — ATPP MDRS spec-phase continuation:**
+- [[Ruth Adetunji]] created 22 new ATPP tickets (ATPP-1659 through ATPP-1680), all To Do / Medium / unassigned (except ATPP-1610 Olatunbosun Olaosebikan). Scope: Second Presentment flow (ATPP-1665–1668, 1670–1673), Arbitration (ATPP-1674, 1677), Reason Code Change (ATPP-1676, 1679), Auto-Accept Warning (ATPP-1680), Code C Collaboration (ATPP-1659–1664), Presentment History (ATPP-1673). **Direct continuation of prior tick's spec-phase cluster (ATPP-1652–1664).** Matches Ruth's 13:26 WAT ATPP Daily Standup output (Drive surfaced the Gemini note this tick). Awareness-tier: routine planning work by assigned owner, no CTO action. Factors: source=jira, archetype=software, spec_phase_continuation, batch_creation, reporter=ruth_adetunji, no_cto_action.
 
-**Routine transitions (10 items, Awareness-tier):**
-- Assorted TCDD mandate-detail updates (no state transitions, metadata refresh only).
-- ATPP MDRS planning tickets (ATPP-1652 through ATPP-1664) — further metadata updates on the spec-phase cluster created by [[Ruth Adetunji]] in the prior tick.
-- ADD-4570 (Challenge success event not posted to SDK Monnify) — assignee [[Funsho Abdullahi]] progressing, no state change.
-- ATPP-1608 (Centralized Dashboard Backend Column Rearrangement) — still Ready for QA Testing.
+**Routine transitions (Awareness-tier):**
+- TDSD-6612 Settlement Payout — metadata update (Initial Review, Dominic Usiabulu assigned, Blessing Olawale reporter).
+- TCDD-1319 Master-Slave DB Deployment — metadata refresh on Yasir epic.
+- TCDD-1175 500 error subscription-plans sorting bug — Victor Madu In Progress.
+- ATPP-1647, ATPP-1646 — Ejiro Asiuwhu enhancements In Progress (TeamApt Admin User Views expansion).
+- ATPP-1607 Column Rearrangement — **transitioned to Done** by Ejiro Asiuwhu (was Ready for QA Testing prior tick).
+- ATPG-90 Harness code coverage stage check — **Done** by Joshua Oluwakuse.
+
+**TDSD-6630 NIBSS DD DOWNTIME silence extends:**
+- No new update this tick. Any-update silence → **6h51m** (from 08:18 WAT). Comment silence → **9h42m** (from 05:27 WAT).
+- User triage B1 in briefing-2026-04-20 explicitly deferred to Apr 21 briefing — **no Immediate re-dispatch** per triage-deferred state.
+- Silent-recovery pattern precedent intact (retired NIBSS DD Apr 14 after 47h silence).
+
+**TDSD-6633 Keystone Settlement Requery:** No update this tick. Still Initial Review per situation tracker.
+
+**TDSD-6638 Merchant Settlement disparity account 0000221603:** No update this tick. Still tracked on [[Merchant Settlement — Systemic Reconciliation Disparity]] situation.
 
 **Out-of-scope carryforward (via Layer 1 email):**
 - **TISD-480** ArgoCD CVE remediation — no further updates. Still Awaiting Control Approval. Proposed Apr 17 change window MISSED by 3 days. Briefing-tier Decision candidate for Apr 21 briefing — needs window replan.
 
 **TDSD-6203 Request for Change of ISO Managers** (in-scope, no new update this tick) — still Authorize state; 2nd approval email of 09:18 WAT still pending decision. Briefing-tier Decision candidate for Apr 21 briefing.
 
-**TDSD-6630 NIBSS DD DOWNTIME silence status:**
-- No new comments since 05:27 WAT Frances Omelu "escalated to NIBSS" — comment silence extends to **8h42m** at tick.
-- Last any-update 08:18 WAT (metadata refresh); any-update silence extends to **5h51m**.
-- User triage B1 in briefing-2026-04-20 explicitly deferred to Apr 21 briefing — **no Immediate re-dispatch** per triage-deferred state.
-- Silent-recovery pattern precedent intact (retired NIBSS DD Apr 14 after 47h silence).
-
-No Immediate-tier transitions this tick. No new P1/outage filings.
+No Immediate-tier transitions this tick. No new P1/outage filings. Union Bank RC91 cycle 7 (6m brief) filed via Slack only — no TDSD ticket created (pattern for brief bank-auto-recovered cycles).

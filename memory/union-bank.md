@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending). ATS RC91: five cycles now in 8 days (Apr 12, 15, 16×2, 19). Cycle 5 Apr 19 overnight — first-time participant on active RC91 wave (00:00–04:50 WAT window, 2h10m duration). MPGS settlement bank (ICA 34150)."
-updated: "2026-04-19T07:34:20Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending). ATS RC91: SEVEN cycles in 9 days (Apr 12, 15, 16×2, 19, 20 morning, 20 afternoon). Apr 20 morning cycle 6h39m bank-side (longest on record, 3x prior ceiling); Apr 20 afternoon cycle 6m brief auto-recovered. Same-day dual-cycle is new pattern behavior. MPGS settlement bank (ICA 34150)."
+updated: "2026-04-20T14:19:39Z"
 cssclasses:
   - "entity"
 ---
@@ -17,7 +17,15 @@ cssclasses:
 
 **2026-04-16:** Access granted for the [[Union Bank]] [[Direct Debit]] project following Emanuel's feedback on Jira. Team expects to make progress on mandate creation and transaction simulation today. [[Abiodun Famoye]] raised a blocker related to Cosmos, which he plans to engage with after the D2B standup call to resolve. Source: [[Direct to Bank Daily Stand Up 2026-04-16]].
 
-## ATS RC91
+## ATS RC91 — Accumulating Pattern (7 cycles in 9 days)
+
+### Cycle 7 — Apr 20, 2026 afternoon (14:27–14:33 WAT, 6m, bank-auto-recovered)
+
+**2026-04-20 14:36 WAT:** [[Qazim Adedigba]] filed post-recovery P1 alert in #teamapt-tech-operations. Start 14:27 WAT, end 14:33 WAT, duration 6 minutes. Resolution: "Transactions auto recovered." Identified cause: "From the bank." No Jira ticket created — brief bank-auto-recovered cycle pattern (consistent with Stanbic fast-cycle signature, not Union's prior slow-response signature). **Same-day dual-cycle** — second Union Bank cycle within 7 hours of Cycle 6 closure (07:56 WAT). This is new pattern behavior for Union Bank — prior cycles were 24h+ apart. Factors: source=slack, channel=teamapt-tech-operations, post_recovery_filing, bank_auto_recovery_brief_cycle, same_day_dual_cycle, pattern_significance.
+
+### Cycle 6 — Apr 20, 2026 overnight (01:17–07:56 WAT, 6h39m bank-side, longest on record)
+
+**2026-04-20 overnight:** [[Olamide Ajibulu]] filed RC91 cycle at 01:17 WAT via email to itechannels@unionbankng.com. Bank first response at 07:33 WAT from Iyama Victor (reconfirm-status prompt) — 6h16m silent before engagement. Olamide confirmed resolution at 07:56 WAT. TDSD-6632 filed 07:21 WAT, Completed 07:57 WAT. End-to-end **6h39m — 3x prior longest (Apr 19 cycle 2h10m)**, crossing the config-salience Immediate-tier trigger #2 envelope (>2h anomalous) by 4h+. Bank-silent-6h-before-response pattern contrasts with [[Stanbic Bank ATS — Persistent RC91 Pattern]] (6m engagement latency). Bank-owned resolution path held despite duration; CTO-direct engagement was NOT required. Dedicated situation page: [[Union Bank — RC91 P1 Apr 20]] (retired 10:09 WAT).
 
 ### Cycle 5 — Apr 19, 2026 (02:40–04:50 WAT, 2h10m, bank-resolved)
 
@@ -39,6 +47,17 @@ cssclasses:
 
 **TDSD-6519** (Apr 12, 2026): [[Qazim Adedigba]] filed RC91 failure at 13:58 WAT. Victor Iyama requested reconfirmation at 14:02 WAT. Qazim confirmed resolution at 14:14 WAT. Duration: ~16 min. Part of broader multi-bank pattern on Apr 12.
 
+### Pattern-significance summary
+
+Trajectory 7 cycles / 9 days:
+- Apr 12 — isolated (16m)
+- Apr 15 — isolated (active, routing error)
+- Apr 16 — two cycles in one day (pattern established)
+- Apr 19 — overnight wave participant (2h10m)
+- Apr 20 — dual-cycle day: 6h39m morning (longest on record) + 6m afternoon (brief auto-recover)
+
+The 9-day trajectory shows: escalating frequency, a new longest-duration ceiling (6h39m), and now same-day dual-cycle (new behavior). Bank-response-latency signature is mixed — Cycle 6 had 6h+ silence before first response, Cycle 7 was bank-auto-recovered without any email thread. Contrast with [[Stanbic Bank ATS — Persistent RC91 Pattern]] where bank auto-responder fires in 6m consistently. Pattern-significance retained for downstream synthesis.
+
 ## Settlement
 
 Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TDSD-6276]]). NIBSS-flagged ATS timeout outstanding as of Apr 2026. Stanbic settlement account reconciliation thread active Apr 16 (Emeka Joseph / Stanbic reconciliation unit).
@@ -55,6 +74,7 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 - [[Access Bank — Multi-Track Failures]]
 - [[RC91 Multi-Bank Failure Pattern]]
 - [[Union Bank — RC91 P1 Apr 19]]
+- [[Union Bank — RC91 P1 Apr 20]]
 - [[ATS]]
 - [[NIBSS]]
 - [[Monnify]]

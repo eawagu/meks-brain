@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T13:09:00Z. 14:09 WAT Full tick: 2 new messages in-window in #go-subscribe-by-teamapt — Yasir Syed Ali 13:45 WAT asking Abdulgafar Obeitor for POS Go Subscribe sanity testing + Dennis demo (priority contention with bank vulnerabilities), plus Khadijat channel join. Zero DMs, zero Tier 3 Immediate matches. Seven consecutive Slack-operational-quiet ticks — ops signals continue to travel via email/Jira tracks."
-updated: "2026-04-20T13:19:32Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T14:09:00Z. 15:09 WAT Full tick: 8-consecutive-Slack-operational-quiet-tick streak BROKEN — Union Bank RC91 P1 brief cycle filed 14:36 WAT in #teamapt-tech-operations by Qazim Adedigba (start 14:27, end 14:33, 6m, bank-auto-recovered). Cycle 7 in 9 days on Union Bank ATS. Already-resolved at filing — no Immediate dispatch. All other Tier 1 channels silent, zero DMs, Tier 3 keyword search returned no hits (indexing lag)."
+updated: "2026-04-20T14:19:38Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T13:09:00Z"
+last_processed: "2026-04-20T14:09:00Z"
 ---
 
 ## Connection
@@ -33,13 +33,11 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-20 14:09 WAT Full-level. Tier 1 channels: 2 new items in 13:09→14:09 WAT window, both in #go-subscribe-by-teamapt.
+Tick 2026-04-20 15:09 WAT Full-level. Tier 1 channels: 1 new filing in 14:09→15:09 WAT window, in #teamapt-tech-operations.
 
-**#go-subscribe-by-teamapt — continued activity after yesterday's silence break:**
-- 13:45 WAT — [[Yasir Syed Ali]] in-channel ask to [[Abdulgafar Obeitor]]: request for POS Go Subscribe sanity testing + Dennis demo; flags priority contention against ongoing bank vulnerabilities work. CCs [[Ketan Dhamasana]], [[Daniel]], [[Ravi]], [[Kevin]], [[Khadijat]]. Second message in same burst addresses Ketan + [[Wycliffe Ochieng']] asking for platform stability commitment. Tier: Awareness (priority-contention signal with named owners). Recorded as delta on [[GoSubscribe — Integration Issues Open, Channel Silent]] situation page.
-- 13:xx WAT — Khadijat channel join (membership event). No content; informational only.
-- Factors: source=slack, channel=go-subscribe-by-teamapt, priority_contention, cto_cc'd_not_primary_asker, named_engineer_ownership, active_situation_entity_match=gosubscribe.
+**#teamapt-tech-operations — Slack-operational-quiet streak (8 ticks) BROKEN:**
+- 14:36:53 BST — [[Qazim Adedigba]] filed P1 alert for Union Bank brief RC91 cycle. Format follows standard post-recovery filing: *Product: ATS | Incident: P1: Union Bank Brief RC91 Failures Across Processors | Incident Impact: Transactions were failing success rate impacted | Identified Cause: From the bank | Resolution Action: Transactions auto recovered | Incident Duration: 6 Minutes | Start Time: 2:27 PM | End Time: 2:33 PM*. **Already resolved at filing** — 6m auto-recovery by the bank. **Cycle 7 in 9 days** on [[Union Bank]] ATS route (Apr 12, 15, 16×2, 19, 20 morning 6h39m, 20 afternoon 6m). Pattern-significance: accumulating frequency + dual-cycle-in-one-day (Apr 20 morning 6h39m followed by afternoon 6m brief). Already-resolved post-recovery filing → **no Immediate dispatch required** (per config-salience trigger #1 interpretation — resolved incidents don't need within-hour dispatch). Classification: Awareness-tier for Apr 21 briefing. Delta recorded on [[Union Bank]] entity page (cycle count 5→7, longest-on-record 6h39m, same-day dual-cycle). Factors: source=slack, channel=teamapt-tech-operations, keyword=P1+RC91+Union, pattern_significance, bank_auto_recovery_brief_cycle, accumulating_cycle_count=7_in_9_days, same_day_dual_cycle, post_recovery_filing.
 
-**All other Tier 1 channels silent** — #teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev all returned zero new parent messages in the 13:09→14:09 WAT window. Zero DMs to user. Tier 3 keyword sweep (P1 OR outage OR RC91 OR RC05 OR breach OR compromised OR NIBSS after:2026-04-20) returned zero results.
+**All other Tier 1 channels silent** — #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt all returned zero new parent messages in the 14:09→15:09 WAT window. Zero DMs to user. Tier 3 keyword sweep (P1 OR outage OR RC91 OR RC05 OR breach OR compromised OR NIBSS after:2026-04-20) returned zero results (Slack search indexing likely lagged behind 14:36 WAT filing — the direct channel read caught it).
 
-**Seven consecutive Slack-operational-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 + 12:09 + 13:09 + 14:09 WAT).** GoSubscribe activity continues to be coordination-class, not operational-incident-class. Calibration pattern intact: operational tickets (Union Bank RC91 Apr 20 cycle, NIBSS DD downtime, Merchant settlement cluster) file via Jira + email Layer 1 without Slack announcement. Ops team handling signals outside Tier 1 Slack.
+**Calibration pattern — 8-tick operational-quiet streak (07:09 + 08:09 + 09:09 + 10:09 + 11:09 + 12:09 + 13:09 + 14:09 WAT) ended at 15:09 WAT with Union Bank brief cycle.** Streak-break mechanism held as expected: post-recovery P1 filings from Qazim / ops team appear when a cycle closes, even for 6m brief durations. Slack channel remains the canonical announce point for closed operational cycles — live incidents route through Jira + email direct threads first.
