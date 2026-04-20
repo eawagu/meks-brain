@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only; ~75 consecutive quiet ticks as of 2026-04-20 09:09 WAT. ~2 days from 7-day absence-of-signal threshold at current cadence; Monday work-hour activation likely to interrupt streak."
-updated: "2026-04-20T08:18:43Z"
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only; 10:09 WAT tick encountered Google Drive MCP authentication error (connector requires re-auth). Isolate error, log, continue. Prior quiet-tick streak (~75 ticks) still carried; ~2 days from 7-day absence-of-signal threshold. Re-auth needed by user."
+updated: "2026-04-20T09:17:30Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T08:09:34Z"
+last_processed: "2026-04-20T09:09:00Z"
 ---
 
 ## Connection
@@ -25,4 +25,8 @@ Google Drive MCP. Scope: files whose title starts with "Notes by Gemini" (meetin
 
 ## Notes
 
-Tick 2026-04-20 09:09 WAT Skim-level. No new or modified Notes-by-Gemini files. Search `title contains 'Notes by Gemini' and modifiedTime > '2026-04-19T19:09:34Z'` returned empty. Consecutive-quiet-tick streak extended to ~75 ticks (~5 days at ~15 ticks/day). ~2 days from 7-day absence-of-signal threshold — Monday work-hour activation (~08:30 WAT onward) likely to interrupt streak before crossing (DTB standup 08:30, IMS review 08:30, etc., would produce Gemini transcripts). Empty-result fast path held.
+Tick 2026-04-20 10:09 WAT Skim-level. **Google Drive MCP auth error this tick** — `search_files` returned: *"This connector requires authentication. The user needs to connect it before this tick can be used."* Per config-heartbeat error isolation rule: error logged, tick continues for other sources. Drive scan deferred until connector is re-authenticated by user.
+
+Prior quiet-tick streak (~75 ticks as of 09:09 WAT) not incremented this tick because the sweep itself did not run — last successful sweep was at 09:09 WAT with zero deltas. Absence-of-signal threshold calculation holds at ~2 days from 7-day threshold. Monday work-hour activation (Cards and Account All Hands 10:30, Channels Onboarding 11:30, etc.) likely to produce Notes-by-Gemini transcripts, but re-auth is required first to detect them.
+
+**Flag for user action:** re-authenticate Google Drive MCP connector in Claude app to restore this source's sweep capability. Next tick with auth restored will resume empty-result fast path or process accumulated deltas.
