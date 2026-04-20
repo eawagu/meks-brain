@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T11:09:00Z. 12:09 WAT Full tick: zero modifications in 11:09→12:09 WAT window. Today's schedule on track per B5 overrides. Channels Onboarding & Disbursement in progress (11:30–12:30 WAT). No new invites, no RSVP changes, no cancellations."
-updated: "2026-04-20T11:16:24Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T12:09:00Z. 13:09 WAT Full tick: 1 metadata update in 12:09→13:09 WAT window (ATPP Daily Standup Meeting 16:00 WAT updated 12:41 WAT — attendee RSVP change, no user action change; B5 override still applies). Juliana Switch Daily Standup upcoming at 13:30 WAT. No new invites, no RSVP changes to user, no cancellations."
+updated: "2026-04-20T12:18:06Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T11:09:00Z"
+last_processed: "2026-04-20T12:09:00Z"
 ---
 
 ## Connection
@@ -28,16 +28,15 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-20 12:09 WAT Full-level. Calendar sweep 11:09 WAT → 12:09 WAT today + extended through tomorrow.
+Tick 2026-04-20 13:09 WAT Full-level. Calendar sweep 12:09 WAT → 13:09 WAT today + extended through tomorrow.
 
-**Zero calendar modifications in the 1-hour window.** Most-recent lastModified events are pre-tick:
-- Juliana Switch Daily Standup 08:01 WAT (pre-tick metadata refresh).
-- TeamApt Exec Catch-up 08:00 WAT (pre-tick metadata refresh).
+**1 calendar modification in the 1-hour window:**
+- ATPP Daily Standup Meeting 16:00–17:00 WAT updated 12:41 WAT — attendee RSVP change (not user's). User's response still `accepted`. B5 override from briefing-2026-04-20 still applies: user to decline this meeting manually in GCal UI (conflict with Tech Support Meeting 16:00–17:00 WAT). No new heartbeat action required — decline is user's manual step per B5.
 
 **Today's events on track per B5 overrides:**
 - Cards and Account: All Hands 10:30–11:15 WAT — complete, Gemini notes produced 10:47 WAT (pending ingest when Drive auth restored).
-- Channels Onboarding & Disbursement 11:30–12:30 WAT — in progress at tick (ends in ~21m).
-- Juliana Switch Daily Standup 13:30–14:10 WAT (accepted, upcoming).
+- Channels Onboarding & Disbursement 11:30–12:30 WAT — complete.
+- Juliana Switch Daily Standup 13:30–14:10 WAT — upcoming in ~21 minutes.
 - 2026 Strategy Event Debrief 14:45–15:45 WAT (accepted per B5 override).
 - Tech Support Meeting 16:00–17:00 WAT — B5 override: user to decline manually in GCal UI.
 - ATPP Daily Standup 16:00–17:00 WAT — B5 override: user to decline manually in GCal UI.
@@ -51,4 +50,4 @@ Tick 2026-04-20 12:09 WAT Full-level. Calendar sweep 11:09 WAT → 12:09 WAT tod
 - Round 2 Interview HoE 15:00 WAT.
 - TeamApt Exec Catch-up 16:00 WAT.
 
-No RSVP changes to previously-accepted events, no cancellations, no agenda-less invites >30m, no back-to-back overload threshold crossed today. No Immediate-tier triggers from calendar this tick.
+No RSVP changes to previously-accepted events by user, no cancellations, no agenda-less invites >30m, no back-to-back overload threshold crossed today. No Immediate-tier triggers from calendar this tick.
