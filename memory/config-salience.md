@@ -4,7 +4,7 @@ type:
 title: config-salience
 created: "2026-04-11T15:44:57Z"
 summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: "2026-04-20T06:25:12Z"
+updated: 2026-04-20
 cssclasses:
   - "config"
 ---
@@ -51,10 +51,10 @@ Five dimensions, scored 0.0–1.0 per signal. Weighted sum determines ordering w
 | Dimension | Weight | What it measures |
 |---|---|---|
 | Urgency | 0.20 | Time until the window for action closes |
-| Impact scope | 0.20 | Revenue, customers, compliance, or team affected |
+| Impact scope | 0.15 | Revenue, customers, compliance, or team affected |
 | CTO-specificity | 0.20 | Requires CTO decision vs. someone else can handle |
 | Pattern significance | 0.20 | One-off vs. recurring; trend direction (worsening/stable/improving) |
-| Accountability alignment | 0.20 | Maps to declared accountabilities in roles registry |
+| Accountability alignment | 0.25 | Maps to declared accountabilities in roles registry |
 
 ### Weight Constraints
 
@@ -145,26 +145,4 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 
 *(Tuples appended by the Improve phase, triage client, and ingest pipeline)*
 
-- [2026-04-12, B2, acted, pattern_significance]
-- [2026-04-12, B3, acted, accountability_alignment]
-- [2026-04-12, B4, acted, urgency]
-- [2026-04-12, B5, acted, urgency]
-- [2026-04-15, slack-dm-sweep-false-negative-stanbic-rc91-resolution, missed, accountability_alignment]
-- [2026-04-16, B1, acted, urgency]
-- [2026-04-16, B2, acted, accountability_alignment]
-- [2026-04-16, B3, dismissed, impact_scope]
-- [2026-04-16, B4, acted, urgency]
-- [2026-04-16, B5, acted, urgency]
-- [2026-04-17, wema-bank-rc91-p1-apr17-not-surfaced-until-15:09-wat-tick-6h20m-after-filing, missed, pattern_significance]
-- [2026-04-17, B2, acted, urgency]
-- [2026-04-17, B3, acted, accountability_alignment | factors: source=slack+email, situation_delta, resolution_signal, calibration_signal]
-- [2026-04-17, B4, acted, pattern_significance | factors: source=email, sender=Qazim Adedigba, keyword=duty handover+RC91, situation_delta, pattern_significance]
-- [2026-04-17, B5, acted, pattern_significance | factors: source=email, keyword=duty handover+RC91, pattern_significance]
-- [2026-04-17, B6, acted, accountability_alignment | factors: source=email, keyword=duty handover+TDSD, accountability_alignment]
-- [2026-04-17, B7, acted, accountability_alignment | factors: source=calendar, signal_type=day-of schedule, accountability_alignment]
-- [2026-04-17, B8, acted, pattern_significance | factors: source=email, keyword=duty handover, pattern_significance, accountability_alignment=low]
-- [2026-04-19, B1, acted, pattern_significance]
-- [2026-04-19, B2, acted, accountability_alignment]
-- [2026-04-19, stanbic-and-access-apr19-overnight-maintenance-windows-framed-as-rc91-regime-change-wave, missed, pattern_significance]
-- [2026-04-19, step-3b-lint-triage-skipped-throughout-session-client-did-not-check-lint-report-after-briefing-triage-complete-only-surfaced-after-user-prompt, missed, accountability_alignment]
-- [2026-04-20, briefing-2026-04-18-never-triaged-10-items-left-undispositioned-for-2-days-improve-phase-discovered-on-apr-20-heartbeat-sweep, missed, accountability_alignment]
+- [2026-04-12 → 2026-04-20, 18 acted, 1 dismissed, 4 missed, weight_deltas_applied: impact_scope −0.05, accountability_alignment +0.05, cto_specificity held per user override, urgency/pattern_significance unchanged]
