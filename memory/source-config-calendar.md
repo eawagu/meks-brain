@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-19T19:09:34Z. 20:09 WAT skim tick: Moniepoint HoE Round 2 panel formal invite landed (Tobilola Fasanya for Bhuvnesh Bansal, Apr 22 16:00 WAT) — formalizes existing confirmed slot. Monday Apr 20 16:00 WAT ATPP/Tech-Support conflict still unresolved."
-updated: "2026-04-19T19:27:08Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T05:09:34Z. 06:09 WAT Monday briefing tick: two overnight invite deltas on today — IMS Management Review 09:00-10:00 WAT (conflicts DTB standup 30m); Strategy Event Debrief 14:45 WAT. Apr 20 16:00 WAT ATPP/Tech-Support conflict unresolved."
+updated: "2026-04-20T05:39:17Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T19:09:34Z"
+last_processed: "2026-04-20T05:09:34Z"
 ---
 
 ## Connection
@@ -28,22 +28,29 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-19 20:09 WAT **skim-level**. ~2h window since 18:09 WAT last_processed.
+Tick 2026-04-20 06:09 WAT **full-level (06:00 briefing floor)**. Window: 20:09 WAT Apr 19 → 06:09 WAT Apr 20 (~10h, includes overnight delegation window 23:00–06:00 WAT).
 
-**One delta in-window:** New/reformalized invite for Apr 22 16:00–17:00 WAT arrived via email thread 19da7253c2ebc76b from [[Tobilola Fasanya]] (moniepoint.com recruiter) at 20:08 WAT — HoE panel for candidate Bhuvnesh Bansal. Most likely the formal invitation for the existing confirmed "HoE Round 2 panel 4pm–5pm WAT" slot (moved from 11am per 13:09 WAT Sunday tick after [[Chris Purkis]]'s earlier proposal). Not a new conflict; calendar slot already accepted. Signal accumulates to briefing-2026-04-20 via email source-config as Awareness (meeting formalization + candidate name capture: Bhuvnesh Bansal).
+**Two overnight invite deltas on today (Monday Apr 20):**
 
-No RSVP changes, no cancellations, no new same-day (Monday) agenda-less invites, no reschedules on existing meetings. Consistent with Sunday cadence.
+1. **IMS Management Review — Apr 20 09:00–10:00 WAT (NEW invite, same-day trigger).** CONFLICT: overlaps DTB Daily Standup (08:30–09:30 WAT) by 30 minutes (09:00–09:30 WAT). Forced choice — either attend DTB standup full 08:30–09:30 and miss IMS opening 30m, or transition to IMS at 09:00 WAT (leaving DTB standup 30m early). Dispatched to briefing-2026-04-20 as Decision item B2. Factors: urgency 0.8 · impact_scope 0.5 · cto_specificity 0.6 · pattern_significance 0.3 · accountability_alignment 0.7.
 
-Forward view (Monday Apr 20) unchanged since last tick:
+2. **Strategy Event Debrief — Apr 20 14:45 WAT (NEW invite).** Slots into previously light afternoon window. No direct conflict with an existing meeting, but compresses afternoon into a stacked sequence: Strategy Debrief 14:45 → ATPP Standup 16:00 → Tech Support 16:00 (unresolved conflict from prior tick) → Moniepoint Dinner 18:00. Dispatched as part of afternoon-stack item B5 on briefing-2026-04-20.
+
+**Carry-forward unresolved:** Apr 20 16:00–17:00 WAT **ATPP Daily Standup vs Tech Support meeting — conflict persists.** Both accepted, exact overlap. No resolution action observed overnight. Dispatched to briefing-2026-04-20 as Decision item B5 (afternoon-stack question: which to attend, which to delegate/decline).
+
+No RSVP changes on previously accepted meetings, no cancellations, no new Tuesday Apr 21 agenda-less invites, no reschedules.
+
+**Forward view (Monday Apr 20, updated):**
 - 08:30–09:30 WAT — Direct to Bank : Daily stand up
+- **09:00–10:00 WAT — IMS Management Review (NEW)** — conflicts DTB standup 30m
 - 10:30–11:15 WAT — Cards and Account: All Hands
 - 11:30–12:30 WAT — Channels Onboarding & Disbursement
 - 13:30–14:10 WAT — Juliana Switch Daily Standup
-- 14:30 WAT — Moniepoint Dinner (19:00 IST, accepted)
-- **16:00–17:00 WAT — ATPP Daily Standup (accepted)**
-- **16:00–17:00 WAT — Tech support meeting (accepted)** — **CONFLICT: overlaps ATPP Standup exactly.** Still unresolved; carry forward to briefing-2026-04-20.
-- 18:00–19:00 WAT — Product - Engineering Sync (self-organized, Frank Atashili pending)
+- **14:45 WAT — Strategy Event Debrief (NEW)**
+- **16:00–17:00 WAT — ATPP Daily Standup vs Tech support meeting (UNRESOLVED CONFLICT)**
+- 18:00–19:00 WAT — Moniepoint Dinner (accepted; 19:00 IST label)
+- 18:00–19:00 WAT — Product - Engineering Sync (self-organized, Frank Atashili pending) — **NEW CONFLICT: overlaps Moniepoint Dinner exactly.** Carry to next tick for user choice if not self-resolved.
 
 Tue Apr 21 — no meetings shown in forward view.
-Wed Apr 22 — **HoE Round 2 panel 4pm–5pm WAT for Bhuvnesh Bansal** (confirmed earlier at 13:09 WAT tick, formal invite from Tobilola Fasanya landed this tick at 20:08 WAT).
-Lattice Review window closes Apr 27 (8 days remaining).
+Wed Apr 22 — HoE Round 2 panel 4pm–5pm WAT for Bhuvnesh Bansal (confirmed, formal invite received Apr 19 20:08 WAT from [[Tobilola Fasanya]]).
+Lattice Review window closes Apr 27 (7 days remaining).
