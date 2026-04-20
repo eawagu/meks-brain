@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T08:09:34Z. 09:09 WAT Skim tick: Tier 1 channels silent, zero DMs, zero Tier 3 Immediate matches. Two consecutive Slack-quiet Skim ticks (08:09 + 09:09)."
-updated: "2026-04-20T08:18:13Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T09:09:00Z. 10:09 WAT Skim tick: Tier 1 channels silent, zero DMs, zero Tier 3 Immediate matches. Three consecutive Slack-quiet Skim ticks (08:09 + 09:09 + 10:09) — ops signals continue to travel via email/Jira tracks."
+updated: "2026-04-20T09:16:08Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T08:09:34Z"
+last_processed: "2026-04-20T09:09:00Z"
 ---
 
 ## Connection
@@ -33,4 +33,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-20 09:09 WAT Skim-level. Tier 1 channels: no new parent messages since 08:09 tick. DMs to user: zero. Tier 3 keyword sweep: no Immediate-tier matches (P1, outage, RC91, RC05, breach, NIBSS). Two consecutive Slack-quiet Skim ticks (08:09 + 09:09) — active operational signals continuing to travel via email/Jira tracks (Duty Handover via email, NIBSS DD TDSD-6630 via Jira). Slack-silence-while-email-active pattern holds; calibration note from 07:09 tick remains operative.
+Tick 2026-04-20 10:09 WAT Skim-level. Tier 1 channels: no new parent messages since 09:09 tick. DMs to user: zero. Tier 3 keyword sweep (P1, outage, RC91, RC05, breach, compromised, NIBSS) after 2026-04-20: no matches. Three consecutive Slack-quiet Skim ticks (08:09 + 09:09 + 10:09) — ops signals continuing to travel via email/Jira tracks (Duty Handover via email, NIBSS DD TDSD-6630 via Jira, today's Union Bank cycle resolved via email thread + TDSD-6632). Slack-silence-while-email+jira-active pattern holds; calibration note from 07:09 tick remains operative.
