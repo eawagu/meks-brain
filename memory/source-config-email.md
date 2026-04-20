@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-20T10:09:00Z. 11:09 WAT Full tick: narrow per-keyword query approach VALIDATED (token-budget workaround from 10:09 limitation note works for most queries). Layer 1 To:me surfaced 10 threads — zero operational incidents; two CTO-approval candidates accumulating (TISD-480 ArgoCD CVE, TDSD-6203 ISO Managers re-approval). Bank-name issuer query still oversized — deferred to sub-bucketing."
-updated: "2026-04-20T10:17:46Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-20T11:09:00Z. 12:09 WAT Full tick: 3 new to:me threads in 11:09→12:09 window — 1 new Briefing-tier Decision candidate (Lattice 8 pending Downward Reviews, Apr 27 deadline at 12:08 WAT), 2 awareness (Glory TSA/NIBSS follow-up, Blessing CMS chase). Zero operational incidents. Three CTO-approval-gate candidates now accumulating for Apr 21 briefing."
+updated: "2026-04-20T11:15:31Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T10:09:00Z"
+last_processed: "2026-04-20T11:09:00Z"
 ---
 
 ## Connection
@@ -42,28 +42,21 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 
 ## Notes
 
-Tick 2026-04-20 11:09 WAT Full-level. **Narrow per-keyword approach validated.** Executed four narrow queries in parallel:
+Tick 2026-04-20 12:09 WAT Full-level. Narrow per-keyword approach holds reliability across this tick.
 
-- **Layer 1 `to:me newer_than:2h`** → 10 threads returned:
-  - 10:06 WAT — Chris Purkis (Moniepoint) "Updated invitation: Blocker: Head of Engineering (VP+) Slots @ Fri Apr 24 11am-12pm WAT" — 4-day-out interview slot. Awareness.
-  - 09:47 WAT — gemini-notes@google.com "Notes: Cards and Account: All Hands Apr 20, 2026" — Gemini transcript produced. Route to ingress when Drive auth restored.
-  - 09:43 WAT — Chris Purkis "Invitation: Blocker - Head of Engineering @ Thu Apr 23 3:30pm-4:30pm WAT" — 3-day-out interview slot. Awareness.
-  - 09:31 WAT — jira@teamapt.atlassian.net "TISD-480 TeamApt Infrastructure Service Desk" — **CTO approval request** for ArgoCD CVE remediation. Briefing-tier Decision candidate.
-  - 09:18 WAT — jira@teamapt.atlassian.net "TDSD-6203 TeamApt-Service-Desk" — **second approval request** (first was 2026-03-23); ISO Managers change. Briefing-tier Decision candidate.
-  - 09:31 WAT — Microsoft Teams notification from Precious Okiemen (Teams @mention for integration checklist) — awareness, no action.
-  - 09:11 WAT — gemini-notes@google.com "Notes: Direct to Bank Daily stand up Apr 20" — Gemini transcript. Route to ingress when Drive auth restored.
-  - 09:08 WAT — notifications@app.bamboohr.com "Time Off Requested: Ravi Kiran Veluguleti" — HR approval pending. Awareness.
-  - 08:44 WAT — Tracy Ojaigho "Invitation: Cards Team Str, Systems & Roadmap @ Tue Apr 21 1pm-2pm WAT" — next-day meeting invite. Awareness (priority signal #2 fires but carries light weight given Tuesday not today).
-  - 08:18 WAT — Glory Alioha "Re: TSA Integration to NIBSS on Collections" — routine project comms, awareness.
+**Layer 1 `to:me newer_than:2h`** → 3 new threads in 11:09→12:09 WAT window:
 
-- **Operational keywords `(RC91 OR RC05 OR P1 OR outage OR NIBSS OR compromised) newer_than:2h`** → 1 thread: TSA Integration to NIBSS 08:18 WAT (same as Layer 1 entry above — routine project comms, not incident). Zero operational incidents in past 2h.
+- **12:08 WAT — Lattice (notifications@mg.latticehq.com) "Reminder to complete your reviews"** — 7-day countdown to **Apr 27 deadline**, 8 pending Downward Reviews ("no extensions"). Concurrent calendar event `Lattice Review - Hi Emeka - 8 Pending Downward Reviews` runs Apr 13 → Apr 28 (all-day). **New Briefing-tier Decision candidate** for 2026-04-21 06:00 WAT briefing — HR/people deadline, no weekly-rhythm budget set. Factors: source=email, signal_type=hr_deadline_countdown, action_horizon=7_days, accountability_alignment=team_reviews.
+- **11:42 WAT — [[Glory Alioha]] "Re: TSA Integration to NIBSS on Collections"** — follow-up to Mohammed (NIBSS) requesting technical alignment meeting. Routine project comms, large distribution list (CC includes Dennis Ajalie, Mek, Tunde Okufi, Project Delivery). Awareness.
+- **11:23 WAT — [[Blessing Abel-Oguche]] "Re: MoniePoint Issuing BIN and Test Keys – Request for CMS Output File"** — reminder chase to Chris at Resync Payments (cie@resyncpayments.com) following Apr 17 thread. Awareness, routine cadence.
 
-- **Bank-name bucket `(Stanbic OR Ecobank OR Sterling OR Polaris OR Wema OR FCMB OR Keystone OR Access OR UBA OR Fidelity OR Union) newer_than:2h`** → EXCEEDED token budget (139,516 chars). Sub-bucketing required for exhaustive issuer sweep. Confidence on issuer-thread delta carried via TDSD sweep which showed all known active issuer tracks account for (Union TDSD-6632 completed 09:47 WAT; Keystone TDSD-6633/6615 INITIAL REVIEW carryforward; Monnify TDSD-6637 review comment).
+**Operational keywords `(RC91 OR RC05 OR P1 OR outage OR NIBSS OR compromised) newer_than:2h`** → 1 thread (TSA NIBSS Integration, same as Layer 1 — project comms not incident). Zero operational incidents in past 2h.
 
-- **Ecobank narrow `(Ecobank OR "Adewuyi Mayowa") newer_than:1d`** → Apr 19 thread last activity 17:31 WAT (Afeez Kazeem follow-up). No new messages in past ~17h. Wait-state carries forward unchanged. Mayowa silent since 15:29 WAT Apr 19; 24h response heuristic hits 17:24 WAT today (~6h15m from tick).
+**Issuer-name sub-bucket sweep not run this tick** — no active signals prompted it; bank-name query still oversized without sub-bucketing. Active Ecobank wait-state (17:24 WAT threshold) unchanged from B4 override path.
 
-Two CTO-approval candidates accumulating for next briefing tick (2026-04-21 06:00 WAT):
-1. **TISD-480** ArgoCD CVE remediation — Fri Apr 17 window MISSED, needs replan.
-2. **TDSD-6203** ISO Managers change — 34-day pending, 2nd approval email.
+**CTO-approval-gate candidates now totaling three for 2026-04-21 briefing:**
+1. **TISD-480** ArgoCD CVE remediation — Apr 17 window MISSED; needs replan.
+2. **TDSD-6203** ISO Managers change — 34-day pending; 2nd approval email.
+3. **Lattice 8 Downward Reviews** — 7-day countdown (Apr 27).
 
-No Immediate triggers this tick. TDSD-6630 NIBSS DD user-deferred to Apr 21 (no re-dispatch).
+No Immediate triggers this tick. TDSD-6630 NIBSS DD still in user-deferred state (no re-dispatch).
