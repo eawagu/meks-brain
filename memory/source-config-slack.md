@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T10:09:00Z. 11:09 WAT Full tick: all 5 Tier 1 channels silent, zero DMs, zero Tier 3 Immediate matches. Four consecutive Slack-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 WAT) — ops signals continue to travel via email/Jira tracks."
-updated: "2026-04-20T10:17:45Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T11:09:00Z. 12:09 WAT Full tick: all 5 Tier 1 channels silent in 11:09→12:09 window, zero DMs, zero Tier 3 Immediate matches. Five consecutive Slack-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 + 12:09 WAT) — ops signals continue to travel via email/Jira tracks."
+updated: "2026-04-20T11:14:55Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T10:09:00Z"
+last_processed: "2026-04-20T11:09:00Z"
 ---
 
 ## Connection
@@ -33,4 +33,6 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-20 11:09 WAT Full-level. Tier 1 channels: no new parent messages since 10:09 tick across all 5 channels (channel-read oldest=1776676140 returned empty on all). DMs to user: zero. Tier 3 keyword sweep (P1 OR outage OR RC91 OR RC05 OR breach OR compromised OR NIBSS after:2026-04-20): zero results. Four consecutive Slack-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 WAT) — ops signals continuing via email/Jira tracks. Calibration note from 07:09 tick ("Slack-silence-while-email+jira-active pattern") remains operative and strengthening — Slack channels are low-signal during Monday morning work-hours; operational tickets being filed via Jira direct + email Layer 1 without Slack announcement.
+Tick 2026-04-20 12:09 WAT Full-level. Tier 1 channels: no new parent messages in 11:09→12:09 WAT window across all 5 channels. One pre-tick message noted: Yasir Syed Ali in #go-subscribe-by-teamapt at 09:50 WAT chasing pos go-subscribe stability for sprint close-out — non-operational, already within scope of earlier ticks' visibility. DMs to user: zero. Tier 3 keyword sweep (P1 OR outage OR RC91 OR RC05 OR breach OR compromised OR NIBSS after:2026-04-20): zero results. Layer 1 to:me scope-scan: zero results.
+
+**Five consecutive Slack-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 + 12:09 WAT).** Calibration pattern from earlier tick ("Slack-silence-while-email+jira-active on Monday working hours") strengthens — operational tickets are being filed directly via Jira + email Layer 1 without Slack announcement. The overnight Union Bank RC91 Apr 20 01:17 WAT cycle (captured as MISS at 08:33 WAT) landed in email not Slack, matching this pattern.
