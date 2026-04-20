@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 20:09 WAT skim tick: zero substantive transitions across all 18 projects. Stanbic cycle 31 filed on email+Slack only — no TDSD raised (contrasts with cycle 30 triple-track). last_processed 2026-04-19T19:09:34Z."
-updated: "2026-04-19T19:26:46Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. 06:09 WAT Monday briefing tick: two substantive transitions — TDSD-6629 Completed ~00:08 WAT (Stanbic cycle 31 closure); TDSD-6630 NIBSS DD DOWNTIME filed ~05:18 WAT (Medium, new situation page created). last_processed 2026-04-20T05:09:34Z."
+updated: "2026-04-20T05:38:50Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-19T19:09:34Z"
+last_processed: "2026-04-20T05:09:34Z"
 ---
 
 ## Connection
@@ -111,7 +111,7 @@ Format: `[Project display name] — N ticket updates (K1 <signal-type-1>, K2 <si
 
 ### Monitored ticket patterns (operational context, TDSD-scoped)
 
-- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB, Ecobank routes. Track cycle count per bank. Overnight wave closed 2026-04-19 08:24 WAT. New entries to accumulate on next cycles. See [[Stanbic Bank ATS — Persistent RC91 Pattern]] and [[Access Bank — Multi-Track Failures]].
+- **RC91 cycles:** Bank ATS failures — recurring P1 pattern across Stanbic, UBA, Access, Fidelity, Wema, Habari, CoralPay, FCMB, Ecobank routes. Track cycle count per bank. Stanbic cycle 31 closed 2026-04-20 00:08 WAT via [[TDSD-6629]] Completion (~4h43m end-to-end). New entries to accumulate on next cycles. See [[Stanbic Bank ATS — Persistent RC91 Pattern]] and [[Access Bank — Multi-Track Failures]].
 - **RC06/RC05 card-layer cycles:** RC06 first observed on Access Apr 19 (09:27–09:45 WAT, 18m). RC05 first observed on Keystone Apr 17. Track for spread across banks.
 - **Deploy window tickets:** Tickets requiring approval for maintenance windows (typically 01:00–03:00 WAT). Flag if approval pending and window within 4 hours.
 - **Settlement tickets:** E92 responses, insufficient balance, reconciliation disputes. Track by bank.
@@ -119,6 +119,7 @@ Format: `[Project display name] — N ticket updates (K1 <signal-type-1>, K2 <si
 - **Monnify internal faults:** TDSD-6617 (PENDING DISBURSEMENTS stuck IN PROGRESS, Medium, INITIAL REVIEW, assigned Emmanuel Eke) open — see [[Monnify Disbursements — Stuck IN PROGRESS Apr 17+]] situation.
 - **Direct-Debit mandate backlog (under watch):** TDSD-6622 (HIGH PENDING DEBIT MANDATE REQUESTS, Medium, WIP) opened 2026-04-19. Watch for escalation or volume growth.
 - **NIBSS Disbursements (new pattern under watch):** TDSD-6627 opened 2026-04-19 12:17 WAT window — NIBSS-layer disbursement signal. Not presently matched to an active situation. Watch for recurrence or escalation; distinct from Monnify-internal TDSD-6617.
+- **NIBSS DD DOWNTIME (new pattern under watch):** [[TDSD-6630]] filed 2026-04-20 05:18 WAT (Medium, [System] Incident) — NIBSS Direct Debit layer. See [[NIBSS DD — Downtime P1 Apr 20]] situation. Structurally parallel to retired Apr 14 NIBSS DD Pending Mandate P1 pattern (silent-recovery variant). 1h silence-promotion threshold armed: 06:59 WAT.
 - **NIBSS DR Exercise correlation:** TDSD-6626 resolved 2026-04-19 07:49 WAT. Per user-override triage, NIBSS DR routed to ops; no further CTO action.
 
 Equivalent cross-project patterns for the 17 software projects will accumulate via data as baseline stabilizes.
@@ -153,12 +154,14 @@ Active. RECOVERY HOLDING lifted 2026-04-18 on 18-project expansion. `searchJiraI
 
 ## Notes
 
-Tick 2026-04-19 20:09 WAT **skim-level**. ~2h window since 18:09 WAT last_processed. JQL sweep across 18 projects.
+Tick 2026-04-20 06:09 WAT **full-level (06:00 briefing floor)**. Window: 20:09 WAT Apr 19 → 06:09 WAT Apr 20 (~10h, includes overnight delegation window 23:00–06:00 WAT). JQL sweep across 18 projects.
 
-**In-window Jira delta:** Zero substantive transitions across all 18 projects. No P1/P2 status changes, no assignee churn, no priority bumps, no SLA breaches.
+**Two substantive Jira transitions in-window:**
 
-**Out-of-Jira operational context (no TDSD ticket update):**
-- Stanbic cycle 31 opened this tick via email thread 19da2fa4960db78b (19:25 WAT filing by [[Afeez Kazeem]], bank engaged 19:31 → 19:40 WAT). Filed on email+Slack only; no TDSD ticket raised. Pattern note: bank-engaged fast-cycles often resolve before Jira escalation is needed — Jira raise is a secondary escalation step, not a first-pass filing. Cycle 30 (Apr 18) had TDSD-6618 filed at cycle-open + active 64m; cycle 31 pattern suggests TeamApt is holding Jira escalation pending bank's reconfirm-status response.
-- No other operational signals translated to Jira activity this tick.
+1. **[[TDSD-6629]] Completed (~00:08 WAT Apr 20).** Stanbic RC91 cycle 31 closure marker. End-to-end ~4h43m from Apr 19 19:25 WAT filing. Above fast-cycle envelope (typical 4m–64m active) but well below regime-change 7h+ windows. Within-pattern recurring cycle; B6 calibration holds (bank-owned recurring pattern, no CTO action). [[Stanbic Bank ATS — Persistent RC91 Pattern]] updated with cycle 31 closure delta. Accumulated to briefing-2026-04-20 as Awareness A1. Factors: urgency 0.3 · impact_scope 0.5 · cto_specificity 0.4 · pattern_significance 0.9 · accountability_alignment 1.0.
 
-Zero cap-starvation. Baseline still accumulating (~5.8 days of 28 required before Phase 2 migration gate). Connector health confirmed via sweep.
+2. **[[TDSD-6630]] NIBSS DD DOWNTIME filed ~05:18 WAT Apr 20 (Medium priority, [System] Incident type, [[Afeez Kazeem]] reporter).** New P1-trajectory entry on NIBSS Direct Debit layer. Ticket title "NIBSS DD DOWNTIME"; body indicates intermittent direct-debit transaction failures. Structurally parallel to the retired Apr 14 NIBSS DD Pending Mandate P1 pattern (silent-recovery variant). New situation page [[NIBSS DD — Downtime P1 Apr 20]] created (status=developing, role=cto-teamapt, accountability=Technology Reliability and Security). 1h silence-promotion threshold armed: if no resolution activity or comment traffic by 06:59 WAT, promote to higher-tier attention. Medium priority does NOT meet Immediate dispatch criterion per config-salience trigger #1 (which applies to High/P1). Dispatched to briefing-2026-04-20 as Decision item B1 with watch-framing. Factors: urgency 0.6 · impact_scope 0.65 · cto_specificity 0.55 · pattern_significance 0.8 · accountability_alignment 0.9.
+
+No other P1/P2 status changes, no assignee churn, no priority bumps, no SLA breaches in the 18-project sweep. Zero cap-starvation. Baseline still accumulating (~6.2 days of 28 required before Phase 2 migration gate — earliest eligible 2026-05-16).
+
+Connector health confirmed via sweep.
