@@ -3,8 +3,8 @@ type:
   - "config"
 title: config-salience
 created: "2026-04-11T15:44:57Z"
-summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol."
-updated: 2026-04-20
+summary: "Exec assistant salience scoring — triage tiers with trigger conditions, dimension weights, absence-of-signal rules, tuning mechanism with missed signal capture (triage-time + async MISS: notes), threshold-based recalculation trigger (20 tuples), and structured recalculation protocol. 6 fresh tuples appended from briefing-2026-04-20 triage (post-recalc)."
+updated: "2026-04-20T08:21:23Z"
 cssclasses:
   - "config"
 ---
@@ -146,3 +146,9 @@ Triage tier thresholds and absence-of-signal N values require human approval to 
 *(Tuples appended by the Improve phase, triage client, and ingest pipeline)*
 
 - [2026-04-12 → 2026-04-20, 18 acted, 1 dismissed, 4 missed, weight_deltas_applied: impact_scope −0.05, accountability_alignment +0.05, cto_specificity held per user override, urgency/pattern_significance unchanged]
+- [2026-04-20, B1, dismissed, pattern_significance | factors: source=jira, ticket_priority=medium, situation_match=nibss-dd-retired-apr14, pattern_significance, structural_defect_repeat]
+- [2026-04-20, B2, acted, urgency | factors: source=calendar, signal_type=new-invite, conflict_with=recurring-standup, urgency=same-day, accountability_alignment]
+- [2026-04-20, B3, acted, urgency | factors: source=reminder, due=today, deferred_count=2, week_window_narrowing, urgency-dominant]
+- [2026-04-20, B4, acted, cto_specificity | factors: source=email, situation_delta, wait-state, 24h-heuristic, contested-attribution-risk, cto_specificity]
+- [2026-04-20, B5, acted, urgency | factors: source=calendar, signal_type=new-invite+unresolved-conflict-carryforward, urgency=same-day, impact_scope=schedule-integrity]
+- [2026-04-20, B6, acted, accountability_alignment | factors: source=config-salience, tuple_count=22, threshold_crossed, periodic_maintenance]
