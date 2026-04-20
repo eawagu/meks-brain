@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T09:09:00Z. 10:09 WAT Skim tick: no new invites created, no RSVP changes, no cancellations. Juliana Switch Daily Standup recurring 13:30–14:10 confirmed. Cards and Account All Hands 10:30–11:15 within 21m — no action required (accepted)."
-updated: "2026-04-20T09:17:17Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T10:09:00Z. 11:09 WAT Full tick: no same-day invite changes (Strategy Debrief minor metadata update already accepted per B5). Two new Moniepoint interview-slot invites for Apr 23/Apr 24 — awareness (3–4 days out, below priority signal #2 threshold). Cards & Account All Hands in progress (10:30–11:15 WAT)."
+updated: "2026-04-20T10:17:46Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T09:09:00Z"
+last_processed: "2026-04-20T10:09:00Z"
 ---
 
 ## Connection
@@ -28,15 +28,21 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-20 10:09 WAT Skim-level. No new same-day invites created since 09:09 tick, no RSVP changes, no cancellations. Calendar state for today:
+Tick 2026-04-20 11:09 WAT Full-level. Calendar sweep 10:09 WAT → 11:09 WAT today + extended window to catch invites for upcoming days.
 
-- **Cards and Account All Hands** 10:30–11:15 WAT (within 21m of tick, accepted) — no action required.
-- **Channels Onboarding & Disbursement** 11:30–12:30 WAT (accepted).
-- **Juliana Switch Daily Standup** 13:30–14:10 WAT (accepted; recurring, updated 07:01 WAT for today's metadata).
-- **2026 Strategy Event Debrief** 14:45–15:45 WAT (accepted per B5 triage override).
-- **Tech Support Meeting** 16:00–17:00 WAT — B5 triage override: decline today's instance (user to decline manually in GCal UI).
-- **ATPP Daily Standup Meeting** 16:00–17:00 WAT — B5 triage override: decline today's instance (user to decline manually in GCal UI). Overlap with Tech Support resolved by declining both.
-- **Product - Engineering Sync** 18:00–19:00 WAT (accepted).
-- **Moniepoint Dinner** 19:00 WAT (accepted per B5 triage; RSVP manual by user).
+**Two new invites arrived via email (from Chris Purkis / Moniepoint People):**
+- **Apr 23 15:30–16:30 WAT "Blocker - Head of Engineering"** (created 09:43 WAT today). 3-day-out interview slot. Priority signal #2 (same-day/next-day) does NOT fire. Awareness.
+- **Apr 24 11:00–12:00 WAT "Blocker: Head of Engineering (VP+) Slots" (updated invite)** (sent 10:06 WAT today). 4-day-out. Awareness.
+- **Apr 21 13:00–14:00 WAT "Cards Team Str, Systems & Roadmap"** (created 08:44 WAT today, pre-tick but caught in Layer 1 email sweep). Next-day meeting — priority signal #2 fires. Awareness (agenda present, accepted by default; low urgency).
 
-No Immediate-tier triggers from calendar this tick. IMS Management Review 08:30–09:30 WAT and DTB standup 08:30 WAT already resolved per B2 triage (attend IMS full, skip DTB).
+**Today's events proceeding per B5 triage overrides:**
+- Cards and Account: All Hands 10:30–11:15 WAT (in progress at tick, accepted) — produced Gemini notes at 09:47 WAT.
+- Channels Onboarding & Disbursement 11:30–12:30 WAT (accepted, 21m from tick).
+- Juliana Switch Daily Standup 13:30–14:10 WAT (accepted, recurring).
+- 2026 Strategy Event Debrief 14:45–15:45 WAT (accepted, minor metadata bump 10:09 WAT — no content change).
+- Tech Support Meeting 16:00–17:00 WAT — B5 override: user to decline manually in GCal UI.
+- ATPP Daily Standup 16:00–17:00 WAT — B5 override: user to decline manually in GCal UI.
+- Product - Engineering Sync 18:00–19:00 WAT (accepted).
+- Moniepoint Dinner 19:00 WAT (accepted per B5, RSVP manual).
+
+No RSVP changes to previously-accepted events, no cancellations, no agenda-less invites >30m (both new Blocker HoE invites have Google Meet + context), no back-to-back overload crossing the 4-consecutive threshold. No Immediate-tier triggers from calendar this tick.
