@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T07:09:34Z. 08:09 WAT Skim tick: IMS Management Review shifted from 09:00 to 08:30 WAT creating exact-overlap collision with DTB standup (08:30). Not an Immediate-trigger; captured for next briefing Decision item."
-updated: "2026-04-20T07:20:21Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload; last_processed 2026-04-20T08:09:34Z. 09:09 WAT Skim tick: no new invites, no RSVP changes, no cancellations. Same-day calendar state unchanged from 08:09 tick."
+updated: "2026-04-20T08:18:38Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T07:09:34Z"
+last_processed: "2026-04-20T08:09:34Z"
 ---
 
 ## Connection
@@ -28,4 +28,4 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-Tick 2026-04-20 08:09 WAT Skim-level. **Meaningful delta:** IMS Management Review moved from 09:00–10:00 WAT to **08:30 WAT** — now an **exact overlap** with recurring DTB standup at 08:30 (previously a partial 30-minute conflict at the end of DTB). This upgrades the earlier B2 decision item into a hard collision within the briefing cycle. Not in the 8 Immediate triggers defined in config-salience (meeting-time shifts with <1h notice are not enumerated) — holding at Briefing-tier, will be the top Decision item on the next morning briefing with a proposal to decline one of the two. Remainder of same-day calendar unchanged: 2026 Strategy Event Debrief 14:45 WAT; Tech Support 16:00 WAT + ATPP standup 16:00 WAT overlap (B5 carryforward); Moniepoint Dinner 19:00 WAT. No other RSVP changes, new invites, or cancellations.
+Tick 2026-04-20 09:09 WAT Skim-level. No new same-day invites, no RSVP changes, no cancellations. Only metadata updates on existing accepted events (recurring standing meetings). Same-day calendar state unchanged from 08:09 tick: IMS Management Review 08:30 WAT (already passed — within the collision window with DTB standup, resolution at triage deferred); 2026 Strategy Event Debrief 14:45 WAT; Tech Support 16:00 WAT + ATPP standup 16:00 WAT overlap (B5 carryforward from briefing); Moniepoint Dinner 19:00 WAT. No Immediate-tier triggers.
