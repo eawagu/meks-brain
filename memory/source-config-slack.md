@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T11:09:00Z. 12:09 WAT Full tick: all 5 Tier 1 channels silent in 11:09→12:09 window, zero DMs, zero Tier 3 Immediate matches. Five consecutive Slack-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 + 12:09 WAT) — ops signals continue to travel via email/Jira tracks."
-updated: "2026-04-20T11:14:55Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T12:09:00Z. 13:09 WAT Full tick: 1 new message in-window — Akindele Odedoyin in #go-subscribe-by-teamapt at 12:12 WAT flagging mandate_request_notification staging regression to Ketan Dhamasana and Lewis Ugwu (breaks 12-day channel silence; Awareness-tier). Zero DMs, zero Tier 3 Immediate matches. Six consecutive Slack-operational-quiet ticks — ops signals continue to travel via email/Jira tracks."
+updated: "2026-04-20T12:16:11Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T11:09:00Z"
+last_processed: "2026-04-20T12:09:00Z"
 ---
 
 ## Connection
@@ -33,6 +33,13 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-Tick 2026-04-20 12:09 WAT Full-level. Tier 1 channels: no new parent messages in 11:09→12:09 WAT window across all 5 channels. One pre-tick message noted: Yasir Syed Ali in #go-subscribe-by-teamapt at 09:50 WAT chasing pos go-subscribe stability for sprint close-out — non-operational, already within scope of earlier ticks' visibility. DMs to user: zero. Tier 3 keyword sweep (P1 OR outage OR RC91 OR RC05 OR breach OR compromised OR NIBSS after:2026-04-20): zero results. Layer 1 to:me scope-scan: zero results.
+Tick 2026-04-20 13:09 WAT Full-level. Tier 1 channels: 1 new message in 12:09→13:09 WAT window.
 
-**Five consecutive Slack-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 + 12:09 WAT).** Calibration pattern from earlier tick ("Slack-silence-while-email+jira-active on Monday working hours") strengthens — operational tickets are being filed directly via Jira + email Layer 1 without Slack announcement. The overnight Union Bank RC91 Apr 20 01:17 WAT cycle (captured as MISS at 08:33 WAT) landed in email not Slack, matching this pattern.
+**#go-subscribe-by-teamapt — channel silence broken after 12 days:**
+- 12:12 WAT — [[Akindele Odedoyin]] tagged [[Ketan Dhamasana]] (`U0818PKFKQR`) and [[Lewis Ugwu]] (`U080T6P9KEZ`): "we're not receiving messages in mandate_request_notification topic on staging and it's causing us not to be able to complete end to end tests, the issue was fixed late last week but it's back again."
+- Staging-only regression; not production-impacting. E2E test blocker. Tier: Awareness (low CTO-specificity, named engineers own resolution). Recorded on [[GoSubscribe — Integration Issues Open, Channel Silent]] situation page.
+- Factors: source=slack, channel=go-subscribe-by-teamapt, regression_on_previously_fixed_defect, staging_only, named_engineer_ownership, active_situation_entity_match=gosubscribe.
+
+**All other Tier 1 channels silent** — #teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev all returned zero new parent messages in the 12:09→13:09 WAT window. Zero DMs to user. Tier 3 keyword sweep (P1 OR outage OR RC91 OR RC05 OR breach OR compromised OR NIBSS after:2026-04-20) returned zero results. Layer 1 to:me scope-scan returned zero results.
+
+**Six consecutive Slack-operational-quiet ticks (08:09 + 09:09 + 10:09 + 11:09 + 12:09 + 13:09 WAT).** The GoSubscribe regression broke channel silence but is not operational-incident-class. Calibration pattern continues: operational tickets (Union Bank RC91 Apr 20 cycle, NIBSS DD downtime) are filed via Jira + email Layer 1 without Slack announcement. Ops team handling signals outside Tier 1 Slack.
