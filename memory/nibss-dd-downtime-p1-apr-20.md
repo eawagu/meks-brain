@@ -5,8 +5,8 @@ type:
 title: NIBSS DD — Downtime P1 Apr 20
 status: developing
 created: "2026-04-20T05:23:14Z"
-summary: "NIBSS DD downtime P1 (TDSD-6630) filed 05:18 WAT Apr 20 by Frances Omelu. 10:09 WAT tick: no TDSD-6630 update since 08:18 WAT — any-update silence 1h51m, comment silence 4h42m since 05:27 WAT NIBSS escalation. User overrode B1 in briefing-2026-04-20 triage deferring to 2026-04-21 briefing — no Immediate re-dispatch per triage-deferred state. Silent-recovery pattern match with retired Apr 14 NIBSS DD precedent continues."
-updated: "2026-04-20T13:15:52Z"
+summary: "NIBSS DD downtime P1 (TDSD-6630) filed 05:18 WAT Apr 20 by Frances Omelu. 17:09 WAT tick: no TDSD-6630 update since 08:18 WAT — any-update silence ~8h51m, comment silence ~11h42m since 05:27 WAT NIBSS escalation. User overrode B1 in briefing-2026-04-20 triage deferring to 2026-04-21 briefing — no Immediate re-dispatch per triage-deferred state. Separate TDSD-6627 \"NIBSS - Disbursements Downtime\" Resolved/Done in 16:09-17:09 tick window — separate ticket, not TDSD-6630, so no direct bearing on this situation's closure status."
+updated: "2026-04-20T16:19:48Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -22,10 +22,12 @@ accountability: Technology Reliability and Security
 - 05:23 WAT — [[Frances Omelu]] comment: "Pending create mandate transactions cleared before 3am, and we noticed a decrease in pending debit mandate request count. The count kept dropping up until 4:30am, but started to go back up at 4:32am."
 - 05:27 WAT — [[Frances Omelu]] public comment: "This has been escalated to NIBSS for review and resolution."
 - 08:18 WAT — metadata refresh (last any-update).
-- 14:09 WAT tick — **comment silence 8h42m** since 05:27 WAT, **any-update silence 5h51m** since 08:18 WAT. Still Work in progress.
+- 17:09 WAT tick — **comment silence ~11h42m** since 05:27 WAT, **any-update silence ~8h51m** since 08:18 WAT. Still Work in progress.
+
+**Separate TDSD-6627 "NIBSS - Disbursements Downtime" Resolved in 16:09-17:09 tick window — distinct ticket, not this situation.** TDSD-6627 is NIBSS Disbursements (different product), not NIBSS DD mandate processing (this situation). TDSD-6583 "DISBURSEMENT DOWNTIME" also Done in the window. Neither ticket is this situation's tracking ticket (TDSD-6630). No direct bearing on this situation's closure — TDSD-6630 remains Work in progress with no updates since 08:18 WAT.
 
 ## Sources
-jira TDSD-6630 (comments 4757564, 4757577; created 05:18 WAT; metadata 08:18 WAT)
+jira TDSD-6630 (comments 4757564, 4757577; created 05:18 WAT; metadata 08:18 WAT); jira TDSD-6627 "NIBSS - Disbursements Downtime" statusCategory=done (separate ticket, contextual); jira TDSD-6583 "DISBURSEMENT DOWNTIME" statusCategory=done (separate ticket, contextual)
 
 ## Deltas
 - 2026-04-20 05:18 WAT — TDSD-6630 filed by Frances Omelu during overnight delegation window.
@@ -37,3 +39,4 @@ jira TDSD-6630 (comments 4757564, 4757577; created 05:18 WAT; metadata 08:18 WAT
 - 2026-04-20 09:15 WAT — 09:09 tick: comment silence 3h42m, any-update silence 51m. No re-dispatch.
 - 2026-04-20 10:09 WAT — tick: comment silence 4h42m, any-update silence 1h51m. No re-dispatch.
 - 2026-04-20 14:09 WAT — tick: comment silence 8h42m, any-update silence 5h51m. Still WIP. Silent-recovery pattern match with retired Apr 14 precedent continues; user-deferral holds through afternoon.
+- 2026-04-20 17:09 WAT — tick: comment silence ~11h42m, any-update silence ~8h51m on TDSD-6630. Still WIP. **TDSD-6627 "NIBSS - Disbursements Downtime" Resolved/Done and TDSD-6583 "DISBURSEMENT DOWNTIME" Done in this tick window — both are separate tickets from TDSD-6630 (NIBSS Disbursements product, not NIBSS DD mandate product); no closure bearing on this situation.** User-deferral to 2026-04-21 briefing continues to hold. No re-dispatch.
