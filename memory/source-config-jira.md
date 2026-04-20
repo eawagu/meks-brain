@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. last_processed 2026-04-20T07:09:34Z. 08:09 WAT Skim tick: TDSD-6632 Union Bank RC91 documented (situation-track); TDSD-6633 Keystone settlement requery new (new situation); TDSD-6631 Interswitch completed; TDSD-6630 NIBSS DD silent 2h10m (no re-dispatch per calibration)."
-updated: "2026-04-20T07:20:21Z"
+summary: "Signal source registration and filtering directives for Jira (Atlassian MCP). 18-project scope. last_processed 2026-04-20T08:09:34Z. 09:09 WAT Skim tick: TDSD-6630 NIBSS DD non-comment update 08:18 WAT (any-update silence reset, comment silence 3h42m); TDSD-6622 HIGH PENDING DEBIT MANDATE completed 08:22 WAT; TDSD-6634 Monnify doc deploy new (Medium, Review, awareness-tier)."
+updated: "2026-04-20T08:18:33Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T07:09:34Z"
+last_processed: "2026-04-20T08:09:34Z"
 ---
 
 ## Connection
@@ -41,11 +41,9 @@ Match updated tickets against active situation pages. Overlapping entity or keyw
 
 ## Notes
 
-Tick 2026-04-20 08:09 WAT Skim-level. TDSD sweep since 07:10 WAT surfaced three substantive transitions and one persistent silence:
+Tick 2026-04-20 09:09 WAT Skim-level. TDSD sweep since 08:10 WAT surfaced:
 
-- **TDSD-6632 Union Bank RC91 Apr 20** — ticket filed overnight (email-only until now); documented on [[Union Bank — RC91 P1 Apr 20]] situation page; resolved in parallel with email closure at 07:56 WAT.
-- **TDSD-6633 Keystone Bank settlement requery** — NEW ticket. Settlement-layer issue (12AM + 5AM batches awaiting requery). Distinct from RC91/RC05 authorization class. New situation page created: [[Keystone Bank — Settlement Requery Apr 20]]. Flagged gap: no settlement-silence threshold exists in config-salience (to be captured as tuning tuple).
-- **TDSD-6631 Interswitch** — transitioned to Completed.
-- **TDSD-6630 NIBSS DD DOWNTIME** — silent 2h10m since 05:59 WAT Frances Omelu comment. Applying calibration precedent from Stanbic cycle 27 — no re-dispatch on unchanged state. 07:09 tick's Immediate dispatch stands.
-
-No other Immediate-tier transitions this tick.
+- **TDSD-6630 NIBSS DD DOWNTIME** — 08:18 WAT non-comment update (status/assignee change). Ticket still Work in progress. Any-update silence clock reset to 51m at 09:09 WAT (below 1h threshold); comment silence 3h42m since 05:27 WAT NIBSS escalation. No Immediate re-dispatch — state unchanged from 07:09 WAT dispatch. Situation page [[NIBSS DD — Downtime P1 Apr 20]] updated with 09:09 WAT delta.
+- **TDSD-6622 HIGH PENDING DEBIT MANDATE** — transitioned to Completed 08:22 WAT. Resolution signal — positive delta. Related to DCIR/DD cluster but no active situation page requiring update at this tick.
+- **TDSD-6634 Monnify doc deploy** — NEW ticket, Medium priority, Review status. Developer documentation change. Non-CTO-specific, Awareness-tier. No situation page.
+- No other Immediate-tier transitions this tick. No new P1/outage filings.
