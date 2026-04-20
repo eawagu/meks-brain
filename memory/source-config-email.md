@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-20T07:09:34Z. 08:09 WAT Skim tick: Union Bank RC91 cycle closed by Olamide at 07:56 WAT after bank 07:33 response (6h39m cycle); situation page updated to resolving."
-updated: "2026-04-20T07:20:20Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering; last_processed 2026-04-20T08:09:34Z. 09:09 WAT Skim tick: Duty Handover 20260420 (Olamide→Qazim) captures operational state (13/17 PTSAs, Coralpay off, Eco+FCMB off on NIBSS PTSA); Keystone DCIR dispute thread ongoing (\"accounts still not funded for recovery\" 07:59 WAT); no new Layer 1 ops threads."
+updated: "2026-04-20T08:17:54Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T07:09:34Z"
+last_processed: "2026-04-20T08:09:34Z"
 ---
 
 ## Connection
@@ -32,4 +32,8 @@ Gmail MCP. Profile: eawagu@gmail.com.
 
 ## Notes
 
-Tick 2026-04-20 08:09 WAT Skim-level. Primary operational delta: **Union Bank RC91 | 20260420** thread closed — bank response received 07:33 WAT; Olamide Ajibulu closed the loop at 07:56 WAT (total cycle 6h39m, 3x longest prior cycle of 2h10m on Apr 19). Situation page updated to status=resolving. TDSD-6632 Jira track documented on situation page. No other Layer 1 (To:me) threads of operational weight since 07:09 tick. Weekly-status-report backlog (Polaris DD Pilot, Zone Account Switch, Premium Trust DD, Sterling Account Switch) from 07:09 tick remains Awareness-accumulating for next briefing.
+Tick 2026-04-20 09:09 WAT Skim-level. New delta since 08:09 tick:
+
+- **Duty Handover Note 20260420** (Olamide Ajibulu → Qazim, 08:11–08:13 WAT): operational state snapshot — "13 of 17 PTSAs operational, Coralpay banks off due to RC91, Eco and fcmb off on NIBSS ptsa". Confirms state already tracked on [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]] (CoralPay suite off) and [[Ecobank]] / [[FCMB]] entity pages (NIBSS PTSA off). No new situation page required — awareness confirmation.
+- **Keystone DCIR dispute thread** (aptpaytechnicalsupport 07:59 WAT): reply to ongoing dispute loop — "Accounts are still not funded for recovery". Ongoing recovery friction, no escalation keyword. Awareness-tier.
+- No other Layer 1 (To:me) threads of operational weight since 08:09 tick. No new P1/outage/RC91/breach keyword matches.
