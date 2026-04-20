@@ -4,7 +4,7 @@ type:
 title: NIBSS
 created: 2026-04-11
 summary: "Nigeria Inter-Bank Settlement System — national payment infrastructure provider for Moniepoint's Direct Debit rails. Apr 15 12:51 WAT: Moses Ajani explicit denial of service degradation on 09:49–09:53 WAT NIBSS PTSA RC91 window — finger-pointing stalemate. Apr 14: NIBSS DD P1 active."
-updated: "2026-04-15T12:13:45Z"
+updated: "2026-04-20T05:35:13Z"
 cssclasses:
   - "entity"
 ---
@@ -46,6 +46,10 @@ Scheduled maintenance migration of Citrix environment to License Activation Serv
 - **Outcome:** Completed successfully. [[Oladapo Onayemi]] confirmed 19:30 WAT Apr 13: "All NIBSS services consumed by Teamapt are functioning as expected following the migration." Tomiwa Odumuyiwa acknowledged.
 - **Affected services (now stable):** NIP, N-Gate, NPS, EasyPay, PAPPS, BVN, POS, NQR, NIBSS PayPlus
 - **Previously missed:** Earlier Citrix LB migration window was missed; [[Haruna Isa]] (NIBSS) apologized Apr 11. This rescheduled activity now complete.
+
+## Compliance / IMS Context
+
+Per the [[TeamApt Management Review 19_04_2026]], NIBSS compliance is named alongside [[CBN]], [[NDPA]], and [[PCIDSS]] in the Service Management Risk register as a Major compliance exposure. SLA breaches by suppliers/banks (including NIBSS) are tracked under the Service Continuity risk category.
 
 ## Active Issues
 
