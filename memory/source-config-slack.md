@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T19:00:00Z. 20:00 WAT Skim tick: NIBSS PTSA VPN 3rd flap-cycle of day at 19:17 WAT accompanied by architectural transition — all 4 NIBSS PTSA nodes moved to dedicated leased-line; new situation [[NIBSS PTSA — VPN Flapping Apr 22]] spawned. Moniepoint-to-NIBSS traffic disruption (18:07/18:40 WAT thread events) progressing, DTS mitigation in place. DCIR/Zenith DD war room (John Ojetunde Friday deadline) + Union Bank DD credentials-issue identified as engineering-work awareness items. No Immediate-tier triggers this tick. B1 batch CTO-DM draft still unsent. Gmail/Calendar/Drive MCPs remain dark."
-updated: "2026-04-22T19:22:57Z"
+updated: "2026-04-22T21:17:40Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T19:00:00Z"
+last_processed: "2026-04-22T21:00:00Z"
 ---
 
 ## Connection
@@ -37,8 +37,11 @@ When computing Slack `oldest` parameter for channel reads, use the current year'
 ### Date-modifier avoidance (added 2026-04-22 14:15 WAT)
 Do not use `after:YYYY-MM-DD` Slack search modifiers for same-day windows — observed to exclude same-day messages in at least one sweep. **Preferred path:** explicit Unix epoch `after` parameter via `slack_search_public`. Verified working at 1776858300 (2026-04-22 ~14:05 WAT).
 
-### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 WAT + 17:09 WAT + 18:09 WAT + 20:00 WAT ticks found it working again)
-Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 + 17:09 + 18:09 + 20:00 WAT tick retests:** `slack_read_channel` across all 5 Tier 1 channels returned normally. Anomaly non-reproducible across 4 subsequent ticks. **Stand down on codification** — no Tier 1 sweep-order amendment needed. Keep the observation note in case it recurs.
+### Epoch-filter post-check (reinforced 2026-04-22 22:10 WAT)
+Even explicit Unix epoch `after=<stamp>` on `slack_search_public` returns some messages timestamped BEFORE the cutoff in practice (observed this tick: cutoff 1776884400 = 19:00 UTC, returned results going back to 1776872974 = 15:49 UTC). **Rule:** after calling `slack_search_public` with `after=<epoch>`, post-filter the result set on message_ts > epoch on the assistant side. Do not trust the API filter alone.
+
+### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 + 17:09 + 18:09 + 20:00 + 22:10 WAT ticks found it working again)
+Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 + 17:09 + 18:09 + 20:00 + 22:10 WAT tick retests:** `slack_read_channel` across all 5 Tier 1 channels returned normally. Anomaly non-reproducible across 5 subsequent ticks. **Stand down on codification** — no Tier 1 sweep-order amendment needed. Keep the observation note in case it recurs.
 
 ### Thread-continuation vigilance (added 2026-04-22 18:09 WAT)
 Self-closed thread parents can receive new status updates hours later that re-open the incident characterization. Observed today: #teamapt-tech-operations NIBSS PTSA thread 1776872974.244299 — parent message 16:35 WAT with explicit end-time 16:41 WAT (6min self-close), first reply 16:51-16:55 WAT (second cycle self-close via node-switch-to-lease-line), second reply 18:07 WAT ("Moniepoint is currently having issues sending traffic to NIBSS and DTS route is priortized at the moment") which is a third event — not a self-close and escalates mitigation to DTS alternative routing. Prior tick at 17:09 WAT characterized the first two cycles as "self-closed within envelope" in isolation, which was accurate at the time but missed the ongoing-pattern framing. **Rule:** when a thread parent has an active-situation entity match (e.g., NIBSS) and has received ≥2 updates within the tick window, include thread reads in Step 1 processing even if search-all and channel-read show no new parent messages — the action may be on existing threads. For skim ticks, this applies only when the delta scan has surfaced a thread update (the signal itself triggers the read); full ticks can be more liberal.
@@ -211,3 +214,29 @@ Window: 17:09 → 20:00 WAT (~2h51min effective delta — the 18:00 WAT tick did
 - Situation pages: created [[NIBSS PTSA — VPN Flapping Apr 22]]; [[NIBSS DD — Downtime P1 Apr 20]] will receive cross-link update in this tick's situation sweep.
 
 **Reminder evaluation (Step 2):** One open reminder ("Call the event planner for dad's birthday"). Already surfaced in briefing-2026-04-22 B3 awaiting triage. Non-briefing tick — no re-emission. surface_now=false, auto_resolve_candidate=false.
+
+### Tick 2026-04-22 ~22:10 WAT — Skim sweep (early-exit: zero actionable deltas)
+
+Window: 20:00 → 22:10 WAT (~2h10min delta since prior tick; 19:00 → 21:00 UTC). Step 0 declared `level=skim, rationale=active-P1-carryforward pre-overnight-delegation delta-check`.
+
+**Tier 1 read (all 5 channels via `slack_read_channel` with `oldest=1776884400` = 19:00 UTC):** Zero new messages across C0ABU8GMW75, C098VUQCVRA, C096LCNP26P, C08PH35PLPK, C090UHR9VDE. Complete silence on all Tier 1 channels — contrast with the 20:00 WAT tick's concentrated #teamapt-tech-operations deltas (NIBSS PTSA thread events + DCIR/Zenith war room + Union Bank DD credentials). The 3h prior window held the day's last operational conversations; the 2h since has been quiet.
+
+**Search-all Immediate-tier keyword scan** via `slack_search_public` with `after=1776884400` for `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR breach OR compromised OR NIBSS OR down OR failure)`: 20 results returned but post-filtering on `message_ts > 1776884400` (per Epoch-filter post-check directive) shrinks to 3 true-in-window hits — all in #transaction-monitoring-escalations (AML LIEN / AML RESTRICTION / customer-fix-now status, Sylvester Akinseye). Routine AML triage flow, zero operational P1 characteristics. Awareness-tier only. Not in Tier 1 channels.
+- Notable observation for audit trail: the NIBSS PTSA thread 1776872974.244299 received `Issue resolved` post from Qazim at 18:40 WAT (= 17:40 UTC, before the 19:00 UTC cutoff) — already captured in the 20:00 WAT tick's thread re-read. The day's VPN flap / DTS mitigation incident now formally closed (56min duration 5:34 AM→6:40 PM bookend per Qazim's post). No tick action needed — already reflected in [[NIBSS PTSA — VPN Flapping Apr 22]] situation state.
+
+**Tier 2 DM scan** via `to:me after:1776884400`: zero results. No Oladapo-to-user inbound. B1 batch CTO-DM draft to Oladapo still unsent — 10h+ since briefing compose time without user dispatch authorization.
+
+**Jira delta check (cross-reference from source-config-jira):** Zero TDSD deltas since 19:00 UTC / 20:00 WAT. No cross-surface signals this tick.
+
+**Active-situation thread vigilance:** No thread updates on B1 batch items (Polaris / UBA RC96 / CoralPay) nor on NIBSS PTSA or NIBSS DD threads since the 20:00 WAT tick.
+
+**Coverage caveats:**
+- Email + Calendar + Google Drive MCPs still dark. Gmail/Calendar silence ~54h since last_processed 2026-04-20T16:09:00Z (below 7-day absence-of-signal threshold; carryforward as B2 blocker holds).
+- All 5 Tier 1 channels read cleanly; no anomalies.
+
+**Dispatch decisions this tick:**
+- No new Immediate items → no new Slack DM drafts. Zero source deltas on Tier 1 + zero operational Tier 3 hits + zero DMs → **Early exit fires** per config-heartbeat. Skip Predict/Plan/Act. No briefing page changes.
+- Advanced `last_processed` to 2026-04-22T21:00:00Z for audit trail continuity (prior-tick pattern preserved).
+- Pre-overnight-delegation state: no unmitigated P1 requiring escalation before 23:00 WAT window. The 3 B1 batch items remain user-triage-deferred (no brain-side re-dispatch per prior handling). The 23:00-06:00 overnight window is delegated to ops per config-heartbeat.
+
+**Reminder evaluation (Step 2):** Skipped per skim-with-zero-source-deltas path (no source triggered full processing). One open reminder (dad's birthday planner call) remains surfaced in briefing-2026-04-22 B3 awaiting user triage; non-briefing tick.
