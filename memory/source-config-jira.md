@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T16:09:00Z. 17:09 WAT Full tick (narrow WAT-local scope): 4 new-this-tick deltas — TDSD-6690 Change Completed (Ekene), TDSD-6662 Opeyemi Settlement Done (third Opeyemi-same-day-close data point, strengthens TDSD-6645 pattern anomaly), TDSD-6615 Keystone Settlement #20260119 Completed 16:31 WAT (historical ticket closure — Keystone situation now retirement candidate), TDSD-5584 Cancelled (awareness). TDSD-6630 still no movement (silence ~59h42m); TDSD-6645 unchanged (assignee silence ~48h16m). No Immediate-tier dispatches."
-updated: "2026-04-22T17:22:35Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T19:00:00Z. 20:00 WAT Skim tick (TDSD scope): 2 new-this-tick deltas — TDSD-6676 \"Exposure on Access Bank\" filed Work in progress (Access Bank workstream continues; no direct Multi-Track situation link visible this tick), TDSD-5365 \"Monnify Dev Doc Deploy\" Completed (awareness). TDSD-6630 still no movement (silence ~61h42m); TDSD-6645 unchanged (assignee silence ~51h16m). TDSD-6691 (from 18:09 WAT tick) still in Review. No Immediate-tier dispatches."
+updated: "2026-04-22T19:26:29Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T17:09:00Z"
+last_processed: "2026-04-22T19:00:00Z"
 ---
 
 ## Connection
@@ -190,3 +190,28 @@ Queried `project = TDSD AND updated >= "2026-04-22 17:09"` (WAT-local per JQL ti
 **Scope caveat (skim).** Only TDSD queried this tick; the 17 software projects not checked. Skim-level allowance per config-heartbeat-prompt Perceive Step 0. Next Full tick should re-extend to the 18-project scope (iterated per JQL payload-size discipline).
 
 No Immediate-tier dispatches this tick. No new situations spawned.
+
+### Tick 2026-04-22 ~20:00 WAT — Skim-level (narrow WAT-local delta sweep, TDSD scope only)
+
+Window: 18:09 → 20:00 WAT (~1h51min delta since prior tick). Current time 20:00 WAT = 19:00 UTC. Per Step 0 `level=skim`, restricted to TDSD scope.
+
+Queried `project = TDSD AND updated >= "2026-04-22 19:09"` (WAT-local per JQL timezone discipline — equivalent to 18:09 UTC = 19:09 WAT, the true delta window). Post-filtered on assistant side.
+
+**New-this-tick deltas (2 items):**
+
+- **TDSD-6676 "Exposure on Access Bank"** — Work in progress. Adds new tracking point on the [[Access Bank]] workstream. Access Bank is entity-matched to [[Access Bank — Multi-Track Failures]] situation which has tracked RC91 + settlement + multi-mode failure patterns through this week. Ticket title "Exposure on" framing suggests a risk-assessment or exposure-quantification angle rather than an active outage remediation — no P1/outage markers visible. **Uncertain whether this corresponds to an existing Access Bank situation delta or a new tracked condition** — title language ambiguous, assignee details require next-tick confirmation. Classification: Awareness-tier, WIP tracked. Watch next tick for scope clarification before spawning or updating situation. Factors: source=jira, ticket_new, entity_match_access_bank, scope_ambiguous, wip_assignee_engaged, watch_next_tick_for_disambiguation.
+- **TDSD-5365 "Monnify Dev Doc Deploy"** — Completed. Dev documentation deploy for Monnify; routine completion. No operational P1, no active-situation entity overlap beyond the generic Monnify surface. Awareness-tier. Factors: source=jira, deploy_type=dev_doc, completed, routine, no_cto_action.
+
+**TDSD-6691 (from 18:09 WAT tick) — unchanged this tick.** Still in Review status; no new transitions or comments. Pre-deploy approval gate holds.
+
+**TDSD-6630 NIBSS Direct Debit — still no movement.** Comment silence ~62h32m, any-update silence ~59h41m. No delta this tick. Situation page [[NIBSS DD — Downtime P1 Apr 20]] will receive 20:00 WAT delta this tick to integrate the new [[NIBSS PTSA — VPN Flapping Apr 22]] situation cross-link and the DTS-mitigation stabilization signal from Slack.
+
+**TDSD-6645 — unchanged this tick.** Still Awaiting Scheme Update, Dominic still silent (assignee silence ~51h07m since 16:53 WAT Apr 20). No delta.
+
+**TDSD-6689 (watchlist from prior ticks) — no delta this tick.** Stanbic Participant settlement 8AM failure still WIP from 16:15 WAT tick. Now ~4h45m since file; watch continues. If still unresolved at briefing-2026-04-23 compose, candidate for briefing Decision item.
+
+**Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — still unverifiable without Gmail. Brain state unchanged.
+
+**Scope caveat (skim).** Only TDSD queried this tick; 17 software projects not checked. Next Full tick should re-extend to 18-project scope.
+
+No Immediate-tier dispatches this tick. No new situations spawned (TDSD-6676 watch-next-tick holds; spawn deferred pending scope clarification).
