@@ -5,7 +5,7 @@ title: "Call the event planner for dad's birthday"
 status: pending
 created: "2026-04-16T09:45:51Z"
 summary: "Call event planner for dad's birthday — deferred to Monday Apr 20 per Apr 19 triage."
-updated: "2026-04-20T05:24:46Z"
+updated: "2026-04-22T12:05:38Z"
 cssclasses:
   - "reminder"
 deferred_to: 2026-04-20
@@ -13,7 +13,7 @@ deferred_to: 2026-04-20
 
 Needs to happen before flight back to Lagos next week. Time-sensitive — surface any time this week.
 
-**Current disposition:** Monday 2026-04-20 is the commitment day per Apr 19 triage. Saturday and Sunday both skipped; Monday is where this must close. Week-window directive still holds ("before flying back to Lagos next week"); deferral is within window.
+**Current disposition:** Monday 2026-04-20 was the commitment day per Apr 19 triage. User override on briefing-2026-04-20 B3 committed to "Call event planner between 16:00–18:00 WAT today (Apr 20) after planned double-decline of 16:00 slot." No completion signal recorded in brain since that override. briefing-2026-04-21 never fired (see briefing-2026-04-22 B5), so no intermediate surfacing occurred. As of briefing-2026-04-22, this is the 4th consecutive commitment-day-or-later surfacing and the week-window directive ("before flying back to Lagos next week") is now actively broken or closing depending on flight date interpretation.
 
 ## Surfacing history
 - [2026-04-17 06:09 WAT] — Surfaced in briefing-2026-04-17 as Decision item B2. First-time surface (reminder created 2026-04-16 09:45 WAT, after briefing-2026-04-16 was emitted at 05:28 WAT — this is the first briefing tick after creation). Body directive ("surface any time this week") + flight-back-to-Lagos time-sensitivity triggered immediate decision-tier placement.
@@ -21,3 +21,5 @@ Needs to happen before flight back to Lagos next week. Time-sensitive — surfac
 - [2026-04-19 07:11 WAT] — Surfaced in briefing-2026-04-19 as Decision item B2. Saturday commitment window had elapsed; brain had no triage-recorded confirmation that the Sat morning call happened (briefing-2026-04-18 Triage Results remained un-filled). Surfacing prompted user confirmation.
 - [2026-04-19 08:55 WAT] — **Deferred to Monday 2026-04-20 per user decision during triage.** Saturday call did not happen; Sunday also skipped. Monday is the commitment day. Status remains `pending`; `deferred_to: 2026-04-20` added. Reminder should surface prominently in briefing-2026-04-20.
 - [2026-04-20 06:09 WAT] — **Commitment day surfacing.** Surfaced in briefing-2026-04-20 as Decision item B3. Time-trigger matched (`deferred_to: 2026-04-20` = today). Week-window still holds but narrowing — this is the third consecutive commitment-day surfacing. Urgency-dominant salience. Recommendation: close the loop today via action or explicit dismissal.
+- [2026-04-20 08:49 WAT] — **User override during briefing-2026-04-20 triage.** Recommended action overridden with concrete plan: "Call event planner between 16:00–18:00 WAT today (Apr 20) after planned double-decline of 16:00 slot." No completion note recorded in brain afterward.
+- [2026-04-22 ~12:45 WAT] — **Re-surfaced in briefing-2026-04-22 as Decision item B3 (catch-up briefing).** 2 days past Apr 20 commitment day. briefing-2026-04-21 never fired (structural gap — see briefing-2026-04-22 B5) so no intermediate Apr 21 surfacing occurred. Week-window directive now actively broken or closing. Status still `pending`. Triage prompt asks explicitly whether Apr 20 16:00–18:00 call happened.
