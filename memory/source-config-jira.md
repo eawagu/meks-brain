@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T15:15:00Z. 16:15 WAT Full tick (narrow scope): 3 new-this-tick deltas — TDSD-6687 NIP Disbursement Downtime filed+Completed fast-cycle, TDSD-6689 Stanbic 8AM Participant settlement WIP (new failure mode, watchlist), TDSD-6562 Deploy RESYNC Implementing (A5 carryforward). Items updated in 13:22–14:13 UTC window (TDSD-6688 Dominic, TDSD-6671 UBA RC96 Completed, TDSD-6683 Apr 22 P2 Completed, TDSD-6686/6685/6544/6673 housekeeping) were pre-cutoff but surfaced into Monnify TDSD-6645 + NIBSS DD situations this tick — exposed a JQL-timezone handling discipline codified into directives. TDSD-6630 still no movement; retirement bar rising. TDSD-6645 unchanged; TDSD-6688 reframes pattern to workflow-discipline."
-updated: 2026-04-22
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T16:09:00Z. 17:09 WAT Full tick (narrow WAT-local scope): 4 new-this-tick deltas — TDSD-6690 Change Completed (Ekene), TDSD-6662 Opeyemi Settlement Done (third Opeyemi-same-day-close data point, strengthens TDSD-6645 pattern anomaly), TDSD-6615 Keystone Settlement #20260119 Completed 16:31 WAT (historical ticket closure — Keystone situation now retirement candidate), TDSD-5584 Cancelled (awareness). TDSD-6630 still no movement (silence ~59h42m); TDSD-6645 unchanged (assignee silence ~48h16m). No Immediate-tier dispatches."
+updated: "2026-04-22T16:25:36Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T15:15:00Z"
+last_processed: "2026-04-22T16:09:00Z"
 ---
 
 ## Connection
@@ -135,3 +135,26 @@ Queried `project = TDSD AND updated >= "2026-04-22 14:15"` (WAT-local per site t
 **Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — can't re-verify without Gmail. Brain state reflects prior carryforward.
 
 No Immediate-tier dispatches this tick. No new situations spawned. TDSD-6689 (Stanbic Participant settlement) on next-tick watchlist — spawn situation if unresolved or pattern compounds.
+
+### Tick 2026-04-22 ~17:09 WAT — Full-level (narrowly-scoped delta sweep)
+
+Window: 16:15 → 17:09 WAT (~54min delta since prior tick). Current time 17:09 WAT = 16:09 UTC.
+
+Queried `project = TDSD AND updated >= "2026-04-22 16:15"` (WAT-local per JQL timezone discipline above). Applied post-filter on assistant side to confirm only items updated after 15:15 UTC (= 16:15 WAT, the true delta window).
+
+**New-this-tick deltas (4 items):**
+
+- **TDSD-6690 — Change, Ekene-assigned, Completed.** Change-ticket family; Completion this tick. Awareness-tier. No active-situation entity overlap, no P1/outage markers. Factors: source=jira, ticket_type=change, fast_cycle_close, no_cto_action.
+- **TDSD-6662 — Opeyemi-assigned Settlement ticket, Done this tick.** Third Opeyemi-same-day-close data point in the Urgent-Pending-Settlement family alongside TDSD-6655 and TDSD-6661. Strengthens the assignee-variable side of the TDSD-6645 pattern anomaly (3:1 Opeyemi-closes vs. Dominic-stall). Surfaced into [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] situation delta — carry-forward ask for briefing-2026-04-23 now reframed with two angles: workflow-discipline (from TDSD-6688) + assignee-pattern strengthening (from TDSD-6662). Factors: source=jira, same_day_close, opeyemi_assignee, pattern_anomaly_strengthening, cross_reference_TDSD-6645_situation.
+- **TDSD-6615 "Keystone Settlement pending #20260119" — Completed at 16:31 WAT.** Historical pending-settlement ticket (filed Jan 19, surfaced into INITIAL REVIEW on Apr 20 09:54 WAT) now formally closed. Combined with backfilled confirmation of TDSD-6633 Done from 17:09 WAT Apr 20 tick, both current-cycle and historical-cycle Keystone settlement tickets are now closed. Updated [[Keystone Bank — Settlement Requery Apr 20]] situation — **retirement candidate at briefing-2026-04-23 compose** unless new Keystone settlement-layer cycle surfaces. Factors: source=jira, historical_ticket_closure, broader_review_cadence_confirmed, keystone_situation_retirement_candidate.
+- **TDSD-5584 — Cancelled.** Administrative cancellation; no active-situation entity overlap, no P1/outage markers. Awareness-tier. Factors: source=jira, ticket_cancelled, administrative, no_cto_action.
+
+**TDSD-6630 NIBSS Direct Debit — still no movement.** Comment silence ~59h42m, any-update silence ~56h51m. No delta this tick. Situation page updated with retirement-posture-reverted-to-hold framing (see NIBSS DD situation — the 16:44 WAT #monieworld-monnify customer-facing disbursement announcement reversed the prior tick's retirement trajectory).
+
+**TDSD-6645 — unchanged this tick.** Still Awaiting Scheme Update, Dominic still silent on this ticket (assignee silence ~48h16m since 16:53 WAT Apr 20 acknowledgement). TDSD-6662 (new data point above) strengthens carry-forward ask.
+
+**TDSD-6689 (watchlist from prior tick) — no delta this tick.** Stanbic Participant settlement 8AM failure still WIP; assignee-engaged state holds. Watch continues next tick.
+
+**Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — still unverifiable without Gmail. Brain state unchanged.
+
+No Immediate-tier dispatches this tick. No new situations spawned. Situation updates: NIBSS DD (retirement reverted), Keystone (retirement candidate), Monnify TDSD-6645 (assignee-pattern strengthened).
