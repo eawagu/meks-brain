@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives; last_processed 2026-04-20T16:09:00Z. 17:09 WAT Full tick: Union Bank RC91 cycle 2 Apr 20 filed 16:22 WAT in #teamapt-tech-operations by Qazim Adedigba — 12m fast-cycle (16:22→16:34 WAT), bank auto-recovered, TDSD-6643 Resolved 16:41 WAT. 7th Union Bank cycle in 9 days (2nd today). All other Tier 1 channels minimal activity (go-subscribe routine chatter). Timestamp-error MISS on earlier Slack sweep (used 1745161740 2025 epoch instead of 1776697740 2026 epoch) — corrected this tick."
-updated: "2026-04-20T16:22:06Z"
+updated: "2026-04-22T12:06:27Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T16:09:00Z"
+last_processed: "2026-04-22T11:45:00Z"
 ---
 
 ## Connection
@@ -36,20 +36,33 @@ When computing Slack `oldest` parameter for channel reads, use the current year'
 
 ## Notes
 
-Tick 2026-04-20 17:09 WAT Full-level.
+Tick 2026-04-22 ~12:45 WAT — catch-up Full briefing covering 43.5h window since last_processed=2026-04-20T16:09:00Z. briefing-2026-04-21 never fired (see briefing-2026-04-22 B5).
 
-**#teamapt-tech-operations — Union Bank RC91 cycle 2 Apr 20:**
-- Cycle 2 opened 16:22 WAT, resolved 16:34 WAT (12m fast-cycle, bank auto-recovered) — within Union Bank fast-cycle envelope (14m prior floor; cycle 2 is new tightest at 12m).
-- [[Qazim Adedigba]] filed P1 declaration in channel at 16:26:13 WAT; TDSD-6643 filed 16:28 WAT, Resolved 16:41 WAT with auto-recovery comment.
-- **7th Union Bank cycle in 9 days** (Apr 12, 15, 16×2, 19, 20×2). 2nd cycle today after cycle 1 (6h39m, bank-resolved 07:56 WAT).
-- **No Immediate dispatch** — B6 calibration precedent holds; fast-cycle within envelope, already-resolved at tick discovery. [[Union Bank — RC91 P1 Apr 20]] situation updated with cycle 2 delta (page remains retired).
-- Factors: source=slack+jira, channel=teamapt-tech-operations, keyword=P1+RC91+Union, situation_delta, same_tick_open_and_close, within_envelope, pattern_compounding, 7_cycles_9_days.
+**#teamapt-tech-operations — heavy activity across window:**
 
-**#go-subscribe-by-teamapt — routine operational chatter:**
-- 4 messages in window: [[Nancy Muorah]] pinging [[Daniel Ojinaka]] about a call Dennis is on; Daniel acknowledging. Internal coordination, no operational incident. Awareness-tier.
+Resolved in window (9 P1s, one P2→resolved):
+- Union Bank RC91 Apr 20 16:22 WAT → 12m auto-recovery (thread resolved; 7th cycle, already captured pre-tick in prior source-config-slack notes)
+- NIBSS PTSA RC96 Apr 20 17:42 WAT → 1h3m (thread-resolved)
+- Stanbic Bank RC91 Apr 21 04:43 WAT → 3m auto (services restart worked)
+- Fidelity Bank RC91 Apr 21 03:45 WAT → 4h27m (2h34m initial + resurface + final close)
+- Keystone Bank RC91 Apr 21 08:45 WAT → 6m auto
+- NIBSS PTSA RC91 Apr 21 09:30 WAT → 10m auto (self-closed in parent message)
+- NIBSS PTSA VPN FLAP Apr 21 13:20 WAT → 1m (self-closed)
+- Access Bank RC91 Apr 22 02:11 WAT → 39m bank-resolved
+- NIBSS PTSA failure-to-send Apr 22 11:33 WAT → 3m auto (self-closed)
 
-**All other Tier 1 channels silent** — #account-switch-alerts (zero), #teamapt-x-paystack-transfer-support (zero), #notifications-support-dev (zero). Zero DMs to user. Tier 3 keyword sweep was impaired by earlier timestamp error; corrected reads show no additional Tier 1 signals.
+**Silent-unresolved at tick time (Immediate-tier):**
+- Polaris Bank RC91 (Switch) Apr 21 08:44 WAT — 28h+ active, no thread-level resolution
+- UBA Bank RC96 across board (Switch) Apr 21 10:45 WAT — 26h+ active, **NEW failure mode** (prior UBA was RC91)
+- CoralPay Bank FBN RC91 (Switch) Apr 22 05:09 WAT — 7h+ active
 
-**Calibration MISS captured — Slack timestamp error.** Earlier in this tick, initial Slack channel reads used epoch 1745161740 (2025-04-20 15:09 UTC) instead of the intended 1776697740 (2026-04-20 15:09 UTC). This caused the first-pass reads to return irrelevant 2025/early-2026 messages rather than the 16:09→17:09 WAT current-window content. Corrected on re-run; Union Bank cycle 2 was discovered in corrected sweep. Timestamp-computation discipline added to Directives as forcing function for future ticks. MISS: factor captured for tuning log under reliability/verification.
+Batch CTO-direct DM drafted to U080PEXEZ0E for Oladapo escalation. Captured in briefing-2026-04-22 B1.
 
-**Calibration pattern — multi-channel RC91 cycle density.** Three cycles in ~2h today via Slack (Union 14:27–14:33, Stanbic 15:04–16:00, Union 16:22–16:34 WAT). All bank-auto-recovered within envelope. B6 calibration holds across all three.
+**Silent-Briefing-tier:**
+- NIBSS DD P2 pending mandates Apr 22 10:40 WAT — ~2h active at tick, P2 (not P1) so no Immediate dispatch. 3rd NIBSS DD mandate-failure in 8 days (Apr 14 retired, Apr 20 TDSD-6630 silent 53h+, Apr 22 new P2). Captured in briefing-2026-04-22 B4.
+
+**Other Tier 1 channels:** No direct reads performed this tick beyond #teamapt-tech-operations — the incident density in Tier 1 primary channel absorbed the sweep budget. Cost cap holds. Next tick should reassess #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt.
+
+**Deployment notification:** Aptent Services 11pm Apr 21 (rest-service, bank-cashout-service, card-transaction-routing-service), TDSD-6562. Reaction (white_check_mark) + 1 thread reply Apr 22 07:13 WAT → inferred successful deployment. MPG+Resync sink information propagation and dynamic log-level control features now live. Captured in briefing-2026-04-22 A5.
+
+**Calibration pattern — silent-resolution vs truly-active.** Search for "Issue resolved" in channel returned exactly 5 matches mapping to the 5 explicitly-resolved P1 threads. The 3 Immediate-tier items (Polaris/UBA/CoralPay) have no such match — confirming they are factually still open, not merely silent-recovered. This calibrates the B1 Factors: `absence_of_in_channel_resolution` is a reliable signal when combined with `duration_exceeds_historical_envelope`.
