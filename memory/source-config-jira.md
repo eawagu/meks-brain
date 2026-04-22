@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T16:09:00Z. 17:09 WAT Full tick (narrow WAT-local scope): 4 new-this-tick deltas — TDSD-6690 Change Completed (Ekene), TDSD-6662 Opeyemi Settlement Done (third Opeyemi-same-day-close data point, strengthens TDSD-6645 pattern anomaly), TDSD-6615 Keystone Settlement #20260119 Completed 16:31 WAT (historical ticket closure — Keystone situation now retirement candidate), TDSD-5584 Cancelled (awareness). TDSD-6630 still no movement (silence ~59h42m); TDSD-6645 unchanged (assignee silence ~48h16m). No Immediate-tier dispatches."
-updated: "2026-04-22T16:25:36Z"
+updated: "2026-04-22T17:22:35Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T16:09:00Z"
+last_processed: "2026-04-22T17:09:00Z"
 ---
 
 ## Connection
@@ -158,3 +158,35 @@ Queried `project = TDSD AND updated >= "2026-04-22 16:15"` (WAT-local per JQL ti
 **Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — still unverifiable without Gmail. Brain state unchanged.
 
 No Immediate-tier dispatches this tick. No new situations spawned. Situation updates: NIBSS DD (retirement reverted), Keystone (retirement candidate), Monnify TDSD-6645 (assignee-pattern strengthened).
+
+### Tick 2026-04-22 ~18:09 WAT — Skim-level (narrow WAT-local delta sweep, TDSD scope only)
+
+Window: 17:09 → 18:09 WAT (~1h delta since prior tick). Current time 18:09 WAT = 17:09 UTC. Per Step 0 `level=skim`, restricted to TDSD scope (service desk where operational P1s land) rather than all 18 projects.
+
+Queried `project = TDSD AND updated >= "2026-04-22 17:09"` (WAT-local per JQL timezone discipline). Result: `isLast: true`, 1 ticket returned.
+
+**New-this-tick delta (1 item):**
+
+- **TDSD-6691 "Deploy OTP Resend, SmartDet NSS Account Fix & API Settlement Agent for Polaris Outward Flows"** — reporter [[June Johnson]], assignee [[Saheed Yusuf]], **High priority**, Status **Review** (New → Review, transitioned 17:38 WAT), created 17:33 WAT. Component: Switch.
+  - **Description (3 bundled changes):**
+    1. OTP Resend on Backoffice — enables backoffice users to resend OTPs during authentication/transaction verification; reduces support overhead from expired or undelivered OTPs.
+    2. SmartDet NSS Account Fix — resolves incorrect processing/routing on SmartDet NSS account configuration.
+    3. **API Settlement Agent for all outward flows from Polaris (Settlement Bank)** — transitions outward settlement from Polaris (Settlement Bank) to the API Settlement Agent; standardises outward disbursement processing.
+  - **Relevance analysis:**
+    - Assignee Saheed Yusuf is the same person who drove the Apr 21 23:00 WAT Aptent Services deployment (TDSD-6562 MPGS Sink). Continues the Switch-layer deploy cadence.
+    - [[Polaris Bank]] is one of the 3 bank-side P1s in briefing-2026-04-22 B1 batch (Polaris RC91 inbound routing, 33h+ active at this tick). **BUT TDSD-6691 targets *outward* settlement flows from Polaris, which is a different direction** than the inbound RC91 routing P1. The API Settlement Agent transition is a standardisation/rework deploy, not an RC91 remediation. No direct causal link to the B1 Polaris RC91 thread.
+    - Standard change-management path (Review status = pre-deploy approval gate). No Immediate-tier markers.
+  - **Classification:** Awareness-tier. High priority but standard change path, multi-change bundle, not an incident response.
+  - **Factors:** source=jira, priority=high, ticket_new, ticket_type=change_deploy, component=switch, active_situation_match=polaris_bank_outward_scope, no_direct_link_to_b1_polaris_rc91_inbound, awareness_tier, no_cto_action.
+
+**TDSD-6630 NIBSS Direct Debit — still no movement.** Comment silence ~60h42m, any-update silence ~57h51m. No delta this tick. Situation page [[NIBSS DD — Downtime P1 Apr 20]] updated from Slack-side signal (18:07 WAT thread third-event on NIBSS PTSA) — see source-config-slack Notes.
+
+**TDSD-6645 — unchanged this tick.** Still Awaiting Scheme Update, Dominic still silent (assignee silence ~49h16m since 16:53 WAT Apr 20). No delta.
+
+**TDSD-6689 (watchlist from prior ticks) — no delta this tick.** Stanbic Participant settlement 8AM failure still WIP from 16:15 WAT tick; assignee-engaged state holds. Watch continues next tick.
+
+**Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — still unverifiable without Gmail. Brain state unchanged.
+
+**Scope caveat (skim).** Only TDSD queried this tick; the 17 software projects not checked. Skim-level allowance per config-heartbeat-prompt Perceive Step 0. Next Full tick should re-extend to the 18-project scope (iterated per JQL payload-size discipline).
+
+No Immediate-tier dispatches this tick. No new situations spawned.
