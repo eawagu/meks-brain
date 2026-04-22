@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T15:15:00Z. 16:15 WAT Full tick: all 5 Tier 1 channels silent since 15:15 WAT (no new messages, no Immediate-tier keyword hits, no DMs). slack_read_channel anomaly from 14:15 WAT tick did NOT reproduce — call-shape normal across all 5 channels this tick. B1 batch CTO-DM draft to Oladapo still unsent (no user action, no Oladapo inbound). 3 B1 Immediate items: Polaris + CoralPay Slack+Jira silent-unresolved; UBA RC96 has a Jira-side Completion (TDSD-6671 at 15:03 WAT) — may match B1 Slack thread, unverifiable from names alone, flagged for next briefing. 15:11 WAT NIBSS retraction aging toward housekeeping-only interpretation as 1h of Tier 1 silence accumulates. Gmail/Calendar/Drive MCPs remain dark."
-updated: 2026-04-22
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T16:09:00Z. 17:09 WAT Full tick: fresh customer-facing NIBSS signal at #monieworld-monnify 16:44 WAT (Opeyemi Ahmed — disbursement announcement with active mitigation via alternative routing) reverses the 16:15 WAT retraction-as-housekeeping interpretation — NIBSS DD situation retirement posture reverted to hold. 2 NIBSS PTSA VPN fast-cycles in #teamapt-tech-operations this tick (16:35-16:41 + 16:51-16:55 WAT, both self-closed) add frequency-compounding on NIBSS connectivity mode. Tier 1 otherwise quiet outside the VPN flaps. B1 batch CTO-DM draft still unsent (no user action). Gmail/Calendar/Drive MCPs remain dark."
+updated: "2026-04-22T16:23:11Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T15:15:00Z"
+last_processed: "2026-04-22T16:09:00Z"
 ---
 
 ## Connection
@@ -37,8 +37,8 @@ When computing Slack `oldest` parameter for channel reads, use the current year'
 ### Date-modifier avoidance (added 2026-04-22 14:15 WAT)
 Do not use `after:YYYY-MM-DD` Slack search modifiers for same-day windows — observed to exclude same-day messages in at least one sweep. **Preferred path:** explicit Unix epoch `after` parameter via `slack_search_public`. Verified working at 1776858300 (2026-04-22 ~14:05 WAT).
 
-### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 WAT tick found it working again)
-Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 WAT tick retest:** `slack_read_channel` for C0ABU8GMW75 with `oldest=1776867300` returned correctly (empty in this case because channel was genuinely quiet, but the call-shape behaved normally against all 5 Tier 1 channels). Single data point at 14:15 WAT remains unexplained; not reproducible at 16:15 WAT. **Stand down on codification** — no Tier 1 sweep-order amendment needed yet. Keep the observation note in case it recurs.
+### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 WAT + 17:09 WAT ticks found it working again)
+Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 WAT tick retest:** `slack_read_channel` for C0ABU8GMW75 with `oldest=1776867300` returned correctly. **17:09 WAT tick retest:** `slack_read_channel` across all 5 Tier 1 channels with fresh `oldest` worked normally — anomaly non-reproducible across two subsequent ticks. **Stand down on codification** — no Tier 1 sweep-order amendment needed. Keep the observation note in case it recurs.
 
 ## Notes
 
@@ -111,3 +111,34 @@ Window: 14:15 → 16:15 WAT (2h delta since prior tick). Current local time 16:1
 - No new Immediate items → no new Slack DM drafts.
 - No changes to existing briefing-2026-04-22 body (per config-briefing, briefings are immutable after creation except for Triage Results).
 - Situation pages updated for TDSD-6630 (comment silence update, Apr 22 cycle Jira closure, retirement-bar-rising framing) and TDSD-6645 (TDSD-6688 workflow-discipline reframing).
+
+### Tick 2026-04-22 ~17:09 WAT — Full sweep (Tier 1 + Tier 3 keyword hits)
+
+Window: 16:15 → 17:09 WAT (~54min delta since prior tick). Current local time 17:09 WAT = 16:09 UTC.
+
+**Tier 1 read (all 5 channels via `slack_read_channel` with fresh `oldest=1776870300` = 2026-04-22 15:05 UTC = 16:05 WAT).** Anomaly from 14:15 WAT did not reproduce — all 5 channels returned normally.
+
+**#teamapt-tech-operations deltas:**
+- NIBSS PTSA VPN fast-cycle 1: 16:35-16:41 WAT (6min, self-closed in-channel).
+- NIBSS PTSA VPN fast-cycle 2 (resurface): 16:51-16:55 WAT (4min, self-closed in-channel).
+- Both within fast-cycle envelope. Together they echo the Apr 21 13:20 WAT NIBSS PTSA VPN flap (1min) and TDSD-6673 closure this morning. **3 VPN flaps in 24h on NIBSS connectivity mode** — frequency-compounding signal. Not individually Immediate, but tracked as adjacent-evidence for NIBSS-side disruption.
+- No other deltas.
+
+**Other Tier 1 channels (#account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt):** Zero new messages since 16:05 WAT.
+
+**Tier 3 keyword / active-situation entity-match scan** via `slack_search_public`:
+- **#monieworld-monnify 16:44 WAT Apr 22 — Opeyemi Ahmed customer-facing NIBSS disbursement announcement with active mitigation via alternative routing.** Tier 3 match on NIBSS + disbursement + active-situation (NIBSS DD) entity overlap. **This signal reverses the 16:15 WAT "retraction-as-housekeeping" interpretation** — fresh NIBSS customer-facing disruption signal exists, and Moniepoint has engaged an alternative routing mitigation path. Updated [[NIBSS DD — Downtime P1 Apr 20]] situation with 17:09 WAT delta: retirement posture reverted to hold; decision deferred beyond briefing-2026-04-23 until mitigation trajectory clarifies.
+- No other Tier 3 keyword hits.
+
+**DM scan:** No DMs mentioning user. B1 batch CTO-DM draft to Oladapo still unsent — no user action on it, no Oladapo inbound.
+
+**3 Immediate items status (Polaris / UBA RC96 / CoralPay):** Slack-side silent since prior tick (no new thread replies, no resolution posts). Jira-side status tracked via source-config-jira. UBA RC96 framing still potentially stale (TDSD-6671 Completed prior tick); Polaris + CoralPay remain silent-unresolved in both Slack and Jira.
+
+**Coverage caveats:**
+- Email + Calendar + Google Drive MCPs remain dark (auth-failure state carried from briefing-2026-04-22 B2 — deferred tool list for this session does not include Gmail/Calendar/Drive connectors, confirming continued blackout).
+- All 5 Tier 1 channels read cleanly this tick.
+
+**Dispatch decisions this tick:**
+- No new Immediate items → no new Slack DM drafts (the 16:44 WAT #monieworld-monnify signal is a mitigation communication, not an unmitigated outage — Moniepoint is already engaged).
+- No changes to existing briefing-2026-04-22 body.
+- Situation pages updated: [[NIBSS DD — Downtime P1 Apr 20]] (retirement posture reverted to hold, VPN frequency-compounding, #monieworld-monnify signal), [[Keystone Bank — Settlement Requery Apr 20]] (TDSD-6615 closure + backfilled TDSD-6633 closure — retirement candidate), [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] (TDSD-6662 third Opeyemi-same-day-close strengthens assignee-variable evidence).
