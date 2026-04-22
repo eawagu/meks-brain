@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T16:09:00Z. 17:09 WAT Full tick: fresh customer-facing NIBSS signal at #monieworld-monnify 16:44 WAT (Opeyemi Ahmed — disbursement announcement with active mitigation via alternative routing) reverses the 16:15 WAT retraction-as-housekeeping interpretation — NIBSS DD situation retirement posture reverted to hold. 2 NIBSS PTSA VPN fast-cycles in #teamapt-tech-operations this tick (16:35-16:41 + 16:51-16:55 WAT, both self-closed) add frequency-compounding on NIBSS connectivity mode. Tier 1 otherwise quiet outside the VPN flaps. B1 batch CTO-DM draft still unsent (no user action). Gmail/Calendar/Drive MCPs remain dark."
-updated: "2026-04-22T16:23:11Z"
+updated: "2026-04-22T17:19:47Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T16:09:00Z"
+last_processed: "2026-04-22T17:09:00Z"
 ---
 
 ## Connection
@@ -37,8 +37,11 @@ When computing Slack `oldest` parameter for channel reads, use the current year'
 ### Date-modifier avoidance (added 2026-04-22 14:15 WAT)
 Do not use `after:YYYY-MM-DD` Slack search modifiers for same-day windows — observed to exclude same-day messages in at least one sweep. **Preferred path:** explicit Unix epoch `after` parameter via `slack_search_public`. Verified working at 1776858300 (2026-04-22 ~14:05 WAT).
 
-### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 WAT + 17:09 WAT ticks found it working again)
-Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 WAT tick retest:** `slack_read_channel` for C0ABU8GMW75 with `oldest=1776867300` returned correctly. **17:09 WAT tick retest:** `slack_read_channel` across all 5 Tier 1 channels with fresh `oldest` worked normally — anomaly non-reproducible across two subsequent ticks. **Stand down on codification** — no Tier 1 sweep-order amendment needed. Keep the observation note in case it recurs.
+### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 WAT + 17:09 WAT + 18:09 WAT ticks found it working again)
+Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 + 17:09 + 18:09 WAT tick retests:** `slack_read_channel` across all 5 Tier 1 channels returned normally. Anomaly non-reproducible across 3 subsequent ticks. **Stand down on codification** — no Tier 1 sweep-order amendment needed. Keep the observation note in case it recurs.
+
+### Thread-continuation vigilance (added 2026-04-22 18:09 WAT)
+Self-closed thread parents can receive new status updates hours later that re-open the incident characterization. Observed today: #teamapt-tech-operations NIBSS PTSA thread 1776872974.244299 — parent message 16:35 WAT with explicit end-time 16:41 WAT (6min self-close), first reply 16:51-16:55 WAT (second cycle self-close via node-switch-to-lease-line), second reply 18:07 WAT ("Moniepoint is currently having issues sending traffic to NIBSS and DTS route is priortized at the moment") which is a third event — not a self-close and escalates mitigation to DTS alternative routing. Prior tick at 17:09 WAT characterized the first two cycles as "self-closed within envelope" in isolation, which was accurate at the time but missed the ongoing-pattern framing. **Rule:** when a thread parent has an active-situation entity match (e.g., NIBSS) and has received ≥2 updates within the tick window, include thread reads in Step 1 processing even if search-all and channel-read show no new parent messages — the action may be on existing threads. For skim ticks, this applies only when the delta scan has surfaced a thread update (the signal itself triggers the read); full ticks can be more liberal.
 
 ## Notes
 
@@ -142,3 +145,38 @@ Window: 16:15 → 17:09 WAT (~54min delta since prior tick). Current local time 
 - No new Immediate items → no new Slack DM drafts (the 16:44 WAT #monieworld-monnify signal is a mitigation communication, not an unmitigated outage — Moniepoint is already engaged).
 - No changes to existing briefing-2026-04-22 body.
 - Situation pages updated: [[NIBSS DD — Downtime P1 Apr 20]] (retirement posture reverted to hold, VPN frequency-compounding, #monieworld-monnify signal), [[Keystone Bank — Settlement Requery Apr 20]] (TDSD-6615 closure + backfilled TDSD-6633 closure — retirement candidate), [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] (TDSD-6662 third Opeyemi-same-day-close strengthens assignee-variable evidence).
+
+### Tick 2026-04-22 ~18:09 WAT — Skim sweep (Tier 1 read + search-all + DM scan)
+
+Window: 17:09 → 18:09 WAT (1h delta since prior tick). Current local time 18:09 WAT = 17:09 UTC. Step 0 declared `level=skim, rationale=1h after active Full tick, signals live but likely sparse delta window`. Per skim protocol, executed fast-path delta checks per source; one source reported a delta (Slack), so triggered full Step 1 processing on that source + Step 2 reminder evaluation.
+
+**Tier 1 read (all 5 channels via `slack_read_channel` with `oldest=1776874140` = 2026-04-22 16:09 UTC = 17:09 WAT).** Clean — all 5 channels responded normally. Zero new messages in 4 of 5 channels. #teamapt-tech-operations returned one message.
+
+**#teamapt-tech-operations delta (1 message):**
+- **18:07 WAT Qazim Adedigba reply on NIBSS PTSA thread 1776872974.244299:** "Status: Moniepoint is currently having issues sending traffic to NIBSS and DTS route is priortized at the moment." Arrives in the same thread that carried two prior self-closed VPN fast-cycles (16:35-16:41 WAT + 16:51-16:55 WAT). This update is a **third event** on the thread, not a re-framing of the prior two. Characterizes ongoing Moniepoint-to-NIBSS traffic disruption despite the node switch to lease line at 16:55 WAT; mitigation has escalated to DTS alternative route priority. Cumulative active window on thread: 1h32m from 16:35 WAT.
+- Connects to prior-tick 16:44 WAT #monieworld-monnify Opeyemi Ahmed announcement as same-root-cause evidence — NIBSS-side disruption affecting both the internal tech-ops thread and the customer-facing Monnify disbursement channel. Compounds the retirement-posture-on-hold stance on [[NIBSS DD — Downtime P1 Apr 20]].
+- **Not Immediate-tier dispatch this tick:** 1h32m duration is under 2h threshold, and DTS mitigation is active (not an unmitigated outage). Accumulates for briefing-2026-04-23 as Briefing-tier signal. If the 20:00 WAT tick finds the thread still active and crossed 2h, Immediate-tier scoring applies and re-evaluate then.
+- Factors: source=slack, tier1_channel=C0ABU8GMW75, active_situation_match=nibss-dd-downtime-p1-apr-20, keyword=NIBSS+DTS, thread_continuation_third_event, cumulative_1h32m_under_2h_threshold, mitigation_engaged_dts_alternative_route, same_root_cause_as_monieworld_monnify_1644_wat, no_immediate_dispatch.
+
+**Search-all Immediate-tier keyword scan** via `slack_search_public` with `after=1776874140` for `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR down OR failure OR breach OR compromised OR NIBSS)`: 20 results returned, all Awareness-tier or lower when ranked against salience factors. The only operational signal was the 18:07 WAT #teamapt-tech-operations NIBSS status update already captured above. Other results: routine transaction monitoring escalations (Sunday Alake, Oluwatosin Adebayo, Sylvester Akinseye in #transaction-monitoring-escalations), dev workstream in #direct-debit-engineering (TCDD-1356 urgent fix discussion — internal deployment pipeline, not operational P1), UK payments normal operations, #pos-channel-deployments Harness MR approval requests, Union Bank DD integration token API discussion (Bukola Taiwo / Babajide Ojoboorun — engineering work, not a P1), football-corner chat, Ecobank funds settlement API form request (Ifeoluwa Oguntona asking for Teamapt letterhead form — administrative). Nothing Immediate-tier beyond the NIBSS thread.
+
+**Ingress routing check (user-shared documents in-channel):** None in this window.
+
+**Tier 2 DM scan** via `to:me after:1776874140`: 7 results.
+- Tracy Ojaigho (U0818NDNSN5): 17:13 WAT "Good afternoon" + "pls do you have a min?" → 17:43 WAT "Report of the meeting I had with Femi". No operational keyword; meeting-report share. Awareness-tier. Tracy is not in the active-situation entity set. No brain action required.
+- Ketan Dhamasana (U0818PKFKQR): 17:38-17:40 WAT reciprocal "Hi / You called / Yes / Sure." — User initiated (called Ketan, then joined a Slack DM exchange). **User is active in-app during this tick window** (replied to Ketan at 17:40 WAT). Calibration note: the skim-level decision was correct for tick cadence; user is online and can self-triage active Slack signals. No brain action required.
+- No Oladapo-to-user inbound DM. B1 batch CTO-DM draft still unsent.
+
+**TDSD-6691 cross-surface (from source-config-jira delta):** New High-priority deploy ticket 17:33 WAT — covers Polaris Outward Flows (API Settlement Agent transition). Does NOT address the Polaris RC91 inbound P1 in B1 batch (outward settlement vs inbound routing are distinct scopes). No Slack cross-link surfaced. Awareness-tier; logged in source-config-jira Notes.
+
+**Coverage caveats:**
+- Email + Calendar + Google Drive MCPs still dark (auth-failure state unchanged — deferred tool list for this session does not include Gmail/Calendar/Drive connectors). Gmail/Calendar silence now 2+ days since last_processed 2026-04-20T16:09:00Z.
+- All 5 Tier 1 channels read cleanly this tick.
+- TDSD-6691 detail obtained via Jira MCP; Slack cross-link (if any) not visible at this tick.
+
+**Dispatch decisions this tick:**
+- No new Immediate items → no new Slack DM drafts. NIBSS thread third-event signal is Briefing-tier accumulating for briefing-2026-04-23.
+- No changes to existing briefing-2026-04-22 body.
+- Situation page updated: [[NIBSS DD — Downtime P1 Apr 20]] — 18:09 WAT delta capturing the 18:07 WAT thread third-event + the cumulative-1h32m framing + retirement-continues-on-hold stance.
+
+**Reminder evaluation (Step 2):** One open reminder ("Call the event planner for dad's birthday"). Already surfaced in today's briefing-2026-04-22 B3 awaiting triage. Non-briefing tick — no re-emission. surface_now=false, auto_resolve_candidate=false.
