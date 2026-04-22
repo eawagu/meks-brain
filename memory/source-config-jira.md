@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T19:00:00Z. 20:00 WAT Skim tick (TDSD scope): 2 new-this-tick deltas — TDSD-6676 \"Exposure on Access Bank\" filed Work in progress (Access Bank workstream continues; no direct Multi-Track situation link visible this tick), TDSD-5365 \"Monnify Dev Doc Deploy\" Completed (awareness). TDSD-6630 still no movement (silence ~61h42m); TDSD-6645 unchanged (assignee silence ~51h16m). TDSD-6691 (from 18:09 WAT tick) still in Review. No Immediate-tier dispatches."
-updated: "2026-04-22T19:26:29Z"
+updated: "2026-04-22T21:20:55Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T19:00:00Z"
+last_processed: "2026-04-22T21:00:00Z"
 ---
 
 ## Connection
@@ -215,3 +215,25 @@ Queried `project = TDSD AND updated >= "2026-04-22 19:09"` (WAT-local per JQL ti
 **Scope caveat (skim).** Only TDSD queried this tick; 17 software projects not checked. Next Full tick should re-extend to 18-project scope.
 
 No Immediate-tier dispatches this tick. No new situations spawned (TDSD-6676 watch-next-tick holds; spawn deferred pending scope clarification).
+
+### Tick 2026-04-22 ~22:10 WAT — Skim-level (early-exit: zero TDSD deltas)
+
+Window: 20:00 → 22:10 WAT (~2h10min; 19:00 → 21:00 UTC). Per Step 0 `level=skim`, restricted to TDSD scope.
+
+Queried `project = TDSD AND updated >= "2026-04-22 20:00"` (WAT-local per JQL timezone discipline — equivalent to 19:00 UTC = 20:00 WAT, the true delta window). Result: `isLast: true`, **zero issues** returned. Complete TDSD quiet since 20:00 WAT — the 17:09 → 20:00 WAT window's TDSD-6676 (Exposure on Access Bank WIP) and TDSD-5365 (Monnify Dev Doc Deploy Completed) were the last Jira deltas of the day so far.
+
+**Carryforward state (no changes this tick):**
+- **TDSD-6630 NIBSS DD** — comment silence now ~63h42m, any-update silence ~60h41m. Still WIP. User-deferred. No brain-side re-dispatch.
+- **TDSD-6645** — still Awaiting Scheme Update. Dominic assignee silence now ~53h16m since acknowledgement. No delta this tick. Carry-forward to briefing-2026-04-23 Decision item candidate holds.
+- **TDSD-6689 (Stanbic Participant 8AM settlement)** — still WIP; watchlist since 16:15 WAT. Now ~6h45m since file. Assignee-engaged state holds. Briefing-2026-04-23 Decision candidate if unresolved at compose.
+- **TDSD-6691 (Polaris outward-flows deploy)** — still in Review. Pre-deploy approval gate holds.
+- **TDSD-6676 (Access Bank exposure)** — still WIP; scope-disambiguation watch continues. Awareness-tier only.
+
+**Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — still unverifiable without Gmail. Brain state unchanged. Gmail silence ~54h since last_processed — below 7-day absence-of-signal threshold.
+
+**Scope caveat (skim).** Only TDSD queried this tick; 17 software projects not checked. Next Full tick should re-extend to 18-project scope.
+
+**Dispatch decisions this tick:**
+- Zero TDSD deltas → early-exit contribution from Jira source. Combined with Slack zero-deltas, the tick hit early-exit per config-heartbeat.
+- Advanced `last_processed` to 2026-04-22T21:00:00Z for audit trail continuity.
+- No Immediate dispatches. No situation spawns. No situation updates.
