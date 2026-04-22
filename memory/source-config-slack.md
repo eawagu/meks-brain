@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T14:15:00Z. 14:15 WAT Full tick: NIBSS DD P2 cycle (10:40→13:05 WAT, 2h25m resolved); 15:11 WAT NIBSS customer-facing comms retraction (carryforward signal); 3 Immediate items (Polaris/UBA/CoralPay) remain silent-unresolved with zero thread replies since briefing-2026-04-22 B1 dispatch was drafted but not sent (awaits user action). Tool anomaly: slack_read_channel for C0ABU8GMW75 with Unix oldest returned empty despite slack_search_public showing in-window messages — worked around via search path, not root-caused."
-updated: "2026-04-22T14:24:22Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T15:15:00Z. 16:15 WAT Full tick: all 5 Tier 1 channels silent since 15:15 WAT (no new messages, no Immediate-tier keyword hits, no DMs). slack_read_channel anomaly from 14:15 WAT tick did NOT reproduce — call-shape normal across all 5 channels this tick. B1 batch CTO-DM draft to Oladapo still unsent (no user action, no Oladapo inbound). 3 B1 Immediate items: Polaris + CoralPay Slack+Jira silent-unresolved; UBA RC96 has a Jira-side Completion (TDSD-6671 at 15:03 WAT) — may match B1 Slack thread, unverifiable from names alone, flagged for next briefing. 15:11 WAT NIBSS retraction aging toward housekeeping-only interpretation as 1h of Tier 1 silence accumulates. Gmail/Calendar/Drive MCPs remain dark."
+updated: 2026-04-22
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T14:15:00Z"
+last_processed: "2026-04-22T15:15:00Z"
 ---
 
 ## Connection
@@ -37,8 +37,8 @@ When computing Slack `oldest` parameter for channel reads, use the current year'
 ### Date-modifier avoidance (added 2026-04-22 14:15 WAT)
 Do not use `after:YYYY-MM-DD` Slack search modifiers for same-day windows — observed to exclude same-day messages in at least one sweep. **Preferred path:** explicit Unix epoch `after` parameter via `slack_search_public`. Verified working at 1776858300 (2026-04-22 ~14:05 WAT).
 
-### slack_read_channel anomaly (added 2026-04-22 14:15 WAT, not yet root-caused)
-Observed this tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. Workaround: route through search path when channel read returns empty-but-contradicted-by-search. **Not generalized yet** — single data point. If reproducible on next tick, codify as Tier 1 sweep-order amendment (search-first for C0ABU8GMW75) and open an investigation note.
+### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; 16:15 WAT tick found it working again)
+Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. **16:15 WAT tick retest:** `slack_read_channel` for C0ABU8GMW75 with `oldest=1776867300` returned correctly (empty in this case because channel was genuinely quiet, but the call-shape behaved normally against all 5 Tier 1 channels). Single data point at 14:15 WAT remains unexplained; not reproducible at 16:15 WAT. **Stand down on codification** — no Tier 1 sweep-order amendment needed yet. Keep the observation note in case it recurs.
 
 ## Notes
 
@@ -88,3 +88,26 @@ Window: 11:45 → 14:15 WAT (2.5h delta since prior tick).
 **Other Tier 1 channels (this tick's reassessment):** #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt were attempted but `slack_read_channel` behavior anomaly (see Directives — slack_read_channel anomaly) limited coverage. Fell back to search-path keyword scans with no Immediate-tier hits. **Partial coverage** acknowledged — if anomaly reproduces next tick, the fallback becomes codified as the default.
 
 **TDSD-6645 signal (Jira-originated, not Slack)** — see source-config-jira Notes for detail. Not tracked here.
+
+### Tick 2026-04-22 ~16:15 WAT — Full sweep (5/5 Tier 1 channels silent)
+
+Window: 14:15 → 16:15 WAT (2h delta since prior tick). Current local time 16:10 WAT = 15:10 UTC.
+
+**All 5 Tier 1 channels quiet since 15:15 WAT.** `slack_read_channel` for C0ABU8GMW75, C098VUQCVRA, C096LCNP26P, C08PH35PLPK, C090UHR9VDE with `oldest=1776867300` (2026-04-22 14:15 UTC = 15:15 WAT) returned zero messages each. **The 14:15 WAT slack_read_channel anomaly did not reproduce this tick** — call-shape working normally across all 5 channels. Single-data-point status remains — no codification of search-path fallback.
+
+**Search-all Immediate-tier keyword scan:** `slack_search_public` with `after:1776867300 sort:timestamp` for `P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR down OR failure` returned zero results. No Immediate-tier keyword matches in the 1h delta window.
+
+**DM scan:** `to:me OR from:@Oladapo after:2026-04-22` returned zero results. The briefing-2026-04-22 B1 batch CTO-DM draft to Oladapo is still unsent by the user — no indication the user has acted on it, and no Oladapo inbound to user.
+
+**3 Immediate items status (Polaris / UBA RC96 / CoralPay):** Slack-side silent since 15:15 WAT (no new thread replies, no resolution posts). Jira-side: **TDSD-6671 "UBA Transactions failure RC 96" Completed at 15:03 WAT Apr 22** (Olamide Ajibulu) — may or may not correspond to the briefing-B1 UBA RC96 Slack thread (msg ts 1776765124.841669); can't assert identity from names alone without Slack-to-Jira cross-link. Flag for next briefing: B1's UBA RC96 framing is potentially stale, surface to user at triage. Polaris + CoralPay remain silent-unresolved in both Slack and Jira.
+
+**NIBSS customer-facing retraction follow-up (from 15:11 WAT Apr 22):** One hour of Tier 1 silence since the retraction; no fresh NIBSS customer-facing signal arrived. Nudges toward housekeeping-only interpretation; too early to close the ambiguity. Next tick clarifies further. NIBSS DD situation page updated accordingly — retirement bar rising.
+
+**Coverage caveats:**
+- Email + Calendar + Google Drive MCPs remain dark (auth-failure state carried from briefing-2026-04-22 B2 — deferred tool list for this session does not include Gmail/Calendar/Drive connectors, confirming continued blackout).
+- Partial-coverage qualifier from 14:15 WAT tick (other Tier 1 channels) does not apply this tick — all 5 channels read successfully.
+
+**Dispatch decisions this tick:**
+- No new Immediate items → no new Slack DM drafts.
+- No changes to existing briefing-2026-04-22 body (per config-briefing, briefings are immutable after creation except for Triage Results).
+- Situation pages updated for TDSD-6630 (comment silence update, Apr 22 cycle Jira closure, retirement-bar-rising framing) and TDSD-6645 (TDSD-6688 workflow-discipline reframing).
