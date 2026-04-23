@@ -1,25 +1,34 @@
 ---
-title: Card Transaction Service
 type:
   - "entity"
+title: Card Transaction Service
+created: "2026-04-23T05:24:49Z"
+summary: "Manages the transaction processing flow inside Moniepoint MFB's Card Infrastructure — companion to Card Manager Service as a second middleware layer to Core Banking; being extracted to Java 21."
+updated: "2026-04-23T05:35:45Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:49Z"
-updated: "2026-04-23T05:24:49Z"
-summary: Manages the actual card transaction processing flow within Moniepoint MFB — functionally a second middleware layer alongside Card Manager Service between the card system and the Core Banking Application.
 ---
 
 ## Overview
 
-Card Transaction Service manages the actual transaction processing flow within the [[Moniepoint MFB]] card stack. Sits under Card Infrastructure ([[Damilola Oyediran]]).
+**Card Transaction Service** manages the actual transaction processing flow inside [[Moniepoint MFB]]'s Card Infrastructure stack. Functionally paired with [[Card Manager Service]] as a second middleware layer between the card system and Core Banking.
 
-## Architectural Position
+## Scope
 
-- Functionally a closely-related module to [[Card Manager Service]]
-- Acts as a **second middleware layer** between the card system and core banking
-- Note: the [[Card Manager Service CMS Specification]] documents an active extraction effort to spin out a CMS Transaction Service (Java 21) — likely the same or related service.
+- Transaction processing flow
+- Companion to Card Manager Service
 
-## Sources
+## Ownership
 
+Owned by Team 2 (Card Infrastructure) under PM [[Damilola Oyediran]], EM [[Nitish Chand]].
+
+## Evolution
+
+Actively being extracted from the legacy Card Manager Service — the "CMS Transaction Service extraction" work noted in the [[Card Manager Service CMS Specification]] targets Java 21.
+
+## Related
+
+- [[Card Manager Service]]
+- [[Damilola Oyediran]]
+- [[Nitish Chand]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
-- [[Card Manager Service CMS Specification]]

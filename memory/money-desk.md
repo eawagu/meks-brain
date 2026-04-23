@@ -1,18 +1,24 @@
 ---
-title: Money Desk
 type:
   - "entity"
+title: Money Desk
+created: "2026-04-23T05:24:49Z"
+summary: MoniePoint helpdesk and customer-support tool — integrated with Moniepoint MFB Cards via Card Integration Service for logging and resolving card-related issues.
+updated: "2026-04-23T05:35:45Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:49Z"
-updated: "2026-04-23T05:24:49Z"
-summary: MoniePoint helpdesk / customer support tool — integrated into the MFB card stack via Card Integration Service so support agents can log and resolve card-related issues against a customer record.
 ---
 
 ## Overview
 
-Money Desk is the [[MoniePoint]] helpdesk / customer support tool. It is integrated with the MFB card stack via [[Card Integration Service]], enabling support agents to log and resolve card-related issues against a customer record.
+**Money Desk** is MoniePoint's helpdesk / customer-support tool. Support agents use it to log and resolve customer issues, including card-related tickets.
 
-## Sources
+## Card System Integration
 
+The [[Moniepoint MFB]] Cards stack connects to Money Desk via [[Card Integration Service]], allowing card-related support issues to be logged and resolved against a customer record.
+
+## Related
+
+- [[Card Integration Service]]
+- [[Moniepoint MFB]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

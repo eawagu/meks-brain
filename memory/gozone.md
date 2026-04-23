@@ -1,23 +1,27 @@
 ---
-title: GoZone
 type:
   - "entity"
+title: GoZone
+created: "2026-04-23T05:30:10Z"
+summary: "Dispute management / auxiliary integration used by Moniepoint MFB's Dispute Management Service alongside IDS and AITA; full context pending."
+updated: "2026-04-23T05:35:46Z"
 cssclasses:
   - "entity"
 details_tbd: true
-created: "2026-04-23T05:30:10Z"
-updated: "2026-04-23T05:30:10Z"
-summary: Auxiliary dispute-management integration used by Moniepoint MFB alongside IDS/AITA — exact role not detailed in source.
+disambiguation_needed: true
 ---
 
 ## Overview
 
-GoZone is one of the auxiliary dispute-management integrations used by the [[Moniepoint MFB]] card stack alongside IDS / AITA.
+**GoZone** is a dispute management / auxiliary integration used by [[Moniepoint MFB]]'s [[Dispute Management Service]] alongside [[IDS]] and [[AITA]].
 
-## Usage
+## Disambiguation
 
-Listed among the MFB Cards team's external switch / provider integrations for dispute management and auxiliary functions (per 2026-04-21 KT). Exact functional role not detailed in source.
+Full name and organizational role not captured in the source meeting report — listed only as one of the dispute-management auxiliary integrations.
 
-## Sources
+## Related
 
+- [[Dispute Management Service]]
+- [[IDS]]
+- [[AITA]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

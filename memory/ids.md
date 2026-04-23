@@ -1,24 +1,33 @@
 ---
-title: IDS
 type:
   - "entity"
-cssclasses:
-  - "entity"
+title: IDS
 aliases:
   - "Internal Dispute System"
 created: "2026-04-23T05:30:10Z"
-updated: "2026-04-23T05:30:10Z"
-summary: Internal Dispute System within Moniepoint MFB — one of the systems the Dispute Management Service checks when processing a customer-logged card dispute (alongside AIT).
+summary: "Internal Dispute System — dispute management integration used by Moniepoint MFB's Dispute Management Service for dispute intake checks alongside AITA."
+updated: "2026-04-23T05:35:46Z"
+cssclasses:
+  - "entity"
+disambiguation_needed: true
 ---
 
 ## Overview
 
-IDS (Internal Dispute System) is the internal dispute reference/validation system in [[Moniepoint MFB]]. It is one of the systems the [[Dispute Management Service]] checks when processing a customer-logged card dispute.
+**IDS (Internal Dispute System)** is a dispute management platform integration used by [[Moniepoint MFB]]'s [[Dispute Management Service]] to check disputes during intake and routing.
 
-## Usage in Dispute Flow
+## Scope
 
-When a dispute arrives at the Dispute Management Service (from the mobile app), it is **checked against IDS / AIT** before being routed to the appropriate resolution path.
+- Part of the dispute intake check pipeline
+- Used alongside [[AITA]]
 
-## Sources
+## Disambiguation
 
+Glossary in the source meeting report defines IDS as "Internal Dispute System" — but full organizational/technical context needs further confirmation (internal MoniePoint system or external auxiliary integration).
+
+## Related
+
+- [[Dispute Management Service]]
+- [[AITA]]
+- [[GoZone]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

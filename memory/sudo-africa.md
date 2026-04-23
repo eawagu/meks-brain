@@ -1,32 +1,33 @@
 ---
-title: Sudo Africa
 type:
   - "entity"
+title: Sudo Africa
+created: "2026-04-23T05:24:50Z"
+summary: "External subscription-based tap-to-pay provider powering Moniepoint MFB's Digitisation Service — enables pseudo-digitisation approach bypassing VTS; potentially replaced Q4 2026 if Moniepoint moves to full Visa tokenization."
+updated: "2026-04-23T05:35:46Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:50Z"
-updated: "2026-04-23T05:24:50Z"
-summary: "Subscription-based external provider powering Moniepoint's tap-to-pay pseudo-digitisation — enables PAN storage on Android device and EMV NFC transmission at POS without requiring VTS tokenisation."
 ---
 
 ## Overview
 
-Sudo Africa is the external, subscription-based provider that powers [[Moniepoint MFB]]'s tap-to-pay [[Pseudo-Digitisation]] capability via the internal [[Digitisation Service]].
+**Sudo Africa** is the external subscription-based provider powering [[Moniepoint MFB]]'s [[Digitisation Service]] — the tap-to-pay pseudo-digitisation implementation.
 
 ## Commercial Model
 
-Subscription-based.
+- Subscription-based pricing
+- Currently the chosen tap-to-pay vendor
 
 ## Technical Role
 
-Enables Moniepoint's pseudo-digitisation approach: the actual PAN is securely stored on the customer's Android device and transmitted via EMV NFC at the point of sale, **bypassing the need for VTS tokenisation**.
+Supports MoniePoint's pseudo-digitisation approach: PAN stored securely on customer Android device, transmitted via EMV NFC at POS, bypassing Visa Token Service (VTS) tokenisation.
 
-## Status
+## Future Tension
 
-- Live for internal Android users
-- Broader rollout pending NFC readiness on POS estate (OP / PE terminals ~100% ready)
-- May be **replaced or complemented** by full [[Visa]] tokenization via VTS post-Visa launch (likely Q4 2026)
+Under the 2026 roadmap Priority 2 (Visa Tokenization & VAS), Sudo Africa may be replaced if MoniePoint moves to full Visa tokenization via a proper VTS provider — decision likely Q4 2026.
 
-## Sources
+## Related
 
+- [[Digitisation Service]]
+- [[Visa Token Service]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

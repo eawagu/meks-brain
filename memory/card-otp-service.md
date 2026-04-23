@@ -1,29 +1,39 @@
 ---
-title: Card OTP Service
 type:
   - "entity"
+title: Card OTP Service
+created: "2026-04-23T05:24:49Z"
+summary: "Moniepoint MFB OTP service for secure card operations — powers Safe Token today, designed to extend to Visa Token and 3DS/ACS; dispatches via MoniePoint's pre-whitelisted gateway."
+updated: "2026-04-23T05:35:45Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:49Z"
-updated: "2026-04-23T05:24:49Z"
-summary: "Manages One-Time Passwords for secure MFB card operations such as Safe Token — designed to be extensible to Visa Token and 3D Secure / ACS protocols; OTPs dispatched via MoniePoint's pre-whitelisted gateway."
 ---
 
 ## Overview
 
-Card OTP Service manages One-Time Passwords for secure card operations within the [[Moniepoint MFB]] card stack. Sits under Card Infrastructure ([[Damilola Oyediran]]).
+**Card OTP Service** manages One-Time Passwords for secure card operations inside [[Moniepoint MFB]]'s Card Infrastructure stack.
 
-## Current Use
+## Current Scope
 
-- **Safe Token** — OTP secured card operations
-- OTPs dispatched via MoniePoint's **pre-whitelisted gateway**
+- Safe Token OTP generation and distribution
 
-## Designed Extensibility
+## Designed-For Extensibility
 
-Designed to be extensible for additional protocols:
+Architected to extend to:
 - Visa Token
-- 3D Secure / [[ACS]]
+- 3D Secure / ACS
 
-## Sources
+## Dispatch Mechanism
 
+OTPs are dispatched via MoniePoint's pre-whitelisted gateway.
+
+## Ownership
+
+Owned by Team 2 (Card Infrastructure) under PM [[Damilola Oyediran]].
+
+## Related
+
+- [[Card Manager Service]]
+- [[Digitisation Service]]
+- [[Damilola Oyediran]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

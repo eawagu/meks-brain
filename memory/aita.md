@@ -1,25 +1,29 @@
 ---
-title: AITA
 type:
   - "entity"
-cssclasses:
-  - "entity"
+title: AITA
 aliases:
   - "AIT"
-details_tbd: true
 created: "2026-04-23T05:30:10Z"
-updated: "2026-04-23T05:30:10Z"
-summary: Auxiliary dispute-management integration used by Moniepoint MFB alongside IDS/GoZone — the Dispute Management Service checks incoming disputes against IDS/AIT before routing to resolution.
+summary: "Dispute management / auxiliary integration used by Moniepoint MFB's Dispute Management Service alongside IDS during dispute intake; full context pending."
+updated: "2026-04-23T05:35:46Z"
+cssclasses:
+  - "entity"
+details_tbd: true
+disambiguation_needed: true
 ---
 
 ## Overview
 
-AITA is one of the auxiliary dispute-management integrations used by the [[Moniepoint MFB]] card stack. The [[Dispute Management Service]] checks incoming disputes against IDS / AIT before routing to resolution.
+**AITA** is a dispute management / auxiliary integration used by [[Moniepoint MFB]]'s [[Dispute Management Service]] alongside [[IDS]] during dispute intake and routing.
 
-## Note on naming
+## Disambiguation
 
-Source uses both "AIT" (in the dispute flow description) and "AITA" (in the integration list). Treated as the same system. Exact functional role not detailed in source.
+Full name and organizational role not captured in the source meeting report — listed only as one of the dispute-management auxiliary integrations. Further context needed.
 
-## Sources
+## Related
 
+- [[Dispute Management Service]]
+- [[IDS]]
+- [[GoZone]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

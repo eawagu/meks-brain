@@ -1,25 +1,33 @@
 ---
-title: Apps Pay UI
 type:
   - "entity"
+title: Apps Pay UI
+created: "2026-04-23T05:24:49Z"
+summary: Internal UI for backend card operations in Moniepoint MFB — covers card production requests and management of various backend services; each domain (logistics, etc.) also has a dedicated UI alongside.
+updated: "2026-04-23T05:35:45Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:49Z"
-updated: "2026-04-23T05:24:49Z"
-summary: Internal user interface for background MFB card operations — production requests, management of various backend services; complemented by per-domain UIs (e.g. logistics).
 ---
 
 ## Overview
 
-Apps Pay UI is the internal user interface for background card operations within [[Moniepoint MFB]] — covering card production requests and management of the various backend services in the card stack. Sits under Card Infrastructure ([[Damilola Oyediran]]).
+**Apps Pay UI** is the internal user interface for background card operations inside [[Moniepoint MFB]]'s Card Infrastructure stack — including card production requests and management of the various backend services.
 
 ## Scope
 
-- Card production requests
-- Backend service management surfaces
+- Card production request flows
+- Backend service management
+- Operational card administration
 
-Note: Each domain (e.g. [[Logistics Service]]) also has its **own dedicated UI** — Apps Pay UI is not the only ops UI.
+Each individual domain (e.g., logistics) also has its own dedicated UI that complements Apps Pay UI — logistics has the Logistics UI companion to [[Logistics Service]], for example.
 
-## Sources
+## Ownership
 
+Infrastructure-side UI; part of Team 2's scope under PM [[Damilola Oyediran]].
+
+## Related
+
+- [[Card Manager Service]]
+- [[Logistics Service]]
+- [[Damilola Oyediran]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

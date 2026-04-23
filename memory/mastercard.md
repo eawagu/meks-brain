@@ -1,42 +1,38 @@
 ---
+title: Mastercard
 type:
   - "entity"
-title: MasterCard
-aliases:
-  - "Mastercard"
-created: 2026-04-11
-summary: Global card scheme — issuing halted at Moniepoint MFB with <300K cards outstanding via Interswitch legacy; acquiring certification complete at TeamApt but license pending; future Mastercard Chargeback rail on MFB Dispute Management Service roadmap.
-updated: "2026-04-23T05:30:09Z"
 cssclasses:
   - "entity"
+created: "2026-04-23T05:35:46Z"
+updated: "2026-04-23T05:35:46Z"
+summary: Global payment network — Moniepoint MFB has halted Mastercard issuance (<300K legacy cards outstanding, processed via Interswitch); TeamApt acquirer processor cert complete, acquiring licence pending; UK CI&P Phase 3 module will include Mastercard adapter.
 ---
 
 ## Overview
 
-MasterCard is one of the global card schemes processed by [[Moniepoint]] / [[TeamApt]]. Active workstreams across issuing and acquiring.
+**Mastercard** is a global payment network. [[Moniepoint MFB]] historically issued Mastercard cards but **issuance is halted** (legacy stock, <300K cards outstanding). Mastercard processing today routes through [[Interswitch]].
 
-## Moniepoint MFB (Issuing Side)
+## At Moniepoint MFB Cards
 
-- MFB Mastercard cards are processed via [[Interswitch]] as a legacy network
-- **<300K cards outstanding**
-- **Issuance halted** — no new MFB Mastercard cards being issued
-- Future [[Dispute Management Service]] roadmap includes a **Mastercard Chargeback** rail for international disputes
-- BIN 516227 documented in [[Card Manager Service CMS Specification]]
+- **Status:** legacy — issuance halted
+- **Outstanding:** <300K cards
+- **Processing:** routed through Interswitch
+- **Scheme BIN in legacy CMS:** 516227 (per [[Card Manager Service CMS Specification]])
 
-## TeamApt TPP (Acquiring Side)
+## At TeamApt
 
-- Mastercard acquirer processor certification: **completed (2025)** per [[Tracy Ojaigho]]'s 2025 achievements
-- Mastercard acquiring license: **pending**
-- Active workstreams: collections-only integration and MPGS domestic POS processing
+For the broader TeamApt TPP business (acquirer processing), Mastercard acquirer processor certification was completed in 2025. Acquiring licence is pending.
 
-## 2026 Notes (UK Retreat Day 1)
+## Future Roadmap
 
-- **March 2026 back-billing**: MasterCard back-billed fees from Dec 2025–Mar 2026 in a single month, inflating reported March scheme-cost numbers anomalously.
-- **International card coverage target**: full 2026 coverage alongside [[Visa]], Amex, and others. $1M stretch goal (not in official budget).
+- UK CI&P market module (Phase 3) includes Mastercard adapter alongside Visa.
+- No current plan to resume Mastercard issuance under Moniepoint MFB.
 
-## Sources
+## Related
 
-- [[Action Items Index]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 Savings Strategy Rate Framework CSAT Cost Governance Payments Compliance - Summary]]
-- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
+- [[Interswitch]]
+- [[Card Manager Service]]
 - [[Card Manager Service CMS Specification]]
+- [[Card Issuance & Processing Platform]]
+- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

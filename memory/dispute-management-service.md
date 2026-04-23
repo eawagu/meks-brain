@@ -1,39 +1,46 @@
 ---
-title: Dispute Management Service
 type:
   - "entity"
+title: Dispute Management Service
+created: "2026-04-23T05:24:49Z"
+summary: End-to-end customer-logged card dispute handling in Moniepoint MFB — receives from mobile app, checks against IDS/AITA, routes, communicates status; roadmap includes Verve Online and Mastercard Chargeback integration.
+updated: "2026-04-23T05:35:45Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:49Z"
-updated: "2026-04-23T05:24:49Z"
-summary: Handles customer-logged card disputes end-to-end in Moniepoint MFB — receives from mobile app, checks against IDS/AIT, routes to resolution path, and communicates status; future expansion to international rails (Verve Online, Mastercard Chargeback).
 ---
 
 ## Overview
 
-Dispute Management Service handles customer-logged card disputes end-to-end within the [[Moniepoint MFB]] card stack. Operated in practice by the Chargeback & Issue Resolution sub-team ([[Aima]] / [[Precious]]); platform ownership under Card Infrastructure ([[Damilola Oyediran]]).
+**Dispute Management Service** handles end-to-end customer-logged card disputes inside [[Moniepoint MFB]]'s Card Infrastructure stack.
 
-## End-to-End Flow
+## Scope
 
-1. Receives dispute from the MoniePoint mobile app
-2. Checks against IDS / AIT
-3. Routes to the appropriate resolution path
-4. Communicates status back to the customer
+- Receives disputes from the mobile app
+- Checks disputes against [[IDS]] (Internal Dispute System) / [[AITA]]
+- Routes to the appropriate resolution path
+- Communicates status back to the customer
 
-## Future Roadmap
+## Roadmap
 
-Integration expansion to cover **international dispute rails**:
+Integration expansion planned to cover international dispute rails:
 - Verve Online
-- [[Mastercard]] Chargeback
+- Mastercard Chargeback
 
-## AI Automation Priority
+## Operational Relationship
 
-The Chargeback & Issue Resolution team that operates this service is the **highest-priority AI automation target** for the strike team forming under [[Tracy Ojaigho]] — automated dispute intake, routing, status communication.
+The [[Chargeback and Issue Resolution]] sub-team (led by [[Aima]] / [[Precious]]) performs the human-in-the-loop chargeback processing that feeds into this service. This workflow is the **highest-priority AI automation target** for the CI&P strike team.
 
-## Relationship to Phoenix Card Dispute Service
+## Ownership
 
-The Phoenix-architecture replacement / successor at platform Spine level is [[Card Dispute Service]], owned by [[Team 1 Card Processing]].
+Owned by Team 2 (Card Infrastructure) under PM [[Damilola Oyediran]].
 
-## Sources
+## Related
 
+- [[Card Dispute Service]] — the Phoenix Spine equivalent
+- [[Chargeback and Issue Resolution]]
+- [[Aima]]
+- [[Precious]]
+- [[IDS]]
+- [[AITA]]
+- [[Damilola Oyediran]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

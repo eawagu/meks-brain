@@ -1,29 +1,39 @@
 ---
-title: Logistics Service
 type:
   - "entity"
+title: Logistics Service
+created: "2026-04-23T05:24:49Z"
+summary: Moniepoint MFB card inventory and physical distribution service with companion Logistics UI — tracks card movement through HO→RO→SRO→BO chain via QR/barcode scan; dashboard prevents false shortage claims.
+updated: "2026-04-23T05:35:45Z"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:24:49Z"
-updated: "2026-04-23T05:24:49Z"
-summary: Manages card inventory and physical movement through the distribution chain in Moniepoint MFB — QR/barcode scan registers each delivery; dashboard provides RO-level stock visibility.
 ---
 
 ## Overview
 
-Logistics Service manages card inventory and the physical movement of cards through the [[Moniepoint MFB]] distribution chain. Owned by Card Sales & Distribution under [[Nadeem Abbas]].
+**Logistics Service** (and its companion Logistics UI) manages [[Moniepoint MFB]]'s card inventory and the physical movement of cards through the distribution chain. Owned by Team 1 (Card Sales & Distribution) under PM [[Nadeem Abbas]].
 
-## Functions
+## Scope
 
-- Inventory tracking across the distribution chain: Head Office → Regional Offices (ROs) → Sectoral Regional Offices (SROs) → Branch Offices (BOs)
-- Cards are accepted at each level by **QR / barcode scan**, which registers the delivery on the system
-- A dashboard provides visibility into stock levels at each RO, enabling data-driven dispatch decisions and **preventing false shortage claims**
-- Has its own dedicated UI (separate from [[Apps Pay UI]])
+- Card inventory management
+- Physical distribution chain tracking: Head Office → Regional Offices → Sectoral Regional Offices → Branch Offices
+- QR/barcode scan registration — cards accepted at each level via scan, registering delivery
+- Dashboard visibility of stock levels at each RO — enables data-driven dispatch decisions and prevents false shortage claims
+
+## Operational Coupling
+
+Tight coupling with the [[Card Production and Logistics]] operations sub-team (led by [[Philip]]) — logistics workflows ultimately route through this service.
+
+## Position in Phoenix Roadmap
+
+Under the new [[Card Management System]] plan, card production capabilities may migrate onto the new CMS, but **distribution logistics workflows are recommended to stay separate** — to avoid overloading the CMS.
 
 ## Related
 
-- [[Card Production and Logistics]] — the operations sub-team led by [[Philip]] that operates this service
-
-## Sources
-
+- [[Card Service]]
+- [[Card Integration Service]]
+- [[Card Production and Logistics]]
+- [[Philip]]
+- [[Nadeem Abbas]]
+- [[Card Management System]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
