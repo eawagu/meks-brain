@@ -4,7 +4,7 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed remains 2026-04-20T16:09:00Z (~64h backlog deferred to next briefing tick catch-up). 2026-04-23 09:11 WAT tick: Gmail MCP RECOVERED after ~64h dark window. Probe-sweep detected fresh Ecobank RC91 P1 cycle (thread 19db8d64f00a406d) filed 06:35 WAT + chased 08:52 WAT — Immediate-tier dispatch triggered via Slack draft. ATPP Daily Standup canceled today (calendar conflict relief). UBA DCIR portal pentest message recall observed. Marketing/cold outreach skipped per directive. Backlog catch-up sweep deferred to briefing-2026-04-24 06:00 WAT."
-updated: "2026-04-23T08:20:42Z"
+updated: "2026-04-23T13:21:15Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -48,37 +48,44 @@ Layer 1 `to:me newer_than:1h` returned NIBSS TSA Integration meeting confirmatio
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure)
 
-Gmail MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 06:10 WAT briefing tick / Apr 23 07:10 + 08:10 WAT skim-and-full ticks. Surfaced as briefing-2026-04-22 B2 (Decision item — "reconnect now before next tick") and carried into briefing-2026-04-23 D4 ("B2 carryforward — 61h+ dark"). All operational coverage on email-routed signals was blind for the window; Slack + Jira sweeps continued normally.
+Gmail MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 06:10 WAT briefing tick / Apr 23 07:10 + 08:10 WAT skim-and-full ticks. Surfaced as briefing-2026-04-22 B2 (Decision item) and briefing-2026-04-23 D4 (B2 carryforward — 61h+ dark).
 
-### Tick 2026-04-23 ~09:11 WAT — RECOVERY (Full-level promotion on state change)
+### Tick 2026-04-23 ~09:11 WAT — RECOVERY (condensed — see git history)
 
-Window probe scope: `to:me newer_than:1h` (Layer 1) + `(RC91 OR RC05 OR RC96 OR RC06 OR P1 OR outage OR NIBSS OR compromised OR breach) newer_than:3d` (operational keyword Layer 2 widened to 3-day catch-up given the prior dark window). Both queries returned successfully — Gmail MCP fully recovered.
+Layer 1 `to:me newer_than:1h` + Layer 2 operational keyword `newer_than:3d` — Gmail MCP fully recovered. **Operational-priority finding:** Ecobank RC91 fresh cycle thread 19db8d64f00a406d filed 06:35 WAT + chased 08:52 WAT → Immediate-tier Slack DM dispatched, [[Ecobank — RC91 on NUS Nodes]] situation updated. Layer 1 secondary: ATPP Daily Standup canceled today (conflict relief), UBA DCIR pentest message recall, cold outreach skipped. `last_processed` held at 2026-04-20T16:09:00Z pending briefing-2026-04-24 catch-up.
 
-**Operational-priority finding — Ecobank RC91 P1 fresh cycle.** Thread 19db8d64f00a406d filed by [[Daniel Armstrong]] at 06:35 WAT Apr 23 (subject "Ecobank | RC91 | 20260423"), with [[Olamide Ajibulu]] chase at 08:52 WAT ("this failure has persisted for over 2 hours"). Bank-side silent on both messages. Distinct from the Apr 18-19 wait-state thread 19da60c7ea537e24. Triggered config-salience #2 Immediate-tier (P1 duration > 2h, no bank resolution signal). Dispatched Immediate alert via `slack_send_message_draft` to user self-DM D081JT4AD0Q with three-option recommendation. [[Ecobank — RC91 on NUS Nodes]] situation page updated with Apr 23 cycle delta. Without Gmail recovery this tick, the signal would have been invisible until next briefing tick (~21h delay).
+### Tick 2026-04-23 ~14:09 WAT — Full (weekday work-hours; 2 in-window signals)
 
-**Layer 1 to:me probe — secondary signals.**
-- 08:56 WAT — Ruth Adetunji: ATPP Daily Standup CANCELED today ("because of Dispute Management Sprint Planning") — calendar-overlap relief at 14:00 WAT Apr 23.
-- 08:29 WAT — Camilla Rimdans (UBA): RECALL message on "Re: PENTEST_ 2FA on DCIR portal" thread 19db93e7083bdbb3 — recall is itself a soft signal but no actionable content (recall reason unknown). Relates to active situation [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] (UBA DCIR 2FA production deployment was approved for Apr 18-19 weekend per the situation summary). No immediate action; awareness-tier.
-- 08:15 WAT — Patrick Okonkwo (Revent Technologies / Flowmono): cold-outreach E-Signature pitch — skipped per Skip rules.
-- Older Fidelity/Paystack balance-confirmation thread (Apr 7-13 era) — pre-cutoff, awareness only.
+Probe scope: `(RC91 OR RC96 OR RC05 OR RC06 OR P1 OR outage OR NIBSS OR breach OR approval) newer_than:2h` + `to:me newer_than:2h`. **Gmail MCP operational.**
 
-**Operational keyword sweep findings (3-day window).** Captured for catch-up at next briefing tick — high-volume backlog includes:
-- **Ecobank RC91 thread (above) — already actioned this tick.**
-- FCMB RC91 cycle Apr 22 02:12 WAT filed by Afeez — bank thread (no follow-on observed in probe).
-- UBA RC91 + DCIR portal down Apr 21 17:04 WAT (Daniel Armstrong) — multi-message thread with Christian Uchegbu, status uncertain.
-- NIBSS PTSA "SUCCESSFUL RESPONSE NOT SENT" Apr 22 11:10 WAT (Olamide / Moses Ajani) — already covered via briefing-2026-04-22 / 23 NIBSS PTSA situation page.
-- NIBSS Helpdesk Ticket 7245499 RC91 Apr 21 / Apr 22 thread — Fumbi Lawrence diagnosis (network timeout from NIBSS → VPN failure) routed to networkmanagement.
-- Multiple duty handover notes Apr 21-23 (Olamide ↔ Qazim ↔ Daniel) — operational-continuity awareness only.
-- Zone <> TeamApt POS Integration scope (Taiwo Baptista Apr 21) — relates to AS bulk-grooming observed in Jira (Zone Switching Partnership project).
+**In-window signals — 2 threads:**
 
-**Backlog catch-up policy.** `last_processed` deliberately NOT advanced this tick — left at 2026-04-20T16:09:00Z. The next briefing tick (2026-04-24 06:00 WAT) will sweep the full ~64h backlog through the standard Layer 1 + Layer 2 query pipeline. This tick's probe was scope-limited (Layer 1 newer_than:1h + Layer 2 newer_than:3d operational-only). Three CTO-approval-gate candidates from 2026-04-20 17:09 WAT (TISD-480, TDSD-6203, Lattice Downward Reviews) remain unverified — also deferred to briefing-2026-04-24 catch-up.
+1. **Thread 19dba77670436f02 — "Approval for HA Setup on TeamApt Prod Firewalls 02 and 03"** (14:11 WAT Apr 23)
+   - From: [[Fumbi Lawrence]] (fumbi.lawrence@teamapt.com)
+   - To: [[Tolu Aina]] (tolu.aina@teamapt.com) — **PRIMARY APPROVER**
+   - CC: emeka.awagu@teamapt.com + networkmanagement@teamapt.com
+   - Snippet: "Hi Tolu, As part of our initiative to build a more resilient infrastructure, we are requesting approval to deploy a High Availability (HA) setup to TeamApt Firewalls 02 and 03 at Rackcenter."
+   - **Emeka is CC-only — Layer 1 (To:me) does NOT apply.** Layer 2 keyword match: "approval" (process keyword).
+   - **Cross-source pairing:** [[TDSD-6699]] "CONFIGURATION OF HIGH AVAILABILITY ON TeamApt FIREWALL 02 and 03" Review status 13:44 WAT (see source-config-jira).
+   - **Classification:** Briefing-tier **Awareness** — CTO awareness informational, not a CTO-specific approval gate (Tolu Aina is the named approver). Factors: source=email, layer2_keyword_approval, cc_only_not_to_me, primary_approver_tolu_aina, infrastructure_change_tdsd6699, briefing_tier_awareness.
 
-**Cross-source asymmetry observation (2nd data point in 3h).** Ecobank RC91 surfaced via EMAIL ONLY — zero Slack #teamapt-tech-operations mirror. This is the second consecutive observation of operational signals routing through Jira/Email but not the canonical Slack ops channel: TDSD-6692 UBA fast-cycle Jira-only at 06:44 WAT Apr 23, Ecobank Email-only at 06:35-08:52 WAT Apr 23. Stand-down on directive codification — 2 data points across heterogeneous mechanisms. Note for pattern tracking; if 3rd email-only or Jira-only signal observed within 24h, escalate to source-config-slack as a coverage-redundancy concern (Slack ops channel becoming a less-canonical signal source).
+2. **Thread 19dba55e567fab81 — "Invitation: TeamApt Org Changes @ Fri Apr 24, 2026 4pm - 6pm (WAT) (Emeka Awagu)"** (13:34 WAT Apr 23, 12:34 UTC)
+   - From: [[Pawel Swiatek]] (pawel.swiatek@moniepoint.com)
+   - CC: dajalie@teamapt.com (optional attendee)
+   - To: emeka.awagu@teamapt.com + frank.atashili@teamapt.com + tracy.ojaigho@teamapt.com
+   - **Emeka in To: — Layer 1 trigger.** Subject keyword "Org Changes" — material/strategic.
+   - **Paired with calendar event 5ia9mtsqmjbgt1gvp82b7m1lul** (see source-config-calendar). 
+   - **Classification:** Briefing-tier Decision candidate (strategic topic + triple-overlap with Lattice + Tech support at 16:00 WAT Apr 24). Factors: source=email+calendar, layer1_to_me, moniepoint_leadership_sender, strategic_keyword_org_changes, agenda_less, triple_overlap_apr24_16wat, briefing_tier_decision.
+
+**Operational keyword sweep (newer_than:2h):** Zero operational incident threads in-window. Ecobank thread 19db8d64f00a406d static (bank-responded 10:19/10:33 WAT, awaiting TeamApt reconfirmation). No new RC91/RC96/RC05/RC06/NIBSS/outage threads.
+
+**Backlog catch-up policy.** `last_processed` STILL deliberately NOT advanced — held at 2026-04-20T16:09:00Z. Full 64h+ Layer 1 + Layer 2 sweep queued for briefing-2026-04-24 06:00 WAT.
+
+**Cross-source asymmetry tracker status:** TDSD-6699 Firewall HA has an email counterpart (thread 19dba77670436f02) paired in the same hour window — **does NOT count against the tracker** (cross-source consistency, not asymmetry). Tracker remains at 1 data point (TDSD-6692 UBA). Tracker window closes 06:44 WAT Apr 24.
 
 **Dispatch decisions:**
-- Immediate-tier Slack DM draft created in user self-DM (D081JT4AD0Q) with Ecobank framing.
-- [[Ecobank — RC91 on NUS Nodes]] situation page updated with Apr 23 fresh-cycle delta.
-- No other in-window items required Immediate dispatch.
-- Backlog catch-up emails not source-paged this tick (cost-cap; deferred to next briefing).
+- TeamApt Org Changes invite → queued as **Decision candidate for briefing-2026-04-24** (strategic + triple-overlap).
+- Firewall HA approval email → Awareness (CTO CC'd, not primary approver).
+- No Immediate-tier email dispatch (no operational P1/outage/breach in-window).
 
 **`last_processed` unchanged at 2026-04-20T16:09:00Z** — see backlog catch-up policy above.
