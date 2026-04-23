@@ -3,38 +3,40 @@ type:
   - "entity"
 title: Tracy Ojaigho
 created: 2026-04-11
-summary: "Head of Digital Banking Platforms at the central Moniepoint platform org (Moniepoint Technologies UK / IPCo) \u2014 Product Leader for the Card Issuance & Processing Platform serving all group tenants; co-lead with Olufemi Davies on Cards (Tracy Product / central platform; Femi Business / MFB); pre-Phoenix context: led TeamApt TPP Department."
-updated: "2026-04-23T05:39:08Z"
+summary: "Head of CI&P Product \u2014 Product Leader for the Card Issuance & Processing Platform at the central Moniepoint platform org (Moniepoint Technologies UK / IPCo); CI&P sits within the broader Digital Banking Platforms cluster (head TBD); co-lead with Olufemi Davies on Cards (Tracy Product / central platform; Femi Business / MFB); pre-Phoenix context: led TeamApt TPP Department."
+updated: "2026-04-23T06:05:07Z"
 cssclasses:
   - "entity"
 ---
 
 ## Overview
 
-Tracy Ojaigho is the **Head of [[Digital Banking Platforms]]** at the central [[Moniepoint Group Platformization|Moniepoint platform organization]] (Moniepoint Technologies UK / IPCo). She is the **Product Leader for the [[Card Issuance & Processing Platform]]** \u2014 the central, multi-tenant platform that serves [[Moniepoint MFB]], [[TeamApt]], and future market entities (UK, Kenya).
+Tracy Ojaigho is the **Head of CI&P Product** \u2014 Product Leader for the [[Card Issuance & Processing Platform]] at the central [[Moniepoint Group Platformization|Moniepoint platform organization]] (Moniepoint Technologies UK / IPCo). The CI&P platform is a multi-tenant central platform serving [[Moniepoint MFB]], [[TeamApt]], and future market entities (UK, Kenya) as tenants.
 
-Before Phoenix formalized the group platform org, Tracy led TeamApt's TPP (Third Party Processing) department. That pre-Phoenix role is historical context; her current authority is at the **group platform level**, not as a TeamApt representative.
+CI&P sits within the broader [[Digital Banking Platforms]] cluster (head TBD). Tracy's scope is CI&P specifically \u2014 not the parent cluster.
+
+Before Phoenix formalized the group platform org, Tracy led TeamApt's TPP (Third Party Processing) department. That pre-Phoenix role is historical context; her current authority is at the **group platform level on CI&P Product**, not as a TeamApt representative.
 
 ## Role Under Phoenix
 
-### Head of Digital Banking Platforms
-- Owns overall direction for the Digital Banking Platforms cluster
-- Houses the Card Issuance & Processing Platform (CI&P)
-- Reports into the Chief Platforms & Products Officer of Moniepoint Technologies UK (IPCo)
-- The platform serves all group business entities as tenants (MFB, TeamApt, MonieWorld, Sumac MFB)
-
 ### CI&P Platform Triad
-- **Head of Digital Banking Platforms:** Tracy Ojaigho
-- **Head of CI&P Engineering:** [[Emeka Awagu]]
-- **Head of CI&P Product:** TBD
-- **Design Lead:** TBD
+
+Tracy is one of the three triad leads for the Card Issuance & Processing Platform:
+
+| Role | Person |
+|---|---|
+| Head of CI&P Product | **Tracy Ojaigho** |
+| Head of CI&P Engineering | [[Emeka Awagu]] |
+| Design Lead | TBD |
+
+The parent cluster (Digital Banking Platforms) head is TBD \u2014 Tracy does not lead the parent cluster.
 
 ### Relationship with MFB Cards
 Under Phoenix, Tracy is **co-lead with [[Olufemi Davies]]** on the Cards domain: Tracy leads Product (central platform build); Femi continues to lead Business (MFB cards commercial + operational outcomes). Not a succession. The split is by function.
 
 ## CI&P Operational Ownership (2026-04-14)
 
-Formalized the platform takeover of the existing [[MFB Cards Team]] under the [[Strike Team + Continuity Operating Model]]. Existing MFB engineers maintain the legacy stack; a strike team builds the new central [[Card Management System]].
+Tracy and [[Emeka Awagu]] formalized the platform takeover of the existing [[MFB Cards Team]] under the [[Strike Team + Continuity Operating Model]]. Existing MFB engineers maintain the legacy stack; a strike team builds the new central [[Card Management System]].
 
 ## Recent Actions / Signals
 
@@ -57,7 +59,7 @@ At [[TeamApt]] she led the TPP Department, one of the two Enabler departments. O
 - EMV Data Prep: all modules done except Visa perso
 - Acquiring licenses: Visa \u2705, Mastercard pending
 
-These capabilities now feed directly into the Phoenix CI&P platform.
+These capabilities now feed directly into the Phoenix CI&P platform she now leads on the Product side.
 
 ## Sources
 
