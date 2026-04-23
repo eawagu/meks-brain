@@ -1,13 +1,13 @@
 ---
-title: Project Phoenix — Architecture, Staffing, and Execution Status
 type:
   - "synthesis"
-cssclasses:
-  - "synthesis"
+title: Project Phoenix — Architecture, Staffing, and Execution Status
 status: current
 created: "2026-04-19T18:20:10Z"
-updated: "2026-04-19T18:20:10Z"
-summary: Cross-cutting synthesis of Project Phoenix — architecture (6 clusters, Spine-and-Module pattern), staffing (Stage 1 plan, TSP strike teams, MFB cards transition, TSP resource gap), execution status (CI&P Phase 1 kicked off Apr 7, TSP Phase 1 underway, Kenya via Sumac), and implications including TSP M1 gate, MFB Systems Blindspot resolution, Stage 2 change freeze enforcement, and the CI&P Product Lead gap.
+summary: Cross-cutting synthesis of Project Phoenix — architecture (6 clusters, Spine-and-Module pattern), staffing (Stage 1 plan, TSP strike teams, MFB cards transition with Tracy filling CI&P Product and Femi continuing as Cards Business Leader, TSP resource gap), execution status (CI&P Phase 1 kicked off Apr 7, TSP Phase 1 underway, Kenya via Sumac), and implications including TSP M1 gate, MFB Systems Blindspot partial resolution on Cards, Stage 2 change freeze enforcement, and the remaining CI&P Design Lead gap.
+updated: "2026-04-23T06:12:43Z"
+cssclasses:
+  - "synthesis"
 ---
 
 ## Scope and Purpose
@@ -38,7 +38,7 @@ This distinguishes TeamApt from being framed as "Moniepoint MFB's technology arm
 
 ### Group vs TeamApt Framing
 
-Phoenix is a **group initiative, not a TeamApt initiative**. However, TeamApt had already been building in a platformized, multi-tenant, country-agnostic way before Phoenix was conceived — a natural consequence of operating switching and processing across multiple entities and international card scheme ecosystems. TeamApt's pre-Phoenix architecture is therefore a head-start, not a target-state gap.
+Phoenix is a **group initiative, not a TeamApt initiative**. The central [[Platform Organization]] sits at the group level (legal home: [[Moniepoint Technologies UK]] / IPCo) and serves all business entities (OpCos — MFB, TeamApt, MonieWorld, Sumac, future countries) as tenants. TeamApt had already been building in a platformized, multi-tenant, country-agnostic way before Phoenix was conceived — a natural consequence of operating switching and processing across multiple entities and international card scheme ecosystems. TeamApt's pre-Phoenix architecture is therefore a head-start contributing to the central platform, not a precondition that Phoenix simply formalises TeamApt ownership of.
 
 ## Architecture
 
@@ -56,23 +56,6 @@ Phoenix organizes all Moniepoint infrastructure into six clusters with distinct 
 | 6 | Banking Operations Platforms | CBA, MonieCRM, MonieDesk, Finance Systems, Field Verification, MOOS, [[Loom]], Moniebook |
 
 Plus a cross-cutting **Design System & UI Frameworks** layer.
-
-### TeamApt's Proposed Platform Ownership
-
-Under the Phoenix ownership principle (TeamApt owns any platform requiring CBN switching/processing license or serving multiple group companies as shared infrastructure):
-
-- Card/Account/VAS Switching & Processing
-- Card Issuance & Processing
-- Card Acceptance & Processing
-- CBA (Core Banking Application)
-- [[Loom]]
-- Clearing & Settlement
-- Tokenisation
-- Mandate Management
-- EMV Authentication stack
-- TSP (foundational)
-
-Individual group companies own product experience layers as tenants.
 
 ### The Spine-and-Module Pattern
 
@@ -200,11 +183,11 @@ Two platform engineering teams under [[Digital Banking Platforms]]:
 
 ### MFB Cards Team Transition (Apr 14)
 
-Per [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]:
+Per [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]] and [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]:
 
 **MFB Team 1** — PM [[Nadeem Abbas]], EM [[Elishma Nwobodo]]. Full composition TBD.
 
-**MFB Team 2** — PM Damilola Oyediran, EM [[Nitish Chand]]. 9-person engineering roster:
+**MFB Team 2** — PM [[Damilola Oyediran]], EM [[Nitish Chand]]. 9-person engineering roster:
 - Backend: Spandan Mishra, Oreoluwa Somuyiwa, Abdullah Ismail, Amar Sharma (on performance evaluation)
 - QA: Oluwatosin Awodire, Ridwan Abdulazeez
 - Mobile FE: Taiwo Enikuomehin
@@ -215,16 +198,17 @@ Per [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]:
 - 2 Backend (1 Senior + 1 Mid/Junior), 1 QA, 1 part-time UI
 - Requested: [[Razaq Adegbite]] (Senior Backend) — not yet confirmed
 
-CI&P platform leadership ([[Tracy Ojaigho]] + [[Emeka Awagu]]) is formalizing operational ownership of both MFB cards teams.
+**Business-side continuity:** [[Olufemi Davies]] continues as Cards Business Leader at Moniepoint MFB — not replaced. Tracy (CI&P Product) + Femi (MFB Cards Business) operate as co-leads under the [[Strike Team + Continuity Operating Model]].
 
 ### Leadership Triad for CI&P
 
 | Role | Person |
 |---|---|
-| Head of Digital Banking Platforms | [[Tracy Ojaigho]] |
+| Head of CI&P Product | [[Tracy Ojaigho]] |
 | Head of CI&P Engineering | [[Emeka Awagu]] |
-| Head of CI&P Product | TBD |
 | Design Lead | TBD |
+
+The parent cluster ([[Digital Banking Platforms]]) head is TBD — Tracy does not lead the parent cluster, she leads CI&P Product specifically.
 
 ### Moniepoint Group Panel Participation
 
@@ -314,7 +298,7 @@ A critical strategic gap in the Phoenix analysis (per [[source — MFB Systems B
 - **Postilion/PostCard** — ACI/Interswitch vendor-managed CMS
 - **Smart Card Process** — card lifecycle
 - **Safe Token** — tokenization
-- **[[Card Manager Service CMS Specification|CMS Manager]]** — MFB-built bridge (~12-person Cards Infrastructure team under [[Femi Davies]] / [[Olufemi Davies]])
+- **[[Card Manager Service|CMS Manager]]** — MFB-built bridge (~12-person Cards Infrastructure team under [[Olufemi Davies]])
 - **Aptent** — authorization routing
 
 ### MFB Transfer/Reconciliation Infrastructure
@@ -326,6 +310,12 @@ A critical strategic gap in the Phoenix analysis (per [[source — MFB Systems B
 [[Monnify]] (under [[Damilare Ogunnaike]]) uses **Iris and Atlas** rather than [[TACHA]] and [[Juliana]] — the TeamApt-owned equivalents. This is a cross-entity entanglement that Phoenix was explicitly created to eliminate, yet remains unmapped in the current platformization plan.
 
 Resolving this requires either (a) migrating Monnify to TACHA/Juliana, (b) designating Iris/Atlas as Phoenix platforms with formal tenant boundaries, or (c) accepting the parallel infrastructure as permanent — but the decision has not been made.
+
+### Cards Blindspot — Partial Resolution
+
+The CI&P operational takeover of MFB Cards (Apr 14 2026) + the Apr 21 knowledge transfer from Olufemi to Tracy are the first concrete resolution of this blindspot for the card stack. The full MFB cards systems inventory (Card Manager Service + Card Transaction Service + Card OTP Service + Dispute Management Service + Digitisation Service + Card Integration Service + Apps Pay UI + Card Service + Logistics Service) is now mapped; migration strategy to the new Phoenix CMS is decided (Visa as launch workload; Postillion Elimination as primary objective; phased progressive cut-over). See [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]].
+
+Monnify → Iris/Atlas remains unresolved.
 
 ## Eywa — The AI Layer
 
@@ -339,6 +329,10 @@ Artifacts are scope-agnostic by design — they can describe TeamApt platforms, 
 
 ### AI-Native Mandate
 All functional managers rebuild workflows using AI (Eywa). Claude access via [[Michael Afolabi]]. Per Tosin's Feb 16–20 mandate: AI-native operations effective immediately.
+
+### Operational Application — CI&P
+
+See [[AI-Native Operations]]. CI&P strike team has an explicit AI-automation mandate alongside the CMS build. Priorities agreed 2026-04-21: Chargeback & Issue Resolution (highest), Logistics & Production, then general workflow automation (Jira → AI ticketing, tool evaluation led by [[Rumulo]]).
 
 ## Talent Density
 
@@ -374,7 +368,7 @@ Alex's position won at the Apr 9 ratification. Frank now frames his role as the 
 
 Phoenix platforms could **launch alongside** rather than **replacing** existing MFB systems, creating more duplication rather than less. This is the inverse of Phoenix's stated goal. The MFB Systems Blindspot directly manifests this risk.
 
-Mitigation requires: formal migration plans for each MFB parallel system, Monnify cross-entity dependency resolution (Iris/Atlas → TACHA/Juliana or formal Phoenix-tenant model), and explicit tenant governance for MFB as a group company.
+The CI&P takeover of MFB Cards (Apr 14, and the full-inventory knowledge transfer Apr 21) addresses this risk for the card stack specifically — with Postillion Elimination as the explicit migration objective, Visa programme as the launch workload, and phased progressive cut-over. Monnify → Iris/Atlas remains unresolved and represents the largest remaining migration-risk surface.
 
 ### 3. Timeline Ambition vs Scope
 
@@ -390,7 +384,7 @@ Mitigation requires: formal migration plans for each MFB parallel system, Monnif
 
 No dedicated Moniepoint engineers on TSP despite initial commitments from Tosin and Felix. [[Ravi Jakhodia]] advocating through structure (OKRs, formal sign-offs) rather than direct resource confrontation. The "safer route" per Frank/Alex private read.
 
-This is the single-largest capacity constraint on TSP Phase 1 delivery. The M1 milestone (First Live Transaction, Apr 24) is 4-5 days out and depends on the current staffing level executing as planned.
+This is the single-largest capacity constraint on TSP Phase 1 delivery. The M1 milestone (First Live Transaction, Apr 24) is days out and depends on the current staffing level executing as planned.
 
 ### 5. Design Components Slip Risk
 
@@ -418,13 +412,13 @@ Tosin's "6-month sacrosanct" framing converts the deadline into an immovable con
 
 Phoenix's entire platformization claim rests on the Spine-and-Module pattern working as specified. CI&P is the most detailed Phoenix platform and will be the first to exercise the pattern at production scale. Its Phase 1 outcomes (Nigeria Spine + Nigeria Module) directly validate or invalidate the claim "Adding a new market means adding a Module; the Spine requires no changes" — which is the foundation of the entire architecture thesis.
 
-### 4. The MFB Blindspot Is A Phoenix-Level Strategic Gap
+### 4. The MFB Blindspot Is A Phoenix-Level Strategic Gap (Partially Closing)
 
-Phoenix defines six platform clusters, but MFB infrastructure (Iris, Atlas, Postilion, CMS Manager, Smart Card, Safe Token, Aptent) is not systematically mapped to them. Until MFB is integrated into the Phoenix cluster model, the group platformization goal is incomplete by definition — the TeamApt portion can platformize successfully while MFB remains a separate parallel stack.
+Phoenix defines six platform clusters, but MFB infrastructure (Iris, Atlas, Postilion, CMS Manager, Smart Card, Safe Token, Aptent) is not systematically mapped to them. The CI&P takeover of MFB Cards has now started closing the cards portion of this gap (full inventory mapped Apr 21; migration strategy decided; Postillion Elimination as the explicit objective; Visa as launch workload). Monnify → Iris/Atlas remains unresolved; until that is decided, the group platformization goal is incomplete by definition.
 
 ### 5. AI-Nativeness Is Operationally Vaguer Than Platformization
 
-The platformization goal has concrete artifacts (6 clusters, Spine-and-Module pattern, Phase plan). The AI-nativeness goal is specified at the principle level (Eywa, all managers rebuild workflows with AI, Claude access via Michael Afolabi) but lacks the same concrete execution structure. The AI PM Process (Romulo Braga) is the most specific operationalization; the broader AI-native mandate runs on top of each existing function without equivalent cluster-level design.
+The platformization goal has concrete artifacts (6 clusters, Spine-and-Module pattern, Phase plan). The AI-nativeness goal is specified at the principle level (Eywa, all managers rebuild workflows with AI, Claude access via Michael Afolabi) but lacks the same concrete execution structure. The AI PM Process (Romulo Braga) is the most specific operationalization; the broader AI-native mandate runs on top of each existing function without equivalent cluster-level design. The CI&P strike team's explicit AI mandate (Chargeback → Logistics → Jira-tool) is one of the first concrete operationalizations at the platform level.
 
 ### 6. The Integration Problems Framework Is A Useful Pattern
 
@@ -438,10 +432,10 @@ CI&P Phase 1 kicked off Apr 7 during a week of 3 concurrent P1s, GoSubscribe war
 
 1. **TSP M1 milestone is the most critical near-term gate** — First Live Transaction Apr 24 validates the entire TSP Phase 1 thesis. If M1 slips, the downstream milestones (M2 May 15, M3 Jun 5, M4 Jun 26) compress; the Stage 1 end-May deadline starts eroding.
 2. **Resolve the TSP Moniepoint engineer resourcing gap** — the highest-value single intervention. Ravi's structural advocacy (OKRs, sign-offs) is operating but slow; a direct Tosin/Felix resource commitment would materially change TSP capacity and reduce the best-effort context-sharing dependency.
-3. **Formalize the MFB Systems integration plan** — the blindspot is a strategic-level gap, not a team-level gap. Phoenix cannot deliver its stated goal (eliminate cross-entity entanglement) without an MFB systems cluster design. The Monnify→Iris/Atlas dependency is the clearest leverage point.
+3. **Formalize the MFB Systems integration plan for non-Cards systems** — the cards portion is now mapped (Apr 21). Monnify → Iris/Atlas is the clearest remaining leverage point. Phoenix cannot deliver its stated goal (eliminate cross-entity entanglement) without resolving it.
 4. **Define the Phoenix rollback protocol** — flagged as an explicit gap in the plan analysis. Every phase should have an explicit rollback path, not just "feature flags." Rollback planning is a risk-reduction investment that protects the sacrosanct deadline by making partial reverts safe.
 5. **Monitor the Stage 2 change freeze enforcement** — the formal exception process needs protection. Informal workarounds are the identified HIGH risk; creating a single Slack channel or Eywa artifact for exception logging would make workarounds visible and reduce ambiguity on what counts as a valid exception.
-6. **Close the CI&P Product Lead gap** — the Head of CI&P Product role is TBD. This is the product counterpart to Emeka's engineering leadership of CI&P. An unfilled product role alongside an actively kicked-off platform creates coordination friction between Emeka, Tracy, and the Team 1/Team 2 triads.
+6. **Fill the CI&P Design Lead role** — the Design Lead position in the CI&P triad is TBD. With Product ([[Tracy Ojaigho]]) and Engineering ([[Emeka Awagu]]) filled, Design completion closes the triad.
 
 ## Key References
 
@@ -452,21 +446,27 @@ CI&P Phase 1 kicked off Apr 7 during a week of 3 concurrent P1s, GoSubscribe war
 - [[Strangler Fig Pattern]] — migration pattern (separate synthesis exists)
 - [[Platform Strategy]] — strategic framework
 - [[Platform Architecture]] — technical architecture
+- [[Strike Team + Continuity Operating Model]] — Phoenix transition operating model
+- [[Postillion Elimination]] — CI&P strategic objective
+- [[AI-Native Operations]] — operational thread of AI-nativeness
 
 ### Entity Pages
 - [[Project Phoenix]] — master entity
+- [[Platform Organization]] — central group-level org unit
 - [[Card Issuance & Processing Platform]] — the first fully-specified platform
 - [[Team 1 Card Processing]] — Authorization Engine + 3DS/SCA + Dispute Service
 - [[Team 2 Card Issuance]] — CMS + Controls + EMV Data Prep
-- [[Digital Banking Platforms]] — parent org unit
+- [[Digital Banking Platforms]] — parent cluster (head TBD)
+- [[MFB Cards Team]] — absorbing team on MFB side
 
 ### Program Leaders
 - [[Ravi Jakhodia]] — Program Lead
 - [[Tosin Eniolorunda]] — Governance (post-Stage 1)
 - [[Alex Adeyemo]] — TSP Engineering Lead
 - [[Frank Atashili]] — TSP Product Lead
-- [[Tracy Ojaigho]] — Head of Digital Banking Platforms, CI&P lead
+- [[Tracy Ojaigho]] — Head of CI&P Product
 - [[Emeka Awagu]] — Head of CI&P Engineering
+- [[Olufemi Davies]] — Cards Business Leader at Moniepoint MFB (co-lead with Tracy on Cards)
 - [[Ravi Veluguleti]] — Card Switching Domain Owner
 - [[Sulaiman Adeeyo]] — Team Spine EM
 - [[Sunday Ayodele]] — Team Adapters EM
@@ -477,6 +477,7 @@ CI&P Phase 1 kicked off Apr 7 during a week of 3 concurrent P1s, GoSubscribe war
 ### MFB Transition Entities
 - [[Nadeem Abbas]] — MFB Team 1 PM
 - [[Elishma Nwobodo]] — MFB Team 1 EM
+- [[Damilola Oyediran]] — MFB Team 2 PM
 - [[Nitish Chand]] — MFB Team 2 EM
 - [[Iris]] — MFB reconciliation platform (Phoenix blindspot)
 - [[Atlas]] — MFB transfer orchestration (Phoenix blindspot)
@@ -486,6 +487,7 @@ CI&P Phase 1 kicked off Apr 7 during a week of 3 concurrent P1s, GoSubscribe war
 - [[Phoenix Stage 1 Consolidated Project Plan]] — Ravi's mastersheet companion (Apr 10)
 - [[source — Project Phoenix Initiative]] — earlier comprehensive document
 - [[source — Platform Strategy and Vision]] — "One Platform Many Markets" vision
+- [[source — Project Phoenix Org Structure Changes (March 2026)]] — authoritative group org structure
 - [[source — Org Structure Changes — Project Phoenix]] — platform-centric transition
 - [[source — TSP Executive Briefing Analysis]] — TSP gaps
 - [[source — MFB Systems Blindspot Analysis]] — parallel infrastructure risk
@@ -497,4 +499,5 @@ CI&P Phase 1 kicked off Apr 7 during a week of 3 concurrent P1s, GoSubscribe war
 - [[TSP Phase 1 Project Plan DRAFT (Apr 10)]] — Frank's business-layer plan
 - [[Ravi J Expectations and Prep (Apr 7)]] — Frank's deliverable consolidation
 - [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]] — transition capture
+- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]] — full MFB cards inventory + migration strategy
 - [[source — Retreat Day 1 Profitability Phoenix Kenya Competitive Strategy Summary (Apr 14 2026)]] — Tosin's public Phase 2 confirmation
