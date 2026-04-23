@@ -1,12 +1,12 @@
 ---
-title: Direct Debit
 type:
   - "concept"
+title: Direct Debit
+created: "2026-04-19T16:15:33Z"
+summary: Mandate-based bank debit payment rail at TeamApt — three products (MADD, GoSubscribe, SAFE), NIBSS-integrated, multi-bank deployment via AptPay, led by the DD/CDD department under Daniel Ojinaka. Apr 23 D2B cadence picks up continued progress on Union/Interswitch/Polaris/Money Point/GTBank/Access integrations.
+updated: "2026-04-23T14:43:37Z"
 cssclasses:
   - "concept"
-created: "2026-04-19T16:15:33Z"
-updated: "2026-04-19T16:15:33Z"
-summary: Mandate-based bank debit payment rail at TeamApt — three products (MADD, GoSubscribe, SAFE), NIBSS-integrated, multi-bank deployment via AptPay, led by the DD/CDD department under Daniel Ojinaka.
 ---
 
 ## Overview
@@ -33,7 +33,7 @@ Key subsystems: ACS (mandate authentication / OTP), [[GoSubscribe]], SAFE, [[TAC
 
 ## Bank Network
 
-Active integration partners include [[Fidelity Bank]], [[Access Bank]], [[Polaris Bank]] (suspended — recorded exposure), [[GTBank]] (via [[Habari Pay]], deployed Apr 2026). Ongoing onboarding activity tracked in Direct to Bank standup cadence.
+Active integration partners include [[Fidelity Bank]], [[Access Bank]], [[Polaris Bank]] (suspended — recorded exposure), [[GTBank]] (via [[Habari Pay]], deployed Apr 2026), [[Union Bank]] (access granted Apr 16), [[Interswitch]] (bug fixes validated by Ghanaian test team Apr 23), [[Money Point]] (account provided Apr 22 — team settlement account pending Finance). Ongoing onboarding activity tracked in [[Direct to Bank]] standup cadence.
 
 Settlement model: T+1 onward. Funds stage through [[Transit Account]]s at each bank before final settlement or reversal (Fidelity: 9020033048, Access: 1942066093, Polaris: 1790324517).
 
@@ -89,3 +89,4 @@ Key focus areas: mandate creation improvements, ACS enhancements, GoSubscribe We
 - [[TACHA]]
 - [[Transit Account]]
 - [[RC91 Multi-Bank Failure Pattern]] — ATS failures affecting bank integrations
+- [[note_2026-04-23T13-53-37-857Z]] — Apr 23 D2B standup

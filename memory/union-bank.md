@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16 (Cosmos blocker pending). ATS RC91: SEVEN cycles in 9 days (Apr 12, 15, 16×2, 19, 20 morning, 20 afternoon). Apr 20 morning cycle 6h39m bank-side (longest on record, 3x prior ceiling); Apr 20 afternoon cycle 6m brief auto-recovered. Same-day dual-cycle is new pattern behavior. MPGS settlement bank (ICA 34150)."
-updated: "2026-04-20T14:19:39Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — DD access granted Apr 16; Apr 23 DD progress continuing (mandate creation + transaction simulation) with Cosmos blocker still active. ATS RC91 7 cycles in 9 days (Apr 12–20)."
+updated: "2026-04-23T14:43:36Z"
 cssclasses:
   - "entity"
 ---
@@ -15,7 +15,9 @@ cssclasses:
 
 ## Direct Debit Integration
 
-**2026-04-16:** Access granted for the [[Union Bank]] [[Direct Debit]] project following Emanuel's feedback on Jira. Team expects to make progress on mandate creation and transaction simulation today. [[Abiodun Famoye]] raised a blocker related to Cosmos, which he plans to engage with after the D2B standup call to resolve. Source: [[Direct to Bank Daily Stand Up 2026-04-16]].
+**2026-04-16:** Access granted for the [[Union Bank]] [[Direct Debit]] project following [[Emanuel]]'s feedback on [[Jira]]. Team expects to make progress on mandate creation and transaction simulation today. [[Abiodun Famoye]] raised a blocker related to [[Cosmos]], which he plans to engage with after the D2B standup call to resolve. Source: [[Direct to Bank Daily Stand Up 2026-04-16]].
+
+**2026-04-23:** DD progress still advancing on mandate creation and transaction simulation; [[Cosmos]] blocker remains active — [[Abiodun Famoye]] to engage after this call. No other Union Bank DD update at the standup. Source: [[note_2026-04-23T13-53-37-857Z]].
 
 ## ATS RC91 — Accumulating Pattern (7 cycles in 9 days)
 
@@ -79,4 +81,5 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 - [[NIBSS]]
 - [[Monnify]]
 - [[Direct to Bank Daily Stand Up 2026-04-16]]
+- [[note_2026-04-23T13-53-37-857Z]]
 - [[NIBSS PTSA — Route Failure Apr 16]]
