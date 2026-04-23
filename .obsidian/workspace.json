@@ -1,0 +1,214 @@
+{
+  "main": {
+    "id": "a1b8e8615ab23259",
+    "type": "split",
+    "children": [
+      {
+        "id": "1706565c8ff3ac32",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f293589a8bd70f4e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "memory/config-ingest-prompt.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "config-ingest-prompt"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "896322da550839e2",
+    "type": "split",
+    "children": [
+      {
+        "id": "11bcd7b1c05919d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a92b0e4ca011cd3f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c28a7b5f438a7191",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "ingress-",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "19cb1b66c2b3f62f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7c381e90f2f80bf0",
+    "type": "split",
+    "children": [
+      {
+        "id": "f5d37e8406393094",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f17ecfcc7cb0a7d3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "c0e814989b922ef3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "931012322c83c47a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3b6e00ae965c88a7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "0b1b0fd8233cc82e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "f293589a8bd70f4e",
+  "lastOpenFiles": [
+    "memory/jira.md",
+    "memory/bank-transfer-agreement.md",
+    "memory/settlement-api.md",
+    "memory/role-matrix.md",
+    "memory/v2-jazz.md",
+    "memory/money-point.md",
+    "memory/emanuel.md",
+    "memory/zach.md",
+    "memory/olawale-olapetan.md",
+    "memory/wally.md",
+    "memory/jamiu.md",
+    "memory/cosmos.md",
+    "memory/isaac.md",
+    "memory/note2026-04-23t13-53-37-857z.md",
+    "memory/schema-probe.md",
+    "memory/phase-1-capturenote-rebuild.md",
+    "memory/mek-brain.md",
+    "memory/capturenote.md",
+    "memory/mcp-tool-schema-probe-2026-04-23.md",
+    "memory/working-preferences.md",
+    "memory/breach-of-contract-nigerian-damages-framework.md",
+    "memory/ben-onuora-co.md",
+    "memory/hon-justice-efunkumbi.md",
+    "memory/andrew-ogochukwu-ughonu.md",
+    "memory/mordi-joe-ebube.md",
+    "memory/optisoft-technology-co-ltd.md",
+    "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
+  ]
+}
