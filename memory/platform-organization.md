@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Platform Organization
 created: "2026-04-16T09:59:03Z"
-summary: Central group-level organizational unit (not TeamApt-internal) housing platform engineering and product under Project Phoenix \u2014 Moniepoint Technologies UK (IPCo) is the legal home; serves all group business entities (MFB, TeamApt, MonieWorld, Sumac) as tenants; three operating divisions (Business Banking Platforms, Digital Banking Platforms, Credit Platforms) plus cross-cutting CoEs, each with a Product+Engineering+Design triad.
-updated: "2026-04-23T05:39:36Z"
+summary: Central group-level organizational unit (not TeamApt-internal) housing platform engineering and product under Project Phoenix \u2014 Moniepoint Technologies UK (IPCo) is the legal home; serves all group business entities (MFB, TeamApt, MonieWorld, Sumac) as tenants; three operating divisions (Business Banking Platforms, Digital Banking Platforms, Credit Platforms) plus cross-cutting CoEs, each platform node led by a Product+Engineering+Design triad.
+updated: "2026-04-23T06:06:04Z"
 cssclasses:
   - "entity"
 ---
@@ -24,11 +24,11 @@ Led by a **Chief Platforms & Products Officer**. Three operating divisions plus 
 - Card Acceptance & Processing
 - Payment Gateway
 - POS Hardware & Devices
-- [[Card Issuance & Processing Platform]]
 - Cross-Border Payments
 
 ### Digital Banking Platforms
-(Headed by [[Tracy Ojaigho]])
+(Cluster head TBD)
+- [[Card Issuance & Processing Platform]] \u2014 triad: [[Tracy Ojaigho]] (Head of CI&P Product), [[Emeka Awagu]] (Head of CI&P Engineering), Design Lead TBD
 - Customer Platforms (Mobile App, Web App, POS App, CRM/Product Instrumentation, Design System)
 - Banking Operations Platforms (Spend Mgmt, VAS, Savings, Identity/Onboarding/Shell, Rewards)
 
@@ -52,7 +52,7 @@ Each platform node is led by a triad:
 - **Engineering Leader**
 - **Design Leader**
 
-Example for CI&P: Tracy Ojaigho (Platform / Product) + [[Emeka Awagu]] (Engineering) + Design Lead TBD.
+Example for CI&P: [[Tracy Ojaigho]] (Product) + [[Emeka Awagu]] (Engineering) + Design Lead TBD.
 
 ## Relationship to TeamApt
 
