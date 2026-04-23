@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Project Phoenix
 created: 2026-04-11
-summary: "Moniepoint's group-wide transformation initiative — platformization of all infrastructure into 6 clusters with AI-native mandate (Eywa); One Platform migration via Strangler Fig pattern targeting Nigeria/UK/Kenya in 6 months; Card Issuance & Processing Platform (Spine-and-Module) formally kicked off Apr 7, 2026."
-updated: "2026-04-14T18:24:27Z"
+summary: "Moniepoint's group-wide transformation initiative — platformization of all infrastructure into 6 clusters with AI-native mandate (Eywa); One Platform migration via Strangler Fig pattern targeting Nigeria/UK/Kenya in 6 months; Card Issuance & Processing Platform (Spine-and-Module) formally kicked off Apr 7, 2026; existing MFB Cards Team absorption and strike team formation confirmed Apr 21, 2026."
+updated: "2026-04-23T05:30:13Z"
 cssclasses:
   - "entity"
 ---
@@ -22,6 +22,7 @@ Project Phoenix is [[Moniepoint]]'s group-wide transformation initiative with tw
 - **Mar 24, 2026**: Tosin authored Project_Phoenix_v3 — comprehensive strategic document defining 6 platform clusters, execution governance, extreme reliability (99.99% uptime), talent density standards
 - **Mar 27, 2026**: Phase 1 start confirmed — build for Nigeria, UK, Kenya. Full production in **6 months ("sacrosanct")**. [[Ravi Jakhodia]] leads program
 - **Apr 14, 2026 (Retreat Day 1, London):** Tosin publicly confirmed Phase 1 TSP launch in progress (account transfers, cards, other services consolidated), core platform + Phoenix design system starting across POS and web. **Phase 2 begins June** — company-wide adoption of new design system + AI-native processes. Phase 3 — beta new app + parallel backend to "strangle" legacy, progressive traffic cutover. Team leads own June scope definitions and transition planning. Kenya launch 2026 confirmed via [[Sumac Microfinance Bank]] acquisition. Moneywalls shifts to business-led platform model (business team operates, central team runs platform). Org split target: one configurable global product + global platform team vs country business entities. See [[source — Retreat Day 1 Profitability Phoenix Kenya Competitive Strategy Summary (Apr 14 2026)]].
+- **Apr 21, 2026:** [[Moniepoint MFB Cards Team]] knowledge-transfer meeting ([[Olufemi Davies]] → [[Tracy Ojaigho]] + [[Emeka Awagu]]) — strike team being formed to build the new [[Card Management System]] in parallel with full MFB Cards team transition; Visa is the CMS launch workload; primary objective to eliminate [[Postillion]] dependency. See [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]].
 
 ## Platform Cluster Architecture (Official — Tosin's Project_Phoenix_v3)
 
@@ -80,6 +81,10 @@ The platform is designed around a [[Spine and Module Architecture]] — a market
 4. **Phase 4** — Kenya Launch: add Kenya Module (Visa adapter, config)
 5. **Phase 5** — Additional Markets: same pattern, Spine unchanged
 
+### MFB Cards Team Absorption (Apr 2026)
+
+Per [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]: the existing [[Moniepoint MFB Cards Team]] under [[Olufemi Davies]] is being absorbed under [[Tracy Ojaigho]] (CI&P Platform lead) + [[Emeka Awagu]]. A strike team is being formed to build the new Card Management System in parallel with the full transition (see [[Strike Team Model]]). Visa is the launch workload. Primary strategic objective: eliminate [[Postillion]] dependency.
+
 ### Team Structure
 Two teams under [[Digital Banking Platforms]]:
 - [[Team 1 Card Processing]] — owns Authorization Engine, 3DS/SCA, Card Dispute Service
@@ -108,6 +113,8 @@ Per [[TSP Phase 1 Project Plan DRAFT (Apr 10)]] (Frank's business-layer plan) an
 ## MFB Systems Blindspot
 
 [[Moniepoint MFB]] operates parallel card infrastructure NOT in any Phoenix platform spec: Postilion/PostCard (ACI/Interswitch), Smart Card Process, Safe Token, [[CMS Manager]] (~12-person team), Aptent (authorization routing). Beyond cards: [[Iris]] (group reconciliation, 15–27B+ txn/month — recommended: Absorb), [[Atlas]] (transfer orchestration, ~500M txn/month, 12+ downstream providers — recommended: Evaluate). Critical dependency: TeamApt's Monnify uses Iris and Atlas rather than TACHA and Juliana — cross-entity entanglement Phoenix was created to eliminate. Both sit in [[Damilare Ogunnaike]]'s Monnify org.
+
+**Apr 21, 2026 update:** The MFB cards-side blindspot is actively being addressed via the KT handover and strike team — see [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]] and [[Moniepoint MFB Cards Team]].
 
 ## Eywa (AI Layer)
 
@@ -146,3 +153,4 @@ Phoenix described as "calibration moment." Primary dimensions tested: Customer O
 - [[Source: notes-2026-04-08]] — architecture in progress
 - [[source — Retreat Day 1 Profitability Phoenix Kenya Competitive Strategy Summary (Apr 14 2026)]] — Tosin's public Day 1 confirmation of Phase 2 June start, Kenya launch via Sumac, Moneywalls business-led platform model, org split post-platformization
 - [[source — Retreat Day 1 Management Framework Loan Portfolio Risk Summary (Apr 14 2026)]] — Tosin's 7-principle management framework (cascade goals → structure → people → incentives → context → systems → governance)
+- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]] — MFB Cards Team absorption; strike team formation; Visa as new-CMS launch workload; Postillion-elimination objective
