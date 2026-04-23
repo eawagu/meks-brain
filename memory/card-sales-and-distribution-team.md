@@ -1,38 +1,46 @@
 ---
-title: Card Sales and Distribution Team
 type:
   - "entity"
-cssclasses:
-  - "entity"
+title: Card Sales and Distribution Team
 aliases:
   - "MFB Cards Team 1"
 created: "2026-04-23T05:30:09Z"
-updated: "2026-04-23T05:30:09Z"
-summary: One of two product teams in Moniepoint MFB Cards — PM Nadeem Abbas, EM Elishma Nwobodo; owns card selling, distribution chain (HO→RO→SRO→BO), pricing/sharing formulas, and customer sales experience for Visa and Africa card programmes.
+summary: "MFB Cards Team 1 (smaller) — owns card pricing, sharing formulas, ordering, distribution chain, and customer sales experience; PM Nadeem Abbas, EM Elishma Nwobodo; platforms: Card Service, Logistics Service."
+updated: "2026-04-23T05:38:05Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Overview
 
-The Card Sales & Distribution team is one of the two product teams within the [[Moniepoint MFB Cards Team]], led by PM [[Nadeem Abbas]] and EM [[Elishma Nwobodo]], ultimately under [[Olufemi Davies]]. Also referred to as MFB Cards Team 1.
+**Card Sales and Distribution Team** (Team 1) is the smaller of the two product teams inside the [[MFB Cards Team]] at [[Moniepoint MFB]].
+
+## Leadership
+
+- **PM:** [[Nadeem Abbas]]
+- **EM:** [[Elishma Nwobodo]]
 
 ## Scope
 
-All activities related to **selling and distributing physical cards** to customers:
-- Card pricing and sharing formulas (agent, PRM, BO splits)
+- Card pricing and sharing formulas (agent / PRM / BO splits)
 - Card ordering and production request process
-- Overseeing the entire card distribution chain: Head Office → Regional Offices → Sectoral Regional Offices → Branch Offices
-- Driving the customer sales experience for card products (Visa, Africa card programmes)
+- Distribution chain oversight: Head Office → Regional Offices → Sectoral Regional Offices → Branch Offices
+- Customer sales experience for card products (Visa, Africa card programmes)
 
 ## Platforms Owned
 
-- [[Card Service]] — core selling platform; sharing formulas, pricing tiers, commission structures (decisions joint with Growth Team)
-- [[Logistics Service]] + Logistics UI — inventory and physical movement; QR/barcode scan registration; RO-level stock dashboard
+- [[Card Service]] — commercial configuration platform
+- [[Logistics Service]] + Logistics UI — inventory and physical distribution
 
-## Operations Support
+## Operational Partnership
 
-- [[Card Production and Logistics]] sub-team (lead [[Philip]]) — operates card stock and distribution into ROs
+Overlaps with [[Card Production and Logistics]] (operations sub-team under [[Philip]]) — physical card production and distribution flows through Logistics Service and the Production sub-team.
 
-## Sources
+## Related
 
+- [[MFB Cards Team]]
+- [[Card Infrastructure Team]] — sibling product team
+- [[Nadeem Abbas]]
+- [[Elishma Nwobodo]]
+- [[Card Production and Logistics]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
-- [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]

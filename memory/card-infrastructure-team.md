@@ -1,47 +1,55 @@
 ---
-title: Card Infrastructure Team
 type:
   - "entity"
-cssclasses:
-  - "entity"
+title: Card Infrastructure Team
 aliases:
   - "MFB Cards Team 2"
 created: "2026-04-23T05:30:09Z"
-updated: "2026-04-23T05:30:09Z"
-summary: The larger of two product teams in Moniepoint MFB Cards — PM Damilola Oyediran, EM Nitish Chand; owns transaction processing, security modules, and system integrations across Card Manager Service, Transaction Service, OTP, Disputes, Digitisation, Apps Pay UI, and Card Integration Service.
+summary: "MFB Cards Team 2 (larger) — owns transaction processing, security modules, system integrations, and deferred VAS scope; PM Damilola Oyediran, EM Nitish Chand; platforms: Card Manager Service, Card Transaction Service, Card OTP Service, Dispute Management Service, Digitisation Service, Card Integration Service, Apps Pay UI."
+updated: "2026-04-23T05:38:05Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Overview
 
-The Card Infrastructure team is one of the two product teams within the [[Moniepoint MFB Cards Team]], led by PM [[Damilola Oyediran]] and EM [[Nitish Chand]], ultimately under [[Olufemi Davies]]. Also referred to as MFB Cards Team 2 — the **larger** of the two product teams.
+**Card Infrastructure Team** (Team 2) is the larger of the two product teams inside the [[MFB Cards Team]] at [[Moniepoint MFB]].
+
+## Leadership
+
+- **PM:** [[Damilola Oyediran]]
+- **EM:** [[Nitish Chand]]
 
 ## Scope
 
-All transaction processing, security modules, and system integrations. Functions that would have migrated to a deferred third team (Value Added Services / VAS) — covering tokenization, ACS — currently remain under this team.
+- All transaction processing
+- Security modules
+- System integrations (internal and external)
+- Deferred VAS scope (tokenization, ACS) — originally planned for a third team that was shelved; these functions currently sit here
 
 ## Platforms Owned
 
-- [[Card Manager Service]] — the legacy internal CMS; critical middleware to CBA via Postillion
-- [[Card Transaction Service]] — actual transaction processing flow; second middleware layer
-- [[Card OTP Service]] — OTPs for secure card operations (Safe Token, future Visa Token, 3DS/ACS)
-- [[Dispute Management Service]] — end-to-end customer dispute handling
-- [[Digitisation Service]] + [[Sudo Africa]] — tap-to-pay pseudo-digitisation
-- [[Apps Pay UI]] — internal UI for background card operations
-- [[Card Integration Service]] — integration to Money Desk and other internals
+- [[Card Manager Service]] — critical legacy middleware to CBA
+- [[Card Transaction Service]] — transaction processing flow
+- [[Card OTP Service]] — secure card OTPs
+- [[Dispute Management Service]] — end-to-end disputes
+- [[Digitisation Service]] — tap-to-pay (via [[Sudo Africa]])
+- [[Card Integration Service]] — integration layer to internal platforms (Money Desk, etc.)
+- [[Apps Pay UI]] — internal operations UI
 
-## External Switches / Providers
+## Engineering Roster
 
-- [[Postillion]] + [[HSM]] (via Interswitch)
-- [[Interswitch]] (legacy Mastercard route)
-- [[Verve]] (~99% of transactions)
-- [[Sudo Africa]] (tap-to-pay)
-- IDS / AITA / GoZone (dispute rails)
+Per the [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]:
+- Backend: [[Spandan Mishra]], [[Oreoluwa Somuyiwa]], [[Abdullah Ismail]], [[Amar Sharma]] (on performance evaluation — inherited unresolved people decision)
+- QA: [[Oluwatosin Awodire]], [[Ridwan Abdulazeez]]
+- Mobile FE: [[Taiwo Enikuomehin]]
+- SRE: [[Mohammed-Nasir Ajoge]], [[Moshood Idris]]
 
-## Operations Support
+## Related
 
-- [[Chargeback and Issue Resolution]] sub-team (leads [[Aima]] / [[Precious]]) — operates dispute flows and L2 customer support
-
-## Sources
-
+- [[MFB Cards Team]]
+- [[Card Sales and Distribution Team]] — sibling product team
+- [[Damilola Oyediran]]
+- [[Nitish Chand]]
+- [[Card Manager Service CMS Specification]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
-- [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]
