@@ -3,8 +3,8 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split summary/transcript → process summary as in-tick heartbeat source + dispatch transcript to ingress via capture_note(name=drive-title). 2026-04-23 phase-1 retrofit: MCP capture_note gained optional `name` parameter; directive rewritten to encode the long-intended two-part split that had been reduced to ambiguous \"routed to ingress review\" wording. last_processed frozen at 2026-04-20T16:09:00Z pending redeployment of the updated MCP server and phase-2 backfill dispatch."
-updated: "2026-04-23T13:20:51Z"
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split summary/transcript → process summary as in-tick heartbeat source + dispatch transcript to ingress via capture_note(name=drive-title). 2026-04-23 phase-1 retrofit verified live via schema probe; phase-2 backfill dispatch unblocked at the server level. last_processed frozen at 2026-04-20T16:09:00Z pending phase-2 backfill kickoff."
+updated: "2026-04-23T14:34:11Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -31,7 +31,7 @@ When a new or modified Notes-by-Gemini file is detected, the heartbeat MUST exec
    - Run `search` against the full brain for semantic matches (perfect cross-referencing per CLAUDE.md).
    - Update any matched entity/concept/situation pages.
    - Create a `source` page (via `create_page`) for the meeting summary. Frontmatter: `type: [source]`, `source_path: <Drive file title>`, plus `drive_file_id` and `drive_view_url` for traceability. Body: the extracted summary layer plus wiki-links to matched entities/concepts.
-4. **Dispatch transcript to ingress** — call `capture_note` with:
+4. **Dispatch transcript to ingress** — call [[capture_note]] with:
    - `name` = the Drive file title (MCP server sanitizes for filesystem safety and appends `.md`)
    - `content` = the transcript layer only
    - The ingest pipeline will create a separate source page with `source_path` matching the Drive title.
@@ -81,10 +81,14 @@ User-identified design regressions:
 3. Gemini pipeline was running through ~Apr 14 (initial observation was Apr 11 — corrected to Apr 14 after user review), then silently broke: the heartbeat was switched from direct-drop to `capture_note`, but the split logic was not carried over; directive was never updated to encode the split.
 
 Phase-1 retrofit executed this tick:
-- **MCP server code change** — `capture_note` tool gained optional `name` parameter (Windows-filesystem-safe sanitization + `.md` appending). Backward-compatible: omitting `name` preserves the prior timestamped default.
+- **MCP server code change** — [[capture_note]] tool gained optional `name` parameter (Windows-filesystem-safe sanitization + `.md` appending). Backward-compatible: omitting `name` preserves the prior timestamped default.
 - **Directive rewrite (this page)** — Handling chain, section detection, per-tick behavior sections now explicitly codify the two-part split.
 - **config-heartbeat-prompt update** — Ingress routing section updated to mention the new `name` parameter for provenance preservation.
 
 **Backfill held.** Earlier dispatch of 5 `capture_note` calls at 12:40 UTC (using the old tool; summary+transcript combined; default timestamp filenames) was reverted by user. Phase-2 re-dispatch of the Apr-14-through-Apr-22 backlog is gated on MCP server redeploy + phase-1 verification. No transcript-only captures executed this tick.
 
 **`last_processed` unchanged at 2026-04-20T16:09:00Z** — phase-2 scope spans files from last-truly-ingested (~Apr 14) through 2026-04-20T16:09:00Z + the 5 dark-window files + any new files since 2026-04-23T09:11:00Z.
+
+### Tick 2026-04-23 ~13:49 UTC — Phase-1 verification (schema probe landed)
+
+[[Phase-1 capture_note rebuild]] verified live on the [[mek-brain]] server. A [[schema probe]] note was dispatched via `capture_note` with an explicit `name` parameter and landed in ingress under the intended filename `mcp-tool-schema-probe-2026-04-23.md` — confirming the rebuilt schema is being served. See source page [[mcp-tool-schema-probe-2026-04-23]]. Phase-2 backfill re-dispatch of the Apr-14-through-Apr-22 Notes-by-Gemini backlog is now unblocked at the server level; remaining gate is manual kickoff.
