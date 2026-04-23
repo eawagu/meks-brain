@@ -1,12 +1,55 @@
 ---
-title: Damilola Oyediran
 type:
   - "entity"
+title: Damilola Oyediran
 created: 2026-04-11
-updated: 2026-04-11
+summary: Product Manager on Moniepoint MFB Cards Team 2 (Card Infrastructure) — the larger of the two MFB cards product teams; owns transaction processing, security modules, system integrations, and the deferred VAS scope; operational counterpart to EM Nitish Chand.
+updated: "2026-04-23T05:24:48Z"
 cssclasses:
   - "entity"
-summary: Technical Product Manager on the Cards team at Moniepoint MFB — CMS platform.
 ---
 
-Mentioned in [[Card Manager Service CMS Specification]].
+## Overview
+
+Damilola Oyediran is the **Technical Product Manager** on the [[Moniepoint MFB]] Cards Team 2 (Card Infrastructure) — the larger of the two MFB cards product teams. She owns the entire infrastructure side of the MFB card stack: transaction processing, security modules, and external/internal integrations.
+
+## Role
+
+- **Team:** Moniepoint MFB Cards Team 2 / Card Infrastructure
+- **Role:** Product Manager (Technical)
+- **Counterpart EM:** [[Nitish Chand]]
+
+## Scope (per 2026-04-21 KT)
+
+Card Infrastructure functions:
+- Transaction processing flow ([[Card Transaction Service]])
+- Critical middleware to CBA ([[Card Manager Service]])
+- OTP and secure operations ([[Card OTP Service]])
+- Dispute end-to-end handling ([[Dispute Management Service]])
+- Tap-to-pay digitisation ([[Digitisation Service]] + [[Sudo Africa]])
+- Internal ops UI ([[Apps Pay UI]])
+- Internal/external integration plane ([[Card Integration Service]] to [[Money Desk]] etc.)
+
+**Deferred VAS scope** (the planned third team that was shelved) currently sits under her team — tokenization, ACS, and related value-added services.
+
+## Roadmap Ownership (2026)
+
+- Visa launch & tap-to-pay rollout (jointly with Nadeem)
+- Visa tokenization & VAS (Q4 2026 likely)
+- CX/App revamp on dispute logging and card management interactions
+
+Confirmed (with [[Tracy Ojaigho]] and [[Mish]]) that most functions currently in Card Manager Service logically belong inside the new [[Card Management System]] being built under [[Project Phoenix]].
+
+## Source-document name correction
+
+The 2026-04-21 KT meeting report transcribed her name as "Damola" — corrected to **Damilola Oyediran** per established Moniepoint MFB roster.
+
+## Related
+
+- [[Nitish Chand]] — EM counterpart on Team 2
+- [[Nadeem Abbas]] — PM on Team 1 (Card Sales & Distribution)
+- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
+- [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]
+- [[Card Manager Service CMS Specification]]
+- [[Card Manager Service]]
+- [[Card Transaction Service]]

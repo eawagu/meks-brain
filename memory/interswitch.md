@@ -2,24 +2,32 @@
 type:
   - "entity"
 title: Interswitch
-created: 2026-04-11
-summary: Nigerian payment switching company — domestic Visa POS transactions route through Interswitch/UPSL, bypassing TACHA. Also a former employer of both Emeka Awagu (software engineer, later Head of Commerce & Digital Channels, 2008–2020) and Ina Alogwu (Risk Specialist, later Product Strategy & Innovation lead).
-updated: "2026-04-19T09:36:32Z"
-cssclasses:
-  - "entity"
 aliases:
   - "InterSwitch"
+created: 2026-04-11
+summary: Nigerian payment switching company — owns Postillion (the switch Moniepoint MFB is strategically migrating away from) and operates Verve; legacy Mastercard processing route; also a former employer of Emeka Awagu and Ina Alogwu.
+updated: "2026-04-23T05:24:50Z"
+cssclasses:
+  - "entity"
 ---
 
 ## Overview
 
-Interswitch is a major Nigerian payment switching and processing company. It operates the [[Verve]] card scheme. Domestic Visa POS transactions route through Interswitch/UPSL, bypassing TACHA.
+Interswitch is a major Nigerian payment switching and processing company. It operates the [[Verve]] card scheme and owns the [[Postillion]] payment switch. Domestic Visa POS transactions route through Interswitch/UPSL, bypassing TACHA.
 
 ## Moniepoint Integration
 
 - Domestic Visa POS transactions route through Interswitch/UPSL
 - ISW (Interswitch) referenced in incident reports as a processor for card transactions
+- Owns [[Postillion]] — the switch the new [[Card Management System]] under [[Project Phoenix]] is explicitly designed to eliminate dependency on (per 2026-04-21 KT)
+- Also routes [[Moniepoint MFB]]'s legacy [[Mastercard]] traffic (issuance halted, <300K outstanding)
 - Operates [[Verve]] — the scheme at the center of the Q4 2025 [[Verve Pricing Dispute]]
+
+## Strategic Tension
+
+- Moniepoint MFB has a **deliberate strategy to reduce dependency on Interswitch** — motivated by uptime and feature-rollout speed.
+- The new platform-built CMS under [[Project Phoenix]] is the structural mechanism for this exit.
+- [[Card Manager Service]] limitation: uses dummy account number on Postillion, blocking Interswitch direct refunds by transfer.
 
 ## Positioning (2026 Retreat Day 1)
 
@@ -36,3 +44,4 @@ Interswitch is a major Nigerian payment switching and processing company. It ope
 - [[Action Items Index]]
 - [[Reference Letter for Ina Alogwu 9PSB Board]]
 - [[Moniepoint 2026 Leadership Retreat UK - Day 1 Profitability Project Phoenix Kenya Launch - Summary]]
+- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

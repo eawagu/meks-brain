@@ -1,26 +1,35 @@
 ---
+title: Mastercard
 type:
   - "entity"
-title: MasterCard
-aliases:
-  - "Mastercard"
-created: 2026-04-11
-summary: Global payment network — TeamApt pursuing collections-only integration and MPGS domestic POS processing.
-updated: "2026-04-17T15:00:17Z"
 cssclasses:
   - "entity"
+aliases:
+  - "MasterCard"
+created: "2026-04-23T05:24:50Z"
+updated: "2026-04-23T05:24:50Z"
+summary: Global card scheme — in Moniepoint MFB, processed via Interswitch as legacy network with <300K cards outstanding and issuance halted; future Dispute Management Service roadmap includes Mastercard Chargeback rail; TeamApt acquirer license still pending.
 ---
 
 ## Overview
 
-MasterCard is one of the global card schemes processed by [[Moniepoint]] / TeamApt. Active workstreams: collections-only integration and MPGS domestic POS processing.
+Mastercard is a global card scheme. Two distinct presences in the Moniepoint group:
 
-## 2026 Notes (UK Retreat Day 1)
+## Moniepoint MFB (Issuing Side)
 
-- **March 2026 back-billing**: MasterCard back-billed fees from Dec 2025–Mar 2026 in a single month, inflating reported March scheme-cost numbers anomalously.
-- **International card coverage target**: full 2026 coverage alongside [[Visa]], Amex, and others. $1M stretch goal (not in official budget).
+- Mastercard cards are processed via [[Interswitch]] as a legacy network
+- **<300K cards outstanding**
+- **Issuance halted** — no new Mastercard cards being issued
+- Future [[Dispute Management Service]] roadmap includes a **Mastercard Chargeback** rail
+- BIN 516227 documented in [[Card Manager Service CMS Specification]]
+
+## TeamApt TPP (Acquiring Side)
+
+- Mastercard acquirer processor certification: **completed (2025)** per [[Tracy Ojaigho]]'s 2025 achievements
+- Mastercard acquiring license: **pending**
 
 ## Sources
 
-- [[Action Items Index]]
-- [[Moniepoint 2026 Leadership Retreat UK - Day 1 Savings Strategy Rate Framework CSAT Cost Governance Payments Compliance - Summary]]
+- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
+- [[Card Manager Service CMS Specification]]
+- [[Tracy Ojaigho]]
