@@ -496,16 +496,33 @@ export const markProcessed: ToolDef = {
 export const captureNote: ToolDef = {
   name: "capture_note",
   description:
-    "Capture a note by writing it as a timestamped file in the ingress folder. The next ingest cycle picks it up automatically. No format constraints, no Postgres sync — pure capture.",
+    "Capture a note by writing it as a file in the ingress folder. The next ingest cycle picks it up automatically. No format constraints, no Postgres sync — pure capture.\n\nFilename: when `name` is provided, it is used (sanitized for filesystem safety, `.md` appended if no extension is present); otherwise defaults to `note_{ISO-8601}.md`. Use `name` to preserve provenance (e.g., the original Drive or email title) so the ingested source page carries the right source_path.",
   schema: z.object({
     content: z.string().describe("Raw text content to capture"),
+    name: z
+      .string()
+      .optional()
+      .describe(
+        "Optional filename for the captured note. Characters forbidden on Windows (/ \\ : * ? \" < > |) are replaced with `_`; trailing dots and spaces are trimmed; `.md` is appended if the name has no extension. Omit for the default `note_{timestamp}.md` filename."
+      ),
   }),
   accessLevel: "write",
   handler: async (params) => {
-    const { content } = params;
+    const { content, name } = params;
     const now = new Date();
-    const timestamp = now.toISOString().replace(/[:.]/g, "-");
-    const filename = `note_${timestamp}.md`;
+    let filename: string;
+    if (name && name.trim().length > 0) {
+      // Sanitize for Windows filesystem: replace forbidden chars, trim trailing dots/spaces
+      let safe = name.trim().replace(/[\/\\:*?"<>|]/g, "_").replace(/[. ]+$/, "");
+      // Append .md if no extension present (1-6 alphanumeric chars after a dot)
+      if (!/\.[a-zA-Z0-9]{1,6}$/.test(safe)) {
+        safe = safe + ".md";
+      }
+      filename = safe;
+    } else {
+      const timestamp = now.toISOString().replace(/[:.]/g, "-");
+      filename = `note_${timestamp}.md`;
+    }
     const filePath = path.join(config.ingressPath, filename);
     await fs.writeFile(filePath, content, "utf-8");
     return { message: `Captured note as ${filename}`, timestamp: now.toISOString(), file: filename };

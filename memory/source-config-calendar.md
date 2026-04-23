@@ -4,7 +4,7 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed remains 2026-04-20T16:09:00Z (full sweep deferred to next briefing tick). 2026-04-23 09:11 WAT tick: Calendar MCP RECOVERED after ~64h dark. Apr 23 today + Apr 24 tomorrow probe shows 13:00 WAT WAT today double-book (DD Production Issues vs DD Weekly Check-ins), ATPP Standup canceled (calendar-conflict relief). Apr 24 carries 4 overlapping events at 11:00-12:00 WAT (HoE Round 2 + HoE Blocker + Lattice Reviews 15:00 + Tech Support 16:00 + CI&P 13:00)."
-updated: "2026-04-23T08:20:42Z"
+updated: "2026-04-23T13:20:26Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -36,38 +36,57 @@ Zero in-window calendar modifications. Tomorrow's (Apr 21) 14:00 WAT triple-then
 
 Calendar MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 ticks pre-recovery. Surfaced as briefing-2026-04-22 B2 (joint with Gmail) and briefing-2026-04-23 D4. New invites + conflict detection blind for the window.
 
-### Tick 2026-04-23 ~09:11 WAT — RECOVERY (Full-level promotion on state change)
+### Tick 2026-04-23 ~09:11 WAT — RECOVERY (condensed — see git history)
 
-Probe scope: `list_events` startTime=2026-04-23T08:00 WAT, endTime=2026-04-24T18:00 WAT, primary calendar — returned 17 events spanning today + tomorrow. Calendar MCP fully recovered.
+Probe scope: today + tomorrow via `list_events`. Apr 23 13:00 WAT DD double-book (DD Production Issues Weekly Analysis + Weekly Check-ins DD); ATPP Daily Standup 14:00 WAT today CANCELED (conflict relief); Apr 24 HoE interview cluster 11:00-12:40 WAT + Deliberation + CI&P 13:00 + Lattice 15:00 + Tech Support 16:00. `last_processed` held at 2026-04-20T16:09:00Z pending briefing-2026-04-24 catch-up.
 
-**Today (Apr 23) — relevant signals:**
-- 08:30-09:30 WAT — Direct to Bank Daily standup (Khadijat Musa organizer; needsAction).
-- 10:00-10:30 WAT — Ravi / Emeka 1:1 (accepted, organizer self).
-- 11:30-12:10 WAT — Juliana Switch Daily Catchup (June Johnson; needsAction).
-- **13:00-14:00 WAT — DOUBLE-BOOK:** Direct Debit Production Issues Weekly Analysis (Yasir Ali organizer; needsAction) + Weekly Check-ins Direct Debit (Dojinaka organizer; optional/needsAction). Both DD-themed; possible merge candidate or one-to-decline.
-- 15:30-16:30 WAT (Lisbon TZ) — Interview for Head of Engineering (VP+ level) Kuldeep Singh (Chris Purkis; needsAction).
-- 18:00-19:00 WAT — Product - Engineering Sync (recurring, accepted, organizer self).
+### Tick 2026-04-23 ~14:09 WAT — Full (weekday work-hours; NEW invite "TeamApt Org Changes")
 
-**Today canceled:**
-- ATPP Daily Standup 14:00 WAT — Ruth Adetunji canceled ("because of Dispute Management Sprint Planning") at 08:56 WAT today via email. **Calendar-overlap relief**: removes one of the prior 14:00 WAT conflict items.
+Probe scope: `list_events` startTime=2026-04-23T14:00 WAT, endTime=2026-04-25T00:00 WAT, primary calendar — 12 events returned. **Calendar MCP operational.**
 
-**Tomorrow (Apr 24) — relevant signals:**
-- 08:30 WAT — TeamApt All Hands (accepted, recurring).
-- 11:00-12:00 WAT — Round 2: Interview for HoE Position Venkatesh Purushothaman (Tobilola Fasanya; needsAction).
-- 11:00-12:00 WAT (LA TZ) / overlaps WAT later — Blocker: Head of Engineering (VP+) Slots (Chris Purkis; needsAction).
-- 12:00-12:40 WAT (Lisbon TZ) — Deliberation: HoE batch interviews (Chris Purkis; needsAction).
-- 13:00-14:00 WAT — CI&P Team Structure (Tracy Ojaigho; needsAction) — NEW invite created Apr 22 16:07 WAT, modified Apr 23 05:46 WAT (after Tracy added).
-- 15:00-17:00 WAT — Lattice Downward Reviews — 8 pending (self-organized batch, accepted, scheduled per briefing-2026-04-16 B5 triage). Lattice deadline Apr 27.
-- 16:00-17:00 WAT — Tech Support Meeting (recurring, organizer Chidera Molokwu; needsAction).
+**NEW invite this window — "TeamApt Org Changes" (event id 5ia9mtsqmjbgt1gvp82b7m1lul):**
+- **Start:** 2026-04-24T16:00:00+01:00 WAT, **End:** 2026-04-24T18:00:00+01:00 WAT (2-hour block, Friday Apr 24)
+- **Organizer:** [[Pawel Swiatek]] (pawel.swiatek@moniepoint.com) — parent-co (Moniepoint) leadership
+- **Attendees:** emeka.awagu@teamapt.com (needsAction), frank.atashili@teamapt.com (needsAction), tracy.ojaigho@teamapt.com (needsAction), dajalie@teamapt.com (optional, needsAction)
+- **Created:** 2026-04-22T18:33:54Z; **Updated:** 2026-04-23T12:34:42Z (calendar write just before 13:34 WAT email invite fired)
+- **Google Meet:** https://meet.google.com/khb-xywd-bey
+- **Description:** EMPTY (agenda-less)
+- **Email pairing:** Gmail thread 19dba55e567fab81 at 13:34 WAT delivered the invite (source-config-email captures side)
 
-**Apr 24 conflict observation.** 11:00-12:00 WAT Apr 24 carries Round 2 HoE (Venkatesh) + Blocker HoE Slots (LA-TZ overlap). Triple-overlap is plausible if both fire concurrently. Plus Deliberation 12:00-12:40 (Lisbon TZ ~ 12:00-12:40 WAT). Calendar-overlap concern on Apr 24 morning HoE block — likely intentional given the HoE backlog framing in briefing-2026-04-22 / Lattice context.
+**Priority-signal matches (source-config-calendar directives):**
+- #2 New invites for next-day meetings — YES (Apr 24)
+- #4 Agenda-less invites for >30-min blocks — YES (2h, empty description)
+- Subject "TeamApt Org Changes" is strategic/material; three TeamApt-side leaders (CTO Emeka + Frank Atashili + Tracy Ojaigho) summoned by Moniepoint leadership
 
-**Backlog catch-up policy.** `last_processed` deliberately NOT advanced — left at 2026-04-20T16:09:00Z. Next briefing tick will run full Layer 1 calendar diff sweep across the 64h gap to catch any cancellations / new invites / RSVP changes that occurred during the dark window. This tick's probe was scope-limited (today + tomorrow only).
+**Apr 24 triple-overlap at 16:00 WAT:**
+1. [[Lattice Downward Reviews — 8 pending]] 15:00-17:00 WAT (Emeka self-organized, accepted; Lattice deadline Apr 27)
+2. [[Tech Support Meeting]] 16:00-17:00 WAT (Chidera Molokwu recurring; Emeka accepted)
+3. **"TeamApt Org Changes" 16:00-18:00 WAT (Pawel Swiatek; Emeka needsAction) — NEW**
+
+Resolution options for briefing-2026-04-24 Decision item: (a) accept Org Changes + defer Lattice Reviews + decline Tech Support recurring instance; (b) accept Org Changes + skip Tech Support + keep Lattice running in parallel (Lattice is async-capable); (c) decline Org Changes citing conflicts + request asynchronous readout.
+
+**Today (Apr 23) remaining schedule:**
+- 15:30-16:30 WAT (Lisbon TZ) — Interview for HoE (VP+) Kuldeep Singh (Chris Purkis; **needsAction**, 1h20m out at tick). Already surfaced in 09:11 tick sweep; no new delta but approaching. Factors: source=calendar, today_remaining, needsAction, 1h20m_out, hoe_cluster_alignment, awareness_tier.
+- 18:00-19:00 WAT — [[Product - Engineering Sync]] (self-organizer recurring, accepted).
+
+**Tomorrow (Apr 24) confirmed cluster (no changes this window beyond Org Changes):**
+- 08:30 WAT — TeamApt All Hands (accepted, recurring)
+- 11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (needsAction)
+- 11:00 WAT (LA TZ) — Blocker: HoE (VP+) Slots (Chris Purkis; needsAction)
+- 12:00 WAT (Lisbon TZ) — Deliberation: HoE batch interviews (needsAction)
+- 13:00 WAT — CI&P Team Structure (Tracy Ojaigho; needsAction)
+- 15:00 WAT — Lattice Downward Reviews (self)
+- 16:00 WAT — Tech Support Meeting (recurring needsAction)
+- **16:00 WAT — TeamApt Org Changes (NEW needsAction)**
+- 18:00 WAT — Product - Engineering Sync (self recurring)
+
+**Apr 24 morning overlap cluster (11:00-12:40 WAT):** 3 concurrent HoE-related events (Round 2 interview + Blocker slot + Deliberation). Known cluster; no new delta.
+
+**Backlog catch-up policy.** `last_processed` STILL deliberately NOT advanced — held at 2026-04-20T16:09:00Z. Full 64h+ diff sweep continues to be queued for briefing-2026-04-24 06:00 WAT. This tick's probe was scope-limited to today-remaining + tomorrow's new events.
 
 **Dispatch decisions:**
-- ATPP standup cancellation surfaced as awareness — no further action (resolves prior 14:00 WAT conflict line item).
-- 13:00 WAT Apr 23 DD double-book noted for accumulation into next briefing tick.
-- Apr 24 HoE batch holds calendar attention; Lattice Reviews 15:00 WAT batch is on-schedule.
-- No new invites in the immediate-attention window required Immediate-tier dispatch.
+- TeamApt Org Changes invite — queued as **Decision candidate for briefing-2026-04-24** (strategic topic + triple-overlap resolution).
+- HoE Kuldeep Singh interview today 15:30 WAT — Awareness (already-known; needsAction RSVP but within-work-hours, not Immediate).
+- No Immediate-tier dispatch (no same-hour new cancellations, no CTO-specific <1h deadline).
 
 **`last_processed` unchanged at 2026-04-20T16:09:00Z** — see backlog catch-up policy above.
