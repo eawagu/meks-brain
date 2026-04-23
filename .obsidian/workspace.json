@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "memory/working-preferences.md",
+                "file": "memory/config-ingest-prompt.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "working-preferences"
+              "title": "config-ingest-prompt"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "working-preferen",
+                "query": "ingress-",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -183,6 +183,7 @@
   },
   "active": "f293589a8bd70f4e",
   "lastOpenFiles": [
+    "memory/working-preferences.md",
     "memory/breach-of-contract-nigerian-damages-framework.md",
     "memory/ben-onuora-co.md",
     "memory/hon-justice-efunkumbi.md",
@@ -208,7 +209,6 @@
     "memory/uba-bank-rc91-p1-apr-17.md",
     "Travel History — Emeka Awagu.md",
     "heartbeat-2026-04-13T0611-output.md",
-    "Travel Dates — Personal Record (Emeka Awagu).md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
