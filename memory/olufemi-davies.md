@@ -3,17 +3,17 @@ type:
   - "entity"
 title: Olufemi Davies
 created: 2026-04-11
-summary: Cards Business Leader at Moniepoint MFB \u2014 continuing business owner for MFB cards; operates as co-lead with Tracy Ojaigho under Project Phoenix (Femi owns business, Tracy owns product / central platform); grew MFB card issuance market share from 7th to 3rd nationally.
-updated: "2026-04-23T05:38:37Z"
+summary: Cards Business Leader at Moniepoint MFB \u2014 continuing business owner for MFB cards; operates as co-lead with Tracy Ojaigho (Head of CI&P Product) under Project Phoenix (Femi owns business, Tracy owns product / central platform); grew MFB card issuance market share from 7th to 3rd nationally.
+updated: "2026-04-23T06:06:37Z"
 cssclasses:
   - "entity"
 ---
 
 ## Overview
 
-Olufemi Davies (**Femi**) is the **Cards Business Leader** at [[Moniepoint MFB]] — the continuing business owner for the MFB cards business. Under [[Project Phoenix]] he operates as **co-lead** with [[Tracy Ojaigho]]: Femi owns the **business** side (commercial outcomes, MFB operations, agent/BRM relationships, market share), Tracy owns the **product** side (central [[Card Issuance & Processing Platform]] build that MFB consumes as tenant).
+Olufemi Davies (**Femi**) is the **Cards Business Leader** at [[Moniepoint MFB]] \u2014 the continuing business owner for the MFB cards business. Under [[Project Phoenix]] he operates as **co-lead** with [[Tracy Ojaigho]] (Head of CI&P Product): Femi owns the **business** side (commercial outcomes, MFB operations, agent/BRM relationships, market share), Tracy owns the **product** side (central [[Card Issuance & Processing Platform]] build that MFB consumes as tenant).
 
-**This is not a succession.** Tracy is not replacing Femi. The split is by function — business leadership stays with Femi at the MFB; product leadership for the central platform sits with Tracy at the group platform org ([[Digital Banking Platforms]]).
+**This is not a succession.** Tracy is not replacing Femi. The split is by function \u2014 business leadership stays with Femi at the MFB; product leadership for the central CI&P platform sits with Tracy at the group platform org.
 
 ## Scope
 
@@ -53,7 +53,7 @@ See [[Source \u2014 Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]].
 
 ## Related
 
-- [[Tracy Ojaigho]] \u2014 co-lead (Product, central platform)
+- [[Tracy Ojaigho]] \u2014 co-lead (Head of CI&P Product, central platform)
 - [[Emeka Awagu]] \u2014 Head of CI&P Engineering
 - [[Moniepoint MFB]]
 - [[MFB Cards Team]]
