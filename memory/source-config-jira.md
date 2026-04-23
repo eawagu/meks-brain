@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T11:09:00Z. 12:09 WAT Apr 23 Full tick (weekday work-hours; multiple active situations): 6 in-window items (payload in-envelope, Agent delegation not required this tick). **CRITICAL DELTA: TDSD-6630 NIBSS DD DOWNTIME Completed by Kabir Yusuf at 11:30:22 WAT with zero closure RCA comment** — briefing-2026-04-23 D2 retire-or-hold ask answered by system-level closure; situation [[NIBSS DD — Downtime P1 Apr 20]] retired this tick (78h04m silent-recovery-without-RCA, exact Apr 14 precedent match). **TDSD-6697 NEW \"INTERSWITCH 91 ERRORS | 20260420\"** — Frances Omelu self-filed+self-closed in 2 minutes (11:36 WAT create → 11:38 WAT Completed), retrospective documentation of Apr 20 Interswitch RC91 cycle with \"issue originated from the issuer\" Interswitch-team attribution. Routine dev lifecycle: TCDD-1132 Log for Re-work, TDSD-6656 Awaiting implementation (Axios version bump), ADD-4254 Done, AS-4995 NEW Juliana Back office report-generation failure (Wycliffe Ochieng assignee, Pre-pilot phase, Moniepoint reporter Mariam Davies). TDSD-6645/TDSD-6696/TDSD-6684 no touch in-window. All non-Immediate; accumulating for briefing-2026-04-24."
-updated: "2026-04-23T14:20:54Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T15:11:00Z. 16:11 WAT Apr 23 Full tick: Agent-delegated payload (49 items, 214KB oversize). **2 Immediate candidates reclassified to Briefing** (TDSD-6702 NIBSS DD DOWNTIME self-closed in 49min silent-no-RCA, Medium → pattern-compound on [[NIBSS]] entity; TDSD-6703 3DS HTTP 422 fresh-filing, Medium → first observation under second-cycle gate). **4 Briefing-tier:** TDSD-6694 Paystack Balance Resolved, AS-4995 Juliana Back office Done, TDSD-6699 Firewall HA Awaiting implementation gate-pass, TDSD-6701 TACCS DB Awaiting Scheme Update. 43 Awareness routine dev deltas (MDRS epic continuation). Cross-source asymmetry tracker codification gate CROSSED (see source-config-slack)."
+updated: "2026-04-23T15:24:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T14:11:00Z"
+last_processed: "2026-04-23T15:11:00Z"
 ---
 
 ## Connection
@@ -26,11 +26,11 @@ last_processed: "2026-04-23T14:11:00Z"
 | AptPay Switch | AS | software |
 | AptPay Third Party Processing | ATPP | software |
 
-**JQL reserved-word handling.** Project keys `ADD` and `AS` are reserved JQL words and must be quoted in queries: `project in (TDSD, TCDD, ATPG, "ADD", "AS", ATPP)`. **Verified 7th time 2026-04-23 15:11 WAT** — unquoted query failed with reserved-word error on ADD first, then AS after quoting ADD. Both must be quoted from the start. The directive has been reaffirmed 7 ticks consecutively; any heartbeat that writes JQL MUST quote both keys.
+**JQL reserved-word handling.** Project keys `ADD` and `AS` are reserved JQL words and must be quoted in queries: `project in (TDSD, TCDD, ATPG, "ADD", "AS", ATPP)`. **Verified 8th time 2026-04-23 16:11 WAT** — directive holds through every JQL write this week.
 
-**JQL payload-size discipline.** Full 18-project `searchJiraIssuesUsingJql` returned oversize across six consecutive ticks (56,914 → 166,691 → 199,382 → 196,192 → 57,262 → 56,684 chars across 2026-04-22 14:15 WAT → 2026-04-23 14:09 WAT). **15:11 WAT: 10 items returned, payload fit within direct-read limit (window was only 1h; cumulative deltas small).** Rule (promoted from exception to default): for weekday work-hours ticks (08:00-18:00 WAT) the default extraction path MUST be `Agent`-delegated file-chunk reads WHEN payload is oversize, because bulk grooming batches are persistent — saw 48-61 items in three consecutive tick windows and 10-16 items in the other four. `maxResults=50` is not sufficient for overlong windows; raise to 100 or accept isLast=False. `markdown` response format (vs ADF) reduces payload per item but does not eliminate oversize at 11+ item windows with task descriptions. Small windows (~1h) with low item counts (≤10) can be direct-read.
+**JQL payload-size discipline.** Full 18-project `searchJiraIssuesUsingJql` returned oversize across seven consecutive ticks (56,914 → 166,691 → 199,382 → 196,192 → 57,262 → 56,684 → 214,831 chars across 2026-04-22 14:15 WAT → 2026-04-23 16:11 WAT). **16:11 WAT: 49 items returned in 1h window, payload 214KB oversize → Agent-delegated file-chunk extraction used (subagent returned classification summary).** Rule (holds): for weekday work-hours ticks (08:00-18:00 WAT) the default extraction path SHOULD be `Agent`-delegated when payload is oversize. Small windows (~1h) with low item counts (≤10) can be direct-read — but weekday MDRS epic grooming batches routinely push 40+ items, so assume delegation.
 
-**JQL date-filter-timezone discipline (added 2026-04-22 16:15 WAT).** JQL `updated >= "YYYY-MM-DD HH:mm"` is evaluated in the Jira site's timezone (Africa/Lagos for teamapt.atlassian.net), NOT UTC. When filtering relative to a UTC `last_processed` stamp, **either** pass the WAT-local time equivalent **or** accept that the query may return items updated 1 hour before the stated UTC cutoff and post-filter on the assistant side. Applying no post-filter to a WAT-indexed query will include pre-window items and inflate the delta set.
+**JQL date-filter-timezone discipline (added 2026-04-22 16:15 WAT).** JQL `updated >= "YYYY-MM-DD HH:mm"` is evaluated in the Jira site's timezone (Africa/Lagos for teamapt.atlassian.net), NOT UTC. When filtering relative to a UTC `last_processed` stamp, either pass the WAT-local time equivalent or accept that the query may return items updated 1 hour before the stated UTC cutoff and post-filter on the assistant side.
 
 ## Directives
 
@@ -38,6 +38,7 @@ last_processed: "2026-04-23T14:11:00Z"
 - Service desk tickets (TDSD) with P1/outage markers — Immediate-tier candidates.
 - Software project tickets with CTO approval gate — Briefing-tier.
 - Routine dev/QA transitions — Awareness-tier.
+- **Jira [System] Incident Medium-or-higher without Slack P1 mirror** — classify per config-salience Immediate triggers (if "down"/"outage"/"breach"/"compromised" keyword in summary → still only Immediate when Slack P1 filed; Medium-priority incident-type alone is Briefing-tier). See source-config-slack Cross-source asymmetry tracker — codification gate crossed 2026-04-23 16:11 WAT; directive draft pending briefing-2026-04-24 Decision.
 
 ### Active-situation entity match
 Match updated tickets against active situation pages. Overlapping entity or keyword → elevate to Briefing-tier minimum.
@@ -45,8 +46,11 @@ Match updated tickets against active situation pages. Overlapping entity or keyw
 ### Out-of-scope surfacing via Layer 1 email
 When a Jira ticket from an out-of-scope project (not in the 18-project scope above) surfaces to the user via Layer 1 Gmail (To:me) approval request, fetch the ticket metadata and treat per normal tier classification. Record in notes so the next sweep can follow the ticket without re-discovery. Example: TISD-480 surfaced 2026-04-20 via approval email.
 
-### Second-cycle situation creation gate (reinforced 2026-04-23 13:09 WAT; re-affirmed 14:09 WAT; held 15:11 WAT)
-When a product surface records a first operational signal (e.g., AS-4995 Juliana Back office report-generation Apr 23), a second distinct-cycle signal within 7 days warrants situation-page creation. **Clarification (13:09 WAT):** "second cycle on the same product surface" means a genuinely recurring failure mode on the same sub-component. AS-4995 (Juliana Back office report generation), TDSD-6698 (Juliana Switch downtime), and AS-4404 (Juliana Card Not Present refund) are on three different sub-components (Back office, Switch, CNP refund) — the Juliana brand umbrella overlaps but the failure surfaces diverge. Do NOT create a Juliana situation page from this triad alone; watch for third distinct-cycle surface OR second cycle on Back-office-specifically OR Switch-specifically OR CNP-refund-specifically. **14:09 WAT re-affirmation:** 3rd Juliana-branded surface today (AS-4404) does not auto-trigger; sub-component diversity criterion holds. **15:11 WAT hold:** no new Juliana-branded deltas in-window; tracker unchanged.
+### Second-cycle situation creation gate (reinforced 2026-04-23 13:09 WAT; held through 16:11 WAT)
+When a product surface records a first operational signal, a second distinct-cycle signal within 7 days warrants situation-page creation. **Same-sub-component criterion holds** — Juliana Back-office / Switch / CNP-refund are distinct surfaces. 3DS HTTP 422 (TDSD-6703) is the first 3DS surface this week — does NOT warrant page yet; watch for second 3DS cycle.
+
+### NIBSS DD cycle-4 pattern (observed 2026-04-23 16:12 WAT)
+TDSD-6702 (Frances Omelu self-filed 15:23 WAT, self-closed 16:12 WAT, 49min, silent-no-RCA, Medium Incident) is the 4th NIBSS DD operational cycle in 9 days. Silent-close-without-RCA now matches 3 of 4 cycles (75%). Compounded onto [[NIBSS]] entity page. **Decision to NOT create a new situation page** for TDSD-6702: same-day self-close makes it historical-at-filing — no developing condition to monitor. If cycle 5 arrives within 48h, escalate to synthesis candidate ("NIBSS DD silent-close-without-RCA pattern") instead of a per-cycle situation page.
 
 ### Skip rules
 [Maintained via monthly skip-list regression review + weekly skip-list bulk-confirm per config-salience Periodic Reviews.]
@@ -55,48 +59,35 @@ When a product surface records a first operational signal (e.g., AS-4995 Juliana
 
 ### Tick 2026-04-22 (condensed — full details in git history)
 
-Six Apr 22 ticks across 14:15, 16:15, 17:09, 18:09, 20:00, 22:10 WAT. Key accumulations: TDSD-6645 stall pattern (45h+ assignee silence), TDSD-6655/6661/6662 Opeyemi same-day-close comparisons (3:1 vs Dominic stall), TDSD-6688 Dominic-Awaiting-Scheme-Update workflow compound, TDSD-6630 carry across all 6 ticks (no movement), Keystone retirement candidate, TDSD-6691 Polaris outward-flows deploy awareness, TDSD-6676 Access Bank exposure. 22:10 WAT early-exit advanced last_processed to 2026-04-22T21:00:00Z.
+Six Apr 22 ticks across 14:15, 16:15, 17:09, 18:09, 20:00, 22:10 WAT. Key accumulations: TDSD-6645 stall pattern (45h+ assignee silence), TDSD-6655/6661/6662 Opeyemi same-day-close comparisons, TDSD-6688 Dominic-Awaiting-Scheme-Update workflow compound, TDSD-6630 carry across all 6 ticks, Keystone retirement candidate, TDSD-6691 Polaris outward-flows deploy awareness, TDSD-6676 Access Bank exposure. 22:10 WAT early-exit advanced last_processed to 2026-04-22T21:00:00Z.
 
-### Tick 2026-04-23 06:10 / 07:10 / 08:10 / 09:11 / 10:09 / 11:09 / 12:09 / 13:09 / 14:09 WAT (condensed — see git history)
+### Tick 2026-04-23 06:10–15:11 WAT (condensed — see git history)
 
-06:10 briefing tick: TDSD-6645 Dominic broke 59h15m silence with attribution-transfer to inwards payments team; TDSD-6630 72h43m silent surfaced as D2 retire-or-hold ask; TDSD-6684 new Blessing→Dominic filing (3rd in 3 days); TDSD-6638 closed. 07:10 TDSD-6692 UBA 6-min fast-cycle Jira-only (cross-source asymmetry 1st observation). 08:10 TDSD-6675/TDSD-6592 closures + AS-* bulk grooming. 09:11 ADD-4587/ADD-4584/ADD-4589 + AS Zone Switching Partnership 30-item batch + ATPP MDRS 12-item batch. 10:09 TDSD-6694 Paystack Balance + TDSD-6695 Stopgap Public Access Waiting-for-Approval + settlement reliability closures. 11:09 TDSD-6696 RC06 Verve TTP Work in Progress (first RC06 Verve surface this week) + TDSD-6506 Firewall Emergency Upgrade Implementing + TDSD-5900 Completed + AS-4854 DD Engine In Progress + TDSD-6695 transitioned to Awaiting Scheme Update. 12:09 TDSD-6630 Completed by Kabir Yusuf 11:30 WAT with zero RCA (situation retired this tick, exact Apr 14 precedent match at 78h04m silent-recovery-without-RCA) + TDSD-6697 retrospective Interswitch RC91 self-filed+self-closed (2-min) + AS-4995 Juliana Back office first surface. 13:09 TDSD-6698 Juliana Switch Downtime retrospective self-filed+self-closed + AS-4995 status update + ATPP MDRS epic expansion opener (ATPP-1710 + 1711-1718). 14:09 TDSD-6699 Firewall HA Review (Olayinka Ajayi; paired Gmail thread 19dba77670436f02 with Tolu Aina primary approver, Emeka CC-only — not CTO-specific) + AS-4404 Juliana CNP Refund Highest/Task (3rd Juliana surface, sub-component diversity holds) + TDSD-6693 Pending Settlement Done + TCDD-1106 Habari Pay OTP bug fix Done + ATPP-1634/1711-1718 MDRS epic continuation.
+06:10 briefing tick: TDSD-6645 Dominic broke 59h15m silence with attribution-transfer to inwards payments team; TDSD-6630 72h43m silent surfaced as D2; TDSD-6684 new Blessing→Dominic filing. 07:10 TDSD-6692 UBA 6-min fast-cycle Jira-only (cross-source asymmetry tracker opened). 08:10 TDSD-6675/TDSD-6592 closures + AS-* bulk grooming. 09:11 ADD-4587/ADD-4584/ADD-4589 + AS Zone Switching Partnership 30-item batch. 10:09 TDSD-6694 Paystack Balance + TDSD-6695 Stopgap Public Access. 11:09 TDSD-6696 RC06 Verve TTP + TDSD-6506 Firewall Emergency Upgrade + TDSD-5900 Completed + AS-4854 DD Engine In Progress. 12:09 TDSD-6630 Completed 11:30 WAT zero RCA (retired); TDSD-6697 retrospective Interswitch RC91 2-min self-filed+self-closed; AS-4995 Juliana Back office first surface. 13:09 TDSD-6698 Juliana Switch Downtime retrospective; ATPP MDRS epic expansion. 14:09 TDSD-6699 Firewall HA (Tolu Aina primary approver); AS-4404 Juliana CNP Refund Highest/Task; TDSD-6693 Pending Settlement Done; TCDD-1106 Habari Pay OTP Done. 15:11 TDSD-6699 past approval gate (Review → Awaiting implementation); TDSD-6701 new Awaiting Scheme Update; TDSD-6700 new Change; TDSD-6680 Palmpay re-activation. 10 items in-window; direct-read payload fit.
 
-### Tick 2026-04-23 ~15:11 WAT — Full (weekday work-hours; TDSD-6699 past approval gate; TDSD-6701 new Awaiting Scheme Update)
+### Tick 2026-04-23 ~16:11 WAT — Full (Agent-delegated; 49 items; Ecobank, NIBSS DD cycle-4, 3DS HTTP 422)
 
-Window: 13:09 UTC → 14:11 UTC Apr 23 (~62min; JQL `updated >= "2026-04-23 14:09"` WAT-local per timezone-discipline). Step 0 declared `level=full, rationale=weekday-working-hours-active-situations-proximate-reminder-potential-mcp-recovery`. briefing-2026-04-23 already exists — not a briefing tick. 10 items in-window; direct-read payload fit within limit (no Agent delegation needed for this small window).
+Window: 14:11 UTC → 15:11 UTC Apr 23 (~60min; JQL `updated >= "2026-04-23 15:11"` WAT-local). Payload 214,831 chars oversize → delegated to Agent subagent, returned classification summary.
 
-**Operationally relevant deltas:**
+**Operationally significant deltas:**
 
-1. **TDSD-6699 "CONFIGURATION OF HIGH AVAILABILITY ON TeamApt Prod FIREWALL 02 and 03"** — status transitioned Review → **Awaiting implementation** at 15:11:26 WAT (1-min before tick observation). Approval gate passed. Per 14:09 WAT analysis: Tolu Aina was primary approver, Emeka CC-only on paired Gmail thread 19dba77670436f02 — ticket progressed via Tolu's approval, not Emeka's. No CTO action was required; the Jira-native notification at 13:32 WAT (Gmail thread 19dba8ae164169a7) was informational given the CC-not-To posture on the human approval thread. **Awareness-tier** (infrastructure change now deployment-ready). Factors: source=jira+email, status_transition_review_to_awaiting_implementation, cto_cc_not_primary_approver, tolu_aina_approved, infrastructure_change_deployment_ready, awareness_tier.
+1. **TDSD-6702 NIBSS DD DIWNTIME | 20260423** (Medium, [System] Incident). Reporter+assignee [[Frances Omelu]] (self-filed+self-closed). Created 15:23:11 WAT, transitioned to Completed at 16:12:10 WAT by same Frances Omelu — **~49min duration, silent-close-no-RCA**. Description: standard customer-facing NIBSS-downtime template ("We are currently experiencing issues with direct debit transactions... challenges originate from NIBSS"). **4th NIBSS DD operational cycle in 9 days; 3rd silent-close-no-RCA.** Briefing-tier Awareness (pattern compound); NOT a new situation page (historical at tick, same-day close). Cross-source asymmetry tracker 2nd data point — no Slack #teamapt-tech-operations P1 mirror at 16:11 WAT tick. Factors: source=jira, ticket_incident_medium, self_filed_self_closed, silent_close_no_rca, pattern_compound_4th_cycle_9_days, cross_source_asymmetry_jira_only, briefing_tier_awareness.
 
-2. **TDSD-6701 NEW "UPDATE OF SETTLEMENT STATUS ON TACCS CLEARING DB"** — [System] Service request with approvals, Medium. Reporter [[Daniel Fetuga]], assignee [[Oluwaseun Oladele]]. Created 15:01:14 WAT, first transition to **Awaiting Scheme Update** at 15:10:42 WAT (9min from create to scheme-update gate). Affects TACCS clearing DB settlement state — operational settlement request. **Awareness-tier** (routine settlement service request, no Immediate markers). Factors: source=jira, ticket_new, service_request_with_approvals, taccs_clearing_settlement, medium_priority, awaiting_scheme_update, awareness_tier.
+2. **TDSD-6703 3ds is currently failing with HTTP 422** (Medium, [System] Incident). Reporter+assignee [[Olamide Ajibulu]] (self-filed). Created 16:07:01 WAT, Updated 16:11:06 WAT, status **INITIAL REVIEW** — 4min active at tick, still in progress. Description: "This is being addressed by the TSE." **First 3DS HTTP 422 observation** (second-cycle gate does NOT fire — below 2-cycle threshold). Briefing-tier for briefing-2026-04-24 (emerging surface, watch for recurrence within 7 days). Cross-source asymmetry tracker 3rd data point — no Slack #teamapt-tech-operations P1 mirror at 16:11 WAT tick. Factors: source=jira, ticket_incident_medium, 3ds_acs_surface, fresh_filing_4min_active, tse_addressing, cross_source_asymmetry_jira_only, briefing_tier_first_observation.
 
-3. **TDSD-6700 NEW "International payment deployment Enhancement (Currency Aware Transaction Refund and Recall Entry)"** — [System] Change, Medium, assignee null, reporter [[David Oparanti]]. Created 14:39 WAT, status transitioned to **Awaiting implementation** at 14:58 WAT. Planned infrastructure change on international payment flows. **Awareness-tier**. Factors: source=jira, ticket_new, system_change, international_payment, awaiting_implementation, awareness_tier.
+3. **TDSD-6694 PAYSTACK BALANCE ADJUSTMENT APRIL 23RD 2026** — status Resolved at 15:40:54 WAT. Was Awaiting Scheme Update at 10:09 WAT; ~5h30m to resolution. Awareness.
 
-4. **TDSD-6680 "PALMPAY PORTAL | TRANSACTION NOT MIGRATING"** — [System] Incident (P2 per prior tracking), Medium, assignee null, reporter [[Afeez Kazeem]]. Filed 2026-04-22 07:54 WAT, re-touched at 15:05:03 WAT this tick (status remains INITIAL REVIEW). Incident not auto-closed despite Medium priority — continuing under initial review 31h+ post-filing. Not in active-situation tracker. **Awareness-tier** (ticket re-activation signal; no Immediate markers). Factors: source=jira, ticket_incident_medium, re_activation_signal, initial_review_sustained_31h_plus, no_assignee, awareness_tier.
+4. **AS-4995 Pre pilot — Inability to generate Report for 23rd April on the Juliana Back office** — status Done at 15:34:30 WAT. Wycliffe Ochieng' assignee. Second Juliana closure today (AS-4995 Back office + AS-4404 CNP Refund Highest pending) — sub-component diversity gate still holds, no situation page. Awareness.
 
-**Routine dev lifecycle (6 items):**
+5. **TDSD-6699 Firewall HA** — updated 15:16 WAT (minor status resync); already Awaiting implementation since 15:11 WAT. Awareness.
 
-- **TCDD-1268 "GoSubscribe POS UI Translation: Design Revamp & Mapped Color Implementation"** — In Progress, Medium. Assignee [[Ekene Oranekwu]]. Updated 15:08 WAT. Awareness.
-- **TCDD-1132 "Implement Direct Debit Transaction Scheduler in DD Scheduler Service"** — **READY FOR QA TESTING**, Medium. Assignee [[Oluwadayo Osborne]]. Updated 14:56 WAT. Progression signal (In Progress → Ready for QA). Awareness.
-- **ATPP-1628 "MDRS - Backend - Build Mastercard API Client Wrapper"** — To Do, Medium. Assignee [[George Ijidola]]. Updated 15:04 WAT. Awareness — MDRS epic continuation.
-- **ATPP-1627 "MDRS - Backend - Implement Role-Based Access Control (RBAC) Framework"** — To Do, Medium. Assignee George Ijidola. Updated 15:02 WAT. Awareness — MDRS epic continuation.
-- **ATPP-1625 "MDRS Setup - Backend - Implement Row-Level Security and Access Control"** — To Do, Medium. Assignee George Ijidola. Updated 15:02 WAT. Awareness — MDRS epic continuation.
-- **ATPP-1709 "MDRS - UI - Backoffice Frontend Base Project Setup"** — To Do, Medium. Assignee [[Olatunbosun Olaosebikan]]. Updated 14:47 WAT. Awareness — MDRS epic UI track.
+6. **TDSD-6701 TACCS DB Settlement** — Awaiting Scheme Update at 15:13 WAT; already noted at 15:11 WAT. Awareness.
 
-**Named-ticket watchlist activity (not touched in-window):**
-TDSD-6645 (Dominic silence ~11h03m post-04:08 WAT attribution-transfer, under 48h threshold), TDSD-6696 (Verve TTP RC06 — static since 11:09 WAT), TDSD-6684 (Awaiting Scheme Update continues), TDSD-6694 (Paystack Balance — Awaiting Scheme Update), TDSD-6695 (Stopgap Public Access — Awaiting Scheme Update), TDSD-6506 (Firewall Emergency Upgrade — distinct from TDSD-6699), TDSD-6692 (UBA fast-cycle — static), TDSD-6697 (Interswitch RC91 retrospective — static), AS-4995 (Juliana Back office — In Progress held), AS-4404 (Juliana CNP Refund — static since 13:47 WAT), TDSD-6698 (Juliana Switch Downtime — retrospective, static).
-
-**Cross-source asymmetry tracker status:** No new asymmetry observations this tick. Tracker still at 1 data point (TDSD-6692). Window closes 06:44 WAT Apr 24.
-
-**Second-cycle situation gate:** No new Juliana or other product-surface deltas warrant gate review this tick. Hold.
-
-**No CTO (@Emeka Awagu) @-mentions or explicit approval asks** detected in Jira payload this window.
+**Routine dev deltas (43 items):** MDRS epic continuation backend + frontend (ATPP-16xx and ATPP-17xx sub-tickets), legacy FCMB account switch continuation. All Medium, mostly To Do/In Progress. No CTO approvals, no Ecobank/RC91 new Jira filings (confirming Ecobank cycle-B is Slack+email only from Jira's perspective — no TDSD ticket yet), no new P1 issuer pattern. Named-ticket watchlist: TDSD-6645 (Dominic silence ~12h05m post-04:08 WAT attribution-transfer; under 48h threshold); TDSD-6684/6688 Awaiting Scheme Update hold; TDSD-6696 Verve TTP RC06 static since 11:09 WAT; others unchanged.
 
 **Dispatch decisions:**
-- No Immediate-tier Jira dispatch.
-- TDSD-6699 gate-pass + TDSD-6700 new change + TDSD-6701 new TACCS settlement request noted as Awareness items for briefing-2026-04-24.
-- TDSD-6680 re-activation noted as Awareness for briefing-2026-04-24 (re-check next tick for further status movement).
-- All routine dev deltas Awareness-tier; accumulate for briefing-2026-04-24.
+- No Immediate-tier Jira dispatch (TDSD-6702/6703 Medium, not formal P1; Ecobank Immediate routed via Slack+email already).
+- Briefing-2026-04-24 candidates: TDSD-6703 (new 3DS surface); cross-source-asymmetry-tracker codification directive (per source-config-slack).
+- [[NIBSS]] entity page updated with NIBSS DD silent-close pattern table (4 cycles, 3 silent-close).
 
-**Advanced `last_processed` to 2026-04-23T14:11:00Z.**
+**Advanced `last_processed` to 2026-04-23T15:11:00Z.**
