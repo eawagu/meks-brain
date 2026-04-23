@@ -1,34 +1,32 @@
 ---
-title: Precious
 type:
   - "entity"
+title: Precious
+created: "2026-04-23T05:24:48Z"
+summary: Co-leads the Chargeback & Issue Resolution sub-team inside Moniepoint MFB Cards with Aima — handles chargeback processing and L2 customer-support escalation.
+updated: "2026-04-23T05:33:35Z"
 cssclasses:
   - "entity"
 first_name_only: true
 disambiguation_needed: true
-created: "2026-04-23T05:24:48Z"
-updated: "2026-04-23T05:24:48Z"
-summary: "Co-lead of the Chargeback & Issue Resolution ops sub-team within Moniepoint MFB Cards (with Aima) — highest-priority target for the strike team's AI automation roadmap."
 ---
 
 ## Overview
 
-Precious co-leads the **Chargeback & Issue Resolution** operations sub-team within the [[Moniepoint MFB]] Cards Team, alongside [[Aima]].
+Precious co-leads the **Chargeback & Issue Resolution** sub-team (jointly with [[Aima]]) embedded within [[Moniepoint MFB]] Cards.
 
 ## Scope
 
 - Chargeback processing
-- Level 2 customer support escalation for card-related issues
-- Operates the [[Dispute Management Service]] flows in practice
+- Level 2 customer-support escalation for card-related issues
 
-## AI Automation Priority
+## Disambiguation Needed
 
-Per the 2026-04-21 KT, this sub-team is the **highest-priority AI automation target** for the strike team. Targets: automated dispute intake, routing, status communication.
+Surname not captured in the source document. Needs resolution to full MFB Cards roster identity.
 
-## Disambiguation
+## Related
 
-First-name only in source. Surname TBD.
-
-## Sources
-
+- [[Aima]] — co-lead on same sub-team
+- [[Moniepoint MFB]]
+- [[Chargeback and Issue Resolution]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

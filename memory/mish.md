@@ -1,24 +1,28 @@
 ---
-title: Mish
 type:
   - "entity"
+title: Mish
+created: "2026-04-23T05:24:48Z"
+summary: Participated in a prior working session with Tracy Ojaigho and Damilola Oyediran that concluded most functions currently outside the legacy CMS (handled by Card Manager Service) logically belong inside the new Phoenix CMS.
+updated: "2026-04-23T05:33:35Z"
 cssclasses:
   - "entity"
 first_name_only: true
 disambiguation_needed: true
-created: "2026-04-23T05:24:48Z"
-updated: "2026-04-23T05:24:48Z"
-summary: Participated with Damilola Oyediran in a prior session that confirmed most functions currently in the legacy Card Manager Service logically belong inside the new CMS being built under Project Phoenix.
 ---
 
 ## Overview
 
-Mish participated in a prior architectural review session with [[Damilola Oyediran]] and [[Tracy Ojaigho]] that confirmed most functions currently handled outside the legacy CMS (in the [[Card Manager Service]]) logically belong inside the new [[Card Management System]] being built under [[Project Phoenix]].
+Mish participated in a prior working session with [[Tracy Ojaigho]] and [[Damilola Oyediran]] — the session that concluded most functions currently handled outside the legacy CMS (by [[Card Manager Service]]) logically belong inside the new [[Card Management System]] being built under [[Project Phoenix]].
 
-## Disambiguation
+## Disambiguation Needed
 
-First-name only in source. Likely a senior engineer or architect on the MFB Cards Team or CI&P Platform side. Surname TBD.
+Full name / organizational role not captured. Likely a senior technical voice (given the architectural nature of the conclusion) — possibly TeamApt-side given the Phoenix CMS framing.
 
-## Sources
+## Related
 
+- [[Tracy Ojaigho]]
+- [[Damilola Oyediran]]
+- [[Card Manager Service]]
+- [[Card Management System]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

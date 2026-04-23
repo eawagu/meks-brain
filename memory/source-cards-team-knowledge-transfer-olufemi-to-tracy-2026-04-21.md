@@ -1,12 +1,13 @@
 ---
-title: Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21
 type:
   - "source"
+title: Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21
+created: "2026-04-23T05:20:54Z"
+summary: Structured knowledge-transfer meeting (Apr 21 2026, 1pm WAT) from Olufemi Davies (Cards Business Leader) to Tracy Ojaigho (Head of Digital Banking Platforms) covering MFB Cards Team structure, platforms architecture, external integrations, 2026 roadmap, and strike-team / new CMS plan.
+updated: "2026-04-23T05:33:35Z"
 cssclasses:
   - "source"
 source_path: review\Cards_Team_Meeting_Report.docx
-retention_label: postgres
-retention_rationale: Multi-stakeholder transition briefing with named systems, BIN-level technical detail, switch routing decisions, named action items, and a roadmap. Future retrieval likely when scoping CMS migration, Visa launch, or AI automation work.
 meeting_date: 2026-04-21
 meeting_time: "13:00 WAT"
 participants:
@@ -14,125 +15,110 @@ participants:
   - "Tracy Ojaigho"
   - "Emeka Awagu"
 documented_by: Gemini AI (auto-notes) + Transcript
+retention_label: postgres
+retention_rationale: Multi-stakeholder knowledge-transfer document with named people, complete MFB cards systems inventory, external integration map, decisions table, and action items — future retrieval likely for any MFB cards question.
 name_corrections_applied: "Source uses 'Nadin' → resolved to Nadeem Abbas; 'Damola' → resolved to Damilola Oyediran; 'Taps / TMSS' → resolved to TeamApt (the settlement switch reference)"
-created: "2026-04-23T05:20:54Z"
-updated: "2026-04-23T05:20:54Z"
-summary: Knowledge transfer meeting (Apr 21, 2026) — Olufemi Davies to Tracy Ojaigho on Moniepoint MFB Cards Team structure, platforms, integrations, 2026 roadmap, and strike team formation under the CI&P Platform / Project Phoenix transition.
 ---
 
 ## Summary
 
-Knowledge-transfer meeting on 2026-04-21 between [[Olufemi Davies]] (Head, Moniepoint MFB Cards Team) and [[Tracy Ojaigho]] (incoming CI&P Platform lead), with [[Emeka Awagu]]. Covers the current MFB Cards Team org structure, the platforms that comprise its card stack today, external switch and provider connections, the 2026 roadmap (Visa launch, tap-to-pay, VTS/VAS, CX revamp, ops excellence), and the formation of a strike team to build the new [[Card Management System]] and drive AI automation under [[Project Phoenix]] platformisation.
+Structured knowledge-transfer meeting on April 21 2026 (1pm WAT) between [[Olufemi Davies]] (continuing Cards Business Leader at [[Moniepoint MFB]]) and [[Tracy Ojaigho]] (Head of [[Digital Banking Platforms]], incoming Product Leader for the central [[Card Issuance & Processing Platform]]). Covered the MFB Cards Team structure, the full MFB-side cards systems inventory, external integrations, 2026 roadmap priorities, and the strike-team / new CMS plan under [[Project Phoenix]].
 
-This is the next chapter in the [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]] transition: that note documented who is on the MFB Cards teams; this source documents what they own, how it works, and what they will deliver next.
-
-**Name resolution notes** (source uses informal/transcribed names — corrected here):
-- "Nadin" → [[Nadeem Abbas]] (PM, Card Sales & Distribution / MFB Cards Team 1)
-- "Damola" → [[Damilola Oyediran]] (PM, Card Infrastructure / MFB Cards Team 2)
-- "Taps / TMSS" → [[TeamApt]] (the settlement switch under TeamApt's Domestic Switching license, not a third party)
+This is **not a succession** — Olufemi continues as Business Leader owning commercial/operational outcomes at the MFB; Tracy owns the central platform build that the MFB (and future markets) will consume as tenant. The session frames how the existing MFB cards infrastructure feeds the platform build.
 
 ## Key Points
 
-### Org Structure (MFB Cards Team)
-- Two product teams under Olufemi Davies; a third team (VAS — tokenization, ACS) was planned but is shelved pending platformisation. VAS scope currently sits under Card Infrastructure.
-- **Card Sales & Distribution** (PM: [[Nadeem Abbas]]) — owns card pricing/sharing formulas (agent / PRM / BO splits), card ordering and production requests, distribution chain (Head Office → RO → SRO → BO), customer sales experience for Visa and Africa card programmes.
-- **Card Infrastructure** (PM: [[Damilola Oyediran]]) — larger team. Owns transaction processing, security modules, system integrations. Holds the deferred VAS scope (tokenization, ACS).
-- **Operations sub-teams** embedded in Cards Team:
-  - Card Production & Logistics (lead: [[Philip]], team of 4) — physical card stock, card-file generation, warehouse intake from perso vendor, distribution to ROs.
-  - Chargeback & Issue Resolution (lead: [[Aima]] / [[Precious]]) — chargeback processing, L2 customer support escalation for card issues.
+### MFB Cards Team Structure
+- Two product teams (a planned third — VAS — was shelved pending platformisation):
+  - **Team 1 — Card Sales & Distribution** (smaller): PM [[Nadeem Abbas]] (source doc transcribed "Nadin"). Scope: card pricing and sharing formulas (agent/PRM/BO splits), ordering and production request process, distribution chain (HO → RO → SRO → BO), customer sales experience for Visa and Africa card programmes.
+  - **Team 2 — Card Infrastructure** (larger): PM [[Damilola Oyediran]] (source doc transcribed "Damola"). Scope: all transaction processing, security modules, system integrations, plus the deferred VAS functions (tokenization, ACS).
+- Two embedded operations sub-teams inside Cards:
+  - **Card Production & Logistics** — led by [[Philip]], team of 4 — physical card stock, card file generation, warehouse intake from perso vendor, distribution to ROs.
+  - **Chargeback & Issue Resolution** — led by [[Aima]] / [[Precious]] — chargeback processing and L2 customer-support escalation for card issues.
 
-### Platforms — Card Sales & Distribution
-- **[[Card Service]]** — core selling platform; manages sharing formulas, pricing tiers, agent/PRM/BO commissions. Decisions made jointly with Growth Team before implementation.
-- **[[Logistics Service]] + [[Logistics UI]]** — inventory and physical movement; QR/barcode scan registers delivery at each chain level; dashboard provides RO-level stock visibility (prevents false shortage claims).
-- **[[Card Integration Service]]** (under Infrastructure) — integrates the card stack with internal platforms, notably [[Money Desk]] (MoniePoint helpdesk/customer support tool).
+### MFB Cards Platform Inventory
 
-### Platforms — Card Infrastructure
-- **[[Postillion]] + [[HSM]]** — external payment switch (owned by [[Interswitch]]) used for card production and authorisation. Deliberate strategy underway to **reduce dependency on Interswitch** (improves uptime, speeds up feature rollout). This is the strategic motivation for the new CMS — see Strike Team section.
-- **[[Card Manager Service]]** (the legacy internal CMS — see [[Card Manager Service CMS Specification]]) — critical middleware between the card stack and the [[Core Banking Application]]. Functions: card blocking/unblocking, account-to-card linking, transaction routing. **Known limitation:** uses a dummy account number on Postillion rather than the real account number, which currently prevents Interswitch from processing direct refunds by transfer.
-- **[[Card Transaction Service]]** — actual transaction processing flow; functionally a second middleware layer alongside Card Manager Service.
-- **[[Card OTP Service]]** — One-Time Passwords for secure card operations (Safe Token). Designed to be extensible to Visa Token and 3D Secure / ACS. OTPs dispatched via MoniePoint's pre-whitelisted gateway.
-- **[[Dispute Management Service]]** — handles customer-logged disputes end-to-end: receives from mobile app, checks against IDS/AIT, routes to resolution path, communicates status. Future expansion: international dispute rails ([[Verve]] Online, [[Mastercard]] Chargeback).
-- **[[Digitisation Service]] + [[Sudo Africa]]** — enables tap-to-pay. MoniePoint uses [[Pseudo-Digitisation]]: actual PAN is securely stored on the customer's Android device and transmitted via EMV NFC at POS, **bypassing the need for VTS tokenisation**. External provider: Sudo Africa (subscription). Live for Android users internally; broader rollout pending NFC readiness on POS estate (OP and PE terminals are ~100% ready).
-- **[[Apps Pay UI]]** — internal UI for background card operations (production requests, backend service management). Each domain (e.g. logistics) also has its own dedicated UI.
+**Card Sales & Distribution platforms:**
+- **[[Card Service]]** — commercial config (sharing formulas, pricing tiers, agent/PRM/BO commissions). Decisions jointly made with Growth Team before implementation.
+- **[[Logistics Service]] + Logistics UI** — card inventory and physical distribution. QR/barcode scan registers delivery at each level; dashboard shows stock by RO; prevents false shortage claims.
+- **[[Card Integration Service]]** — integration layer to internal platforms, notably [[Money Desk]] (MFB helpdesk/support tool) for support-ticket logging against customer records.
 
-### External Integrations
-| Switch / Provider | Purpose / Notes |
+**Card Infrastructure platforms:**
+- **[[Postillion]] + [[HSM]]** — external ACI/Interswitch switch used for card production and authorisation. Deliberate strategy to reduce Interswitch dependency for uptime and feature-rollout speed.
+- **[[Card Manager Service]] (the legacy internal CMS)** — critical middleware between cards and [[CBA|Core Banking Application]]. Handles card blocking/unblocking, account-to-card linking, transaction routing. Known limitation: uses dummy account numbers on Postillion rather than real account numbers — currently blocks [[Interswitch]] from processing direct refunds by transfer.
+- **[[Card Transaction Service]]** — transaction processing flow; functionally paired with Card Manager Service as a second middleware layer to core banking.
+- **[[Card OTP Service]]** — OTPs for secure card operations (Safe Token today). Designed to extend to Visa Token and 3DS/ACS. Dispatched via MoniePoint's pre-whitelisted gateway.
+- **[[Dispute Management Service]]** — end-to-end customer-logged disputes from mobile app; checks against [[IDS]]/[[AITA]]; routes to resolution; communicates status back. Roadmap: integrate Verve Online and Mastercard Chargeback international dispute rails.
+- **[[Digitisation Service]] (internal) + [[Sudo Africa]] (external)** — tap-to-pay. MoniePoint's approach is **pseudo-digitisation**: actual PAN stored securely on customer's Android device, transmitted via EMV NFC at POS, bypassing Visa Token Service (VTS) tokenisation. Live for Android internally; wider rollout pending NFC readiness on POS estate (OP and PE terminals ~100% ready).
+- **[[Apps Pay UI]]** — internal UI for backend card operations (production requests, service management). Each domain (e.g., logistics) also has its own dedicated UI.
+
+### External Switches & Providers
+
+| Provider | Purpose / Notes |
 |---|---|
-| [[Verve]] | Primary switch for on-us and remote transactions; ~99% of transactions are Verve. |
-| [[Interswitch]] | Processes transactions routed through its network; also used for [[Mastercard]] (legacy, <300K cards outstanding, issuance halted). |
-| [[TeamApt]] (TMSS) | Settlement connection. Technical integration complete; business/settlement arrangement with [[Zenith Bank]] in final stages ([[Kevin]] driving). |
-| [[Sudo Africa]] | Tap-to-pay pseudo-digitisation (subscription). |
-| IDS / AITA / GoZone | Dispute management and auxiliary integrations. |
+| [[Verve]] | Primary switch — ~99% of transactions are on Verve (on-us and remote) |
+| [[Interswitch]] | Processes routed transactions; also Mastercard (legacy, <300K cards outstanding, issuance halted) |
+| **[[TeamApt]] (TMSS)** | Settlement connection — technical integration complete; business/settlement arrangement with [[Zenith Bank]] in final stages ([[Kevin]] driving). Source document transcribed this as "Taps" but the referenced settlement switch is TeamApt (TMSS = TeamApt's settlement switch offering). |
+| [[Sudo Africa]] | External provider for tap-to-pay pseudo-digitisation (subscription) |
+| [[IDS]] / [[AITA]] / [[GoZone]] | Dispute management and auxiliary integrations |
 
-**Switch strategy:** No new switches added unless clear commercial benefit. Long-term play is to route Visa acquiring through [[TeamApt]] — gradually negotiating with major banks (UBA, Access) to route MoniePoint Visa card transactions through TeamApt rather than UP/Interswitch.
+Deliberate decision **not** to connect additional switches (e.g., UP) unless clear commercial benefit. Long-term strategy: route Visa acquiring through [[TeamApt]]'s TMSS, gradually negotiating with major banks ([[UBA]], [[Access Bank]]) to route MoniePoint Visa card transactions via TeamApt rather than UP.
 
-### 2026 Roadmap (MFB Cards)
-1. **Visa Launch & Tap-to-Pay Rollout** — most critical 2026 deliverable. Commercial payment for Visa programme is the primary dependency. Once live, NFC tap-to-pay (via Sudo Africa) deploys across Android base on OP/PE terminals.
-2. **Visa Tokenization & VAS** — full VTS-based tokenization (potentially replacing pseudo-digitisation) planned post-Visa launch, likely Q4 2026. Includes ACS provider exploration. Discussions with an ACS provider in progress (previous provider [[Vicas]] discontinued due to cost).
-3. **CX/App Experience Revamp** — card request flows (physical + virtual), dispute logging, card management. Scope owned by Nadeem and Damilola.
-4. **Reduce Customer Failure Rates & Operational Excellence** — keep BRMs / channel partners supported to avoid diverting eng capacity to firefighting.
+### 2026 Roadmap — MFB Cards Priorities
+
+1. **Visa Launch & Tap-to-Pay Rollout** — primary 2026 deliverable. Commercial payment for the Visa programme is the primary dependency. Post-launch: broad NFC tap-to-pay deployment across Android users using OP and PE terminals.
+2. **Visa Tokenization & VAS** — full Visa tokenization (via a VTS provider, potentially replacing pseudo-digitisation), likely Q4 2026. Includes ACS provider discussions (previous provider [[Vicas]] discontinued due to cost).
+3. **CX/App Experience Revamp** — card request flows (physical + virtual), dispute logging, card management interactions. Detailed scope with Nadeem / Damilola.
+4. **Reduce Customer Failure Rates & Operational Excellence** — continuous focus on reducing failure rates, BRM/channel-partner satisfaction, avoiding operational firefighting diverting engineering capacity.
 
 ### Strike Team & Platformisation
-- The MFB Cards team transitions into the [[Project Phoenix]] platform structure; Phase 2 (TSP, led by [[Frank Atashili]] and [[Alex Adeyemo]]) is currently underway.
-- A **strike team** is formed ahead of the full team transition: at least one maker, one EM, plus another member, drawn from the teams that will eventually join the Cards platform. Two mandates:
-  1. Build the new [[Card Management System]] — proprietary, configurable platform to replace dependency on Postillion and the legacy [[Card Manager Service]].
-  2. Drive AI automation in card operations.
-- **New CMS — architecture & migration:**
-  - Visa project is the launch vehicle; Visa card management is the first workload on the new CMS.
-  - Core card management functions in the legacy CMS migrate progressively.
-  - Production capabilities (card-file generation) under Sales & Distribution may move to the new CMS; distribution logistics workflows recommended to remain separate.
-  - Full cut-over later in the year once stability is confirmed; phased migration to minimise disruption.
+
+- **Context:** [[Project Phoenix]] Phase 1 is underway. [[TSP]] is a peer product line (under Business Banking Platforms) that most other products depend on — hence its Phase 1 priority. Cards, as a separate product line under [[Digital Banking Platforms]], consumes TSP but is not absorbed into it.
+- **Strike team formation:** Ahead of the full team transition, a strike team (one maker, one EM, at least one other member) will be drawn from the teams that will feed into the central Cards platform. Two mandates:
+  1. Build the new [[Card Management System]] — the Phoenix Spine service that replaces Postillion dependency and the legacy [[Card Manager Service]].
+  2. Drive AI automation initiatives within card operations (see below).
+- **New CMS migration strategy:**
+  - [[Visa]] programme serves as launch vehicle — Visa card management will be the first workload on the new CMS, validating the platform before broader migration.
+  - Core card management functions (blocking, account-to-card linking, etc.) migrated progressively.
+  - Production capabilities (card file generation) under Sales & Distribution may also move onto the new CMS. Distribution logistics workflows recommended to remain separate to avoid overloading the CMS.
+  - Full cut-over planned later in the year once stability confirmed; phased migration to minimise disruption.
   - **Primary strategic objective: eliminate Postillion dependency.**
-  - Tracy noted a prior session with Damilola and [[Mish]] confirmed that most functions currently outside the CMS (in Card Manager Service) logically belong inside the new CMS.
-- **AI & Automation priorities** (strike team scope):
-  1. Chargeback & Issue Resolution (Aima/Precious) — automate dispute intake, routing, status communication. **Highest priority.**
-  2. Logistics & Production (Philip) — automate card file generation, inventory requests, regional dispatch.
-  3. General workflow automation: replace manual Jira request logging with AI-driven ticketing. Tool to be evaluated with [[Rumulo]] later in the week.
-- **Change management:** Olufemi will give the current MFB Cards Team a heads-up about the incoming strike team, with messaging that current operations are not immediately affected. Tracy flagged the importance of reassuring team members — drawing on the people-management approach that helped grow MoniePoint's market share from 7th to 3rd in card issuance (target: 2nd by end of 2026).
+  - Tracy noted a prior session with Damilola and [[Mish]] confirmed that most functions currently handled outside the CMS (by [[Card Manager Service]]) logically belong inside the new CMS.
+- **AI & automation priorities:**
+  - **Chargeback & Issue Resolution** ([[Aima]] / [[Precious]]) — automating dispute intake, routing, status communication. Highest priority AI use case.
+  - **Logistics & Production** ([[Philip]]) — automating card file generation, inventory requests, regional dispatch.
+  - **General workflow automation** — replacing manual Jira request logging with AI-driven ticketing. Tool to be evaluated with [[Rumulo]] later in the week.
+- **Change management:** Olufemi will brief the current Cards Team on the incoming strike team — current operations not immediately affected. Tracy flagged importance of reassurance — drawing on the people-management approach that grew MoniePoint MFB's card issuance market share from 7th to 3rd nationally (target: 2nd by end of 2026).
 
 ### Decisions
+
 | Decision | Rationale |
 |---|---|
-| Strike team formed immediately | Start CMS development without waiting for full team transition |
-| Visa project launches on new CMS | Use Visa as the platform launch workload; validates new CMS in production |
-| Primary CMS objective: eliminate [[Postillion]] dependency | Reduces Interswitch dependency; improves uptime and deployment agility |
-| AI priority order: Chargeback first, then Logistics | Aima's and Philip's teams are highest-value AI automation opportunities |
-| No new switch connections without clear commercial ROI | Limit switch exposure; long-term route acquiring through [[TeamApt]] |
+| Strike team to be formed immediately | Start CMS development without waiting for full team transition |
+| Visa programme launches on new CMS | Validates new CMS in production via a clean, high-priority workload |
+| Primary CMS objective: eliminate Postillion dependency | Reduces Interswitch dependency; improves uptime + deployment agility |
+| AI priority order: Chargeback & Issue Resolution, then Logistics | Aima's and Philip's teams are the highest-value automation opportunities |
+| No new switch connections without clear commercial ROI | Long-term: route acquiring through TeamApt (TMSS) |
 
 ### Action Items
+
 | Owner | Action |
 |---|---|
-| [[Tracy Ojaigho]] | Meet with [[Nadeem Abbas]] (Card Sales PM) and [[Damilola Oyediran]] (Infrastructure PM) for detailed roadmap breakdown per team. |
-| [[Tracy Ojaigho]] | Schedule meeting with [[Rumulo]] to review Jira automation / AI workflow tool. |
-| [[Tracy Ojaigho]] | Meet with current Cards Team members (target: Friday) — introduce, brief on platformisation, begin relationship-building. |
-| [[Olufemi Davies]] | Heads-up to current Cards Team on strike team formation; reassure on continuity. |
-| [[Tracy Ojaigho]] | Finalise strike team composition (maker, EM, additional member); initiate CMS development scoping. |
-| [[Kevin]] (via Olufemi) | Complete TeamApt/TMSS settlement setup with [[Zenith Bank]] for live transaction processing. |
+| [[Tracy Ojaigho]] | Meet with [[Nadeem Abbas]] and [[Damilola Oyediran]] to obtain detailed roadmap breakdown per team |
+| [[Tracy Ojaigho]] | Schedule meeting with [[Rumulo]] to review AI initiative tooling (Jira automation / AI workflow tool) |
+| [[Tracy Ojaigho]] | Meet with current MFB Cards Team members (target Friday) to introduce herself, brief on platformisation, begin relationship-building |
+| [[Olufemi Davies]] | Heads-up to current Cards Team on strike team formation; reassure current operations are not immediately disrupted |
+| [[Tracy Ojaigho]] | Finalise strike team composition (maker, EM, additional member); initiate CMS development scoping |
+| [[Kevin]] (via Olufemi) | Complete [[TeamApt]] (TMSS) settlement setup with [[Zenith Bank]] for live transaction processing |
 
 ## Entities Mentioned
 
-[[Olufemi Davies]], [[Tracy Ojaigho]], [[Emeka Awagu]], [[Nadeem Abbas]], [[Damilola Oyediran]], [[Philip]], [[Aima]], [[Precious]], [[Kevin]], [[Rumulo]], [[Mish]], [[Frank Atashili]], [[Alex Adeyemo]], [[Card Service]], [[Logistics Service]], [[Card Integration Service]], [[Card Manager Service]], [[Card Transaction Service]], [[Card OTP Service]], [[Dispute Management Service]], [[Digitisation Service]], [[Apps Pay UI]], [[Money Desk]], [[Postillion]], [[HSM]], [[Interswitch]], [[Verve]], [[TeamApt]], [[Sudo Africa]], [[Zenith Bank]], [[Visa]], [[Mastercard]], [[Vicas]], [[Card Management System]], [[Card Issuance & Processing Platform]], [[Project Phoenix]], [[Moniepoint MFB]], [[Core Banking Application]]
+[[Olufemi Davies]], [[Tracy Ojaigho]], [[Emeka Awagu]], [[Nadeem Abbas]], [[Damilola Oyediran]], [[Philip]], [[Aima]], [[Precious]], [[Kevin]], [[Rumulo]], [[Mish]], [[Moniepoint MFB]], [[MFB Cards Team]], [[Card Sales and Distribution Team]], [[Card Infrastructure Team]], [[Card Production and Logistics]], [[Chargeback and Issue Resolution]], [[Card Service]], [[Logistics Service]], [[Card Integration Service]], [[Card Manager Service]], [[Card Transaction Service]], [[Card OTP Service]], [[Dispute Management Service]], [[Digitisation Service]], [[Apps Pay UI]], [[Money Desk]], [[Postillion]], [[HSM]], [[Sudo Africa]], [[IDS]], [[AITA]], [[GoZone]], [[Interswitch]], [[Verve]], [[TeamApt]], [[Zenith Bank]], [[UBA]], [[Access Bank]], [[Visa]], [[Mastercard]], [[Vicas]], [[Project Phoenix]], [[TSP]], [[Card Issuance & Processing Platform]], [[Card Management System]], [[Digital Banking Platforms]]
 
 ## Concepts
 
-[[Pseudo-Digitisation]], [[Strike Team Model]], [[NFC Tap-to-Pay]], [[Postillion Dependency Elimination]], [[Card Distribution Chain]]
+[[Moniepoint Group Platformization]], [[Strike Team + Continuity Operating Model]], [[Pseudo-Digitisation Tap-to-Pay]], [[Postillion Elimination]], [[AI-Native Operations]]
 
 ## Glossary (from source)
 
-| Term | Definition |
-|---|---|
-| ACS | Access Control Server — 3D Secure authentication for online card transactions |
-| CBA | Core Banking Application |
-| CMS | Card Management System (legacy internal + new platform-built) |
-| EM | Engineering Manager |
-| EMV | Europay/Mastercard/Visa — global chip card standard |
-| HSM | Hardware Security Module |
-| IDS | Internal Dispute System |
-| NFC | Near-Field Communication |
-| PAN | Primary Account Number |
-| PRM | Partner Relationship Manager (agent network intermediary) |
-| RO / SRO / BO | Regional Office / Sectoral Regional Office / Branch Office |
-| TMSS | TeamApt settlement switch (per name correction — source originally wrote "Taps") |
-| TSP | Transaction Switching & Processing (Phase 2 of platformisation) |
-| VAS | Value Added Services (planned third team; currently under Infrastructure) |
-| VTS | Visa Token Service |
+ACS · 3D Secure Access Control Server; CBA · Core Banking Application; CMS · Card Management System (legacy internal one and the new Phoenix one); EM · Engineering Manager; EMV · chip card standard; HSM · Hardware Security Module; IDS · Internal Dispute System; NFC · Near-Field Communication; PAN · Primary Account Number; PM · Product Manager; PRM · Partner Relationship Manager; RO · Regional Office; SRO · Sectoral Regional Office; BO · Branch Office; TMSS · TeamApt settlement switch (source doc transcribed as "Taps"); TSP · Transaction Switching & Processing; VAS · Value Added Services; VTS · Visa Token Service.

@@ -1,34 +1,37 @@
 ---
-title: Aima
 type:
   - "entity"
+title: Aima
+created: "2026-04-23T05:24:48Z"
+summary: Co-leads the Chargeback & Issue Resolution sub-team inside Moniepoint MFB Cards — handles chargeback processing and L2 customer-support escalation; top-priority AI automation target.
+updated: "2026-04-23T05:33:35Z"
 cssclasses:
   - "entity"
 first_name_only: true
 disambiguation_needed: true
-created: "2026-04-23T05:24:48Z"
-updated: "2026-04-23T05:24:48Z"
-summary: "Co-lead of the Chargeback & Issue Resolution ops sub-team within Moniepoint MFB Cards — highest-priority target for the strike team's AI automation roadmap."
 ---
 
 ## Overview
 
-Aima co-leads the **Chargeback & Issue Resolution** operations sub-team within the [[Moniepoint MFB]] Cards Team, alongside [[Precious]].
+Aima co-leads the **Chargeback & Issue Resolution** sub-team (jointly with [[Precious]]) embedded within [[Moniepoint MFB]] Cards.
 
 ## Scope
 
 - Chargeback processing
-- Level 2 customer support escalation for card-related issues
-- Operates the [[Dispute Management Service]] flows in practice
+- Level 2 customer-support escalation for card-related issues
 
-## AI Automation Priority
+## AI Automation Target
 
-Per the 2026-04-21 KT, Aima's team is the **highest-priority AI automation target** for the strike team forming under [[Tracy Ojaigho]]. Targets: automated dispute intake, routing, and status communication to the customer.
+The Chargeback & Issue Resolution workflow is the **highest-priority** AI automation target for the CI&P strike team. Targets: automating dispute intake, routing, and status communication.
 
-## Disambiguation
+## Disambiguation Needed
 
-First-name only in source. Surname TBD.
+Surname not captured in the source document. Needs resolution to full MFB Cards roster identity.
 
-## Sources
+## Related
 
+- [[Precious]] — co-lead on same sub-team
+- [[Moniepoint MFB]]
+- [[Chargeback and Issue Resolution]]
+- [[Dispute Management Service]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]

@@ -1,28 +1,33 @@
 ---
-title: Rumulo
 type:
   - "entity"
+title: Rumulo
+created: "2026-04-23T05:24:48Z"
+summary: Moniepoint-side lead for evaluating a Jira-automation / AI-workflow tool intended to replace manual Jira request logging with AI-driven ticketing; tool evaluation scheduled with Tracy late April 2026.
+updated: "2026-04-23T05:33:35Z"
 cssclasses:
   - "entity"
 first_name_only: true
 disambiguation_needed: true
-created: "2026-04-23T05:24:48Z"
-updated: "2026-04-23T05:24:48Z"
-summary: Owner of an AI workflow / Jira-replacement tool to be evaluated for general workflow automation in MFB Cards — meeting scheduled with Tracy Ojaigho during week of 2026-04-21.
+likely_identity: Romulo Braga
 ---
 
 ## Overview
 
-Rumulo owns or manages an AI workflow / ticketing tool being evaluated to replace manual Jira request logging in the [[Moniepoint MFB]] Cards stack as part of the strike team's general workflow automation mandate.
+Rumulo is leading the evaluation of a Jira-automation / AI-workflow tool at [[Moniepoint]], intended to replace manual Jira request logging with AI-driven ticketing. [[Tracy Ojaigho]] scheduled to meet with Rumulo to review the tool in the week of Apr 21 2026.
 
-## Status (Apr 2026)
+## Likely Identity
 
-- Action item from the 2026-04-21 KT: [[Tracy Ojaigho]] to schedule and attend a meeting with Rumulo to review the product later in the week.
+Name spelling in the source document is "Rumulo" — likely a phonetic transcription of **Romulo Braga**, who is already documented in the brain as the AI PM Process lead for [[Project Phoenix]]. Transcription ambiguity → disambiguation confirmation needed.
 
-## Disambiguation
+## Scope
 
-First-name only in source. Surname TBD.
+- AI-driven ticketing tool evaluation — replacing manual Jira request logging
+- Part of the broader AI-native mandate under Project Phoenix
 
-## Sources
+## Related
 
+- [[Project Phoenix]]
+- [[Tracy Ojaigho]]
+- [[AI-Native Operations]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
