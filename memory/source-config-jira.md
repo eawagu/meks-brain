@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-22T19:00:00Z. 20:00 WAT Skim tick (TDSD scope): 2 new-this-tick deltas — TDSD-6676 \"Exposure on Access Bank\" filed Work in progress (Access Bank workstream continues; no direct Multi-Track situation link visible this tick), TDSD-5365 \"Monnify Dev Doc Deploy\" Completed (awareness). TDSD-6630 still no movement (silence ~61h42m); TDSD-6645 unchanged (assignee silence ~51h16m). TDSD-6691 (from 18:09 WAT tick) still in Review. No Immediate-tier dispatches."
-updated: "2026-04-22T21:20:55Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T05:10:00Z. 06:10 WAT Apr 23 briefing-tick Full sweep: critical overnight delta — TDSD-6645 Dominic broke 59h15m silence at 04:08 WAT with attribution-transfer to inwards payments team (status transition: Awaiting Scheme Update → Escalated). TDSD-6630 zero overnight movement; comment silence now ~72h43m (past 48h implicit-retire threshold, new high watermark). TDSD-6684 new Blessing-filed ticket to Dominic. TDSD-6638 closed at 02:55 WAT. TDSD-6689/TDSD-6676/TDSD-6691 no movement. Decision items D1 (attribution-transfer) + D2 (NIBSS DD retire-or-hold) carried into briefing-2026-04-23."
+updated: "2026-04-23T05:46:15Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T21:00:00Z"
+last_processed: "2026-04-23T05:10:00Z"
 ---
 
 ## Connection
@@ -237,3 +237,61 @@ Queried `project = TDSD AND updated >= "2026-04-22 20:00"` (WAT-local per JQL ti
 - Zero TDSD deltas → early-exit contribution from Jira source. Combined with Slack zero-deltas, the tick hit early-exit per config-heartbeat.
 - Advanced `last_processed` to 2026-04-22T21:00:00Z for audit trail continuity.
 - No Immediate dispatches. No situation spawns. No situation updates.
+
+### Tick 2026-04-23 ~06:10 WAT — Full briefing-tick sweep (overnight window; 18-project scope)
+
+Window: 22:10 WAT Apr 22 → 06:10 WAT Apr 23 (~8h; 21:00 UTC Apr 22 → 05:10 UTC Apr 23). Step 0 declared `level=full, rationale=briefing-tick` — first tick after 06:00 WAT with no existing briefing-2026-04-23 page. Full 18-project scope re-extended per skim-scope-caveat carryforward from prior ticks; iterated per JQL payload-size discipline.
+
+**Critical overnight delta — TDSD-6645 Dominic broke 59h15m silence.**
+- **04:08 WAT Apr 23 Dominic Usiabulu comment on TDSD-6645:** "MIT|HYD|100004250509160823132420308489|1920873578377506816_CREDIT_0_RVSL was triggered by the inwards payments team, we will their review to understand why the reversal was triggered even though we have settled the merchant."
+- **Status transition: Awaiting Scheme Update → Escalated** (04:08 WAT Apr 23).
+- **Attribution mechanism:** Dominic identifies that the credit-debit-reversal that insufficient-funded the VA was triggered by a different Moniepoint internal team (inwards payments), not by scheme/NIBSS. This reframes the 3-day investigation — the assignee silence was NOT scheme-upstream blocked, it was internal-team cross-reference blocked. The original hypothesis ("punted upstream to scheme/NIBSS and stopped internal comms") is partially contradicted: Dominic was waiting on information from an internal team, not the scheme.
+- **Implication for pattern anomaly:** The workflow-discipline framing (TDSD-6688 / TDSD-6662 comparison) partially re-validates — Dominic's Awaiting Scheme Update usage across both TDSD-6645 and TDSD-6688 may have been imprecise; the actual dependency on TDSD-6645 was the inwards payments team, not the scheme. But more fundamentally: Dominic now punts the investigation to that team without clear ownership transfer — classic hot-potato handoff pattern. The settlement-blocking problem is unresolved; the root cause is still unknown; accountability is now diluted.
+- **Options for user triage** (surfaced in briefing-2026-04-23 D1):
+  (a) Accept the handoff as progress (TDSD-6645 is no longer Dominic's investigation) — close out the 3-day friction, let inwards payments team work it
+  (b) Chase via [[Oladapo]] — surface the attribution-transfer pattern as a workflow-discipline issue needing CTO-level reinforcement (ownership hot-potatoing across internal teams, not just upstream)
+  (c) Direct-ask Dominic — require clear handoff documentation (who is now responsible, what's the timeline, what's the communication path) before closing out Dominic's involvement
+- [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] situation updated with Apr 23 06:10 WAT delta capturing the attribution-transfer + status transition + three-option framing.
+- Factors: source=jira, priority=highest, silence_broken_59h15m, status_transitioned_escalated, attribution_transfer_to_inwards_payments_team, reframes_pattern_anomaly, three_option_user_ask, briefing_d1_tier.
+
+**Critical overnight absence — TDSD-6630 NIBSS DD zero movement.**
+- Comment silence now **~72h43m** (from 05:27 WAT Apr 20 — last comment from [[Oladapo Olusola]]).
+- Any-update silence **~69h52m** (from 08:18 WAT Apr 20).
+- **23h past the Apr 14 NIBSS DD 47h implicit-retire precedent.** New high watermark on NIBSS DD silent-unresolved duration.
+- Both prior-tick hypotheses (retirement posture reverted via 16:44 WAT Apr 22 customer-facing signal; connectivity-layer blocked via NIBSS PTSA thread) can be tested against the overnight leased-line-stability evidence: NIBSS PTSA thread closed at 18:40 WAT Apr 22 ("Issue resolved"), leased-line stable 10h47m+ through the overnight window, TDSD-6630 still silent. **Connectivity-layer hypothesis ruled out** — if the silence were blocked on NIBSS PTSA connectivity, TDSD-6630 should have seen movement once PTSA stabilized. The silence is ticket-specific (owner / workstream / scheme-side), not network-infrastructure-blocked.
+- **Options for user triage** (surfaced in briefing-2026-04-23 D2):
+  (a) Retire the situation per bias-toward-retiring principle (past 48h precedent, no signal, connectivity-layer ruled out — the situation is holding no live information)
+  (b) Hold 24h — wait for the 05:27 WAT Apr 23 comment-silence checkpoint (that's in ~23h) before retiring
+  (c) Re-dispatch via [[Oladapo]] — send escalation chase to the CTO given 72h+ silence on a Highest-priority ticket is operationally abnormal
+- [[NIBSS DD — Downtime P1 Apr 20]] situation updated with Apr 23 06:10 WAT delta capturing connectivity-layer rule-out + three-option framing.
+- Factors: source=jira, priority=highest, comment_silence_72h43m, beyond_apr_14_precedent, connectivity_layer_ruled_out, retirement_candidate_via_bias_principle, three_option_user_ask, briefing_d2_tier.
+
+**New-this-tick delta — TDSD-6684 "Multiple MIT transactions pending for over 2 weeks".**
+- Filed 03:51 WAT Apr 23 by [[Blessing Obioha]] (Moniepoint); assignee [[Dominic Usiabulu]]; component Monnify_settlements; priority Highest.
+- **Third Blessing→Dominic escalation in 3 days** (Apr 20 TDSD-6645, Apr 21 chase, Apr 23 TDSD-6684). Strengthens the workflow-discipline observation captured in the TDSD-6645 situation.
+- Substance: pending MIT transactions aged 2+ weeks — a broader cohort of the same root pattern that TDSD-6645 represents.
+- **Classification:** Awareness-tier for briefing-2026-04-23 A2 (the D1 TDSD-6645 carries the operational ask; TDSD-6684 is adjacent evidence of pattern accumulation, not a new decision item). Blessing has clearly escalated this to ticket-based accumulation to force visibility on Dominic's queue.
+- [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] situation updated to add TDSD-6684 as 3rd data point to workflow-discipline observation.
+- Factors: source=jira, priority=highest, ticket_new, filer=blessing, assignee=dominic, third_blessing_to_dominic_escalation_in_3_days, pattern_accumulation, awareness_tier, briefing_a2_tier.
+
+**Housekeeping closures in window (Awareness-tier, no separate briefing placement):**
+- **TDSD-6638 "Merchant Settlement disparity account 0000221603"** — Completed at 02:55 WAT Apr 23 (filed Apr 20; was carrying as "still new" from Apr 20 17:09 WAT tick). Resolution closed ~3-day pending disparity investigation. No situation bearing beyond closing a carryforward item.
+- No other overnight TDSD deltas.
+
+**Software projects re-extended this tick (17 projects):**
+- No operational deltas of Briefing-tier or higher priority. Routine dev/QA transitions across ATPG, ATPP, AS, ADD, TCDD — all Awareness-tier with no active-situation entity overlap worth individual callout.
+
+**Carryforward state (no changes this tick):**
+- **TDSD-6689 (Stanbic Participant 8AM settlement)** — still WIP (watchlist since 16:15 WAT Apr 22; now ~14h45m). Assignee-engaged state holds, no closing status transition overnight. Awareness-tier.
+- **TDSD-6691 (Polaris outward-flows deploy)** — still in Review status. Pre-deploy approval gate holds into Apr 23. No change.
+- **TDSD-6676 (Access Bank exposure)** — still WIP; scope-disambiguation watch continues. Awareness-tier.
+
+**Out-of-scope carryforward (Layer 1 email dependent — Gmail MCP dark):** TISD-480 + TDSD-6203 — still unverifiable without Gmail. Gmail silence now ~61h since last_processed 2026-04-20T16:09:00Z (still below 7-day absence-of-signal threshold; carryforward as B2 blocker holds via briefing-2026-04-23 D4).
+
+**Dispatch decisions this tick:**
+- No Immediate-tier dispatches — the TDSD-6645 attribution-transfer is D1 three-option user ask (not an autonomous escalation), TDSD-6630 retirement is D2 three-option user ask (not autonomous retirement — too-consequential for bias-toward-retiring without user input on a 72h+ Highest ticket), TDSD-6684 is A2 awareness only.
+- Briefing-2026-04-23 composed + created via MCP.
+- briefing-2026-04-22 superseded via MCP.
+- Situation pages updated: TDSD-6645 (attribution-transfer + status transition + TDSD-6684 as 3rd data point), TDSD-6630 (overnight-silence + connectivity-layer rule-out), NIBSS PTSA (10h47m stable confirmation from Slack-side), Keystone (retired per pre-committed criterion — zero Keystone signals overnight).
+
+**Advanced `last_processed` to 2026-04-23T05:10:00Z** for audit trail continuity.
