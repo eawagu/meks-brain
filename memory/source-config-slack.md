@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration. last_processed 2026-04-23T06:10:00Z. 07:10 WAT Apr 23 Skim post-briefing tick: zero deltas across full sweep (Tier 1 channels clean, Immediate keyword scan empty, DM scan empty). Cross-source asymmetry observed — Jira side surfaced TDSD-6692 UBA fast-cycle without Slack mirror (single-instance, no codification). Gmail/Calendar/Drive MCPs still dark (~63h, below 7-day threshold). B1 batch CTO-DM draft still unsent 18h+."
-updated: 2026-04-23
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-23T05:10:00Z. 06:10 WAT Apr 23 briefing-tick Full sweep: overnight window (21:00 Apr 22 → 05:10 UTC Apr 23 = 8h10min) zero Tier 1 new messages, zero Immediate-tier keyword hits, zero DMs. 3 B1 batch items (Polaris/UBA/CoralPay) plus TDSD-6630/TDSD-6645 carryforward state — all surfaced into briefing-2026-04-23 D1/D2/D5. B1 batch CTO-DM draft still unsent 17h+ (carryforward via D5). Gmail/Calendar/Drive MCPs still dark (~61h)."
+updated: "2026-04-23T07:17:48Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T06:10:00Z"
+last_processed: "2026-04-23T07:10:00Z"
 ---
 
 ## Connection
@@ -45,6 +45,9 @@ Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `olde
 
 ### Thread-continuation vigilance (added 2026-04-22 18:09 WAT)
 Self-closed thread parents can receive new status updates hours later that re-open the incident characterization. **Rule:** when a thread parent has an active-situation entity match (e.g., NIBSS) and has received ≥2 updates within the tick window, include thread reads in Step 1 processing even if search-all and channel-read show no new parent messages — the action may be on existing threads. For skim ticks, this applies only when the delta scan has surfaced a thread update (the signal itself triggers the read); full ticks can be more liberal.
+
+### Block-formatted bot content — content-blind observation (2026-04-23 08:10 WAT)
+`#account-switch-alerts` (C098VUQCVRA) bot B098VURV46Q posts block-formatted messages with empty top-level `text` field — content lives in attachments/blocks not exposed by current MCP retrieval (`slack_read_channel` detailed mode + `slack_search_public_and_private` both return empty text). Cannot classify these messages as Immediate-tier (e.g., route-turned-off alert per config-salience trigger #7) without block-content access. **Current posture:** treat as known blind spot; absence of alarm cannot be verified. **Stand down on codification until recurrence pattern stabilizes** — single observation, may be session-specific MCP behavior. If pattern holds across 3+ ticks, escalate to source-config directive requiring `slack_read_thread` on each bot-ts + attempted permalink fetch as content-recovery path.
 
 ## Notes
 
@@ -122,3 +125,27 @@ Window: 05:10 UTC → 06:10 UTC Apr 23 (~1h; `oldest=1776921000`). Step 0 declar
 - Non-briefing tick — reminder Step 2 skipped per skim rules (source-triggered Step 2 ran via Jira delta; reminder eval concluded no new surfacing needed — sole open reminder "Call the event planner for dad's birthday" already surfaced today in briefing-2026-04-23 D3 awaiting user triage).
 
 **Advanced `last_processed` to 2026-04-23T06:10:00Z** (07:10 WAT).
+
+### Tick 2026-04-23 ~08:10 WAT — Full (weekday work-hours opener)
+
+Window: 06:10 UTC → 07:10 UTC Apr 23 (~1h; `oldest=1776924600` = 06:10 UTC). Step 0 declared `level=full, rationale=weekday-active-p1-density` — work-hours opening tick with 10+ active situations (NIBSS DD TDSD-6630 silent 73h, Monnify TDSD-6645 post-attribution-transfer, multi-bank RC91/RC96 carryforward, NIBSS PTSA leased-line developing).
+
+**Tier 1 read (all 5 channels):** 4 of 5 fully empty. **#account-switch-alerts (C098VUQCVRA)** produced 2 bot messages at 07:31 and 07:37 WAT (ts 1776925915.331699 / 1776926241.777909) from bot B098VURV46Q with **empty text payload** (block-formatted content not exposed by MCP retrieval). No threads, no keyword hits. Verified via `slack_read_thread` (no thread children) and `slack_search_public_and_private` with `in:#account-switch-alerts` (confirmed empty text). Codified as content-blind-observation directive above; non-escalable without block-content access.
+
+**Search-all Immediate-tier keyword scan** `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR breach OR compromised OR NIBSS OR down OR failure)` with `after=1776924600`: zero results.
+
+**Tier 2 DM scan** (`to:me after=1776924600`): zero results. **B1 batch CTO-DM draft still unsent — 19h+ since briefing-2026-04-22 compose** (carryforward via briefing-2026-04-23 D5). Work-hours opening — dispatch-authorization gap entering its 20th hour.
+
+**Active-situation thread vigilance:**
+- TDSD-6645 post-attribution-transfer — 4h02m Dominic-silent post-04:08 WAT comment. Not alarming at morning-hours observation (expected quiet until Moniepoint work-hours ramp).
+- TDSD-6630 — no Slack-side signal; Jira-side also zero (see source-config-jira). Silence compounds toward D2 retirement decision.
+- NIBSS PTSA leased-line stable (now ~12h53m post-19:17 WAT Apr 22 transition).
+
+**Coverage caveats:** Gmail + Calendar + Google Drive MCPs still dark. Silence now ~64h since last_processed 2026-04-20T16:09:00Z. Still below 7-day absence-of-signal threshold; B2/D4 carryforward holds.
+
+**Dispatch decisions:**
+- No Immediate-tier triggers → no new DM drafts.
+- Non-briefing tick — Awareness-tier Jira deltas (TDSD-6675/TDSD-6592 closures + AS-* bulk; see source-config-jira) accumulate for briefing-2026-04-24.
+- Reminder Step 2 eval: zero new surfacings (sole open reminder already in briefing-2026-04-23 D3 awaiting triage; no new brain content or context-match triggering re-surface within same-day window).
+
+**Advanced `last_processed` to 2026-04-23T07:10:00Z.**
