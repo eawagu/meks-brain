@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T08:10:00Z. 09:11 WAT Apr 23 Full tick (weekday work-hours; 10+ active situations): 50 deltas in-window (isLast=False — additional page available; cost-cap invoked). TDSD-6693 Chinenye-reported PENDING SETTLEMENT WIP 08:47 WAT (Oladimeji Alabi assigned, 5th pending-settlement ticket this week). ADD-4584 CRLF vulnerability DONE. ADD-4587 Direct Debit Bug Tracking new (Yasir/Nancy). Bulk grooming: ATPP MDRS new backend epic (12 items), AS Zone POS Integration project plan (~30 items). TDSD-6645/TDSD-6630 no follow-on. Cross-source asymmetry 2nd observation carryforward."
-updated: "2026-04-23T08:25:02Z"
+updated: 2026-04-23
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T08:10:00Z"
+last_processed: "2026-04-23T09:10:00Z"
 ---
 
 ## Connection
@@ -26,9 +26,9 @@ last_processed: "2026-04-23T08:10:00Z"
 | AptPay Switch | AS | software |
 | AptPay Third Party Processing | ATPP | software |
 
-**JQL reserved-word handling.** Project keys `ADD` and `AS` are reserved JQL words and must be quoted in queries: `project in ("TDSD", "TCDD", "ATPG", "ADD", "AS", "ATPP")`. Verified after two consecutive rejections on unquoted forms.
+**JQL reserved-word handling.** Project keys `ADD` and `AS` are reserved JQL words and must be quoted in queries: `project in (TDSD, TCDD, ATPG, "ADD", "AS", ATPP)`. **Verified 3rd time 2026-04-23 10:09 WAT** — query `project in (TDSD, TCDD, ATPG, ADD, ...)` rejected with `'ADD' is a reserved JQL word. You must surround it in quotation marks`; subsequent retry without quoting `AS` rejected with same-class error `'AS' is a reserved JQL word`. Both must be quoted together.
 
-**JQL payload-size discipline (added 2026-04-22 14:15 WAT after oversize return).** Full 18-project `searchJiraIssuesUsingJql` returned 56,914 chars / 931 lines in a single call — exceeded practical context envelope. **Rule:** for tick sweeps with windows > 24h, query projects individually (iterate the scope list) or restrict by fields at source. Do not pull the union payload unconditionally. Applies to any tick with `updated > -24h` comparable window length. **Reinforced 2026-04-23 08:10 WAT:** 1h window at Full-tick still returned 64,872 chars on 15 items due to ADF-expanded descriptions/comments — probe Jira results via jq post-filter (structure: `{issues: [{...}]}`) rather than reading raw MCP output when result > ~30KB. **Re-reinforced 2026-04-23 09:11 WAT:** 1h Full-tick now returned 166,691 chars / 2,939 lines on 50 items (maxResults=50) with isLast=False — bulk grooming batches (AS Zone Switching Partnership project plan create + ATPP MDRS backend epic create) accumulated at weekday work-hours opener. **Rule update:** during weekday work-hours tick, anticipate 30-50+ item bulk batches and use Python jq-projection against saved file as default (not escape hatch). maxResults=50 is sufficient for 1h windows if the extraction pipeline projects key/updated/summary/status/priority/assignee/reporter only.
+**JQL payload-size discipline (added 2026-04-22 14:15 WAT after oversize return).** Full 18-project `searchJiraIssuesUsingJql` returned 56,914 chars / 931 lines in a single call — exceeded practical context envelope. **Rule:** for tick sweeps with windows > 24h, query projects individually (iterate the scope list) or restrict by fields at source. Do not pull the union payload unconditionally. Applies to any tick with `updated > -24h` comparable window length. **Reinforced 2026-04-23 08:10 WAT:** 1h window at Full-tick still returned 64,872 chars on 15 items due to ADF-expanded descriptions/comments — probe Jira results via jq post-filter (structure: `{issues: [{...}]}`) rather than reading raw MCP output when result > ~30KB. **Re-reinforced 2026-04-23 09:11 WAT:** 1h Full-tick now returned 166,691 chars / 2,939 lines on 50 items (maxResults=50) with isLast=False — bulk grooming batches (AS Zone Switching Partnership project plan create + ATPP MDRS backend epic create) accumulated at weekday work-hours opener. **Re-re-reinforced 2026-04-23 10:09 WAT:** 1h Full-tick returned 199,382 chars / 3,181 lines on 61 items — exceeded MCP output cap; tool auto-saved to disk and instructed subagent delegation. **Rule update:** for weekday work-hours ticks (08:00-18:00 WAT) the default extraction path MUST be `Agent`-delegated file-chunk reads (not raw output consumption), because bulk grooming batches are persistent — saw 50+ items in both the 09:11 and 10:09 tick windows. maxResults=50 is not sufficient for these windows either; raise to 100 or accept isLast=False.
 
 **JQL date-filter-timezone discipline (added 2026-04-22 16:15 WAT).** JQL `updated >= "YYYY-MM-DD HH:mm"` is evaluated in the Jira site's timezone (Africa/Lagos for teamapt.atlassian.net), NOT UTC. When filtering relative to a UTC `last_processed` stamp, **either** pass the WAT-local time equivalent **or** accept that the query may return items updated 1 hour before the stated UTC cutoff and post-filter on the assistant side. Applying no post-filter to a WAT-indexed query will include pre-window items and inflate the delta set.
 
@@ -68,36 +68,53 @@ Window: 07:10 UTC → 08:11 UTC Apr 23 (~1h). Step 0 declared `level=full, ratio
 
 **Payload oversize critically exceeded.** 50-item result (maxResults=50, isLast=False — additional page available) returned 166,691 chars / 2,939 lines. Extraction via Python jq-projection against saved file yielded key/updated/priority/status/summary/assignee/reporter projection only. **Payload-size-discipline directive updated** above: anticipate 30-50+ item batches during weekday work-hours opener; default to jq-projection from file, not raw read.
 
-**Operationally relevant deltas (in-window):**
+**Operationally relevant deltas (in-window):** TDSD-6693 new PENDING SETTLEMENT WIP (Chinenye→Oladimeji, 5th pending-settlement this week, Awareness); ADD-4587 Direct Debit Bug Tracking new (Nancy→Yasir, Awareness — ties to today's 13:00 WAT DD Weekly Analysis); ADD-4584 CRLF vulnerability Done (Bukola self-filed-self-closed, Awareness); ADD-4589 Moniepoint ACS Details in DS new (Abiodun→Wycliffe, DCIR/ACS proximity, Awareness); ADD-4590 UI filter bug (routine, Awareness); ADD-3434 Zone Switching Partnership simulation In Progress (Taiwo Baptista, routine).
 
-1. **TDSD-6693 "PENDING SETTLEMENT"** — Work in progress at 08:47 WAT. Reporter [[Chinenye Iloka]], assignee [[Oladimeji Alabi]], Medium priority. 5th "PENDING SETTLEMENT" family ticket this week (TDSD-6655/TDSD-6661/TDSD-6662 Opeyemi family + TDSD-6675 Chinenye+Oladimeji Apr 23 + TDSD-6693 Chinenye+Oladimeji Apr 23). Oladimeji-assigned x2 this morning — transitions the pattern anomaly from Opeyemi-vs-Dominic binary into broader multi-assignee accumulation. **Not applied to TDSD-6645 situation this tick** — continuing the adjacent-pattern-observation discipline from 08:10 tick (different template, different reporter/assignee vs. the TDSD-6645 Blessing→Dominic Urgent Pending Settlement family). If TDSD-6693 closes fast-cycle like TDSD-6675, record as further Oladimeji-closes-fast evidence; otherwise watch for Dominic-style stall signal. Factors: source=jira, ticket_new_in_progress, family=pending_settlement, reporter=chinenye_iloka, assignee=oladimeji_alabi, adjacent_pattern_observation, awareness_tier.
+**Bulk grooming batches (Awareness):** AS project Zone Switching Partnership go-live prep 30+ items (June Johnson reporter, scope through UAT/CAB/ramp-up). ATPP project MDRS backend epic 12 items (Ruth Adetunji reporter, RBAC/multi-tenant DB/queue processors/UI — ties to today's ATPP Daily Standup cancellation "because of Dispute Management Sprint Planning").
 
-2. **ADD-4587 "Direct Debit Bug Tracking"** — new at 08:31 WAT. Reporter [[Nancy Muorah]], assignee [[Yasir Syed Ali]], Medium priority, To Do. Umbrella tracking epic for DD bugs. Relates to today's 13:00 WAT Direct Debit Production Issues Weekly Analysis meeting (Yasir organizer) — Yasir is organizing a structural container for DD bug work. No active-situation direct match but [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] proximity worth noting. Awareness-tier.
+**TDSD-6630 / TDSD-6645 carryforward:** TDSD-6645 Dominic silent 5h03m post-04:08 WAT attribution-transfer. TDSD-6630 comment silence ~76h43m, retirement still held in briefing-2026-04-23 D2.
 
-3. **ADD-4584 "Fix CRLF Injection Vulnerability on Direct Debit Cron Service"** — Done at 09:09 WAT by [[Bukola Taiwo]] (self-filed+self-closed). Security remediation completed. Awareness-tier. Factors: source=jira, security_fix_done, self_filed_self_closed, awareness_tier.
+**Page 2 NOT pulled this tick** — cost-cap engaged. isLast=False means additional items beyond 50. Full sweep deferrable to briefing-2026-04-24 if no in-window deltas reference unobserved items.
 
-4. **ADD-4589 "Update the Moniepoint ACS Details in DS"** — new at 09:05 WAT by [[Abiodun Famoye]] reporter, [[Wycliffe Ochieng']] assignee, Medium Todo. Relates to [[DCIR/ACS/DD]] multi-track situation (ACS connector replacement line). Awareness-tier, accumulating.
+**Cross-source asymmetry carryforward (2nd observation this tick).** Ecobank RC91 P1 surfaced via Gmail, zero Slack mirror at 09:11 observation. Compounds with TDSD-6692 UBA Jira-only as 2nd observation in 3h. Directive codification still stands-down pending 3rd observation within 24h. [NOTE: see 10:09 tick below — Ecobank asymmetry reclassified as sequencing lag; TDSD-6692 remains the standing 2nd data point alone.]
 
-5. **ADD-4590 "Management portal: Filter feature on PF page not working across pages"** — new at 08:52 WAT by Fatai Ibrahim reporter, Ebenezer Igbinoba assignee. UI bug, routine. Awareness.
-
-6. **ADD-3434 "Production - Simulation of Live Transaction"** — In Progress at 08:48 WAT by [[Taiwo Baptista]]. Zone Switching Partnership test activity. Routine, awareness.
-
-**Bulk grooming batches (Awareness — routine project setup):**
-
-- **AS project — Zone Switching Partnership go-live prep (30+ items in-window):** [[June Johnson]]-reportered AS-4962 through AS-4994 hierarchy covering scope sign-off, stakeholder allocation, architectural docs share, test-env setup, prod-env setup, E2E testing, UAT sign-off, CAB/Pilot approval, volume ramp-up, closure. All Medium Todo, unassigned. Matches the Zone <> TeamApt POS Integration Partnership announcement in email (Taiwo Baptista Apr 21 13:13 WAT). Structurally a new Zone-project rollout plan crystallizing on Jira. No active-situation match — project is early-stage / scope-alignment phase.
-- **ATPP project — MDRS backend epic (12 items in-window):** [[Ruth Adetunji]]-reported ATPP-1624 through ATPP-1632 + ATPP-1708/1709 covering MDRS Setup (RBAC framework, multi-tenant database schema, multi-tenancy middleware, row-level security), backend services (Mastercard API Client Wrapper, Queue Polling Service, Claim Enrichment Service, AcquirerCollaborationUnworked Queue Processor), UI (Backoffice Service + Frontend Base Project Setup). All Medium To Do, unassigned. MDRS = Mastercard Dispute Resolution Service. Ties to the ATPP Daily Standup cancellation today ("because of Dispute Management Sprint Planning") — the bulk-create IS the Sprint Planning output. Context-link noted.
-
-**TDSD-6630 / TDSD-6645 carryforward (unchanged):** TDSD-6645 Dominic silent 5h03m post-04:08 WAT attribution-transfer — within morning-hours expected quiet. TDSD-6630 comment silence now ~76h43m from 05:27 WAT Apr 20 — still held per briefing-2026-04-23 D2.
-
-**Page 2 of results NOT pulled this tick** — cost-cap engaged. maxResults=50 isLast=False means additional items beyond the 50 fetched. Based on the 50-item sample, likely additional AS-* / ATPP-* bulk grooming + possible operational tickets. **Mitigation:** if next tick finds in-window deltas that reference items not in the observed 50, pull those via `getJiraIssue`; otherwise accept the cost-cap loss. Full-page-2 can be swept at the next briefing tick with expanded budget.
-
-**Cross-source asymmetry carryforward (2nd observation this tick).** Ecobank RC91 P1 Apr 23 06:35-08:52 WAT surfaced via Gmail recovery, zero Slack #teamapt-tech-operations mirror, zero Jira mirror. Sole channel was email. Compounds with TDSD-6692 UBA fast-cycle (07:10 tick) as 2nd observation in 3h of operational signal routing outside the canonical Slack ops channel. Directive codification still stands-down pending 3rd observation within 24h.
-
-**Out-of-scope carryforward (Gmail MCP recovered):** TISD-480 + TDSD-6203 status unverified this tick — Gmail backlog catch-up sweep deferred to briefing-2026-04-24. Once verified, any CTO-approval-gate action surfaces into that briefing.
-
-**Dispatch decisions:**
-- No Immediate-tier Jira dispatch (operational Immediate this tick was Ecobank-via-email, see source-config-email).
-- All in-window Jira deltas Awareness-tier; accumulate for briefing-2026-04-24.
-- No situation-page updates from Jira this tick (TDSD-6693 adjacent-pattern-not-applied; ADD-4587/4589/4590/3434 routine; bulk grooming no active-situation match).
+**Dispatch decisions:** No Immediate-tier Jira dispatch (operational Immediate was Ecobank-via-email). All in-window Jira deltas Awareness-tier; accumulate for briefing-2026-04-24. No situation-page updates from Jira this tick.
 
 **Advanced `last_processed` to 2026-04-23T08:10:00Z.**
+
+### Tick 2026-04-23 ~10:09 WAT — Full (weekday work-hours; active situations)
+
+Window: 08:10 UTC → 09:10 UTC Apr 23 (~1h). Step 0 declared `level=full, rationale=weekday-working-hours + active-P1-situations + recent-dense-signals`. briefing-2026-04-23 already exists — not a briefing tick.
+
+Delta query via `searchJiraIssuesUsingJql` with `updated > "2026-04-23 09:10"` (WAT per timezone-discipline = 08:10 UTC). JQL reserved-word handling tripped twice — `ADD` and `AS` both required quoting (directive reinforced above for 3rd time).
+
+**Payload oversize extreme (3rd reinforcement):** 61-item result returned 199,382 chars / 3,181 lines — exceeded MCP output cap; tool auto-saved output to file and instructed Agent delegation. Delegated to general-purpose subagent with structured instructions (total count, Highest/P1 tickets, status transitions, new tickets with reporter/assignee/priority, named-ticket updates, RC91/RC96/settlement/NIBSS/CBN mentions). Returned concise <600-word summary. **Directive update above** — weekday work-hours ticks MUST default to Agent-delegated file-chunk reads.
+
+**Operationally relevant deltas (in-window):**
+
+1. **TDSD-6694 "Paystack Balance Adjustment April 23rd"** — NEW at 10:10 WAT. Reporter [[Christine Ogude]], assignee [[Daniel Fetuga]], status Awaiting Scheme Update. **Correlates 1:1 with the 09:29 WAT #teamapt-x-paystack-transfer-support Slack message** (new inflows ₦1,550,465,282.14 to apply) — treasury-workflow ticket formalizing the Slack operational ask. Awareness-tier. Factors: source=jira, ticket_new, family=paystack_balance_operations, cross_source_match=slack_treasury, awareness_tier.
+
+2. **TDSD-6695 "Temporary Public Access for Account Switch Reports (Stopgap)"** — NEW at 10:10 WAT. Reporter [[Ekene Udodi]], assignee [[Tolu Aina]], Medium priority, status **Waiting for Approval**. **CloudFront/S3 public-access stopgap — MEDIUM security risk.** Description: users are blocked from downloading account switch reports due to signed-URL/policy-token failure on `account-switch-report.teamapt.com`; temporary mitigation is to disable auth and allow public `s3:GetObject` access. Mitigation strategy: "Limit the access by only making the connection to cloud front public when a ticket has been raised and approved to download reports and manually share with the partners." **Approver not named in ticket description.** Zero comments yet. If approver is CTO — escalate to Decision tier for briefing-2026-04-24. Default classification **pending approver identification**: Awareness-tier on briefing-2026-04-24, with watch for status change or explicit CTO approval gate signal. Factors: source=jira, ticket_new, security_adjacent, medium_risk, waiting_for_approval, approver_unidentified.
+
+3. **Settlement reliability closures (batch):** [[TDSD-5900]] "Settlement reliability" Completed; [[TDSD-6219]] "Settlement service cache optimization" Completed; [[TDSD-5119]] "Settlement entry enhancement" Completed. Batch operational improvement shipped. No active-situation direct match; [[Merchant Settlement — Systemic Reconciliation Disparity]] (retired) has adjacency. Awareness-tier — positive operational signal.
+
+4. **Other status transitions:** TDSD-5240 Enhanced Logging for DD → Awaiting implementation; TDSD-5279 Kafka consumer groups NIBSS/TeamApt DD → Review (Smart Mekiliuwa); TDSD-6382 Compliance Review + KYC Revamp → Awaiting implementation; TDSD-6546 CBA Async Based Transaction → Authorize (Dominic Usiabulu assignee — adjacent to TDSD-6645 assignee pattern, note but don't apply to situation); ADD-4254 Bulk Settlement Narration Format → Ready for QA Testing. All Awareness.
+
+5. **MDRS backend sprint planning continuation:** Ruth Adetunji filed ~8 more ATPP tickets (ATPP-1624 etc.) — continuation of the MDRS epic batch observed at 09:11 tick. Consistent pattern, no new signal beyond accumulation.
+
+**Named-ticket watch (no updates in window):**
+- TDSD-6645 Dominic silent 6h01m post-04:08 WAT comment — still within morning-hours expected quiet; no flag.
+- TDSD-6630 NIBSS DD silent ~77h+ — retirement held in briefing-2026-04-23 D2.
+- TDSD-6684 / TDSD-6688 / ADD-4587 / TDSD-6693 — no updates in window.
+
+**Cross-source asymmetry status update.** Ecobank 09:38 WAT Slack formal P1 filing (27 min after 09:11 observation) reclassifies that observation as sequencing lag, not structural asymmetry — drops out of the pattern. Current count: **1 (TDSD-6692 UBA Jira-only, 2026-04-23 06:44 WAT).** Stand-down-pending-3rd-within-24h still holds; tracking window expires 06:44 WAT Apr 24.
+
+**Page 2 (from 09:11 tick cost-cap)** — no evidence this tick's in-window deltas reference items not observed. Full sweep deferrable to briefing-2026-04-24.
+
+**Dispatch decisions:**
+- No Immediate-tier Jira dispatch this tick.
+- All in-window Jira deltas Awareness-tier; accumulate for briefing-2026-04-24.
+- TDSD-6695 flagged for approver-identification at next sweep (if approver = CTO, elevate to Decision tier with security-risk framing).
+- No situation-page updates from Jira this tick.
+
+**Advanced `last_processed` to 2026-04-23T09:10:00Z.**
