@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-22T19:00:00Z. 20:00 WAT Skim tick: NIBSS PTSA VPN 3rd flap-cycle of day at 19:17 WAT accompanied by architectural transition — all 4 NIBSS PTSA nodes moved to dedicated leased-line; new situation [[NIBSS PTSA — VPN Flapping Apr 22]] spawned. Moniepoint-to-NIBSS traffic disruption (18:07/18:40 WAT thread events) progressing, DTS mitigation in place. DCIR/Zenith DD war room (John Ojetunde Friday deadline) + Union Bank DD credentials-issue identified as engineering-work awareness items. No Immediate-tier triggers this tick. B1 batch CTO-DM draft still unsent. Gmail/Calendar/Drive MCPs remain dark."
-updated: "2026-04-22T21:17:40Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-23T05:10:00Z. 06:10 WAT Apr 23 briefing-tick Full sweep: overnight window (21:00 Apr 22 → 05:10 UTC Apr 23 = 8h10min) zero Tier 1 new messages, zero Immediate-tier keyword hits, zero DMs. 3 B1 batch items (Polaris/UBA/CoralPay) plus TDSD-6630/TDSD-6645 carryforward state — all surfaced into briefing-2026-04-23 D1/D2/D5. B1 batch CTO-DM draft still unsent 17h+ (carryforward via D5). Gmail/Calendar/Drive MCPs still dark (~61h)."
+updated: "2026-04-23T05:42:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-22T21:00:00Z"
+last_processed: "2026-04-23T05:10:00Z"
 ---
 
 ## Connection
@@ -240,3 +240,35 @@ Window: 20:00 → 22:10 WAT (~2h10min delta since prior tick; 19:00 → 21:00 UT
 - Pre-overnight-delegation state: no unmitigated P1 requiring escalation before 23:00 WAT window. The 3 B1 batch items remain user-triage-deferred (no brain-side re-dispatch per prior handling). The 23:00-06:00 overnight window is delegated to ops per config-heartbeat.
 
 **Reminder evaluation (Step 2):** Skipped per skim-with-zero-source-deltas path (no source triggered full processing). One open reminder (dad's birthday planner call) remains surfaced in briefing-2026-04-22 B3 awaiting user triage; non-briefing tick.
+
+### Tick 2026-04-23 ~06:10 WAT — Full briefing-tick sweep (overnight window)
+
+Window: 22:10 WAT Apr 22 → 06:10 WAT Apr 23 (~8h; 21:00 UTC Apr 22 → 05:10 UTC Apr 23). Step 0 declared `level=full, rationale=briefing-tick` — first tick after 06:00 WAT with no existing briefing-2026-04-23 page. Full processing across all phases required by briefing-tick protocol.
+
+**Tier 1 read (all 5 channels via `slack_read_channel` with `oldest=1776891000` = 2026-04-22 21:00 UTC = 22:00 WAT, covering full overnight window):** Zero new messages across C0ABU8GMW75, C098VUQCVRA, C096LCNP26P, C08PH35PLPK, C090UHR9VDE. **Complete overnight silence on all Tier 1 channels.** Continues the post-22:00 WAT Apr 22 pattern — the day's last operational conversations closed at the 20:00 WAT tick window, and the 10h since has been quiet. Consistent with overnight-delegation delegated to ops window.
+
+**Search-all Immediate-tier keyword scan** via `slack_search_public` with `after=1776891000` for `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR breach OR compromised OR NIBSS OR down OR failure)`: 20 results returned; post-filtering on `message_ts > 1776891000` per Epoch-filter post-check directive shrinks the true in-window set to a handful — all Awareness-tier or lower. No Tier 1 channel hits in the true-in-window subset, no active-situation entity matches (no new Polaris / UBA / CoralPay / NIBSS DD / NIBSS PTSA / Monnify Settlements / Keystone signals). Routine background activity only.
+
+**Tier 2 DM scan** via `to:me after=1776891000`: zero results. No Oladapo-to-user inbound DM. **B1 batch CTO-DM draft to Oladapo still unsent — 17h15m+ since briefing-2026-04-22 compose time without user dispatch authorization.** Carryforward to briefing-2026-04-23 D5.
+
+**Active-situation thread vigilance (re-reads for:**
+- **NIBSS PTSA thread 1776872974.244299** — no new replies since 18:40 WAT Apr 22 "Issue resolved" post from Qazim. Thread is closed. Leased-line stability confirmed at 10h47m since 19:17 WAT transition. Surfaced into briefing-2026-04-23 A5.
+- **TDSD-6645 Monnify Settlements (via Jira cross-ref)** — Dominic broke 59h15m silence at 04:08 WAT Apr 23 with attribution-transfer comment. This is the critical overnight delta — see source-config-jira 06:10 WAT tick notes. Surfaced into briefing-2026-04-23 D1.
+- **TDSD-6630 NIBSS DD (via Jira cross-ref)** — zero updates overnight. Comment silence now ~72h43m, any-update silence ~69h52m. Surfaced into briefing-2026-04-23 D2 (retire-or-hold three-option ask).
+- **Polaris / UBA RC96 / CoralPay B1 batch** — Slack-side silent overnight (no thread replies, no resolution posts). Jira-side tracked separately.
+
+**Tier 3 keyword / active-situation entity-match scan:** Zero in-window hits on Tier 1 or active-situation entity names. The overnight window was operationally quiet.
+
+**Coverage caveats:**
+- Email + Calendar + Google Drive MCPs still dark. Gmail/Calendar silence now ~61h since last_processed 2026-04-20T16:09:00Z — still below 7-day absence-of-signal threshold but 3rd consecutive briefing-blocker day (B2 carryforward via briefing-2026-04-23 D4).
+- All 5 Tier 1 channels read cleanly; no anomalies. Epoch-filter post-check applied to `slack_search_public` per directive.
+
+**Dispatch decisions this tick:**
+- No new Immediate items → no new Slack DM drafts overnight. Overnight-delegation window held per expectation (no escalation-grade signals reached the brain).
+- Briefing-2026-04-23 composed and created via MCP with 5 Decision items (D1 TDSD-6645 attribution-transfer / D2 TDSD-6630 retire-or-hold / D3 dad's birthday 5th surfacing / D4 Gmail+Calendar+Drive dark / D5 briefing-2026-04-22 untriaged) + 5 Awareness items (A1-A5).
+- briefing-2026-04-22 superseded via MCP (status: current → superseded; ## Superseded section added documenting carryforward to briefing-2026-04-23 D5/D3/D4).
+- Situation pages updated: TDSD-6645 Monnify Settlements (critical Apr 23 04:08 WAT Dominic attribution-transfer delta, status transitioned Awaiting Scheme Update → Escalated), TDSD-6630 NIBSS DD (overnight-silence delta, connectivity-layer hypothesis ruled out via leased-line stability), NIBSS PTSA (10h47m stable confirmation), Keystone (retired per pre-committed criterion).
+
+**Reminder evaluation (Step 2):** One open reminder ("Call the event planner for dad's birthday"). Briefing tick — re-emitted in briefing-2026-04-23 D3 as 5th consecutive commitment-day-or-later surfacing. Surfacing history page updated. surface_now=true (briefing-tier), auto_resolve_candidate=false (no completion evidence).
+
+**Advanced `last_processed` to 2026-04-23T05:10:00Z** for audit trail continuity.
