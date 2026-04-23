@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-23T05:10:00Z. 06:10 WAT Apr 23 briefing-tick Full sweep: overnight window (21:00 Apr 22 → 05:10 UTC Apr 23 = 8h10min) zero Tier 1 new messages, zero Immediate-tier keyword hits, zero DMs. 3 B1 batch items (Polaris/UBA/CoralPay) plus TDSD-6630/TDSD-6645 carryforward state — all surfaced into briefing-2026-04-23 D1/D2/D5. B1 batch CTO-DM draft still unsent 17h+ (carryforward via D5). Gmail/Calendar/Drive MCPs still dark (~61h)."
-updated: "2026-04-23T05:47:57Z"
+summary: "Slack signal-source configuration. last_processed 2026-04-23T06:10:00Z. 07:10 WAT Apr 23 Skim post-briefing tick: zero deltas across full sweep (Tier 1 channels clean, Immediate keyword scan empty, DM scan empty). Cross-source asymmetry observed — Jira side surfaced TDSD-6692 UBA fast-cycle without Slack mirror (single-instance, no codification). Gmail/Calendar/Drive MCPs still dark (~63h, below 7-day threshold). B1 batch CTO-DM draft still unsent 18h+."
+updated: 2026-04-23
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T05:10:00Z"
+last_processed: "2026-04-23T06:10:00Z"
 ---
 
 ## Connection
@@ -101,3 +101,24 @@ Window: 22:10 WAT Apr 22 → 06:10 WAT Apr 23 (~8h; 21:00 UTC Apr 22 → 05:10 U
 **Reminder evaluation (Step 2):** One open reminder ("Call the event planner for dad's birthday"). Briefing tick — re-emitted in briefing-2026-04-23 D3 as 5th consecutive commitment-day-or-later surfacing. Surfacing history page updated.
 
 **Advanced `last_processed` to 2026-04-23T05:10:00Z** for audit trail continuity.
+
+### Tick 2026-04-23 ~07:10 WAT — Skim (post-briefing window)
+
+Window: 05:10 UTC → 06:10 UTC Apr 23 (~1h; `oldest=1776921000`). Step 0 declared `level=skim, rationale=post-briefing-42m-window-pre-work-hours`.
+
+**Zero deltas across full sweep:**
+- Tier 1 read (all 5 channels C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE with `oldest=1776921000`): zero new messages across all five. Pre-work-hours window (07:10 WAT) consistent with overnight→morning quiet-window profile.
+- Search-all Immediate-tier keyword scan `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR breach OR compromised OR NIBSS OR down OR failure)` with `after=1776921000` via `slack_search_public_and_private`: zero results.
+- Tier 2 DM scan (`to:me after:2026-04-23` with `after=1776921000`): zero results. **B1 batch CTO-DM draft still unsent — 18h+ since briefing-2026-04-22 compose** (carryforward via briefing-2026-04-23 D5).
+
+**Cross-source asymmetry observed.** Jira-side sweep surfaced TDSD-6692 UBA "failing generally" (6-min bank-resolved fast-cycle; see source-config-jira notes) this tick. Slack Tier 1 and keyword sweeps show zero matching signal — Daniel Armstrong filed and closed the ticket without mirroring to #teamapt-tech-operations. **Single-instance observation; no codification yet.** Flag for pattern tracking — if this recurs 3+ times (fast-cycle Jira-only incidents on Tier 1 entities), consider a directive addition noting that fast-cycle self-filed-and-closed tickets may not surface in Slack and Jira sweep coverage is required to catch them.
+
+**Coverage caveats:**
+- Email + Calendar + Google Drive MCPs still dark. Deferred tool list for this session does not include Gmail/Calendar/Drive connectors. Silence now ~63h since last_processed 2026-04-20T16:09:00Z. Below 7-day absence-of-signal threshold; B2 carryforward via briefing-2026-04-23 D4 holds.
+
+**Dispatch decisions:**
+- No Immediate items → no new DM drafts.
+- Overnight-delegation window already closed (06:00 WAT per config-heartbeat); pre-work-hours window (06:00–08:00 WAT) is expected low-signal. Confirmed.
+- Non-briefing tick — reminder Step 2 skipped per skim rules (source-triggered Step 2 ran via Jira delta; reminder eval concluded no new surfacing needed — sole open reminder "Call the event planner for dad's birthday" already surfaced today in briefing-2026-04-23 D3 awaiting user triage).
+
+**Advanced `last_processed` to 2026-04-23T06:10:00Z** (07:10 WAT).

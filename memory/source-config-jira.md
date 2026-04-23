@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T05:10:00Z. 06:10 WAT Apr 23 briefing-tick Full sweep: critical overnight delta — TDSD-6645 Dominic broke 59h15m silence at 04:08 WAT with attribution-transfer to inwards payments team (status transition: Awaiting Scheme Update → Escalated). TDSD-6630 zero overnight movement; comment silence now ~72h43m (past 48h implicit-retire threshold, new high watermark). TDSD-6684 new Blessing-filed ticket to Dominic. TDSD-6638 closed at 02:55 WAT. TDSD-6689/TDSD-6676/TDSD-6691 no movement. Decision items D1 (attribution-transfer) + D2 (NIBSS DD retire-or-hold) carried into briefing-2026-04-23."
-updated: "2026-04-23T05:49:41Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T06:10:00Z. 07:10 WAT Apr 23 Skim post-briefing tick: 1 in-window delta — TDSD-6692 UBA \"failing generally\" 6-min fast-cycle (database connectivity, bank-confirmed RCA, auto-closed 06:44 WAT) — Awareness-tier, accumulates for briefing-2026-04-24. UBA situation updated (3rd distinct failure mode in 6 days). TDSD-6691 caught by query but pre-cutoff (05:50 WAT=04:50 UTC before 05:10 UTC last_processed) — not a new delta. TDSD-6630/TDSD-6645 no follow-on movement."
+updated: 2026-04-23
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T05:10:00Z"
+last_processed: "2026-04-23T06:10:00Z"
 ---
 
 ## Connection
@@ -136,3 +136,27 @@ Window: 22:10 WAT Apr 22 → 06:10 WAT Apr 23 (~8h; 21:00 UTC Apr 22 → 05:10 U
 - Situation pages updated: TDSD-6645, TDSD-6630, NIBSS PTSA (10h47m stable confirmation), Keystone (retired per pre-committed criterion — zero overnight signals).
 
 **Advanced `last_processed` to 2026-04-23T05:10:00Z.**
+
+### Tick 2026-04-23 ~07:10 WAT — Skim (post-briefing window)
+
+Window: 05:10 UTC → 06:10 UTC Apr 23 (~1h). Step 0 declared `level=skim, rationale=post-briefing-42m-window-pre-work-hours`. Delta query via `searchJiraIssuesUsingJql` with `updated >= "2026-04-23 05:10"` (JQL date-filter in WAT per timezone-discipline directive; equivalent to 04:10 UTC, intentionally wider than last_processed 05:10 UTC — post-filter on assistant side using ticket update timestamp to exclude pre-cutoff).
+
+**One in-window delta — TDSD-6692 UBA "Failing generally" fast-cycle.**
+- Filed 06:38 WAT Apr 23 by [[Daniel Armstrong]] (self-filed, self-assigned), Medium priority, [System] Incident. Title: "Uba | Failing generally | 20260421" (date-stamp in title template; actual creation 2026-04-23).
+- Six-minute lifetime 06:38 → 06:44 WAT. Seven comments all by Daniel Armstrong: 5 diagnostic screenshots (06:39–06:42 WAT), 1 RCA ("Uba had network issues, their services could not reach their database"), 1 closure ("This issue has been fixed by the bank"). Status: Completed.
+- Classification: Awareness-tier (already closed at observation, Medium priority, bank-auto-resolved, no CTO action path). Accumulates for briefing-2026-04-24.
+- Factors: source=jira, ticket_auto_closed_within_6min_lifetime, bank_root_cause_attribution=database_connectivity, pattern_compounding_uba_multi_failure_mode, no_slack_mirror_jira_only_signal, awareness_tier.
+- State update: [[UBA Bank — RC91 P1 Apr 17]] situation received delta line (skim-tick append; narrative-rewrite carryforward noted — page is stale at Apr 17–18 era, missing Apr 20–22 cycles including Apr 21 RC96 via TDSD-6671).
+
+**TDSD-6691 caught by query but NOT a new delta.** Updated 05:50 WAT (2026-04-23T04:50 UTC) — BEFORE last_processed 05:10 UTC (06:10 WAT). Already in pre-briefing state. Verified via ticket update timestamp — post-filter correctly dropped it. Status unchanged: Review (pre-deploy approval gate).
+
+**Zero other operational deltas.** No follow-on activity on TDSD-6645 (Dominic silent post-04:08 WAT attribution-transfer; ~3h02m quiet at tick — within overnight-to-morning expected quiet). No movement on TDSD-6630 (NIBSS DD silence compounds — ~73h43m comment-silence from 05:27 WAT Apr 20 at tick time; carryforward to briefing-2026-04-24 if D2 user-held).
+
+**Cross-source asymmetry observation (shared with source-config-slack).** TDSD-6692 surfaced exclusively on the Jira sweep — no Slack mirror. Daniel Armstrong filed and closed within 6 min without posting to #teamapt-tech-operations. Single-instance observation; no codification yet.
+
+**Dispatch decisions:**
+- No Immediate-tier dispatch (TDSD-6692 already closed, Medium, no active P1).
+- Non-briefing tick — Awareness accumulation only (next briefing 2026-04-24 06:00 WAT).
+- Situation updated: UBA-RC91 tracker.
+
+**Advanced `last_processed` to 2026-04-23T06:10:00Z** (07:10 WAT).
