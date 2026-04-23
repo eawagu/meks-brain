@@ -11,10 +11,14 @@
             "id": "f293589a8bd70f4e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "memory/working-preferences.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "working-preferences"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "config-heartbeat",
+                "query": "working-preferen",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
