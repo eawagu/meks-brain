@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-23T10:09:00Z. 11:09 WAT Apr 23 Full tick (weekday-working-hours; active Ecobank situation): Tier 1 sweep — 4 of 5 channels quiet (#teamapt-tech-operations/notifications-support-dev/go-subscribe empty; #account-switch-alerts 3 content-blind bot messages B098VURV46Q; #teamapt-x-paystack-transfer-support 6 messages Christine Ogude dispute-chase to Chioma Enwerem + empty-text bot message). Search-all operational-keyword sweep zero. DM scan zero. No Immediate-tier dispatch; Awareness accumulation for briefing-2026-04-24. Cross-source asymmetry tracker holds single data point (TDSD-6692 UBA Jira-only 06:44 WAT); Ecobank 09:38 WAT formal P1 remains sequencing-lag-not-asymmetry."
-updated: "2026-04-23T10:20:47Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, and directives. last_processed 2026-04-23T11:09:00Z. 12:09 WAT Apr 23 Full tick: Tier 1 — 4 of 5 channels fully empty; #teamapt-tech-operations ONE new message (Olamide Ajibulu 11:48 WAT VERVE TTP/Moniepointrest RC06 P2, start 10:45 WAT — 1h24m active at tick, under 2h Immediate threshold). Bot content-blind pattern did NOT recur (0 bot messages in #account-switch-alerts or #teamapt-x-paystack-transfer-support in-window) — 4th-tick codification gate does NOT fire; directive stood down. Search-all keyword sweep: zero in-window (RC06 P2 above was channel-read, not search surfaced). DM scan zero. TDSD-6630 closed by Kabir Yusuf on Jira side at 11:30 WAT — cross-source check via TDSD-6645 situation retained. No Immediate dispatch. All signals Awareness-tier, accumulating for briefing-2026-04-24."
+updated: "2026-04-23T11:18:43Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T10:09:00Z"
+last_processed: "2026-04-23T11:09:00Z"
 ---
 
 ## Connection
@@ -40,17 +40,17 @@ Do not use `after:YYYY-MM-DD` Slack search modifiers for same-day windows — ob
 ### Epoch-filter post-check (reinforced 2026-04-22 22:10 WAT)
 Even explicit Unix epoch `after=<stamp>` on `slack_search_public` returns some messages timestamped BEFORE the cutoff in practice (observed: cutoff 1776884400 = 19:00 UTC, returned results going back to 1776872974 = 15:49 UTC). **Rule:** after calling `slack_search_public` with `after=<epoch>`, post-filter the result set on message_ts > epoch on the assistant side. Do not trust the API filter alone.
 
-### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; non-reproducible across 5 subsequent ticks)
-Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. All retests across 16:15, 17:09, 18:09, 20:00, 22:10 WAT ticks returned normally. **Stand down on codification** — keep the observation note in case it recurs.
+### slack_read_channel anomaly (observed 2026-04-22 14:15 WAT; non-reproducible across 5+ subsequent ticks)
+Observed 14:15 WAT tick: `slack_read_channel` for channel C0ABU8GMW75 with `oldest=<valid Unix epoch>` returned empty result set despite `slack_search_public` with same Unix epoch returning in-window messages from the same channel. All retests across 16:15, 17:09, 18:09, 20:00, 22:10, 06:10, 07:10, 08:10, 09:11, 10:09, 11:09, 12:09 WAT ticks returned normally. **Stand down on codification** — keep the observation note in case it recurs.
 
 ### Thread-continuation vigilance (added 2026-04-22 18:09 WAT)
 Self-closed thread parents can receive new status updates hours later that re-open the incident characterization. **Rule:** when a thread parent has an active-situation entity match (e.g., NIBSS) and has received ≥2 updates within the tick window, include thread reads in Step 1 processing even if search-all and channel-read show no new parent messages — the action may be on existing threads. For skim ticks, this applies only when the delta scan has surfaced a thread update (the signal itself triggers the read); full ticks can be more liberal.
 
-### Block-formatted bot content — content-blind observation (2026-04-23 08:10 WAT; 2nd bot 09:11 WAT; 3rd tick 11:09 WAT)
-`#account-switch-alerts` (C098VUQCVRA) bot B098VURV46Q and `#teamapt-x-paystack-transfer-support` (C096LCNP26P) bot B0AQ9MDE0BZ both post block-formatted messages with empty top-level `text` field — content lives in attachments/blocks not exposed by current MCP retrieval (`slack_read_channel` detailed mode + `slack_search_public_and_private` both return empty text). Cannot classify these messages as Immediate-tier (e.g., route-turned-off alert per config-salience trigger #7) without block-content access. **Current posture:** treat as known blind spot; absence of alarm cannot be verified. 11:09 WAT tick continues the pattern: 3 bot messages in #account-switch-alerts (B098VURV46Q) all empty-text — 3rd tick of recurrence on this bot. **Directive action — escalate to codification if 4th consecutive tick shows same pattern (at next tick ~12:09 WAT)**: require `slack_read_thread` on each bot-ts + attempted permalink fetch as content-recovery path. One-tick-more observation gate before structural change.
+### Block-formatted bot content — content-blind observation (STAND DOWN 2026-04-23 12:09 WAT after 4th-tick non-recurrence)
+`#account-switch-alerts` (C098VUQCVRA) bot B098VURV46Q and `#teamapt-x-paystack-transfer-support` (C096LCNP26P) bot B0AQ9MDE0BZ both post block-formatted messages with empty top-level `text` field — content lives in attachments/blocks not exposed by current MCP retrieval (`slack_read_channel` detailed mode + `slack_search_public_and_private` both return empty text). Three consecutive ticks observed the pattern (08:10, 09:11, 11:09 WAT Apr 23). **4th-tick gate test (12:09 WAT Apr 23): zero bot messages in either channel in-window — pattern did not recur.** Codification gate dissolves. Observation retained as known blind spot; absence of alarm cannot be verified when bots do fire, but bots did not fire this tick. Revive the codification discussion if 3+ consecutive ticks of the pattern are seen again.
 
-### Cross-source asymmetry tracker (opened 2026-04-23 06:44 WAT)
-Operational signals bypassing the canonical Slack #teamapt-tech-operations channel should be counted for pattern-significance. First observation: TDSD-6692 UBA fast-cycle Jira-only (06:44 WAT Apr 23 — 6-min bank-resolved, never mirrored to Slack ops channel). Ecobank 09:11 WAT observation was reclassified to 27-minute sequencing lag (09:38 WAT Olamide Slack P1 filed) — does NOT count against the tracker. **Stand-down on directive codification** pending 3rd heterogeneous observation within 24h of 1st (by 06:44 WAT Apr 24). If 3rd observation arrives, escalate to source-config coverage-redundancy concern; if not, pattern dissolves.
+### Cross-source asymmetry tracker (opened 2026-04-23 06:44 WAT — tracker window closes 06:44 WAT Apr 24)
+Operational signals bypassing the canonical Slack #teamapt-tech-operations channel should be counted for pattern-significance. First observation: TDSD-6692 UBA fast-cycle Jira-only (06:44 WAT Apr 23 — 6-min bank-resolved, never mirrored to Slack ops channel). Ecobank 09:11 WAT observation was reclassified to 27-minute sequencing lag (09:38 WAT Olamide Slack P1 filed) — does NOT count against the tracker. TDSD-6696 Verve TTP RC06 at 11:09 WAT Jira tick → Slack P2 filed 11:48 WAT (39min sequencing lag) — also does NOT count (cross-source consistency). **Tracker still at 1 data point.** Stand-down on directive codification pending 3rd heterogeneous observation within 24h of 1st (by 06:44 WAT Apr 24). If 3rd observation arrives, escalate to source-config coverage-redundancy concern; if not, pattern dissolves.
 
 ## Notes
 
@@ -58,51 +58,36 @@ Operational signals bypassing the canonical Slack #teamapt-tech-operations chann
 
 Seven ticks across the day (12:45 Full catch-up, 14:15 Full, 16:15 Full, 17:09 Full, 18:09 Skim, 20:00 Skim, 22:10 Skim early-exit). briefing-2026-04-22 composed at ~12:45 WAT (catch-up Full) covering 43.5h back to 2026-04-20T16:09:00Z. 3 Immediate-tier silent-unresolved items batched into B1 CTO-DM draft to Oladapo (Polaris/UBA RC96/CoralPay FBN). NIBSS PTSA VPN flap pattern crystallized into architectural transition to leased-line at 19:17 WAT Apr 22 (new situation [[NIBSS PTSA — VPN Flapping Apr 22]]). B1 batch CTO-DM draft remained unsent by user throughout the day — 10h+ dispatch-authorization gap at end-of-day. Email + Calendar + Google Drive MCPs dark all day.
 
-### Tick 2026-04-23 (condensed for 06:10 briefing + 07:10 skim + 08:10 full)
+### Tick 2026-04-23 06:10 / 07:10 / 08:10 / 09:11 / 10:09 / 11:09 WAT (condensed — see git history for details)
 
-**06:10 WAT briefing-tick Full** — 8h10min overnight window 21:00 UTC Apr 22 → 05:10 UTC Apr 23 clean. 4 of 5 Tier 1 channels fully silent; Jira-side critical delta (TDSD-6645 Dominic broke 59h15m silence, attribution-transfer to inwards payments team). briefing-2026-04-23 composed with 5 Decision + 5 Awareness. Gmail/Calendar/Drive still dark. Carry into D4.
+06:10 briefing tick composed briefing-2026-04-23 (5 Decision + 5 Awareness). Critical overnight delta: TDSD-6645 Dominic broke 59h15m silence at 04:08 WAT with attribution-transfer to inwards payments team (D1). TDSD-6630 retire-or-hold decision surfaced as D2. 07:10 TDSD-6692 UBA Jira-only fast-cycle opened cross-source asymmetry tracker. 08:10 bulk Jira grooming + first content-blind bot observation. 09:11 Gmail/Calendar/Drive MCPs RECOVERED after ~64h dark — fresh Ecobank RC91 P1 cycle detected via email first. 10:09 Ecobank Slack P1 filing at 09:38 WAT (asymmetry reclassified to sequencing lag). 11:09 Tier 1 sweep + Jira 48-item payload (3rd oversize tick → Agent delegation promoted to default for weekday work-hours extraction path per source-config-jira directive).
 
-**07:10 WAT Skim (post-briefing, pre-work-hours)** — 1h window clean on Slack; Jira-side TDSD-6692 UBA fast-cycle (6-min lifetime, bank-resolved). Cross-source asymmetry 1st observation (Jira-only).
+### Tick 2026-04-23 ~12:09 WAT — Full (weekday work-hours; TDSD-6630 closure delta)
 
-**08:10 WAT Full (weekday work-hours opener)** — 1h window; Tier 1: 4 of 5 clean, #account-switch-alerts bot content-blind (first observation codified). TDSD-6675/TDSD-6592 closures + AS-* bulk grooming on Zone Switching Partnership. All Awareness-tier.
-
-### Tick 2026-04-23 ~09:11 WAT — Full (condensed)
-
-Gmail/Calendar/Drive RECOVERY tick. Ecobank RC91 P1 detected via email first (06:35/08:52 WAT), Immediate-tier Slack DM drafted to user self-DM. Cross-source asymmetry 2nd observation opened (later reclassified to sequencing lag after 09:38 WAT formal P1 filing). #go-subscribe ATS staging POS failure (Awareness). #account-switch-alerts + #teamapt-x-paystack bots empty-text (content-blind codified). Advanced last_processed to 2026-04-23T08:10:00Z.
-
-### Tick 2026-04-23 ~10:09 WAT — Full (condensed)
-
-Olamide 09:38 WAT formal Ecobank P1 filing in #teamapt-tech-operations (asymmetry reclassified to sequencing lag). Moniepoint CBA incident surface (#tech-operations Akinola Akintayo 09:41 WAT, cross-org Awareness). TDSD-6694 Paystack Balance Adjustment NEW + TDSD-6695 CloudFront stopgap Waiting-for-Approval (approver unnamed). Ravi DM pre-meeting check. Advanced last_processed to 2026-04-23T09:10:00Z.
-
-### Tick 2026-04-23 ~11:09 WAT — Full (weekday work-hours; active Ecobank situation)
-
-Window: 09:10 UTC → 10:09 UTC Apr 23 (~59 min; `oldest=1776935400`). Step 0 declared `level=full, rationale=weekday-working-hours-active-ops`. briefing-2026-04-23 already exists — not a briefing tick.
+Window: 10:09 UTC → 11:09 UTC Apr 23 (~60min; `oldest=1776938940`). Step 0 declared `level=full, rationale=weekday-working-hours, multiple-active-situations, overdue-reminder, prior-tick-dense`. briefing-2026-04-23 already exists — not a briefing tick.
 
 **Tier 1 read (5 channels):**
-- **#teamapt-tech-operations (C0ABU8GMW75):** **zero new messages.** Full quiet post-09:38 WAT Ecobank P1 filing. No resolution post to the Ecobank P1 thread yet (see Ecobank email delta this tick — bank responded via email 10:19 WAT with "processing successfully"; Slack closure not yet propagated). Propagation latency starting.
-- **#account-switch-alerts (C098VUQCVRA):** 3 bot messages 10:13, 10:16, 10:17 WAT (bot B098VURV46Q, all empty text — 3rd tick of content-blind pattern; directive updated with "4th-tick codification gate").
-- **#teamapt-x-paystack-transfer-support (C096LCNP26P):** 6 messages:
-  - [[Christine Ogude]] at 10:11 WAT "Done," (chat follow-up, trivial).
-  - 2 empty-text bot messages 10:13 WAT (bot B0AQ9MDE0BZ — content-blind).
-  - [[Christine Ogude]] at 10:15 WAT chasing [[Chioma]] (U0259CDFBHA) — 8 pending dispute IDs (APT000042604... prefix) mentioning [[Peace Emmanuel]] (U0A7X8EBCJX). Operational workflow — disputes pending on Chioma's end. Awareness-tier.
-  - [[Christine Ogude]] at 10:36 WAT follow-up to Chioma: "yes Peace Emmanuel is on top of that" — disposition of one dispute.
-- **#notifications-support-dev (C08PH35PLPK):** zero new messages.
-- **#go-subscribe-by-teamapt (C090UHR9VDE):** zero new messages.
+- **#teamapt-tech-operations (C0ABU8GMW75):** 1 new message — **[[Olamide Ajibulu]] VERVE TTP/Moniepointrest RC 06 P2** at 11:48:50 WAT. Incident Summary: P2 Transactions failing with RC 06 not reaching TeamApt switch. Impact: <1% transactions to moniepoint-rest failing. Identified Cause: 502 internal server errors. Resolution Action: Reviewed by TSE. Start Time 10:45 AM. End Time: Ongoing. Duration at tick: ~1h24m. **Does not hit Immediate-tier — P2 not P1 (trigger #1 requires P1); duration under 2h (trigger #2 threshold not met).** Cross-source confirmation of TDSD-6696 from prior Jira tick at 11:09 WAT (ticket transitioned to Work in progress ~10:57 WAT) — same cycle, 39-min sequencing lag Jira→Slack. First Verve TTP RC06 cycle on the active tracker; second cycle within 7 days would create situation page per source-config-jira directive.
+- **#account-switch-alerts (C098VUQCVRA):** zero messages in-window. Bot content-blind 4th-tick gate test: pattern did not recur. Codification gate dissolves.
+- **#teamapt-x-paystack-transfer-support (C096LCNP26P):** zero messages in-window.
+- **#notifications-support-dev (C08PH35PLPK):** zero messages in-window.
+- **#go-subscribe-by-teamapt (C090UHR9VDE):** zero messages in-window.
 
-**Search-all Immediate-tier keyword scan** `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR breach OR compromised OR NIBSS OR down OR failure OR incident)` with `after=1776935400`: zero results.
+**Search-all Immediate-tier keyword scan** `(P1 OR outage OR RC91 OR RC96 OR RC05 OR RC06 OR breach OR compromised OR NIBSS OR down OR failure OR incident)` with `after=1776938940`: zero results. (The 11:48 WAT Olamide RC 06 P2 message did not surface in search — caught via channel read instead. Consistent with prior-observed propagation lag between posting and search-indexing.)
 
-**Tier 2 DM scan** (`to:<@U080PEXEZ0E> after=1776935400`): zero results.
+**Tier 2 DM scan** (`to:<@U080PEXEZ0E> after=1776938940`): zero in-window results (4 historical Ketan Dhamasana pre-window DMs returned by search but timestamps pre-window, ignored).
 
-**Active-situation thread vigilance:**
-- Ecobank RC91 — **bank responded via email at 10:19 WAT** (see source-config-email tick note). Slack P1 (09:38 WAT message_ts 1776934715) **still End Time: Ongoing** — no resolution post; TeamApt-side needs to validate bank's claim then close Slack P1. Email-to-Slack closure propagation not yet started. Watchpoint.
-- TDSD-6645 — Dominic silent ~7h post-04:08 WAT attribution-transfer comment. Within morning-hours expected quiet (most TDSD-6645 comment activity observed in 11:00 WAT+ windows historically).
-- TDSD-6630 — NIBSS DD silent ~78h from 05:27 WAT Apr 20; retirement still held in briefing-2026-04-23 D2.
-- NIBSS PTSA leased-line stable ~15h50m post-19:17 WAT Apr 22 transition; under 24h threshold for `stable` status transition (projected at 19:17 WAT today).
+**Cross-source signals this tick:**
+- **TDSD-6630 (NIBSS DD DOWNTIME) Completed at 11:30:22 WAT by Kabir Yusuf** (via Jira tick this window) — briefing-2026-04-23 D2 retire-or-hold ask answered by system-level closure. No closure RCA comment. Exact Apr 14 precedent match at 78h04m. Situation [[NIBSS DD — Downtime P1 Apr 20]] retired this tick. No Slack-side closure post in #teamapt-tech-operations (channel silent since the Olamide P2 message 11:48 WAT). Slack-side closure lag consistent with Jira-first closure pattern on silent-recovery tickets.
+- **TDSD-6697 Interswitch RC91 20260420** — new retrospective ticket filed 11:36 WAT + Completed 11:38 WAT by Frances Omelu (2-minute self-filed+self-closed). Documents an Apr 20 Interswitch RC91 cycle 3 days retroactively. No Slack mirror (would be expected since the event itself is Apr 20 not in any current Slack-read window). Awareness.
+
+**Active-situation thread vigilance (per directive):**
+- Ecobank RC91 NUS Nodes — Slack P1 thread closure propagation still pending (09:38 WAT P1 filing remains End Time: Ongoing in #teamapt-tech-operations; no resolution post this tick either). Bank response at 10:19 WAT via email was resolution-adjacent ("processing successfully now"); TeamApt-side Slack P1 closure has not propagated. Watchpoint extends.
+- TDSD-6645 — Dominic comment silence ~8h post-04:08 WAT attribution-transfer. No new comment in Jira this tick. D1 still open.
+- NIBSS PTSA leased-line — cumulative stable ~16h50m post-19:17 WAT Apr 22 transition; under 24h threshold (projected 19:17 WAT today for `stable` transition).
 
 **Dispatch decisions:**
-- No Immediate-tier Slack dispatch. Ecobank bank response is resolution-adjacent (not escalation); no need to pre-empt the user's 06:10 WAT briefing D1/D5 triage with a mid-day re-dispatch.
-- Christine↔Chioma dispute-chase — treasury workflow Awareness, not CTO-specificity.
-- Bot content-blind pattern now 3rd tick on B098VURV46Q — directive updated with codification-gate at next tick.
-- Accumulated for briefing-2026-04-24: (a) Christine-Chioma dispute workflow, (b) bot content-blind 3rd-tick, (c) Ecobank Slack-closure propagation watchpoint, (d) TDSD-6684/TDSD-6695 Jira deltas this tick (see source-config-jira).
+- No Immediate-tier Slack dispatch. RC06 P2 is Briefing-tier (accumulating for briefing-2026-04-24). TDSD-6630 closure is resolution (retirement action taken on situation page). TDSD-6697 is Awareness.
+- Accumulated for briefing-2026-04-24: (a) TDSD-6696 Verve TTP RC06 cross-source cycle (first RC06-Verve surface this week), (b) TDSD-6630 retirement via Kabir Yusuf silent closure (D2 structural answer), (c) TDSD-6697 retrospective Interswitch RC91 Apr 20 documentation, (d) Ecobank Slack-closure propagation still pending (watchpoint), (e) bot content-blind 4th-tick gate dissolved.
 
-**Advanced `last_processed` to 2026-04-23T10:09:00Z.**
+**Advanced `last_processed` to 2026-04-23T11:09:00Z.**
