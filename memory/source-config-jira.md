@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T06:10:00Z. 07:10 WAT Apr 23 Skim post-briefing tick: 1 in-window delta — TDSD-6692 UBA \"failing generally\" 6-min fast-cycle (database connectivity, bank-confirmed RCA, auto-closed 06:44 WAT) — Awareness-tier, accumulates for briefing-2026-04-24. UBA situation updated (3rd distinct failure mode in 6 days). TDSD-6691 caught by query but pre-cutoff (05:50 WAT=04:50 UTC before 05:10 UTC last_processed) — not a new delta. TDSD-6630/TDSD-6645 no follow-on movement."
-updated: 2026-04-23
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T05:10:00Z. 06:10 WAT Apr 23 briefing-tick Full sweep: critical overnight delta — TDSD-6645 Dominic broke 59h15m silence at 04:08 WAT with attribution-transfer to inwards payments team (status transition: Awaiting Scheme Update → Escalated). TDSD-6630 zero overnight movement; comment silence now ~72h43m (past 48h implicit-retire threshold, new high watermark). TDSD-6684 new Blessing-filed ticket to Dominic. TDSD-6638 closed at 02:55 WAT. TDSD-6689/TDSD-6676/TDSD-6691 no movement. Decision items D1 (attribution-transfer) + D2 (NIBSS DD retire-or-hold) carried into briefing-2026-04-23."
+updated: "2026-04-23T07:20:38Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T06:10:00Z"
+last_processed: "2026-04-23T07:10:00Z"
 ---
 
 ## Connection
@@ -28,7 +28,7 @@ last_processed: "2026-04-23T06:10:00Z"
 
 **JQL reserved-word handling.** Project keys `ADD` and `AS` are reserved JQL words and must be quoted in queries: `project in ("TDSD", "TCDD", "ATPG", "ADD", "AS", "ATPP")`. Verified after two consecutive rejections on unquoted forms.
 
-**JQL payload-size discipline (added 2026-04-22 14:15 WAT after oversize return).** Full 18-project `searchJiraIssuesUsingJql` returned 56,914 chars / 931 lines in a single call — exceeded practical context envelope. **Rule:** for tick sweeps with windows > 24h, query projects individually (iterate the scope list) or restrict by fields at source. Do not pull the union payload unconditionally. Applies to any tick with `updated > -24h` comparable window length.
+**JQL payload-size discipline (added 2026-04-22 14:15 WAT after oversize return).** Full 18-project `searchJiraIssuesUsingJql` returned 56,914 chars / 931 lines in a single call — exceeded practical context envelope. **Rule:** for tick sweeps with windows > 24h, query projects individually (iterate the scope list) or restrict by fields at source. Do not pull the union payload unconditionally. Applies to any tick with `updated > -24h` comparable window length. **Reinforced 2026-04-23 08:10 WAT:** 1h window at Full-tick still returned 64,872 chars on 15 items due to ADF-expanded descriptions/comments — probe Jira results via jq post-filter (structure: `{issues: {totalCount, nodes: [{...}]}}`) rather than reading raw MCP output when result > ~30KB.
 
 **JQL date-filter-timezone discipline (added 2026-04-22 16:15 WAT).** JQL `updated >= "YYYY-MM-DD HH:mm"` is evaluated in the Jira site's timezone (Africa/Lagos for teamapt.atlassian.net), NOT UTC. When filtering relative to a UTC `last_processed` stamp, **either** pass the WAT-local time equivalent **or** accept that the query may return items updated 1 hour before the stated UTC cutoff and post-filter on the assistant side. Applying no post-filter to a WAT-indexed query will include pre-window items and inflate the delta set.
 
@@ -160,3 +160,32 @@ Window: 05:10 UTC → 06:10 UTC Apr 23 (~1h). Step 0 declared `level=skim, ratio
 - Situation updated: UBA-RC91 tracker.
 
 **Advanced `last_processed` to 2026-04-23T06:10:00Z** (07:10 WAT).
+
+### Tick 2026-04-23 ~08:10 WAT — Full (weekday work-hours opener; 18-project scope)
+
+Window: 06:10 UTC → 07:10 UTC Apr 23 (~1h). Step 0 declared `level=full, rationale=weekday-active-p1-density`. Delta query via `searchJiraIssuesUsingJql` with `updated >= "2026-04-23 06:10"` (WAT per timezone-discipline directive = 05:10 UTC, intentionally wider than last_processed 06:10 UTC) — post-filter on assistant side. 18-project scope.
+
+**Payload oversize encountered.** 15-item result returned 64,872 chars of ADF-expanded content. Resolved by reading structured extract via `jq` post-filter against saved tool-result file (key/updated/summary/status/priority/type/assignee/reporter projection only). Reinforces payload-size-discipline directive — even at 1h Full-tick window, raw MCP output can exceed context budget when ADF descriptions/comments are expanded. Post-filter projection via jq is the reliable escape hatch.
+
+**Three TDSD deltas in window:**
+
+1. **TDSD-6675 "PENDING SETTLEMENT" — Closed 07:55 WAT by [[Opeyemi Ahmed]], reporter [[Chinenye Iloka]], Medium.** Adjacent-pattern observation for TDSD-6645 situation: 4th Opeyemi-closed settlement ticket this week extends the "Opeyemi-closes-settlement-fast" signal. **Weak 1:1 extension** — different ticket template ("PENDING SETTLEMENT" not "Urgent Pending Settlement – System Failure"), different reporter (Chinenye not Blessing). Recording here as adjacent-pattern tick note, **not** as TDSD-6645 situation-page delta, to avoid conflating templates and over-strengthening the 3:1 assignee-variable evidence. If TDSD-6645 briefing-2026-04-24 carryforward warrants narrative rewrite, the soft extension can be incorporated then. Factors: source=jira, ticket_closed, adjacent_pattern_observation, different_template_and_reporter_than_tdsd6655_family, awareness_tier.
+
+2. **TDSD-6592 "Kafka Monnify Live datasource issue" — Completed 07:57 WAT by [[Kabir Yusuf]] (self-filed, self-assigned), Medium, [System] Incident.** Long-tail close — ticket is Apr 14-era (pre-briefing-2026-04-15 memory). No active-situation entity match at present; does not link to current Monnify settlement narrative (Kafka datasource layer vs. VA-reversal settlement layer). Routine closure, Awareness-tier. Factors: source=jira, ticket_closed, long_tail_apr14_era, no_active_situation_match, awareness_tier.
+
+3. **AS-* bulk grooming (12 items) — June Johnson + Opeyemi Animashaun board grooming on Zone Switching Partnership go-live prep.** AS-4958 Epic "3rd Party Integration - Zone" updated 08:11 WAT + 11 related tasks updated 08:03-08:04 WAT (AS-4854 DD Engine credits config In Progress; AS-2343 3DS Directory Server monitoring In Progress; AS-3004 Production Go-live approval Todo; AS-2794 Production interchange/routing/switch setup Todo; AS-3005 Card-not-present API endpoints integration Todo; AS-3006 Web E2E pilot functional testing Todo; AS-2793 Production encryption key exchange/import Todo; AS-3259 UI modification for new merchant onboarding Todo; AS-2905 Scope of work sign-off In Progress; AS-2662 Acquirer processor onboarding pack In Progress; AS-2917 PROD Change Approval Board Todo). All Medium priority, routine task progression or labeling updates. No active-situation entity match. Factors: source=jira, bulk_grooming_batch, project=AS_zone_switching_partnership, no_active_situation_match, awareness_tier.
+
+**TDSD-6692 (UBA fast-cycle)** — caught by query at 06:44 WAT update (05:44 UTC). 05:44 UTC < 06:10 UTC last_processed, so **pre-cutoff, already captured in 07:10 WAT skim tick**. Post-filter correctly dropped it from this tick's new-deltas set.
+
+**TDSD-6630 / TDSD-6645 no follow-on movement.** TDSD-6645 Dominic silent 4h02m post-04:08 WAT attribution-transfer — within expected morning-hours quiet. TDSD-6630 comment silence now ~74h43m (from 05:27 WAT Apr 20) — compounds but no new delta; retirement decision still user-held in briefing-2026-04-23 D2.
+
+**Carryforward state (unchanged):** TDSD-6689 Stanbic Participant 8AM settlement WIP (~16h45m since surface); TDSD-6691 Polaris outward-flows deploy Review (pre-deploy approval gate); TDSD-6676 Access Bank exposure WIP.
+
+**Out-of-scope carryforward (Gmail MCP dark):** TISD-480 + TDSD-6203 still unverifiable. Gmail silence ~64h. B2/D4 carryforward holds.
+
+**Dispatch decisions:**
+- No Immediate-tier dispatch (all in-window deltas Awareness-tier).
+- Non-briefing tick — all Awareness items accumulate for briefing-2026-04-24.
+- No situation-page updates (TDSD-6675 intentionally not applied to TDSD-6645 situation per adjacent-pattern-observation discipline; TDSD-6592 has no active-situation match; AS-* bulk has no active-situation match).
+
+**Advanced `last_processed` to 2026-04-23T07:10:00Z.**
