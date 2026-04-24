@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full backlog catch-up completed after 86h+ dormancy (dark Apr 20→23, recovered 09:11 WAT Apr 23 but last_processed held pending briefing compose). Ecobank compound failure Apr 23 (3 RC91 cycles + DCIR portal inaccessibility) surfaced in briefing-2026-04-24 D1. Org Changes invite + Frank Atashili Platformization-Org-Movements presentation surfaced as D2 + A7."
-updated: "2026-04-24T05:28:33Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: Layer 1 to:me + operational+issuer keyword bucket both returned 0 in 2h window. MCP health holding post-recovery."
+updated: "2026-04-24T06:16:56Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T05:09:00Z"
+last_processed: "2026-04-24T06:10:00Z"
 ---
 
 ## Connection
@@ -41,6 +41,10 @@ Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP tok
 Gmail `search_threads` returns full-thread bodies that exceed context-window budget on broad queries. Narrow per-keyword queries with `pageSize:10-15` stay within budget reliably. Per-tick heartbeat should default to the execution pattern above; jq-from-persisted-file is the escape hatch when even pageSize 10 overflows.
 
 ## Notes
+
+### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
+
+07:10 WAT Apr 24 tick: Layer 1 `to:me newer_than:2h` returned 0 threads. Operational+issuer+process keyword bucket `(RC91 OR RC05 OR RC69 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover" OR Stanbic) newer_than:2h` returned 0 threads. Zero signals in 1h post-briefing window. MCP health holding — 22h+ post-recovery (recovered ~09:11 WAT Apr 23). No Ecobank thread activity since 21:33 WAT Qazim portal-inaccessibility email yesterday, consistent with route-off overnight state (bank working their side, no TeamApt-initiated chase this morning yet).
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full backlog catch-up
 
