@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T12:09:00Z (13:09 WAT). 13:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 12:09 WAT prior tick (1h00m quiet); keyword scan + DM scan 0 hits. Total Slack-side quiet now 2h01m from 11:09 WAT Paystack treasury ops closeout."
-updated: "2026-04-24T13:22:16Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T14:09:00Z (15:09 WAT). 15:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 14:09 WAT prior tick (1h00m quiet); keyword scan + DM scan 0 hits. Total Slack-side quiet now 4h01m from 11:09 WAT Paystack treasury ops closeout."
+updated: "2026-04-24T14:19:40Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T13:09:00Z"
+last_processed: "2026-04-24T14:09:00Z"
 ---
 
 ## Connection
@@ -45,17 +45,21 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-24T13:09:00Z (14:09 WAT) — full-level zero-delta tick
+### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level zero-delta tick
 
-14:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777032540)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 13:09→14:09 WAT tick window. **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777032540` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
+15:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777036140)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 14:09→15:09 WAT tick window. **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777036140` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
 
-**No Immediate-tier dispatch this tick.** Cross-source: Ecobank DCIR user-creation 3-week escalation email (thread 19dbf704dc7edb8a, 13:21 WAT) captured by email sweep — adds third DCIR-portal failure mode layer to Ecobank situation (briefing-2026-04-24 D1 strengthening signal). TDSD-6719 Verve TTP RC06 Problem ticket opened + TDSD-6696 Incident Completed (27h cycle) captured by Jira sweep. TDSD-6718 7m fast-close by Opeyemi Ahmed captured by Jira sweep — hardens Monnify Settlements Opeyemi-cluster ownership evidence. Slack carried zero signal on these — consistent with the pattern that email-escalation layers + Jira cross-track movements are not ops-channel material.
+**No Immediate-tier dispatch this tick.** Cross-source: email sweep captured 3 reconciliation-workstream threads — Stanbic settlement validation pending (thread 19dbfa48d456d605, 14:18 WAT, David Oseji asking for session 14:23 WAT), Stanbic DCIR API documentation follow-up (thread 19dbfae110fa739c, 14:28 WAT), Union Bank chargeback reminder (thread 19d77d38df87404c, 14:49 WAT). All Awareness-level ops signals. Jira sweep captured 3 NEW Opeyemi-cluster deltas — TDSD-6714 Closed 14:48 WAT by Opeyemi (Samuel Amos reporter, NEW cluster-reporter); TDSD-6720 NEW PENDING SETTLEMENT 14:43 WAT Blessing Olawale→Opeyemi (first Blessing-Olawale routing-bypass); TDSD-6721 NEW PENDING PAYABLE POSTING 14:53 WAT Samson Anaele→Opeyemi. Slack carried zero signal on these — consistent with the pattern that email reconciliation + Jira routing-changes are not ops-channel material.
 
-Total Slack-side quiet now 3h01m from 11:09 WAT Paystack treasury ops closeout (Christine "Done" 10:54 WAT).
+Total Slack-side quiet now 4h01m from 11:09 WAT Paystack treasury ops closeout (Christine "Done" 10:54 WAT).
+
+### last_processed 2026-04-24T13:09:00Z (14:09 WAT) — full-level zero-delta tick (preserved summary)
+
+14:09 WAT Apr 24 tick: all 5 Tier 1 channels silent since 13:09 WAT prior tick. Keyword scan + DM scan 0 hits. Cross-source: Ecobank DCIR user-creation 3-week escalation email (thread 19dbf704dc7edb8a, 13:21 WAT) captured by email sweep — third DCIR-portal failure mode layer on Ecobank. TDSD-6719 Verve TTP RC06 Problem ticket + TDSD-6696 Incident Completed captured by Jira sweep. TDSD-6718 7m fast-close by Opeyemi Ahmed captured by Jira sweep — hardens Monnify Settlements Opeyemi-cluster ownership evidence.
 
 ### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level zero-delta tick (preserved summary)
 
-13:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777028940)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 12:09→13:09 WAT tick window. Keyword scan + DM scan 0 hits. Cross-source: NIBSS PTSA formal-escalation email layer captured by email sweep; TDSD-6718 NEW Opeyemi-direct-assigned refund ticket captured by Jira sweep. Total Slack-side quiet 2h01m at that tick.
+13:09 WAT Apr 24 tick: all 5 Tier 1 channels empty. Keyword scan + DM scan 0 hits. Cross-source: NIBSS PTSA formal-escalation email layer captured by email sweep; TDSD-6718 NEW Opeyemi-direct-assigned refund ticket captured by Jira sweep.
 
 ### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-level zero-delta tick (preserved summary)
 
@@ -63,19 +67,7 @@ Total Slack-side quiet now 3h01m from 11:09 WAT Paystack treasury ops closeout (
 
 ### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
 
-11:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777021740)` swept all 5 Tier 1 channels. Deltas:
-- **C096LCNP26P #teamapt-x-paystack-transfer-support — 3 parent messages + 5 bot-like/empty** — 10:26 WAT Caret treasury application request ₦1.07B; 10:35 WAT Christine ack; 10:54 WAT Christine "Done"; corresponds to TDSD-6717 filed 10:38 WAT → Resolved 10:53 WAT. Routine treasury ops.
-- **C098VUQCVRA** 5 bot-only (empty-sender baseline).
-- **C0ABU8GMW75 + C08PH35PLPK + C090UHR9VDE** empty.
-- Keyword scan + DM scan both 0. No Immediate-tier dispatch.
-
-### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — skim elevated to full on delta (preserved summary)
-
-10:09 WAT Apr 24 tick: C096LCNP26P 2 new parent messages — Afeez Kazeem ~09:27 WAT Paystack-balance-below-₦200m alert + Peace Emmanuel dispute review request; other 4 Tier 1 channels empty / bot-join noise; keyword + DM scans 0; no Immediate dispatch.
-
-### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick (preserved)
-
-09:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 08:09 WAT prior tick. Keyword + DM scans: 0 hits.
+11:09 WAT Apr 24 tick: Paystack treasury ops sequence 10:26→10:54 WAT (Caret treasury application ₦1.07B → Christine "Done"); TDSD-6717 closed 10:53 WAT. Routine treasury ops. Other channels empty.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep (preserved)
 
