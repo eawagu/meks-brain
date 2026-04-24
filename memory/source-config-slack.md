@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T08:10:00Z (09:10 WAT). 09:10 WAT Apr 24 zero-delta tick: all 5 Tier 1 channels silent since 08:09 WAT prior tick (3h01m post-briefing clean window). Keyword scan 0 hits; DM scan 0 hits. Friday morning working-hours holds quiet despite Keystone settlement-requery cycle re-opening via Jira (TDSD-6713) — ops-lead handling off-channel."
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T09:09:00Z (10:09 WAT). 10:09 WAT Apr 24 skim-level tick, elevated on deltas: #teamapt-x-paystack-transfer-support produced 2 new parent messages — Afeez Kazeem ~09:27 WAT Paystack-balance-below-₦200m alert (2nd such alert in 2 days; briefing-2026-04-23 A4 was the 1st) and Peace Emmanuel ~09:36 WAT dispute review request to Chioma (routine). Other 4 Tier 1 channels empty / bot-join noise. Keyword scan + DM scan both 0. No Immediate-tier dispatch."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T08:10:00Z"
+last_processed: "2026-04-24T09:09:00Z"
 ---
 
 ## Connection
@@ -45,29 +45,37 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
+### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — skim elevated to full on delta
+
+10:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777018200)` swept all 5 Tier 1 channels. Deltas:
+
+- **C096LCNP26P #teamapt-x-paystack-transfer-support — 2 new parent messages** (plus 2 empty bot-like messages skipped):
+  - [[Afeez Kazeem]] at ~09:27 WAT: *"Hello <@U07UQ0C79QS|Chiamaka> <@U09CW6MAV8A|Christine Ogude> Please be informed that Paystack balance is currently below #200m, kindly assist look into this"*. Treasury-layer alert, no P1/outage framing, no CTO-tag. **2nd Paystack-balance-below-₦200m alert in 2 days** — briefing-2026-04-23 A4 captured the 1st (Daniel Armstrong 00:51 WAT Apr 23, same channel, same recipients). Pattern-awareness: two distinct reporters, same float threshold, ~33h apart. Not yet situation-page material (2 data points, different reporters, escalation path explicit to treasury). If a 3rd fires in the next 72h, open a treasury-float situation page. No Immediate dispatch. Factors: source=slack, channel=C096LCNP26P, tier1, active_situation_entity_match=paystack_treasury_recurring, treasury_tagged_not_cto, no_p1_markers, awareness_only, 2nd_alert_in_2_days, pattern_compounding_below_threshold.
+  - Peace Emmanuel at ~09:36 WAT: dispute review request to <@U0259CDFBHA|Chioma> listing 4 APT-prefixed transaction IDs pending review. Routine Paystack disputes ops, no CTO signal. Factors: source=slack, channel=C096LCNP26P, tier1, routine_disputes_ops, no_cto_relevance, awareness_only.
+
+- **C098VUQCVRA #account-switch-alerts — bot-only noise.** 1 empty-sender message at 09:27:50 WAT. Bot-authored per the channel's baseline. No content surface.
+
+- **C08PH35PLPK #notifications-support-dev — join/noise only.** Gabriella Sanusi + Bukola Taiwo channel-join events at 09:35/09:20 WAT; 1 empty-sender Waqas Tabbasum message at 09:18 WAT. No operational content.
+
+- **C0ABU8GMW75 + C090UHR9VDE — empty.** Zero new messages since 09:10 WAT prior tick.
+
+**Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777018200` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
+
+**No Immediate-tier dispatch this tick.** Paystack balance alert is treasury-scope and has an ops-team owner trajectory (Chiamaka / Christine) — does not meet CTO Immediate triggers. Recurring-pattern observation recorded for next briefing compose (Sat 06:10 WAT).
+
 ### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick
 
 09:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 08:09 WAT prior tick (3h01m post-briefing clean window). `slack_read_channel(oldest=1777061340)` returned 0 across C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE. Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` returned 0. DM scan `to:me after:2026-04-24` returned 0.
 
-Friday working-hours quiet holds even as Jira surfaced TDSD-6713 (Keystone settlements 3am requery — filed 08:21 WAT by Daniel Armstrong) — ops-lead handling off-channel, consistent with prior 4-day-gap cycle (TDSD-6633) handling pattern. See source-config-jira 09:10 WAT note + [[Keystone Bank — Settlement Requery Apr 20]] revival.
+Friday working-hours quiet held even as Jira surfaced TDSD-6713 (Keystone settlements 3am requery — filed 08:21 WAT by Daniel Armstrong) — ops-lead handling off-channel, consistent with prior 4-day-gap cycle (TDSD-6633) handling pattern.
 
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
 
-08:09 WAT Apr 24 tick: all 5 Tier 1 channels empty since 07:10 WAT prior tick (2h04m post-briefing clean window). `slack_read_channel(oldest=1777010200)` returned 0 across C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE. Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` returned 0. DM scan `to:me after:2026-04-24` returned 0.
-
-**Cross-source note.** TDSD-6712 (NEW Kafka Monnify Live datasource Jira ticket, Medium, Kabir Yusuf) references a Slack message `p1777011284784829` at 07:14:44 WAT Apr 24 from Moniepoint workspace channel C0812LH3BNJ. This Slack MCP is scoped to user's TeamApt Slack workspace — the Moniepoint-side message is NOT observable here. Jira is the primary signal for the Monnify Kafka datasource observation. Not a source-config gap; workspace scope is by design.
-
-Friday morning working-hours start; ops-channel quiet continues. No Ecobank Slack signal despite overnight route-off framing (ops-lead handling off-channel).
-
-### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
-
-07:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 06:09 WAT briefing tick (1h01m post-briefing quiet). `slack_read_channel(oldest=1777007340)` returned 0 across C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE. Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR outage OR breach OR compromised) after:2026-04-24` returned 0. DM scan `to:me after:2026-04-24` returned 0. Friday morning post-briefing window clean. Ecobank compound state (briefing-2026-04-24 D1) has produced no new Slack signal despite route-off-overnight framing; ops-lead handling appears to be holding the thread off-channel.
+08:09 WAT Apr 24 tick: all 5 Tier 1 channels empty since 07:10 WAT prior tick. Keyword and DM scans: 0. Cross-source note: TDSD-6712 (NEW Kafka Monnify Live datasource Jira ticket) references a Slack message from the Moniepoint workspace C0812LH3BNJ — not observable via this TeamApt-scoped Slack MCP.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep
 
 06:09 WAT Apr 24 briefing tick: **all 5 Tier 1 channels empty since 22:09 WAT Apr 23** (8h10m overnight delegation window clean). Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR outage OR breach) after:2026-04-23` returned 0 results. DM scan `to:me after:2026-04-23` returned 0. Per briefing-2026-04-24 A1 — structural signal that overnight delegation continues to work.
-
-No situation updates triggered by Slack sweep this tick. Ecobank compound situation (briefing-2026-04-24 D1) driven by email + Jira sources; no overnight Slack re-surface of Ecobank RC91 despite ongoing route-off state.
 
 ### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — skim-tick elevated to full on delta (preserved)
 
