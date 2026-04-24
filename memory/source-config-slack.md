@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T12:09:00Z (13:09 WAT). 13:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 12:09 WAT prior tick (1h00m quiet); keyword scan + DM scan 0 hits. Total Slack-side quiet now 2h01m from 11:09 WAT Paystack treasury ops closeout."
-updated: "2026-04-24T12:26:51Z"
+updated: "2026-04-24T13:22:16Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T12:09:00Z"
+last_processed: "2026-04-24T13:09:00Z"
 ---
 
 ## Connection
@@ -45,13 +45,17 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level zero-delta tick
+### last_processed 2026-04-24T13:09:00Z (14:09 WAT) — full-level zero-delta tick
 
-13:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777028940)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 12:09→13:09 WAT tick window. **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777028940` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
+14:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777032540)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 13:09→14:09 WAT tick window. **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777032540` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
 
-**No Immediate-tier dispatch this tick.** Cross-source: NIBSS PTSA formal-escalation email layer (Afeez 11:56 WAT to NIBSS CCing CTO Oladapo + Moniepoint Sholotan) captured by email sweep; TDSD-6718 NEW Opeyemi-direct-assigned refund ticket captured by Jira sweep. Slack carried zero signal on these — consistent with the pattern that Moniepoint→TeamApt Jira escalations + email counter-pushes are Jira/email-layer phenomena not ops-channel material.
+**No Immediate-tier dispatch this tick.** Cross-source: Ecobank DCIR user-creation 3-week escalation email (thread 19dbf704dc7edb8a, 13:21 WAT) captured by email sweep — adds third DCIR-portal failure mode layer to Ecobank situation (briefing-2026-04-24 D1 strengthening signal). TDSD-6719 Verve TTP RC06 Problem ticket opened + TDSD-6696 Incident Completed (27h cycle) captured by Jira sweep. TDSD-6718 7m fast-close by Opeyemi Ahmed captured by Jira sweep — hardens Monnify Settlements Opeyemi-cluster ownership evidence. Slack carried zero signal on these — consistent with the pattern that email-escalation layers + Jira cross-track movements are not ops-channel material.
 
-Total Slack-side quiet now 2h01m from 11:09 WAT Paystack treasury ops closeout (Christine "Done" 10:54 WAT).
+Total Slack-side quiet now 3h01m from 11:09 WAT Paystack treasury ops closeout (Christine "Done" 10:54 WAT).
+
+### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level zero-delta tick (preserved summary)
+
+13:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777028940)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 12:09→13:09 WAT tick window. Keyword scan + DM scan 0 hits. Cross-source: NIBSS PTSA formal-escalation email layer captured by email sweep; TDSD-6718 NEW Opeyemi-direct-assigned refund ticket captured by Jira sweep. Total Slack-side quiet 2h01m at that tick.
 
 ### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-level zero-delta tick (preserved summary)
 
