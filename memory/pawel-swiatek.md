@@ -1,25 +1,26 @@
 ---
-title: Pawel Swiatek
 type:
   - "entity"
+title: Pawel Swiatek
+created: "2026-04-19T17:03:06Z"
+summary: "Group COO — audience (with Dennis Ajalie) of Frank Atashili's Apr 22, 2026 TeamApt Org Movements brief; also co-organizer (with Julia Penido) of the 2026 Executive Strategy Retreat (London, Apr 14–16)."
+updated: "2026-04-24T11:50:56Z"
 cssclasses:
   - "entity"
-created: "2026-04-19T17:03:06Z"
-updated: "2026-04-19T17:03:06Z"
-summary: Moniepoint team member — co-organizer of the 2026 Executive Strategy Retreat (London, Apr 14–16); set OKR presentation requirements via Mar 31 brief.
 ---
 
 ## Overview
 
-Pawel Swiatek is a Moniepoint team member responsible for coordinating executive offsites and setting presentation standards for senior leadership events.
+Pawel Swiatek is the **Group COO** at [[Moniepoint]] / [[MP Technologies UK]] — a role explicitly named in [[Frank Atashili]]'s Apr 22, 2026 [[TeamApt-Platformization-Org-Movements (1)|Org Movements brief]], prepared for Pawel and [[Dennis Ajalie]].
 
-## Activity
+## Signals
 
-- **2026 Executive Strategy Retreat (Apr 14–16, London, Chicago Booth):** Co-organized with [[Julia Penido]]. Set OKR presentation requirements per March 31 brief — structure: OKRs anchored to 5 Group objectives, Q1 progress, Q2–Q4 plan.
-- **Retreat logistics:** Day 2 dinner groupings, Thursday special dinner, calendar invite coordination.
+- **Apr 22, 2026:** Audience (with Dennis Ajalie) of Frank's TeamApt Platformization Org Movements brief — how Project Phoenix lands on TeamApt's people.
+- **Apr 14–16, 2026:** Co-organizer (with Julia Penido) of the [[2026 Executive Strategy Retreat]] in London (Chicago Booth venue).
+- **Mar 31, 2026:** Set OKR presentation requirements via retreat brief — structure of OKRs anchored to 5 Group objectives, Q1 progress, Q2–Q4 plan.
+- Coordinated retreat logistics (Day 2 dinners, Thursday special, calendar invites).
 
-## Related
+## Sources
 
 - [[2026 Executive Strategy Retreat]]
-- [[Julia Penido]] — co-organizer
-- [[2026 Strategy Retreat CPO Prep Brief]]
+- [[TeamApt-Platformization-Org-Movements (1)]] — Apr 22, 2026 brief naming Pawel as Group COO
