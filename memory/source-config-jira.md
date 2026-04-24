@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-23T21:09:00Z (22:09 WAT). Skim-tick elevated to full: 21 TDSD deltas in 15:11→22:09 WAT window — Wema TDSD-6705 Completed 18:45 WAT, Access TDSD-6708 Resolved 18:51, NIBSS Dis TDSD-6710/6650 Completed 21:51/21:42, 4th Dominic Awaiting-Scheme-Update ticket (TDSD-6706). Zero P1/Highest filings despite 4 Slack P1 posts — Polaris + CoralPay ZIB Slack-only (5th data point on cross-source asymmetry tracker)."
-updated: "2026-04-23T21:19:52Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T05:09:00Z (06:09 WAT). Briefing-tick full sweep: Layer A TDSD 5 deltas (Dominic resolution burst 23:25-23:32 WAT Apr 23 closed TDSD-6553/6612/6688/6706 + TDSD-6711 NEW Ecobank DCIR portal inaccessibility 22:32 WAT Apr 23 Work In Progress). Layer B software projects 0 deltas. Key observations: TDSD-6612 (Highest priority, dormant since Apr 17) closed; Dominic workflow-discipline observation has mixed evidence now (resolution burst is counter-signal)."
+updated: "2026-04-24T05:27:27Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T21:09:00Z"
+last_processed: "2026-04-24T05:09:00Z"
 ---
 
 ## Connection
@@ -65,25 +65,23 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
-### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — skim-tick elevated to full on delta
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep
 
-22:09 WAT Apr 23 tick: **21 TDSD deltas in the 15:11→22:09 WAT window.** Oversize payload (82KB) — extracted compact summary via subagent-equivalent jq parse. Key movements:
+06:09 WAT Apr 24 briefing tick: 5 TDSD deltas since 22:09 WAT Apr 23, 0 Layer B deltas. Dominic resolution burst observed:
 
-- **TDSD-6705** Wema Bank ATS RC 91/22 20260423 — reporter/assignee Qazim Adedigba, Completed 18:45 WAT. Pairs with Slack 16:54 WAT Qazim Wema RC91/22 Ongoing post. ~2h cycle within-pattern.
-- **TDSD-6708** Access Bank ATS USER CREATION ON DCIR PORTAL 20260422 — Resolved 18:51 WAT.
-- **TDSD-6651** Fidelity Bank ATS RC 91 Failures 20260421 — Completed 18:45 WAT (~2d lag from file date).
-- **TDSD-6710, TDSD-6650** NIBSS Disbursement downtime — both Completed 21:51/21:42 WAT by Dominic Usiabulu. Paired closures.
-- **TDSD-6706** REJECTED REFUND STATUS UPDATE 23042026 — Awaiting Scheme Update, assignee Dominic. **4th Dominic-Awaiting-Scheme-Update ticket this week** (extends pattern from briefing-2026-04-23 D1 and A2). Compound data point on workflow-discipline observation.
-- **TDSD-6709** UPDATE MONIEPOINT_INT INTERCHANGE CONFIG FOR F60 SINK INFO — Awaiting Scheme Update, assignee Oluwaseun Oladele (not Dominic).
-- **TDSD-6707** INABILITY TO LOG INTO STAGING — INITIAL REVIEW, June Johnson, assignee Ekene Udodi. Low priority Awareness.
-- **TDSD-6699** Firewall HA configuration — Awaiting implementation (carryforward from 16:11 tick).
-- **TDSD-6506** EMERGENCY UPGRADE TEAMAPT FIREWALL2 — Completed 16:18 WAT.
-- **TDSD-6680** PALMPAY PORTAL TRANSACTION NOT MIGRATING — Completed 16:18 WAT.
-- **TDSD-6694** Paystack balance adjustment — Resolved 15:40 WAT.
-- **TDSD-6562** Deploy RESYNC and MPGS Sink — Completed 15:58 WAT.
-- **Zero P1/Highest priority tickets** filed in the 15:11→22:09 WAT window despite 4 Slack P1 posts — Polaris and CoralPay ZIB RC91s have NO corresponding Jira ticket at tick time (cross-source asymmetry compounds — 5th data point beyond the Apr 23 16:11 WAT codification threshold of 3).
+- **TDSD-6612** "SETTLEMENT PAYOUT" (single txn M0826041000431109080 beneficiary bank not available) — **Highest priority** dormant since filing 22:50 WAT Apr 17 — **Done 23:32 WAT Apr 23** by [[Dominic Usiabulu]] (assignee), reporter [[Blessing Olawale]]. Major resolution — 6-day dormant Highest-priority ticket.
+- **TDSD-6553** "SETTLEMENT PAYOUT" (24-transaction batch) — Medium, filed 23:07 WAT Apr 14 — **Done 23:30 WAT Apr 23** by Dominic, reporter Blessing Olawale.
+- **TDSD-6688** "UPDATE OF REJECTED REFUND STATUS 22042026" — Medium, filed 16:13 WAT Apr 22 by [[Samson Anaele]] (reporter), Dominic assignee — **Closed 23:25 WAT Apr 23**.
+- **TDSD-6706** "UPDATE OF REJECTED REFUND STATUS 23042026" — Medium, filed 17:59 WAT Apr 23 by Samson Anaele, Dominic assignee — **Resolved 23:25 WAT Apr 23**.
+- **TDSD-6711** "Ecobank | ATS | Portal Inaccessibility | 20260423" — Medium, filed **22:32 WAT Apr 23** by [[Qazim Adedigba]] (reporter + assignee self-assigned), status Work in Progress. Escalated to Mayowa/Olayombo@ecobank.com. See briefing-2026-04-24 D1 + [[Ecobank — RC91 on NUS Nodes]] situation page — now tracking compound Ecobank failure (3 RC91 cycles Apr 23 + DCIR portal inaccessibility).
 
-**Cross-source asymmetry — codification tracker:** 5 data points within 24h (TDSD-6692 UBA 06:44 WAT + TDSD-6702 NIBSS DD DOWNTIME 15:23 WAT Jira-only; TDSD-6703 3DS HTTP 422 16:07 WAT Jira-only; Polaris 22:09 WAT Slack-only; CoralPay ZIB 22:09 WAT Slack-only). Directive draft deferred to briefing-2026-04-24 Decision item — the asymmetry runs in both directions (Slack-only and Jira-only).
+**Dominic workflow-discipline pattern — mixed evidence after this tick.** The 4-ticket resolution burst at 23:25-23:32 WAT (TDSD-6553/6612/6688/6706) is a concrete counter-signal to the workflow-discipline concern flagged in briefing-2026-04-22 B4 and briefing-2026-04-23 D1/A2. Dominic is processing backlog at end-of-day — this is resolution behavior, not stall. However, TDSD-6645 (the primary situation-driver) was NOT in the resolution burst and remains static since 22:09 WAT Apr 23, so the single-ticket handoff-to-inwards-payments-team thread is still open. Synthesis candidate ("Monnify Settlements — Dominic-Awaiting-Scheme-Update workflow pattern") status: mixed evidence, defer.
+
+**TDSD-6645 state check.** JQL sweep returned zero updates since 22:09 WAT Apr 23 → TDSD-6645 remains Escalated with Dominic's 04:08 WAT Apr 23 attribution-transfer comment as the latest activity. No new counterparty identified.
+
+### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — preserved from prior note
+
+22:09 WAT Apr 23 tick: 21 TDSD deltas in 15:11→22:09 WAT window — Wema TDSD-6705 Completed 18:45 WAT, Access TDSD-6708 Resolved 18:51, NIBSS Dis TDSD-6710/6650 Completed 21:51/21:42, 4th Dominic Awaiting-Scheme-Update ticket (TDSD-6706). Zero P1/Highest filings despite 4 Slack P1 posts — Polaris + CoralPay ZIB Slack-only (5th data point on cross-source asymmetry tracker).
 
 ### Tick 2026-04-23 16:11 WAT (preserved from prior note)
 
