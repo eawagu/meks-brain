@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-23T21:09:00Z (22:09 WAT). Skim-tick elevated to full on delta: #teamapt-tech-operations 4 new Qazim incident posts — 2 active P1s (Polaris 5h20m, CoralPay ZIB 1h53m) dispatched Immediate-tier DM, 2 resolved in-window (Wema TDSD-6705 2h, Access 11m). 6h tick-gap observation — 17/18/20 WAT ticks did not run."
-updated: "2026-04-23T21:18:59Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T05:09:00Z (06:09 WAT). Briefing-tick full sweep: all 5 Tier 1 channels empty since 22:09 WAT Apr 23 (8h10m overnight quiet); keyword scan 0 hits; DM scan 0 hits. Clean overnight delegation window — captured in briefing-2026-04-24 A1."
+updated: "2026-04-24T05:26:30Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-23T21:09:00Z"
+last_processed: "2026-04-24T05:09:00Z"
 ---
 
 ## Connection
@@ -45,19 +45,15 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — skim-tick elevated to full on delta
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep
 
-22:09 WAT Apr 23 tick: **4 of 5 Tier 1 channels empty; #teamapt-tech-operations 4 new parent messages** (all Qazim Adedigba incident posts):
-1. **CoralPay (ZIB) RC91** Start 20:16 WAT Ongoing (Product: Switch) — Immediate #1 new P1, 1h53m active at tick.
-2. **Polaris Bank RC91** Start 16:49 WAT Ongoing — Immediate #2 threshold exceeded (5h20m active, P1 >2h unresolved).
-3. **Access Bank brief RC91** 16:47–16:56 WAT (11min, bank-auto-recovered).
-4. **Wema Bank RC91/22** Start 16:44 WAT Ongoing (resolved via TDSD-6705 Completed 18:45 WAT).
+06:09 WAT Apr 24 briefing tick: **all 5 Tier 1 channels empty since 22:09 WAT Apr 23** (8h10m overnight delegation window clean). Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR outage OR breach) after:2026-04-23` returned 0 results. DM scan `to:me after:2026-04-23` returned 0. Per briefing-2026-04-24 A1 — structural signal that overnight delegation continues to work.
 
-Immediate-tier DM dispatched consolidating Polaris + CoralPay ZIB to user (U080PEXEZ0E). Wema + Access captured as context (resolved). Situation page updates written: [[Sterling + Polaris — Routes Degraded]], [[Wema Bank — RC91 P1 Apr 17]], [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]] (new ZIB re-enablement regression framing).
+No situation updates triggered by Slack sweep this tick. Ecobank compound situation (briefing-2026-04-24 D1) driven by email + Jira sources; no overnight Slack re-surface of Ecobank RC91 despite ongoing route-off state.
 
-DM scan: 0 new DMs to user. Keyword scan (P1|outage|RC91|RC96|RC05|RC06|breach|compromised|transaction failure|settlement failure) after 15:11Z: 0 additional hits beyond the Tier 1 channel-read deltas.
+### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — skim-tick elevated to full on delta (preserved)
 
-**6h tick-gap observation** — prior tick at 16:11 WAT; expected ticks at 17/18/20 WAT did not run (reason unknown, not a Slack-source issue). All 4 new parent messages were in the 16:11→22:09 WAT gap. Skim-tick fast-path promoted to full on delta per Step 0 directive.
+22:09 WAT Apr 23 tick: 4 of 5 Tier 1 channels empty; #teamapt-tech-operations 4 new parent messages (Qazim incident posts) — Polaris 5h20m + CoralPay ZIB 1h53m Immediate-dispatched via DM draft; Wema TDSD-6705 + Access 11m resolved in-window. 6h tick-gap observation (17/18/20 WAT ticks did not run).
 
 ### Tick 2026-04-23 16:11 WAT (preserved from prior note)
 
