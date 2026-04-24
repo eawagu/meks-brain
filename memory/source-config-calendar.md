@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick sweep covered Apr 24 day (11 events returned). TeamApt Org Changes 16:00-18:00 WAT today + HoE cluster 11:00-12:40 WAT + triple-overlap at 16:00 WAT surfaced as briefing-2026-04-24 D2 + A6."
-updated: "2026-04-24T05:28:59Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: Apr 24 event set unchanged from briefing-tick enumeration — no new invites, no cancellations, no RSVP deltas."
+updated: "2026-04-24T06:18:28Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T05:09:00Z"
+last_processed: "2026-04-24T06:10:00Z"
 ---
 
 ## Connection
@@ -27,6 +27,10 @@ Google Calendar MCP. Primary calendar for user.
 - Recurring standing meetings with unchanged metadata — no delta, no surface.
 
 ## Notes
+
+### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
+
+07:10 WAT Apr 24 tick: `list_events` for Apr 24 (07:10 WAT → Apr 25 00:00 WAT) returned 9 events ordered by lastModified — all timestamps pre-dating 06:09 WAT briefing tick (most recent `updated` is Org Changes at 14:38 WAT Apr 23). No new invites, no cancellations, no RSVP status deltas since briefing compose. All 9 events match briefing-2026-04-24 A6 enumeration. First meeting of the day is TeamApt All Hands at 08:30 WAT (80min away).
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick sweep
 
