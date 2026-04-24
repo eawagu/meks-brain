@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T10:09:00Z (11:09 WAT). 11:09 WAT Apr 24 skim elevated to full: Layer A returned 8 deltas — TDSD-6268 SETTLEMENT PROCESSING Done 11:02 WAT (same transaction MNFY|46|20260310114548|008618 as TDSD-6645; 4th Opeyemi-cluster fast-close; TDSD-6645 itself still Escalated, 31h01m Dominic silence); **TDSD-6716 NEW Incident Medium 10:18 WAT formalizes NIBSS response-not-sent pattern (RC91 + Access + GTBank scope)** — folded into [[NIBSS PTSA — VPN Flapping Apr 22]] watchpoint; TDSD-6717 Paystack ₦1.07B balance adjustment (routine, 15m filed→resolved); TDSD-6714 routine; TDSD-6715 NEW cron change (Authorize, not CTO-gate); TDSD-6618 Stanbic 6-day-old RC91 backlog closure. Layer B 0. No Immediate dispatch."
-updated: 2026-04-24
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T11:09:00Z (12:09 WAT). 12:09 WAT Apr 24 skim-elevated-to-full tick: Layer A returned 3 NEW deltas in 1h window — TDSD-6713 Keystone INITIAL REVIEW → Work in progress 11:59 WAT (Daniel Armstrong, 3h38m filing-to-WIP, David Oseji assignee); TDSD-6645 Blessing 3rd-chase 11:20 WAT (\"Please do we have an update\", Dominic silence 32h01m); TDSD-6684 Blessing 11:19 WAT first-cross-ticket-CC-to-Opeyemi-Ahmed on refund ticket (Dominic silence 32h18m). Layer B 0. No Immediate dispatch."
+updated: "2026-04-24T11:23:35Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T10:09:00Z"
+last_processed: "2026-04-24T11:09:00Z"
 ---
 
 ## Connection
@@ -65,63 +65,38 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
-### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta
+### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim elevated to full on delta
 
-11:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 10:09"` returned **8 deltas**. Layer B software JQL returned **0 deltas**.
+12:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 11:09"` returned **3 deltas in the 11:09→12:09 WAT window** (filtered from 10-ticket response; pre-11:09 deltas already processed at prior tick). Layer B software JQL returned **0 deltas**.
 
-**Layer A — TDSD-6268 "SETTLEMENT PROCESSING" Done 11:02 WAT** (situation delta on [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]])
-- **Type:** Task (service_desk archetype). **Priority:** High. **Status transition:** Work in progress (09:14 WAT) → **Done 11:02 WAT Apr 24** by [[Opeyemi Ahmed]]. 1h48m fast-close after first Apr 24 activity observation.
-- **Reporter:** [[Blessing Olawale]]. Filed 2026-03-23 (13-month-old ticket).
-- **Scope:** Same transaction reference `MNFY|46|20260310114548|008618` as TDSD-6645.
-- **Significance:** 4th Opeyemi-cluster same-day-close (alongside TDSD-6655/TDSD-6661/TDSD-6662 system-failure settlements). TDSD-6645 itself still Escalated, 31h01m Dominic silence continuing. No closure RCA comment observed. Three non-exclusive closure framings (inwards-team handoff completion / duplicate-path closure / settlement fully processed) underdetermined from status-only data.
-- **Disposition:** Situation delta folded into [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]]. Briefing-2026-04-25 Decision candidate: treat as implicit resolution vs. ping Dominic for TDSD-6645 closure vs. direct-ask Opeyemi.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=high`, `status_transition_done`, `parallel_ticket_resolution_same_transaction_as_tdsd6645`, `active_situation_match=monnify_settlements_tdsd6645_va_reversal`, `assignee=opeyemi_ahmed_cluster_match`, `1h48m_fast_close`, `no_closure_rca`, `tdsd6645_unchanged_escalated`, `dominic_ticket_specific_silence_continues_31h01m`, `opeyemi_cluster_evidence_4_to_1`, `briefing_2026_04_25_decision_candidate`, `no_immediate_dispatch`.
+**Layer A — TDSD-6713 "Keystone | Settlements issue | 20260424" — status transition** (situation delta on [[Keystone Bank — Settlement Requery Apr 20]])
+- **Transition:** INITIAL REVIEW → **Work in progress 11:59:13 WAT Apr 24** by [[Daniel Armstrong]] (ticket filer + post-filing assignee-volley operator). Assignee stable at [[David Oseji]]. Priority Medium. 3h38m from filing (08:21 WAT) to active-WIP.
+- **Significance:** Ticket is now actively being handled. No comments on ticket yet; no resolution signal. Pattern watch: TDSD-6633 (Apr 20 cycle) closed same-day (~9h0m filing-to-Done); if TDSD-6713 follows same cadence, expect closure by ~17:00 WAT Apr 24. Situation delta folded into [[Keystone Bank — Settlement Requery Apr 20]].
+- **Disposition:** Awareness — briefing-2026-04-25 candidate. No Immediate dispatch.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `status_transition_initial_review_to_wip`, `active_situation_match=keystone_settlement_requery_apr20`, `assignee_david_oseji_confirmed`, `3h38m_filing_to_wip`, `same_day_close_tracking_17_wat_expected`, `no_immediate_dispatch`.
 
-**Layer A — TDSD-6716 "NIBSS|SUCCESSFUL RESPONSE NOT SENT| 20260424"** (NEW — formalizes response-not-sent pattern)
-- **Type:** [System] Incident (service_desk archetype). **Priority:** Medium. **Status:** Work in progress (updated 10:46 WAT Apr 24). Filed **10:18 WAT Apr 24**.
-- **Reporter + Assignee:** [[Afeez Kazeem]] (self-assignee).
-- **Description:** *"Moniepoint notice high RC91 responses for from Nibss on Access And GTBank transactions being sent to PTSA fro processing. These transactions were processed successfully on Switch side but Nibss did not send response to Moniepoint."*
-- **Significance:** Formalizes the response-not-sent pattern from email-only watchpoint to Jira-trackable Medium Incident. **RC91 keyword explicit** — frames the mechanism as producing RC91 on Moniepoint side. **Two banks named — Access and GTBank** — not single-transaction anomaly; scoped to card-layer transactions across multiple issuers routed via PTSA. Elevates response-not-sent watchpoint (see [[NIBSS PTSA — VPN Flapping Apr 22]]) to proto-pattern with formal incident tracking.
-- **Disposition:** Situation watchpoint strengthened (folded into [[NIBSS PTSA — VPN Flapping Apr 22]]). No new situation page — directive-tracking 48h window (10:10 WAT Apr 24 → 10:10 WAT Apr 26) still at 1-of-2 post-transition instances. No Immediate dispatch (Medium priority, 2-min self-resolved window, no active customer-facing incident — documentation/escalation ticket).
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_type=incident`, `ticket_new`, `rc91_keyword_explicit`, `two_banks_scope_access_gtbank`, `active_situation_match=nibss_ptsa_vpn_flapping`, `formalizes_email_watchpoint_pattern`, `self_resolved_2min_window`, `watchpoint_layer_strengthening_not_status_driver`, `no_immediate_dispatch_self_resolved`.
+**Layer A — TDSD-6645 "Urgent Pending Settlement – Re-trigger Required" — Blessing 3rd-chase** (situation delta on [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]])
+- **Comment added:** 11:20:45 WAT Apr 24 by [[Blessing Obioha]] (reporter) — *"Please do we have an update"*. Status unchanged at Escalated (since 04:08 WAT Apr 23). Priority unchanged at Highest.
+- **Significance:** 3rd Blessing chase on TDSD-6645 (Apr 21 15:02, Apr 22 11:10, Apr 24 11:20) — daily cadence. Dominic ticket-specific silence extends to 32h01m from 04:08 WAT Apr 23 attribution-transfer comment. No dispatcher-side response. Blessing has not yet CC'd Opeyemi Ahmed on this ticket (contrast to TDSD-6684 below).
+- **Disposition:** Situation delta folded into [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]]. Briefing-2026-04-25 Decision candidate strengthened.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=highest`, `comment_added_reporter_3rd_chase`, `active_situation_match=monnify_settlements_tdsd6645_va_reversal`, `status_unchanged_escalated_32h01m_dominic_silence`, `daily_chase_cadence`, `no_cc_opeyemi_yet_on_this_ticket`, `no_immediate_dispatch`.
 
-**Layer A — TDSD-6717 "PAYSTACK BALANCE ADJUSTMENT APRIL 24TH 2026"** (NEW routine treasury ops — fast-close)
-- **Type:** [System] Service request with approvals. **Priority:** Medium. **Status transition:** NEW (10:38 WAT) → **Resolved 10:53 WAT** (15m filed→resolved).
-- **Reporter:** [[Christine Ogude]]. **Assignee:** [[Daniel Fetuga]].
-- **Description:** Paystack balance update request for NGN 1,074,864,192.35 (₦1.07B).
-- **Cross-source correlation:** Matches Slack activity on #teamapt-x-paystack-transfer-support (10:26-10:54 WAT sequence: Caret user treasury application request → Christine acknowledgment → Christine "Done"). Slack sequence precedes Jira filing by 12m; Jira filing precedes Slack "Done" by 16m — parallel documentation of same operational event. Routine treasury operations, no CTO action.
-- **Disposition:** Awareness — routine treasury ops. No situation page needed. No Immediate dispatch. Different direction from Paystack-balance-below-₦200m alert pattern (this is inflow application, not low-float alert) — does not compound with that recurring pattern.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_type=service_request_with_approvals`, `ticket_new_and_resolved_same_window`, `15m_filed_to_resolved`, `slack_cross_source_correlation=c096lcnp26p`, `routine_treasury_ops`, `different_direction_from_low_float_pattern`, `no_active_situation_match`, `no_immediate_dispatch`.
-
-**Layer A — TDSD-6714 "Transaction Status Update"** (routine continuation from prior tick)
-- **Type:** [System] Service request. **Priority:** Medium. **Status:** In Progress 10:56 WAT (transitioned from Awaiting Scheme Update 10:11 WAT filing).
-- **Reporter:** Samuel Amos (Moniepoint). **Assignee:** [[Opeyemi Ahmed]].
-- **Disposition:** Awareness — single-transaction routine investigation. No Immediate dispatch.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `status_transition_awaiting_scheme_update_to_in_progress`, `assignee=opeyemi_ahmed`, `routine_single_txn_investigation`, `no_active_situation_match`.
-
-**Layer A — TDSD-6715 "Turn on cron to fetch bank mandate configs in consolidated"** (NEW routine change)
-- **Type:** [System] Change. **Priority:** Medium. **Status:** Authorize (filed 10:12 WAT, updated 10:13 WAT).
-- **Reporter + Assignee:** [[Yasir Syed Ali]] (self-assignee; same-person).
-- **Description:** *"We just need to turn on cron"*.
-- **Disposition:** Awareness — routine consolidated DD infrastructure change. **Not CTO approval-gate** — no deploy/action window approaching within 4 hours per Immediate #4 directive. Standard authorize flow. No Immediate dispatch.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_type=change`, `ticket_new`, `status=authorize`, `self_reporter_and_assignee`, `no_cto_approval_gate`, `routine_infra_change`, `no_active_situation_match`, `no_immediate_dispatch`.
-
-**Layer A — TDSD-6618 "Stanbic | RC91| 20260418"** (backlog closure — 6-day-old ticket)
-- **Type:** [System] Incident. **Priority:** Medium. **Status transition:** Work in progress → **Completed 10:27 WAT Apr 24** by [[Afeez Kazeem]] (assignee).
-- Filed Apr 18 18:44 WAT — 5d15h43m active lifespan, now closed. Historical [[Stanbic Bank]] RC91 cycle closure; [[Stanbic Bank ATS — Persistent RC91 Pattern]] tracks the ongoing cycle count (32 cycles Apr 3-20) and does not individually surface each ticket closure.
-- **Disposition:** Awareness — backlog cleanup. No situation-page update needed (individual ticket closures not tracked on the persistent-pattern situation). No Immediate dispatch.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_type=incident`, `status_transition_completed`, `backlog_6_day_old_ticket_close`, `active_situation_match=stanbic_bank_ats_persistent_rc91_pattern`, `persistent_pattern_individual_cycle_not_tracked`, `no_immediate_dispatch`.
-
-**Layer A — TDSD-6617 + TDSD-6565** (already-processed tickets, tangential edits this window)
-- **TDSD-6617** — retired [[Monnify Disbursements — Stuck IN PROGRESS Apr 17+]] in 10:09 WAT tick. Updated again 10:12 WAT Apr 24 (post-closure metadata edit). No new disposition.
-- **TDSD-6565** — Payment Link Enhancement V2 closure processed in 10:09 WAT tick. No new disposition.
+**Layer A — TDSD-6684 "Pending Refund Transactions" — Blessing CC-escalation to Opeyemi Ahmed** (situation delta on [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]])
+- **Comment added:** 11:19:31 WAT Apr 24 by [[Blessing Obioha]] (reporter) — *"@Dominic Usiabulu Please help with an update cc @Opeyemi Ahmed Kindly assist"*. Status unchanged at Awaiting Scheme Update. Priority unchanged at Medium. Assignee still [[Dominic Usiabulu]].
+- **Significance:** **First time Blessing has CC'd Opeyemi Ahmed on a Dominic-assigned ticket.** 17 minutes after TDSD-6268 Done by Opeyemi at 11:02 WAT. Dominic silence on TDSD-6684: Apr 23 03:01 WAT "thiis is in progress" → Apr 24 11:19 WAT = 32h18m (mirrors TDSD-6645 Dominic silence). Cross-ticket escalation pattern emerging: Blessing is routing around Dominic-silence by pulling Opeyemi-cluster ownership into refund-side tickets.
+- **Disposition:** Cross-ticket signal folded into [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] situation (TDSD-6684 referenced as pattern-compounding evidence). Not promoting TDSD-6684 to its own situation yet — 1 data point of cross-ticket CC is below threshold; if Blessing similarly CCs Opeyemi on TDSD-6645 in next ticks, reconsider spinning separate "refund escalation" situation.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `comment_added_reporter_chase_with_cross_ticket_cc`, `first_blessing_cc_opeyemi_on_dominic_ticket`, `active_situation_match=monnify_settlements_tdsd6645_va_reversal_pattern_compounding`, `status_unchanged_awaiting_scheme_update_32h18m_dominic_silence`, `cross_ticket_rerouting_signal`, `triggered_17m_after_tdsd6268_done`, `no_immediate_dispatch`.
 
 **Active-situation checkpoints (zero delta this tick):**
-- **TDSD-6645** (Monnify Settlements Escalated) — no movement; still Escalated, last Dominic comment 04:08 WAT Apr 23 (31h01m silence). TDSD-6268 Done captures as parallel-ticket resolution signal.
-- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no movement since 22:32 WAT Apr 23 Work In Progress filing. Route remains off.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no updates since 22:32 WAT Apr 23 Work In Progress filing. 13h37m silent at 12:09 WAT. Route remains off per briefing-2026-04-24 D1.
+- **TDSD-6716** (NIBSS response-not-sent formalization) — no updates since 10:46 WAT Apr 24 (already captured at 11:09 tick).
 - **TDSD-6699 + TDSD-6690** (CTO approval queue) — both still pending; no approval action observed.
-- **TDSD-6713** (Keystone Apr 24 revived cycle) — still Medium INITIAL REVIEW from 08:21 WAT filing; no movement.
 - **TDSD-6703** (3DS HTTP 422) — Work in progress, no movement.
+- **TDSD-6712** (Kafka Monnify Live datasource) — no updates since prior tick.
+
+### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
+
+11:09 WAT Apr 24 tick: Layer A returned 8 deltas — TDSD-6268 SETTLEMENT PROCESSING Done 11:02 WAT (same transaction MNFY|46|20260310114548|008618 as TDSD-6645; 4th Opeyemi-cluster fast-close; TDSD-6645 itself still Escalated, 31h01m Dominic silence); **TDSD-6716 NEW Incident Medium 10:18 WAT formalizes NIBSS response-not-sent pattern (RC91 + Access + GTBank scope)** — folded into [[NIBSS PTSA — VPN Flapping Apr 22]] watchpoint; TDSD-6717 Paystack ₦1.07B balance adjustment (routine, 15m filed→resolved); TDSD-6714 routine; TDSD-6715 NEW cron change (Authorize, not CTO-gate); TDSD-6618 Stanbic 6-day-old RC91 backlog closure. Layer B 0. No Immediate dispatch.
 
 ### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — skim elevated to full on delta (preserved summary)
 
