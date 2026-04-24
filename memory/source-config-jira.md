@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T14:09:00Z (15:09 WAT). 15:09 WAT Apr 24 full-level tick: Layer A returned 3 new deltas in 14:09→15:09 WAT window — **TDSD-6714 Closed 14:48 WAT by Opeyemi Ahmed (Samuel Amos reporter, NEW Opeyemi-cluster-reporter); TDSD-6720 NEW PENDING SETTLEMENT 14:43 WAT by Blessing Olawale, Opeyemi direct-assigned (first Blessing-Olawale routing-bypass); TDSD-6721 NEW PENDING PAYABLE POSTING 14:53 WAT by Samson Anaele, Opeyemi direct-assigned, Awaiting Scheme Update.** All 3 Opeyemi-direct-assigned from filing — routing-bypass now spans 3 reporter clusters (Samson Anaele, Blessing Obioha+Olawale, Samuel Amos). Layer B 0. No Immediate dispatch."
-updated: "2026-04-24T14:22:06Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T16:09:00Z (17:09 WAT). 17:09 WAT Apr 24 full-level tick: Layer A 2 new deltas — **TDSD-6724 Review → Authorize 16:20 WAT (Ezinne Ogoke Deployment Destination Account Name Bug Fix + CBA Reversal Request Fix — 3rd deploy-approval ticket in briefing-2026-04-24 D3 queue alongside TDSD-6699 + TDSD-6690); TDSD-6723 title refined 16:53 WAT (added 'AND ROUTING' — metadata touch)**. Layer B 4 new deltas — **AS-4242 Sterling Account Switch Project Plan Epic Done 16:41 WAT (High priority milestone); ADD-4597/4598/4599 bank_reference unique constraint Tasks Done 17:03-17:06 WAT (Bukola Taiwo — duplicate-debit defense layer, cross-link to [[Monnify Atlas NIP Outwards Transit — Duplicate Debit Recurrence]])**. No Immediate dispatch."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T14:09:00Z"
+last_processed: "2026-04-24T16:09:00Z"
 ---
 
 ## Connection
@@ -46,7 +46,7 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 - **Archetype signals:** service_desk (TDSD) = operational incidents (Immediate/Briefing tiers); software projects = dev work (mostly Awareness unless P1/P0).
 - **Layer A — TDSD service_desk:** surface all P1/Highest/Critical priority, all status transitions on active-situation entities, all new ticket filings matching active situations.
 - **Layer B — Software projects:** heuristic — surface P1/P0, Blocker priority, status transitions on pattern-tracked epics (MDRS, Harness migration, CoralPay), tickets touching entities in developing situations.
-- **Layer C — Skip list:** low-signal ticket patterns (bulk config updates, routine documentation) — see Skip list section.
+- **Layer C — Skip list:** low-signal ticket patterns — see Skip list section.
 
 ### Salience factors
 - `priority=<level>` — Highest/Critical > High > Medium > Low. P1 = Immediate unless resolved fast-cycle.
@@ -56,7 +56,7 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 - `archetype=<service_desk|software>` — service_desk tickets default to higher salience.
 
 ### Skip list (patterns explicitly excluded from Layer B surface)
-*(Empty — maintained via monthly periodic review + weekly skip candidate bulk-confirm per config-salience. Dismissed patterns (3+ consecutive) enter a verification queue before being added here.)*
+*(Empty — maintained via monthly periodic review + weekly skip candidate bulk-confirm per config-salience.)*
 
 ### Sweep
 1. **Layer A full sweep** — JQL: `project = TDSD AND updated > "<last_processed>" ORDER BY updated DESC`
@@ -65,55 +65,54 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
-### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level tick
+### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level tick
 
-15:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 13:09"` returned 10 deltas, of which **3 are new to the 14:09→15:09 WAT window** (remaining 7 were captured in the 14:09 WAT prior tick and reflected the older section's work). Layer B software JQL returned **0 deltas**.
+17:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 15:09"` returned 6 tickets; **2 are new to the 16:09→17:09 WAT window** (4 were captured in the 16:09 WAT tick).
 
-**Layer A — TDSD-6721 NEW "PENDING PAYABLE POSTING" at 14:53 WAT** (situation delta on [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]])
-- **Created 14:53 WAT Apr 24** by [[Samson Anaele]] (samson.anaele@moniepoint.com), Medium priority, [System] Service request. **Assignee: [[Opeyemi Ahmed]] directly from filing** (not Dominic). Status **Awaiting Scheme Update** at tick time.
-- **Significance:** Second Samson-Anaele direct-Opeyemi ticket today (first was TDSD-6718 at 13:30 WAT). Confirms the Apr 24 13:30 WAT Samson→Opeyemi direct-routing was not an isolated event. **Awaiting Scheme Update status** suggests Opeyemi is in an intermediate handling phase (not closure-ready) — still Opeyemi-owned, just blocked on scheme. Contrast with TDSD-6718 which closed in 7 minutes — same reporter-to-Opeyemi path, different execution gate.
-- **Disposition:** Awareness — Monnify Settlements situation delta. No Immediate dispatch.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `issuetype=service_request`, `ticket_new`, `reporter=samson_anaele`, `assignee=opeyemi_ahmed_direct`, `status=awaiting_scheme_update`, `second_samson_anaele_direct_opeyemi_today`, `opeyemi_cluster_expansion`, `active_situation_match=monnify_settlements_tdsd6645_va_reversal`, `no_immediate_dispatch`.
+**Layer A — TDSD-6724 Review → Authorize 16:20 WAT** (approval-queue continuation, briefing-2026-04-24 D3 compound)
+- Created 16:08 WAT Apr 24 by [[Ezinne Ogoke]], [System] Change, "Deployment Destination Account Name Bug Fix And CBA Reversal Request Fix" — title trimmed from filing ("Deployment Note For" prefix dropped). **Status transitioned Review → Authorize at 16:20 WAT**, still unassigned.
+- **Significance: 3rd deployment-approval ticket in queue.** Briefing-2026-04-24 D3 flagged TDSD-6699 (Firewall HA, filed 13:32 WAT Apr 23) + TDSD-6690 (Ekene Udodi, filed 15:56 WAT Apr 22) as Emeka-approval-chain candidates. TDSD-6724 now reaches Authorize state within 12 minutes of filing — fast-track approval queue entry. Ezinne Ogoke is a regular change-filer. Approver routing not yet observable (unassigned).
+- **Briefing-2026-04-25 candidate: approval-queue expansion.** If Emeka appears in TDSD-6724's approval chain (visible via email notification at next tick if routing triggers), roll up under D3 continuation.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `issuetype=change`, `status_transition=review_to_authorize_12min`, `reporter=ezinne_ogoke`, `assignee=unassigned`, `deployment_note_change`, `approval_queue_third_ticket`, `briefing_2026_04_25_candidate`, `awareness_tier`, `no_immediate_dispatch`.
 
-**Layer A — TDSD-6714 Closed 14:48 WAT by Opeyemi Ahmed** (situation delta on Monnify Settlements + NEW Opeyemi-cluster-reporter)
-- **Transition:** Filed 10:11 WAT Apr 24 by [[Samuel Amos]] (amos.samuel@moniepoint.com) → **Closed 14:48 WAT Apr 24** by Opeyemi Ahmed (assignee from filing), Medium priority, "Transaction Status Update." 4h37m filing-to-Closed.
-- **Significance:** **NEW Opeyemi-cluster reporter — Samuel Amos.** Previously the Opeyemi-cluster routing-bypass pattern was observed via Samson Anaele (refund status updates) and Blessing Obioha/Olawale (settlement tickets). Samuel Amos adds a third reporter cluster, expanding the cluster-reporter surface and strengthening the "Opeyemi is the de-facto owner for refund/settlement/transaction-status cluster" interpretation from evidence-baselined to evidence-saturated. Not a fast-close (4h37m vs. TDSD-6718's 7m), but still Opeyemi-cluster-closed.
-- **Disposition:** Awareness — Monnify Settlements situation delta. No Immediate dispatch.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `issuetype=service_request`, `status_transition=closed`, `4h37m_filing_to_closed`, `reporter=samuel_amos_new_cluster_reporter`, `assignee=opeyemi_ahmed`, `opeyemi_cluster_evidence_expansion_third_reporter_cluster`, `active_situation_match=monnify_settlements_tdsd6645_va_reversal`, `no_immediate_dispatch`.
+**Layer A — TDSD-6723 title metadata refinement 16:53 WAT** (routine task metadata)
+- Originally "Create third party for MONNIFY INTERNATIONAL ON JULIANA SWITCH BO" → refined to **"Create third party for MONNIFY INTERNATIONAL AND ROUTING ON JULIANA SWITCH BO"** (added "AND ROUTING" scope). Still Awaiting Scheme Update, [[Mustapha Ajibade]] self-assigned. No status transition. Scope clarification on routine Juliana Switch onboarding task.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `issuetype=service_request`, `no_status_transition`, `title_scope_refinement`, `juliana_switch_onboarding_monnify_international_and_routing`, `awareness_only`, `no_active_situation_match`.
 
-**Layer A — TDSD-6720 NEW "PENDING SETTLEMENT" at 14:43 WAT** (situation delta on Monnify Settlements + NEW Blessing-Olawale routing-bypass)
-- **Created 14:43 WAT Apr 24** by [[Blessing Olawale]] (blessing.olawale@moniepoint.com, distinct from Blessing Obioha), Medium priority, Task issuetype. **Assignee: [[Opeyemi Ahmed]] directly from filing.** Status INITIAL REVIEW.
-- **Significance:** **Blessing Olawale's first observed routing-bypass.** Previously Blessing Olawale was the reporter of [[TDSD-6553]] (SETTLEMENT PAYOUT 24-transaction batch) which was Dominic-assigned and Closed in the Apr 23 23:25 WAT Dominic resolution burst. Today's filing direct to Opeyemi signals that Blessing Olawale's workflow is now routing around Dominic for new tickets. Combined with Blessing Obioha's 11:19 WAT CC-escalation on TDSD-6684 (Apr 24), **both Blessing-reporters are now pulling Opeyemi-cluster ownership into their workflow**.
-- **Disposition:** Awareness — Monnify Settlements situation delta. No Immediate dispatch.
-- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `issuetype=task`, `ticket_new`, `reporter=blessing_olawale_first_routing_bypass`, `assignee=opeyemi_ahmed_direct`, `status=initial_review`, `opeyemi_cluster_expansion_blessing_family`, `active_situation_match=monnify_settlements_tdsd6645_va_reversal`, `no_immediate_dispatch`.
+**Layer B — 4 new closures (Sterling Epic milestone + ADD duplicate-defense dev work):**
 
-**Active-situation checkpoints (zero delta this tick beyond the above):**
-- **TDSD-6645** (Monnify VA reversal) — still Escalated, 35h01m Dominic silence since 04:08 WAT Apr 23.
-- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, 36h08m Dominic silence.
-- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no Jira updates since 22:32 WAT Apr 23 filing. 16h37m silent at 15:09 WAT.
-- **TDSD-6699 + TDSD-6690** (CTO approval queue) — both still pending; no approval action observed.
-- **TDSD-6713** (Keystone settlement requery cycle) — no updates since 11:59 WAT Work in progress transition; 3h10m active.
-- **TDSD-6719** (Verve TTP RC06 Problem) — still Problem Investigation, no updates since filing 14:07 WAT Apr 24.
+- **AS-4242 "Sterling Account Switch Project Plan" Epic Done 15:41 UTC (16:41 WAT)** by [[Glory Alioha]] (assignee, June Johnson reporter, High priority). **Epic-level milestone** — Sterling Account Switch project plan now closed. Sterling separately remains on the CoralPay turned-off list (briefing-2026-04-24 context: Qazim→Daniel 23:06 WAT Apr 23 duty handover listed First Bank/Providus/Sterling as turned-off RC91 routes). The Epic closure is distinct from route-disposition — infrastructure/migration work plan vs. live route failure disposition. Not linked to [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]] directly; separate workstream. Factors: `source=jira`, `archetype=software`, `project=AS`, `priority=high`, `issuetype=epic`, `status_transition=in_progress_to_done`, `sterling_account_switch_project_plan_milestone`, `assignee=glory_alioha`, `reporter=june_johnson`, `no_direct_situation_match`, `awareness_tier`.
+
+- **ADD-4599 "Change bankReference field on transactionRequest to use UUID instead of Time base id generator" Task Done 16:06 UTC (17:06 WAT)** by [[Bukola Taiwo]]. Direct Debit dev work: switching bankReference from time-based ID → UUID prevents collision-driven duplicate-transaction risk. Factors: `source=jira`, `archetype=software`, `project=ADD`, `priority=medium`, `issuetype=task`, `status_transition=to_done`, `bank_reference_uuid_migration`, `duplicate_defense_layer`, `cross_link_candidate=monnify_atlas_nip_outwards_transit_duplicate_debit`, `awareness_tier`.
+
+- **ADD-4598 "Add unique constrain on bank_reference column on transfer table on bank integration service" Task Done 16:05 UTC (17:05 WAT)** by Bukola Taiwo. Direct Debit dev work: DB-layer uniqueness guarantee on `bank_reference` in bank-integration transfer table — prevents duplicate row insertion on retry/race paths. Factors: `source=jira`, `archetype=software`, `project=ADD`, `priority=medium`, `issuetype=task`, `status_transition=to_done`, `bank_reference_unique_constraint_transfer`, `duplicate_defense_layer_db`, `cross_link_candidate=monnify_atlas_nip_outwards_transit_duplicate_debit`, `awareness_tier`.
+
+- **ADD-4597 "Add a unique constrain on bank_reference column on transaction table" Task Done 16:05 UTC (17:05 WAT)** by Bukola Taiwo. Direct Debit dev work: DB-layer uniqueness guarantee on `bank_reference` in transaction table — paired with ADD-4598 to lock duplicate-defense across both transaction + transfer surfaces. Factors: `source=jira`, `archetype=software`, `project=ADD`, `priority=medium`, `issuetype=task`, `status_transition=to_done`, `bank_reference_unique_constraint_transaction`, `duplicate_defense_layer_db`, `cross_link_candidate=monnify_atlas_nip_outwards_transit_duplicate_debit`, `awareness_tier`.
+
+**Cross-link observation (ADD bank_reference trio → Monnify Atlas duplicate-debit):** The three ADD-4597/4598/4599 closures together constitute a **DB-layer + app-layer duplicate-defense hardening** on Direct Debit bank-integration. The ADD project (AptPay Consolidated Direct Debit) is distinct from Monnify Atlas NIP Outwards Transit (duplicate-debit recurrence with ₦32.66M exposure, [[TDSD-6591]] active workstream), but the defensive pattern — unique constraints on reference fields + UUID-based identifier generation — is directly applicable to preventing duplicate-debit reoccurrences. Potential briefing-2026-04-25 Awareness: "ADD duplicate-defense hardening complete — surfacing as reference pattern for Monnify Atlas remediation discussion." Not a decision item — informational cross-link.
+
+**Active-situation checkpoints (zero delta this tick):**
+- **TDSD-6645** (Monnify VA reversal) — still Escalated, **38h01m Dominic silence** since 04:08 WAT Apr 23.
+- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **39h08m Dominic silence**.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no Jira updates since 22:32 WAT Apr 23 filing. 18h37m silent at 17:09 WAT.
+- **TDSD-6699 + TDSD-6690** (CTO approval queue) — both still pending; no approval action observed. TDSD-6724 joins queue (above). **Note:** TDSD-6699 Firewall HA filed 13:32 WAT Apr 23 = 27h37m at approval gate (exceeds config-salience 12h threshold); TDSD-6690 filed 15:56 WAT Apr 22 = 49h13m at approval gate. Both already surface in briefing-2026-04-24 D3 — same-day re-fire is noise.
+- **TDSD-6713** (Keystone settlement requery cycle) — no updates.
 - **TDSD-6716** (NIBSS PTSA response-not-sent) — still Work in progress, no updates since 13:48 WAT Apr 24.
+- **TDSD-6719** (Verve TTP RC06 Problem) — still Problem Investigation.
+- **TDSD-6720** (Blessing Olawale NEW PENDING SETTLEMENT) — still INITIAL REVIEW at tick time.
 
-**Layer B — 0 deltas.**
+### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level tick (preserved summary)
+
+16:09 WAT Apr 24 tick: Layer A 5 deltas — TDSD-6722 UBA RC91 fast-cycle Completed 15:56 WAT (28m, VPN-downtime proximate cause); TDSD-6721 Resolved 15:54 WAT by Opeyemi Ahmed (1h01m, Samson Anaele second Opeyemi-direct close today — 7th Opeyemi-cluster closure); TDSD-6703 3ds HTTP 422 Completed 15:59 WAT; TDSD-6680 PalmPay portal touch 16:04 WAT; TDSD-6723 NEW 15:56 WAT Mustapha Ajibade Monnify International on Juliana Switch BO (Awaiting Scheme Update); TDSD-6724 NEW 16:08 WAT Deployment Note Destination Account Name Bug Fix + CBA Reversal Request Fix (Ezinne Ogoke, Review status, unassigned). Layer B 3 routine closures. No Immediate dispatch.
+
+### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level tick (preserved summary)
+
+15:09 WAT Apr 24 tick: Layer A 3 deltas — TDSD-6714 Closed 14:48 WAT by Opeyemi (Samuel Amos NEW cluster-reporter); TDSD-6720 NEW 14:43 WAT PENDING SETTLEMENT (Blessing Olawale, Opeyemi direct-assigned); TDSD-6721 NEW 14:53 WAT PENDING PAYABLE POSTING (Samson Anaele, Opeyemi direct-assigned). Layer B 0.
 
 ### last_processed 2026-04-24T13:09:00Z (14:09 WAT) — full-level tick (preserved summary)
 
-14:09 WAT Apr 24 tick: Layer A returned 7 deltas — TDSD-6719 NEW verve ttp RC06 Problem + TDSD-6696 Incident Completed (incident-to-problem workflow handoff); TDSD-6718 Closed 7m after filing by Opeyemi Ahmed (fastest Opeyemi-cluster cycle); TDSD-6572 FCMB RC91 Apr 16 backlog closure 8d stale; TDSD-6716 NIBSS PTSA status-touch; TDSD-6037 Yasir Syed Ali picking up DD logging work; TDSD-6566 INITIAL REVIEW status touch. Layer B 0.
+14:09 WAT Apr 24 tick: TDSD-6719 Verve TTP RC06 Problem + TDSD-6696 Completed; TDSD-6718 Closed 7m after filing by Opeyemi; TDSD-6572 FCMB backlog closure.
 
-### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level tick (preserved summary)
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
 
-13:09 WAT Apr 24 tick: Layer A returned 3 deltas — TDSD-6717 Paystack balance adjustment Resolved; TDSD-6718 NEW 13:30 WAT refund-status-update ticket by Samson Anaele, Opeyemi Ahmed direct-assigned (first Samson-filed ticket bypassing Dominic routing); TDSD-6037 status touch. Layer B returned 6 routine closures.
-
-### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-elevated-to-full tick (preserved summary)
-
-12:09 WAT Apr 24 tick: Layer A returned 3 NEW deltas — TDSD-6713 Keystone INITIAL REVIEW → Work in progress 11:59 WAT (Daniel Armstrong, David Oseji assignee); TDSD-6645 Blessing 3rd-chase 11:20 WAT; TDSD-6684 Blessing 11:19 WAT first-cross-ticket-CC-to-Opeyemi-Ahmed on refund ticket.
-
-### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
-
-11:09 WAT Apr 24 tick: Layer A returned 8 deltas — TDSD-6268 SETTLEMENT PROCESSING Done 11:02 WAT; TDSD-6716 NEW Incident Medium 10:18 WAT NIBSS response-not-sent; TDSD-6717 Paystack ₦1.07B balance adjustment; TDSD-6714 routine; TDSD-6715 NEW cron change; TDSD-6618 Stanbic 6-day-old RC91 backlog closure.
-
-### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep (preserved summary)
-
-06:09 WAT Apr 24 briefing tick: 5 TDSD deltas since 22:09 WAT Apr 23, 0 Layer B deltas. Dominic resolution burst 23:25–23:32 WAT Apr 23 closed TDSD-6553/TDSD-6612 (Highest)/TDSD-6688/TDSD-6706. TDSD-6711 Ecobank DCIR portal inaccessibility filed 22:32 WAT Apr 23 by Qazim — folded into briefing-2026-04-24 D1 + Ecobank situation.
+06:09 WAT Apr 24 briefing tick: 5 TDSD deltas since 22:09 WAT Apr 23. Dominic resolution burst 23:25–23:32 WAT Apr 23 closed TDSD-6553/6612/6688/6706. TDSD-6711 Ecobank DCIR portal filed 22:32 WAT Apr 23.

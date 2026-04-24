@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T14:09:00Z (15:09 WAT). 15:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 14:09 WAT prior tick (1h00m quiet); keyword scan + DM scan 0 hits. Total Slack-side quiet now 4h01m from 11:09 WAT Paystack treasury ops closeout."
-updated: "2026-04-24T14:19:40Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T16:09:00Z (17:09 WAT). 17:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 16:09 WAT prior tick (1h00m quiet). Keyword + DM scans 0 hits. Slack-side quiet 1h40m from 15:29 WAT Afeez UBA P1 template post (already captured prior tick)."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T14:09:00Z"
+last_processed: "2026-04-24T16:09:00Z"
 ---
 
 ## Connection
@@ -41,34 +41,28 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 - `sender_weighting` — Tier 1/2 senders (CTO reports, ops leads) amplify salience
 
 ### Skip list (channels explicitly excluded from keyword sweep scope)
-*(Empty — maintained via monthly periodic review + weekly suspected-bot bulk-confirm per config-salience. Bot-only channels identified as candidates enter a one-week verification queue before being added here.)*
+*(Empty — maintained via monthly periodic review + weekly suspected-bot bulk-confirm per config-salience.)*
 
 ## Notes
 
-### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level zero-delta tick
+### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level zero-delta tick
 
-15:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777036140)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 14:09→15:09 WAT tick window. **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777036140` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
+17:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777043340)` across all 5 Tier 1 channels → 0 messages. Keyword scan `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` → 0 results. DM scan `to:me after:2026-04-24` → 0. Briefing-2026-04-24 D2 Org Changes meeting currently in progress (16:30–18:00 WAT) may account for Slack-side quiet. Cross-source: email 1 Layer 1 invite (Tracy Ojaigho TPP x Platformization Apr 27) + reconciliation bucket threads; Jira 2 TDSD + 4 software deltas.
 
-**No Immediate-tier dispatch this tick.** Cross-source: email sweep captured 3 reconciliation-workstream threads — Stanbic settlement validation pending (thread 19dbfa48d456d605, 14:18 WAT, David Oseji asking for session 14:23 WAT), Stanbic DCIR API documentation follow-up (thread 19dbfae110fa739c, 14:28 WAT), Union Bank chargeback reminder (thread 19d77d38df87404c, 14:49 WAT). All Awareness-level ops signals. Jira sweep captured 3 NEW Opeyemi-cluster deltas — TDSD-6714 Closed 14:48 WAT by Opeyemi (Samuel Amos reporter, NEW cluster-reporter); TDSD-6720 NEW PENDING SETTLEMENT 14:43 WAT Blessing Olawale→Opeyemi (first Blessing-Olawale routing-bypass); TDSD-6721 NEW PENDING PAYABLE POSTING 14:53 WAT Samson Anaele→Opeyemi. Slack carried zero signal on these — consistent with the pattern that email reconciliation + Jira routing-changes are not ops-channel material.
+Factors: `zero_delta`, `no_immediate_dispatch`, `all_tier1_channels_silent`.
 
-Total Slack-side quiet now 4h01m from 11:09 WAT Paystack treasury ops closeout (Christine "Done" 10:54 WAT).
+### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level tick, UBA RC91 fast-cycle captured (preserved)
+
+16:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777039740)` swept all 5 Tier 1 channels. Results: 1 new message in #teamapt-tech-operations — Afeez Kazeem P1 template post 15:29 WAT for UBA RC 91 Failures (Start Time 15:24 WAT, Identified Cause "From the bank"). Corresponding Jira [[TDSD-6722]] filed 15:28 WAT → Completed 15:56 WAT (28-min fast-cycle, Afeez self-assigned). Duty handover 16:07 WAT retagged TDSD-6722 as "UBA RC91 failures ; VPN Downtime" — VPN-downtime proximate cause, not bank-side switch. Folded into [[UBA Bank — RC91 P1 Apr 17]] as 4th failure mode in 7 days. Other 4 Tier 1 channels empty. Keyword + DM scans 0. **No Immediate-tier dispatch this tick** — UBA RC91 cycle already Completed 15:56 WAT before heartbeat observation.
+
+### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level zero-delta tick (preserved summary)
+
+15:09 WAT Apr 24 tick: all 5 Tier 1 channels empty. Keyword + DM scans 0. Cross-source: email 3 reconciliation threads (Stanbic settlement validation pending, Stanbic DCIR API documentation follow-up, Union Bank chargeback reminder); Jira 3 Opeyemi-cluster deltas (TDSD-6714 Closed + TDSD-6720 NEW + TDSD-6721 NEW).
 
 ### last_processed 2026-04-24T13:09:00Z (14:09 WAT) — full-level zero-delta tick (preserved summary)
 
-14:09 WAT Apr 24 tick: all 5 Tier 1 channels silent since 13:09 WAT prior tick. Keyword scan + DM scan 0 hits. Cross-source: Ecobank DCIR user-creation 3-week escalation email (thread 19dbf704dc7edb8a, 13:21 WAT) captured by email sweep — third DCIR-portal failure mode layer on Ecobank. TDSD-6719 Verve TTP RC06 Problem ticket + TDSD-6696 Incident Completed captured by Jira sweep. TDSD-6718 7m fast-close by Opeyemi Ahmed captured by Jira sweep — hardens Monnify Settlements Opeyemi-cluster ownership evidence.
+14:09 WAT Apr 24 tick: all 5 Tier 1 channels silent. Cross-source: Ecobank DCIR user-creation 3-week escalation (thread 19dbf704dc7edb8a, 13:21 WAT) third DCIR-portal failure mode.
 
-### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level zero-delta tick (preserved summary)
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
 
-13:09 WAT Apr 24 tick: all 5 Tier 1 channels empty. Keyword scan + DM scan 0 hits. Cross-source: NIBSS PTSA formal-escalation email layer captured by email sweep; TDSD-6718 NEW Opeyemi-direct-assigned refund ticket captured by Jira sweep.
-
-### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-level zero-delta tick (preserved summary)
-
-12:09 WAT Apr 24 tick: all 5 Tier 1 channels silent since 11:09 WAT prior tick (1h01m quiet); keyword scan + DM scan 0 hits. Paystack treasury ops sequence from prior tick closed out (Christine "Done" 10:54 WAT); no new activity.
-
-### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
-
-11:09 WAT Apr 24 tick: Paystack treasury ops sequence 10:26→10:54 WAT (Caret treasury application ₦1.07B → Christine "Done"); TDSD-6717 closed 10:53 WAT. Routine treasury ops. Other channels empty.
-
-### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep (preserved)
-
-06:09 WAT Apr 24 briefing tick: all 5 Tier 1 channels empty since 22:09 WAT Apr 23 (8h10m overnight delegation window clean). Keyword + DM scans: 0.
+06:09 WAT Apr 24 briefing tick: all 5 Tier 1 channels empty since 22:09 WAT Apr 23 (8h10m overnight clean). Keyword + DM scans 0.

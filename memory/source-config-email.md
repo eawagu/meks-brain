@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T14:09:00Z (15:09 WAT). 15:09 WAT Apr 24 full-level tick: Layer 1 returned 0 new threads in the 14:09→15:09 WAT window. Layer 2 issuer-bucket returned 3 reconciliation-workstream threads — Stanbic settlement validation pending (19dbfa48d456d605, 14:18 WAT), Stanbic DCIR API documentation follow-up (19dbfae110fa739c, 14:28 WAT), Union Bank chargeback reminder (19d77d38df87404c, 14:49 WAT). All Awareness-level; no Immediate dispatch. MCP health holding 30h+ post-recovery."
-updated: "2026-04-24T14:20:45Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T16:09:00Z (17:09 WAT). 17:09 WAT Apr 24 full-level tick: Layer 1 returned 1 new thread — **Tracy Ojaigho TPP x Platformization invite 16:31 WAT for Mon Apr 27 11:30-12:00 WAT** (attendees Emeka + Ravi Jakhodia Moniepoint + Frank Atashili — strategic follow-up to today's Org Changes meeting, thematic cluster with [[TeamApt-Platformization-Org-Movements (1)]]). Layer 2 issuer-bucket + operational returned 4 Awareness threads (VALIDATION OF CLAIMS Apr 21 + Apr 22 delivery by Qazim; MONIEPOINT TRANSACTIONS-24042026 dispute handling 15:59-16:02 WAT). No Immediate dispatch. MCP health holding 32h+ post-recovery."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T14:09:00Z"
+last_processed: "2026-04-24T16:09:00Z"
 ---
 
 ## Connection
@@ -42,50 +42,44 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 
 ## Notes
 
-### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level tick
+### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level tick, 1 Layer 1 strategic invite
 
-15:09 WAT Apr 24 tick.
+17:09 WAT Apr 24 tick.
 
-**Layer 1 `to:me newer_than:1h`** returned **0 genuinely-new threads** in the 14:09→15:09 WAT window. (Query returned stale threads from Jan–Feb 2026, indicating `newer_than:1h` filter did not apply — all dates predate cutoff. Interpretation: no new Layer 1 activity in the tick window.)
+**Layer 1 `to:me newer_than:1h`** returned **1 genuinely-new thread** in the 16:09→17:09 WAT window:
 
-**Layer 2 operational+issuer bucket** `(RC91 OR RC05 OR RC06 OR RC69 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover") newer_than:1h` returned stale threads (no new hits in window).
+- **19dc01ddeb0473fb — "Invitation: TPP x Platformization @ Mon Apr 27, 2026 11:30am - 12pm (WAT)", 15:31 UTC (16:31 WAT) Apr 24** — `tracy.ojaigho@teamapt.com` → Emeka + Ravi Jakhodia (ravi.jakhodia@moniepoint.com, Moniepoint parent-co stakeholder) + Frank Atashili. Google Meet attached. **Next-weekday (Monday Apr 27) 30-min strategic meeting.** Thematic cluster: (1) today's 16:30–18:00 WAT TeamApt Org Changes meeting (briefing-2026-04-24 D2, Pawel Swiatek organizer, currently in progress); (2) Frank's TeamApt-Platformization-Org-Movements Google Slides shared 18:17 WAT Apr 22 (briefing-2026-04-24 A7); (3) [[TeamApt Organizational Restructuring]] concept (2026-04-16 tech function migration + 2026-04-22 Phase 1 org movements). TPP likely = **Third-Party Processing**, one of the OpCo business lines under the Switching & Processing merger ([[Babatunde Okufi]] CBDO double-hat per Frank's Apr 22 brief). Tracy Ojaigho is the IPCo Head of [[CI&P]] per Frank's brief — this invite's framing "TPP x Platformization" suggests structural discussion of how TPP fits into the platformization design. **Briefing-2026-04-25 Decision/Awareness candidate** — depending on outcome of today's Org Changes meeting (D2), Apr 27 follow-up may need prep posture decision. Factors: `source=email`, `layer_1_to_me`, `sender=tracy_ojaigho`, `recipient_moniepoint_parent_co=ravi_jakhodia`, `strategic_keyword=platformization+tpp`, `next_weekday_30min_meeting`, `thematic_cluster_org_changes`, `active_situation_match=teamapt_organizational_restructuring`, `briefing_2026_04_25_candidate`, `no_immediate_dispatch`.
+
+**Layer 2 operational bucket** `(RC91 OR RC05 OR RC06 OR RC69 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover") newer_than:1h` returned **0 new threads** in the 16:09→17:09 WAT window.
 
 **Layer 2 issuer bucket** `(Stanbic OR Monnify OR Keystone OR Union OR Wema OR FCMB OR UBA OR Fidelity OR Sterling OR Polaris OR Access) newer_than:1h` returned **3 threads with in-window messages**:
 
-- **19d77d38df87404c — "Re: TEAMAPT UNABLE TO RAISE TRANSACTIONS 0153157786 0221367330 0024665976", 14:49 WAT Apr 24** — `aptpaytechnicalsupport@teamapt.com` (Comfort Iheanacho signing, Cards and Alternate Chan. Dispute Resolution) → Union Bank dispute team + Moniepoint dispute team. Body: "A gentle reminder for the below transactions." **Third chase on a ~14-day-old Union Bank chargeback-raising issue** (first message Apr 10, revival Apr 23 09:25 WAT, chase Apr 24 14:49 WAT). Reconciliation-workstream signal — Union Bank chargeback-raising pipeline blocked on 3 specific card transactions. Awareness only — not matching an active situation (distinct from Union Bank RC91 pattern; this is card-layer chargeback-raising, not switch-layer routing). Factors: `source=email`, `sender=comfort_iheanacho_aptpaytechnicalsupport`, `issuer=union_bank`, `reconciliation_workstream`, `14_day_thread_age`, `3rd_chase_apr10_apr23_apr24`, `awareness_only`, `no_immediate_dispatch`.
+- **19db44306c2e8b62 — "Re: VALIDATION OF CLAIMS ABOVE 6 MONTHS 22/04/2026", 15:20 UTC (16:20 WAT) Apr 24** — Qazim Adedigba → Victor Orukpe (UBA) + UBA dispute team + Moniepoint dispute: *"Please find attached the validation of claims report for 22nd of April, 2026."* Routine reconciliation-workstream delivery for Apr 22 claims batch. Factors: `source=email`, `sender=qazim_adedigba`, `issuer=uba`, `reconciliation_workstream`, `routine_delivery`, `awareness_tier`.
 
-- **19dbfa48d456d605 — "Re: TEAMAPT SETTLEMENT ACCOUNT - 0001409339 PENDING VALIDATION FOR 17-04-2026 TO 22-04-2026", 14:18 WAT Apr 24** — NEW thread. `aptpaytechnicalsupport@teamapt.com` → Emeka Joseph (TeamApt) + Stanbic dispute/ChargeBack teams + Moniepoint dispute. Body: "Please, we urgently need your feedback on the status of the attached outstanding transactions. Timely clarification is critical, as these unresolved items are directly affecting our..." 5-day Stanbic settlement account 0001409339 validation backlog (Apr 17-22). Follow-up at 14:23 WAT: `david.oseji@teamapt.com` replied "@TechnologyCardSupport kindly assist with a session." **Urgency keyword ("urgently") + 5-day transaction backlog.** Reconciliation-workstream signal; Emeka Joseph is the internal TeamApt contact ping, not CTO. Not a P1/incident signal. Awareness only. Factors: `source=email`, `sender=aptpaytechnicalsupport`, `issuer=stanbic`, `reconciliation_workstream`, `5_day_transaction_backlog`, `urgency_keyword`, `david_oseji_follow_up_session_ask`, `internal_ping_not_cto`, `awareness_only`, `no_immediate_dispatch`.
+- **19db073a0e7d3595 — "Re: VALIDATION OF CLAIMS ABOVE 6 MONTHS 21/04/2026", 15:14 UTC (16:14 WAT) Apr 24** — Qazim → Victor Orukpe (UBA) + dispute teams: validation report for 21st of April. Routine. Factors: `source=email`, `sender=qazim_adedigba`, `issuer=uba`, `reconciliation_workstream`, `routine_delivery`, `awareness_tier`.
 
-- **19dbfae110fa739c — "RE: API DOCUMENTATION FOR THE DCIR PLATFORM", 14:28 WAT Apr 24** — `aptpaytechnicalsupport@teamapt.com` (Nosarieme Faluyi signing, Stanbic side) → Emeka Joseph (TeamApt). Body: "Are there any other ways (like an API endpoint) where we can retrieve the Card Acceptor ID? This information is not available in our core banking..." Follow-up on Stanbic's DCIR API documentation request (Apr 17 → Apr 18 → Apr 23 → Apr 24). Stanbic asking TeamApt for API path to retrieve card acceptor ID. Awareness only — Stanbic reconciliation-process signal, not an operational incident. Emeka Joseph is the internal contact. Factors: `source=email`, `sender=nosarieme_faluyi_via_aptpaytechnicalsupport`, `issuer=stanbic`, `dcir_api_documentation`, `reconciliation_workstream`, `7_day_thread_age`, `awareness_only`, `no_immediate_dispatch`.
+- **19dc00b0d62f9bc1 — "Re: MONIEPOINT TRANSACTIONS-24042026", 15:10 UTC → 16:02 UTC Apr 24** — aptpaytechnicalsupport → Moniepoint dispute team with CCs to compliance, Access Bank (Card Dispute Resolution), UPSL. Thread: TeamApt reviews transactions for cardholder credit determination; refunds processed; clarification with Chiamaka Paul-Igwilo (Access Bank) that transactions failed and should be treated as such with UPSL reversal settlement date. Routine inter-bank dispute-handling workstream. Factors: `source=email`, `sender=aptpay_technical_support`, `issuer=access+moniepoint`, `dispute_handling_workstream`, `routine_delivery`, `awareness_tier`.
 
-**Net deltas this tick:** 3 Stanbic+Union reconciliation-workstream threads (Awareness, no situation match — none are operational incidents). No NIBSS/Ecobank/Monnify deltas in email window (those are captured by Jira sweep this tick).
+**Layer 2 governance/process bucket** `(board OR audit OR PCI OR compliance OR regulator OR CBN OR "weekly status" OR RCA) newer_than:1h` returned **0 new threads**.
 
-MCP health holding — 30h+ post-recovery from the ~64h auth-failure dark window.
+**Net deltas this tick:** 1 Layer 1 strategic invite (Tracy TPP x Platformization Apr 27) + 3 Layer 2 routine reconciliation/dispute threads. No Immediate dispatch. MCP health holding 32h+ post-recovery.
+
+### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level tick (preserved)
+
+16:09 WAT Apr 24 tick: Layer 1 0 new threads. Layer 2 operational+issuer bucket returned Afeez Duty Handover Note #20260424 16:07 WAT (Ecobank route back ON — absent from turned-off list; First Bank/Providus/Sterling still off) + UBA RC91 email filing 15:27 WAT (TDSD-6722 28m fast-close) + Daily Report 15:47 WAT + VALIDATION OF CLAIMS UBA thread continuation 15:08 WAT. Governance bucket returned Tolulope Obianwu 14:46 WAT to Dennis Ajalie CC Emeka — Request for Executive-Level Engagement with Fidelity Bank on Settlement Structure (TACHA overdraft-enabled settlement account). **Briefing-2026-04-25 Awareness candidate** (governance escalation thread to track).
+
+### last_processed 2026-04-24T14:09:00Z (15:09 WAT) — full-level tick (preserved summary)
+
+15:09 WAT Apr 24 tick: Layer 2 issuer-bucket returned 3 reconciliation-workstream threads — Stanbic settlement validation pending, Stanbic DCIR API documentation follow-up, Union Bank chargeback reminder. All Awareness-level.
 
 ### last_processed 2026-04-24T13:09:00Z (14:09 WAT) — full-level tick (preserved summary)
 
-14:09 WAT Apr 24 tick: Layer 2 issuer bucket returned Ecobank DCIR user-creation 3-week escalation email (thread 19dbf704dc7edb8a, 13:21 WAT) — third DCIR-portal failure mode layer on Ecobank (admin-layer onboarding, distinct from transaction-routing RC91 + portal-access TDSD-6711). Folded into Ecobank situation as 2026-04-24 14:09 WAT delta.
+14:09 WAT Apr 24 tick: Layer 2 returned Ecobank DCIR user-creation 3-week escalation email (thread 19dbf704dc7edb8a, 13:21 WAT) — third DCIR-portal failure mode layer.
 
-### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level tick (preserved summary)
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved)
 
-13:09 WAT Apr 24 tick: Layer 1 returned 5 threads — 1 significant (Pawel Swiatek Org Changes UPDATED invitation 11:18 WAT, meeting time shifted 16:00→16:30 WAT). Layer 2 operational+issuer bucket returned Afeez Kazeem → NIBSS PTSA 11:56 WAT formal pattern-escalation email.
-
-### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-elevated-to-full tick (preserved summary)
-
-12:09 WAT Apr 24 tick: Layer 1 returned 1 metaview.ai HoE interview-ready notification (skipped); Layer 2 operational+issuer bucket returned Union Bank TEAMAPT TRANSACTION STATUS CONFIRMATION thread with 2 new messages.
-
-### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
-
-11:09 WAT Apr 24 tick: Layer 2 returned 2 NIBSS PTSA watchpoint signals — NEW NIBSS attribution-contested reply 10:56 WAT + Mustapha Ajibade 11:24 WAT revival follow-up. Cross-source: TDSD-6716 formal Jira Incident filed 10:18 WAT.
-
-### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — skim elevated to full on delta (preserved summary)
-
-10:09 WAT Apr 24 tick: Layer 2 operational+issuer bucket returned NEW NIBSS PTSA thread 19dbec21731fddeb Afeez Kazeem → NIBSS PTSA at 10:10 WAT "SUCCESSFUL RESPONSE NOT SENT| 20260424."
-
-### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full backlog catch-up (preserved summary)
-
-06:09 WAT Apr 24 briefing tick: 86h+ backlog sweep completed via 5 narrow buckets. Key captures: Ecobank compound failure Apr 23; TeamApt Org Changes invite (→ briefing D2); Jira approval queue (→ briefing D3); Wema Bank RC91/22 Apr 23; Union Bank RC69 Apr 23 first observation; AWS Outposts case 7-day prompt. Backlog catch-up complete; `last_processed` advanced from 2026-04-20T16:09:00Z to 2026-04-24T05:09:00Z.
+06:09 WAT Apr 24 briefing tick: 86h+ backlog sweep completed via 5 narrow buckets. Key captures: Ecobank compound failure; TeamApt Org Changes invite; Jira approval queue; Wema Bank RC91/22 Apr 23; Union Bank RC69 Apr 23; AWS Outposts 7-day prompt. Backlog catch-up complete.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
-Gmail MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Surfaced as briefing-2026-04-22 B2 and briefing-2026-04-23 D4. Recovery confirmed 09:11 WAT Apr 23.
+Gmail MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23.
