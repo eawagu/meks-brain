@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 zero-delta tick: Layer 1 returned 1 thread (Confluence daily digest — skipped per automated-status rule); operational+issuer keyword bucket returned 1 thread (Ecobank RC91 Apr 23 — no new Apr 24 messages, stale thread index artifact). Net 0 actionable deltas."
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T08:10:00Z (09:10 WAT). 09:10 WAT Apr 24 skim tick: Layer 1 returned 2 threads (1 new — Lattice weekly update reminder 09:06 WAT, automated, Awareness-only; 1 stale Confluence digest from prior tick). Operational+issuer keyword bucket returned 1 stale Ecobank Apr 23 thread (no new Apr 24 messages). Net 0 operational deltas; 1 Awareness-only Lattice reminder for next briefing."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T07:09:00Z"
+last_processed: "2026-04-24T08:10:00Z"
 ---
 
 ## Connection
@@ -41,6 +41,18 @@ Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP tok
 Gmail `search_threads` returns full-thread bodies that exceed context-window budget on broad queries. Narrow per-keyword queries with `pageSize:10-15` stay within budget reliably. Per-tick heartbeat should default to the execution pattern above; jq-from-persisted-file is the escape hatch when even pageSize 10 overflows.
 
 ## Notes
+
+### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — skim tick, 1 Awareness-only delta
+
+09:10 WAT Apr 24 tick: Layer 1 `to:me newer_than:2h` returned **2 threads**:
+- **19dbe86e17e3857d** — Lattice weekly update reminder from `notifications@mg.latticehq.com` at 09:06 WAT ("Emeka, it's time to write your update"). Automated sender. Per skip rule "Automated status emails without operational keywords — discard unless matches active-situation entity" — no operational keyword; does NOT match any active-situation entity, BUT it is a direct to:me action-reminder from a tool Emeka actively uses (Lattice Reviews are already a tracked workstream, see [[Lattice Downward Reviews — 8 pending]]). Classification: Awareness-only, routine weekly prompt. No deadline stated in message (weekly cadence implicit). Queue for next-briefing A-item if nothing else displaces; lower priority than Lattice Downward Reviews deadline Apr 27.
+- **19dbe252d3a733aa** — Confluence daily digest at 07:19 WAT (stale — already processed in 08:09 WAT tick; thread-level `newer_than` indexing re-surfaces). No action.
+
+Operational+issuer keyword bucket `(RC91 OR RC05 OR RC69 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover" OR Stanbic OR Monnify) newer_than:2h` returned **1 thread** — thread `19dbac740631c4f9` Ecobank RC91 20260423 cycle B (stale thread index artifact, already processed in briefing-2026-04-24 backlog sweep; 5 returned messages all Apr 23 pre-briefing-tick, zero Apr 24 deltas). No Ecobank thread activity since 21:33 WAT Qazim portal-inaccessibility email yesterday; route-off state continues per overnight duty handover with no TeamApt-side chase this morning.
+
+**Notable absence** — no new Lattice reminder thread from Kuldeep Singh Apr 23 scorecard (surfaced Apr 23 16:30 WAT thread 19dbb2d82e8ce66f) or Venkatesh today-interview reminder thread 19dbc92ab7dd3326 — these remain pending user action but no new prompts queued.
+
+Net 0 operational deltas this tick. 1 Awareness-only Lattice weekly update reminder. MCP health holding — 24h+ post-recovery.
 
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
 

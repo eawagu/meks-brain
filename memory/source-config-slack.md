@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 zero-delta tick: all 5 Tier 1 channels silent since 07:10 WAT prior tick (2h04m post-briefing clean window). Keyword scan 0 hits; DM scan 0 hits. Note: TDSD-6712 Kafka Monnify Live Jira ticket references a Moniepoint-workspace Slack message (C0812LH3BNJ p1777011284) — out-of-scope for this Slack MCP (workspace-scoped to user's TeamApt Slack)."
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T08:10:00Z (09:10 WAT). 09:10 WAT Apr 24 zero-delta tick: all 5 Tier 1 channels silent since 08:09 WAT prior tick (3h01m post-briefing clean window). Keyword scan 0 hits; DM scan 0 hits. Friday morning working-hours holds quiet despite Keystone settlement-requery cycle re-opening via Jira (TDSD-6713) — ops-lead handling off-channel."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T07:09:00Z"
+last_processed: "2026-04-24T08:10:00Z"
 ---
 
 ## Connection
@@ -44,6 +44,12 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 *(Empty — maintained via monthly periodic review + weekly suspected-bot bulk-confirm per config-salience. Bot-only channels identified as candidates enter a one-week verification queue before being added here.)*
 
 ## Notes
+
+### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick
+
+09:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 08:09 WAT prior tick (3h01m post-briefing clean window). `slack_read_channel(oldest=1777061340)` returned 0 across C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE. Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` returned 0. DM scan `to:me after:2026-04-24` returned 0.
+
+Friday working-hours quiet holds even as Jira surfaced TDSD-6713 (Keystone settlements 3am requery — filed 08:21 WAT by Daniel Armstrong) — ops-lead handling off-channel, consistent with prior 4-day-gap cycle (TDSD-6633) handling pattern. See source-config-jira 09:10 WAT note + [[Keystone Bank — Settlement Requery Apr 20]] revival.
 
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
 

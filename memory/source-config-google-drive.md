@@ -3,7 +3,7 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog batches 2–4 completion. 08:09 WAT Apr 24 tick: zero new Notes-by-Gemini files in the 07:10→08:09 WAT window — same 5-file pre-existing set still surfaced by the last_processed-since query; Phase-2 backlog dispatch status unchanged."
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog batches 2–4 completion. 09:10 WAT Apr 24 tick: since-last-processed query returned 0 files (no new or modified Notes-by-Gemini files in 08:09→09:10 WAT tick window); Phase-2 backlog dispatch status unchanged."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
@@ -51,6 +51,10 @@ This split keeps distilled content (summary / decisions / action items) and subs
 - Any file that fails to download / split / process / dispatch: do NOT advance `last_processed` past the failing file's `modifiedTime`; log the failure in the Notes section and retry next tick.
 
 ## Notes
+
+### Tick 2026-04-24 09:10 WAT — skim-level, zero new files in tick window
+
+`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T07:09:00Z'` (since-prior-tick query) returned **0 files** — no Notes-by-Gemini file modifiedTime falls inside the 08:09→09:10 WAT window. Phase-2 backlog batches 2–4 dispatch status unchanged this tick (separate dispatch process, not per-tick heartbeat). `last_processed` remains held at 2026-04-20T16:09:00Z pending Phase-2 backlog completion.
 
 ### Tick 2026-04-24 08:09 WAT — skim-level, zero new files in tick window
 

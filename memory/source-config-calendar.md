@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 zero-delta tick: 10 events returned; most recent `updated` is TeamApt All Hands at 07:07 UTC (08:07 WAT) — routine recurring-event metadata refresh (status confirmed, self accepted, no RSVP change). No new invites, no cancellations, no priority-signal matches."
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T08:10:00Z (09:10 WAT). 09:10 WAT Apr 24 zero-delta tick: 10 events returned; most recent `updated` is TeamApt All Hands recurring instance at 07:07 UTC (08:07 WAT) — same event as prior tick (no further metadata refresh). No new invites, no cancellations, no RSVP deltas. Round 2 HoE Interview Venkatesh starts in 1h50m at 11:00 WAT (still needsAction)."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T07:09:00Z"
+last_processed: "2026-04-24T08:10:00Z"
 ---
 
 ## Connection
@@ -27,6 +27,22 @@ Google Calendar MCP. Primary calendar for user.
 - Recurring standing meetings with unchanged metadata — no delta, no surface.
 
 ## Notes
+
+### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick
+
+09:10 WAT Apr 24 tick: `list_events` for Apr 24 (08:09 WAT → Apr 25 00:00 WAT) returned 10 events. Most recent `updated`: TeamApt All Hands recurring instance at 07:07 UTC (08:07 WAT) — same as prior tick (no further metadata refresh since 08:09 WAT). All Hands meeting was in progress at tick time (started 08:30 WAT, ends 10:00 WAT; currently ~40min into meeting). No new invites, no cancellations, no RSVP status deltas since 08:09 WAT sweep.
+
+Upcoming event set unchanged from briefing-2026-04-24 A6:
+- **11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (needsAction, 1h)** — starts in 1h50m; RSVP still pending per briefing A6 recommendation.
+- 11:00 WAT — Blocker: HoE (VP+) Slots (Chris Purkis; needsAction, optional)
+- 12:00 WAT — Deliberation: HoE batch interviews (needsAction, 40min)
+- 13:00 WAT — CI&P Team Structure (Tracy Ojaigho; needsAction, 1h)
+- 15:00–17:00 WAT — Lattice Downward Reviews — 8 pending (self, accepted)
+- 16:00 WAT — Tech Support Meeting (recurring, accepted)
+- 16:00 WAT — TeamApt Org Changes (Pawel Swiatek; accepted per briefing-tick disposition, 2h — triple-overlap resolution per D2)
+- 18:00 WAT — Product-Engineering Sync (self recurring, accepted)
+
+No priority-signal matches this tick.
 
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
 

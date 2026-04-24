@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 skim tick: 5 deltas — NEW TDSD-6712 Kafka Monnify Live datasource issue (Medium, Work in progress, Kabir Yusuf self-assigned, referenced Slack p1777011284 from Moniepoint workspace) + 4 Layer B routine bug closures (TCDD-1357/1255/1254, ADD-4384). TDSD-6712 is a new Monnify subsystem observation (data streaming, distinct from TDSD-6645 VA reversal)."
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T08:10:00Z (09:10 WAT). 09:10 WAT Apr 24 skim elevated to full-processing: 7 deltas — TDSD-6713 NEW Keystone settlements 3am requery (revives retired [[Keystone Bank — Settlement Requery Apr 20]] situation); TDSD-6712 Kafka Monnify fast-close 47m; TDSD-6703 3DS HTTP 422 ongoing Medium; TDSD-6575 Pending Settlement stale on Dominic 9-day INITIAL REVIEW (workflow-discipline data point); TDSD-6709 config update Resolved; TDSD-6555 old Apr 15 Keystone ticket Completed; AS-4404 Highest dev task READY FOR QA (awareness). No Immediate-tier triggers."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T07:09:00Z"
+last_processed: "2026-04-24T08:10:00Z"
 ---
 
 ## Connection
@@ -65,6 +65,71 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
+### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — skim elevated to full-processing on delta
+
+09:10 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 08:09"` returned **6 deltas**. Layer B software JQL returned **1 delta**.
+
+**Layer A — most significant: TDSD-6713 "Keystone | Settlements issue | 20260424"** (NEW — revives retired situation)
+- **Type:** System Incident (service_desk archetype). **Priority:** Medium. **Status:** INITIAL REVIEW.
+- **Reporter:** [[Daniel Armstrong]]. **Assignee:** [[David Oseji]].
+- **Filed:** 08:21 WAT Apr 24; updated 08:30 WAT.
+- **Description:** *"Keystone settlements 3am awaiting requery"* — verbatim pattern match with TDSD-6633 (Apr 20: "Settlement for keystone for 12AM is awaiting requery, and 5AM"), now on the 3AM batch.
+- **Criterion met:** [[Keystone Bank — Settlement Requery Apr 20]] situation was retired on 2026-04-23 06:10 WAT with pre-committed revival criterion "new Keystone settlement-layer cycle surfaces." TDSD-6713 formally meets that criterion.
+- **Action:** Revived situation page (`retired` → `developing`) with Apr 24 delta appended. 4-day Apr 20 → Apr 24 gap — first observable cadence data point; possible ~weekly failure mode when combined with TDSD-6555 (Apr 15) + TDSD-6633 (Apr 20) + TDSD-6713 (Apr 24) intervals (5-day, 4-day).
+- **Immediate-tier check:** Medium priority, no outage keyword, settlement layer (not revenue-time-critical), no regulatory deadline. **NO Immediate dispatch.**
+- **Disposition:** Briefing-tier awareness for next briefing tick.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_new`, `active_situation_entity_match=keystone_settlement_requery`, `retirement_criterion_met`, `lifecycle_transition=retired→developing`, `verbatim_description_template_match`, `cadence_2nd_data_point`, `assignee_rotation_daniel_david`, `no_immediate_dispatch`.
+
+**Layer A — TDSD-6703 "3ds is currently failing with HTTP 422"** (carryover, in-window update)
+- **Type:** System Incident. **Priority:** Medium. **Status:** Work in progress.
+- **Reporter + assignee:** [[Olamide Ajibulu]]. Created 16:07 WAT Apr 23; updated 09:01 WAT Apr 24.
+- **Description (terse):** "This is being addressed by the TSE".
+- **Context:** Prior Access 3DS failure was 11:58 WAT Apr 14 ("Access 3DS Unreachable | 20260414|504") — tracked in [[Access Bank — Multi-Track Failures]] situation as latent-unresolved 3DS track. TDSD-6703 does not explicitly name Access Bank in the title — scope ambiguous (could be 3DS infrastructure generally, or new bank's 3DS, or revival of Access 3DS). Description too terse to disambiguate at this tick.
+- **Backfill note:** TDSD-6703 was filed during Apr 23 16:07 WAT window — covered by the briefing-tick 22:09 WAT Apr 23 sweep but not surfaced in briefing-2026-04-24 (Medium priority + terse description = low per-message salience). The 09:01 WAT Apr 24 update indicates continuing work — still no resolution.
+- **Immediate-tier check:** Medium, no P1 language, no Access Bank explicit naming. **NO Immediate dispatch.**
+- **Disposition:** Awareness-candidate for next briefing tick. If a P1 3DS cycle fires, or if TDSD-6703 elevates, consider surfacing. No situation page creation yet.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_carryover_from_apr23_sweep`, `scope_ambiguous_3ds`, `low_salience_first_surface`, `no_immediate_dispatch`.
+
+**Layer A — TDSD-6712 "Kafka Monnify Live datasource issue | 20260424"** (fast-cycle close)
+- **Status transition:** Work in progress → **Completed** 08:47 WAT Apr 24 by [[Peter Ile]] (assignee), previously Kabir Yusuf self-assigned per 08:09 WAT tick observation.
+- **Resolution time:** ~47m from filing (07:59 WAT → 08:47 WAT). Fast-cycle close via cloud-engineer team routing.
+- **Disposition:** Resolved. The 08:09 WAT tick's Awareness-candidate status is retired. No situation page needed (single-ticket fast-close, pattern not compounding).
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `fast_cycle_resolution_47m`, `assignee_handoff_kabir_peter`, `no_situation_page_needed`, `awareness_close_signal`.
+
+**Layer A — TDSD-6575 "Pending Settlement"** (stale metadata refresh — workflow-discipline data point)
+- **Type:** Task. **Priority:** Medium. **Status:** INITIAL REVIEW (unchanged).
+- **Reporter:** Samuel Ojuolape. **Assignee:** [[Dominic Usiabulu]] (Moniepoint).
+- **Created:** Apr 16. **Updated:** 08:58 WAT Apr 24 (no status transition, likely Jira metadata refresh).
+- **Observation:** 9-day-old Pending Settlement cleanup task (historical MNFY transactions from 2022-2025), Dominic-assigned, still INITIAL REVIEW. NOT in the Dominic Apr 23 23:25-23:32 WAT resolution burst. Compounds the Dominic-workflow-discipline observation as a tangential-scope data point (batch cleanup task vs. the primary single-transaction reversal in [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]]). Not directly folded into that situation page — scope is too different (historical batch vs. VA reversal).
+- **Disposition:** No action this tick. Observation folded into Dominic workflow-discipline mixed-evidence synthesis candidate.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_stale_9d_initial_review`, `assignee=dominic_usiabulu`, `scope_tangential_to_tdsd6645`, `metadata_refresh_not_status_transition`, `workflow_discipline_peripheral_data_point`.
+
+**Layer A — TDSD-6555 "Keystone | Settlements issue | 20260415"** (historical cycle cleanup)
+- **Type:** System Incident. **Priority:** Medium. **Status transition:** Completed 08:21 WAT Apr 24 (by [[Oluwatofunmi Obafemi]] assignee, reporter Daniel Armstrong).
+- **Observation:** Apr 15 Keystone settlements 3am ticket closed ~same minute as TDSD-6713 filing. Reinforces the ~weekly cadence hypothesis on the Keystone settlement-requery pattern (Apr 15 → Apr 20 → Apr 24 intervals of 5-day, 4-day).
+- **Disposition:** Folded into [[Keystone Bank — Settlement Requery Apr 20]] revival delta as cadence evidence.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_closed`, `keystone_pattern_cadence_reinforcement`, `parallel_cleanup_with_tdsd6713`.
+
+**Layer A — TDSD-6709 "UPDATE MONIEPOINT_INT INTERCHANGE CONFIG FOR F60 SINK INFO"** (routine config change)
+- **Type:** Service request. **Priority:** Medium. **Status:** Resolved 08:21 WAT Apr 24.
+- **Reporter:** Mustapha Ajibade. **Assignee:** Oluwaseun Oladele (Moniepoint).
+- **Scope:** SQL UPDATE on `interchange_config` table to enable F60 sink_info propagation on MONIEPOINT_INT interchange (Aptent_DB).
+- **Disposition:** Routine infrastructure change. Closed same-day. No situation signal.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `routine_config_update`, `fast_close`.
+
+**Layer B — AS-4404 "Refund - Rest [Source Node] for Web Implementation Task (Card Not Present Juliana)"** (Highest priority dev task)
+- **Type:** Task (AptPay Switch software project). **Priority:** Highest. **Status:** READY FOR QA TESTING (updated 08:56 WAT Apr 24).
+- **Assignee:** Lewis Ugwu. **Reporter:** Kevin Ng'Eno.
+- **Scope:** Refund flow implementation for Card-Not-Present payment gateway path (Juliana custom authorization service). Development/QA work.
+- **Immediate-tier check:** Highest priority but it's a dev task (not a production incident); active-situation match none; no outage keyword. **NO Immediate dispatch.**
+- **Disposition:** Awareness-level only. Tracks dev progress on AptPay Switch; no operational signal.
+- Factors: `source=jira`, `archetype=software`, `priority=highest`, `ticket_type=task`, `status_transition_to_ready_for_qa`, `dev_work_no_incident`, `no_active_situation_match`, `no_immediate_dispatch`.
+
+**Active-situation checkpoints (zero delta this tick):**
+- **TDSD-6645** (Monnify Settlements Escalated) — no movement since Dominic 04:08 WAT Apr 23 attribution-transfer comment. Unchanged.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no movement since Qazim 22:32 WAT Apr 23 Work In Progress filing. Unchanged. Route remains off per overnight duty handover.
+- **TDSD-6699 + TDSD-6690** (CTO approval queue from briefing-2026-04-24 D3) — both still pending; no approval action observed.
+
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — skim-tick elevated to full-processing on delta
 
 08:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 06:09"` returned **1 delta**. Layer B software JQL returned **4 deltas** (all Medium bug closures).
@@ -78,7 +143,7 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 - **Description:** "We are getting not data on KAFKA-MONNIFY-LIVE datasource this has been excalated to the cloud engineer team for review" — escalated to cloud-engineer team.
 - **Entity match:** [[Monnify]] — but **distinct subsystem** from [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] (Kafka data streaming vs. VA reversal settlement block). No cross-reference added to that situation page — scopes differ.
 - **Immediate-tier check:** Priority Medium, not P1/Highest; no outage/security keywords; no route-off; cloud-engineer team already engaged product-side. NO Immediate dispatch.
-- **Disposition:** Awareness-candidate for next briefing tick (Apr 25 06:09 WAT). If TDSD-6712 recurs, compounds, or elevates to Highest priority during today's working hours, a new situation page should be created at next briefing compose.
+- **Disposition:** Awareness-candidate for next briefing tick (Apr 25 06:09 WAT). If TDSD-6712 recurs, compounds, or elevates to Highest priority during today's working hours, a new situation page should be created at next briefing compose. **[Resolved 08:47 WAT per 09:10 WAT tick observation — fast-close, awareness retired.]**
 - Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_new`, `active_situation_entity_match=monnify`, `subsystem_distinct_from_existing_situation`, `product_side_escalation_path_active`, `no_immediate_dispatch`.
 
 **Layer B — 4 routine bug closures** (all Medium, all Done, all Awareness-level with no active-situation match):
