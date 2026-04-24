@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: all 5 Tier 1 channels silent since 06:09 WAT briefing-tick (1h01m post-briefing quiet); keyword scan 0 hits; DM scan 0 hits."
-updated: "2026-04-24T06:15:57Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 zero-delta tick: all 5 Tier 1 channels silent since 07:10 WAT prior tick (2h04m post-briefing clean window). Keyword scan 0 hits; DM scan 0 hits. Note: TDSD-6712 Kafka Monnify Live Jira ticket references a Moniepoint-workspace Slack message (C0812LH3BNJ p1777011284) — out-of-scope for this Slack MCP (workspace-scoped to user's TeamApt Slack)."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T06:10:00Z"
+last_processed: "2026-04-24T07:09:00Z"
 ---
 
 ## Connection
@@ -45,6 +45,14 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
+### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
+
+08:09 WAT Apr 24 tick: all 5 Tier 1 channels empty since 07:10 WAT prior tick (2h04m post-briefing clean window). `slack_read_channel(oldest=1777010200)` returned 0 across C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE. Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` returned 0. DM scan `to:me after:2026-04-24` returned 0.
+
+**Cross-source note.** TDSD-6712 (NEW Kafka Monnify Live datasource Jira ticket, Medium, Kabir Yusuf) references a Slack message `p1777011284784829` at 07:14:44 WAT Apr 24 from Moniepoint workspace channel C0812LH3BNJ. This Slack MCP is scoped to user's TeamApt Slack workspace — the Moniepoint-side message is NOT observable here. Jira is the primary signal for the Monnify Kafka datasource observation. Not a source-config gap; workspace scope is by design.
+
+Friday morning working-hours start; ops-channel quiet continues. No Ecobank Slack signal despite overnight route-off framing (ops-lead handling off-channel).
+
 ### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
 
 07:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 06:09 WAT briefing tick (1h01m post-briefing quiet). `slack_read_channel(oldest=1777007340)` returned 0 across C0ABU8GMW75 / C098VUQCVRA / C096LCNP26P / C08PH35PLPK / C090UHR9VDE. Keyword search `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR outage OR breach OR compromised) after:2026-04-24` returned 0. DM scan `to:me after:2026-04-24` returned 0. Friday morning post-briefing window clean. Ecobank compound state (briefing-2026-04-24 D1) has produced no new Slack signal despite route-off-overnight framing; ops-lead handling appears to be holding the thread off-channel.
@@ -58,7 +66,3 @@ No situation updates triggered by Slack sweep this tick. Ecobank compound situat
 ### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — skim-tick elevated to full on delta (preserved)
 
 22:09 WAT Apr 23 tick: 4 of 5 Tier 1 channels empty; #teamapt-tech-operations 4 new parent messages (Qazim incident posts) — Polaris 5h20m + CoralPay ZIB 1h53m Immediate-dispatched via DM draft; Wema TDSD-6705 + Access 11m resolved in-window. 6h tick-gap observation (17/18/20 WAT ticks did not run).
-
-### Tick 2026-04-23 16:11 WAT (preserved from prior note)
-
-Full tick: 4 of 5 Tier 1 channels empty; #teamapt-tech-operations ONE new message (Olamide Ajibulu 15:54 WAT Ecobank RC91 P1 cycle #2 Start 15:47 WAT — Immediate-tier dispatched, DM draft already exists in self-DM so cycle-B was folded into that draft's narrative). Cross-source asymmetry tracker codification threshold crossed at 3 data points within 24h.

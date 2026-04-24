@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: Apr 24 event set unchanged from briefing-tick enumeration — no new invites, no cancellations, no RSVP deltas."
-updated: "2026-04-24T06:18:28Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 zero-delta tick: 10 events returned; most recent `updated` is TeamApt All Hands at 07:07 UTC (08:07 WAT) — routine recurring-event metadata refresh (status confirmed, self accepted, no RSVP change). No new invites, no cancellations, no priority-signal matches."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T06:10:00Z"
+last_processed: "2026-04-24T07:09:00Z"
 ---
 
 ## Connection
@@ -27,6 +27,23 @@ Google Calendar MCP. Primary calendar for user.
 - Recurring standing meetings with unchanged metadata — no delta, no surface.
 
 ## Notes
+
+### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
+
+08:09 WAT Apr 24 tick: `list_events` for Apr 24 (07:00 WAT → Apr 25 00:00 WAT) returned 10 events ordered by lastModified. Most recent `updated`: **TeamApt All Hands recurring instance 08:30–10:00 WAT** with update timestamp 07:07 UTC (08:07 WAT Apr 24) — this event's start is ~23min away at tick time. Metadata inspection: `status: confirmed`, self-attendee response `accepted` (unchanged), no new attendees, no time change. Classified as routine Google Calendar recurring-event metadata refresh — skip rule "Recurring standing meetings with unchanged metadata — no delta, no surface" applies.
+
+Other events enumerated unchanged from briefing-2026-04-24 A6:
+- 08:30 WAT — TeamApt All Hands (accepted, starting shortly)
+- 11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (needsAction, 1h)
+- 11:00 WAT — Blocker: HoE (VP+) Slots (Chris Purkis; needsAction, optional)
+- 12:00 WAT — Deliberation: HoE batch interviews (needsAction, 40min)
+- 13:00 WAT — CI&P Team Structure (Tracy Ojaigho; needsAction, 1h)
+- 15:00–17:00 WAT — Lattice Downward Reviews — 8 pending (self, accepted)
+- 16:00 WAT — Tech Support Meeting (recurring, accepted)
+- 16:00 WAT — TeamApt Org Changes (Pawel Swiatek; accepted, 2h — triple-overlap disposition in D2)
+- 18:00 WAT — Product-Engineering Sync (self recurring, accepted)
+
+No priority-signal matches this tick. First meeting of the day (All Hands) starts in 21 minutes.
 
 ### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
 
@@ -60,7 +77,3 @@ Google Calendar MCP. Primary calendar for user.
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
 Calendar MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Surfaced as briefing-2026-04-22 B2 + briefing-2026-04-23 D4. Recovery confirmed 09:11 WAT Apr 23.
-
-### Tick 2026-04-23 ~14:09 WAT — Full (preserved context)
-
-TeamApt Org Changes invite detected + triple-overlap identified; held as Decision candidate for briefing-2026-04-24 → now surfaced as D2.

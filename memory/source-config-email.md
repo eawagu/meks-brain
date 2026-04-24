@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: Layer 1 to:me + operational+issuer keyword bucket both returned 0 in 2h window. MCP health holding post-recovery."
-updated: "2026-04-24T06:16:56Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 zero-delta tick: Layer 1 returned 1 thread (Confluence daily digest — skipped per automated-status rule); operational+issuer keyword bucket returned 1 thread (Ecobank RC91 Apr 23 — no new Apr 24 messages, stale thread index artifact). Net 0 actionable deltas."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T06:10:00Z"
+last_processed: "2026-04-24T07:09:00Z"
 ---
 
 ## Connection
@@ -41,6 +41,14 @@ Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP tok
 Gmail `search_threads` returns full-thread bodies that exceed context-window budget on broad queries. Narrow per-keyword queries with `pageSize:10-15` stay within budget reliably. Per-tick heartbeat should default to the execution pattern above; jq-from-persisted-file is the escape hatch when even pageSize 10 overflows.
 
 ## Notes
+
+### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick
+
+08:09 WAT Apr 24 tick: Layer 1 `to:me newer_than:2h` returned **1 thread** — Confluence daily digest (automated, "Stephen Emmanuel has made updates on 'Deployment Notes Management ATS UI v2 (v1.0.0)' & more", `confluence@teamapt.atlassian.net`, 06:19 UTC). Skipped per "Automated status emails without operational keywords — discard unless matches active-situation entity" — Confluence digest carries no operational keyword and no active-situation entity match.
+
+Operational+issuer keyword bucket `(RC91 OR RC05 OR RC69 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover" OR Stanbic OR Monnify) newer_than:2h` returned **1 thread** — thread `19dbac740631c4f9` Ecobank RC91 20260423 cycle B — but all 5 returned messages are from Apr 23 14:38–17:36 WAT (pre-briefing-tick), already processed in the briefing-2026-04-24 backlog sweep. No Apr 24 messages in thread. Gmail `newer_than:2h` can return stale threads due to thread-level indexing; body-scan confirms no new delta. Net 0 actionable email deltas this tick.
+
+MCP health holding — 23h+ post-recovery from the ~64h auth-failure dark window. No Ecobank thread activity since 21:33 WAT Qazim portal-inaccessibility email yesterday, consistent with route-off overnight state.
 
 ### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
 

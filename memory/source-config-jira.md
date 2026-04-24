@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: Layer A TDSD + Layer B software both returned 0. Post-Dominic-resolution-burst quiet. TDSD-6645 unchanged at 04:08 WAT Apr 23 attribution-transfer; TDSD-6711 unchanged at 22:32 WAT Apr 23 Work In Progress."
-updated: "2026-04-24T06:17:59Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T07:09:00Z (08:09 WAT). 08:09 WAT Apr 24 skim tick: 5 deltas — NEW TDSD-6712 Kafka Monnify Live datasource issue (Medium, Work in progress, Kabir Yusuf self-assigned, referenced Slack p1777011284 from Moniepoint workspace) + 4 Layer B routine bug closures (TCDD-1357/1255/1254, ADD-4384). TDSD-6712 is a new Monnify subsystem observation (data streaming, distinct from TDSD-6645 VA reversal)."
+updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T06:10:00Z"
+last_processed: "2026-04-24T07:09:00Z"
 ---
 
 ## Connection
@@ -65,6 +65,34 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
+### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — skim-tick elevated to full-processing on delta
+
+08:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 06:09"` returned **1 delta**. Layer B software JQL returned **4 deltas** (all Medium bug closures).
+
+**Layer A — TDSD-6712 "Kafka Monnify Live datasource issue | 20260424"** (NEW)
+- **Type:** System Incident (service_desk archetype)
+- **Priority:** Medium
+- **Status:** Work in progress
+- **Reporter + assignee:** [[Kabir Yusuf]] (self-assigned)
+- **Filed:** referenced Slack message `p1777011284784829` → 07:14:44 WAT Apr 24 (Moniepoint workspace C0812LH3BNJ). Jira updated 07:59 WAT.
+- **Description:** "We are getting not data on KAFKA-MONNIFY-LIVE datasource this has been excalated to the cloud engineer team for review" — escalated to cloud-engineer team.
+- **Entity match:** [[Monnify]] — but **distinct subsystem** from [[Monnify Settlements — TDSD-6645 VA Reversal Blocking Settlement Apr 20]] (Kafka data streaming vs. VA reversal settlement block). No cross-reference added to that situation page — scopes differ.
+- **Immediate-tier check:** Priority Medium, not P1/Highest; no outage/security keywords; no route-off; cloud-engineer team already engaged product-side. NO Immediate dispatch.
+- **Disposition:** Awareness-candidate for next briefing tick (Apr 25 06:09 WAT). If TDSD-6712 recurs, compounds, or elevates to Highest priority during today's working hours, a new situation page should be created at next briefing compose.
+- Factors: `source=jira`, `archetype=service_desk`, `priority=medium`, `ticket_new`, `active_situation_entity_match=monnify`, `subsystem_distinct_from_existing_situation`, `product_side_escalation_path_active`, `no_immediate_dispatch`.
+
+**Layer B — 4 routine bug closures** (all Medium, all Done, all Awareness-level with no active-situation match):
+- **TCDD-1357** "BETA ENV: Resend OTP returned 400 even when a new OTP was successfully resent" — Mary Alaba assignee, Done 07:20 WAT.
+- **TCDD-1255** "PROD: PF Admin is unable to disable PF User" — Fatai Ibrahim assignee, Done 07:18 WAT.
+- **TCDD-1254** "PROD: Unable to login as teamapt admin via google on prod" — Akindele Odedoyin assignee, Done 07:16 WAT.
+- **ADD-4384** "Bank Admin Unable to Approve Fee Creation Requests on Staging" — Mary Alaba assignee, Done 07:20 WAT.
+
+All 4 are Consolidated Direct Debit (TCDD) + DTB (ADD) product-layer bug closures — routine dev hygiene, not tied to active incident situations.
+
+**Active-situation checkpoints (zero delta this tick):**
+- **TDSD-6645** (Monnify Settlements Escalated) — no movement since Dominic 04:08 WAT Apr 23 attribution-transfer comment. Unchanged.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no movement since Qazim 22:32 WAT Apr 23 Work In Progress filing. Unchanged.
+
 ### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
 
 07:10 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 05:09"` returned 0 issues. Layer B software JQL (scoped to priority Highest/Blocker/Critical or status transitions to resolved/done/completed/escalated) returned 0 issues. Post-briefing quiet. Key state checkpoints:
@@ -91,7 +119,3 @@ No new P1/Highest filings. No status transitions on active-situation entities (E
 ### last_processed 2026-04-23T21:09:00Z (22:09 WAT) — preserved from prior note
 
 22:09 WAT Apr 23 tick: 21 TDSD deltas in 15:11→22:09 WAT window — Wema TDSD-6705 Completed 18:45 WAT, Access TDSD-6708 Resolved 18:51, NIBSS Dis TDSD-6710/6650 Completed 21:51/21:42, 4th Dominic Awaiting-Scheme-Update ticket (TDSD-6706). Zero P1/Highest filings despite 4 Slack P1 posts — Polaris + CoralPay ZIB Slack-only (5th data point on cross-source asymmetry tracker).
-
-### Tick 2026-04-23 16:11 WAT (preserved from prior note)
-
-Full tick: Agent-delegated payload (49 items, 214KB oversize). 2 Immediate candidates reclassified to Briefing (TDSD-6702 NIBSS DD DOWNTIME self-closed in 49min silent-no-RCA, Medium → pattern-compound on [[NIBSS]] entity; TDSD-6703 3DS HTTP 422 fresh-filing, Medium → first observation under second-cycle gate). 4 Briefing-tier: TDSD-6694 Paystack Balance Resolved, AS-4995 Juliana Back office Done, TDSD-6699 Firewall HA Awaiting implementation gate-pass, TDSD-6701 TACCS DB Awaiting Scheme Update. 43 Awareness routine dev deltas (MDRS epic continuation). Cross-source asymmetry tracker codification gate CROSSED (see source-config-slack).
