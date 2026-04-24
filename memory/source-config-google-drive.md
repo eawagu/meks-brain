@@ -4,7 +4,7 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (NOW 22 files). 13:09 WAT Apr 24 full-level tick: 2 NEW HoE-cluster files detected — Round 2 Venkatesh Purushothaman transcript (modifiedTime 12:10 WAT) + Deliberation: HoE batch interviews transcript (modifiedTime 12:51 WAT); both queued to Phase-2 backlog."
-updated: "2026-04-24T12:26:52Z"
+updated: "2026-04-24T13:27:07Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -52,47 +52,48 @@ This split keeps distilled content (summary / decisions / action items) and subs
 
 ## Notes
 
-### Tick 2026-04-24 13:09 WAT — full-level, 2 NEW HoE-cluster files in tick window
+### Tick 2026-04-24 14:09 WAT — full-level, 0 new files but 1 backlog file content-updated
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T11:09:00Z'` returned **2 NEW files**:
+`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T12:09:00Z'` returned 3 files (server-side filter still lossy, client-side filter confirms). Client-side check `modifiedTime > '2026-04-24T12:09:00Z'`:
 
-1. **Round 2: Interview for Head of Engineering Position at Moniepoint – 2026/04/24 11:00 WAT – Notes by Gemini** (fileId `1bVruBg46fPq77wu28GejLMhIr-H0gVjZ3jDfWHgmICo`; owner tobilola.fasanya@moniepoint.com; modifiedTime 2026-04-24T11:10:56Z = 12:10 WAT; sharedWithMeTime 12:10 WAT). Corresponds to the Round 2 Venkatesh Purushothaman interview that ended 12:00 WAT today (briefing-2026-04-24 A6 cluster). File queued for Phase-2 backlog dispatch.
+1. **Deliberation: Head of Engineering batch interviews - 2026/04/24 12:00 WEST - Notes by Gemini** (fileId `1GRwuLzdbZHzv1NujqSUlVBPuvlaOUW22coJ2Kb8vYnM`; owner chris.purkis@moniepoint.com; **modifiedTime 2026-04-24T12:21:44.823Z = 13:21 WAT — refreshed from 11:51 WAT at prior tick**). **Content update on existing Phase-2 backlog file.** The file was first detected at the 13:09 WAT tick (modifiedTime 11:51 UTC then); it has since been content-refreshed (Gemini likely adding/updating summary/details as transcription processes). No new file detection; backlog entry persists at its latest modifiedTime for when Phase-2 dispatch reaches it.
 
-2. **Deliberation: Head of Engineering batch interviews - 2026/04/24 12:00 WEST - Notes by Gemini** (fileId `1GRwuLzdbZHzv1NujqSUlVBPuvlaOUW22coJ2Kb8vYnM`; owner chris.purkis@moniepoint.com; modifiedTime 2026-04-24T11:51:41Z = 12:51 WAT; sharedWithMeTime 12:51 WAT). Corresponds to the Deliberation meeting that started 12:00 WAT today (briefing-2026-04-24 A6 cluster). Gmail cross-source match: thread 19dbf55bdc93593a gemini-notes auto-digest at 12:52 WAT (confirms this file's arrival). File queued for Phase-2 backlog dispatch.
+2. **Round 2 Venkatesh Purushothaman** (modifiedTime 11:10 UTC = 12:10 WAT) — predates 12:09 UTC cutoff, not a new detection this tick.
 
-**Phase-2 backlog count: 22 files** (was 20; +2 new this tick). Both files are HoE-interview-cluster artifacts from today's batch. `last_processed` remains held at 2026-04-20T16:09:00Z per hold policy (advances only after full chain execution on all backlog files).
+3. **Phoenix Stage 1** (modifiedTime 09:23 UTC) — predates cutoff.
 
-Anomaly noted: search_files with modifiedTime>'2026-04-24T11:09:00Z' also returned the Phoenix Stage 1 file (modifiedTime 2026-04-24T09:23:03Z) which should be filtered out by the server-side query. The filter appears lossy — checking modifiedTime client-side confirms only the 2 genuinely-new files. No action needed this tick; keep the manual client-side epoch filter as safety.
+**Phase-2 backlog count: 22 files (unchanged from prior tick).** No genuinely-new files this tick. One backlog file (Deliberation HoE) had modifiedTime refresh — does not alter backlog size but will be processed from the latest content when Phase-2 dispatch reaches it. `last_processed` remains held at 2026-04-20T16:09:00Z per hold policy.
+
+Server-side filter lossiness persists — `modifiedTime > X` still returns files with modifiedTime < X. Continue applying client-side epoch filter as safety.
+
+### Tick 2026-04-24 13:09 WAT — full-level, 2 NEW HoE-cluster files (preserved summary)
+
+13:09 WAT Apr 24 tick: 2 NEW files detected — Round 2 Venkatesh Purushothaman transcript (modifiedTime 12:10 WAT) + Deliberation: HoE batch interviews transcript (modifiedTime 12:51 WAT); both queued to Phase-2 backlog. Backlog 20 → 22.
 
 ### Tick 2026-04-24 12:09 WAT — skim-level, 0 new files in tick window (preserved)
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T10:09:00Z'` returned 1 file (Phoenix Stage 1 Weekly Check in 2026/04/07) with modifiedTime 2026-04-24T09:23:03Z — this file was detected and queued at the 11:09 WAT prior tick; its modifiedTime pre-dates the 11:09→12:09 WAT window, so no new detection this tick. Phase-2 backlog unchanged at 20 files. `last_processed` remains held at 2026-04-20T16:09:00Z per hold policy.
+12:09 WAT Apr 24 tick: Phase-2 backlog unchanged at 20 files.
 
 ### Tick 2026-04-24 11:09 WAT — skim-level, 1 NEW file in tick window (preserved)
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T09:09:00Z'` returned **1 file**:
-- **Phoenix Stage 1 - Weekly Check in - 2026/04/07 16:59 BST - Notes by Gemini** (fileId `1onYwTlta_f5aBFTlqAsZj3cIKDH1qp6BxCRC66PPn40`; owner ravi.jakhodia@moniepoint.com; modifiedTime 2026-04-24T09:23:03Z = 10:23 WAT; sharedWithMeTime 10:23 WAT). File queued for Phase-2 backlog dispatch. Correlates to Slack/Gmail cross-source — Ravi owns both the Gemini-transcription ingest and the follow-up invitation flow.
+Phoenix Stage 1 Weekly Check in 2026/04/07 queued to Phase-2 backlog (19 → 20).
 
 ### Tick 2026-04-24 10:09 WAT — skim-level, zero new files in tick window (preserved)
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T08:10:00Z'` returned **0 files**.
-
 ### Tick 2026-04-24 09:10 WAT — skim-level, zero new files in tick window (preserved)
-
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T07:09:00Z'` returned 0 files.
 
 ### Tick 2026-04-24 08:09 WAT — skim-level, zero new files in tick window (preserved)
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-20T16:09:00Z'` returned the **same 5 pre-existing files** surfaced by prior ticks — no file modifiedTime falls inside the 07:10→08:09 WAT tick window.
+Same 5 pre-existing files, no file modifiedTime inside 07:10→08:09 WAT.
 
 ### Tick 2026-04-20 17:09 WAT Full-level (condensed — pre-dark)
 
-Zero new Notes-by-Gemini files in the 16:09→17:09 WAT window.
+Zero new Notes-by-Gemini files.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
-Drive MCP returned auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 ticks pre-recovery. Recovery confirmed 09:11 WAT Apr 23.
+Drive MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23.
 
-### Phase-2 backlog — 22 files as of 2026-04-24 13:09 WAT tick
+### Phase-2 backlog — 22 files as of 2026-04-24 14:09 WAT tick
 
-19 files modified between 2026-04-14 and 2026-04-22 identified in the Apr 23 retrofit backlog; +1 new file at 11:09 WAT Apr 24 tick (Phoenix Stage 1); +2 new files at 13:09 WAT Apr 24 tick (Round 2 Venkatesh + Deliberation batch) brings backlog to **22 files**. Batch 1 dispatched: 4 SKIPPED on "no transcript section" (correct disposition); 1 file OK CAPTURED (Direct to Bank 04-16 08:14) with possible over-match flag. Batches 2–4 dispatch continuing with tightened instruction. `last_processed` deferred until all 22 files processed.
+Unchanged at 22 files. Deliberation HoE file has modifiedTime refresh 13:21 WAT but this is content update on existing backlog entry, not a new file. Phase-2 dispatch will pick up the latest content when it reaches this file. `last_processed` deferred until all 22 files processed.
