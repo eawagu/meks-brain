@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T11:09:00Z (12:09 WAT). 12:09 WAT Apr 24 skim-elevated-to-full tick: Layer 1 returned 1 metaview.ai HoE interview-ready notification (skipped per automated-sender rule); Layer 2 operational+issuer bucket returned Union Bank TEAMAPT TRANSACTION STATUS CONFIRMATION thread with 2 new messages — 11:10 WAT Adeyinka Taiwo (Union Bank) feedback chase + 11:15 WAT Emeka Joseph reply (blocked-on-bank-technical-team; database env access unavailable). Reconciliation workstream signal; Awareness only. MCP health holding 27h+ post-recovery."
-updated: "2026-04-24T11:22:06Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T12:09:00Z (13:09 WAT). 13:09 WAT Apr 24 full-level tick: Layer 1 returned 5 threads — 1 significant (Pawel Swiatek Org Changes UPDATED invitation 11:18 WAT, meeting time shifted 16:00→16:30 WAT — calendar D2 refinement), 4 skipped (CEO Gazette newsletter, Greenhouse scorecard reminder, Greenhouse permissions, gemini-notes auto-digest). Layer 2 operational+issuer bucket returned Afeez Kazeem → NIBSS PTSA 11:56 WAT formal pattern-escalation email (thread 19dbf59f056a7ee0, subject 'Persistent Intermittent Failure (RC91) and Transaction Non-Receipt via PTSA Route', CCing CTO Oladapo Onayemi + Moniepoint Sholotan + networkmanagement) — NIBSS PTSA watchpoint formal-escalation-layer signal. MCP health holding 28h+ post-recovery."
+updated: "2026-04-24T12:26:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T11:09:00Z"
+last_processed: "2026-04-24T12:09:00Z"
 ---
 
 ## Connection
@@ -42,27 +42,33 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 
 ## Notes
 
-### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim elevated to full on delta
+### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level tick
 
-12:09 WAT Apr 24 tick.
+13:09 WAT Apr 24 tick.
 
-**Layer 1 `to:me newer_than:1h`** returned **1 thread**:
-- **19dbf2c142800c74 — metaview.ai HoE interview-ready notification** from `interview@metaview.ai` at 11:07 WAT: "Your interview with Venkatesh Purushothaman is ready for you to review! Executive Interview 60 minutes • 3 participants." Post-interview transcript notification from the interview recording service — confirms the 11:00 WAT Round 2 HoE interview concluded on schedule. Automated sender, no operational keyword, tracks to HoE interview cluster (briefing-2026-04-24 A6). **Skipped per skip rule "Automated status emails without operational keywords — discard unless matches active-situation entity"** (HoE interview cluster is not a situation). Factors: source=email, automated_sender, interview_transcript_ready, no_operational_keyword, no_situation_match, skip.
+**Layer 1 `to:me newer_than:1h`** returned **5 threads**:
 
-**Operational+issuer keyword bucket** `(RC91 OR RC05 OR RC69 OR RC06 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover" OR Stanbic OR Monnify OR Keystone OR Union) newer_than:1h` returned **multiple Union-tagged threads**:
+- **19dbf368f9c7d8df — Pawel Swiatek UPDATED INVITATION TeamApt Org Changes 12:18 WAT** (sent 11:18 WAT) — *"Updated invitation with note: TeamApt Org Changes @ Fri Apr 24, 2026 4:30pm - 6pm (WAT)"*. **Meeting time shifted 16:00→16:30 WAT** (30-min later start, end unchanged at 18:00 WAT). CCs: dajalie; To: emeka.awagu, frank.atashili, tracy.ojaigho. **Calendar-delta-significance:** briefing-2026-04-24 D2 option 1 plan (accept + decline Tech Support + keep Lattice) still holds; the 30-min shift reduces Tech Support overlap from 1h to 30min (16:30–17:00 WAT overlap), making declining Tech Support slightly less costly. No action change. Fold into briefing-2026-04-25 Awareness as D2 refinement note. Factors: source=email, layer1_to_me, calendar_update_notification, meeting_time_shift_30min_later, moniepoint_leadership_sender_pawel_swiatek, d2_refinement, overlap_severity_reduced, awareness_only.
 
-- **19db483a28870f92 — "TEAMAPT TRANSACTION STATUS CONFIRMATION 22.04.2026" (Union Bank reconciliation workstream)** — 2 NEW messages this window:
-  - **11:10:45 WAT Apr 24 — Adeyinka Taiwo (Union Bank e-Business Reconciliation, tsadeyinka@unionbankng.com, via aptpaytechnicalsupport@teamapt.com shared-mailbox inbound):** *"Dear Emeka, Awaiting your feedback on the attached status confirmation."* Third chase from the Union Bank reconciliation team on this Apr 22 thread (prior messages: Apr 22 10:26 WAT initial send, Apr 23 10:12 WAT first chase, now Apr 24 11:10 WAT second chase).
-  - **11:15:13 WAT Apr 24 — Emeka Joseph reply:** *"Hello Taiwo, We are reviewing this. We cannot access the database environment to provide the transaction status. This is being worked on by the bank's technical team and the request will be completed..."* **Blocked-on-bank-technical-team signal** — TeamApt-side has a named internal dependency on bank-side database env access. Reconciliation workstream, not a P1 or outage.
-  - **Disposition:** Awareness — reconciliation workstream chase; bank-side dependency explicitly named. No active Union Bank situation (RC91 Apr 20 retired Apr 20 post-cycle-2 closure). Fold into [[Union Bank]] entity context at next entity refresh. Factors: source=email, active_entity_match=union_bank, bank_technical_team_dependency, reconciliation_workstream, 3rd_chase_cadence_24h, emeka_joseph_responded_same_tick, no_p1_no_outage, awareness_only.
+- **19dbf5e13aa3ad14 — Weekly CEO Gazette Apr 24th 2026** 13:00 WAT from ialiyu@teamapt.com (CCs emeka.awagu, frank.atashili, ibukun.atoyebi) — company newsletter distribution. **Skipped per marketing/newsletter skip rule.** Factors: source=email, newsletter_content, skip_rule_applied.
 
-- **19c769a836f53719 — Union Bank NSS Consent thread** — stale Feb-March 2026 content, no Apr 24 delta. Skip (stale).
-- **19ce759249dd1f6d — Access Bank DAILY BANK STATEMENT REQUEST** — stale March 2026. Skip (stale).
-- **19db4e3461c204ea — NIBSS PTSA Apr 22 response-not-sent thread** — no new messages in 11:09→12:09 WAT window (last message Mustapha Ajibade Apr 24 09:24 UTC = 10:24 WAT, already captured in 11:09 WAT tick).
+- **19dbf5ce9a5fe3a2 — Greenhouse scorecard reminder 13:00 WAT** ("REMINDER: Please fill out your scorecard for Venkatesh Purushothaman") — 1h post-interview automated prompt. Tracks to briefing-2026-04-24 A6 HoE interview cluster (already noted scorecard pending). **Skipped per automated-sender skip rule** (no operational keyword, not active situation). Factors: source=email, automated_sender_greenhouse, scorecard_pending_tracked_in_briefing_a6, skip_rule_applied.
 
-**Net deltas this tick:** 1 Union Bank reconciliation workstream chase + Emeka Joseph reply (Awareness-only, bank-dependency signal); 1 Layer 1 HoE transcript-ready notification (skipped).
+- **19dbf55bdc93593a — gemini-notes auto-digest for Deliberation: HoE batch interviews** 12:52 WAT — corresponds to Drive Notes-by-Gemini file detected this tick. **Skipped per automated-sender skip rule** (non-operational, HR interview cluster). Factors: source=email, automated_sender_gemini_notes, cross_source_drive_notes_by_gemini_detected, skip_rule_applied.
 
-MCP health holding — 27h+ post-recovery from the ~64h auth-failure dark window.
+- **19dbf4a1242631b1 — Greenhouse permissions update 12:39 WAT** ("Your permissions in Greenhouse have been updated: Job Admin on Operations Team Lead") — low-signal automated admin notification. **Skipped per automated-sender skip rule.** Factors: source=email, automated_sender_greenhouse, low_signal_admin_notification, skip_rule_applied.
+
+**Operational+issuer keyword bucket** `(RC91 OR RC05 OR RC69 OR RC06 OR P1 OR outage OR NIBSS OR compromised OR Ecobank OR "duty handover" OR Stanbic OR Monnify OR Keystone OR Union) newer_than:1h` returned **1 significant thread**:
+
+- **19dbf59f056a7ee0 — Afeez Kazeem → NIBSS PTSA 12:56 WAT Apr 24 formal pattern-escalation email** — sent 11:56:36 WAT. **To:** ptsa@nibss-plc.com.ng. **CCs:** aptpaytechnicalsupport@teamapt.com, mustapha.ajibade@teamapt.com, **oladapo.onayemi@teamapt.com (CTO)**, ademola.adefemi@moniepoint.com, networkmanagement@teamapt.com, **oladipupo.sholotan@moniepoint.com (Moniepoint leadership)**. **Subject:** *"Persistent Intermittent Failure (RC91) and Transaction Non-Receipt via PTSA Route"*. **Body opens:** *"Dear Team, We have been experiencing the intermittent non-receipt of transactions successfully sent by Moniepoint to NIBSS. This failure often results in transactions being declined with Response Code..."* **Escalation-layer semantics:** (a) subject change from per-event "SUCCESSFUL RESPONSE NOT SENT| 20260424" → broader "Persistent Intermittent Failure (RC91) and Transaction Non-Receipt" indicates TeamApt formally claiming the pattern, not a single event; (b) sent 1 hour after NIBSS's 10:56 WAT contested-attribution reply on thread 19dbec21731fddeb — TeamApt counter-pushing rather than conceding; (c) CTO + Moniepoint-leadership remain CC'd, signaling formal-posture maintenance. **Disposition:** Situation delta on [[NIBSS PTSA — VPN Flapping Apr 22]] response-not-sent watchpoint — folded into situation page as formal-escalation-layer delta. NOT a new 1st/2nd-instance data point for directive-tracking (it's a pattern-escalation, not a new response-not-sent observation); directive window stays at 1 of 2 post-transition instances through 10:10 WAT Apr 26. **Re-escalation bar extended:** added CTO-direct engagement on thread as trigger. Awareness-only for briefing-2026-04-25 — attribution negotiation is bilateral-mediated, not unilateral-action triggering. No Immediate dispatch. Factors: source=email, active_situation_entity_match=nibss_ptsa, active_situation_entity_match=oladapo_onayemi, formal_escalation_layer, pattern_claim_vs_single_event, counter_response_to_nibss_attribution_push, cto_cc_formal_posture, moniepoint_sholotan_cc, subject_change_per_event_to_persistent_pattern, directive_unchanged_1_of_2_instances, re_escalation_bar_extended_cto_direct_engagement, bilateral_negotiation_not_unilateral_trigger, briefing_2026_04_25_awareness_candidate, no_immediate_dispatch.
+
+**Net deltas this tick:** 1 significant NIBSS PTSA formal-escalation email (Awareness, situation delta) + 1 significant Calendar-update notification on Org Changes time-shift (Awareness, D2 refinement); 4 automated-sender threads skipped.
+
+MCP health holding — 28h+ post-recovery from the ~64h auth-failure dark window.
+
+### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-elevated-to-full tick (preserved summary)
+
+12:09 WAT Apr 24 tick: Layer 1 returned 1 metaview.ai HoE interview-ready notification (skipped per automated-sender rule); Layer 2 operational+issuer bucket returned Union Bank TEAMAPT TRANSACTION STATUS CONFIRMATION thread with 2 new messages — 11:10 WAT Adeyinka Taiwo (Union Bank) feedback chase + 11:15 WAT Emeka Joseph reply (blocked-on-bank-technical-team; database env access unavailable). Reconciliation workstream signal; Awareness only. MCP health holding 27h+ post-recovery.
 
 ### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
 
@@ -71,14 +77,6 @@ MCP health holding — 27h+ post-recovery from the ~64h auth-failure dark window
 ### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — skim elevated to full on delta (preserved summary)
 
 10:09 WAT Apr 24 tick: Layer 1 returned 1 BambooHR time-off approvals reminder (Awareness-only, skip-rule applies but queued); operational+issuer bucket returned NEW NIBSS PTSA thread 19dbec21731fddeb Afeez Kazeem → NIBSS PTSA at 10:10 WAT "SUCCESSFUL RESPONSE NOT SENT| 20260424" (distinct failure mode from retired VPN flap; watchpoint-match delta folded into situation page). MCP health holding — 25h+ post-recovery.
-
-### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — skim tick, 1 Awareness-only delta (preserved)
-
-09:10 WAT Apr 24 tick: Layer 1 returned 2 threads — Lattice weekly update reminder (automated sender, tracked workstream, Awareness-only queue for next briefing) + Confluence daily digest (stale, skipped). Operational+issuer keyword bucket returned 1 stale Ecobank thread (zero Apr 24 deltas). Net 0 operational deltas; 1 Awareness-only Lattice reminder.
-
-### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick (preserved)
-
-08:09 WAT Apr 24 tick: Layer 1 returned 1 Confluence daily digest (skipped). Operational+issuer keyword bucket returned 1 stale Ecobank thread. Net 0 actionable email deltas.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full backlog catch-up (preserved summary)
 

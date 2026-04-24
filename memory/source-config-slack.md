@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T11:09:00Z (12:09 WAT). 12:09 WAT Apr 24 skim-level zero-delta tick: all 5 Tier 1 channels silent since 11:09 WAT prior tick (1h01m quiet); keyword scan + DM scan 0 hits. Paystack treasury ops sequence from prior tick closed out (Christine \"Done\" 10:54 WAT); no new activity."
-updated: "2026-04-24T11:20:57Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T12:09:00Z (13:09 WAT). 13:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 12:09 WAT prior tick (1h00m quiet); keyword scan + DM scan 0 hits. Total Slack-side quiet now 2h01m from 11:09 WAT Paystack treasury ops closeout."
+updated: "2026-04-24T12:26:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T11:09:00Z"
+last_processed: "2026-04-24T12:09:00Z"
 ---
 
 ## Connection
@@ -45,20 +45,17 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — zero-delta tick
+### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level zero-delta tick
 
-12:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777021740)` swept all 5 Tier 1 channels. Results after epoch post-filter (message_ts > 1777025340 / 11:09 UTC = 12:09 WAT):
-- **C0ABU8GMW75** empty
-- **C098VUQCVRA** returned 5 bot-join messages at 10:27-10:57 WAT (all before 12:09 WAT tick boundary; already processed at 11:09 WAT tick); zero true-in-window
-- **C096LCNP26P** returned 5 messages at 10:26-10:57 WAT (already processed at 11:09 WAT tick — Christine Ogude "Done" sequence); zero true-in-window
-- **C08PH35PLPK** empty
-- **C090UHR9VDE** empty
+13:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777028940)` swept all 5 Tier 1 channels. Results: all 5 channels empty in 12:09→13:09 WAT tick window. **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777028940` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
 
-All Tier 1 channel activity this window pre-dated 11:09 WAT — post-filter rejects; confirms the 11:09 WAT tick captured this activity. 1h01m post-tick quiet confirmed.
+**No Immediate-tier dispatch this tick.** Cross-source: NIBSS PTSA formal-escalation email layer (Afeez 11:56 WAT to NIBSS CCing CTO Oladapo + Moniepoint Sholotan) captured by email sweep; TDSD-6718 NEW Opeyemi-direct-assigned refund ticket captured by Jira sweep. Slack carried zero signal on these — consistent with the pattern that Moniepoint→TeamApt Jira escalations + email counter-pushes are Jira/email-layer phenomena not ops-channel material.
 
-**Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777021740` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
+Total Slack-side quiet now 2h01m from 11:09 WAT Paystack treasury ops closeout (Christine "Done" 10:54 WAT).
 
-**No Immediate-tier dispatch this tick.** Jira-side TDSD-6645 Blessing chase + TDSD-6684 Blessing CC-to-Opeyemi escalation captured by Jira sweep (see source-config-jira); Slack carried zero signal on these reporter-side pressure moves — consistent with the pattern that Moniepoint→TeamApt Jira escalations are Jira-layer phenomena not ops-channel material.
+### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — skim-level zero-delta tick (preserved summary)
+
+12:09 WAT Apr 24 tick: all 5 Tier 1 channels silent since 11:09 WAT prior tick (1h01m quiet); keyword scan + DM scan 0 hits. Paystack treasury ops sequence from prior tick closed out (Christine "Done" 10:54 WAT); no new activity.
 
 ### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
 
@@ -75,10 +72,6 @@ All Tier 1 channel activity this window pre-dated 11:09 WAT — post-filter reje
 ### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick (preserved)
 
 09:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 08:09 WAT prior tick. Keyword + DM scans: 0 hits.
-
-### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick (preserved)
-
-08:09 WAT Apr 24 tick: all 5 Tier 1 channels empty since 07:10 WAT prior tick. Keyword + DM scans: 0.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep (preserved)
 
