@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T09:09:00Z (10:09 WAT). 10:09 WAT Apr 24 zero-delta tick: 8 events returned (All Hands dropped as ended 10:00 WAT), ordered by lastModified. Most recent update is Round 2 HoE Interview (Venkatesh Purushothaman) at 16:04 WAT Apr 23 — pre-existing; no delta. No new invites, no cancellations, no RSVP status changes. Next event: 11:00 WAT Round 2 HoE Interview (needsAction RSVP still pending)."
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T10:09:00Z (11:09 WAT). 11:09 WAT Apr 24 zero-delta tick: 8 events returned; Deliberation HoE recurring metadata refresh 10:42 WAT only (skip-rule applies). No new invites, no cancellations, no RSVP deltas. 11:00 WAT HoE Round 2 interview starting at tick time (briefing-2026-04-24 A6 effectively consumed)."
 updated: 2026-04-24
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T09:09:00Z"
+last_processed: "2026-04-24T10:09:00Z"
 ---
 
 ## Connection
@@ -28,12 +28,12 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — zero-delta tick
+### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — zero-delta tick (Deliberation recurring metadata refresh only)
 
-10:09 WAT Apr 24 tick: `list_events` for Apr 24 (10:09 WAT → Apr 25 00:00 WAT) returned 8 events (All Hands dropped from window — meeting ended 10:00 WAT). Most recent `updated`: Round 2 HoE Interview Venkatesh Purushothaman at 16:04 WAT Apr 23 — pre-existing, no metadata delta since prior tick. No new invites, no cancellations, no RSVP status deltas.
+11:09 WAT Apr 24 tick: `list_events` for Apr 24 (10:09 WAT → Apr 25 00:00 WAT) returned 8 events. Most recent `updated`: **Deliberation: Head of Engineering batch interviews** (recurring, updated 10:42 WAT Apr 24 — 27m before tick). Event starts 12:00 WAT today. Update is routine metadata refresh on recurring event — skip-rule applies. No new invites, no cancellations, no RSVP status deltas.
 
-Upcoming today (unchanged):
-- **11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (needsAction, 1h)** — starts in ~51m; RSVP still pending (briefing-2026-04-24 A6 recommendation unresolved).
+Upcoming today (unchanged from prior tick):
+- **11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (needsAction, 1h)** — starts in ~0m at 11:09 WAT tick; RSVP still pending (briefing-2026-04-24 A6 recommendation unresolved). **Event is starting now** — briefing item A6 effectively consumed regardless of disposition.
 - 11:00 WAT — Blocker: HoE (VP+) Slots (Chris Purkis; needsAction, optional)
 - 12:00 WAT — Deliberation: HoE batch interviews (needsAction, 40min)
 - 13:00 WAT — CI&P Team Structure (Tracy Ojaigho; needsAction, 1h)
@@ -44,17 +44,17 @@ Upcoming today (unchanged):
 
 No priority-signal matches this tick.
 
+### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — zero-delta tick (preserved)
+
+10:09 WAT Apr 24 tick: 8 events returned. Most recent `updated`: Round 2 HoE Interview Venkatesh Purushothaman at 16:04 WAT Apr 23 — pre-existing, no metadata delta since prior tick. No priority-signal matches.
+
 ### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick (preserved)
 
-09:10 WAT Apr 24 tick: 10 events returned; most recent `updated` is TeamApt All Hands recurring instance at 07:07 UTC (08:07 WAT) — same event as prior tick, no further metadata refresh. All Hands meeting in progress at tick time. No priority-signal matches.
+09:10 WAT Apr 24 tick: 10 events returned; most recent `updated` is TeamApt All Hands recurring instance at 07:07 UTC. Skip-rule applies. No priority-signal matches.
 
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick (preserved)
 
-08:09 WAT Apr 24 tick: TeamApt All Hands metadata refresh only — skip-rule applies (recurring standing meeting, unchanged metadata). No priority-signal matches.
-
-### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick (preserved)
-
-07:10 WAT Apr 24 tick: 9 events returned, all timestamps pre-dating briefing tick. No deltas.
+08:09 WAT Apr 24 tick: TeamApt All Hands metadata refresh only — skip-rule applies. No priority-signal matches.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick sweep (preserved summary)
 
