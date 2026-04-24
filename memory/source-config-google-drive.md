@@ -3,8 +3,8 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (now 20 files). 11:09 WAT Apr 24 tick: 1 NEW file detected (Phoenix Stage 1 Weekly Check-in 2026/04/07, modifiedTime 10:23 WAT) — queued for Phase-2 backlog dispatch, not processed this tick."
-updated: 2026-04-24
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (20 files). 12:09 WAT Apr 24 skim-level tick: 0 NEW files in 11:09→12:09 WAT tick window (prior tick's Phoenix Stage 1 file already queued in Phase-2 backlog at its 09:23 UTC modifiedTime)."
+updated: "2026-04-24T11:25:02Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -52,18 +52,18 @@ This split keeps distilled content (summary / decisions / action items) and subs
 
 ## Notes
 
-### Tick 2026-04-24 11:09 WAT — skim-level, 1 NEW file in tick window
+### Tick 2026-04-24 12:09 WAT — skim-level, 0 new files in tick window
+
+`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T10:09:00Z'` returned 1 file (Phoenix Stage 1 Weekly Check in 2026/04/07) with modifiedTime 2026-04-24T09:23:03Z — this file was detected and queued at the 11:09 WAT prior tick; its modifiedTime pre-dates the 11:09→12:09 WAT window, so no new detection this tick. Phase-2 backlog unchanged at 20 files. `last_processed` remains held at 2026-04-20T16:09:00Z per hold policy.
+
+### Tick 2026-04-24 11:09 WAT — skim-level, 1 NEW file in tick window (preserved)
 
 `search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T09:09:00Z'` returned **1 file**:
-- **Phoenix Stage 1 - Weekly Check in - 2026/04/07 16:59 BST - Notes by Gemini** (fileId `1onYwTlta_f5aBFTlqAsZj3cIKDH1qp6BxCRC66PPn40`; owner ravi.jakhodia@moniepoint.com; modifiedTime 2026-04-24T09:23:03Z = 10:23 WAT; sharedWithMeTime 10:23 WAT). 17-day-old meeting (2026-04-07 16:59 BST) — modified today likely because Gemini added late-arriving transcript/summary content.
-
-**File queued for Phase-2 backlog dispatch** — not processed this tick per `last_processed` hold policy (see Phase-2 backlog section below). File is added to the backlog queue; full chain processing deferred until Phase-2 batches 2–4 complete. `last_processed` remains held at 2026-04-20T16:09:00Z.
-
-Correlates to Slack cross-source: `ravi.jakhodia@moniepoint.com` sent 10:23 WAT Gmail invite (thread 19dbeccffe9b0633) for the next Phoenix Stage 1 weekly instance — suggesting a weekly cadence where Ravi owns both the Gemini-transcription ingest and the follow-up invitation flow. Phoenix Stage 1 workstream is Moniepoint-owned cross-company checkpoint; relevant entities/concepts will be identified when the file is processed.
+- **Phoenix Stage 1 - Weekly Check in - 2026/04/07 16:59 BST - Notes by Gemini** (fileId `1onYwTlta_f5aBFTlqAsZj3cIKDH1qp6BxCRC66PPn40`; owner ravi.jakhodia@moniepoint.com; modifiedTime 2026-04-24T09:23:03Z = 10:23 WAT; sharedWithMeTime 10:23 WAT). File queued for Phase-2 backlog dispatch. Correlates to Slack/Gmail cross-source — Ravi owns both the Gemini-transcription ingest and the follow-up invitation flow.
 
 ### Tick 2026-04-24 10:09 WAT — skim-level, zero new files in tick window (preserved)
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T08:10:00Z'` returned **0 files** — no Notes-by-Gemini file modifiedTime falls inside the 09:10→10:09 WAT window.
+`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T08:10:00Z'` returned **0 files**.
 
 ### Tick 2026-04-24 09:10 WAT — skim-level, zero new files in tick window (preserved)
 
@@ -88,6 +88,6 @@ Zero new Notes-by-Gemini files in the 16:09→17:09 WAT window.
 
 Drive MCP returned auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 ticks pre-recovery. Recovery confirmed 09:11 WAT Apr 23.
 
-### Phase-2 backlog — preserved context (now 20 files)
+### Phase-2 backlog — preserved context (20 files, unchanged this tick)
 
-19 files modified between 2026-04-14 and 2026-04-22 identified in the Apr 23 retrofit backlog; **+1 new file detected 11:09 WAT Apr 24 tick (Phoenix Stage 1 Weekly Check-in 2026/04/07)** brings backlog to **20 files**. Batch 1 dispatched: 4 SKIPPED on "no transcript section" (correct disposition); 1 file OK CAPTURED (Direct to Bank 04-16 08:14) with possible over-match flag. Batches 2–4 dispatch continuing with tightened instruction. `last_processed` deferred until all 20 files processed.
+19 files modified between 2026-04-14 and 2026-04-22 identified in the Apr 23 retrofit backlog; +1 new file detected 11:09 WAT Apr 24 tick (Phoenix Stage 1 Weekly Check-in 2026/04/07) brings backlog to **20 files**. Batch 1 dispatched: 4 SKIPPED on "no transcript section" (correct disposition); 1 file OK CAPTURED (Direct to Bank 04-16 08:14) with possible over-match flag. Batches 2–4 dispatch continuing with tightened instruction. `last_processed` deferred until all 20 files processed.
