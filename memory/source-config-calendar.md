@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T10:09:00Z (11:09 WAT). 11:09 WAT Apr 24 zero-delta tick: 8 events returned; Deliberation HoE recurring metadata refresh 10:42 WAT only (skip-rule applies). No new invites, no cancellations, no RSVP deltas. 11:00 WAT HoE Round 2 interview starting at tick time (briefing-2026-04-24 A6 effectively consumed)."
-updated: 2026-04-24
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T11:09:00Z (12:09 WAT). 12:09 WAT Apr 24 zero-delta tick: Round 2 HoE Interview Venkatesh Purushothaman metadata update 11:11 WAT (post-interview RSVP/metadata refresh — interview ended 12:00 WAT per event end). Interview-layer completion confirmed by parallel metaview.ai email notification 11:07 WAT. No new invites, no cancellations, no RSVP priority-signal deltas."
+updated: "2026-04-24T11:24:06Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T10:09:00Z"
+last_processed: "2026-04-24T11:09:00Z"
 ---
 
 ## Connection
@@ -28,21 +28,28 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — zero-delta tick (Deliberation recurring metadata refresh only)
+### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — zero-delta tick (Round 2 HoE interview metadata refresh)
 
-11:09 WAT Apr 24 tick: `list_events` for Apr 24 (10:09 WAT → Apr 25 00:00 WAT) returned 8 events. Most recent `updated`: **Deliberation: Head of Engineering batch interviews** (recurring, updated 10:42 WAT Apr 24 — 27m before tick). Event starts 12:00 WAT today. Update is routine metadata refresh on recurring event — skip-rule applies. No new invites, no cancellations, no RSVP status deltas.
+12:09 WAT Apr 24 tick: `list_events` for Apr 24 (12:09 WAT → Apr 25 00:00 WAT) returned 10 events. Most recent `updated`: **Round 2 HoE Interview Venkatesh Purushothaman** updated at **11:11:04 WAT Apr 24** — post-interview metadata refresh (interview concluded 12:00 WAT per event end; parallel metaview.ai transcript-ready email notification received 11:07 WAT). No RSVP status change, no cancellation. Skip-rule applies (unchanged recurring/pre-existing event).
 
-Upcoming today (unchanged from prior tick):
-- **11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (needsAction, 1h)** — starts in ~0m at 11:09 WAT tick; RSVP still pending (briefing-2026-04-24 A6 recommendation unresolved). **Event is starting now** — briefing item A6 effectively consumed regardless of disposition.
-- 11:00 WAT — Blocker: HoE (VP+) Slots (Chris Purkis; needsAction, optional)
-- 12:00 WAT — Deliberation: HoE batch interviews (needsAction, 40min)
+Remaining today (unchanged from 11:09 WAT tick enumeration):
 - 13:00 WAT — CI&P Team Structure (Tracy Ojaigho; needsAction, 1h)
 - 15:00–17:00 WAT — Lattice Downward Reviews — 8 pending (self, accepted)
 - 16:00 WAT — Tech support meeting (recurring, accepted) — triple-overlap carryover from briefing-2026-04-24 D2
 - 16:00 WAT — TeamApt Org Changes (Pawel Swiatek; accepted, 2h)
 - 18:00 WAT — Product-Engineering Sync (self recurring, accepted)
 
+Also present (but already past at tick time):
+- 08:30 WAT — TeamApt All Hands (recurring accepted, completed)
+- 11:00 WAT — Round 2 HoE Interview Venkatesh Purushothaman (completed, scorecard pending)
+- 11:00 WAT — Blocker: HoE (VP+) Slots (optional, completed)
+- 12:00 WAT — Deliberation: HoE batch interviews (needsAction, starting now at 12:09 WAT / just-past-start)
+
 No priority-signal matches this tick.
+
+### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — zero-delta tick (preserved)
+
+11:09 WAT Apr 24 tick: 8 events returned. Most recent `updated`: **Deliberation: Head of Engineering batch interviews** (recurring, updated 10:42 WAT Apr 24 — 27m before tick). Routine metadata refresh on recurring event — skip-rule applies. No priority-signal matches.
 
 ### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — zero-delta tick (preserved)
 
