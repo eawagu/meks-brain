@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T05:09:00Z (06:09 WAT). Briefing-tick full sweep: Layer A TDSD 5 deltas (Dominic resolution burst 23:25-23:32 WAT Apr 23 closed TDSD-6553/6612/6688/6706 + TDSD-6711 NEW Ecobank DCIR portal inaccessibility 22:32 WAT Apr 23 Work In Progress). Layer B software projects 0 deltas. Key observations: TDSD-6612 (Highest priority, dormant since Apr 17) closed; Dominic workflow-discipline observation has mixed evidence now (resolution burst is counter-signal)."
-updated: "2026-04-24T05:27:27Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T06:10:00Z (07:10 WAT). 07:10 WAT Apr 24 zero-delta tick: Layer A TDSD + Layer B software both returned 0. Post-Dominic-resolution-burst quiet. TDSD-6645 unchanged at 04:08 WAT Apr 23 attribution-transfer; TDSD-6711 unchanged at 22:32 WAT Apr 23 Work In Progress."
+updated: "2026-04-24T06:17:59Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T05:09:00Z"
+last_processed: "2026-04-24T06:10:00Z"
 ---
 
 ## Connection
@@ -64,6 +64,15 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 3. **Per-ticket reasoning** — classify by archetype + priority + active-situation match; record triggering factors.
 
 ## Notes
+
+### last_processed 2026-04-24T06:10:00Z (07:10 WAT) — zero-delta tick
+
+07:10 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 05:09"` returned 0 issues. Layer B software JQL (scoped to priority Highest/Blocker/Critical or status transitions to resolved/done/completed/escalated) returned 0 issues. Post-briefing quiet. Key state checkpoints:
+- **TDSD-6645** (Monnify Settlements Escalated) — no movement since Dominic 04:08 WAT Apr 23 attribution-transfer comment. Unchanged.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no movement since Qazim 22:32 WAT Apr 23 Work In Progress filing. Unchanged.
+- **Dominic resolution burst (TDSD-6553/6612/6688/6706)** — all remain closed from 23:25–23:32 WAT Apr 23.
+
+No new P1/Highest filings. No status transitions on active-situation entities (Ecobank, Monnify, NIBSS, CoralPay). Friday morning pre-ops-start window consistent with quiet expectation.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep
 
