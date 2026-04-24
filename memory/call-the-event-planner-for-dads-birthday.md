@@ -4,8 +4,8 @@ type:
 title: "Call the event planner for dad's birthday"
 status: pending
 created: "2026-04-16T09:45:51Z"
-summary: "Call event planner for dad's birthday — 3 days past Apr 20 commitment; 5th consecutive commitment-day-or-later surfacing in briefing-2026-04-23 D3."
-updated: "2026-04-23T05:37:46Z"
+summary: "Call event planner for dad's birthday — 4 days past Apr 20 commitment; 6th consecutive commitment-day-or-later surfacing in briefing-2026-04-24 D4."
+updated: "2026-04-24T05:25:51Z"
 cssclasses:
   - "reminder"
 deferred_to: 2026-04-20
@@ -13,7 +13,7 @@ deferred_to: 2026-04-20
 
 Needs to happen before flight back to Lagos next week. Time-sensitive — surface any time this week.
 
-**Current disposition:** Monday 2026-04-20 was the commitment day per Apr 19 triage. User override on briefing-2026-04-20 B3 committed to "Call event planner between 16:00–18:00 WAT today (Apr 20) after planned double-decline of 16:00 slot." No completion signal recorded in brain since that override. briefing-2026-04-21 never fired (see briefing-2026-04-22 B5), so no intermediate surfacing occurred. briefing-2026-04-22 B3 re-surfaced it (4th consecutive commitment-day-or-later surfacing) but has not yet received triage — the entire briefing-2026-04-22 stands untriaged as of this brief (see briefing-2026-04-23 D5 carryforward). As of briefing-2026-04-23, this is the 5th consecutive commitment-day-or-later surfacing, now 3 days past the Apr 20 commitment day, and the week-window directive ("before flying back to Lagos next week") is now actively broken or closing depending on flight date interpretation.
+**Current disposition:** Monday 2026-04-20 was the commitment day per Apr 19 triage. User override on briefing-2026-04-20 B3 committed to "Call event planner between 16:00–18:00 WAT today (Apr 20) after planned double-decline of 16:00 slot." No completion signal recorded in brain since that override. briefing-2026-04-21 never fired (see briefing-2026-04-22 B5), so no intermediate surfacing occurred. briefing-2026-04-22 B3 re-surfaced it (4th consecutive commitment-day-or-later surfacing) but has not yet received triage — the entire briefing-2026-04-22 stands untriaged as of this brief (see briefing-2026-04-23 D5 carryforward). briefing-2026-04-23 D3 re-surfaced it (5th consecutive) — also untriaged. As of briefing-2026-04-24, this is the 6th consecutive commitment-day-or-later surfacing, now 4 days past the Apr 20 commitment day, and the week-window directive ("before flying back to Lagos next week") is now actively broken under any reasonable week-start convention.
 
 ## Surfacing history
 - [2026-04-17 06:09 WAT] — Surfaced in briefing-2026-04-17 as Decision item B2. First-time surface (reminder created 2026-04-16 09:45 WAT, after briefing-2026-04-16 was emitted at 05:28 WAT — this is the first briefing tick after creation). Body directive ("surface any time this week") + flight-back-to-Lagos time-sensitivity triggered immediate decision-tier placement.
@@ -24,3 +24,4 @@ Needs to happen before flight back to Lagos next week. Time-sensitive — surfac
 - [2026-04-20 08:49 WAT] — **User override during briefing-2026-04-20 triage.** Recommended action overridden with concrete plan: "Call event planner between 16:00–18:00 WAT today (Apr 20) after planned double-decline of 16:00 slot." No completion note recorded in brain afterward.
 - [2026-04-22 ~12:45 WAT] — **Re-surfaced in briefing-2026-04-22 as Decision item B3 (catch-up briefing).** 2 days past Apr 20 commitment day. briefing-2026-04-21 never fired (structural gap — see briefing-2026-04-22 B5) so no intermediate Apr 21 surfacing occurred. Week-window directive now actively broken or closing. Status still `pending`. Triage prompt asks explicitly whether Apr 20 16:00–18:00 call happened.
 - [2026-04-23 06:10 WAT] — **Re-surfaced in briefing-2026-04-23 as Decision item D3.** 3 days past Apr 20 commitment day; 5th consecutive commitment-day-or-later surfacing. briefing-2026-04-22 B3 remains untriaged (entire Apr 22 briefing untriaged — see briefing-2026-04-23 D5). Salience remains urgency-dominant. Recommendation: confirm call happened, dismiss the reminder explicitly, or re-commit to a specific window today. Auto-resolve pathway requires ingest-surfaced completion evidence that has not appeared.
+- [2026-04-24 05:10 WAT] — **Re-surfaced in briefing-2026-04-24 as Decision item D4.** 4 days past Apr 20 commitment day; 6th consecutive commitment-day-or-later surfacing (Apr 17/18/19/20/22/23/24, Apr 21 missing). briefing-2026-04-22 B3 + briefing-2026-04-23 D3 both remain untriaged — the reminder is now inside a 2-briefing untriage compound (see briefing-2026-04-24 D5). Surfaced via age (6-consecutive) + context-match (no context-match actually fires; week-window broken is the salience driver) + overdue-due (`deferred_to: 2026-04-20` is 4 days past). Same three-path recommendation: close loop via action / call today / dismiss as post-mortem.
