@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T17:09:00Z (18:09 WAT). 18:09 WAT Apr 24 full-level tick: 3 genuinely new deltas (client-side UTC filter) — **TDSD-6713 Work in progress → Completed 17:43 WAT by David Oseji** (Keystone settlement Apr 24 cycle closed, 9h22m filing-to-close, second consecutive same-day ~9h close matching TDSD-6633 cadence; [[Keystone Bank — Settlement Requery Apr 20]] status → resolving); **ADD-4429 + ADD-4426 Bug Done 17:11 WAT / 17:10 WAT by Ezinne Igbinoba** (Direct Debit description UX fixes — merchant-name + \"To\" prefix; Awareness-only, no active-situation match). No Immediate dispatch."
-updated: "2026-04-24T17:18:36Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron tick (13min after prior 18:09 WAT): 1 genuinely new delta — **ADD-4596 In Progress** (17:16 UTC / 18:16 WAT) \"BETA ENV: Phone number not properly rendered on OTP screen\", Medium, assignee Ebenezer Igbinoba, new sprint UX bug. No active-situation match, no operational keyword match. Awareness tier; accumulates for briefing-2026-04-25. No Immediate dispatch."
+updated: "2026-04-24T17:32:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T17:09:00Z"
+last_processed: "2026-04-24T17:22:16Z"
 ---
 
 ## Connection
@@ -66,7 +66,19 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level tick
+### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron tick, 1 Layer B delta
+
+18:22 WAT Apr 24 off-cron tick (13min after prior 18:09 WAT cron tick). Skim-level consolidated JQL `project in (...) AND updated >= "2026-04-24 17:09"` returned 3 tickets; client-side UTC filter (>2026-04-24T17:09:00Z) yields **1 genuinely new**:
+
+**Layer B — ADD-4596 In Progress 18:16:58 WAT (17:16 UTC)** — routine DD BETA UX bug
+- Task In Progress at 2026-04-24T17:16:58Z by [[Ebenezer Igbinoba]] (assignee). Medium, reporter not loaded. Summary: "BETA ENV: Phone number not properly rendered on OTP screen."
+- BETA-env UX-layer bug on the DD OTP screen. Semantic search against brain matches OTP Authentication / OTP Delivery concepts (DD domain) but NO active-situation match. Not paired with P1 / outage / RC91 / breach signals.
+- Accumulates for briefing-2026-04-25 as Awareness item: "DD BETA env OTP-screen phone-number rendering bug in progress (Ebenezer Igbinoba, Medium)."
+- Factors: `source=jira`, `archetype=software`, `project=ADD`, `priority=medium`, `status_transition=new_in_progress`, `beta_env_ux_bug`, `dd_otp_screen`, `assignee=ebenezer_igbinoba`, `no_active_situation_match`, `no_operational_keyword_match`, `awareness_tier`.
+
+No Immediate dispatch this tick. Other tickets returned by the sweep (TDSD-6713, ATPP-1708) predate the 17:09 UTC cutoff and were captured in the prior 18:09 WAT tick.
+
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level tick (preserved)
 
 18:09 WAT Apr 24 tick: Layer A TDSD JQL `project = TDSD AND updated > "2026-04-24 16:09"` returned 3 tickets; client-side UTC filter (>2026-04-24T16:09:00Z) yields **1 genuinely new**. Layer B scoped JQL returned 6 tickets; client-side filter yields **2 genuinely new**.
 

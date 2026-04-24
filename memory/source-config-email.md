@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T17:09:00Z (18:09 WAT). 18:09 WAT Apr 24 full-level zero-delta tick: all 4 buckets (Layer 1 to:me, operational, issuer, governance) returned only the cached Zone<>TeamApt Juliana Switch thread from Jan 2026 as residual match — 0 genuinely new threads in the 17:09→18:09 WAT window. MCP health holding 33h+ post-recovery; residual-cache behavior noted as Gmail newer_than filter occasionally returns stale thread when no in-window match exists."
-updated: "2026-04-24T17:16:52Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron zero-delta tick (13min after prior 18:09 WAT): broad `newer_than:1h` query returned 0 threads in the 17:09→17:22 UTC window. MCP health holding 33h+ post-recovery."
+updated: "2026-04-24T17:32:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T17:09:00Z"
+last_processed: "2026-04-24T17:22:16Z"
 ---
 
 ## Connection
@@ -45,7 +45,13 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick
+### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron zero-delta tick
+
+18:22 WAT Apr 24 off-cron tick (13min after prior 18:09 WAT cron tick): single consolidated `search_threads(newer_than:1h)` returned empty result set for the 17:09→17:22 UTC window. Skim-level delta-check satisfies per-source sweep requirement; no need for 4-bucket split at this delta size.
+
+Factors: `zero_delta`, `no_immediate_dispatch`, `off_cron_tick`, `user_in_meeting`.
+
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick (preserved)
 
 18:09 WAT Apr 24 tick. All 4 bucket queries returned only a cached residual thread (Zone<>TeamApt Juliana Account Transfer Switch Requirements, thread 19be1a59539e3734, latest message 2026-01-23 17:54 UTC). Applied client-side filter (most-recent-message timestamp > 2026-04-24T16:09:00Z): **0 new threads**. This is the first observation of the residual-cache behavior — documented as a known limitation above for future ticks.
 

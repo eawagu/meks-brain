@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T17:09:00Z (18:09 WAT). 18:09 WAT Apr 24 full-level zero-delta tick: `list_events` for 18:10 WAT → Apr 25 00:00 WAT window returned 2 events (Lattice Reviews just ended, Product-Engineering Sync 18:00-19:00 currently starting) — none updated inside 17:09→18:09 WAT window. No priority-signal matches."
-updated: "2026-04-24T17:17:17Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron zero-delta tick (13min after prior 18:09 WAT): `list_events` returned 2 events (Lattice recurring block, Product-Engineering Sync 18:00-19:00 WAT currently in progress) — neither updated inside 17:09→17:22 UTC window. No priority-signal matches."
+updated: "2026-04-24T17:32:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T17:09:00Z"
+last_processed: "2026-04-24T17:22:16Z"
 ---
 
 ## Connection
@@ -28,7 +28,17 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick
+### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron zero-delta tick
+
+18:22 WAT Apr 24 off-cron tick (13min after prior 18:09 WAT cron tick): `list_events` for 18:22 WAT → Apr 25 00:00 WAT returned 2 events:
+- Lattice Review recurring block — updated 2026-04-19 14:54 WAT (stale, preserved from prior ticks)
+- 18:00–19:00 WAT Product-Engineering Sync (self recurring, accepted) — currently in progress; updated 2026-04-22 21:14 WAT (stale)
+
+Neither event's `updated` falls inside the 17:09→17:22 UTC window. No new invites, no RSVP changes, no cancellations, no agenda-less matches.
+
+Factors: `source=calendar`, `zero_delta`, `no_priority_signal_match`, `no_immediate_dispatch`, `off_cron_tick`, `product_engineering_sync_in_progress`.
+
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick (preserved)
 
 18:09 WAT Apr 24 tick: `list_events` for remaining Apr 24 day (18:10 WAT → Apr 25 00:00 WAT) ordered by lastModified returned **2 events**, none with `updated` inside the 17:09→18:09 WAT window.
 

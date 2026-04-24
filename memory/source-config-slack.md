@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T17:09:00Z (18:09 WAT). 18:09 WAT Apr 24 full-level zero-delta tick: all 5 Tier 1 channels silent since 17:09 WAT prior tick (1h00m quiet). Keyword + DM scans 0 hits. Org Changes meeting 16:30-18:00 WAT concluded during window; post-meeting Slack quiet holds through 18:09 WAT."
-updated: "2026-04-24T17:15:54Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron zero-delta tick (13min after prior 18:09 WAT): all 5 Tier 1 channels silent, keyword + DM scans 0 hits. Product-Engineering Sync meeting 18:00-19:00 WAT currently in progress."
+updated: "2026-04-24T17:32:24Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T17:09:00Z"
+last_processed: "2026-04-24T17:22:16Z"
 ---
 
 ## Connection
@@ -45,7 +45,13 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick
+### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron zero-delta tick
+
+18:22 WAT Apr 24 off-cron tick (13min after prior 18:09 WAT cron tick): `slack_read_channel(oldest=1777043340)` across all 5 Tier 1 channels → 0 messages. Keyword scan `(P1 OR RC91 OR RC05 OR RC06 OR outage OR breach OR down) after:2026-04-24` → 0 results. DM scan `to:me after:2026-04-24` → 0. Product-Engineering Sync 18:00-19:00 WAT currently in progress; Slack quiet holds through user-in-meeting window.
+
+Factors: `zero_delta`, `no_immediate_dispatch`, `all_tier1_channels_silent`, `off_cron_tick`, `user_in_meeting`.
+
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick (preserved)
 
 18:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777046940)` across all 5 Tier 1 channels → 0 messages. Keyword scan `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` → 0 results. DM scan `to:me after:2026-04-24` → 0. Briefing-2026-04-24 D2 Org Changes meeting (16:30–18:00 WAT) concluded during this window; post-meeting Slack stays quiet. Cross-source: email 0 genuinely new threads (only cached Zone<>TeamApt Juliana Switch thread from Jan as residual match); Jira 1 Layer A delta (TDSD-6713 Keystone settlements Completed 17:43 WAT) + 2 Layer B deltas (ADD-4429/4426 DD bug fixes Done).
 

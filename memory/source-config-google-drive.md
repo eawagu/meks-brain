@@ -3,8 +3,8 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 18:09 WAT Apr 24 full-level tick: 0 genuinely-new files; `search_files` returned same 3 HoE/Phoenix files as prior ticks, all predating 17:09 UTC cutoff (client-side filter still lossy). Backlog unchanged at 22 files."
-updated: "2026-04-24T17:19:28Z"
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 18:22 WAT Apr 24 skim-level off-cron tick: 0 genuinely-new files; `search_files` returned same 3 HoE/Phoenix files as prior ticks, all predating 17:22 UTC cutoff. Backlog unchanged at 22 files."
+updated: "2026-04-24T17:32:25Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -52,7 +52,11 @@ This split keeps distilled content (summary / decisions / action items) and subs
 
 ## Notes
 
-### Tick 2026-04-24 18:09 WAT — full-level, 0 new files this tick
+### Tick 2026-04-24 18:22 WAT — skim-level off-cron, 0 new files
+
+`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T17:09:00Z'` returned 3 files (Deliberation HoE 12:21 UTC, Round 2 Venkatesh 11:10 UTC, Phoenix Stage 1 09:23 UTC). All predate the 17:22 UTC off-cron cutoff. Client-side filter: **0 new files this tick**. Backlog 22 files unchanged. `last_processed` remains held per Phase-2 policy.
+
+### Tick 2026-04-24 18:09 WAT — full-level, 0 new files this tick (preserved)
 
 `search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T16:09:00Z'` returned 3 files. Client-side check `modifiedTime > '2026-04-24T16:09:00Z'` (17:09 WAT cutoff):
 
@@ -96,6 +100,6 @@ Zero new Notes-by-Gemini files.
 
 Drive MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23.
 
-### Phase-2 backlog — 22 files as of 2026-04-24 18:09 WAT tick
+### Phase-2 backlog — 22 files as of 2026-04-24 18:22 WAT tick
 
 Unchanged at 22 files. No new files or content updates this tick. Phase-2 dispatch will pick up the latest content when it reaches these files. `last_processed` deferred until all 22 files processed.
