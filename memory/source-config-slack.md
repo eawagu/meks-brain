@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T10:09:00Z (11:09 WAT). 11:09 WAT Apr 24 skim-level tick, elevated on deltas: #teamapt-x-paystack-transfer-support produced 3 parent messages — Caret user 10:26 WAT treasury application request for ₦1.07B new inflow + Christine Ogude 10:35 WAT acknowledgment + 10:54 WAT Done. Correlates to TDSD-6717 filed+resolved 10:38-10:53 WAT. Routine treasury ops, different direction from Paystack-balance-below-₦200m alert pattern. Other 4 Tier 1 channels bot-only noise / empty. Keyword scan + DM scan both 0. No Immediate dispatch."
-updated: 2026-04-24
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T11:09:00Z (12:09 WAT). 12:09 WAT Apr 24 skim-level zero-delta tick: all 5 Tier 1 channels silent since 11:09 WAT prior tick (1h01m quiet); keyword scan + DM scan 0 hits. Paystack treasury ops sequence from prior tick closed out (Christine \"Done\" 10:54 WAT); no new activity."
+updated: "2026-04-24T11:20:57Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T10:09:00Z"
+last_processed: "2026-04-24T11:09:00Z"
 ---
 
 ## Connection
@@ -45,32 +45,36 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta
+### last_processed 2026-04-24T11:09:00Z (12:09 WAT) — zero-delta tick
 
-11:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777021740)` swept all 5 Tier 1 channels. Deltas:
+12:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777021740)` swept all 5 Tier 1 channels. Results after epoch post-filter (message_ts > 1777025340 / 11:09 UTC = 12:09 WAT):
+- **C0ABU8GMW75** empty
+- **C098VUQCVRA** returned 5 bot-join messages at 10:27-10:57 WAT (all before 12:09 WAT tick boundary; already processed at 11:09 WAT tick); zero true-in-window
+- **C096LCNP26P** returned 5 messages at 10:26-10:57 WAT (already processed at 11:09 WAT tick — Christine Ogude "Done" sequence); zero true-in-window
+- **C08PH35PLPK** empty
+- **C090UHR9VDE** empty
 
-- **C096LCNP26P #teamapt-x-paystack-transfer-support — 3 parent messages + 5 bot-like/empty**:
-  - 10:26 WAT (sender name not in feed, likely external caret/bot-integration user): *"Hi <@U086Y6AT6TH|Mustapha Ajibade> <@U09CW6MAV8A|Christine Ogude> kindly see new inflows that are yet to be applied shaded in yellow. Bank statement and balance screenshot attached. Kindly apply *#1,074,864,192.35*"* — treasury application request, ₦1.07B.
-  - 10:35 WAT [[Christine Ogude]]: "Hi <@U03T571RK9P|Ono (Caret)>, acknowledged" — Christine acks Caret-side user. Ono = caret.xyz integration (Paystack treasury operational counterpart).
-  - 10:54 WAT [[Christine Ogude]]: "Done" — balance applied.
-  - Same-day Jira formalization: [[TDSD-6717]] "PAYSTACK BALANCE ADJUSTMENT APRIL 24TH 2026" filed 10:38 WAT by [[Christine Ogude]], assignee [[Daniel Fetuga]], Medium Service Request with approvals, Resolved 10:53 WAT (15m filed→resolved). Matches Slack exactly. Routine treasury ops. **Different direction from the Paystack-balance-below-₦200m alert pattern** (Daniel Armstrong Apr 23 00:51 WAT + Afeez Kazeem Apr 24 09:27 WAT) — this is an inflow application, not a low-float alert. Does not compound with the ₦200m-alert pattern. Factors: source=slack+jira_correlation, channel=C096LCNP26P, tier1, routine_treasury_ops, fast_close_15m_filed_to_resolved, different_direction_from_low_float_pattern, awareness_only, no_cto_action.
-  - 10:57:05, 10:57:07, 10:57:25 WAT — three empty-sender bot-like messages, no content surface.
-
-- **C098VUQCVRA #account-switch-alerts — 5 bot-only messages** (10:27, 10:32, 10:57:05, 10:57:21, 10:57:50 WAT). All empty-sender per channel baseline. No content surface.
-
-- **C0ABU8GMW75 + C08PH35PLPK + C090UHR9VDE — empty.** Zero messages since 10:09 WAT prior tick.
+All Tier 1 channel activity this window pre-dated 11:09 WAT — post-filter rejects; confirms the 11:09 WAT tick captured this activity. 1h01m post-tick quiet confirmed.
 
 **Keyword scan** `(P1 OR RC91 OR RC96 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised) after:2026-04-24` with `after=1777021740` filter: **0 results**. **DM scan** `to:me after:2026-04-24` with same epoch filter: **0 results**.
 
-**No Immediate-tier dispatch this tick.** TDSD-6716 (NIBSS response-not-sent) surfaced via email+jira sources but Slack carried zero signal on it — consistent with the pattern that NIBSS response-not-sent events are email-layer phenomena with Jira formalization rather than Slack ops-channel material.
+**No Immediate-tier dispatch this tick.** Jira-side TDSD-6645 Blessing chase + TDSD-6684 Blessing CC-to-Opeyemi escalation captured by Jira sweep (see source-config-jira); Slack carried zero signal on these reporter-side pressure moves — consistent with the pattern that Moniepoint→TeamApt Jira escalations are Jira-layer phenomena not ops-channel material.
+
+### last_processed 2026-04-24T10:09:00Z (11:09 WAT) — skim elevated to full on delta (preserved summary)
+
+11:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777021740)` swept all 5 Tier 1 channels. Deltas:
+- **C096LCNP26P #teamapt-x-paystack-transfer-support — 3 parent messages + 5 bot-like/empty** — 10:26 WAT Caret treasury application request ₦1.07B; 10:35 WAT Christine ack; 10:54 WAT Christine "Done"; corresponds to TDSD-6717 filed 10:38 WAT → Resolved 10:53 WAT. Routine treasury ops.
+- **C098VUQCVRA** 5 bot-only (empty-sender baseline).
+- **C0ABU8GMW75 + C08PH35PLPK + C090UHR9VDE** empty.
+- Keyword scan + DM scan both 0. No Immediate-tier dispatch.
 
 ### last_processed 2026-04-24T09:09:00Z (10:09 WAT) — skim elevated to full on delta (preserved summary)
 
-10:09 WAT Apr 24 tick: `slack_read_channel(oldest=1777018200)` swept all 5 Tier 1 channels. Deltas: C096LCNP26P 2 new parent messages — Afeez Kazeem ~09:27 WAT Paystack-balance-below-₦200m alert (2nd such alert in 2 days; briefing-2026-04-23 A4 was the 1st) and Peace Emmanuel ~09:36 WAT dispute review request to Chioma (routine); other 4 Tier 1 channels empty / bot-join noise; keyword scan + DM scan both 0 hits; no Immediate dispatch.
+10:09 WAT Apr 24 tick: C096LCNP26P 2 new parent messages — Afeez Kazeem ~09:27 WAT Paystack-balance-below-₦200m alert + Peace Emmanuel dispute review request; other 4 Tier 1 channels empty / bot-join noise; keyword + DM scans 0; no Immediate dispatch.
 
 ### last_processed 2026-04-24T08:10:00Z (09:10 WAT) — zero-delta tick (preserved)
 
-09:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 08:09 WAT prior tick (3h01m post-briefing clean window). Keyword + DM scans: 0 hits.
+09:10 WAT Apr 24 tick: all 5 Tier 1 channels empty since 08:09 WAT prior tick. Keyword + DM scans: 0 hits.
 
 ### last_processed 2026-04-24T07:09:00Z (08:09 WAT) — zero-delta tick (preserved)
 
@@ -78,4 +82,4 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full sweep (preserved)
 
-06:09 WAT Apr 24 briefing tick: **all 5 Tier 1 channels empty since 22:09 WAT Apr 23** (8h10m overnight delegation window clean). Keyword + DM scans: 0.
+06:09 WAT Apr 24 briefing tick: all 5 Tier 1 channels empty since 22:09 WAT Apr 23 (8h10m overnight delegation window clean). Keyword + DM scans: 0.
