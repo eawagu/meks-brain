@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed remains 2026-04-20T16:09:00Z (~64h backlog deferred to next briefing tick catch-up). 2026-04-23 09:11 WAT tick: Gmail MCP RECOVERED after ~64h dark window. Probe-sweep detected fresh Ecobank RC91 P1 cycle (thread 19db8d64f00a406d) filed 06:35 WAT + chased 08:52 WAT — Immediate-tier dispatch triggered via Slack draft. ATPP Daily Standup canceled today (calendar conflict relief). UBA DCIR portal pentest message recall observed. Marketing/cold outreach skipped per directive. Backlog catch-up sweep deferred to briefing-2026-04-24 06:00 WAT."
-updated: "2026-04-23T13:21:15Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full backlog catch-up completed after 86h+ dormancy (dark Apr 20→23, recovered 09:11 WAT Apr 23 but last_processed held pending briefing compose). Ecobank compound failure Apr 23 (3 RC91 cycles + DCIR portal inaccessibility) surfaced in briefing-2026-04-24 D1. Org Changes invite + Frank Atashili Platformization-Org-Movements presentation surfaced as D2 + A7."
+updated: "2026-04-24T05:28:33Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T16:09:00Z"
+last_processed: "2026-04-24T05:09:00Z"
 ---
 
 ## Connection
@@ -42,50 +42,42 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 
 ## Notes
 
-### Tick 2026-04-20 17:09 WAT Full-level (condensed — pre-dark)
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick full backlog catch-up
 
-Layer 1 `to:me newer_than:1h` returned NIBSS TSA Integration meeting confirmation thread Apr 21 14:00 WAT (calendar-overlap signal already captured). Layer 2 operational sweep zero in-window operational escalations. Three CTO-approval-gate candidates accumulating for Apr 21 briefing: TISD-480, TDSD-6203, Lattice Downward Reviews.
+06:09 WAT Apr 24 briefing tick: 86h+ backlog sweep completed via 5 narrow buckets (Layer 1 to:me, operational keywords, issuer bucket 1, issuer bucket 2, governance/process). Issuer bucket 2 (Wema/FCMB/Keystone/Access/UBA/Fidelity/Union) exceeded token budget — output overflowed to persisted file; not re-read (coverage duplicated from operational + issuer bucket 1 sweeps).
 
-### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure)
+**Key signals captured this tick (chronological, pre-briefing-tick window):**
 
-Gmail MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 06:10 WAT briefing tick / Apr 23 07:10 + 08:10 WAT skim-and-full ticks. Surfaced as briefing-2026-04-22 B2 (Decision item) and briefing-2026-04-23 D4 (B2 carryforward — 61h+ dark).
+- **Ecobank compound failure Apr 23** — three RC91 cycles (morning 06:35 WAT thread 19db8d64f00a406d, afternoon 14:38 WAT thread 19dbac740631c4f9 resurfaced 17:36 WAT, evening listed in Qazim 21:36 WAT hourly report) + **DCIR portal inaccessibility** (Qazim 21:33 WAT email thread 19dbc43766215aeb, paired with TDSD-6711 22:32 WAT filing). Mayowa attribution-mismatch pattern 3-for-3 week-to-date. Surfaced as briefing-2026-04-24 D1. [[Ecobank — RC91 on NUS Nodes]] situation updated.
 
-### Tick 2026-04-23 ~09:11 WAT — RECOVERY (condensed — see git history)
+- **TeamApt Org Changes invite** — Pawel Swiatek Gmail thread 19dba55e567fab81 13:34 WAT Apr 23 delivering Fri Apr 24 16:00–18:00 WAT calendar invite. Paired with [[Frank Atashili]] drive-share thread 19db668f77e3591f "TeamApt-Platformization-Org-Movements" 18:17 WAT Apr 22. Surfaced as briefing-2026-04-24 D2 + A7.
 
-Layer 1 `to:me newer_than:1h` + Layer 2 operational keyword `newer_than:3d` — Gmail MCP fully recovered. **Operational-priority finding:** Ecobank RC91 fresh cycle thread 19db8d64f00a406d filed 06:35 WAT + chased 08:52 WAT → Immediate-tier Slack DM dispatched, [[Ecobank — RC91 on NUS Nodes]] situation updated. Layer 1 secondary: ATPP Daily Standup canceled today (conflict relief), UBA DCIR pentest message recall, cold outreach skipped. `last_processed` held at 2026-04-20T16:09:00Z pending briefing-2026-04-24 catch-up.
+- **Jira approval queue** — TDSD-6699 Firewall HA 13:32 WAT Apr 23 (paired email from Fumbi Lawrence to Tolu Aina primary-approver), TDSD-6690 15:56 WAT Apr 22 (Ekene Udodi). Surfaced as briefing-2026-04-24 D3.
 
-### Tick 2026-04-23 ~14:09 WAT — Full (weekday work-hours; 2 in-window signals)
+- **Wema Bank RC91/22 Apr 23** — thread 19dbb0b85f40d34d filed 15:52 WAT Qazim, resurfaced 18:27 WAT, final fine 18:44 WAT; TDSD-6705 Completed 18:45 WAT. Within-pattern. A9.
 
-Probe scope: `(RC91 OR RC96 OR RC05 OR RC06 OR P1 OR outage OR NIBSS OR breach OR approval) newer_than:2h` + `to:me newer_than:2h`. **Gmail MCP operational.**
+- **Union Bank RC69 Apr 23 11:12 WAT** — thread 19dba0af1a6fc7a2 Olamide Ajibulu to itechannels@ — first RC69 observation on Union Bank. A10.
 
-**In-window signals — 2 threads:**
+- **AWS Outposts case 177635165100470** — "Attention required" 7-day inactivity prompt thread 19dbb3e96bb83fc2 16:48 WAT Apr 23. Situation-delta for [[AWS Outposts — Three Concurrent Health Events]]. A8.
 
-1. **Thread 19dba77670436f02 — "Approval for HA Setup on TeamApt Prod Firewalls 02 and 03"** (14:11 WAT Apr 23)
-   - From: [[Fumbi Lawrence]] (fumbi.lawrence@teamapt.com)
-   - To: [[Tolu Aina]] (tolu.aina@teamapt.com) — **PRIMARY APPROVER**
-   - CC: emeka.awagu@teamapt.com + networkmanagement@teamapt.com
-   - Snippet: "Hi Tolu, As part of our initiative to build a more resilient infrastructure, we are requesting approval to deploy a High Availability (HA) setup to TeamApt Firewalls 02 and 03 at Rackcenter."
-   - **Emeka is CC-only — Layer 1 (To:me) does NOT apply.** Layer 2 keyword match: "approval" (process keyword).
-   - **Cross-source pairing:** [[TDSD-6699]] "CONFIGURATION OF HIGH AVAILABILITY ON TeamApt FIREWALL 02 and 03" Review status 13:44 WAT (see source-config-jira).
-   - **Classification:** Briefing-tier **Awareness** — CTO awareness informational, not a CTO-specific approval gate (Tolu Aina is the named approver). Factors: source=email, layer2_keyword_approval, cc_only_not_to_me, primary_approver_tolu_aina, infrastructure_change_tdsd6699, briefing_tier_awareness.
+- **FCMB Pending Failed Dcir Transactions** — thread 19dbaeba45c8cc11 15:17 WAT Apr 23 — routine bulk requery filing.
 
-2. **Thread 19dba55e567fab81 — "Invitation: TeamApt Org Changes @ Fri Apr 24, 2026 4pm - 6pm (WAT) (Emeka Awagu)"** (13:34 WAT Apr 23, 12:34 UTC)
-   - From: [[Pawel Swiatek]] (pawel.swiatek@moniepoint.com)
-   - CC: dajalie@teamapt.com (optional attendee)
-   - To: emeka.awagu@teamapt.com + frank.atashili@teamapt.com + tracy.ojaigho@teamapt.com
-   - **Emeka in To: — Layer 1 trigger.** Subject keyword "Org Changes" — material/strategic.
-   - **Paired with calendar event 5ia9mtsqmjbgt1gvp82b7m1lul** (see source-config-calendar). 
-   - **Classification:** Briefing-tier Decision candidate (strategic topic + triple-overlap with Lattice + Tech support at 16:00 WAT Apr 24). Factors: source=email+calendar, layer1_to_me, moniepoint_leadership_sender, strategic_keyword_org_changes, agenda_less, triple_overlap_apr24_16wat, briefing_tier_decision.
+- **Ecobank FAILED BUT SETTLED TRANSACTION** — thread 19db97326ff1ab7a 08:26 WAT Apr 23, then recalled 3x in 13s window. Routine.
 
-**Operational keyword sweep (newer_than:2h):** Zero operational incident threads in-window. Ecobank thread 19db8d64f00a406d static (bank-responded 10:19/10:33 WAT, awaiting TeamApt reconfirmation). No new RC91/RC96/RC05/RC06/NIBSS/outage threads.
+- **Duty Handover chains Apr 22/Apr 23** — Olamide→Qazim + Qazim→Daniel. Apr 23 23:06 WAT handover confirms Ecobank explicitly failing RC 91, route off going into overnight.
 
-**Backlog catch-up policy.** `last_processed` STILL deliberately NOT advanced — held at 2026-04-20T16:09:00Z. Full 64h+ Layer 1 + Layer 2 sweep queued for briefing-2026-04-24 06:00 WAT.
+- **Hourly Reports 20260423** — 17:29 WAT (13/17 routes, Ecobank not yet turned off), 21:36 WAT + 23:03 WAT (12/17 routes, Ecobank failing RC 91 listed).
 
-**Cross-source asymmetry tracker status:** TDSD-6699 Firewall HA has an email counterpart (thread 19dba77670436f02) paired in the same hour window — **does NOT count against the tracker** (cross-source consistency, not asymmetry). Tracker remains at 1 data point (TDSD-6692 UBA). Tracker window closes 06:44 WAT Apr 24.
+- **Ha-Shem Academy training cold outreach** — thread 19db5e4896ca64c9 — skipped per marketing rule.
 
-**Dispatch decisions:**
-- TeamApt Org Changes invite → queued as **Decision candidate for briefing-2026-04-24** (strategic + triple-overlap).
-- Firewall HA approval email → Awareness (CTO CC'd, not primary approver).
-- No Immediate-tier email dispatch (no operational P1/outage/breach in-window).
+- **BambooHR time-off approvals pending** — thread 19db996af0c72b5a — administrative, Awareness-level if surfaced.
 
-**`last_processed` unchanged at 2026-04-20T16:09:00Z** — see backlog catch-up policy above.
+- **Greenhouse interview scorecards** — Kuldeep Singh reminder thread 19dbb2d82e8ce66f 16:30 WAT Apr 23; Venkatesh today-interview reminder thread 19dbc92ab7dd3326 23:00 WAT Apr 23.
+
+- **BambooHR "Welcome 7 New Team Members"** — thread 19dbdaaf86ee01a8 04:06 WAT Apr 24 — informational.
+
+**Backlog catch-up complete.** `last_processed` advanced to 2026-04-24T05:09:00Z. No deferred signals remaining from the Apr 20–23 window.
+
+### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
+
+Gmail MCP returned auth-failure across all heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Surfaced as briefing-2026-04-22 B2 and briefing-2026-04-23 D4. Recovery confirmed 09:11 WAT Apr 23; `last_processed` held at 2026-04-20T16:09:00Z pending this briefing-tick catch-up.
