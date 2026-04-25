@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Ketan Dhamasana
 created: 2026-04-11
-summary: "EM transferring from AptPay Suite to CI&P (CMS/Card Issuance) under Emeka Awagu and Tracy Ojaigho — Phase 1 of Project Phoenix. Proposed team: 2 Backend (1 Senior + 1 Mid/Junior), 1 QA, 1 part-time UI; requested Razaq Adegbite (Senior Backend, pending)."
-updated: "2026-04-24T11:50:56Z"
+summary: "EM transferring from AptPay Suite to CI&P (CMS/Card Issuance) under Emeka Awagu and Tracy Ojaigho — Phase 1 of Project Phoenix. Apr 22 weekly: Inflow Sac filter for Monify reported only 3 issues; Prateek consolidated ownership of all moneyify vulns."
+updated: "2026-04-25T12:03:37Z"
 cssclasses:
   - "entity"
 ---
@@ -30,6 +30,10 @@ Pre-Phoenix he led the [[AptPay Suite]] area in TeamApt.
 - Requested transfer of [[Razaq Adegbite]] (Senior Backend) — not yet confirmed
 - Sits alongside MFB-side teams under Tracy + Emeka
 
+## 2026-04-22 weekly team meeting
+
+Noted that the Inflow Sac filter being used for Monify reporting only surfaced three issues. [[Prateek Gupta]] subsequently consolidated ownership of all "moneyify"-domain vulnerabilities (atm.moneyifi, app.moneyify.com) for investigation. Source: [[TeamApt Weekly Team Meeting - 2026-04-22 16:59 IST]].
+
 ## Also Note
 
 [[Ravi Kiran Veluguleti]] remains with TSPP as functional engineering manager (separate track; NOT CI&P).
@@ -38,3 +42,4 @@ Pre-Phoenix he led the [[AptPay Suite]] area in TeamApt.
 
 - [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]
 - [[TeamApt-Platformization-Org-Movements (1)]] — Frank's Apr 22, 2026 brief formalising Phase 1 EM transfer
+- [[TeamApt Weekly Team Meeting - 2026-04-22 16:59 IST]]
