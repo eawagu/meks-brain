@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T06:14:54Z (07:14 WAT). 07:14 WAT Apr 25 skim-tick: 1 delta — Stanbic RC91 cycle 33 (Qazim P1 post 06:56 WAT, cycle 04:58–06:06 WAT 1h08m, service-restart resolution, first-of-pattern wording, 4d12h58m gap from cycle 32). Awareness-tier accumulation; bank-owned recurring pattern holds. 4 other Tier 1 silent, DM 0, keyword scan 0 (Stanbic post not yet indexed; channel-read caught it)."
-updated: "2026-04-25T06:24:31Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: zero-delta — 5 Tier 1 channels silent, DM scan 0, keyword scan 0, FCMB-specific search 0. FCMB P1 from 02:33 WAT (briefing-2026-04-25 D1) implicit-resolved via email cross-source (07:02 WAT hourly report 14/17 routes operational, FCMB no longer in failure list)."
+updated: "2026-04-25T07:16:58Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T06:14:54Z"
+last_processed: "2026-04-25T07:10:00Z"
 ---
 
 ## Connection
@@ -44,6 +44,16 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 *(Empty — maintained via monthly periodic review + weekly suspected-bot bulk-confirm per config-salience.)*
 
 ## Notes
+
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, zero-delta + FCMB implicit-resolved via email cross-source
+
+08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 06:24:31Z → 07:10:00Z = ~46min. **All 5 Tier 1 channels silent.** DM scan `to:me after:2026-04-25` = 0. Keyword scan `(P1 OR RC91 OR RC96 OR RC05 OR outage OR FCMB)` = 0. FCMB-specific search `FCMB after:2026-04-25` = 0 (Slack indexing window does not include the 02:33 WAT FCMB P1 post under this query — the morning briefing tick caught it via channel-read).
+
+**Cross-source: FCMB P1 implicit-resolved.** Email source captured the 07:02 WAT hourly report (Qazim) showing **14/17 routes operational** (vs 10/17 at 02:20 WAT). Failure list now reduced to: Coralpay banks (FBN/PVB/SBP) — turned-off business decision only. **FCMB, Habari, Zenith, and Union all dropped from failure list** between 02:33 WAT and 07:02 WAT. The morning briefing-2026-04-25 D1 active-FCMB-P1 question is now stale-resolved by trajectory (no explicit FCMB closure post in Slack — process gap noted; Slack-only P1 → no Jira ticket → no formal closure cadence). 08:06 WAT duty handover Qazim → Afeez (Afeez ack 08:10 WAT) confirms 14/17 stable into Afeez's morning shift.
+
+**Active P1 silence-rule check:** FCMB at 02:33 WAT → 1h-no-update threshold crossed at 03:33 WAT historically; this tick does NOT fire Immediate alert because the 07:02 WAT hourly report constitutes the "update" (FCMB removed from failure list). Pre-emptive Immediate dispatch from briefing-2026-04-25 06:19 WAT remains the user's primary alert channel.
+
+Factors: `skim_tick`, `saturday_mid_morning`, `tier1_silent`, `dm_zero`, `keyword_scan_zero`, `fcmb_implicit_resolved_via_email_cross_source`, `four_route_recovery_10_to_14`, `process_gap_no_fcmb_jira`, `no_immediate_dispatch_this_tick`, `briefing_tick_dispatch_already_active`.
 
 ### last_processed 2026-04-25T06:14:54Z (07:14 WAT) — skim-level 07:00-cron tick, Stanbic cycle 33 single delta
 
