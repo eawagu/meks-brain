@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T10:10:00Z (11:10 WAT). 11:10 WAT Apr 25 skim-tick: zero-delta across all 5 Tier 1 channels + DM + keyword sweep."
-updated: "2026-04-25T10:22:01Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T11:10:00Z (12:10 WAT). 12:10 WAT Apr 25 skim-tick: zero-delta across all 5 Tier 1 channels + DM + keyword sweep."
+updated: "2026-04-25T11:20:21Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T10:10:00Z"
+last_processed: "2026-04-25T11:10:00Z"
 ---
 
 ## Connection
@@ -47,6 +47,18 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 *(Empty — maintained via monthly periodic review + weekly suspected-bot bulk-confirm per config-salience.)*
 
 ## Notes
+
+### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), zero-delta
+
+12:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=active-fcmb-p1-trajectory-resolved+mostly-quiet-priors). Window 10:10:00Z → 11:10:00Z = 1h.
+
+**`slack_read_channel(oldest=1777111800)` on all 5 Tier 1 channels: 0 new parent messages.** Saturday-midday quiet across #teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt.
+
+**DM scan (U080PEXEZ0E): 0 messages.** Keyword scan `(P1 OR outage OR RC91 OR RC96 OR breach OR incident OR down) after:2026-04-25` returned 0 results.
+
+**Active P1 silence-rule check:** No active P1s open at tick time. Wema cycle resolved 08:49 WAT, FCMB resolved by trajectory at 07:02 WAT, Stanbic cycle 33 closed 06:06 WAT. No Immediate dispatch.
+
+Factors: `skim_tick`, `saturday_midday`, `tier1_zero_delta`, `dm_zero`, `keyword_zero`, `no_active_p1_at_tick`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `epoch_arithmetic_correct_post_bug_fix`.
 
 ### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), zero-delta
 
