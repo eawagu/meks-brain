@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: 4 in-window threads — Hourly Reports update 07:02 WAT (14/17 routes operational, FCMB/Habari/Zenith/Union all dropped from failure list), Duty Handover 08:06 WAT (Qazim → Afeez, 14/17 confirmed stable), TACHA Backoffice update 06:54 WAT (June Johnson, internal Layer 1 to:me), Union RC96 thread (no new activity post-resolution). Implicit FCMB P1 closure resolves morning briefing D1 stale-by-trajectory."
-updated: "2026-04-25T08:25:07Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T09:10:00Z (10:10 WAT). 10:10 WAT Apr 25 skim-tick: BambooHR Layer 1 to:me Time-Off Approval notification 10:06 WAT — 5th consecutive day silent (Apr 21–25 same payload, Ravi Kiran Veluguleti Apr 01 sick + Muhammad Samu pending). Layer 1 directive bypassed. MISS captured."
+updated: 2026-04-25
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T08:10:00Z"
+last_processed: "2026-04-25T09:10:00Z"
 ---
 
 ## Connection
@@ -17,7 +17,7 @@ Gmail MCP. Profile: eawagu@gmail.com.
 ## Directives
 
 ### Priority model
-- **Layer 1 — Always surface:** messages where the user is in To: (not only CC/BCC). No keyword gate.
+- **Layer 1 — Always surface:** messages where the user is in To: (not only CC/BCC). No keyword gate. **Bot-sender heuristic MUST NOT preempt Layer 1** — a To:user message from an automated address (bamboohr.com, lattice, calendar invites) is still Layer 1; the bot-sender filter applies only to CC/BCC paths.
 - **Layer 2 — Keyword surface:** any recipient field matching primary keywords below.
 
 ### Keyword rules (Layer 2)
@@ -25,10 +25,11 @@ Gmail MCP. Profile: eawagu@gmail.com.
 - Issuer names: Stanbic, Ecobank, Sterling, Polaris, Wema, FCMB, Keystone, Access, UBA, Fidelity, Union.
 - Governance: board, audit, PCI, compliance, regulator.
 - Process: duty handover, weekly status report, RCA.
+- HR/people-management: time off, leave request, approval pending, hire approval, PIP.
 
 ### Skip rules
 - Marketing/newsletter senders — skip.
-- Automated status emails without operational keywords — discard unless matches active-situation entity.
+- Automated status emails without operational keywords — discard unless matches active-situation entity OR is To:user (Layer 1 preempts skip).
 
 ### Query execution pattern (post 10:09 limitation note)
 Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP token budget:
@@ -45,24 +46,29 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, 1 thread delta (Wema RC91 cycle 5/17days)
+### last_processed 2026-04-25T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, BambooHR Layer 1 calibration miss surfaced (5-day silent)
 
-09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h. Query `newer_than:1h` returned **2 threads** in window:
+10:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations+2h-since-last-sweep,no-immediate-firing). Window 08:10:00Z → 09:10:00Z = ~1h. Query `newer_than:3h` returned 6 threads, of which 1 is in-window-and-genuinely-new this tick:
 
-1. **Thread 19dc390a02e9797c — "Wema Bank | RC91 | 20260425"** (4 messages, [[Afeez Kazeem]] ↔ Peace Etim Wema Bank). Layer 2 issuer+keyword bucket (Wema + RC91). Filed 08:34:50 WAT by Afeez to switching&payments_services@wemabank.com (CC aptpaytechnicalsupport): "Please be informed that transactions are failing with RC91. Kindly review the transaction." Bank acknowledgement 08:40:10 WAT (Peace Etim, Switching and Payment Officer): "This is receiving attention, we will revert shortly." Bank reconfirm-status 08:43:58 WAT: "Kindly reconfirm status." Afeez closure 08:49:10 WAT: "Transactions are now processing successfully." **Total cycle: 14m20s, bank-resolved with explicit two-way confirmation.** Filing channel: email-only — no Slack P1 post (5 Tier 1 channels silent), no Jira ticket. Active-situation entity match → [[Wema Bank — RC91 P1 Apr 17]]. **5th cycle in 17 days (Apr 8 → Apr 11 → Apr 17 → Apr 23 → Apr 25); inter-cycle gap narrowing to ~38h (vs. prior 6-day gaps) — frequency-trajectory accelerating.** Within-pattern resolution path (bank-side handling). No CTO action. Briefing-2026-04-26 Awareness candidate.
+1. **Thread 19dc3e3ea8fbbbb9 — "Time Off Requested: Ravi Kiran Veluguleti and Muhammad Samu"** (1 message, 09:06:26 UTC = 10:06 WAT, sender `notifications@app.bamboohr.com`, To: `emeka.awagu@teamapt.com`). **Layer 1 To:me — always-surface per directive.** Pending approvals: Ravi Kiran Veluguleti Wed Apr 01 (1 day Sick) + Muhammad Samu (date in body). **5th consecutive daily notification with identical payload (Apr 21, 22, 23, 24, 25 — thread IDs 19daf4a1b6567477, 19db4706ab8d810c, 19db996af0c72b5a, 19dbebd659fb5484, 19dc3e3ea8fbbbb9 respectively).** None surfaced in any of briefings 2026-04-21 through 2026-04-25 — Layer 1 directive silently bypassed. MISS captured to `MISS-bamboohr-layer1-silent-5-days-2026-04-25.md`. Hypothesis: bot-sender heuristic over-fired and preempted Layer 1 (now corrected — directive amended above to "Bot-sender heuristic MUST NOT preempt Layer 1"). Folded into [[BambooHR]] entity page with the 5-consecutive-day pattern documented. Briefing-2026-04-26 Decision candidate (Confidence: high — single clear action: approve both via BambooHR portal).
 
-2. **Thread 19dc38d79729fe24 — "TEAMAPT Monitoring Service Alert"** (1 message, 08:32:00 WAT). Automated alert: "Transaction failure rate is 33.03% and has exceeded configured threshold of 20.0%." Self-recipient (aptpaytechnicalsupport ↔ aptpaytechnicalsupport). Paired with Wema thread above — automated alert preceded Afeez filing by ~3min, implying filing was driven by automated failure-rate detection (not manual escalation). **Skip rule applies under literal directive ("Automated status emails without operational keywords — discard unless matches active-situation entity")** — but body contains threshold-breach data that retroactively contextualizes the Wema filing channel; counted as cross-source confirmation, not a standalone delta.
+Other threads returned by `newer_than:3h` query (already processed by prior ticks):
+- Thread 19dc390a02e9797c — Wema Bank RC91 cycle (already in [[Wema Bank — RC91 P1 Apr 17]] situation page; 09:10 WAT prior tick captured email side, 10:10 WAT this tick captured paired Slack post).
+- Thread 19dc38d79729fe24 — TEAMAPT Monitoring Service Alert 33% failure rate (paired with Wema cycle, already cross-referenced).
+- Thread 19dc376af908d69d — Duty Handover Note 20260425 (already in CoralPay situation page via 09:10 WAT tick).
+- Thread 19dc23924c6ed10a — Hourly Reports 20260425 (07:02 WAT update already in source-config-email 08:10 WAT skim notes; 02:20 WAT update already in briefing-2026-04-25).
+- Thread 19dc36afa39a2e3e — TACHA Backoffice Update (June Johnson, already in 08:10 WAT skim notes).
+- Thread 19b93b9d0b6ac562 — Jan 2026 NPS UAT Script (residual-cache, predates window, filtered out).
 
-**No Layer 1 to:me threads in window.** No new governance/regulatory deadlines, no escalation requests.
+**Active-situation entity coverage:** all situations updated within last 4h. No 48h+ silence triggers.
 
-**Cross-source: Slack 5 Tier 1 silent + DM zero + keyword scan zero + Wema-keyword search zero (Slack indexing window did not yet include the 08:34 WAT Afrz Wema-related activity OR no Slack post was made — second hypothesis confirmed by absence of Slack post in `slack_search_public_and_private` after:2026-04-25 sweep). Jira 4 deltas (TDSD-6728 NEW CoralPay ZIB Interchange post-incident-doc, TDSD-6711 Ecobank Portal Completed 08:13 WAT, TDSD-6727 Union RC96 re-captured from prior tick due to JQL slop, TDSD-6706 metadata Resolved → Closed) — no Wema Jira ticket created (consistent with email-only filing channel). Calendar 0 deltas (weekend clear).**
+**No Layer 1 to:me threads other than BambooHR.** No new governance/regulatory deadlines. No P1 in window. No FCMB/Habari/Zenith activity (consistent with morning trajectory).
 
-**Implication for active situations:**
-- **[[Wema Bank — RC91 P1 Apr 17]]:** updated this tick with Apr 25 cycle delta. Frequency-trajectory acceleration documented. If the 38h gap holds, next cycle expected within 1–2 days — increases monitoring weight on Wema for Apr 26-27 ticks.
-- **briefing-2026-04-25 D1 (FCMB):** further confirmation FCMB resolved — no FCMB activity in 09:10 tick window despite issuer-keyword sweep. The 07:02 WAT hourly-report-implicit-resolution holds.
-- **briefing-2026-04-25 D2 (multi-bank degradation):** Wema fast-cycle is within-pattern noise on the multi-bank operational picture; does not change systemic frame.
+Factors: `skim_tick`, `saturday_morning`, `1_genuinely_new_thread`, `bamboohr_layer1_5_consecutive_days_silent`, `cto_as_manager_approval_queue_24d_unactioned`, `bot_sender_heuristic_preempted_layer1_directive_corrected`, `miss_captured`, `cross_source_slack_recovers_wema_post`, `no_immediate_dispatch_this_tick`.
 
-Factors: `skim_tick`, `saturday_morning`, `1_thread_delta_wema_rc91_apr25`, `wema_5th_cycle_in_17days`, `frequency_trajectory_accelerating_38h_gap`, `bank_two_way_confirmation`, `email_only_filing_channel`, `automated_alert_trigger_33pct_failure_rate`, `cross_source_no_slack_post_no_jira_ticket`, `briefing_d1_fcmb_resolution_holds`, `briefing_d2_systemic_frame_unchanged`, `no_immediate_dispatch_this_tick`.
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, 1 thread delta (Wema RC91 cycle 5/17days) (preserved summary — note the email-only framing in this entry was corrected at 10:10 WAT tick; Slack post was made and missed due to epoch bug)
+
+09:10 WAT Apr 25 Saturday skim tick. Window 07:10:00Z → 08:10:00Z = ~1h. Query `newer_than:1h` returned 2 threads in window: Wema Bank RC91 thread + TEAMAPT Monitoring Service Alert. Wema cycle 14m20s bank-resolved. **Note: original entry claimed "email-only filing — no Slack P1 post" — this was an artifact of the cross-source Slack epoch bug (see source-config-slack notes). Wema cycle was actually dual-channel filed (email 08:34 WAT + Slack 08:39 WAT). Filing-channel-divergence framing is rescinded.**
 
 ### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, 4 in-window threads (FCMB implicit-resolved via 14/17 trajectory, preserved summary)
 

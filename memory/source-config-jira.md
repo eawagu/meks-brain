@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: Layer A 1 delta — TDSD-6727 Union RC96 transitioned Work in progress → Completed at 08:11 WAT (formalizing the 02:52 WAT bank-side resolution; 5h19m formalization lag, within ops-cadence). Layer B 0 deltas. Active situations checkpoints unchanged: TDSD-6645 still ~52h+ Dominic silence, TDSD-6711 Ecobank portal still silent ~33h, TDSD-6699/6690 still at approval gates. No FCMB Jira ticket created post-resolution — process gap persists."
-updated: "2026-04-25T08:26:57Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T10:10:00Z (11:10 WAT). 11:10 WAT Apr 25 skim-tick: Layer A 1 delta — TDSD-6684 Pending Refund Transactions transitioned Awaiting Scheme Update → Resolved at 10:54 WAT (Dominic, 55h+ silence broken). Counter-signal to workflow-discipline observation. Layer B 0 deltas."
+updated: "2026-04-25T10:20:29Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T08:10:00Z"
+last_processed: "2026-04-25T10:10:00Z"
 ---
 
 ## Connection
@@ -65,6 +65,30 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 4. **Client-side UTC filter** — Jira JQL interprets the `"YYYY-MM-DD HH:MM"` datetime literal in the user's configured timezone (Africa/Lagos = WAT). Since `last_processed` is stored in UTC (`YYYY-MM-DDTHH:MM:SSZ`), the server-side JQL filter using the UTC hour as-is is effectively 1h lax — it lets through updates from the hour before `last_processed`. Therefore the heartbeat MUST apply a client-side filter: convert each returned issue's `fields.updated` to UTC and compare to `last_processed`; discard any issue whose UTC-updated time ≤ `last_processed`.
 
 ## Notes
+
+### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), Layer A 1 delta — TDSD-6684 Resolved at 10:54 WAT (Dominic, 55h+ silence broken)
+
+11:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations-monitoring+prior-tick-quiet+no-immediate-firing). Window 08:10:00Z → 10:10:00Z = 2h (frontmatter was stale at 08:10:00Z; 09:10 WAT tick wrote body section but did not advance frontmatter — this tick reconciles by advancing to 10:10:00Z).
+
+**Layer A — JQL `project in (TDSD, "ADD", "AS", ...) AND updated >= "2026-04-25 09:10" ORDER BY updated DESC` returned 1 genuinely-new ticket:**
+
+1. **TDSD-6684 — "Pending Refund Transactions"** (Medium, [System] Service request, assignee [[Dominic Usiabulu]]). Status transitioned **Awaiting Scheme Update → Resolved at 10:54:53 WAT.** Per 09:10 WAT prior-tick checkpoint, TDSD-6684 was at "Awaiting Scheme Update" with ~54h+ Dominic silence (no movement since pre-Apr 23). This transition breaks the silence — Dominic processed the ticket Saturday late morning. Counter-signal to the workflow-discipline observation in [[Dominic Usiabulu]]; consistent with the [[briefing-2026-04-24]] A2 "Dominic resolution burst" pattern continuing into Apr 25 morning. **Briefing-2026-04-26 Awareness candidate** (low salience; status transition only, no incident/operational impact, no entity beyond Dominic). Active-situation entity match: none — refund-pending workflow is not part of any developing situation.
+
+Other Jira tickets that updated in the 09:10–10:10 WAT range (TDSD-6728 CoralPay ZIB, TDSD-6711 Ecobank portal, TDSD-6727 Union RC96, TDSD-6706 refund metadata) were already processed by the 09:10 WAT tick — see body section below.
+
+**Layer B sweep — 0 deltas.** No P1/Blocker/Critical priority transitions, no Done-state transitions on pattern-tracked entities, no developing-situation entity matches. Saturday-late-morning dev-quiet continues.
+
+**Active-situation checkpoints (zero new delta this tick):**
+- **TDSD-6645** (Monnify VA reversal) — still Escalated, ~55h+ Dominic silence (no movement since 04:08 WAT Apr 23). 1h advance from 09:10 WAT prior tick.
+- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~48h+ at gate, above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward).
+- **TDSD-6716** (NIBSS PTSA RC91) — listed Open per Apr 24 23:05 WAT handover; no Jira-side delta in window. NIBSS bilateral negotiation ~16h silent at tick (under 48h threshold).
+- **TDSD-6711** (Ecobank portal) — Completed at 08:13 WAT prior tick; no new activity.
+- **TDSD-6727** (Union Bank RC96) — Completed at 08:11 WAT; no new activity.
+- **TDSD-6728** (CoralPay ZIB Interchange Stopped) — Completed at 08:47 WAT; CoralPay_Cashout failover persisting in production per duty handover.
+
+No Immediate dispatch from this Jira sweep. TDSD-6684 is awareness-only.
+
+Factors: `source=jira`, `skim_tick`, `saturday_late_morning`, `layer_a_1_delta_tdsd6684_awaiting_scheme_update_to_resolved`, `dominic_workflow_movement_55h_silence_broken`, `counter_signal_to_workflow_discipline_observation`, `awareness_only`, `layer_b_zero_deltas`, `no_immediate_dispatch`, `active_situation_checkpoints_zero_new`.
 
 ### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, Layer A 4 deltas (1 NEW + 1 portal closure + 2 already-captured/metadata)
 
