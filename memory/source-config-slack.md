@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick full sweep: 3 P1 messages overnight in #teamapt-tech-operations (Habari VPN flap 02:06–02:13 WAT autoreconnected, Access Bank brief RC91 02:21–02:32 WAT auto-recovered, **FCMB RC91 02:33 WAT Ongoing — Immediate-tier dispatched, 3h36m+ active**). 4 other Tier 1 channels silent. DM scan 0 hits. Keyword scan caught the 3 P1s (no FCMB closure signal)."
-updated: "2026-04-25T05:27:00Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T06:14:54Z (07:14 WAT). 07:14 WAT Apr 25 skim-tick: 1 delta — Stanbic RC91 cycle 33 (Qazim P1 post 06:56 WAT, cycle 04:58–06:06 WAT 1h08m, service-restart resolution, first-of-pattern wording, 4d12h58m gap from cycle 32). Awareness-tier accumulation; bank-owned recurring pattern holds. 4 other Tier 1 silent, DM 0, keyword scan 0 (Stanbic post not yet indexed; channel-read caught it)."
+updated: "2026-04-25T06:24:31Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T05:09:54Z"
+last_processed: "2026-04-25T06:14:54Z"
 ---
 
 ## Connection
@@ -44,6 +44,12 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 *(Empty — maintained via monthly periodic review + weekly suspected-bot bulk-confirm per config-salience.)*
 
 ## Notes
+
+### last_processed 2026-04-25T06:14:54Z (07:14 WAT) — skim-level 07:00-cron tick, Stanbic cycle 33 single delta
+
+07:14 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-post-briefing-tick). Window 05:09:54Z → 06:14:54Z = ~65min. **#teamapt-tech-operations 1 new parent message — [[Qazim Adedigba]] Stanbic RC91 P1 structured post at 06:56 WAT:** "Product: ATS, Incident Summary: P1: Stanbic RC 91 Failures, Identified Cause: From the bank, Resolution Action: Service restart, Start Time: 4:58 AM, End Time: 6:06 AM." Cycle 33 → 1h08m bank-resolved (template Duration field still "Ongoing" alongside filled End Time — treating as resolved per End Time + Resolution Action populated, template inconsistency). 4d12h58m gap from cycle 32 close = longest inter-cycle quiet in the pattern. Active-situation entity match → [[Stanbic Bank ATS — Persistent RC91 Pattern]]; Awareness-tier (B6 calibration precedent: bank-owned recurring pattern, no CTO action). 4 other Tier 1 channels silent. DM scan 0 hits. Keyword scan returned 0 hits — Stanbic post not yet indexed at scan time (channel-read sweep caught it). Cross-source confirmation: email 0 deltas, Jira TDSD/Layer-B 0 deltas, calendar 0 deltas (1 long-running Lattice Review event, no recent modification). Drive last_processed stuck at 2026-04-20T16:09:00Z (4d15h stale, 5 unprocessed Notes-by-Gemini files visible in scan — out of scope for skim tick, deferred to next briefing tick).
+
+Factors: `skim_tick`, `saturday_post_briefing`, `tier1_channel_single_p1_message`, `stanbic_cycle_33_within_pattern_+4m`, `longest_inter_cycle_gap_4d12h58m`, `service_restart_resolution_first_of_pattern`, `single_track_slack_only`, `keyword_scan_zero_hits_indexing_lag`, `dm_scan_zero_hits`, `cross_source_zero_deltas`, `drive_stuck_state_deferred`.
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — full-level briefing-tick, 3 P1 messages overnight + Immediate-tier dispatch
 
