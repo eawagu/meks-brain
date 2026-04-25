@@ -4,11 +4,12 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: zero-delta across all 5 Tier 1 channels + DM + keyword sweep. Four consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10 WAT)."
-updated: "2026-04-25T16:21:21Z"
+updated: "2026-04-25T17:28:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T16:10:00Z"
+last_processed: "2026-04-25T17:10:00Z"
 ---
+
 
 ## Connection
 Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 channels: #teamapt-tech-operations (C0ABU8GMW75), #account-switch-alerts (C098VUQCVRA), #teamapt-x-paystack-transfer-support (C096LCNP26P), #notifications-support-dev (C08PH35PLPK), #go-subscribe-by-teamapt (C090UHR9VDE).
@@ -22,7 +23,7 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ### Sweep order (Slack delta path)
 1. **Tier 1 channel reads** — for each Tier 1 channel, `slack_read_channel(oldest=last_processed_epoch, limit=50)` to catch parent messages filed since last tick. Must complete even if other sweeps fire.
-2. **User DM scan** — `slack_search_public_and_private(query="to:me after:<date>")` to catch DMs to user since last tick.
+2. **User DM scan** — `slack_search_public_and_private(query=\"to:me after:<date>\")` to catch DMs to user since last tick.
 3. **Keyword scan (all channels)** — `slack_search_public_and_private` with Immediate triggers (P1, outage, RC91, RC96, RC05, RC06, breach, compromised, transaction failure, settlement failure) + `after=<epoch>` filter.
 4. **Per-message salience reasoning** — for each new parent message, score factors per config-salience (channel identity, keyword floor, active-situation entity match, @mention, DM, sender weighting). Record triggering factors in the signal metadata.
 5. **Epoch filter post-check** — Slack search results may include matches slightly before `oldest`/`after` timestamps due to indexing lag; filter result `message_ts` > epoch to avoid re-processing.
@@ -48,13 +49,25 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
+### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, single firewall-HA-notification delta on Tier 1
+
+18:10 WAT Apr 25 Saturday skim tick. Tier 1 channels read-by-default sweep with `oldest=1777133400` (deterministic compute from prior `last_processed=2026-04-25T16:10:00Z`; `oldest <= now` runtime assertion passed; 1.04h window):
+- **#teamapt-tech-operations (C0ABU8GMW75):** **1 message** — [[Mustapha Ajibade]] 17:26 WAT post: \"CONFIGURATION OF HIGH AVAILABILITY ON TeamApt Prod FIREWALL 02 and 03 | 6pm April 25 2026 ... Card Traffic via NIBSS will be moved from leased-line to VPN during the exercise. No Downtime is expected. Change ticket: TDSD-6699.\" Layer 1 active-situation-entity-match against [[NIBSS PTSA — VPN Flapping Apr 22]] (leased-line is the very architectural fix RCA-confirmed today). Cross-referenced into situation page deltas; retirement candidacy deferred until post-exercise stability confirmed.
+- **#account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt:** zero messages each. Clean.
+
+DM (`to:me after:2026-04-25` search) zero results. Keyword sweep (P1 OR RC91 OR RC96 OR outage OR breach in window) zero results.
+
+No Immediate-tier triggers (firewall HA is planned change, Medium priority, no downtime — Briefing-tier informational). No new P1 filings since 02:33 WAT FCMB (already in today's briefing D1). No fresh urgent DMs.
+
+Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777133400, oldest_le_now_assertion_passed, tier1_one_delta_firewall_ha_notification, active_situation_entity_match=nibss_ptsa, cross_referenced_into_situation_page, planned_change_briefing_tier_not_immediate, no_immediate_dispatch, dm_keyword_sweep_zero.
+
 ### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (10min late), zero-delta
 
 17:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-quiet-priors-with-active-fcmb-p1-needing-verification). Window 15:10:00Z → 16:10:00Z = 1h.
 
 **`slack_read_channel(oldest=1777129800)` on all 5 Tier 1 channels: 0 new parent messages.** Saturday-afternoon quiet across #teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt.
 
-**DM scan (U080PEXEZ0E): 0 messages.** Keyword scan `(P1 OR RC91 OR RC96 OR outage OR incident OR breach OR "transaction failure" OR "settlement failure")` with `after=1777129800`: 0 results.
+**DM scan (U080PEXEZ0E): 0 messages.** Keyword scan `(P1 OR RC91 OR RC96 OR outage OR incident OR breach OR \"transaction failure\" OR \"settlement failure\")` with `after=1777129800`: 0 results.
 
 **Active P1 silence-rule check:** No active P1s open at tick time per prior-tick checkpoints. FCMB cycle 1 (02:33 WAT) implicit-resolved 07:02 WAT. **FCMB cycle 2 fresh email-only signal at 16:04 WAT (caught via email keyword sweep this tick, not Slack)** — no Slack P1 post. Five consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10/17:10 WAT). Cross-source: TDSD-6716 NIBSS PTSA Completed at 16:20 WAT (Jira sweep delta this tick) — no Slack signal.
 
@@ -86,11 +99,11 @@ Factors: `skim_tick`, `saturday_afternoon`, `tier1_zero_delta`, `dm_zero`, `keyw
 
 ### last_processed 2026-04-25T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, 1 Tier 1 delta recovered + epoch-bug correction (preserved summary)
 
-10:10 WAT Apr 25 skim. `oldest=1777101000` returned Afeez Wema RC91 P1 08:39 WAT (active-situation match → [[Wema Bank — RC91 P1 Apr 17]]). Other 4 Tier 1 silent. DM 0, keyword 0 (index lag). Bug capture: prior 09:10 WAT tick used `oldest=1777705800` (May 2, 7d in future) — false zero-delta. Both this tick + Wema situation page corrected. MISS captured to `MISS-slack-epoch-bug-09-10-wat-tick-2026-04-25.md`. New "Epoch arithmetic — deterministic compute MANDATORY" directive added above.
+10:10 WAT Apr 25 skim. `oldest=1777101000` returned Afeez Wema RC91 P1 08:39 WAT (active-situation match → [[Wema Bank — RC91 P1 Apr 17]]). Other 4 Tier 1 silent. DM 0, keyword 0 (index lag). Bug capture: prior 09:10 WAT tick used `oldest=1777705800` (May 2, 7d in future) — false zero-delta. Both this tick + Wema situation page corrected. MISS captured to `MISS-slack-epoch-bug-09-10-wat-tick-2026-04-25.md`. New \"Epoch arithmetic — deterministic compute MANDATORY\" directive added above.
 
 ### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, FALSE zero-delta due to epoch bug (preserved for audit, see Epoch arithmetic directive)
 
-09:10 WAT Apr 25 Saturday skim tick. **The "zero-delta confirmed" finding in this prior summary was an artifact of an epoch arithmetic bug — `oldest=1777705800` (May 2) was used instead of `1777101000` (Apr 25). The Wema Apr 25 cycle WAS posted to Slack at 08:39 WAT and was recovered by the 10:10 WAT tick. The "Wema cycle email-only" framing in the original 09:10 WAT note is incorrect and superseded by the 10:10 WAT note above.**
+09:10 WAT Apr 25 Saturday skim tick. **The \"zero-delta confirmed\" finding in this prior summary was an artifact of an epoch arithmetic bug — `oldest=1777705800` (May 2) was used instead of `1777101000` (Apr 25). The Wema Apr 25 cycle WAS posted to Slack at 08:39 WAT and was recovered by the 10:10 WAT tick. The \"Wema cycle email-only\" framing in the original 09:10 WAT note is incorrect and superseded by the 10:10 WAT note above.**
 
 ### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, zero-delta + FCMB implicit-resolved via email cross-source (preserved summary)
 
