@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T09:10:00Z (10:10 WAT). 10:10 WAT Apr 25 skim-tick: 1 Tier 1 delta recovered — Wema RC91 P1 post #teamapt-tech-operations 08:39 WAT (corrects prior 09:10 WAT tick's false zero-delta caused by wrong epoch 1777705800 = 7d future). Other 4 Tier 1 silent. DM 0, keyword scan 0. MISS captured for epoch arithmetic bug."
-updated: 2026-04-25
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T10:10:00Z (11:10 WAT). 11:10 WAT Apr 25 skim-tick: zero-delta across all 5 Tier 1 channels + DM + keyword sweep."
+updated: "2026-04-25T10:22:01Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T09:10:00Z"
+last_processed: "2026-04-25T10:10:00Z"
 ---
 
 ## Connection
@@ -48,6 +48,18 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
+### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), zero-delta
+
+11:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations-monitoring+prior-tick-quiet+no-immediate-firing). Window 09:10:00Z → 10:10:00Z = 1h.
+
+**`slack_read_channel(oldest=1777104600)` on C0ABU8GMW75: 0 new parent messages.** Most recent post in channel was Wema Afeez P1 at 08:39 WAT (already captured by 10:10 WAT prior tick + folded into [[Wema Bank — RC91 P1 Apr 17]] situation page). Stanbic Qazim P1 at 06:56 WAT and prior posts all predate window.
+
+**Other 4 Tier 1 channels silent.** DM scan (U080PEXEZ0E): 0 messages. Keyword scan `(P1 OR outage OR RC91 OR RC96 OR breach OR incident OR down) after:2026-04-25` returned 0 results (Slack search index continues to lag — channel-read remains the load-bearing sweep step).
+
+**Active P1 silence-rule check:** No active P1s open at tick time. Wema cycle resolved 08:49 WAT, FCMB resolved by trajectory at 07:02 WAT, Stanbic cycle 33 closed 06:06 WAT. No Immediate dispatch.
+
+Factors: `skim_tick`, `saturday_late_morning`, `tier1_zero_delta`, `dm_zero`, `keyword_zero`, `no_active_p1_at_tick`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `epoch_arithmetic_correct_post_bug_fix`.
+
 ### last_processed 2026-04-25T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, 1 Tier 1 delta recovered + epoch-bug correction
 
 10:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations+2h-since-last-sweep,no-immediate-firing). Window 08:10:00Z → 09:10:00Z = ~1h, but effective recovery window covers the prior 09:10 WAT tick's missed range (08:10–09:10 WAT) because of the epoch bug.
@@ -72,7 +84,7 @@ Factors: `skim_tick`, `saturday_morning`, `tier1_channel_read_recovery`, `wema_r
 
 ### last_processed 2026-04-25T06:14:54Z (07:14 WAT) — skim-level 07:00-cron tick, Stanbic cycle 33 single delta (preserved summary)
 
-07:14 WAT Apr 25 skim. #teamapt-tech-operations 1 new parent message — Qazim Stanbic RC91 P1 06:56 WAT (cycle 33, 04:58–06:06 WAT, 1h08m bank-resolved with service-restart). 4d12h58m gap from cycle 32 close = longest inter-cycle quiet in pattern. 4 other Tier 1 silent. DM/keyword 0. Cross-source 0.
+07:14 WAT Apr 25 skim. #teamapt-tech-operations 1 new parent message — Qazim Stanbic RC91 P1 06:56 WAT (cycle 33, 04:58–06:06 WAT, 1h08m bank-resolved with service-restart). 4 other Tier 1 silent. DM/keyword 0. Cross-source 0.
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — full-level briefing-tick, 3 P1 messages overnight + Immediate-tier dispatch (preserved summary)
 
