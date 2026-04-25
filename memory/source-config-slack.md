@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: zero-delta — 5 Tier 1 channels silent, DM scan 0, keyword scan 0, FCMB-specific search 0. FCMB P1 from 02:33 WAT (briefing-2026-04-25 D1) implicit-resolved via email cross-source (07:02 WAT hourly report 14/17 routes operational, FCMB no longer in failure list)."
-updated: "2026-04-25T07:16:58Z"
+updated: "2026-04-25T08:27:55Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T07:10:00Z"
+last_processed: "2026-04-25T08:10:00Z"
 ---
 
 ## Connection
@@ -45,35 +45,27 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, zero-delta + FCMB implicit-resolved via email cross-source
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, zero-delta confirmed (Wema cycle was email-only)
 
-08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 06:24:31Z → 07:10:00Z = ~46min. **All 5 Tier 1 channels silent.** DM scan `to:me after:2026-04-25` = 0. Keyword scan `(P1 OR RC91 OR RC96 OR RC05 OR outage OR FCMB)` = 0. FCMB-specific search `FCMB after:2026-04-25` = 0 (Slack indexing window does not include the 02:33 WAT FCMB P1 post under this query — the morning briefing tick caught it via channel-read).
+09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h. **All 5 Tier 1 channels silent** — `slack_read_channel(oldest=1777705800)` returned 0 parent messages across C0ABU8GMW75, C098VUQCVRA, C096LCNP26P, C08PH35PLPK, C090UHR9VDE. DM scan `to:me after:2026-04-25` = 0. Keyword scan `(P1 OR RC91 OR outage OR breach) after:2026-04-25` = 0. Wema-specific keyword search not separately run (covered by RC91 keyword sweep).
 
-**Cross-source: FCMB P1 implicit-resolved.** Email source captured the 07:02 WAT hourly report (Qazim) showing **14/17 routes operational** (vs 10/17 at 02:20 WAT). Failure list now reduced to: Coralpay banks (FBN/PVB/SBP) — turned-off business decision only. **FCMB, Habari, Zenith, and Union all dropped from failure list** between 02:33 WAT and 07:02 WAT. The morning briefing-2026-04-25 D1 active-FCMB-P1 question is now stale-resolved by trajectory (no explicit FCMB closure post in Slack — process gap noted; Slack-only P1 → no Jira ticket → no formal closure cadence). 08:06 WAT duty handover Qazim → Afeez (Afeez ack 08:10 WAT) confirms 14/17 stable into Afeez's morning shift.
+**Cross-source: Wema Bank RC91 cycle Apr 25 captured email-only.** Per [[source-config-email]] 09:10 tick note: thread "Wema Bank | RC91 | 20260425" filed 08:34:50 WAT by Afeez Kazeem to switching&payments_services@wemabank.com (CC aptpaytechnicalsupport), bank-resolved 08:49:10 WAT (14m20s, two-way confirmation with Peace Etim). **No Slack P1 post made** — confirmed by zero-delta in Tier 1 channel sweep + zero-delta in keyword scan. **5th Wema cycle in 17 days; filing-channel divergence (Slack-driven Apr 17/23, email-only Apr 25) suggests Afeez opting into the lighter email path for fast-cycle expectations.**
 
-**Active P1 silence-rule check:** FCMB at 02:33 WAT → 1h-no-update threshold crossed at 03:33 WAT historically; this tick does NOT fire Immediate alert because the 07:02 WAT hourly report constitutes the "update" (FCMB removed from failure list). Pre-emptive Immediate dispatch from briefing-2026-04-25 06:19 WAT remains the user's primary alert channel.
+**Active P1 silence-rule check:** No active P1s open at tick time. FCMB resolved by trajectory at 07:02 WAT (briefing-2026-04-25 D1 implicit closure); Stanbic cycle 33 closed 06:06 WAT; Wema Apr 25 cycle closed 08:49 WAT before tick. No Immediate dispatch.
 
-Factors: `skim_tick`, `saturday_mid_morning`, `tier1_silent`, `dm_zero`, `keyword_scan_zero`, `fcmb_implicit_resolved_via_email_cross_source`, `four_route_recovery_10_to_14`, `process_gap_no_fcmb_jira`, `no_immediate_dispatch_this_tick`, `briefing_tick_dispatch_already_active`.
+Factors: `skim_tick`, `saturday_morning`, `tier1_silent`, `dm_zero`, `keyword_scan_zero`, `wema_cycle_email_only_no_slack_post`, `filing_channel_divergence_slack_to_email_for_fast_cycles`, `cross_source_email_carries_full_signal`, `no_active_p1_at_tick`, `no_immediate_dispatch_this_tick`.
 
-### last_processed 2026-04-25T06:14:54Z (07:14 WAT) — skim-level 07:00-cron tick, Stanbic cycle 33 single delta
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, zero-delta + FCMB implicit-resolved via email cross-source (preserved summary)
 
-07:14 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-post-briefing-tick). Window 05:09:54Z → 06:14:54Z = ~65min. **#teamapt-tech-operations 1 new parent message — [[Qazim Adedigba]] Stanbic RC91 P1 structured post at 06:56 WAT:** "Product: ATS, Incident Summary: P1: Stanbic RC 91 Failures, Identified Cause: From the bank, Resolution Action: Service restart, Start Time: 4:58 AM, End Time: 6:06 AM." Cycle 33 → 1h08m bank-resolved (template Duration field still "Ongoing" alongside filled End Time — treating as resolved per End Time + Resolution Action populated, template inconsistency). 4d12h58m gap from cycle 32 close = longest inter-cycle quiet in the pattern. Active-situation entity match → [[Stanbic Bank ATS — Persistent RC91 Pattern]]; Awareness-tier (B6 calibration precedent: bank-owned recurring pattern, no CTO action). 4 other Tier 1 channels silent. DM scan 0 hits. Keyword scan returned 0 hits — Stanbic post not yet indexed at scan time (channel-read sweep caught it). Cross-source confirmation: email 0 deltas, Jira TDSD/Layer-B 0 deltas, calendar 0 deltas (1 long-running Lattice Review event, no recent modification). Drive last_processed stuck at 2026-04-20T16:09:00Z (4d15h stale, 5 unprocessed Notes-by-Gemini files visible in scan — out of scope for skim tick, deferred to next briefing tick).
+08:10 WAT Apr 25 skim. All 5 Tier 1 silent, DM 0, keyword 0, FCMB-keyword 0. FCMB P1 from 02:33 WAT implicit-resolved via 07:02 WAT email hourly report (14/17 routes operational, FCMB dropped from failure list). Pre-emptive Immediate dispatch from briefing-2026-04-25 06:19 WAT remains user's primary alert channel.
 
-Factors: `skim_tick`, `saturday_post_briefing`, `tier1_channel_single_p1_message`, `stanbic_cycle_33_within_pattern_+4m`, `longest_inter_cycle_gap_4d12h58m`, `service_restart_resolution_first_of_pattern`, `single_track_slack_only`, `keyword_scan_zero_hits_indexing_lag`, `dm_scan_zero_hits`, `cross_source_zero_deltas`, `drive_stuck_state_deferred`.
+### last_processed 2026-04-25T06:14:54Z (07:14 WAT) — skim-level 07:00-cron tick, Stanbic cycle 33 single delta (preserved summary)
 
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — full-level briefing-tick, 3 P1 messages overnight + Immediate-tier dispatch
+07:14 WAT Apr 25 skim. #teamapt-tech-operations 1 new parent message — Qazim Stanbic RC91 P1 06:56 WAT (cycle 33, 04:58–06:06 WAT, 1h08m bank-resolved with service-restart). 4d12h58m gap from cycle 32 close = longest inter-cycle quiet in pattern. 4 other Tier 1 silent. DM/keyword 0. Cross-source 0.
 
-06:09 WAT Apr 25 Saturday briefing tick. Window 21:10:00Z Apr 24 → 05:09:54Z Apr 25 = ~8h overnight. **#teamapt-tech-operations 3 new P1 messages from [[Qazim Adedigba]]:**
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — full-level briefing-tick, 3 P1 messages overnight + Immediate-tier dispatch (preserved summary)
 
-1. **02:06–02:13 WAT — Habari VPN tunnel disconnect:** "Status: Habari VPN tunnel was briefly disconnected, RC 91 issue persists. Resolution: VPN autoreconnected. Duration 7min." VPN-flap layer auto-recovered in 7min; RC91 issue persisted independently of the VPN flap. Cross-references: [[HabariPay]], [[GTBank]].
-
-2. **02:21–02:32 WAT — Access Bank brief RC91:** "P1: Access Bank Brief RC 91 Failures. Identified Cause From the bank. Resolution Action: Transaction auto recovered. Duration 11 min." Bank-resolved fast-cycle. Within Access Bank pattern. Awareness tier.
-
-3. **02:33 WAT — FCMB RC91 Ongoing P1:** "P1: FCMB RC 91 Failures Across Processors. Identified Cause From the bank. Resolution Action: The issue will be escalated to the bank for resolution. Incident Duration: Ongoing." Marked Ongoing at 02:37 WAT post-time. **No resolution signal between 02:33 and 06:09 WAT (3h36m+ active). No FCMB Jira ticket created in window. Exceeds 2h Immediate-tier silence threshold (config-salience trigger #2). Immediate-tier Slack DM dispatched to user D081JT4AD0Q via `slack_send_message_draft`.**
-
-**4 other Tier 1 channels silent.** DM scan `to:me after:2026-04-24` returned 0 hits. Keyword scan caught the 3 P1s above plus job-management noise. Cross-source: email captured 02:20 WAT hourly report (Habari + Zenith failing RC91 escalated to partners) + Union Bank RC96 fast-cycle thread; Jira captured TDSD-6727 Union RC96 + TDSD-6726 Habari Problem ticket; calendar zero deltas (weekend clear); drive zero genuinely new.
-
-Factors: `briefing_tick`, `full_level`, `overnight_window_8h`, `tier1_channel_3_p1_messages`, `fcmb_p1_active_3h36m_immediate_dispatched`, `habari_vpn_flap_with_rc91_persists`, `access_brief_fast_cycle_within_pattern`, `keyword_scan_3_hits`, `dm_scan_zero_hits`, `cross_source_email_jira_aligned`.
+06:09 WAT Apr 25 briefing tick. 8h overnight window. 3 #teamapt-tech-operations P1 messages: Habari VPN flap 02:06–02:13 WAT (7min auto-recovery, RC91 persists); Access Bank brief RC91 02:21–02:32 WAT (11min auto-recovery); FCMB RC91 02:33 WAT Ongoing (3h36m+ at tick, Immediate-tier DM dispatched). DM 0, keyword 3-hits.
 
 ### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level scheduled 22:00-cron tick (10min late), zero-delta (preserved summary)
 
