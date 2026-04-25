@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron zero-delta tick (13min after prior 18:09 WAT): all 5 Tier 1 channels silent, keyword + DM scans 0 hits. Product-Engineering Sync meeting 18:00-19:00 WAT currently in progress."
-updated: "2026-04-24T21:15:27Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick full sweep: 3 P1 messages overnight in #teamapt-tech-operations (Habari VPN flap 02:06–02:13 WAT autoreconnected, Access Bank brief RC91 02:21–02:32 WAT auto-recovered, **FCMB RC91 02:33 WAT Ongoing — Immediate-tier dispatched, 3h36m+ active**). 4 other Tier 1 channels silent. DM scan 0 hits. Keyword scan caught the 3 P1s (no FCMB closure signal)."
+updated: "2026-04-25T05:27:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T21:10:00Z"
+last_processed: "2026-04-25T05:09:54Z"
 ---
 
 ## Connection
@@ -45,39 +45,35 @@ Slack MCP (workspace-scoped). User ID for DM dispatch: U080PEXEZ0E. Tier 1 chann
 
 ## Notes
 
-### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level scheduled 22:00-cron tick (10min late), zero-delta
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — full-level briefing-tick, 3 P1 messages overnight + Immediate-tier dispatch
 
-22:10 WAT Apr 24 Friday skim tick. Window 19:10:00Z → 21:10:00Z = 2h. `slack_read_channel(oldest=1777057800)` across all 5 Tier 1 channels returned **0 new messages**. Keyword scan `(P1 OR RC91 OR RC05 OR RC06 OR RC69 OR outage OR breach OR compromised OR down) after:2026-04-24 after=1777057800` → 0 results. DM scan `to:me after:2026-04-24` → 0 results.
+06:09 WAT Apr 25 Saturday briefing tick. Window 21:10:00Z Apr 24 → 05:09:54Z Apr 25 = ~8h overnight. **#teamapt-tech-operations 3 new P1 messages from [[Qazim Adedigba]]:**
 
-Clean Friday-evening window: Product-Engineering Sync 18:00–19:00 WAT concluded before last tick; no further Tier 1 activity through 22:10. 50min before overnight delegation window opens at 23:00 WAT. Active situations (Ecobank RC91 route-off, TDSD-6645 Dominic attribution-transfer 42h+ silent, NIBSS PTSA stable 37h+ post-transition, TDSD-6711 Ecobank DCIR portal 23h+ silent) all operating without new Slack-side signals this window.
+1. **02:06–02:13 WAT — Habari VPN tunnel disconnect:** "Status: Habari VPN tunnel was briefly disconnected, RC 91 issue persists. Resolution: VPN autoreconnected. Duration 7min." VPN-flap layer auto-recovered in 7min; RC91 issue persisted independently of the VPN flap. Cross-references: [[HabariPay]], [[GTBank]].
 
-Cross-source this tick: email 0 genuinely new (residual-cache filtered); Jira 2 Layer B CRLF security-fix closures (ADD-4584 22:07 WAT, ADD-4574 21:59 WAT — routine Bukola Taiwo hygiene, no active-situation match); calendar 0 deltas; drive 0 genuinely new (backlog 22 unchanged).
+2. **02:21–02:32 WAT — Access Bank brief RC91:** "P1: Access Bank Brief RC 91 Failures. Identified Cause From the bank. Resolution Action: Transaction auto recovered. Duration 11 min." Bank-resolved fast-cycle. Within Access Bank pattern. Awareness tier.
 
-No Immediate dispatch this tick.
+3. **02:33 WAT — FCMB RC91 Ongoing P1:** "P1: FCMB RC 91 Failures Across Processors. Identified Cause From the bank. Resolution Action: The issue will be escalated to the bank for resolution. Incident Duration: Ongoing." Marked Ongoing at 02:37 WAT post-time. **No resolution signal between 02:33 and 06:09 WAT (3h36m+ active). No FCMB Jira ticket created in window. Exceeds 2h Immediate-tier silence threshold (config-salience trigger #2). Immediate-tier Slack DM dispatched to user D081JT4AD0Q via `slack_send_message_draft`.**
 
-Factors: `skim_level`, `scheduled_cron_22wat_10min_late`, `zero_delta_all_5_tier1`, `keyword_scan_zero_hits`, `dm_scan_zero_hits`, `2h_clean_window`, `pre_overnight_delegation_50min`, `friday_evening`, `no_immediate_dispatch`, `cross_source_jira_2_layerB_crlf_fixes_no_match`.
+**4 other Tier 1 channels silent.** DM scan `to:me after:2026-04-24` returned 0 hits. Keyword scan caught the 3 P1s above plus job-management noise. Cross-source: email captured 02:20 WAT hourly report (Habari + Zenith failing RC91 escalated to partners) + Union Bank RC96 fast-cycle thread; Jira captured TDSD-6727 Union RC96 + TDSD-6726 Habari Problem ticket; calendar zero deltas (weekend clear); drive zero genuinely new.
 
-### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level 20:00-cron tick (10min late), Habari/GTB RC91 first observation
+Factors: `briefing_tick`, `full_level`, `overnight_window_8h`, `tier1_channel_3_p1_messages`, `fcmb_p1_active_3h36m_immediate_dispatched`, `habari_vpn_flap_with_rc91_persists`, `access_brief_fast_cycle_within_pattern`, `keyword_scan_3_hits`, `dm_scan_zero_hits`, `cross_source_email_jira_aligned`.
 
-20:10 WAT Apr 24 full-level tick. Window 18:22:16Z → 19:10:00Z = 47m44s. **2 Tier 1 channels with deltas:**
+### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level scheduled 22:00-cron tick (10min late), zero-delta (preserved summary)
 
-**Channel C0ABU8GMW75 (#teamapt-tech-operations) — 1 new message.** [[Olamide Ajibulu]] structured P1 post at 18:36:58 WAT: Product Switch, "P1: Habari (GTB) RC 91 Failures", Start 18:30 WAT End 18:55 WAT (25m), "From Habari" cause, escalated to Habari team. **First RC91 observation on Habari/GTB route in brain** — pattern-significance signal; RC91 wave extends to GTB via [[HabariPay]] acquiring arm. Fast-cycle 25m bank-resolved. Entity-level tracking applied to [[GTBank]] + [[HabariPay]].
+22:10 WAT Apr 24 Friday skim tick. Window 19:10–21:10 UTC = 2h. All 5 Tier 1 channels silent. Keyword + DM 0. Cross-source: email 0; Jira 2 Layer B CRLF-fix closures (ADD-4584/4574 Bukola Taiwo); calendar 0; drive 0.
 
-**Channel C096LCNP26P (#teamapt-x-paystack-transfer-support) — 2 new messages.** 18:26:05 WAT parent tagging Mustapha Ajibade + Christine Ogude: "apply *#4,500,000,000.00*" inflows with bank statement + balance screenshot. [[Christine Ogude]] "Done" 18:57:32 WAT — 22min cycle. Paired with TDSD-6725 Resolved 18:56 WAT same cycle. Routine Paystack inflow-application.
+### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level 20:00-cron tick, Habari/GTB RC91 first observation (preserved summary)
 
-**3 Tier 1 channels silent.** Keyword + DM scans 0 hits (Habari P1 caught via channel-read, not keyword path — indexing lag). No Immediate dispatch (Habari retroactively-resolved, Paystack routine).
+20:10 WAT Apr 24 full tick. Habari (GTB) RC91 P1 first observation in brain at 18:36:58 WAT (Olamide structured post, 25min cycle bank-resolved). Paystack-transfer 18:26:05 WAT inflow apply (Mustapha + Christine Ogude, paired with TDSD-6725 Resolved 18:56 WAT).
 
-### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron zero-delta tick (preserved)
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta (preserved)
 
-18:22 WAT Apr 24 skim off-cron tick (13min after prior 18:09 WAT cron tick): all 5 Tier 1 channels silent; keyword + DM scans 0 hits. Product-Engineering Sync 18:00-19:00 WAT in progress.
+18:09 WAT Apr 24 tick: 0 new across all 5 Tier 1. Keyword + DM 0. Cross-source minor.
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick (preserved)
+### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level UBA RC91 fast-cycle (preserved summary)
 
-18:09 WAT Apr 24 tick: 0 new messages across all 5 Tier 1 channels. Keyword + DM 0. Cross-source: email 0; Jira 1 Layer A delta (TDSD-6713 Keystone settlements Completed 17:43 WAT) + 2 Layer B (ADD-4429/4426 DD bug fixes Done).
-
-### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level tick, UBA RC91 fast-cycle (preserved summary)
-
-16:09 WAT Apr 24 tick: Afeez Kazeem P1 template post 15:29 WAT UBA RC91. TDSD-6722 Completed 15:56 WAT (28m fast-cycle). Folded into [[UBA Bank — RC91 P1 Apr 17]] as 4th failure mode in 7 days.
+16:09 WAT Apr 24 tick: Afeez P1 template UBA RC91 15:29 WAT. TDSD-6722 Completed 15:56 WAT (28m). Folded into [[UBA Bank — RC91 P1 Apr 17]].
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
 

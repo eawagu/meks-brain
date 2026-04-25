@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron zero-delta tick (13min after prior 18:09 WAT): broad `newer_than:1h` query returned 0 threads in the 17:09→17:22 UTC window. MCP health holding 33h+ post-recovery."
-updated: "2026-04-24T21:16:26Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick: 4 in-window threads — Hourly Reports 02:20 WAT (10/17 routes operational, Habari/Zenith RC91 escalated to partners), Duty Handover 00:05 WAT (3 routes turned off MP-decision), Union Bank RC96 thread 19dc1fd7e4326d6a (filed 01:14 WAT, resolved 02:52 WAT bank-side), NIBSS PTSA prior counter-reply already captured. MCP health holding 45h+ post-recovery."
+updated: "2026-04-25T05:27:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T21:10:00Z"
+last_processed: "2026-04-25T05:09:54Z"
 ---
 
 ## Connection
@@ -41,46 +41,46 @@ Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP tok
 Gmail `search_threads` returns full-thread bodies that exceed context-window budget on broad queries. Narrow per-keyword queries with `pageSize:10-15` stay within budget reliably. Per-tick heartbeat should default to the execution pattern above; jq-from-persisted-file is the escape hatch when even pageSize 10 overflows.
 
 ### Known limitation — Residual-cache behavior on newer_than filter (observed 2026-04-24 18:09 WAT)
-When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns a cached thread (often an old thread the user is a participant in) instead of an empty result. Filter must be applied client-side: check each returned thread's most-recent-message timestamp against the window cutoff; treat threads whose latest message predates the cutoff as zero-delta. Observed Apr 24 ticks 18:09 / 20:10 / 22:10: broad `newer_than:Nh` consistently returned a cached April 15–20 Fidelity PayFac settlement thread (19d9052b6c594184, latest 2026-04-20T08:31:45Z) — correctly filtered out by client-side timestamp check each time.
+When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns a cached thread (often an old thread the user is a participant in) instead of an empty result. Filter must be applied client-side: check each returned thread's most-recent-message timestamp against the window cutoff; treat threads whose latest message predates the cutoff as zero-delta.
 
 ## Notes
 
-### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level scheduled 22:00-cron tick (10min late), zero-delta
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, 4 in-window threads
 
-22:10 WAT Apr 24 Friday skim tick. Window 19:10:00Z → 21:10:00Z = 2h. Consolidated `search_threads(newer_than:3h)` returned 1 thread — 19d9052b6c594184 "Instruction for PayFac Settlement (Monnify)- Fidelity Bank", 5 messages Apr 15–20, latest 2026-04-20T08:31:45Z. **Predates window — residual-cache artifact filtered client-side. 0 genuinely new threads this tick.**
+06:09 WAT Apr 25 Saturday briefing tick. Window 21:10:00Z Apr 24 → 05:09:54Z Apr 25 = ~8h overnight. **4 in-window threads from `(RC91 OR P1 OR outage OR FCMB OR Habari OR "Access Bank") newer_than:12h` + issuer bucket pass:**
 
-Context: 19dc0ab7bafe02e0 NIBSS PTSA counter-reply captured in prior 20:10 WAT tick at 19:05 WAT — no further NIBSS PTSA thread activity in this 2h window (bilateral negotiation in read-latency state). No new duty handover emails (next handover typically overnight 23:00+ WAT into briefing window).
+1. **Thread 19dc23924c6ed10a — "Hourly Reports 20260425"** ([[Qazim Adedigba]] → aptpaytechnicalsupport, 02:20 WAT). Single message: "10 of 17 routes are operational. Coralpay banks (FBN, PVB, SBP) turned off — business decisions. **Habari and Zenith transactions are failing with RC 91, escalated to the partners for resolution.** Union Bank failing RC 96 across processors — service restarted, persists, escalated to bank. All portals up. Tickets raised: 1 (TDSD-6726 Habari Problem ticket); closed: 0." Multi-bank degradation snapshot. Layer 2 keyword bucket capture (RC91, Habari, Union).
 
-Cross-source: Slack 0 deltas; Jira 2 Layer B CRLF-security-fix closures; calendar 0; drive 0 genuinely new.
+2. **Thread 19dc1bdbe990f06e — "Duty Handover Note #20260424"** ([[Olamide Ajibulu]] → [[Qazim Adedigba]], 00:05 WAT, 2 messages). Olamide handover: "14 of 17 PTSAs operational. **First bank, providus and sterling are turned off due to RC91 - MP decision.** Open Tickets: TDSD-6716 NIBSS RC91 Failures. Other Updates: TDSD-6726 GTB RC 91, TDSD-6680 Palmpay portal, TDSD-6276 Union problem ticket, TDSD-6713 Keystone settlements." Qazim Acknowledged 00:11 WAT. Process keyword bucket capture (duty handover).
 
-No Immediate dispatch.
+3. **Thread 19dc1fd7e4326d6a — "Union Bank | ATS | RC 96 Failure | 20260425 | TDSD-6727"** ([[Qazim Adedigba]] → Union Bank itechannels, 5 messages). Filed 01:14 WAT "failing with RC 96." Qazim follow-up 02:58 WAT "any update? issue persists." Bank reply (Iyama Victor) 02:50 WAT "reconfirm now." Qazim 02:52 WAT "processing fine now." Bank-resolved ~1h40m. Layer 2 issuer bucket capture (Union).
 
-Factors: `skim_level`, `scheduled_cron_22wat_10min_late`, `zero_genuinely_new`, `residual_cache_fidelity_payfac_filtered_client_side`, `2h_window`, `mcp_health_37h_post_recovery`, `no_immediate_dispatch`, `no_layer1_new`, `no_issuer_match`.
+4. **Thread 19dc0ab7bafe02e0 — NIBSS PTSA counter-reply** (already captured in 20:10 WAT Apr 24 tick; no new in-window activity, 11h silent at this tick — under 48h absence threshold). Layer 2 issuer bucket capture (NIBSS).
 
-### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level 20:00-cron tick (10min late), NIBSS counter-reply
+No Layer 1 to:me threads in window. Cross-source: Slack 3 P1s; Jira 2 TDSD deltas (TDSD-6727 Union, TDSD-6726 Habari Problem) + 2 Layer B Bukola Taiwo Apr 24 evening updates; calendar 0; drive 0. MCP health holding 45h+ post-Apr-23-recovery.
 
-20:10 WAT Apr 24 full-level tick. Window 18:22:16Z → 19:10:00Z. **1 genuinely new — thread 19dc0ab7bafe02e0** "Re: 7259261 Persistent Intermittent Failure (RC91) and Transaction Non-Receipt via PTSA Route" — 1 message at 2026-04-24T18:05:48Z (19:05 WAT). **Active-situation match: [[NIBSS PTSA — VPN Flapping Apr 22]].** Sender routed via `aptpaytechnicalsupport@teamapt.com` (NIBSS as true author). CC preserved: ptsa@nibss-plc.com.ng, mustapha.ajibade@teamapt.com, **oladapo.onayemi@teamapt.com (CTO)**, ademola.adefemi@moniepoint.com, networkmanagement@teamapt.com, oladipupo.sholotan@moniepoint.com. Substantive stance: NIBSS doubles down on responses-were-sent claim; contested-attribution posture continues round 2. "apologies for delayed feedback" acknowledges 7h09m latency without conceding substance. Truncated "However, there is..." indicates additional observation in body. Classification: **Briefing tier** (active-situation delta, bilateral-negotiation, CTO in-loop natural engagement). Delta applied to [[NIBSS PTSA — VPN Flapping Apr 22]].
+Factors: `briefing_tick`, `full_level`, `overnight_window_8h`, `4_in_window_threads`, `hourly_report_multi_bank_degradation`, `duty_handover_3_routes_off_mp_decision`, `union_rc96_fast_cycle_resolved`, `nibss_ptsa_silent_under_48h`, `mcp_health_45h_stable`, `cross_source_aligned`.
 
-### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron zero-delta tick (preserved)
+### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level zero-genuinely-new (preserved summary)
 
-18:22 WAT Apr 24 off-cron skim tick: single `search_threads(newer_than:1h)` returned empty result set for 17:09→17:22 UTC window.
+22:10 WAT Apr 24 skim. Window 2h. 1 thread returned (Fidelity PayFac Settlement) — predates window, residual-cache filtered. 0 genuinely new. NIBSS PTSA bilateral negotiation in read-latency state.
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick (preserved)
+### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level NIBSS counter-reply (preserved summary)
 
-18:09 WAT Apr 24 tick. All 4 bucket queries returned only cached-residual Zone<>TeamApt Juliana thread (Jan 2026). Client-side filter: **0 new threads**.
+20:10 WAT Apr 24 full tick. Thread 19dc0ab7bafe02e0 NIBSS counter-reply 19:05 WAT — contested-attribution round 2 stance with CTO Oladapo CC. Briefing tier delta to [[NIBSS PTSA — VPN Flapping Apr 22]].
 
-### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level tick, 1 Layer 1 strategic invite (preserved summary)
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta (preserved)
 
-17:09 WAT Apr 24 tick: 1 Layer 1 new thread — Tracy Ojaigho "Invitation: TPP x Platformization @ Mon Apr 27" 15:31 UTC. Strategic meeting with Moniepoint stakeholder Ravi Jakhodia. Briefing-2026-04-25 candidate. Layer 2 3 reconciliation-workstream threads.
+18:09 WAT Apr 24 tick. All 4 buckets returned cached-residual only. 0 new threads.
 
-### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level tick (preserved summary)
+### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level 1 Layer 1 strategic invite (preserved summary)
 
-16:09 WAT Apr 24 tick: Afeez Duty Handover Note 16:07 WAT (Ecobank route back ON) + UBA RC91 email filing 15:27 WAT + Daily Report + VALIDATION OF CLAIMS UBA thread. Governance bucket Tolulope Obianwu 14:46 WAT Request for Executive-Level Engagement with Fidelity Bank.
+17:09 WAT Apr 24 tick: 1 Layer 1 — Tracy Ojaigho "Invitation: TPP x Platformization @ Mon Apr 27" 15:31 UTC. Strategic meeting with Moniepoint stakeholder Ravi Jakhodia.
+
+### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level Afeez handover + UBA + Fidelity governance (preserved summary)
+
+16:09 WAT Apr 24 tick: Afeez Duty Handover (Ecobank route back ON) + UBA RC91 filing 15:27 WAT + Tolulope Obianwu 14:46 WAT Request for Executive-Level Engagement with Fidelity Bank.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved)
 
-06:09 WAT Apr 24 briefing tick: 86h+ backlog sweep completed via 5 narrow buckets. Key captures: Ecobank compound failure; TeamApt Org Changes invite; Jira approval queue; Wema Bank RC91/22 Apr 23; Union Bank RC69 Apr 23; AWS Outposts 7-day prompt.
-
-### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
-
-Gmail MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23.
+06:09 WAT Apr 24 briefing tick: 86h+ backlog sweep via 5 narrow buckets. Key captures: Ecobank compound failure; TeamApt Org Changes invite; Jira approval queue; Wema Apr 23; Union RC69 Apr 23; AWS Outposts 7-day prompt.

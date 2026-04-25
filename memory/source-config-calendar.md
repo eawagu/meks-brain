@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron zero-delta tick (13min after prior 18:09 WAT): `list_events` returned 2 events (Lattice recurring block, Product-Engineering Sync 18:00-19:00 WAT currently in progress) — neither updated inside 17:09→17:22 UTC window. No priority-signal matches."
-updated: "2026-04-24T21:18:07Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick: weekend zero-delta — Saturday Apr 25 + Sunday Apr 26 calendar empty. Lattice Review recurring block (deadline Apr 28) only. No new invites, no RSVP changes. Open weekend window for triage compound + dad reminder + Lattice batch."
+updated: "2026-04-25T05:27:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T21:10:00Z"
+last_processed: "2026-04-25T05:09:54Z"
 ---
 
 ## Connection
@@ -28,42 +28,34 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level scheduled 22:00-cron tick (10min late), zero-delta
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick weekend zero-delta
 
-22:10 WAT Apr 24 Friday skim tick. `list_events` 22:10 WAT → Apr 26 23:59 WAT (ordered by lastModified, pageSize 25) returned **1 event**:
-- Lattice Review recurring block (ends 2026-04-28) — updated 2026-04-19T14:54:32Z. Stale; predates window.
+06:09 WAT Apr 25 Saturday briefing tick. `list_events` Apr 25 05:00Z → Apr 26 23:00Z (orderBy startTime, pageSize 25, timeZone Africa/Lagos) returned **1 event**:
+- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window update.
 
-Weekend horizon clear: Saturday Apr 25 + Sunday Apr 26 both empty of events. **No priority-signal matches this tick.** No new invites, no RSVP changes, no cancellations, no agenda-less matches, no back-to-back overload.
+**Saturday Apr 25 + Sunday Apr 26 calendar clear.** No meetings, no invites, no conflicts. No priority-signal matches (no declined RSVPs, no new invites, no cancellations, no agenda-less, no overload). Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice Review batch (deadline Mon Apr 27, 2 days away).
 
-Factors: `source=calendar`, `skim_level`, `scheduled_cron_22wat_10min_late`, `zero_delta`, `no_priority_signal_match`, `no_immediate_dispatch`, `weekend_calendar_clear_sat_sun`.
+Factors: `source=calendar`, `briefing_tick`, `full_level`, `weekend_clear_sat_sun`, `lattice_deadline_apr27_2d`, `zero_priority_signal_match`, `no_immediate_dispatch`, `weekend_window_for_compound_actions`.
 
-### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level 20:00-cron tick zero-delta (preserved)
+### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim weekend-ahead clear (preserved)
 
-20:10 WAT Apr 24 full-level tick: 1 event (Lattice Review recurring, updated 2026-04-19). Weekend ahead calendar-clear. No priority-signal matches. Product-Engineering Sync concluded; Lattice Reviews concluded.
+22:10 WAT Apr 24 skim. Lattice recurring only. Weekend ahead calendar-clear. No priority match.
 
-### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron zero-delta tick (preserved)
+### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level zero-delta (preserved)
 
-18:22 WAT Apr 24 off-cron tick: `list_events` returned 2 events (Lattice, Product-Engineering Sync in-progress) — neither updated inside 17:09→17:22 UTC window.
+20:10 WAT Apr 24 full tick. Product-Eng Sync + Lattice concluded; no priority match.
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level zero-delta tick (preserved)
+### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — TeamApt Org Changes in progress (preserved)
 
-18:09 WAT Apr 24 tick: 2 events — Lattice recurring + Product-Engineering Sync starting 18:00 WAT. Neither updated inside 17:09→18:09 WAT window.
+17:09 WAT Apr 24. TeamApt Org Changes 16:30–18:00 WAT in progress.
 
-### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level zero-delta tick (preserved)
+### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — TeamApt Org Changes time-shift (preserved)
 
-17:09 WAT Apr 24 tick: 3 events, none updated inside 16:09→17:09 window. TeamApt Org Changes 16:30-18:00 WAT in progress.
+13:09 WAT Apr 24. TeamApt Org Changes updated 12:18 WAT Pawel Swiatek — meeting 16:00 → 16:30 WAT shift.
 
-### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level zero-delta tick (preserved summary)
+### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
 
-16:09 WAT Apr 24 tick: 5 events, most recent TeamApt Org Changes 11:18 WAT.
-
-### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — full-level tick, TeamApt Org Changes time-shift delta (preserved summary)
-
-13:09 WAT Apr 24 tick: TeamApt Org Changes updated 12:18 WAT by Pawel Swiatek — meeting time shifted 16:00→16:30 WAT.
-
-### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick sweep (preserved summary)
-
-06:09 WAT Apr 24 briefing tick: 11 events. Priority-signal match — TeamApt Org Changes (Pawel Swiatek, 16:00–18:00 WAT, 2h, agenda-less, NEW). Triple-overlap at 16:00 WAT resolved in briefing-2026-04-24 D2 option 1.
+06:09 WAT Apr 24 briefing tick: 11 events. TeamApt Org Changes 16:00–18:00 WAT new (Pawel Swiatek). Triple-overlap resolved in briefing-2026-04-24 D2.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 

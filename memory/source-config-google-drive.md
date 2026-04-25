@@ -3,8 +3,8 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 18:22 WAT Apr 24 skim-level off-cron tick: 0 genuinely-new files; `search_files` returned same 3 HoE/Phoenix files as prior ticks, all predating 17:22 UTC cutoff. Backlog unchanged at 22 files."
-updated: "2026-04-24T21:18:57Z"
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
+updated: "2026-04-25T05:27:00Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-20T16:09:00Z"
@@ -52,37 +52,33 @@ This split keeps distilled content (summary / decisions / action items) and subs
 
 ## Notes
 
-### Tick 2026-04-24 22:10 WAT — skim-level scheduled 22:00-cron (10min late), 0 new files
+### Tick 2026-04-25 06:09 WAT — briefing-tick, 0 new files
 
-`search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T19:10:00Z'` returned 3 files (Deliberation HoE 12:21 UTC, Round 2 Venkatesh 11:10 UTC, Phoenix Stage 1 09:23 UTC). All 3 predate the 19:10 UTC cutoff. Client-side filter: **0 new files this tick**. Backlog 22 files unchanged. `last_processed` remains held at 2026-04-20T16:09:00Z per Phase-2 backlog hold policy.
+06:09 WAT Apr 25 Saturday briefing tick. `search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T21:10:00Z'` returned 3 files (Deliberation HoE 12:21 UTC Apr 24, Round 2 Venkatesh 11:10 UTC Apr 24, Phoenix Stage 1 09:23 UTC Apr 24). All 3 predate the 21:10 UTC Apr 24 cutoff. Client-side filter: **0 new files this tick**. Backlog 22 files unchanged. `last_processed` remains held at 2026-04-20T16:09:00Z per Phase-2 backlog hold policy.
 
-Factors: `source=drive`, `skim_level`, `scheduled_cron_22wat_10min_late`, `zero_genuinely_new`, `backlog_22_unchanged`, `last_processed_held_phase2_policy`, `no_immediate_dispatch`.
+Factors: `source=drive`, `briefing_tick`, `full_level`, `zero_genuinely_new`, `backlog_22_unchanged`, `last_processed_held_phase2_policy`, `no_immediate_dispatch`.
 
-### Tick 2026-04-24 20:10 WAT — full-level 20:00-cron (10min late), 0 new files (preserved)
+### Tick 2026-04-24 22:10 WAT — skim 0 new (preserved)
 
-20:10 WAT tick: `search_files` returned same 3 files; all predate 17:22 UTC cutoff. Backlog 22 unchanged.
+22:10 WAT Apr 24 skim: same 3 files predate cutoff. Backlog 22.
 
-### Tick 2026-04-24 18:22 WAT — skim-level off-cron, 0 new files (preserved)
+### Tick 2026-04-24 20:10 WAT — full 0 new (preserved)
 
-18:22 WAT off-cron skim tick: `search_files` returned same 3 files as prior ticks; all predate 17:09 UTC cutoff. Backlog 22 unchanged.
+20:10 WAT tick: same 3 files. Backlog 22.
 
-### Tick 2026-04-24 18:09 WAT — full-level, 0 new files this tick (preserved)
+### Tick 2026-04-24 14:09 WAT — Deliberation HoE content-update (preserved)
 
-18:09 WAT Apr 24 tick: `search_files` returned 3 files (Deliberation HoE, Round 2 Venkatesh, Phoenix Stage 1). All 3 predate the 17:09 WAT window cutoff. **Phase-2 backlog count: 22 files (unchanged).**
+14:09 WAT tick: Deliberation HoE file modifiedTime 11:51 → 13:21 WAT (Gemini content update on existing backlog entry).
 
-### Tick 2026-04-24 14:09 WAT — full-level, 0 new files but 1 backlog file content-updated (preserved summary)
+### Tick 2026-04-24 13:09 WAT — 2 NEW HoE-cluster files (preserved)
 
-14:09 WAT tick: Deliberation HoE file modifiedTime refresh from 11:51 → 13:21 WAT (Gemini content update on existing backlog entry).
+13:09 WAT Apr 24 tick: 2 NEW files queued to Phase-2 backlog. Backlog 20 → 22.
 
-### Tick 2026-04-24 13:09 WAT — full-level, 2 NEW HoE-cluster files (preserved summary)
+### Tick 2026-04-24 11:09 WAT — Phoenix Stage 1 NEW (preserved)
 
-13:09 WAT Apr 24 tick: 2 NEW files — Round 2 Venkatesh Purushothaman transcript + Deliberation: HoE batch interviews transcript; both queued to Phase-2 backlog. Backlog 20 → 22.
+Phoenix Stage 1 Weekly Check in 2026/04/07 queued. 19 → 20.
 
-### Tick 2026-04-24 11:09 WAT — skim-level, 1 NEW file (preserved)
-
-Phoenix Stage 1 Weekly Check in 2026/04/07 queued to Phase-2 backlog (19 → 20).
-
-### Tick 2026-04-20 17:09 WAT Full-level (condensed — pre-dark)
+### Tick 2026-04-20 17:09 WAT (pre-dark, preserved)
 
 Zero new Notes-by-Gemini files.
 
@@ -90,6 +86,6 @@ Zero new Notes-by-Gemini files.
 
 Drive MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23.
 
-### Phase-2 backlog — 22 files as of 2026-04-24 22:10 WAT tick
+### Phase-2 backlog — 22 files as of 2026-04-25 06:09 WAT
 
 Unchanged at 22 files. No new files or content updates this tick. Phase-2 dispatch will pick up the latest content when it reaches these files. `last_processed` deferred until all 22 files processed.

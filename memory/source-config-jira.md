@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-24T17:22:16Z (18:22 WAT). 18:22 WAT Apr 24 skim-level off-cron tick (13min after prior 18:09 WAT): 1 genuinely new delta — **ADD-4596 In Progress** (17:16 UTC / 18:16 WAT) \"BETA ENV: Phone number not properly rendered on OTP screen\", Medium, assignee Ebenezer Igbinoba, new sprint UX bug. No active-situation match, no operational keyword match. Awareness tier; accumulates for briefing-2026-04-25. No Immediate dispatch."
-updated: "2026-04-24T21:17:42Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick: Layer A 2 deltas — TDSD-6727 Union RC96 (Work in progress 02:12 WAT) + TDSD-6726 Habari RC91 Problem ticket (created+Completed 00:49→00:50 WAT, post-incident documentation of Apr 24 cycle). Layer B 2 deltas — ADD-4597, ADD-4599 Bukola Taiwo metadata updates 23:28 WAT (post-closure update of items already Done at 17:03–17:06 WAT). No FCMB Jira ticket for the active 02:33 WAT Slack-only P1 — process gap."
+updated: "2026-04-25T05:27:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-24T21:10:00Z"
+last_processed: "2026-04-25T05:09:54Z"
 ---
 
 ## Connection
@@ -66,58 +66,54 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
-### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level scheduled 22:00-cron tick (10min late), 2 Layer B deltas
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, Layer A 2 deltas + Layer B 2 deltas
 
-22:10 WAT Apr 24 Friday skim tick. Window 19:10:00Z → 21:10:00Z = 2h.
+06:09 WAT Apr 25 Saturday briefing tick. Window 21:10:00Z Apr 24 → 05:09:54Z Apr 25 = ~8h overnight.
 
-**Layer A** — JQL `project = TDSD AND updated > "2026-04-24 21:10"` returned 0 tickets. No TDSD deltas in window.
+**Layer A — JQL `project = TDSD AND updated > "2026-04-24 21:10" ORDER BY updated DESC` returned 2 tickets:**
 
-**Layer B** — JQL `project in ("ADD","AS",TCDD,ATPG,ATPP,TPSE,TD,TM,TWP,ATLAS,TDEV,TAV,ATS,NIBSS,OPS,NUS,NSS) AND updated > "2026-04-24 21:10" AND (priority in (Highest, Blocker, Critical) OR status changed FROM ("Open","In Progress") TO ("Resolved","Done","Completed","Escalated"))` returned **2 tickets**:
+1. **TDSD-6727 — "Union Bank | ATS | RC 96 Failures Across Processors | 20260425"** Medium [System] Incident, reporter+assignee [[Qazim Adedigba]]. Created 02:12 WAT, status **Work in progress** at 02:12 WAT (last update). Description: "Transactions are failing with RC 96. Kindly assist review." Cross-tracked with email thread 19dc1fd7e4326d6a — bank-resolved 02:52 WAT (~1h40m total cycle), but ticket status has not been updated to Completed at this tick. Briefing-2026-04-25 A1 captures the cycle. No active-situation match (Union RC96 noted on briefing-2026-04-22 B1 but no Union-RC96-specific situation page).
 
-1. **ADD-4584 "Fix CRLF Injection Vulnerability on Direct Debit Cron Service" — Done 2026-04-24T22:07:52.835+0100 (22:07 WAT).**
-   - Issuetype: Task. Priority: Medium. Reporter + Assignee: [[Bukola Taiwo]] (bukola.taiwo@teamapt.com, Direct Debit engineer). Created: 2026-04-22 10:14 WAT → Done: 2026-04-24 22:07 WAT (~60h development cycle).
-   - Classification: Awareness tier. Security-hygiene maintenance work on the Direct Debit cron service — CRLF Injection is a OWASP Top-10 web-layer vulnerability class; closure is defensive coding discipline.
-   - **Not matched to [[DCIR Security Vulnerabilities]] Access Bank pen-test cluster** — that program tracks 5 CRITICAL findings (default OAuth secrets, JWT validation, etc.) on the DCIR/ACS/DD platform. CRLF Injection on DD Cron Service is Medium priority Task work, not a pen-test-CRITICAL closure.
+2. **TDSD-6726 — "Habari RC 91"** Medium [System] Problem, reporter+assignee [[Olamide Ajibulu]]. Created 23:49 UTC Apr 24 (00:49 WAT Apr 25), **Completed 23:50 UTC** (1-min cycle). Description: "This were failures that lasted for 25minutes." Documents the Apr 24 18:30–18:55 WAT 25min Habari/GTB RC91 cycle (briefing-2026-04-24 capture) as post-incident closure. Problem-archetype = post-incident documentation, not active failure. Briefing-2026-04-25 A2.
 
-2. **ADD-4574 "Fix CRLF Injection Vulnerability on Authentication service" — Done 2026-04-24T21:59:46.324+0100 (21:59 WAT).**
-   - Issuetype: Task. Priority: Medium. Reporter + Assignee: [[Bukola Taiwo]]. Created: 2026-04-20 17:22 WAT → Done: 2026-04-24 21:59 WAT (~100h cycle).
-   - Classification: Awareness tier. Paired closure with ADD-4584 — same engineer, same vulnerability class, sibling services (Direct Debit cron + Authentication). Closed 8min apart as a batch. Routine security-hygiene release.
+**Layer B — JQL returned 2 tickets:**
 
-**Pattern:** Bukola Taiwo closing two CRLF-Injection fixes in Direct Debit service cluster within 8min — consistent with end-of-day deploy batching. Accumulates alongside earlier Apr 24 Bukola deliveries: ADD-4597/4598/4599 (bank_reference unique constraint Tasks, Done 17:03–17:06 WAT). Fifth Bukola closure this day.
+1. **ADD-4599 "Change bankReference field on transactionRequest to use UUID instead of Time base id generator"** Medium Task, [[Bukola Taiwo]] reporter+assignee. Created 17:05 WAT Apr 24, status **Done** (last updated 23:28:59 WAT Apr 24). Already Done per prior tick observation at 17:06 WAT — this is metadata/comment update post-closure (likely PR-link or sub-task transition).
+
+2. **ADD-4597 "Add a unique constrain on bank_reference column on transaction table"** Medium Task, [[Bukola Taiwo]] reporter+assignee. Created 17:03 WAT Apr 24, status **Done** (last updated 23:28:33 WAT Apr 24). Same post-closure metadata pattern; paired with ADD-4599 (sibling Tasks closed and post-closure-edited together).
 
 **Active-situation checkpoints (zero delta this tick):**
-- **TDSD-6645** (Monnify VA reversal) — still Escalated, **42h+ Dominic silence** since 04:08 WAT Apr 23.
-- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **43h+ Dominic silence**.
-- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no updates since 22:32 WAT Apr 23. 23h+ silent at 22:10 WAT Apr 24.
-- **TDSD-6699 + TDSD-6690 + TDSD-6724** — still at approval/authorize gates; briefing-2026-04-24 D3 carryforward.
-- **TDSD-6716** (NIBSS PTSA response-not-sent) — Work in progress; bilateral negotiation active via email (NIBSS counter-reply 19:05 WAT this afternoon).
-- **TDSD-6725** (Paystack balance adjustment B) — Resolved earlier today 18:56 WAT.
-- **ADD-4596** (BETA OTP UX bug) — still In Progress per prior 18:22 WAT tick observation.
+- **TDSD-6645** (Monnify VA reversal) — still Escalated, **~50h+ Dominic silence** since 04:08 WAT Apr 23.
+- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **~51h+ Dominic silence**.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no updates since 22:32 WAT Apr 23. ~31h silent at 06:09 WAT.
+- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates per Apr 24 22:10 WAT tick.
+- **TDSD-6716** (NIBSS PTSA RC91 / response-not-sent) — listed Open in Olamide handover 23:05 WAT Apr 24; no Jira-side delta in window.
+- **No FCMB Jira ticket** for the active 02:33 WAT Slack-only P1 — process gap, briefing-2026-04-25 D1 captures.
 
-No Immediate dispatch this tick.
+No Immediate dispatch from this Jira sweep (the 02:33 WAT FCMB Slack P1 is the Immediate-tier signal; Jira sweep does not introduce a separate Immediate event).
 
-Factors: `source=jira`, `skim_level`, `scheduled_cron_22wat_10min_late`, `layer_a_zero_delta`, `layer_b_2_deltas_paired`, `archetype=software`, `project=ADD`, `priority=medium`, `issuetype=task`, `status_transition=in_progress_to_done`, `cycle_time=60h_and_100h`, `assignee=bukola_taiwo_5th_closure_today`, `vulnerability_class=crlf_injection`, `not_dcir_pen_test_cluster`, `batch_deploy_end_of_day`, `routine_security_hygiene`, `no_active_situation_match`, `awareness_tier`, `no_immediate_dispatch`, `42h_dominic_silence_tdsd6645`, `23h_silence_tdsd6711`.
+Factors: `source=jira`, `briefing_tick`, `full_level`, `overnight_window_8h`, `layer_a_2_deltas`, `layer_b_2_deltas_post_closure_metadata`, `tdsd6727_union_rc96_work_in_progress_email_resolved`, `tdsd6726_habari_problem_post_incident_doc`, `add_4597_4599_bukola_metadata_update`, `no_fcmb_jira_for_active_p1_process_gap`, `tdsd6645_50h_dominic_silence`, `tdsd6711_31h_silent`.
 
-### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level 20:00-cron tick, 1 Layer A delta (preserved)
+### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level 2 Layer B deltas (preserved summary)
 
-20:10 WAT Apr 24 full-level tick. Window 18:22:16Z → 19:10:00Z = 47m44s. Layer A 1 genuinely new — **TDSD-6725 PAYSTACK BALANCE ADJUSTMENT APRIL 24TH 2026 B** Medium Service Request, reporter Christine Ogude, assignee Daniel Fetuga, Resolved 18:56 WAT (22m fast-cycle); cross-tracked with Slack #teamapt-x-paystack-transfer-support #4.5B NGN inflow thread. Layer B 0. Active-situation checkpoints: TDSD-6645 39h59m Dominic silence; TDSD-6711 20h35m silent.
+22:10 WAT Apr 24 skim. Layer A 0; Layer B 2 — ADD-4584 + ADD-4574 CRLF Injection fixes (Bukola Taiwo end-of-day batch, paired closure 8min apart). Routine security-hygiene; not DCIR pen-test cluster.
 
-### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim-level off-cron, 1 Layer B delta (preserved)
+### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level TDSD-6725 Paystack (preserved summary)
 
-18:22 WAT Apr 24 skim tick: ADD-4596 In Progress 18:16:58 WAT, Medium, Ebenezer Igbinoba, routine DD BETA OTP-screen UX bug. Awareness tier.
+20:10 WAT Apr 24 full tick. TDSD-6725 PAYSTACK BALANCE ADJUSTMENT 20260424 B Resolved 18:56 WAT (22m fast-cycle, ₦4.5B inflow apply); cross-tracked with Slack #teamapt-x-paystack-transfer-support thread.
 
-### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full-level tick (preserved)
+### last_processed 2026-04-24T17:22:16Z (18:22 WAT) — skim ADD-4596 BETA OTP (preserved)
 
-18:09 WAT Apr 24 tick: Layer A 1 genuinely new — TDSD-6713 Keystone settlements Apr 24 cycle Completed 17:43 WAT by David Oseji (9h22m cycle). [[Keystone Bank — Settlement Requery Apr 20]] `developing` → `resolving`. Layer B 2 routine DD closures (ADD-4429/4426).
+18:22 WAT Apr 24 skim. ADD-4596 In Progress 18:16 WAT, Medium UX bug, Ebenezer Igbinoba. Awareness.
 
-### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full-level tick (preserved summary)
+### last_processed 2026-04-24T17:09:00Z (18:09 WAT) — full TDSD-6713 Keystone Apr 24 cycle (preserved)
 
-17:09 WAT Apr 24 tick: TDSD-6724 Review → Authorize 16:20 WAT (Ezinne Ogoke CBA reversal fix); TDSD-6723 title refined. AS-4242 Sterling Account Switch Project Plan Epic Done 16:41 WAT (High); ADD-4597/4598/4599 bank_reference unique constraint Tasks Done 17:03-17:06 WAT (Bukola Taiwo).
+18:09 WAT Apr 24 tick. TDSD-6713 Keystone settlements Apr 24 cycle Completed 17:43 WAT David Oseji (9h22m). [[Keystone Bank — Settlement Requery Apr 20]] developing → resolving.
 
-### last_processed 2026-04-24T15:09:00Z (16:09 WAT) — full-level tick (preserved summary)
+### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — full TDSD-6724 + AS-4242 + ADD batches (preserved summary)
 
-16:09 WAT Apr 24 tick: Layer A 5 deltas — TDSD-6722 UBA RC91 Completed 15:56 WAT (28m, VPN-downtime proximate cause); TDSD-6721 Resolved 15:54 WAT; TDSD-6703 3ds HTTP 422 Completed 15:59 WAT; TDSD-6680 PalmPay portal touch; TDSD-6723 NEW; TDSD-6724 NEW.
+17:09 WAT Apr 24 tick. TDSD-6724 Review → Authorize 16:20 WAT (Ezinne CBA reversal). AS-4242 Sterling AS Project Plan Epic Done. ADD-4597/8/9 Tasks Done 17:03–17:06 WAT Bukola.
 
 ### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
 
-06:09 WAT Apr 24 briefing tick: 5 TDSD deltas since 22:09 WAT Apr 23. Dominic resolution burst 23:25–23:32 WAT Apr 23 closed TDSD-6553/6612/6688/6706. TDSD-6711 Ecobank DCIR portal filed 22:32 WAT Apr 23.
+06:09 WAT Apr 24 briefing tick. 5 TDSD deltas since 22:09 WAT Apr 23. Dominic resolution burst 23:25–23:32 WAT Apr 23. TDSD-6711 Ecobank DCIR portal filed 22:32 WAT Apr 23.
