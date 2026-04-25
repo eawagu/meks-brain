@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T14:10:00Z (15:10 WAT). 15:10 WAT Apr 25 skim-tick: zero deltas across both Layer A (TDSD service_desk) and Layer B (software). Three consecutive zero-delta skim ticks (13:10/14:10/15:10 WAT)."
-updated: "2026-04-25T14:20:35Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: zero deltas across both Layer A (TDSD service_desk) and Layer B (software). Four consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10 WAT)."
+updated: "2026-04-25T15:18:13Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T14:10:00Z"
+last_processed: "2026-04-25T15:10:00Z"
 ---
 
 ## Connection
@@ -69,22 +69,26 @@ When the source-config trace describes an active-situation ticket's state in nar
 
 ## Notes
 
-### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero deltas across both layers
+### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), zero deltas across both layers
 
-15:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=quiet-saturday-prior-2-ticks-zero-deltas-active-situations-watching). Window 13:10:00Z → 14:10:00Z = 1h.
+16:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-saturday-prior-3-ticks-zero-deltas-active-situations-watching). Window 14:10:00Z → 15:10:00Z = 1h.
 
-**Broad sweep — JQL `updated >= "2026-04-25 14:10" AND project in (TDSD, TCDD, ATPG, "ADD", "AS", ATPP, AVN, ECT, AUM, ASKB, AAS, NM, AMB, AGB, AOTS, AWQA, AGBS, ASD) ORDER BY updated DESC` returned 0 issues.** Layer A (TDSD service_desk): 0 deltas. Layer B (software): 0 deltas.
+**Broad sweep — JQL `project in (TDSD, TCDD, ATPG, "ADD", "AS", ATPP, TPSE, TD, TM, TWP, ATLAS, TDEV, TAV, ATS, NIBSS, OPS, NUS, NSS) AND updated >= "2026-04-25 14:10" ORDER BY updated DESC` returned 0 issues.** Layer A (TDSD service_desk): 0 deltas. Layer B (software): 0 deltas.
 
 **Active-situation checkpoints (skim-tick scope per directive — full re-verification deferred to next briefing tick):**
-- TDSD-6645 (Monnify VA reversal) — still Escalated, ~59h47m Dominic silence (1h advance from 14:10 WAT prior tick).
-- TDSD-6699 (Firewall HA) — still Awaiting implementation (~48h at gate, 1h advance).
-- TDSD-6716 (NIBSS PTSA RC91) — still Work in progress; NIBSS bilateral 20h+ silent (under 48h threshold).
-- TDSD-6690 (Account Switch Reports Stopgap) — `status=Completed` since Apr 22 16:58 WAT per 13:10 WAT prior-tick correction; competing-interpretation framework holds (Jira-API-truth read parsimonious; resolution=null caveat).
+- TDSD-6645 (Monnify VA reversal) — still Escalated, ~60h47m Dominic silence (1h advance from 15:10 WAT prior tick).
+- TDSD-6699 (Firewall HA) — still Awaiting implementation (~49h at gate, 1h advance).
+- TDSD-6716 (NIBSS PTSA RC91) — still Work in progress; NIBSS bilateral 21h+ silent (under 48h threshold).
+- TDSD-6690 (Account Switch Reports Stopgap) — `status=Completed` since Apr 22 16:58 WAT; competing-interpretation framework holds.
 - TDSD-6711, TDSD-6727, TDSD-6726, TDSD-6728 — all Completed in prior ticks; no new activity.
 
-No Immediate dispatch from this Jira sweep. Three consecutive zero-delta skim ticks (Layer A, 13:10/14:10/15:10 WAT — Layer B had 2 deltas at 14:10).
+No Immediate dispatch from this Jira sweep. Four consecutive zero-delta skim ticks (Layer A, 13:10/14:10/15:10/16:10 WAT — Layer B had 2 deltas at 14:10).
 
-Factors: `source=jira`, `skim_tick`, `saturday_afternoon`, `layer_a_zero_deltas`, `layer_b_zero_deltas`, `no_immediate_dispatch`, `tdsd6645_59h47m_dominic_silence_unchanged`, `quiet_weekend_window`, `three_consecutive_zero_delta_skim_ticks_layer_a`.
+Factors: `source=jira`, `skim_tick`, `saturday_afternoon`, `layer_a_zero_deltas`, `layer_b_zero_deltas`, `no_immediate_dispatch`, `tdsd6645_60h47m_dominic_silence_unchanged`, `quiet_weekend_window`, `four_consecutive_zero_delta_skim_ticks_layer_a`.
+
+### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero deltas across both layers (preserved summary)
+
+15:10 WAT Apr 25 Saturday skim tick. Window 13:10:00Z → 14:10:00Z = 1h. Broad sweep 0 issues. Layer A 0; Layer B 0. TDSD-6645 ~59h47m Dominic silence; TDSD-6699 ~48h at gate; TDSD-6716 NIBSS bilateral 20h+ silent. No Immediate dispatch.
 
 ### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), Layer A 0 deltas + Layer B strict 2 deltas (Fatai Ibrahim DD cluster) + 3 broad-sweep Todo/active-state captures discarded
 
