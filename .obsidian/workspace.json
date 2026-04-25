@@ -179,6 +179,10 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/ingest-pipeline-integrity.md",
+    "memory/capture-leakage.md",
+    "memory/phoenix.md",
+    "memory/gemini.md",
     "memory/phoenix-stage-1-weekly-check-in-20260407-1659-bst-notes-by-gemini.md",
     "memory/disbursement-issues-next-steps-20260422-1125-wat-notes-by-gemini.md",
     "memory/briefing-2026-04-25.md",
@@ -201,10 +205,6 @@
     "memory/bank-transfer-agreement.md",
     "memory/settlement-api.md",
     "memory/role-matrix.md",
-    "memory/v2-jazz.md",
-    "memory/money-point.md",
-    "memory/emanuel.md",
-    "memory/zach.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
