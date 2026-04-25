@@ -1,12 +1,26 @@
 ---
-title: Wema Bank
+title: WEMA Bank
 type:
   - "entity"
-created: 2026-04-11
-updated: 2026-04-11
 cssclasses:
   - "entity"
-summary: "Nigerian bank on Moniepoint's ATS — settlement failure (TDSD-6446, Apr 6) followed by new RC91 cycle on Apr 8 and Apr 11; part of the multi-bank RC91 pattern."
+created: "2026-04-25T12:20:42Z"
+updated: "2026-04-25T12:20:42Z"
+summary: "Nigerian bank on Moniepoint's Direct Debit pipeline. D2B Apr 23: direct-debit architectural diagram shared with Michael; approval update expected end of week."
 ---
 
-Mentioned in [[review-queue]].
+## Stub
+
+WEMA Bank (also written "Wema Bank" elsewhere in the brain) is a Nigerian bank on the [[Direct to Bank program]] integration pipeline.
+
+Note: see also [[Wema Bank]] for prior RC91 incident context (Apr 17 P1).
+
+## D2B Apr 23 — Direct Debit
+
+Direct-debit architectural diagram shared with [[Michael]]; approval update expected end of week.
+
+Source: [[Project Delivery and Optimization Realignment - 2026-04-23 14:55 WAT]].
+
+## Sources
+
+- [[Project Delivery and Optimization Realignment - 2026-04-23 14:55 WAT]]
