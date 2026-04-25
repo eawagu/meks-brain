@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T12:10:00Z (13:10 WAT). 13:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged."
-updated: "2026-04-25T12:24:07Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T13:10:00Z (14:10 WAT). 14:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged."
+updated: "2026-04-25T13:21:35Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T12:10:00Z"
+last_processed: "2026-04-25T13:10:00Z"
 ---
 
 ## Connection
@@ -28,47 +28,34 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
+### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), weekend zero-delta unchanged
+
+14:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-active-p1-monitoring-post-quiet-13_10-tick). Window 12:10:00Z → 13:10:00Z = 1h. `list_events` Apr 25 14:10 WAT → Apr 26 23:59 WAT (timeZone Africa/Lagos) returned **1 event**:
+- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window modification.
+
+**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **~1d9h remaining**).
+
+Factors: `source=calendar`, `skim_tick`, `saturday_afternoon`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d9h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
+
 ### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), weekend zero-delta unchanged
 
-13:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-prior-zero-delta-active-p1-monitoring). Window 11:10:00Z → 12:10:00Z = 1h. `list_events` Apr 25 13:10 WAT → Apr 26 23:59 WAT (timeZone Africa/Lagos) returned **1 event**:
-- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window modification.
+13:10 WAT Apr 25 Saturday skim tick. Window 11:10:00Z → 12:10:00Z = 1h. `list_events` returned 1 event: Lattice Review recurring downward review block. Stale; no in-window modification. Saturday + Sunday calendar still clear. Lattice deadline Mon Apr 27 ~1d10h remaining.
 
-**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **~1d10h remaining**).
+### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
 
-Factors: `source=calendar`, `skim_tick`, `saturday_afternoon`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d10h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
+12:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Weekend clear. Lattice deadline ~1d11h remaining.
 
-### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), weekend zero-delta unchanged
+### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
 
-12:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=active-fcmb-p1-trajectory-resolved+mostly-quiet-priors). Window 10:10:00Z → 11:10:00Z = 1h. `list_events` Apr 25 12:10 WAT → Apr 26 23:59 WAT (timeZone Africa/Lagos) returned **1 event**:
-- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window modification.
+11:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Weekend clear. Lattice deadline ~1d12h remaining.
 
-**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **~1d11h remaining**).
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, weekend zero-delta unchanged (preserved summary)
 
-Factors: `source=calendar`, `skim_tick`, `saturday_midday`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d11h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
-
-### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), weekend zero-delta unchanged
-
-11:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations-monitoring+prior-tick-quiet). Window 08:10:00Z → 10:10:00Z = 2h (frontmatter was stale at 08:10:00Z; 09:10 WAT tick wrote body section but did not advance frontmatter — this tick reconciles by advancing to 10:10:00Z).
-
-`list_events` Apr 25 11:00 WAT → Apr 26 23:59 WAT (timeZone Africa/Lagos) returned **1 event**:
-- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window modification.
-
-**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **~1d12h remaining**).
-
-Factors: `source=calendar`, `skim_tick`, `saturday_late_morning`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d12h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
-
-### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, weekend zero-delta unchanged
-
-09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h. `list_events` Apr 25 08:10 WAT → Apr 26 23:59 WAT (orderBy lastModified, pageSize 30, timeZone Africa/Lagos) returned **1 event**:
-- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window update.
-
-**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **1d15h away**).
-
-Factors: `source=calendar`, `skim_tick`, `saturday_morning`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d15h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
+09:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Weekend clear. Lattice deadline 1d15h away.
 
 ### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, weekend zero-delta unchanged (preserved summary)
 
-08:10 WAT Apr 25 skim. Lattice Review recurring only. Weekend clear. Lattice deadline Apr 27 ~1d18h away.
+08:10 WAT Apr 25 skim. Lattice Review recurring only. Weekend clear. Lattice deadline ~1d18h away.
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick weekend zero-delta (preserved summary)
 
