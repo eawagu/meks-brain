@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: 4 in-window threads — Hourly Reports update 07:02 WAT (14/17 routes operational, FCMB/Habari/Zenith/Union all dropped from failure list), Duty Handover 08:06 WAT (Qazim → Afeez, 14/17 confirmed stable), TACHA Backoffice update 06:54 WAT (June Johnson, internal Layer 1 to:me), Union RC96 thread (no new activity post-resolution). Implicit FCMB P1 closure resolves morning briefing D1 stale-by-trajectory."
-updated: "2026-04-25T07:18:31Z"
+updated: "2026-04-25T08:25:07Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T07:10:00Z"
+last_processed: "2026-04-25T08:10:00Z"
 ---
 
 ## Connection
@@ -45,45 +45,36 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, 4 in-window threads (FCMB implicit-resolved via 14/17 trajectory)
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, 1 thread delta (Wema RC91 cycle 5/17days)
 
-08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 05:09:54Z → 07:10:00Z = ~2h. **4 in-window threads from `(FCMB OR RC91 OR RC96 OR P1 OR outage OR Stanbic OR Habari OR Zenith OR Union OR Ecobank OR NIBSS) after:2026/04/25` + `to:me after:2026/04/25`:**
+09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h. Query `newer_than:1h` returned **2 threads** in window:
 
-1. **Thread 19dc23924c6ed10a — "Re: Hourly Reports 20260425"** ([[Qazim Adedigba]] → aptpaytechnicalsupport, 07:02 WAT update on existing thread). **14 of 17 routes are operational** (vs 10/17 at 02:20 WAT). Failure list reduced to: "Coralpay banks (FBN, PVB, and SBP) were turned off due to business decisions." Account Switch transactions processing fine. All portals up. Awaiting authorisation for Window 4/Window 1 reports. Stanbic sweep schedule unchanged. **Net delta: FCMB, Habari, Zenith, Union all dropped from failure list** between 02:33 WAT (FCMB P1 post) and 07:02 WAT (this report). Tickets raised: 2; closed: 2 (TDSD-6727 Union RC96 + TDSD-6726 Habari Problem ticket). Open tickets list trimmed (TDSD-6726 removed; TDSD-6276 Union Settlement Problem, TDSD-6695 Account Switch Stopgap, TDSD-6680 Palmpay Portal remain). New observation: "Keystone Bank Settlement (Keystone Participants) for 25th April 2026, 3 AM failed with RC 05, subsequent settlements have completed." Single-cycle settlement RC05; no situation match — routine ops note.
+1. **Thread 19dc390a02e9797c — "Wema Bank | RC91 | 20260425"** (4 messages, [[Afeez Kazeem]] ↔ Peace Etim Wema Bank). Layer 2 issuer+keyword bucket (Wema + RC91). Filed 08:34:50 WAT by Afeez to switching&payments_services@wemabank.com (CC aptpaytechnicalsupport): "Please be informed that transactions are failing with RC91. Kindly review the transaction." Bank acknowledgement 08:40:10 WAT (Peace Etim, Switching and Payment Officer): "This is receiving attention, we will revert shortly." Bank reconfirm-status 08:43:58 WAT: "Kindly reconfirm status." Afeez closure 08:49:10 WAT: "Transactions are now processing successfully." **Total cycle: 14m20s, bank-resolved with explicit two-way confirmation.** Filing channel: email-only — no Slack P1 post (5 Tier 1 channels silent), no Jira ticket. Active-situation entity match → [[Wema Bank — RC91 P1 Apr 17]]. **5th cycle in 17 days (Apr 8 → Apr 11 → Apr 17 → Apr 23 → Apr 25); inter-cycle gap narrowing to ~38h (vs. prior 6-day gaps) — frequency-trajectory accelerating.** Within-pattern resolution path (bank-side handling). No CTO action. Briefing-2026-04-26 Awareness candidate.
 
-2. **Thread 19dc376af908d69d — "Duty Handover Note 20260425"** ([[Qazim Adedigba]] → [[Afeez Kazeem]], 08:06 WAT). Same 14/17 operational state. Adds: "Coralpay transactions are routed through the CoralPay_Cashout" (failover routing detail). Same Keystone RC05 settlement note + Union N20M settlement window note + UBA pending reports. Afeez Acknowledged 08:10 WAT (no additional content). Process keyword bucket capture (duty handover).
+2. **Thread 19dc38d79729fe24 — "TEAMAPT Monitoring Service Alert"** (1 message, 08:32:00 WAT). Automated alert: "Transaction failure rate is 33.03% and has exceeded configured threshold of 20.0%." Self-recipient (aptpaytechnicalsupport ↔ aptpaytechnicalsupport). Paired with Wema thread above — automated alert preceded Afeez filing by ~3min, implying filing was driven by automated failure-rate detection (not manual escalation). **Skip rule applies under literal directive ("Automated status emails without operational keywords — discard unless matches active-situation entity")** — but body contains threshold-breach data that retroactively contextualizes the Wema filing channel; counted as cross-source confirmation, not a standalone delta.
 
-3. **Thread 19dc36afa39a2e3e — "TeamApt Juliana Backoffice Update (TACHA)"** ([[June Johnson]] → 19 recipients including emeka.awagu@teamapt.com Layer 1, 06:54 WAT). Body: "Please find the attached update regarding Juliana Backoffice (TACHA). If you have any questions, kindly let me know." Attachment-based update; no text content beyond cover note. Recipients include TeamApt + Moniepoint stakeholders (dajalie, frank.atashili, kevin.ngeno, tunde.okufi, abeeb.ahmad, christopher.ogbosuka, ravi.veluguleti, wycliffe.ochieng, ialiyu, abiodun.famoye, dojinaka@moniepoint.com, mdavies@moniepoint.com, projectdelivery@, teamaptoperations@). Layer 1 to:me bucket capture. No action keyword, no urgency markers — informational distribution. Awareness-tier accumulation; pre-read attachment when convenient (no time-sensitive deadline).
+**No Layer 1 to:me threads in window.** No new governance/regulatory deadlines, no escalation requests.
 
-4. **Thread 19dc1fd7e4326d6a — "Union Bank | ATS | RC 96 Failure | 20260425 | TDSD-6727"** — already captured in 06:09 WAT briefing-tick (A1). No new in-window activity (last message 02:52 WAT). Retained in result set due to issuer-bucket query; client-side filter recognized as pre-existing.
+**Cross-source: Slack 5 Tier 1 silent + DM zero + keyword scan zero + Wema-keyword search zero (Slack indexing window did not yet include the 08:34 WAT Afrz Wema-related activity OR no Slack post was made — second hypothesis confirmed by absence of Slack post in `slack_search_public_and_private` after:2026-04-25 sweep). Jira 4 deltas (TDSD-6728 NEW CoralPay ZIB Interchange post-incident-doc, TDSD-6711 Ecobank Portal Completed 08:13 WAT, TDSD-6727 Union RC96 re-captured from prior tick due to JQL slop, TDSD-6706 metadata Resolved → Closed) — no Wema Jira ticket created (consistent with email-only filing channel). Calendar 0 deltas (weekend clear).**
 
-**No Layer 1 to:me action-required threads.** No P1 declarations, no escalation requests, no governance/regulatory deadlines. Cross-source: Slack 5 Tier 1 silent; Jira 1 delta (TDSD-6727 → Completed at 08:11 WAT, formalizing the bank-resolved Union RC96); calendar 0 (weekend clear).
+**Implication for active situations:**
+- **[[Wema Bank — RC91 P1 Apr 17]]:** updated this tick with Apr 25 cycle delta. Frequency-trajectory acceleration documented. If the 38h gap holds, next cycle expected within 1–2 days — increases monitoring weight on Wema for Apr 26-27 ticks.
+- **briefing-2026-04-25 D1 (FCMB):** further confirmation FCMB resolved — no FCMB activity in 09:10 tick window despite issuer-keyword sweep. The 07:02 WAT hourly-report-implicit-resolution holds.
+- **briefing-2026-04-25 D2 (multi-bank degradation):** Wema fast-cycle is within-pattern noise on the multi-bank operational picture; does not change systemic frame.
 
-**Implication for morning briefing items:**
-- **briefing-2026-04-25 D1 (FCMB RC91 P1 active 3h36m+):** Stale-resolved by trajectory. The 07:02 WAT hourly report removes FCMB from failure list. No explicit closure post in Slack — Slack-only P1 → no Jira ticket → no formal closure cadence (process gap captured in briefing factors). The morning briefing's three options (CTO-DM / hold / push for route-off) are now retrospectively answered: option 2 (hold) was the right call; ops absorbed the cycle without CTO escalation. Total duration ~4h-ish (02:33 WAT → before 07:02 WAT). Recommended next-briefing-tick: A-item noting the implicit resolution with calibration trace.
-- **briefing-2026-04-25 D2 (multi-bank degradation 10/17 → systemic frame):** Trajectory has resolved toward 14/17 with only Coralpay-suite (business-decision off) remaining. The recommended option 1 (hold to systemic synthesis) was correct; pattern absorbed without CTO escalation. Recommended next-briefing-tick: A-item noting trajectory completion.
+Factors: `skim_tick`, `saturday_morning`, `1_thread_delta_wema_rc91_apr25`, `wema_5th_cycle_in_17days`, `frequency_trajectory_accelerating_38h_gap`, `bank_two_way_confirmation`, `email_only_filing_channel`, `automated_alert_trigger_33pct_failure_rate`, `cross_source_no_slack_post_no_jira_ticket`, `briefing_d1_fcmb_resolution_holds`, `briefing_d2_systemic_frame_unchanged`, `no_immediate_dispatch_this_tick`.
 
-Factors: `skim_tick`, `saturday_mid_morning`, `4_in_window_threads`, `hourly_report_14_17_operational_vs_10_17_at_0220wat`, `4_route_recovery_fcmb_habari_zenith_union`, `briefing_d1_stale_resolved_by_trajectory`, `briefing_d2_systemic_resolution_path`, `duty_handover_qazim_to_afeez_ack`, `tacha_backoffice_layer1_to_me_attachment_only`, `keystone_rc05_single_cycle_settlement_routine`, `union_n20m_settlement_window_known_issue`, `cross_source_jira_tdsd6727_completed_alignment`, `no_immediate_dispatch_this_tick`.
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, 4 in-window threads (FCMB implicit-resolved via 14/17 trajectory, preserved summary)
 
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, 4 in-window threads
+08:10 WAT Apr 25 skim. 4 in-window threads: Hourly Reports update 07:02 WAT (14/17 routes operational, FCMB/Habari/Zenith/Union all dropped from failure list); Duty Handover 08:06 WAT (Qazim → Afeez, 14/17 confirmed stable + "Coralpay transactions are routed through the CoralPay_Cashout"); TACHA Backoffice update 06:54 WAT (June Johnson, internal Layer 1 to:me); Union RC96 thread (no new activity post-resolution). Implicit FCMB P1 closure resolves morning briefing D1 stale-by-trajectory.
 
-06:09 WAT Apr 25 Saturday briefing tick. Window 21:10:00Z Apr 24 → 05:09:54Z Apr 25 = ~8h overnight. **4 in-window threads from `(RC91 OR P1 OR outage OR FCMB OR Habari OR "Access Bank") newer_than:12h` + issuer bucket pass:**
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, 4 in-window threads (preserved summary)
 
-1. **Thread 19dc23924c6ed10a — "Hourly Reports 20260425"** ([[Qazim Adedigba]] → aptpaytechnicalsupport, 02:20 WAT). Single message: "10 of 17 routes are operational. Coralpay banks (FBN, PVB, SBP) turned off — business decisions. **Habari and Zenith transactions are failing with RC 91, escalated to the partners for resolution.** Union Bank failing RC 96 across processors — service restarted, persists, escalated to bank. All portals up. Tickets raised: 1 (TDSD-6726 Habari Problem ticket); closed: 0." Multi-bank degradation snapshot. Layer 2 keyword bucket capture (RC91, Habari, Union).
-
-2. **Thread 19dc1bdbe990f06e — "Duty Handover Note #20260424"** ([[Olamide Ajibulu]] → [[Qazim Adedigba]], 00:05 WAT, 2 messages). Olamide handover: "14 of 17 PTSAs operational. **First bank, providus and sterling are turned off due to RC91 - MP decision.** Open Tickets: TDSD-6716 NIBSS RC91 Failures. Other Updates: TDSD-6726 GTB RC 91, TDSD-6680 Palmpay portal, TDSD-6276 Union problem ticket, TDSD-6713 Keystone settlements." Qazim Acknowledged 00:11 WAT. Process keyword bucket capture (duty handover).
-
-3. **Thread 19dc1fd7e4326d6a — "Union Bank | ATS | RC 96 Failure | 20260425 | TDSD-6727"** ([[Qazim Adedigba]] → Union Bank itechannels, 5 messages). Filed 01:14 WAT "failing with RC 96." Qazim follow-up 02:58 WAT "any update? issue persists." Bank reply (Iyama Victor) 02:50 WAT "reconfirm now." Qazim 02:52 WAT "processing fine now." Bank-resolved ~1h40m. Layer 2 issuer bucket capture (Union).
-
-4. **Thread 19dc0ab7bafe02e0 — NIBSS PTSA counter-reply** (already captured in 20:10 WAT Apr 24 tick; no new in-window activity, 11h silent at this tick — under 48h absence threshold). Layer 2 issuer bucket capture (NIBSS).
-
-No Layer 1 to:me threads in window. Cross-source: Slack 3 P1s; Jira 2 TDSD deltas (TDSD-6727 Union, TDSD-6726 Habari Problem) + 2 Layer B Bukola Taiwo Apr 24 evening updates; calendar 0; drive 0. MCP health holding 45h+ post-Apr-23-recovery.
-
-Factors: `briefing_tick`, `full_level`, `overnight_window_8h`, `4_in_window_threads`, `hourly_report_multi_bank_degradation`, `duty_handover_3_routes_off_mp_decision`, `union_rc96_fast_cycle_resolved`, `nibss_ptsa_silent_under_48h`, `mcp_health_45h_stable`, `cross_source_aligned`.
+06:09 WAT Apr 25 briefing tick. 8h overnight window. 4 in-window threads: Hourly Reports 02:20 WAT (10/17 routes, Habari/Zenith failing RC91 to partners + Union RC96); Duty Handover 23:05 WAT Apr 24 (Olamide → Qazim, 14/17, FBN/PVB/SBP off); Union RC96 thread (filed 01:14 WAT, bank-resolved 02:52 WAT); NIBSS PTSA counter-reply thread (no new activity). MCP health 45h+ stable post-Apr-23-recovery.
 
 ### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level zero-genuinely-new (preserved summary)
 
-22:10 WAT Apr 24 skim. Window 2h. 1 thread returned (Fidelity PayFac Settlement) — predates window, residual-cache filtered. 0 genuinely new. NIBSS PTSA bilateral negotiation in read-latency state.
+22:10 WAT Apr 24 skim. 1 thread returned (Fidelity PayFac Settlement) — predates window, residual-cache filtered. 0 genuinely new. NIBSS PTSA bilateral negotiation in read-latency state.
 
 ### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level NIBSS counter-reply (preserved summary)
 
