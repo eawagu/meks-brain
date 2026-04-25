@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T19:10:00Z (20:10 WAT). 20:10 WAT Apr 25 skim-tick: Layer 1 + Layer 2 keyword pass both clean (zero-delta in 2h window). FCMB cycle 2 silent ~4h post-filing (within bank-cycle envelope)."
-updated: 2026-04-25
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: Layer 1 zero, Layer 2 keyword pass 1 thread — Stanbic RC91 cycle 34 thread 19dc63afd3c001f0 (21:00–21:14 WAT, 14m04s bank-resolved fast-cycle, two-track with Slack); awareness candidate for briefing-2026-04-26."
+updated: "2026-04-25T21:25:21Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T19:10:00Z"
+last_processed: "2026-04-25T21:10:00Z"
 ---
 
 
@@ -33,7 +33,7 @@ Gmail MCP. Profile: eawagu@gmail.com.
 - Automated status emails without operational keywords — discard unless matches active-situation entity OR is To:user (Layer 1 preempts skip).
 
 ### Skim-tick query discipline (post 2026-04-25 17:10 WAT FCMB cycle-2 1-tick delay)
-Skim-tick MUST run BOTH Layer 1 (`to:me newer_than:Nh`) AND Layer 2 keyword pass (operational keywords + issuer-name buckets) every tick. The 16:10 WAT Apr 25 prior-tick documented only Layer 1 sweep ("clean empty result, no residual-cache") and missed Afeez's FCMB RC91 escalation email filed at 15:04:26Z (within window). The next tick's keyword sweep recovered the signal at 17:10 WAT — 1h05m delay is bounded but undesirable. **Skim-tick MUST run the operational keyword bucket as part of the per-source delta-check pass** — Layer-1-only is not sufficient. Only the issuer-name buckets (which exceed token budget when OR'd) may be deferred under skim cost cap; operational + governance + process buckets fit within budget per the execution pattern below.
+Skim-tick MUST run BOTH Layer 1 (`to:me newer_than:Nh`) AND Layer 2 keyword pass (operational keywords + issuer-name buckets) every tick. The 16:10 WAT Apr 25 prior-tick documented only Layer 1 sweep (\"clean empty result, no residual-cache\") and missed Afeez's FCMB RC91 escalation email filed at 15:04:26Z (within window). The next tick's keyword sweep recovered the signal at 17:10 WAT — 1h05m delay is bounded but undesirable. **Skim-tick MUST run the operational keyword bucket as part of the per-source delta-check pass** — Layer-1-only is not sufficient. Only the issuer-name buckets (which exceed token budget when OR'd) may be deferred under skim cost cap; operational + governance + process buckets fit within budget per the execution pattern below.
 
 ### Query execution pattern (post 10:09 limitation note)
 Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP token budget:
@@ -50,15 +50,24 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, Layer 1 + Layer 2 both zero-delta in 2h window
+### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), Layer 1 zero + Layer 2 keyword 1 delta (Stanbic cycle 34, two-track with Slack)
 
-20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h.
+22:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=last-tick-before-overnight-delegation-with-active-multi-bank-p1s-from-am-briefing). Window 19:10:00Z → 21:10:00Z = 2h.
 
-**Layer 1 query `to:me newer_than:2h`: 0 threads (clean empty result).** **Operational keyword query `(RC91 OR RC96 OR P1 OR outage OR NIBSS OR FCMB OR breach OR "transaction failure" OR "settlement failure") newer_than:2h`: 0 threads.** Saturday-evening quiet across both passes. No FCMB cycle 2 follow-up since 16:04 WAT email; FCMB now ~4h05m silent post-filing — within bank-cycle envelope (multi-day cycles routine per FCMB pattern). No new RC91/RC96/outage/breach signals. NIBSS PTSA bilateral 25h+ silent (under 48h threshold; TDSD-6716 closed unilaterally per Jira sweep this morning).
+**Layer 1 query `to:me newer_than:2h`: 0 threads (clean empty result).** **Operational keyword query `(RC91 OR RC96 OR RC05 OR P1 OR outage OR NIBSS OR FCMB OR breach OR "transaction failure" OR "settlement failure") newer_than:2h`: 1 thread** — Stanbic ATS RC91 cycle 34 thread `19dc63afd3c001f0` "Stanbic | RC91| 20260425":
+- 2026-04-25T20:00:33Z (21:00:33 WAT) — Olamide Ajibulu → Stanbic IT Service Management (`itservicemanagementnigeria@stanbicibtc.com`, `servicemonitoring@stanbicibtc.com`; CC `aptpaytechnicalsupport@teamapt.com`): "Hello team, Please be informed that Stanbic bank card transactions are currently failing. This is occurring with RC 91. Kindly assist with the review."
+- 2026-04-25T20:09:38Z (21:09:38 WAT) — Bank reply Onyekachukwu Okigbo (Officer, Service Monitoring | Information Technology, Stanbic IBTC) → Olamide: "Hello @Olamide Ajibulu, Kindly reconfirm status." — standard Stanbic IT Service Management fast-cycle reconfirmation signature, mirrors cycle 31's bank-side engagement pattern.
+- 2026-04-25T20:14:37Z (21:14:37 WAT) — Olamide → Onyekachukwu: "Transactions are processing successfully."
 
-**Active-situation entity coverage:** All situations updated within last ~12h. No new threads requiring situation-page updates this tick.
+**Email-confirmed end-to-end 14m04s.** Cycle 34 = 21:00–21:14 WAT bank-resolved fast-cycle. Two-track filing with Slack #teamapt-tech-operations Olamide structured P1 post 21:01 WAT (Slack-stated 10m end-to-end). Salience factors: `keyword_floor=RC91+stanbic_issuer`, `active_situation_match=stanbic_bank_ats_persistent_rc91_pattern`, `within_pattern_fast_cycle`, `bank_resolved_pre_tick`, `two_track_with_slack`. Awareness candidate for briefing-2026-04-26 (B6 calibration precedent: bank-owned recurring pattern, no Immediate re-dispatch).
 
-Factors: source=email, skim_tick, saturday_evening, layer1_to_me_zero, layer2_keyword_zero, fcmb_cycle2_silent_4h_within_envelope, nibss_ptsa_bilateral_under_48h_threshold, no_immediate_dispatch.
+**Active-situation entity coverage:** Stanbic ATS — situation page updated this tick to cycle 34. NIBSS PTSA bilateral 26h+ silent post-19:05 WAT Apr 24 NIBSS counter-reply (under 48h threshold; TDSD-6716 closed unilaterally per Jira sweep 17:10 WAT tick). FCMB cycle 2 silent ~6h post-16:04 WAT email-only filing (within bank-cycle envelope, no escalation criteria fired).
+
+Factors: source=email, skim_tick, saturday_late_evening, layer1_to_me_zero, layer2_keyword_one_delta_stanbic_cycle34, two_track_with_slack, within_pattern_fast_cycle, bank_resolved_pre_tick_56m, no_immediate_dispatch, fcmb_cycle2_silent_6h_within_envelope, nibss_ptsa_bilateral_under_48h_threshold, last_tick_before_overnight_delegation.
+
+### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, Layer 1 + Layer 2 both zero-delta in 2h window (preserved summary)
+
+20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h. Layer 1 + operational keyword passes both clean. FCMB cycle 2 ~4h05m silent post-16:04 WAT filing — within envelope. NIBSS PTSA bilateral 25h+ silent (under 48h threshold).
 
 ### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, end-of-shift handover deltas only (preserved summary)
 
