@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick: weekend zero-delta — Saturday Apr 25 + Sunday Apr 26 calendar empty. Lattice Review recurring block (deadline Apr 28) only. No new invites, no RSVP changes. Open weekend window for triage compound + dad reminder + Lattice batch."
-updated: "2026-04-25T05:27:00Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged — Saturday + Sunday calendar empty, Lattice Review recurring block (deadline Apr 28) only, no in-window modifications."
+updated: "2026-04-25T07:20:26Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T05:09:54Z"
+last_processed: "2026-04-25T07:10:00Z"
 ---
 
 ## Connection
@@ -27,6 +27,15 @@ Google Calendar MCP. Primary calendar for user.
 - Recurring standing meetings with unchanged metadata — no delta, no surface.
 
 ## Notes
+
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, weekend zero-delta unchanged
+
+08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 05:09:54Z → 07:10:00Z = ~2h. `list_events` Apr 25 07:10Z → Apr 26 23:00Z (orderBy startTime, pageSize 25, timeZone Africa/Lagos) returned **1 event**:
+- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window update.
+
+**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, 1d18h away).
+
+Factors: `source=calendar`, `skim_tick`, `saturday_mid_morning`, `weekend_clear_unchanged`, `lattice_deadline_apr27_2d_minus_2h`, `zero_priority_signal_match`, `no_immediate_dispatch`.
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick weekend zero-delta
 
