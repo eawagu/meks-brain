@@ -179,6 +179,7 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/direct-to-bank-daily-standup-2026-04-21-0727-wat-empty-stub.md",
     "memory/ingest-pipeline-integrity.md",
     "memory/capture-leakage.md",
     "memory/phoenix.md",
@@ -204,7 +205,6 @@
     "memory/jira.md",
     "memory/bank-transfer-agreement.md",
     "memory/settlement-api.md",
-    "memory/role-matrix.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
