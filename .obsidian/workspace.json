@@ -179,6 +179,7 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/disbursement-cba-integration-architecture-review-2026-04-22-1930-ist.md",
     "memory/technical-depth-bar.md",
     "memory/maybe-equals-reject-framework.md",
     "memory/moniepoint-country-launch-tech-debt.md",
@@ -204,7 +205,6 @@
     "memory/visa-tokenization.md",
     "memory/visa-project.md",
     "memory/atpp.md",
-    "memory/ptsp-project.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
