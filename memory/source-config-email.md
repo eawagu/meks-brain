@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick: 4 in-window threads — Hourly Reports 02:20 WAT (10/17 routes operational, Habari/Zenith RC91 escalated to partners), Duty Handover 00:05 WAT (3 routes turned off MP-decision), Union Bank RC96 thread 19dc1fd7e4326d6a (filed 01:14 WAT, resolved 02:52 WAT bank-side), NIBSS PTSA prior counter-reply already captured. MCP health holding 45h+ post-recovery."
-updated: "2026-04-25T05:27:00Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: 4 in-window threads — Hourly Reports update 07:02 WAT (14/17 routes operational, FCMB/Habari/Zenith/Union all dropped from failure list), Duty Handover 08:06 WAT (Qazim → Afeez, 14/17 confirmed stable), TACHA Backoffice update 06:54 WAT (June Johnson, internal Layer 1 to:me), Union RC96 thread (no new activity post-resolution). Implicit FCMB P1 closure resolves morning briefing D1 stale-by-trajectory."
+updated: "2026-04-25T07:18:31Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T05:09:54Z"
+last_processed: "2026-04-25T07:10:00Z"
 ---
 
 ## Connection
@@ -44,6 +44,26 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns a cached thread (often an old thread the user is a participant in) instead of an empty result. Filter must be applied client-side: check each returned thread's most-recent-message timestamp against the window cutoff; treat threads whose latest message predates the cutoff as zero-delta.
 
 ## Notes
+
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, 4 in-window threads (FCMB implicit-resolved via 14/17 trajectory)
+
+08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 05:09:54Z → 07:10:00Z = ~2h. **4 in-window threads from `(FCMB OR RC91 OR RC96 OR P1 OR outage OR Stanbic OR Habari OR Zenith OR Union OR Ecobank OR NIBSS) after:2026/04/25` + `to:me after:2026/04/25`:**
+
+1. **Thread 19dc23924c6ed10a — "Re: Hourly Reports 20260425"** ([[Qazim Adedigba]] → aptpaytechnicalsupport, 07:02 WAT update on existing thread). **14 of 17 routes are operational** (vs 10/17 at 02:20 WAT). Failure list reduced to: "Coralpay banks (FBN, PVB, and SBP) were turned off due to business decisions." Account Switch transactions processing fine. All portals up. Awaiting authorisation for Window 4/Window 1 reports. Stanbic sweep schedule unchanged. **Net delta: FCMB, Habari, Zenith, Union all dropped from failure list** between 02:33 WAT (FCMB P1 post) and 07:02 WAT (this report). Tickets raised: 2; closed: 2 (TDSD-6727 Union RC96 + TDSD-6726 Habari Problem ticket). Open tickets list trimmed (TDSD-6726 removed; TDSD-6276 Union Settlement Problem, TDSD-6695 Account Switch Stopgap, TDSD-6680 Palmpay Portal remain). New observation: "Keystone Bank Settlement (Keystone Participants) for 25th April 2026, 3 AM failed with RC 05, subsequent settlements have completed." Single-cycle settlement RC05; no situation match — routine ops note.
+
+2. **Thread 19dc376af908d69d — "Duty Handover Note 20260425"** ([[Qazim Adedigba]] → [[Afeez Kazeem]], 08:06 WAT). Same 14/17 operational state. Adds: "Coralpay transactions are routed through the CoralPay_Cashout" (failover routing detail). Same Keystone RC05 settlement note + Union N20M settlement window note + UBA pending reports. Afeez Acknowledged 08:10 WAT (no additional content). Process keyword bucket capture (duty handover).
+
+3. **Thread 19dc36afa39a2e3e — "TeamApt Juliana Backoffice Update (TACHA)"** ([[June Johnson]] → 19 recipients including emeka.awagu@teamapt.com Layer 1, 06:54 WAT). Body: "Please find the attached update regarding Juliana Backoffice (TACHA). If you have any questions, kindly let me know." Attachment-based update; no text content beyond cover note. Recipients include TeamApt + Moniepoint stakeholders (dajalie, frank.atashili, kevin.ngeno, tunde.okufi, abeeb.ahmad, christopher.ogbosuka, ravi.veluguleti, wycliffe.ochieng, ialiyu, abiodun.famoye, dojinaka@moniepoint.com, mdavies@moniepoint.com, projectdelivery@, teamaptoperations@). Layer 1 to:me bucket capture. No action keyword, no urgency markers — informational distribution. Awareness-tier accumulation; pre-read attachment when convenient (no time-sensitive deadline).
+
+4. **Thread 19dc1fd7e4326d6a — "Union Bank | ATS | RC 96 Failure | 20260425 | TDSD-6727"** — already captured in 06:09 WAT briefing-tick (A1). No new in-window activity (last message 02:52 WAT). Retained in result set due to issuer-bucket query; client-side filter recognized as pre-existing.
+
+**No Layer 1 to:me action-required threads.** No P1 declarations, no escalation requests, no governance/regulatory deadlines. Cross-source: Slack 5 Tier 1 silent; Jira 1 delta (TDSD-6727 → Completed at 08:11 WAT, formalizing the bank-resolved Union RC96); calendar 0 (weekend clear).
+
+**Implication for morning briefing items:**
+- **briefing-2026-04-25 D1 (FCMB RC91 P1 active 3h36m+):** Stale-resolved by trajectory. The 07:02 WAT hourly report removes FCMB from failure list. No explicit closure post in Slack — Slack-only P1 → no Jira ticket → no formal closure cadence (process gap captured in briefing factors). The morning briefing's three options (CTO-DM / hold / push for route-off) are now retrospectively answered: option 2 (hold) was the right call; ops absorbed the cycle without CTO escalation. Total duration ~4h-ish (02:33 WAT → before 07:02 WAT). Recommended next-briefing-tick: A-item noting the implicit resolution with calibration trace.
+- **briefing-2026-04-25 D2 (multi-bank degradation 10/17 → systemic frame):** Trajectory has resolved toward 14/17 with only Coralpay-suite (business-decision off) remaining. The recommended option 1 (hold to systemic synthesis) was correct; pattern absorbed without CTO escalation. Recommended next-briefing-tick: A-item noting trajectory completion.
+
+Factors: `skim_tick`, `saturday_mid_morning`, `4_in_window_threads`, `hourly_report_14_17_operational_vs_10_17_at_0220wat`, `4_route_recovery_fcmb_habari_zenith_union`, `briefing_d1_stale_resolved_by_trajectory`, `briefing_d2_systemic_resolution_path`, `duty_handover_qazim_to_afeez_ack`, `tacha_backoffice_layer1_to_me_attachment_only`, `keystone_rc05_single_cycle_settlement_routine`, `union_n20m_settlement_window_known_issue`, `cross_source_jira_tdsd6727_completed_alignment`, `no_immediate_dispatch_this_tick`.
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, 4 in-window threads
 
