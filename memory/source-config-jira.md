@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: Layer A 1 delta — TDSD-6727 Union RC96 transitioned Work in progress → Completed at 08:11 WAT (formalizing the 02:52 WAT bank-side resolution; 5h19m formalization lag, within ops-cadence). Layer B 0 deltas. Active situations checkpoints unchanged: TDSD-6645 still ~52h+ Dominic silence, TDSD-6711 Ecobank portal still silent ~33h, TDSD-6699/6690 still at approval gates. No FCMB Jira ticket created post-resolution — process gap persists."
-updated: "2026-04-25T07:20:00Z"
+updated: "2026-04-25T08:26:57Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T07:10:00Z"
+last_processed: "2026-04-25T08:10:00Z"
 ---
 
 ## Connection
@@ -66,55 +66,39 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 
 ## Notes
 
-### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, Layer A 1 delta (TDSD-6727 Completed)
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, Layer A 4 deltas (1 NEW + 1 portal closure + 2 already-captured/metadata)
 
-08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 05:09:54Z → 07:10:00Z = ~2h.
+09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h.
 
-**Layer A — JQL `project = TDSD AND updated >= "2026-04-25 06:09" ORDER BY updated DESC` returned 1 ticket:**
+**Layer A — JQL `project in (TDSD, ...) AND updated >= "2026-04-25 08:10" ORDER BY updated DESC` returned 4 tickets:**
 
-1. **TDSD-6727 — "Union Bank | ATS | RC 96 Failures Across Processors | 20260425"** Medium [System] Incident, reporter+assignee [[Qazim Adedigba]]. Status transitioned **Work in progress → Completed** (statusCategory: done). Last updated **08:11 WAT**. Cross-tracked with email thread 19dc1fd7e4326d6a — bank-resolved 02:52 WAT (~1h40m total cycle). Jira-side closure lag: **5h19m** post bank-side resolution. Within ops-cadence (post-cycle Jira closure typically batched at duty-handover or hourly-report time). Active-situation match: none (Union RC96 not yet a tracked situation; briefing-2026-04-25 A1 captured the cycle). Awareness-tier — formalizes resolution already noted.
+1. **TDSD-6728 — "Switch | CoralPay (ZIB) | Interchange on Stopped State Incident | 20260425"** (NEW, Medium, Switch component, reporter+assignee [[Qazim Adedigba]]). Created 08:43:55 WAT, transitioned to **Completed at 08:47:23 WAT** (4-min ticket lifetime — post-incident documentation, not active-failure tracker). Description: incident active 01:15 → 07:48 WAT (6h33m, overnight delegation window). Trigger: Zenith EoD issue caused failed transactions; after Zenith resolved their side, CoralPay returned false statuses with interchange state stuck on `Stopped`. Workaround: failover to **CoralPay_Cashout** (now load-bearing in production per duty handover 08:06 WAT). Permanent fix: alternate-key + CoralPay key reselect → state `Running`. Resolution log evidence: `2026-04-25 06:46:56 ERROR ... Sink interchange is not active` + `07:28:01 TRACE ... Client 10.231.18.17:3001, Connected: false`. Comment by Qazim 08:44:55 WAT: "Current Status: Resolved and actively monitoring. NB: Coralpay transactions are currently routed through the CoralPay_Cashout." **Active-situation entity match → [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]]; situation page updated this tick with Apr 25 switch-layer failure-mode delta.** Distinct failure mode from the Apr 23 ZIB RC91 routing failure (RC91 = bank-side issuer-or-switch-inoperative; interchange-Stopped = TeamApt-side switch-state stuck). **Briefing-2026-04-26 Awareness candidate** — configuration-state change (CoralPay_Cashout failover persisting in production) + structural-defect candidate (alternate-key reselect remediation pattern suggests client-side state-machine lock surviving server-side recovery).
 
-**Layer B sweep — 0 deltas.** No P1/Blocker/Critical priority transitions, no Done-state transitions on pattern-tracked entities, no developing-situation entity matches. Saturday morning dev-quiet.
+2. **TDSD-6711 — "Ecobank | ATS | Portal Inaccessibility | 20260423"** Medium. **Status transitioned Work In Progress → Completed at 08:13:14 WAT.** Resolution: Done. Closure comment by Qazim Adedigba: *"Portal is accessible now."* Total ticket lifetime ~33h41m from 22:32 WAT Apr 23 filing to 08:13 WAT Apr 25 closure — silent across overnight Apr 24/25 (no comment activity between Qazim's 22:33 WAT Apr 23 escalation note and the 08:13 WAT closure). No bank-side acknowledgement comment recorded — portal recovery appears bank-side autonomous (or recovered via off-Jira SRE escalation thread). **Active-situation entity match → [[Ecobank — RC91 on NUS Nodes]]; situation page updated this tick — compound failure stack reduces from 3 layers (transaction-routing + portal-access + user-creation) to 1 open layer (3-week user-creation persistence remains).** **Briefing-2026-04-26 Awareness candidate** — Ecobank admin-platform CTO-escalation case (briefing-2026-04-24 D1) weakens materially.
 
-**Active-situation checkpoints (zero delta this tick):**
-- **TDSD-6645** (Monnify VA reversal) — still Escalated, **~52h+ Dominic silence** (no movement since 04:08 WAT Apr 23). Same as briefing-2026-04-25 D4 carryforward state.
-- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **~53h+ Dominic silence**.
-- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no updates since 22:32 WAT Apr 23. **~33h silent**.
-- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates per Apr 24 22:10 WAT tick. No transition deltas.
-- **TDSD-6716** (NIBSS PTSA RC91 / response-not-sent) — listed Open in Olamide handover 23:05 WAT Apr 24; no Jira-side delta in window. NIBSS PTSA bilateral negotiation 13h silent at tick (under 48h absence threshold).
-- **No FCMB Jira ticket created** post the 02:33 WAT Slack-only P1 — process gap persists across the implicit-resolution window. Slack P1 ran ~4h-ish from 02:33 WAT to before 07:02 WAT (per email cross-source) without Jira-tracked closure cadence.
+3. **TDSD-6727 — "Union Bank | ATS | RC 96 Failures Across Processors | 20260425"** Medium. Last update 08:11:35 WAT (Status Completed). **Already captured in 08:10 WAT prior tick** — the JQL window slop (Jira interprets `"2026-04-25 08:10"` as 08:10 WAT = 07:10 UTC; the 08:11 WAT update is 07:11 UTC, which is > 07:10 UTC by 1min so re-appears in this tick's window). Per source-config-jira client-side filter directive, this is a known-already-captured re-appearance, not a fresh delta. No new content; awareness-trace only.
 
-No Immediate dispatch from this Jira sweep.
+4. **TDSD-6706 — "UPDATE OF REJECTED REFUND STATUS TO COMPLETED_VIA_PROVIDER(23042026)"** Medium, reporter Samson Anaele, assignee Dominic Usiabulu. Status transitioned **Resolved → Closed at 08:23:54 WAT**. Originally Resolved at 23:25 WAT Apr 23 in Dominic's resolution burst (briefing-2026-04-24 A2). This is a metadata-only transition (Resolved → Closed is the standard workflow promotion when the ticket originator confirms — no content delta). Awareness-trace only.
 
-Factors: `source=jira`, `skim_tick`, `saturday_mid_morning`, `layer_a_1_delta`, `layer_b_0_deltas`, `tdsd6727_union_rc96_work_in_progress_to_completed`, `jira_closure_lag_5h19m_within_ops_cadence`, `tdsd6645_52h_dominic_silence_unchanged`, `tdsd6711_33h_silent_unchanged`, `no_fcmb_jira_post_resolution_process_gap_persists`, `tdsd6716_nibss_ptsa_under_48h_threshold`.
+**Layer B sweep — 0 deltas.** No P1/Blocker/Critical priority transitions, no Done-state transitions on pattern-tracked entities, no developing-situation entity matches. Saturday morning dev-quiet (continuation of 08:10 tick zero-Layer-B pattern).
 
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, Layer A 2 deltas + Layer B 2 deltas
+**Active-situation checkpoints (zero delta this tick except for situations updated above):**
+- **TDSD-6645** (Monnify VA reversal) — still Escalated, **~53h+ Dominic silence** (no movement since 04:08 WAT Apr 23). Same as briefing-2026-04-25 D4 carryforward state. 1h advance from prior tick observation.
+- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **~54h+ Dominic silence**.
+- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates per Apr 24 22:10 WAT tick. No transition deltas. Now ~46h+ at approval gate (above 12h absence-of-signal threshold; already in briefing-2026-04-24 D3 + briefing-2026-04-25 D4 carryforward).
+- **TDSD-6716** (NIBSS PTSA RC91 / response-not-sent) — listed Open in Olamide handover 23:05 WAT Apr 24; no Jira-side delta in window. NIBSS PTSA bilateral negotiation ~14h silent at tick (under 48h absence threshold — Apr 24 19:05 WAT NIBSS counter-reply was last activity).
 
-06:09 WAT Apr 25 Saturday briefing tick. Window 21:10:00Z Apr 24 → 05:09:54Z Apr 25 = ~8h overnight.
+No Immediate dispatch from this Jira sweep. TDSD-6728 was post-resolved + post-documented before the tick window; TDSD-6711 was bank-side autonomous closure; TDSD-6727/6706 are awareness-only re-captures.
 
-**Layer A — JQL `project = TDSD AND updated > "2026-04-24 21:10" ORDER BY updated DESC` returned 2 tickets:**
+Factors: `source=jira`, `skim_tick`, `saturday_morning`, `layer_a_4_deltas_1_new_1_portal_closure_2_recapture_metadata`, `layer_b_0_deltas`, `tdsd6728_new_coralpay_zib_interchange_stopped_state_post_incident_doc`, `coralpay_cashout_failover_load_bearing`, `alternate_key_reselect_remediation_pattern`, `tdsd6711_ecobank_portal_completed_qazim_closure_portal_accessible`, `ecobank_compound_stack_3_to_1_layer`, `tdsd6727_jql_slop_recapture`, `tdsd6706_metadata_resolved_to_closed_no_content_delta`, `tdsd6645_53h_dominic_silence_unchanged`, `tdsd6716_nibss_ptsa_under_48h_threshold`.
 
-1. **TDSD-6727 — "Union Bank | ATS | RC 96 Failures Across Processors | 20260425"** Medium [System] Incident, reporter+assignee [[Qazim Adedigba]]. Created 02:12 WAT, status **Work in progress** at 02:12 WAT (last update). Description: "Transactions are failing with RC 96. Kindly assist review." Cross-tracked with email thread 19dc1fd7e4326d6a — bank-resolved 02:52 WAT (~1h40m total cycle), but ticket status has not been updated to Completed at this tick. Briefing-2026-04-25 A1 captures the cycle. No active-situation match (Union RC96 noted on briefing-2026-04-22 B1 but no Union-RC96-specific situation page).
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, Layer A 1 delta (TDSD-6727 Completed 08:11 WAT, preserved summary)
 
-2. **TDSD-6726 — "Habari RC 91"** Medium [System] Problem, reporter+assignee [[Olamide Ajibulu]]. Created 23:49 UTC Apr 24 (00:49 WAT Apr 25), **Completed 23:50 UTC** (1-min cycle). Description: "This were failures that lasted for 25minutes." Documents the Apr 24 18:30–18:55 WAT 25min Habari/GTB RC91 cycle (briefing-2026-04-24 capture) as post-incident closure. Problem-archetype = post-incident documentation, not active failure. Briefing-2026-04-25 A2.
+08:10 WAT Apr 25 skim. Layer A 1 (TDSD-6727 Union RC96 Work in progress → Completed at 08:11 WAT, formalizing 02:52 WAT bank-side resolution; 5h19m formalization lag, within ops-cadence). Layer B 0 deltas. Active situations checkpoints unchanged: TDSD-6645 still ~52h+ Dominic silence, TDSD-6711 Ecobank portal still silent ~33h, TDSD-6699/6690 still at approval gates. No FCMB Jira ticket created post-resolution — process gap persists.
 
-**Layer B — JQL returned 2 tickets:**
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, Layer A 2 deltas + Layer B 2 deltas (preserved summary)
 
-1. **ADD-4599 "Change bankReference field on transactionRequest to use UUID instead of Time base id generator"** Medium Task, [[Bukola Taiwo]] reporter+assignee. Created 17:05 WAT Apr 24, status **Done** (last updated 23:28:59 WAT Apr 24). Already Done per prior tick observation at 17:06 WAT — this is metadata/comment update post-closure (likely PR-link or sub-task transition).
-
-2. **ADD-4597 "Add a unique constrain on bank_reference column on transaction table"** Medium Task, [[Bukola Taiwo]] reporter+assignee. Created 17:03 WAT Apr 24, status **Done** (last updated 23:28:33 WAT Apr 24). Same post-closure metadata pattern; paired with ADD-4599 (sibling Tasks closed and post-closure-edited together).
-
-**Active-situation checkpoints (zero delta this tick):**
-- **TDSD-6645** (Monnify VA reversal) — still Escalated, **~50h+ Dominic silence** since 04:08 WAT Apr 23.
-- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **~51h+ Dominic silence**.
-- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no updates since 22:32 WAT Apr 23. ~31h silent at 06:09 WAT.
-- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates per Apr 24 22:10 WAT tick.
-- **TDSD-6716** (NIBSS PTSA RC91 / response-not-sent) — listed Open in Olamide handover 23:05 WAT Apr 24; no Jira-side delta in window.
-- **No FCMB Jira ticket** for the active 02:33 WAT Slack-only P1 — process gap, briefing-2026-04-25 D1 captures.
-
-No Immediate dispatch from this Jira sweep (the 02:33 WAT FCMB Slack P1 is the Immediate-tier signal; Jira sweep does not introduce a separate Immediate event).
-
-Factors: `source=jira`, `briefing_tick`, `full_level`, `overnight_window_8h`, `layer_a_2_deltas`, `layer_b_2_deltas_post_closure_metadata`, `tdsd6727_union_rc96_work_in_progress_email_resolved`, `tdsd6726_habari_problem_post_incident_doc`, `add_4597_4599_bukola_metadata_update`, `no_fcmb_jira_for_active_p1_process_gap`, `tdsd6645_50h_dominic_silence`, `tdsd6711_31h_silent`.
+06:09 WAT Apr 25 briefing tick. 8h overnight window. Layer A 2: TDSD-6727 Union RC96 (Work in progress, 02:12 WAT filing) + TDSD-6726 Habari RC91 Problem ticket (Created 23:49 UTC + Completed 23:50 UTC, 1-min cycle = post-incident documentation of Apr 24 18:30–18:55 WAT). Layer B 2: ADD-4599 + ADD-4597 (Bukola Taiwo metadata updates 23:28 WAT Apr 24, post-closure batch).
 
 ### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level 2 Layer B deltas (preserved summary)
 
