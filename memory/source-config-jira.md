@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T11:10:00Z (12:10 WAT). 12:10 WAT Apr 25 skim-tick: Layer A 0 deltas, Layer B 0 deltas. Active-situation checkpoints unchanged: TDSD-6645 ~56h+ Dominic silence, TDSD-6699/6690 still at approval gates ~49h+, TDSD-6716 NIBSS PTSA still Open."
-updated: "2026-04-25T11:16:59Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T12:10:00Z (13:10 WAT). 13:10 WAT Apr 25 skim-tick: Layer A 0 genuine deltas + TDSD-6690 staleness correction (status=Completed since Apr 22 16:58 WAT contradicts prior 'still at approval gates' framing). Layer B 0 deltas."
+updated: "2026-04-25T12:26:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T11:10:00Z"
+last_processed: "2026-04-25T12:10:00Z"
 ---
 
 ## Connection
@@ -55,6 +55,9 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 - `assignee=<user>` — Dominic routing to Awaiting Scheme Update = workflow-discipline pattern (tracking).
 - `archetype=<service_desk|software>` — service_desk tickets default to higher salience.
 
+### Active-situation checkpoint re-verification (post 2026-04-25 13:10 WAT TDSD-6690 staleness)
+When the source-config trace describes an active-situation ticket's state in narrative shorthand (e.g., "still at approval gates", "still WIP", "still Escalated"), MUST re-verify the description against the live `status` field (and `statusCategory.key`) every full briefing-tick. NEVER propagate a narrative description from a prior tick without checking the current Jira state — descriptions go stale silently when the ticket transitions and prior-tick text is copied forward. Trigger: TDSD-6690 was described as "still at approval gates" across briefing-2026-04-24 D3, briefing-2026-04-25 D4, and four prior source-config-jira tick notes — but Jira state was `status=Completed` (statusCategory=`done`) since 2026-04-22T16:58 WAT (Ekene Udodi "Done" comment, 67h+ ago at the 13:10 WAT tick that caught this). Resolution=null caveats the closure (informal-close-without-formal-authorization candidate), but statusCategory=done is the authoritative bucket signal.
+
 ### Skip list (patterns explicitly excluded from Layer B surface)
 *(Empty — maintained via monthly periodic review + weekly skip candidate bulk-confirm per config-salience.)*
 
@@ -65,6 +68,27 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 4. **Client-side UTC filter** — Jira JQL interprets the `"YYYY-MM-DD HH:MM"` datetime literal in the user's configured timezone (Africa/Lagos = WAT). Since `last_processed` is stored in UTC (`YYYY-MM-DDTHH:MM:SSZ`), the server-side JQL filter using the UTC hour as-is is effectively 1h lax — it lets through updates from the hour before `last_processed`. Therefore the heartbeat MUST apply a client-side filter: convert each returned issue's `fields.updated` to UTC and compare to `last_processed`; discard any issue whose UTC-updated time ≤ `last_processed`.
 
 ## Notes
+
+### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), Layer A 0 genuine deltas + TDSD-6690 staleness correction
+
+13:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-prior-zero-delta-active-p1-monitoring). Window 11:10:00Z → 12:10:00Z = 1h.
+
+**Layer A — JQL `key in (TDSD-6645, TDSD-6716, TDSD-6699, TDSD-6690, TDSD-6711, TDSD-6727, TDSD-6726) OR (project in (TDSD, ATPG, "ADD", "AS", ATPP) AND updated >= -65m)` returned 7 issues.** All 7 updated BEFORE 12:10 WAT (the prior tick's last_processed) — they appeared because of the `key in (...)` checkpoint clause, NOT because of fresh updates. **0 genuine new deltas in 12:10 → 13:10 WAT window.**
+
+**Layer B sweep — 0 deltas.**
+
+**Active-situation checkpoints — verified against live Jira state this tick:**
+- **TDSD-6645** (Monnify VA reversal "Urgent Pending Settlement – Re-trigger Required") — status=`Escalated`, last updated 2026-04-24T11:20:45 WAT. **~57h47m elapsed since last update**; Dominic silence continues. Unchanged.
+- **TDSD-6699** (Firewall HA Configuration on Prod FW 02/03) — status=`Awaiting implementation`, last updated 2026-04-23T15:16:30 WAT. **~46h elapsed at gate**; ~12h above absence-of-signal threshold (already in briefing-2026-04-25 D4 carryforward). Unchanged.
+- **TDSD-6690** (Account Switch Reports Stopgap) — **CORRECTION:** Jira API truth `status=Completed` (statusCategory=`done`), `updated=2026-04-22T16:58:28 WAT`, `resolution=null`. Single comment: Ekene Udodi "Done" at 16:58:28 WAT Apr 22 (3min after creation). **Brain narrative across briefing-2026-04-24 D3 → briefing-2026-04-25 D4 → 4 prior source-config-jira tick notes propagated "still at approval gates" — that framing is contradicted by Jira API state.** Competing-interpretation candidates: (a) statusCategory=`done` is authoritative bucket signal → "Completed" means workflow done; D3/D4 framing was wrong (Jira-API-truth wins, parsimonious read); (b) `resolution=null` is the informal-close-without-formal-authorization signal → "Completed" status set without resolution code = ticket marked as work-done by the assignee but not formally authorized through workflow approval gate; D3/D4 framing's "approval gate" reference would describe an as-yet-uncrossed authorization step despite the status name. Without the workflow definition, (a) is the more parsimonious read. **No briefing rewrite this tick** — briefings are historical record. Source-config-jira understanding updated above with the new "Active-situation checkpoint re-verification" directive to prevent recurrence. Calibration note for Improve: this is a self-discovered staleness, not a user-signaled miss — does NOT generate a Tuning Log tuple (acted/dismissed/missed framework doesn't fit), but the directive addition is the structural fix.
+- **TDSD-6716** (NIBSS Successful Response Not Sent) — status=`Work in progress`, last updated 2026-04-24T13:48:07 WAT. NIBSS bilateral 18h+ silent (under 48h threshold). Unchanged.
+- **TDSD-6711** (Ecobank portal) — status=`Completed`, resolution=`Done`, closed 2026-04-25T08:13:14 WAT (captured by 09:10 WAT prior tick + Ecobank situation page already updated).
+- **TDSD-6727** (Union Bank RC96) — status=`Completed`, closed 2026-04-25T08:11:35 WAT (captured by 08:10 WAT prior tick).
+- **TDSD-6726** (Habari RC91 Problem ticket) — status=`Completed`, closed 2026-04-24T23:50:35 WAT (captured by 06:09 WAT briefing tick + briefing-2026-04-25 A2).
+
+No Immediate dispatch from this Jira sweep.
+
+Factors: `source=jira`, `skim_tick`, `saturday_afternoon`, `layer_a_zero_genuine_deltas`, `layer_b_zero_deltas`, `tdsd6690_staleness_correction_completed_since_apr22_16_58wat_67h_ago`, `narrative_propagated_5_consecutive_ticks_without_reverification`, `competing_interpretation_status_completed_vs_resolution_null`, `directive_added_active_situation_checkpoint_reverification`, `no_tuple_self_discovered_staleness_not_acted_dismissed_missed`, `no_immediate_dispatch`, `tdsd6645_57h47m_dominic_silence_unchanged`.
 
 ### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), Layer A 0 deltas + Layer B 0 deltas
 
@@ -77,7 +101,7 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 **Active-situation checkpoints (zero new delta this tick):**
 - **TDSD-6645** (Monnify VA reversal) — still Escalated, **~56h+ Dominic silence** (no movement since 04:08 WAT Apr 23). 1h advance from prior tick.
 - **TDSD-6684** (Pending Refund Transactions) — Resolved 10:54 WAT Apr 25 (prior tick). No further delta.
-- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~49h+ at gate, well above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward).
+- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~49h+ at gate, well above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward). [13:10 WAT note: TDSD-6690 actually Completed since Apr 22 16:58 WAT — see correction above.]
 - **TDSD-6716** (NIBSS PTSA RC91) — still listed Open per Apr 24 23:05 WAT handover; no Jira-side delta in window. NIBSS bilateral negotiation ~17h silent at tick (under 48h threshold).
 - **TDSD-6711** (Ecobank portal) — Completed at 08:13 WAT Apr 25; no new activity.
 - **TDSD-6727** (Union Bank RC96) — Completed at 08:11 WAT; no new activity.
@@ -101,7 +125,7 @@ Other Jira tickets that updated in the 09:10–10:10 WAT range (TDSD-6728 CoralP
 
 **Active-situation checkpoints (zero new delta this tick):**
 - **TDSD-6645** (Monnify VA reversal) — still Escalated, ~55h+ Dominic silence (no movement since 04:08 WAT Apr 23). 1h advance from 09:10 WAT prior tick.
-- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~48h+ at gate, above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward).
+- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~48h+ at gate, above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward). [13:10 WAT note: TDSD-6690 actually Completed since Apr 22 16:58 WAT — see correction at top of Notes.]
 - **TDSD-6716** (NIBSS PTSA RC91) — listed Open per Apr 24 23:05 WAT handover; no Jira-side delta in window. NIBSS bilateral negotiation ~16h silent at tick (under 48h threshold).
 - **TDSD-6711** (Ecobank portal) — Completed at 08:13 WAT prior tick; no new activity.
 - **TDSD-6727** (Union Bank RC96) — Completed at 08:11 WAT; no new activity.
