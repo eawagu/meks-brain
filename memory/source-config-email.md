@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T13:10:00Z (14:10 WAT). 14:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window; UBA pen-test residual-cache + mock-bot + Moniepoint April-10 thread all filtered out as out-of-window."
-updated: "2026-04-25T13:20:58Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T14:10:00Z (15:10 WAT). 15:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window; clean empty newer_than:2h result."
+updated: "2026-04-25T14:20:36Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T13:10:00Z"
+last_processed: "2026-04-25T14:10:00Z"
 ---
 
 ## Connection
@@ -46,13 +46,23 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
+### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero genuinely-new threads (clean empty result)
+
+15:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=quiet-saturday-prior-2-ticks-zero-deltas-active-situations-watching). Window 13:10:00Z → 14:10:00Z = 1h.
+
+**Layer 1 query `newer_than:2h`: returned 0 threads (clean empty result, no residual-cache).** **Zero genuinely-new threads in 13:10:00Z → 14:10:00Z window.** No P1 emails. No Layer 1 to:me threads. No active-situation entity matches with new content. BambooHR daily notification not in this 1h window (next expected Apr 26 ~10:06 WAT).
+
+**Active-situation entity coverage:** all situations updated within last 10h. NIBSS PTSA bilateral 20h+ silent (under 48h threshold). Three consecutive zero-genuinely-new-thread skim ticks (13:10/14:10/15:10 WAT).
+
+Factors: `source=email`, `skim_tick`, `saturday_afternoon`, `zero_genuinely_new_threads`, `clean_empty_query_no_residual_cache`, `no_p1_emails`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `three_consecutive_zero_delta_skim_ticks`.
+
 ### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), zero genuinely-new threads
 
 14:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-active-p1-monitoring-post-quiet-13_10-tick). Window 12:10:00Z → 13:10:00Z = 1h.
 
 **Layer 1 query `to:me newer_than:2h`: returned 1 residual-cache thread** (UBA pen-test thread 19b2e5fb18efdd60 — \"Re: FW: PENTEST_ 2FA on DCIR portal\", latest message 2026-01-08T08:02:23Z = 99 days predates window cutoff). Filtered out per residual-cache directive — user is CC participant on the thread, not in To: of any in-window message. **Zero genuinely-new Layer 1 threads.**
 
-**Operational keyword query `(P1 OR RC91 OR RC96 OR outage OR incident OR breach OR settlement OR "transaction failure") newer_than:2h`: returned 2 threads, both out-of-window:**
+**Operational keyword query `(P1 OR RC91 OR RC96 OR outage OR incident OR breach OR settlement OR \"transaction failure\") newer_than:2h`: returned 2 threads, both out-of-window:**
 - Thread 19dc48105ab218b6 \"mock Monitoring Service Alert\" — 2026-04-25T11:58:01Z (12:58 WAT, **predates 12:10:00Z window cutoff**) — already captured by 13:10 WAT prior tick (mock prefix synthetic test, bot-to-bot recipient, NOT Layer 1).
 - Thread 19d76cd43ffea769 \"MONIEPOINT TRANSACTIONS-10042026\" — Apr 10 thread, residual-cache (15+ days old).
 
