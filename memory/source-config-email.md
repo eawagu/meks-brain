@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T14:10:00Z (15:10 WAT). 15:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window; clean empty newer_than:2h result."
-updated: "2026-04-25T14:20:36Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window; clean empty newer_than:2h result. Four consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10 WAT)."
+updated: "2026-04-25T15:21:06Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T14:10:00Z"
+last_processed: "2026-04-25T15:10:00Z"
 ---
 
 ## Connection
@@ -46,15 +46,19 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero genuinely-new threads (clean empty result)
+### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), zero genuinely-new threads (clean empty result)
 
-15:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=quiet-saturday-prior-2-ticks-zero-deltas-active-situations-watching). Window 13:10:00Z → 14:10:00Z = 1h.
+16:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-saturday-prior-3-ticks-zero-deltas-active-situations-watching). Window 14:10:00Z → 15:10:00Z = 1h.
 
-**Layer 1 query `newer_than:2h`: returned 0 threads (clean empty result, no residual-cache).** **Zero genuinely-new threads in 13:10:00Z → 14:10:00Z window.** No P1 emails. No Layer 1 to:me threads. No active-situation entity matches with new content. BambooHR daily notification not in this 1h window (next expected Apr 26 ~10:06 WAT).
+**Layer 1 query `to:me newer_than:2h`: returned 0 threads (clean empty result, no residual-cache).** **Zero genuinely-new threads in 14:10:00Z → 15:10:00Z window.** No P1 emails. No Layer 1 to:me threads. No active-situation entity matches with new content. BambooHR daily notification not in this 1h window (next expected Apr 26 ~10:06 WAT).
 
-**Active-situation entity coverage:** all situations updated within last 10h. NIBSS PTSA bilateral 20h+ silent (under 48h threshold). Three consecutive zero-genuinely-new-thread skim ticks (13:10/14:10/15:10 WAT).
+**Active-situation entity coverage:** all situations updated within last 11h. NIBSS PTSA bilateral 21h+ silent (under 48h threshold). Four consecutive zero-genuinely-new-thread skim ticks (13:10/14:10/15:10/16:10 WAT).
 
-Factors: `source=email`, `skim_tick`, `saturday_afternoon`, `zero_genuinely_new_threads`, `clean_empty_query_no_residual_cache`, `no_p1_emails`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `three_consecutive_zero_delta_skim_ticks`.
+Factors: `source=email`, `skim_tick`, `saturday_afternoon`, `zero_genuinely_new_threads`, `clean_empty_query_no_residual_cache`, `no_p1_emails`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `four_consecutive_zero_delta_skim_ticks`.
+
+### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero genuinely-new threads (preserved summary)
+
+15:10 WAT Apr 25 Saturday skim tick. Window 13:10:00Z → 14:10:00Z = 1h. Layer 1 `newer_than:2h` returned 0 threads (clean empty). Zero genuinely-new. NIBSS PTSA bilateral 20h+ silent.
 
 ### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), zero genuinely-new threads
 
