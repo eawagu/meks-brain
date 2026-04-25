@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T11:10:00Z (12:10 WAT). 12:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window."
-updated: "2026-04-25T11:18:43Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T12:10:00Z (13:10 WAT). 13:10 WAT Apr 25 skim-tick: 1 mock-monitoring-bot signal below Layer 1 threshold; zero genuinely-new Layer 1 threads."
+updated: "2026-04-25T12:23:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T11:10:00Z"
+last_processed: "2026-04-25T12:10:00Z"
 ---
 
 ## Connection
@@ -45,6 +45,18 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns a cached thread (often an old thread the user is a participant in) instead of an empty result. Filter must be applied client-side: check each returned thread's most-recent-message timestamp against the window cutoff; treat threads whose latest message predates the cutoff as zero-delta.
 
 ## Notes
+
+### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), 1 mock-bot signal below Layer 1 threshold
+
+13:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-prior-zero-delta-active-p1-monitoring). Window 11:10:00Z → 12:10:00Z = 1h. Query `newer_than:2h` returned 1 in-window thread:
+
+1. **Thread 19dc48105ab218b6 — "mock Monitoring Service Alert"** (1 message, 2026-04-25T11:58:01Z = 12:58 WAT, sender `aptpaytechnicalsupport@teamapt.com`, To: `aptpaytechnicalsupport@teamapt.com`). Body: "Transaction failure rate is 5.379284033827176% and has exceeded configured threshold of 5.0%". **NOT Layer 1** (recipient is the bot mailbox itself, not the user). Layer 2 keyword surface (failure-rate keyword) — single mock-flagged alert at 0.38pp over threshold = below actionable noise floor. The "mock" prefix in the subject line indicates a synthetic test alert, not a production-monitor signal. Routine bot heartbeat. No active-situation entity match. Discard per skip rules (automated status email without operational keywords matching active situation).
+
+**Zero genuinely-new Layer 1 threads in window.** No P1 emails. No to:me threads. No active-situation entity matches with new content. BambooHR daily notification not in this 1h window (next expected Apr 26 ~10:06 WAT).
+
+**Active-situation entity coverage:** all situations updated within last 7h (Wema 10:19 WAT, CoralPay 09:10 WAT, Ecobank Jira-side 08:13 WAT). NIBSS PTSA bilateral 18h+ silent (under 48h threshold). No 48h+ silence triggers fire.
+
+Factors: `source=email`, `skim_tick`, `saturday_afternoon`, `1_mock_monitoring_bot_signal_below_threshold`, `not_layer1_bot_to_bot_recipient`, `mock_prefix_synthetic_test`, `no_p1_emails`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`.
 
 ### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), zero genuinely-new threads
 
