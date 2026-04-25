@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged — Saturday + Sunday calendar empty, Lattice Review recurring block (deadline Apr 28) only, no in-window modifications."
-updated: "2026-04-25T07:20:26Z"
+updated: "2026-04-25T08:28:20Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T07:10:00Z"
+last_processed: "2026-04-25T08:10:00Z"
 ---
 
 ## Connection
@@ -28,23 +28,22 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, weekend zero-delta unchanged
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, weekend zero-delta unchanged
 
-08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 05:09:54Z → 07:10:00Z = ~2h. `list_events` Apr 25 07:10Z → Apr 26 23:00Z (orderBy startTime, pageSize 25, timeZone Africa/Lagos) returned **1 event**:
+09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h. `list_events` Apr 25 08:10 WAT → Apr 26 23:59 WAT (orderBy lastModified, pageSize 30, timeZone Africa/Lagos) returned **1 event**:
 - Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window update.
 
-**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, 1d18h away).
+**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **1d15h away**).
 
-Factors: `source=calendar`, `skim_tick`, `saturday_mid_morning`, `weekend_clear_unchanged`, `lattice_deadline_apr27_2d_minus_2h`, `zero_priority_signal_match`, `no_immediate_dispatch`.
+Factors: `source=calendar`, `skim_tick`, `saturday_morning`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d15h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
 
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick weekend zero-delta
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, weekend zero-delta unchanged (preserved summary)
 
-06:09 WAT Apr 25 Saturday briefing tick. `list_events` Apr 25 05:00Z → Apr 26 23:00Z (orderBy startTime, pageSize 25, timeZone Africa/Lagos) returned **1 event**:
-- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window update.
+08:10 WAT Apr 25 skim. Lattice Review recurring only. Weekend clear. Lattice deadline Apr 27 ~1d18h away.
 
-**Saturday Apr 25 + Sunday Apr 26 calendar clear.** No meetings, no invites, no conflicts. No priority-signal matches (no declined RSVPs, no new invites, no cancellations, no agenda-less, no overload). Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice Review batch (deadline Mon Apr 27, 2 days away).
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick weekend zero-delta (preserved summary)
 
-Factors: `source=calendar`, `briefing_tick`, `full_level`, `weekend_clear_sat_sun`, `lattice_deadline_apr27_2d`, `zero_priority_signal_match`, `no_immediate_dispatch`, `weekend_window_for_compound_actions`.
+06:09 WAT Apr 25 Saturday briefing tick. Lattice Review recurring only. Weekend clear. No priority signal matches. Open weekend window for triage compound (D4) + dad reminder (D3) + Lattice batch (deadline Mon Apr 27).
 
 ### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim weekend-ahead clear (preserved)
 
