@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T12:10:00Z (13:10 WAT). 13:10 WAT Apr 25 skim-tick: Layer A 0 genuine deltas + TDSD-6690 staleness correction (status=Completed since Apr 22 16:58 WAT contradicts prior 'still at approval gates' framing). Layer B 0 deltas."
-updated: "2026-04-25T12:26:51Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T13:10:00Z (14:10 WAT). 14:10 WAT Apr 25 skim-tick: Layer A 0 deltas, Layer B strict 2 deltas (ADD-4563 Axios smoke-test Done + ADD-4542 mandate status bug Done — Fatai Ibrahim DD cluster). 3 broad-sweep Todo/active-state captures discarded per Layer C default."
+updated: "2026-04-25T13:19:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T12:10:00Z"
+last_processed: "2026-04-25T13:10:00Z"
 ---
 
 ## Connection
@@ -69,89 +69,51 @@ When the source-config trace describes an active-situation ticket's state in nar
 
 ## Notes
 
+### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), Layer A 0 deltas + Layer B strict 2 deltas (Fatai Ibrahim DD cluster) + 3 broad-sweep Todo/active-state captures discarded
+
+14:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-active-p1-monitoring-post-quiet-13_10-tick). Window 12:10:00Z → 13:10:00Z = 1h.
+
+**Broad sweep — JQL `project in (TDSD, TCDD, ATPG, "ADD", "AS", TPP, MNFY, MMI, MFY, MPB, MPM, MOR, MOM, MPG, MFR, MFC, MAA, MAS) AND updated >= "2026-04-25 12:10"` returned 5 issues.** All in software-archetype projects; no TDSD service_desk hits.
+
+**Layer A (TDSD service_desk): 0 deltas.** No new ticket filings, no priority transitions, no active-situation entity matches in TDSD.
+
+**Layer B strict (per directive — Highest/Blocker/Critical priority OR status transition to Done/Resolved/Completed/Escalated): 2 deltas:**
+
+1. **ADD-4563 — "PROD: Smoke tests on DD-UI web After Axios version Update"** (Task, Medium, reporter [[Fatai Ibrahim]], assignee [[Emmanuel Francis]]). Status=`Done`, updated 12:57:39 UTC (13:57 WAT). DD-UI smoke-test closure post-Axios upgrade. Active-situation entity match: tangential to [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] (DD platform hygiene cluster) — does not require situation rewrite. Awareness only.
+
+2. **ADD-4542 — "When maker checker is turned off: Status of a deactivated mandate doesnt get updated immediately"** (Bug, Medium, reporter [[Fatai Ibrahim]], assignee [[Ebenezer Igbinoba]]). Status=`Done`, updated 12:57:39 UTC (13:57 WAT). Mandate-status update bug fix. Awareness only.
+
+**Broad-sweep captures discarded per Layer C default (Medium priority, Todo/active-state, no Highest/Blocker/Critical, no active-situation entity match):**
+- **TCDD-1296** — "PROD- PF User Unable to edit merchant on Consolidated UI – 401 Access Denied" (Bug, Medium, status=`Todo`, reporter [[Abdulganiu Yusuff]], assignee [[Victor Madu]]). NEW PROD bug filing in window, but Medium priority + no active-situation match + no urgency signal — does not promote to Layer B surface. Watch-list: if escalates to High/Critical or transitions to In Progress with operational impact, promote next tick.
+- **ADD-4562** — "Expired workflow requests remain in PENDING state instead of being updated to FAILED or EXPIRED" (Task, Medium, status=`Todo`, reporter [[Fatai Ibrahim]], assignee [[Mary Alaba]]). Routine DD workflow hygiene.
+- **ADD-4561** — "Remove redundant information from the actionParameters field for Charge Type and Change User Role workFlowRequestType" (Task, Medium, status=`Todo`, reporter [[Fatai Ibrahim]], assignee [[Mary Alaba]]). Routine DD code hygiene.
+
+**Active-situation checkpoints (zero new delta this tick, prior-tick re-verification stands per skim-tick scope — full re-verification deferred to next briefing tick per directive):**
+- TDSD-6645 (Monnify VA reversal) — still Escalated, ~58h47m Dominic silence (1h advance from 13:10 WAT prior tick).
+- TDSD-6699 (Firewall HA) — still Awaiting implementation (~47h at gate, 1h advance).
+- TDSD-6716 (NIBSS PTSA RC91) — still Work in progress; NIBSS bilateral 19h+ silent (under 48h threshold).
+- TDSD-6690 (Account Switch Reports Stopgap) — `status=Completed` since Apr 22 16:58 WAT per 13:10 WAT prior-tick correction; competing-interpretation framework holds (Jira-API-truth read parsimonious; resolution=null caveat).
+- TDSD-6711, TDSD-6727, TDSD-6726, TDSD-6728 — all Completed in prior ticks; no new activity.
+
+No Immediate dispatch from this Jira sweep. Both Layer B Done transitions are Awareness candidates for briefing-2026-04-26.
+
+Factors: `source=jira`, `skim_tick`, `saturday_afternoon`, `layer_a_zero_deltas`, `layer_b_strict_2_deltas_fatai_ibrahim_dd_cluster`, `add_4563_axios_smoke_test_closure`, `add_4542_mandate_status_bug_fix`, `broad_sweep_3_todo_state_captures_discarded_layer_c_default`, `tcdd_1296_new_prod_bug_medium_no_promotion_watchlist`, `no_immediate_dispatch`, `tdsd6645_58h47m_dominic_silence_unchanged`, `awareness_only_briefing_2026_04_26_candidates`.
+
 ### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), Layer A 0 genuine deltas + TDSD-6690 staleness correction
 
-13:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-prior-zero-delta-active-p1-monitoring). Window 11:10:00Z → 12:10:00Z = 1h.
+13:10 WAT Apr 25 Saturday skim tick. Window 11:10:00Z → 12:10:00Z = 1h. Layer A 0 genuine new deltas. Layer B 0 deltas. **TDSD-6690 staleness correction:** Jira API truth `status=Completed` (statusCategory=`done`), `updated=2026-04-22T16:58:28 WAT`, `resolution=null` — narrative across briefing-2026-04-24 D3, briefing-2026-04-25 D4, and 4 prior source-config-jira tick notes propagated "still at approval gates" framing that is contradicted by Jira API state. Competing-interpretation framework documented. New "Active-situation checkpoint re-verification" directive added above. No Tuning Log tuple (self-discovered staleness, not user-signaled miss). Active-situation checkpoints unchanged: TDSD-6645 ~57h47m Dominic silence, TDSD-6699 still Awaiting implementation, TDSD-6716 NIBSS bilateral 18h+ silent (under 48h threshold).
 
-**Layer A — JQL `key in (TDSD-6645, TDSD-6716, TDSD-6699, TDSD-6690, TDSD-6711, TDSD-6727, TDSD-6726) OR (project in (TDSD, ATPG, "ADD", "AS", ATPP) AND updated >= -65m)` returned 7 issues.** All 7 updated BEFORE 12:10 WAT (the prior tick's last_processed) — they appeared because of the `key in (...)` checkpoint clause, NOT because of fresh updates. **0 genuine new deltas in 12:10 → 13:10 WAT window.**
+### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), Layer A 0 deltas + Layer B 0 deltas (preserved summary)
 
-**Layer B sweep — 0 deltas.**
+12:10 WAT Apr 25 Saturday skim tick. Saturday-midday TDSD quiet. TDSD-6645 ~56h+ Dominic silence. TDSD-6684 Resolved 10:54 WAT (prior tick). TDSD-6699/6690 still at approval/authorize gates (~49h+ at gate). [13:10 WAT correction: TDSD-6690 actually Completed since Apr 22 16:58 WAT.]
 
-**Active-situation checkpoints — verified against live Jira state this tick:**
-- **TDSD-6645** (Monnify VA reversal "Urgent Pending Settlement – Re-trigger Required") — status=`Escalated`, last updated 2026-04-24T11:20:45 WAT. **~57h47m elapsed since last update**; Dominic silence continues. Unchanged.
-- **TDSD-6699** (Firewall HA Configuration on Prod FW 02/03) — status=`Awaiting implementation`, last updated 2026-04-23T15:16:30 WAT. **~46h elapsed at gate**; ~12h above absence-of-signal threshold (already in briefing-2026-04-25 D4 carryforward). Unchanged.
-- **TDSD-6690** (Account Switch Reports Stopgap) — **CORRECTION:** Jira API truth `status=Completed` (statusCategory=`done`), `updated=2026-04-22T16:58:28 WAT`, `resolution=null`. Single comment: Ekene Udodi "Done" at 16:58:28 WAT Apr 22 (3min after creation). **Brain narrative across briefing-2026-04-24 D3 → briefing-2026-04-25 D4 → 4 prior source-config-jira tick notes propagated "still at approval gates" — that framing is contradicted by Jira API state.** Competing-interpretation candidates: (a) statusCategory=`done` is authoritative bucket signal → "Completed" means workflow done; D3/D4 framing was wrong (Jira-API-truth wins, parsimonious read); (b) `resolution=null` is the informal-close-without-formal-authorization signal → "Completed" status set without resolution code = ticket marked as work-done by the assignee but not formally authorized through workflow approval gate; D3/D4 framing's "approval gate" reference would describe an as-yet-uncrossed authorization step despite the status name. Without the workflow definition, (a) is the more parsimonious read. **No briefing rewrite this tick** — briefings are historical record. Source-config-jira understanding updated above with the new "Active-situation checkpoint re-verification" directive to prevent recurrence. Calibration note for Improve: this is a self-discovered staleness, not a user-signaled miss — does NOT generate a Tuning Log tuple (acted/dismissed/missed framework doesn't fit), but the directive addition is the structural fix.
-- **TDSD-6716** (NIBSS Successful Response Not Sent) — status=`Work in progress`, last updated 2026-04-24T13:48:07 WAT. NIBSS bilateral 18h+ silent (under 48h threshold). Unchanged.
-- **TDSD-6711** (Ecobank portal) — status=`Completed`, resolution=`Done`, closed 2026-04-25T08:13:14 WAT (captured by 09:10 WAT prior tick + Ecobank situation page already updated).
-- **TDSD-6727** (Union Bank RC96) — status=`Completed`, closed 2026-04-25T08:11:35 WAT (captured by 08:10 WAT prior tick).
-- **TDSD-6726** (Habari RC91 Problem ticket) — status=`Completed`, closed 2026-04-24T23:50:35 WAT (captured by 06:09 WAT briefing tick + briefing-2026-04-25 A2).
+### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), Layer A 1 delta — TDSD-6684 Resolved at 10:54 WAT (Dominic, 55h+ silence broken) (preserved summary)
 
-No Immediate dispatch from this Jira sweep.
+11:10 WAT Apr 25 Saturday skim tick. TDSD-6684 (Pending Refund Transactions, Dominic Usiabulu) Awaiting Scheme Update → Resolved at 10:54:53 WAT — 55h+ silence broken; counter-signal to workflow-discipline observation, consistent with briefing-2026-04-24 A2 Dominic burst pattern continuing. Briefing-2026-04-26 Awareness candidate. Layer B 0 deltas.
 
-Factors: `source=jira`, `skim_tick`, `saturday_afternoon`, `layer_a_zero_genuine_deltas`, `layer_b_zero_deltas`, `tdsd6690_staleness_correction_completed_since_apr22_16_58wat_67h_ago`, `narrative_propagated_5_consecutive_ticks_without_reverification`, `competing_interpretation_status_completed_vs_resolution_null`, `directive_added_active_situation_checkpoint_reverification`, `no_tuple_self_discovered_staleness_not_acted_dismissed_missed`, `no_immediate_dispatch`, `tdsd6645_57h47m_dominic_silence_unchanged`.
+### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, Layer A 4 deltas (1 NEW + 1 portal closure + 2 already-captured/metadata) (preserved summary)
 
-### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), Layer A 0 deltas + Layer B 0 deltas
-
-12:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=active-fcmb-p1-trajectory-resolved+mostly-quiet-priors). Window 10:10:00Z → 11:10:00Z = 1h.
-
-**Layer A — JQL `project in (TDSD, "ADD", "AS", ...) AND updated >= "2026-04-25 11:10" ORDER BY updated DESC` returned 0 issues.** Saturday-midday TDSD quiet — no new ticket filings, no transitions on tracked entities, no priority transitions.
-
-**Layer B sweep — 0 deltas.** No P1/Blocker/Critical priority transitions, no Done-state transitions on pattern-tracked entities, no developing-situation entity matches.
-
-**Active-situation checkpoints (zero new delta this tick):**
-- **TDSD-6645** (Monnify VA reversal) — still Escalated, **~56h+ Dominic silence** (no movement since 04:08 WAT Apr 23). 1h advance from prior tick.
-- **TDSD-6684** (Pending Refund Transactions) — Resolved 10:54 WAT Apr 25 (prior tick). No further delta.
-- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~49h+ at gate, well above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward). [13:10 WAT note: TDSD-6690 actually Completed since Apr 22 16:58 WAT — see correction above.]
-- **TDSD-6716** (NIBSS PTSA RC91) — still listed Open per Apr 24 23:05 WAT handover; no Jira-side delta in window. NIBSS bilateral negotiation ~17h silent at tick (under 48h threshold).
-- **TDSD-6711** (Ecobank portal) — Completed at 08:13 WAT Apr 25; no new activity.
-- **TDSD-6727** (Union Bank RC96) — Completed at 08:11 WAT; no new activity.
-- **TDSD-6728** (CoralPay ZIB Interchange Stopped) — Completed at 08:47 WAT; CoralPay_Cashout failover persisting in production.
-
-No Immediate dispatch from this Jira sweep.
-
-Factors: `source=jira`, `skim_tick`, `saturday_midday`, `layer_a_zero_deltas`, `layer_b_zero_deltas`, `no_immediate_dispatch`, `active_situation_checkpoints_zero_new`, `tdsd6645_56h_dominic_silence_unchanged`, `tdsd6699_6690_49h_at_approval_gate`, `tdsd6716_nibss_ptsa_under_48h_threshold`.
-
-### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), Layer A 1 delta — TDSD-6684 Resolved at 10:54 WAT (Dominic, 55h+ silence broken)
-
-11:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations-monitoring+prior-tick-quiet+no-immediate-firing). Window 08:10:00Z → 10:10:00Z = 2h (frontmatter was stale at 08:10:00Z; 09:10 WAT tick wrote body section but did not advance frontmatter — this tick reconciles by advancing to 10:10:00Z).
-
-**Layer A — JQL `project in (TDSD, "ADD", "AS", ...) AND updated >= "2026-04-25 09:10" ORDER BY updated DESC` returned 1 genuinely-new ticket:**
-
-1. **TDSD-6684 — "Pending Refund Transactions"** (Medium, [System] Service request, assignee [[Dominic Usiabulu]]). Status transitioned **Awaiting Scheme Update → Resolved at 10:54:53 WAT.** Per 09:10 WAT prior-tick checkpoint, TDSD-6684 was at "Awaiting Scheme Update" with ~54h+ Dominic silence (no movement since pre-Apr 23). This transition breaks the silence — Dominic processed the ticket Saturday late morning. Counter-signal to the workflow-discipline observation in [[Dominic Usiabulu]]; consistent with the [[briefing-2026-04-24]] A2 "Dominic resolution burst" pattern continuing into Apr 25 morning. **Briefing-2026-04-26 Awareness candidate** (low salience; status transition only, no incident/operational impact, no entity beyond Dominic). Active-situation entity match: none — refund-pending workflow is not part of any developing situation.
-
-Other Jira tickets that updated in the 09:10–10:10 WAT range (TDSD-6728 CoralPay ZIB, TDSD-6711 Ecobank portal, TDSD-6727 Union RC96, TDSD-6706 refund metadata) were already processed by the 09:10 WAT tick — see body section below.
-
-**Layer B sweep — 0 deltas.** No P1/Blocker/Critical priority transitions, no Done-state transitions on pattern-tracked entities, no developing-situation entity matches. Saturday-late-morning dev-quiet continues.
-
-**Active-situation checkpoints (zero new delta this tick):**
-- **TDSD-6645** (Monnify VA reversal) — still Escalated, ~55h+ Dominic silence (no movement since 04:08 WAT Apr 23). 1h advance from 09:10 WAT prior tick.
-- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates (~48h+ at gate, above 12h absence-of-signal threshold; in briefing-2026-04-25 D4 carryforward). [13:10 WAT note: TDSD-6690 actually Completed since Apr 22 16:58 WAT — see correction at top of Notes.]
-- **TDSD-6716** (NIBSS PTSA RC91) — listed Open per Apr 24 23:05 WAT handover; no Jira-side delta in window. NIBSS bilateral negotiation ~16h silent at tick (under 48h threshold).
-- **TDSD-6711** (Ecobank portal) — Completed at 08:13 WAT prior tick; no new activity.
-- **TDSD-6727** (Union Bank RC96) — Completed at 08:11 WAT; no new activity.
-- **TDSD-6728** (CoralPay ZIB Interchange Stopped) — Completed at 08:47 WAT; CoralPay_Cashout failover persisting in production per duty handover.
-
-No Immediate dispatch from this Jira sweep. TDSD-6684 is awareness-only.
-
-Factors: `source=jira`, `skim_tick`, `saturday_late_morning`, `layer_a_1_delta_tdsd6684_awaiting_scheme_update_to_resolved`, `dominic_workflow_movement_55h_silence_broken`, `counter_signal_to_workflow_discipline_observation`, `awareness_only`, `layer_b_zero_deltas`, `no_immediate_dispatch`, `active_situation_checkpoints_zero_new`.
-
-### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, Layer A 4 deltas (1 NEW + 1 portal closure + 2 already-captured/metadata)
-
-09:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-morning-quiet-priors-active-situations-monitoring). Window 07:10:00Z → 08:10:00Z = ~1h.
-
-**Layer A — JQL `project in (TDSD, ...) AND updated >= "2026-04-25 08:10" ORDER BY updated DESC` returned 4 tickets:**
-
-1. **TDSD-6728 — "Switch | CoralPay (ZIB) | Interchange on Stopped State Incident | 20260425"** (NEW, Medium, Switch component, reporter+assignee [[Qazim Adedigba]]). Created 08:43:55 WAT, transitioned to **Completed at 08:47:23 WAT** (4-min ticket lifetime — post-incident documentation, not active-failure tracker). Description: incident active 01:15 → 07:48 WAT (6h33m, overnight delegation window). Trigger: Zenith EoD issue caused failed transactions; after Zenith resolved their side, CoralPay returned false statuses with interchange state stuck on `Stopped`. Workaround: failover to **CoralPay_Cashout** (now load-bearing in production per duty handover 08:06 WAT). Permanent fix: alternate-key + CoralPay key reselect → state `Running`. Resolution log evidence: `2026-04-25 06:46:56 ERROR ... Sink interchange is not active` + `07:28:01 TRACE ... Client 10.231.18.17:3001, Connected: false`. Comment by Qazim 08:44:55 WAT: "Current Status: Resolved and actively monitoring. NB: Coralpay transactions are currently routed through the CoralPay_Cashout." **Active-situation entity match → [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]]; situation page updated this tick with Apr 25 switch-layer failure-mode delta.** Distinct failure mode from the Apr 23 ZIB RC91 routing failure (RC91 = bank-side issuer-or-switch-inoperative; interchange-Stopped = TeamApt-side switch-state stuck). **Briefing-2026-04-26 Awareness candidate** — configuration-state change (CoralPay_Cashout failover persisting in production) + structural-defect candidate (alternate-key reselect remediation pattern suggests client-side state-machine lock surviving server-side recovery).
-
-2. **TDSD-6711 — "Ecobank | ATS | Portal Inaccessibility | 20260423"** Medium. **Status transitioned Work In Progress → Completed at 08:13:14 WAT.** Resolution: Done. Closure comment by Qazim Adedigba: *"Portal is accessible now."* Total ticket lifetime ~33h41m from 22:32 WAT Apr 23 filing to 08:13 WAT Apr 25 closure — silent across overnight Apr 24/25 (no comment activity between Qazim's 22:33 WAT Apr 23 escalation note and the 08:13 WAT closure). No bank-side acknowledgement comment recorded — portal recovery appears bank-side autonomous (or recovered via off-Jira SRE escalation thread). **Active-situation entity match → [[Ecobank — RC91 on NUS Nodes]]; situation page updated this tick — compound failure stack reduces from 3 layers (transaction-routing + portal-access + user-creation) to 1 open layer (3-week user-creation persistence remains).** **Briefing-2026-04-26 Awareness candidate** — Ecobank admin-platform CTO-escalation case (briefing-2026-04-24 D1) weakens materially.
-
-3. **TDSD-6727 — "Union Bank | ATS | RC 96 Failures Across Processors | 20260425"** Medium. Last update 08:11:35 WAT (Status Completed). **Already captured in 08:10 WAT prior tick** — re-appearance per JQL window slop directive. No new content; awareness-trace only.
-
-4. **TDSD-6706 — "UPDATE OF REJECTED REFUND STATUS TO COMPLETED_VIA_PROVIDER(23042026)"** Medium, reporter Samson Anaele, assignee Dominic Usiabulu. Status transitioned **Resolved → Closed at 08:23:54 WAT**. Originally Resolved at 23:25 WAT Apr 23 in Dominic's resolution burst (briefing-2026-04-24 A2). Metadata-only transition. Awareness-trace only.
-
-**Layer B sweep — 0 deltas.**
-
-Factors: `source=jira`, `skim_tick`, `saturday_morning`, `layer_a_4_deltas_1_new_1_portal_closure_2_recapture_metadata`, `layer_b_0_deltas`, `tdsd6728_new_coralpay_zib_interchange_stopped_state_post_incident_doc`, `coralpay_cashout_failover_load_bearing`, `tdsd6711_ecobank_portal_completed_qazim_closure_portal_accessible`, `ecobank_compound_stack_3_to_1_layer`, `tdsd6727_jql_slop_recapture`, `tdsd6706_metadata_resolved_to_closed_no_content_delta`.
+09:10 WAT Apr 25 Saturday skim tick. TDSD-6728 NEW CoralPay ZIB Interchange Stopped state incident (post-incident doc, 4-min ticket lifetime, CoralPay_Cashout failover load-bearing in production). TDSD-6711 Ecobank portal Completed at 08:13 WAT (Qazim "Portal is accessible now" closure). TDSD-6727 + TDSD-6706 metadata-only re-captures.
 
 ### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, Layer A 1 delta (TDSD-6727 Completed 08:11 WAT, preserved summary)
 
