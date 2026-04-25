@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T19:10:00Z (20:10 WAT). 20:10 WAT Apr 25 skim-tick: zero deltas across both Layer A (TDSD service_desk) and Layer B (software). FCMB cycle 2 still no Jira ticket (process gap consistent with cycle 1)."
-updated: 2026-04-25
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: zero deltas across both Layer A (TDSD service_desk) and Layer B (software). Stanbic cycle 34 (Slack+email tick this tick) carries no TDSD ticket — single-track-Jira regression continues across cycles 33+34."
+updated: "2026-04-25T21:23:34Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T19:10:00Z"
+last_processed: "2026-04-25T21:10:00Z"
 ---
 
 
@@ -70,23 +70,29 @@ When the source-config trace describes an active-situation ticket's state in nar
 
 ## Notes
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, zero deltas across both layers
+### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), zero deltas across both layers; Stanbic cycle 34 (slack+email this tick) confirms single-track-Jira regression continues across cycles 33+34
 
-20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h (combined with prior-tick window since 18:10 cron also processed). Layer A (TDSD) JQL `project = TDSD AND updated >= "2026-04-25 18:10" ORDER BY updated DESC` returned **0 issues**. Layer B (17 software projects) JQL with "ADD"/"AS" properly quoted + (priority in Highest/Blocker/Critical OR status transition) returned **0 issues**.
+22:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=last-tick-before-overnight-delegation-with-active-multi-bank-p1s-from-am-briefing). Window 19:10:00Z → 21:10:00Z = 2h. Layer A (TDSD) JQL `project = TDSD AND updated >= "2026-04-25 20:10" ORDER BY updated DESC` returned **0 issues**. Layer B (17 software projects) JQL with "ADD"/"AS" properly quoted + (priority in Highest/Blocker/Critical OR status transition) returned **0 issues**.
 
-**Active-situation checkpoint summary (skim-tick scope; full re-verification deferred to next briefing tick):**
+**Stanbic cycle 34 — Jira-track absence (skim-tick scope, full re-verification deferred to briefing tick):** The 22:10 WAT cross-source signal is a Stanbic ATS RC91 cycle 34 caught via Slack #teamapt-tech-operations (Olamide P1 post 21:01 WAT) + Gmail thread 19dc63afd3c001f0 (Olamide → Stanbic 21:00:33 → bank reconfirm-status 21:09:38 → Olamide processing-successfully 21:14:37 WAT). **No TDSD ticket visible at tick** — second consecutive Stanbic cycle (33+34) without a Jira-track entry, confirming the single-track-Jira regression first flagged at cycle 33. Pattern interpretation: cycles 30–32 carried TDSD tickets (6618, 6629, 6639) with operational maturation framing; cycles 33+34 break that maturation. Possible reasons: (a) ticketing-discipline regression on the recurring-pattern response; (b) fast resolution preempts ticket workflow when bank-side close < team workflow latency (cycle 34 was 10–14m end-to-end); (c) Qazim/Olamide structured-Slack-post pattern now captures sufficient resolution detail for the team's purposes. Two-cycle observation insufficient to establish trend; flagging for pattern-watch on cycles 35–36.
+
+**Active-situation checkpoint summary (skim-tick scope):**
 - TDSD-6716 (NIBSS PTSA RC91) — Completed Apr 25 16:20 WAT; situation page `stable → resolving`. Retirement candidate at briefing-2026-04-26.
-- TDSD-6699 (Firewall HA) — Implementation window opened 18:00 WAT per Mustapha 17:26 WAT Slack post (NIBSS leased-line → VPN); ticket unchanged status this tick. Cross-referenced into [[NIBSS PTSA — VPN Flapping Apr 22]].
-- TDSD-6645 (Monnify VA reversal) — still Escalated, Dominic silence ~63h+ (advancing).
+- TDSD-6699 (Firewall HA) — Implementation window opened 18:00 WAT per Mustapha 17:26 WAT Slack post (NIBSS leased-line → VPN); ticket unchanged status this tick. No new activity in 4h post-window-open.
+- TDSD-6645 (Monnify VA reversal) — still Escalated, Dominic silence ~65h+ (advancing).
 - TDSD-6711 (Ecobank DCIR portal) — Completed Apr 25 08:13 WAT prior-tick.
 - TDSD-6690 (Account Switch Reports Stopgap) — `status=Completed` since Apr 22 16:58 WAT; informal-close caveat holds.
-- TDSD-6727/6726/6728 — all Completed in prior ticks; no new activity.
+- Stanbic cycles 33+34 — no Jira-track entries (single-track-Jira regression).
 
-**FCMB cycle 2 process-gap status:** Email cycle 2 escalation filed 16:04 WAT did NOT generate a Jira ticket as of 20:10 WAT (~4h05m later). Same process-gap pattern as cycle 1 (02:33 WAT Slack post, no ticket). Consistent with FCMB multi-day bank-side cycle pattern; not flagged as anomalous.
+**FCMB cycle 2 process-gap status:** Email cycle 2 escalation filed 16:04 WAT did NOT generate a Jira ticket as of 22:10 WAT (~6h05m later). Same process-gap pattern as cycle 1 (02:33 WAT Slack post, no ticket). Consistent with FCMB multi-day bank-side cycle pattern; not flagged as anomalous.
 
 No P1/Highest filings. No Layer A or Layer B Immediate-tier triggers. Multi-bank degradation tracking continues (situation pages already updated).
 
-Factors: source=jira, skim_tick, layer_a_zero_deltas, layer_b_zero_deltas, fcmb_cycle2_no_ticket_4h05m_within_pattern, tdsd6716_resolving_post_completion, tdsd6699_implementation_window_opened, tdsd6645_dominic_silence_63h_advancing, no_immediate_dispatch, saturday_evening_quiet.
+Factors: source=jira, skim_tick, layer_a_zero_deltas, layer_b_zero_deltas, stanbic_cycle34_no_tdsd_ticket_jira_track_regression_cycles33_34_consecutive, fcmb_cycle2_no_ticket_6h_within_pattern, tdsd6716_resolving_post_completion, tdsd6699_implementation_window_opened_no_post_window_activity_4h, tdsd6645_dominic_silence_65h_advancing, no_immediate_dispatch, saturday_late_evening_quiet, last_tick_before_overnight_delegation.
+
+### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, zero deltas across both layers (preserved summary)
+
+20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Layer A 0; Layer B 0. FCMB cycle 2 no ticket 4h05m post-filing — within-pattern. TDSD-6716 resolving (post-completion); TDSD-6699 implementation window opened; TDSD-6645 Dominic ~63h silence; TDSD-6711 Completed prior-tick; TDSD-6690 Completed (informal). No P1/Highest filings.
 
 ### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, single TDSD-6716 closure delta (already captured prior tick) (preserved summary)
 
