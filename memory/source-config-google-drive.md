@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
-updated: "2026-04-25T05:27:00Z"
+updated: "2026-04-25T08:48:40Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-20T16:09:00Z"
+last_processed: "2026-04-25T08:10:00Z"
 ---
 
 ## Connection
@@ -19,9 +19,9 @@ Google Drive MCP. Scope: files whose title starts with "Notes by Gemini" (meetin
 ### Scope
 - Only "Notes by Gemini" files are in-scope. All other Drive activity is out-of-scope for this source.
 
-### Handling chain — two-part split (detect → download → split → dispatch)
+### Handling chain — normal-tick operation (detect → download → split → dispatch)
 
-When a new or modified Notes-by-Gemini file is detected, the heartbeat MUST execute the full chain in-tick:
+When a new or modified Notes-by-Gemini file is detected during a normal tick (i.e., not under dark-window recovery), the heartbeat MUST execute the full chain in-tick:
 
 1. **Download** the file content via Drive MCP `read_file_content`.
 2. **Split** the downloaded content into two layers by section:
@@ -39,6 +39,32 @@ When a new or modified Notes-by-Gemini file is detected, the heartbeat MUST exec
 
 This split keeps distilled content (summary / decisions / action items) and substantive discussion content (details) in the brain immediately at heartbeat time, while preserving full transcripts in the ingress stream for later full-fidelity retrieval. Files without inline transcripts are fully covered by step 3's non-transcript source page; the absence of a transcript is not a gap.
 
+### Dark-window recovery — bulk-dispatch backlog drain
+
+When Drive MCP recovers from a multi-tick outage and a backlog has accumulated (operationalized as: ≥3 in-window files OR `last_processed` more than 24h stale at tick time), the heartbeat MUST bypass the normal handling chain and execute the bulk-dispatch path instead:
+
+1. **Enumerate** all in-window files via `search_files` (`title contains 'Notes by Gemini' and modifiedTime > '<last_processed>'`). Paginate fully.
+2. **Per file, dispatch to ingress via `capture_note`** — no in-tick source page creation, no semantic-search integration:
+   - **Files ≤300KB**: download full content; call `capture_note(name=<exact Drive title>, content=<metadata block + full content>)`.
+   - **Files >300KB**: download full content; if a heading containing "Transcript" exists at top-level (`^##?#? *.*Transcript`), call `capture_note(name=<exact Drive title>, content=<metadata block + non-transcript content + omitted-transcript note>)`. The full transcript remains accessible via the Drive view URL — dropping it from ingress is a budget concession, not data loss.
+   - **Metadata block** (prepended to all bulk-dispatch captures):
+     ```
+     # 📝 Notes
+     
+     Drive file ID: <id>
+     Drive view URL: https://docs.google.com/document/d/<id>/edit
+     Modified: <iso timestamp>
+     Owner: <owner>
+     ```
+3. **Budget protection** — if the heartbeat's own context budget would be exceeded by reading large files inline, delegate to subagents (Task tool) with isolated context. Each subagent processes 1–2 files end-to-end (read → split → capture) and returns a one-line confirmation. The heartbeat only sees the confirmation, not the file content.
+4. **Advance `last_processed`** to the current tick timestamp ONLY after every file has been successfully dispatched. If any file fails:
+   - Log the failure in the Notes section.
+   - Set `last_processed` to the most-recent successfully-processed file's `modifiedTime` so the next tick retries the failed file.
+   - Continue dispatching the remaining files (errors don't block the batch).
+5. **No Phase-2 dispatch deferral.** Bulk-dispatch IS the recovery mechanism — there is no separate Phase-2 process to hand off to. The "Phase-2 backlog hold" pattern that existed Apr 21–25 was a phantom reference to a non-existent mechanism and is now deprecated.
+
+The bulk-dispatch path trades immediate brain integration (normal-chain step 3) for context-budget feasibility on large backlogs. The ingest pipeline picks up the captured notes on its own schedule and creates source pages with full integration. The cost is a delay between dispatch and full brain integration; the benefit is the heartbeat's tick stays bounded and the backlog actually drains.
+
 ### Section detection heuristic
 - Gemini documents have a machine-generated structure: a meta block at top (date, title, invited attendees, attachments, meeting records link), then structured sections (commonly `### Summary`, `### Decisions`, `### Action items`, `### Next steps`, `### Details`, possibly others), and sometimes a transcript section at the end.
 - Split point: the first heading whose text contains "Transcript" (case-insensitive). Everything before is non-transcript layer; everything from that heading onward is transcript layer.
@@ -47,45 +73,49 @@ This split keeps distilled content (summary / decisions / action items) and subs
 - Heuristic is best-effort. When uncertain whether a heading is the transcript start, prefer NOT splitting (over-capture to the non-transcript layer is recoverable; a wrong split wrecks both layers).
 
 ### Per-tick behavior
-- `last_processed` advances to current tick time only after every in-window file has successfully completed the full chain (steps 1–3 for all files, plus step 4 for files with a transcript layer).
+- `last_processed` advances to current tick time only after every in-window file has successfully completed its handling path (either normal-chain steps 1–4 or dark-window-recovery steps 1–4 above).
 - Any file that fails to download / split / process / dispatch: do NOT advance `last_processed` past the failing file's `modifiedTime`; log the failure in the Notes section and retry next tick.
 
 ## Notes
 
-### Tick 2026-04-25 06:09 WAT — briefing-tick, 0 new files
+### Tick 2026-04-25 09:10 WAT — dark-window-recovery bulk-dispatch DRAIN, 13 files captured to ingress, Phase-2 phantom-policy deprecated
 
-06:09 WAT Apr 25 Saturday briefing tick. `search_files` scoped to `title contains 'Notes by Gemini' and modifiedTime > '2026-04-24T21:10:00Z'` returned 3 files (Deliberation HoE 12:21 UTC Apr 24, Round 2 Venkatesh 11:10 UTC Apr 24, Phoenix Stage 1 09:23 UTC Apr 24). All 3 predate the 21:10 UTC Apr 24 cutoff. Client-side filter: **0 new files this tick**. Backlog 22 files unchanged. `last_processed` remains held at 2026-04-20T16:09:00Z per Phase-2 backlog hold policy.
+09:10 WAT Apr 25 Saturday tick. User explicit instruction: "we need to remove the hold off." Plan executed: bulk-dispatch all backlog files via `capture_note` (option 2), delete Phase-2 backlog phantom-policy from Notes (option 4), add explicit Dark-window recovery directive (option 5).
 
-Factors: `source=drive`, `briefing_tick`, `full_level`, `zero_genuinely_new`, `backlog_22_unchanged`, `last_processed_held_phase2_policy`, `no_immediate_dispatch`.
+**Backlog enumeration:** `search_files` with `title contains 'Notes by Gemini' and modifiedTime > '2026-04-20T16:09:00Z'` returned **13 files** (not 22 as previously summarized — earlier counts double-incremented across ticks when files were content-updated; live count was authoritative).
 
-### Tick 2026-04-24 22:10 WAT — skim 0 new (preserved)
+**Dispatch breakdown (all successful):**
 
-22:10 WAT Apr 24 skim: same 3 files predate cutoff. Backlog 22.
+| # | File ID prefix | Title (truncated) | Size | Transcript stripped? |
+|---|---|---|---|---|
+| 1 | 1pzVmi… | Direct to Bank standup 04-21 07:27 WAT | 7KB | n/a (no transcript layer) |
+| 2 | 1N-JHl… | TeamApt Weekly Team Meeting 04-22 | 9KB | n/a (no transcript layer) |
+| 3 | 1yK2i9… | Direct to Bank standup 04-21 08:10 WAT | 12KB | n/a (no transcript layer) |
+| 4 | 1kPhVK… | Direct to Bank standup 04-22 08:21 WAT | 13KB | n/a (no transcript layer) |
+| 5 | 11CkVP… | ATPP Daily Standup 04-20 | 18KB | NO (transcript included — small file) |
+| 6 | 1vzleq… | Cards Team Str Systems & Roadmap 04-21 | 28KB | YES |
+| 7 | 1u126O… | Interview HoE VP+ Chris Purkis 04-23 | 52KB | YES |
+| 8 | 1bVruB… | Round 2 Interview HoE Venkatesh 04-24 | 193KB | YES (~23KB captured) |
+| 9 | 1GRwuL… | Deliberation HoE batch interviews 04-24 | 373KB | YES (~14KB captured) |
+| 10 | 1onYwT… | Phoenix Stage 1 Weekly Check in 04-07/24 | 740KB | YES (~82KB captured, split line 882) |
+| 11 | 1jnbTD… | Disbursement Issues & Next steps 04-22 | 1.4MB | YES (~233KB captured, split line 5738) |
+| 12 | 1SGCDs… | Project delivery and optimization realignment 04-23 | 851KB | NO (no transcript heading found, ~65KB captured) |
+| 13 | 1cgoS4… | Disbursement-CBA integration architecture review 04-22 | 867KB | YES (~20KB captured, split line 111) |
 
-### Tick 2026-04-24 20:10 WAT — full 0 new (preserved)
+**Execution path:** Files 1–5 captured inline via direct `capture_note` calls in main heartbeat context (small enough to pass through token budget). Files 6–13 delegated to 4 parallel general-purpose subagents with isolated context budgets — each subagent handled 2 files end-to-end (read via Drive MCP → bash-based jq extraction + transcript split for large files → `capture_note` to ingress). One subagent (handling files 12–13) stalled mid-batch on file 13 — successfully retried via a fresh subagent.
 
-20:10 WAT tick: same 3 files. Backlog 22.
+**Total content delivered to ingress:** ~563KB structured non-transcript content across 13 markdown files. Transcript content (where stripped) remains accessible via Drive view URLs in each capture's metadata block.
 
-### Tick 2026-04-24 14:09 WAT — Deliberation HoE content-update (preserved)
+**`last_processed` advanced** from `2026-04-20T16:09:00Z` to `2026-04-25T08:10:00Z` — first advance in 4d16h.
 
-14:09 WAT tick: Deliberation HoE file modifiedTime 11:51 → 13:21 WAT (Gemini content update on existing backlog entry).
+**Next steps for ingest pipeline:** The ingest scheduled task will pick up the 13 captured notes on its next run, create source pages, and run brain integration (entity/concept/situation cross-referencing) per the standard ingest chain. Expected pickup: next ingest cycle.
 
-### Tick 2026-04-24 13:09 WAT — 2 NEW HoE-cluster files (preserved)
+**Policy changes applied this tick:**
+1. **"Phase-2 backlog hold" language deleted** from this file. The phantom-policy referenced a non-existent dispatch process and produced a 4d16h hold for no operational benefit.
+2. **Dark-window recovery directive added** to Directives section above. Specifies the bulk-dispatch path with explicit triggers (≥3 backlog files OR >24h stale), file-size-based handling (≤300KB full / >300KB transcript-stripped), subagent budget protection, and `last_processed` advance rules.
 
-13:09 WAT Apr 24 tick: 2 NEW files queued to Phase-2 backlog. Backlog 20 → 22.
-
-### Tick 2026-04-24 11:09 WAT — Phoenix Stage 1 NEW (preserved)
-
-Phoenix Stage 1 Weekly Check in 2026/04/07 queued. 19 → 20.
-
-### Tick 2026-04-20 17:09 WAT (pre-dark, preserved)
-
-Zero new Notes-by-Gemini files.
+Factors: `dark_window_recovery_drain`, `13_files_dispatched_to_ingress`, `phase2_phantom_policy_deprecated`, `directive_added_dark_window_recovery`, `last_processed_advanced_4d16h`, `subagent_delegation_for_budget_protection`, `transcript_stripping_for_files_over_300kb`, `563kb_total_content_to_ingest_pipeline`, `no_immediate_dispatch`, `briefing_2026_04_26_awareness_candidate=ingest_pipeline_pickup_observation`.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
-Drive MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23.
-
-### Phase-2 backlog — 22 files as of 2026-04-25 06:09 WAT
-
-Unchanged at 22 files. No new files or content updates this tick. Phase-2 dispatch will pick up the latest content when it reaches these files. `last_processed` deferred until all 22 files processed.
+Drive MCP auth-failure across heartbeat ticks Apr 21 / Apr 22 / Apr 23 pre-recovery. Recovery 09:11 WAT Apr 23. The Apr 21–24 backlog accumulated during this window and the post-recovery period (when the now-deprecated Phase-2 hold was applied incorrectly).
