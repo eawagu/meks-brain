@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T10:10:00Z (11:10 WAT). 11:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window."
-updated: "2026-04-25T10:23:25Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T11:10:00Z (12:10 WAT). 12:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window."
+updated: "2026-04-25T11:18:43Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T10:10:00Z"
+last_processed: "2026-04-25T11:10:00Z"
 ---
 
 ## Connection
@@ -45,6 +45,16 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns a cached thread (often an old thread the user is a participant in) instead of an empty result. Filter must be applied client-side: check each returned thread's most-recent-message timestamp against the window cutoff; treat threads whose latest message predates the cutoff as zero-delta.
 
 ## Notes
+
+### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), zero genuinely-new threads
+
+12:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=active-fcmb-p1-trajectory-resolved+mostly-quiet-priors). Window 10:10:00Z → 11:10:00Z = 1h. Query `newer_than:1h` returned empty result (no in-window threads at all this tick — clean zero).
+
+**Zero genuinely-new threads in window.** No P1 emails. No to:me threads. No active-situation entity matches with new content. BambooHR repeat (already routed to briefing-2026-04-26 Decision candidate via 10:10 WAT tick) — no new BambooHR notification this hour.
+
+**Active-situation entity coverage:** all situations updated within last 6h (Wema 10:19 WAT, CoralPay 09:10 WAT, Ecobank Jira-side 08:13 WAT). NIBSS PTSA bilateral 17h+ silent (under 48h threshold). No 48h+ silence triggers fire.
+
+Factors: `source=email`, `skim_tick`, `saturday_midday`, `zero_genuinely_new_threads`, `clean_empty_query_result`, `no_p1_emails`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`.
 
 ### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), zero genuinely-new threads
 
