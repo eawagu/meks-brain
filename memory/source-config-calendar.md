@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged. Lattice deadline Mon Apr 27 ~1d7h remaining."
-updated: "2026-04-25T17:22:05Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T19:10:00Z (20:10 WAT). 20:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged. Lattice deadline Mon Apr 27 ~1d4h remaining."
+updated: 2026-04-25
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T17:10:00Z"
+last_processed: "2026-04-25T19:10:00Z"
 ---
 
 
@@ -29,20 +29,19 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, weekend zero-delta unchanged
+### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, weekend zero-delta unchanged
 
-18:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-active-situations-recent-deltas-from-prior-tick). Window 16:10:00Z → 17:10:00Z = 1h. `list_events` Apr 25 18:00 WAT → Apr 27 23:59 WAT returned 13 events: 12 Mon Apr 27 meetings (PTSP Stand-up, Cards & Account All Hands, Channels Onboarding & Disbursement, Direct to Bank Stand-up, Phoenix Stage 1 Weekly Check-in, TPP x Platformization, Tech Support, Project Phoenix CI&P kick-off, Juliana Switch Daily Standup, Fraud Monitoring, ATPP Standup, Product-Engineering Sync) plus Lattice Review recurring block. **Zero events scheduled for today (Sat) or tomorrow (Sun) past 18:00 WAT.** Two Mon Apr 27 events with `responseStatus=needsAction` for user (Phoenix CI&P kick-off 15:00–16:00 WAT, TPP x Platformization 11:30–12:00 WAT) — both created Apr 22-24, predate last_processed; not new deltas. Weekend remains clear. Lattice deadline ~1d6h remaining (Mon Apr 27).
+20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h. `list_events` Apr 25 20:00 WAT → Apr 27 23:59 WAT (timeZone Africa/Lagos) returned 12 events: 11 Mon Apr 27 meetings (Direct to Bank Stand-up, PTSP Weekly Stand-up, Cards & Account All Hands, Channels Onboarding & Disbursement, TPP x Platformization, Phoenix Stage 1 Weekly Check-in, Juliana Switch Daily Standup, Fraud Monitoring, Project Phoenix CI&P kick-off, ATPP Standup, Tech Support, Product-Engineering Sync) plus Lattice Review recurring block. **Zero events scheduled for tonight (Sat) or tomorrow (Sun).** Two Mon Apr 27 events with `responseStatus=needsAction` for user (Phoenix CI&P kick-off 15:00–16:00 WAT, TPP x Platformization 11:30–12:00 WAT) — both `updated` predates 17:10:00Z window cutoff; no new RSVP-required deltas this tick. "Direct to Bank: Daily stand up" updated 10:51:57Z (11:51 WAT) — predates window, not a delta. Weekend remains clear. Lattice deadline Mon Apr 27 ~1d4h remaining.
 
-Factors: source=calendar, skim_tick, saturday_evening, weekend_clear_unchanged, monday_apr27_meeting_density_high, two_pending_rsvp_predate_window, lattice_deadline_apr27_1d6h_remaining, zero_priority_signal_match, no_immediate_dispatch, five_consecutive_zero_delta_skim_ticks.
+Factors: source=calendar, skim_tick, saturday_evening, weekend_clear_unchanged, monday_apr27_meeting_density_high, two_pending_rsvp_predate_window, lattice_deadline_apr27_1d4h_remaining, zero_priority_signal_match, no_immediate_dispatch.
 
-### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (10min late), weekend zero-delta unchanged
+### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, weekend zero-delta unchanged (preserved summary)
 
-17:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-quiet-priors-with-active-fcmb-p1-needing-verification). Window 15:10:00Z → 16:10:00Z = 1h. `list_events` Apr 25 17:10 WAT → Apr 26 23:59 WAT (timeZone Africa/Lagos) returned **1 event**:
-- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window modification.
+18:10 WAT Apr 25 Saturday skim tick. 13 events Apr 25 18:00 WAT → Apr 27 23:59 WAT. Zero events Sat/Sun past 18:00 WAT. Two Mon Apr 27 events needsAction (Phoenix CI&P, TPP x Platformization) predate window. Weekend clear. Lattice deadline ~1d6h.
 
-**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **~1d6h remaining**).
+### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
 
-Factors: `source=calendar`, `skim_tick`, `saturday_afternoon`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d6h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`, `five_consecutive_zero_delta_skim_ticks`.
+17:10 WAT Apr 25 Saturday skim tick. 1 event (Lattice recurring, stale). Saturday + Sunday calendar still clear. Lattice deadline ~1d6h remaining.
 
 ### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
 
