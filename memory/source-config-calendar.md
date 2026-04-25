@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T11:10:00Z (12:10 WAT). 12:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged."
-updated: "2026-04-25T11:14:47Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T12:10:00Z (13:10 WAT). 13:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged."
+updated: "2026-04-25T12:24:07Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T11:10:00Z"
+last_processed: "2026-04-25T12:10:00Z"
 ---
 
 ## Connection
@@ -27,6 +27,15 @@ Google Calendar MCP. Primary calendar for user.
 - Recurring standing meetings with unchanged metadata — no delta, no surface.
 
 ## Notes
+
+### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), weekend zero-delta unchanged
+
+13:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-afternoon-prior-zero-delta-active-p1-monitoring). Window 11:10:00Z → 12:10:00Z = 1h. `list_events` Apr 25 13:10 WAT → Apr 26 23:59 WAT (timeZone Africa/Lagos) returned **1 event**:
+- Lattice Review recurring downward review block (8 pending) — ends 2026-04-28 (Tue). Updated 2026-04-19T14:54:32Z. Stale; no in-window modification.
+
+**Saturday + Sunday calendar still clear.** No new invites, no RSVP changes, no cancellations. Open weekend window for triage compound (briefing-2026-04-25 D4), dad reminder close-out (D3), Lattice batch (deadline Mon Apr 27, **~1d10h remaining**).
+
+Factors: `source=calendar`, `skim_tick`, `saturday_afternoon`, `weekend_clear_unchanged`, `lattice_deadline_apr27_1d10h_remaining`, `zero_priority_signal_match`, `no_immediate_dispatch`.
 
 ### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), weekend zero-delta unchanged
 
