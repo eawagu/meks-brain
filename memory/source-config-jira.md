@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T05:09:54Z (06:09 WAT). 06:09 WAT Apr 25 briefing-tick: Layer A 2 deltas — TDSD-6727 Union RC96 (Work in progress 02:12 WAT) + TDSD-6726 Habari RC91 Problem ticket (created+Completed 00:49→00:50 WAT, post-incident documentation of Apr 24 cycle). Layer B 2 deltas — ADD-4597, ADD-4599 Bukola Taiwo metadata updates 23:28 WAT (post-closure update of items already Done at 17:03–17:06 WAT). No FCMB Jira ticket for the active 02:33 WAT Slack-only P1 — process gap."
-updated: "2026-04-25T05:27:00Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T07:10:00Z (08:10 WAT). 08:10 WAT Apr 25 skim-tick: Layer A 1 delta — TDSD-6727 Union RC96 transitioned Work in progress → Completed at 08:11 WAT (formalizing the 02:52 WAT bank-side resolution; 5h19m formalization lag, within ops-cadence). Layer B 0 deltas. Active situations checkpoints unchanged: TDSD-6645 still ~52h+ Dominic silence, TDSD-6711 Ecobank portal still silent ~33h, TDSD-6699/6690 still at approval gates. No FCMB Jira ticket created post-resolution — process gap persists."
+updated: "2026-04-25T07:20:00Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T05:09:54Z"
+last_processed: "2026-04-25T07:10:00Z"
 ---
 
 ## Connection
@@ -65,6 +65,28 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 4. **Client-side UTC filter** — Jira JQL interprets the `"YYYY-MM-DD HH:MM"` datetime literal in the user's configured timezone (Africa/Lagos = WAT). Since `last_processed` is stored in UTC (`YYYY-MM-DDTHH:MM:SSZ`), the server-side JQL filter using the UTC hour as-is is effectively 1h lax — it lets through updates from the hour before `last_processed`. Therefore the heartbeat MUST apply a client-side filter: convert each returned issue's `fields.updated` to UTC and compare to `last_processed`; discard any issue whose UTC-updated time ≤ `last_processed`.
 
 ## Notes
+
+### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, Layer A 1 delta (TDSD-6727 Completed)
+
+08:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=mid-morning post-briefing tick with active P1 requiring delta-check across all sources). Window 05:09:54Z → 07:10:00Z = ~2h.
+
+**Layer A — JQL `project = TDSD AND updated >= "2026-04-25 06:09" ORDER BY updated DESC` returned 1 ticket:**
+
+1. **TDSD-6727 — "Union Bank | ATS | RC 96 Failures Across Processors | 20260425"** Medium [System] Incident, reporter+assignee [[Qazim Adedigba]]. Status transitioned **Work in progress → Completed** (statusCategory: done). Last updated **08:11 WAT**. Cross-tracked with email thread 19dc1fd7e4326d6a — bank-resolved 02:52 WAT (~1h40m total cycle). Jira-side closure lag: **5h19m** post bank-side resolution. Within ops-cadence (post-cycle Jira closure typically batched at duty-handover or hourly-report time). Active-situation match: none (Union RC96 not yet a tracked situation; briefing-2026-04-25 A1 captured the cycle). Awareness-tier — formalizes resolution already noted.
+
+**Layer B sweep — 0 deltas.** No P1/Blocker/Critical priority transitions, no Done-state transitions on pattern-tracked entities, no developing-situation entity matches. Saturday morning dev-quiet.
+
+**Active-situation checkpoints (zero delta this tick):**
+- **TDSD-6645** (Monnify VA reversal) — still Escalated, **~52h+ Dominic silence** (no movement since 04:08 WAT Apr 23). Same as briefing-2026-04-25 D4 carryforward state.
+- **TDSD-6684** (Blessing-Dominic refund) — still Awaiting Scheme Update, **~53h+ Dominic silence**.
+- **TDSD-6711** (Ecobank DCIR portal inaccessibility) — no updates since 22:32 WAT Apr 23. **~33h silent**.
+- **TDSD-6699 + TDSD-6690** — still at approval/authorize gates per Apr 24 22:10 WAT tick. No transition deltas.
+- **TDSD-6716** (NIBSS PTSA RC91 / response-not-sent) — listed Open in Olamide handover 23:05 WAT Apr 24; no Jira-side delta in window. NIBSS PTSA bilateral negotiation 13h silent at tick (under 48h absence threshold).
+- **No FCMB Jira ticket created** post the 02:33 WAT Slack-only P1 — process gap persists across the implicit-resolution window. Slack P1 ran ~4h-ish from 02:33 WAT to before 07:02 WAT (per email cross-source) without Jira-tracked closure cadence.
+
+No Immediate dispatch from this Jira sweep.
+
+Factors: `source=jira`, `skim_tick`, `saturday_mid_morning`, `layer_a_1_delta`, `layer_b_0_deltas`, `tdsd6727_union_rc96_work_in_progress_to_completed`, `jira_closure_lag_5h19m_within_ops_cadence`, `tdsd6645_52h_dominic_silence_unchanged`, `tdsd6711_33h_silent_unchanged`, `no_fcmb_jira_post_resolution_process_gap_persists`, `tdsd6716_nibss_ptsa_under_48h_threshold`.
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, Layer A 2 deltas + Layer B 2 deltas
 
