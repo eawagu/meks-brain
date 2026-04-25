@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Zenith Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and CoralPay routing; settlement counterparty for the TeamApt/TMSS switch integration. Apr 23 D2B: ATS vulnerability resolved + bank-approved; user-based risk assessment feedback pending; Role Matrix and bank scan report still open. Note: Gemini transcripts render 'Zenith' as 'Zenit'."
-updated: "2026-04-23T14:43:37Z"
+summary: "Nigerian bank on Moniepoint's ATS and CoralPay routing; settlement counterparty for the TeamApt/TMSS switch integration. D2B Apr 21–22: pentest fix, LDAP-vs-MFA reliance decision, user-disable workaround via standby role."
+updated: "2026-04-25T11:47:32Z"
 cssclasses:
   - "entity"
 ---
@@ -26,7 +26,23 @@ Zenith Bank is the **settlement counterparty** for the [[TeamApt]] (TMSS) switch
 - Business / settlement arrangement with Zenith: **final stages** ([[Kevin]] driving)
 - Action item (Apr 21 KT): complete the settlement setup to enable live transaction processing
 
-## ATS Track (Direct to Bank) — Apr 23 standup
+## ATS Track — D2B Apr 21 standup
+
+- Pentest fixes expected ready today for rescanning; training tentatively planned for tomorrow.
+- Decision (aligned): rely on current [[LDAP authentication]] for security; [[Multi-Factor Authentication|MFA]] absence to be addressed in communication with the bank — MFA implementation requires Zenith to share their OTP/2FA credentials ([[Fortunate Nwachukwu]]).
+- LDAP confirmed working ([[Emeka Joseph]], [[Abdulgafar Obeitor]]). [[Abdulgafar Obeitor]] suggested reverting to bank early on inability to provide MFA against LDAP while fixing existing issues.
+- Source: [[Direct to Bank Daily standup - 2026-04-21 08:10 WAT]].
+
+## ATS Track — D2B Apr 22 standup
+
+- Matrix creation and user training scheduled today/tomorrow. Pentest resolution still awaited past yesterday's commitment.
+- **User disable workaround** — [[Ugochukwu Ebirika]] surfaced an existing implementation pattern from [[Ecobank]]: a "standby" user role that strips authorities, leaving only a change-password prompt at login. Not full disablement (LDAP still works for other apps), but functionally restricts portal access. Role creation deadline: 12:00 today.
+- [[Isaac Arinze]] uploading Zenith integration jobs to staging environment for testing — once tested, jobs will be available for [[Solomon]].
+- [[Ifeoluwa Oguntona]] requested team check resolution availability and complete role creation before noon.
+- [[Ugochukwu Ebirika]] to review Zenith workflow configuration documentation.
+- Source: [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]].
+
+## ATS Track — D2B Apr 23 standup
 
 Three open Zenith ATS threads surfaced at the Apr 23 D2B standup:
 
@@ -41,4 +57,6 @@ Source: [[note_2026-04-23T13-53-37-857Z]].
 - [[review-queue]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
 - [[Direct to Bank Daily Stand Up 2026-04-14 0822 — transcript]]
+- [[Direct to Bank Daily standup - 2026-04-21 08:10 WAT]]
+- [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]

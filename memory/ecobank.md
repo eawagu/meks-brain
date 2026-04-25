@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Ecobank
 created: 2026-04-11
-summary: "Pan-African bank — RC91 on NUS nodes (NIBSS, Apr 13); new ATS RC91 cycle Apr 16 (18:54 WAT, unresolved >1h); monitoring portal down (502) Apr 16 19:31 WAT. Direct to Bank SLA signature pending."
-updated: "2026-04-16T19:13:06Z"
+summary: "Pan-African bank on Moniepoint's ATS routing — Apr 16 ATS RC91 cycle, monitoring portal down (502). D2B Apr 22: account-name change to ATS pending end-of-week; foreign settlement agent process restarted; LDAP user-disable workaround source."
+updated: "2026-04-25T11:47:32Z"
 cssclasses:
   - "entity"
 ---
@@ -15,15 +15,18 @@ cssclasses:
 
 ## ATS RC91
 
-**Apr 16, 2026 — new ATS RC91 cycle:** [[Olamide Ajibulu]] filed RC91 failure at 18:54 WAT — transactions failing intermittently. Follow-up reminder sent to Ecobank contacts at 19:23 WAT (no response). No resolution signal as of 20:09 WAT (~1h15min active). Filed to ADEWUYI Mayowa, OGUNSANYA Olayombo, UMECHIKELU Callix, CHUKWUJI Daniel (Ecobank), CC aptpaytechnicalsupport.
+**Apr 16, 2026 — new ATS RC91 cycle:** [[Olamide Ajibulu]] filed RC91 failure at 18:54 WAT — transactions failing intermittently. Follow-up reminder sent at 19:23 WAT (no response). Filed to ADEWUYI Mayowa, OGUNSANYA Olayombo, UMECHIKELU Callix, CHUKWUJI Daniel, CC aptpaytechnicalsupport.
 
-This is the first standard ATS RC91 filing for Ecobank (distinct from the NIBSS NUS node report below). Adds Ecobank to the set of banks with direct ATS RC91 cycles alongside [[Stanbic Bank]], [[Wema Bank]], [[Union Bank]], [[FCMB]], [[Fidelity Bank]].
+**Apr 16, 2026 — monitoring portal down (502):** [[Olamide Ajibulu]] reported Ecobank monitoring portal inaccessible at 19:31 WAT. Concurrent with active RC91 suggests broader Ecobank infrastructure instability.
 
-**Apr 16, 2026 — monitoring portal down (502):** [[Olamide Ajibulu]] reported Ecobank monitoring portal inaccessible at 19:31 WAT. Filed to the same Ecobank contacts + [[Feyisayo Oyeniran]] CC'd. Portal inaccessibility concurrent with active RC91 suggests broader Ecobank infrastructure instability.
+**Apr 13, 2026 (NUS nodes):** [[Moses Ajani]] (NIBSS PTSA Operations) reported Ecobank card transactions routed to Moniepoint NUS nodes being declined with RC91. Email sent at 03:04 WAT to [[Qazim Adedigba]] et al. ECOB.xlsx attached with sample declined transactions. First NIBSS-escalated report for Ecobank. Part of the [[RC91 Multi-Bank Failure Pattern]].
 
-**Apr 13, 2026 (NUS nodes):** [[Moses Ajani]] (NIBSS PTSA Operations) reported Ecobank card transactions routed to Moniepoint NUS nodes being declined with RC91. Email sent at 03:04 WAT to [[Qazim Adedigba]], aptpaytechnicalsupport, [[Mustapha Ajibade]], [[Saheed Yusuf]], Innocent Nwaokorie, [[Daniel Armstrong]]. Reply-to: majani@nibss-plc.com.ng. Attached: ECOB.xlsx with sample declined transactions.
+## Direct to Bank — D2B Apr 22 standup
 
-The NUS node RC91 was the first NIBSS-escalated report for Ecobank. Same NIBSS contact who attributed [[Stanbic Bank]] RC91 to Moniepoint timeout on Apr 12. Part of the [[RC91 Multi-Bank Failure Pattern]].
+- **Account name change** — Ecobank requested until end of week for change of account name from previous entity to ATS.
+- **Foreign settlement agent** — initial request was for [[Money Point]]; new process must be followed: form fill, account details, signature, resubmission for [[Himma]]. Doesn't affect ongoing test integration but required for live implementation. [[Ifeoluwa Oguntona]] owns submitting the settlement form.
+- **LDAP user-disable workaround source** — the "standby role" pattern that strips authorities while preserving LDAP for other apps was originally implemented at Ecobank; [[Ugochukwu Ebirika]] surfacing it for Zenith adoption. [[Abdulgafar Obeitor]] to log in to confirm Ecobank LDAP user disable implementation is still live; Ugochukwu to reconfirm presence within Ecobank environment.
+- Source: [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]].
 
 ## Sources
-[[Direct to Bank Daily Stand Up 2026-04-01 0824]]; email Olamide Ajibulu → Ecobank, 18:54 WAT Apr 16 (ATS RC91); email Olamide Ajibulu → Ecobank, 19:31 WAT Apr 16 (portal down 502)
+[[Direct to Bank Daily Stand Up 2026-04-01 0824]]; email Olamide Ajibulu → Ecobank, 18:54 WAT Apr 16 (ATS RC91); email Olamide Ajibulu → Ecobank, 19:31 WAT Apr 16 (portal down 502); [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
