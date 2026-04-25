@@ -4,35 +4,27 @@ type:
   - "entity"
 cssclasses:
   - "entity"
-created: "2026-04-23T05:35:46Z"
-updated: "2026-04-23T05:35:46Z"
-summary: Global payment network — Moniepoint MFB has halted Mastercard issuance (<300K legacy cards outstanding, processed via Interswitch); TeamApt acquirer processor cert complete, acquiring licence pending; UK CI&P Phase 3 module will include Mastercard adapter.
+created: "2026-04-25T12:07:38Z"
+updated: "2026-04-25T12:07:38Z"
+summary: Global card scheme — Moniepoint MFB issues Mastercard cards (BIN 516227); ATPP track has license-agreement work (legal-to-legal meeting proposed Apr 20). Mastercard walkthrough Friday for ops team.
 ---
 
 ## Overview
 
-**Mastercard** is a global payment network. [[Moniepoint MFB]] historically issued Mastercard cards but **issuance is halted** (legacy stock, <300K cards outstanding). Mastercard processing today routes through [[Interswitch]].
+Mastercard is a global card scheme. [[Moniepoint MFB]] issues Mastercard cards via the legacy [[Card Manager Service]] (BIN 516227 per [[Card Manager Service CMS Specification]]). The 2026 [[ATPP]] track is working on the Mastercard acquirer-processor licensing chain alongside [[Visa]].
 
-## At Moniepoint MFB Cards
+## ATPP — Apr 20 standup
 
-- **Status:** legacy — issuance halted
-- **Outstanding:** <300K cards
-- **Processing:** routed through Interswitch
-- **Scheme BIN in legacy CMS:** 516227 (per [[Card Manager Service CMS Specification]])
+- **License agreement** — a meeting is proposed between TeamApt internal legal and the Mastercard legal team to discuss the master-card license agreement. Three meeting time slots have been proposed; awaiting Mastercard to come back on the date that suits them.
+- **Walkthrough Friday** — the operations team ([[Oluwayimika Debo-Carpenter]]) is preparing for a Mastercard walkthrough session on Friday.
+- Source: [[ATPP Daily Standup - 2026-04-20 15:52 WAT]].
 
-## At TeamApt
+## Cards KT — Apr 21
 
-For the broader TeamApt TPP business (acquirer processing), Mastercard acquirer processor certification was completed in 2025. Acquiring licence is pending.
+Referenced as one of the supported card schemes in the legacy MFB CMS (BIN 516227). 2025 Mastercard acquirer-processor certification was completed under [[Tracy Ojaigho]]'s pre-Phoenix TPP leadership.
 
-## Future Roadmap
+## Sources
 
-- UK CI&P market module (Phase 3) includes Mastercard adapter alongside Visa.
-- No current plan to resume Mastercard issuance under Moniepoint MFB.
-
-## Related
-
-- [[Interswitch]]
-- [[Card Manager Service]]
 - [[Card Manager Service CMS Specification]]
-- [[Card Issuance & Processing Platform]]
-- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
+- [[ATPP Daily Standup - 2026-04-20 15:52 WAT]]
+- [[Cards Team Structure Systems Roadmap - 2026-04-21 13:00 WAT]]
