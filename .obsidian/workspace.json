@@ -179,6 +179,16 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/direct-to-bank-program.md",
+    "memory/finance-team.md",
+    "memory/gt-bank.md",
+    "memory/abar-pay.md",
+    "memory/cab.md",
+    "memory/karry-mfb.md",
+    "memory/coral-pay.md",
+    "memory/steel-bank.md",
+    "memory/whma-bank.md",
+    "memory/tap.md",
     "memory/direct-to-bank-daily-standup-2026-04-22-0821-wat.md",
     "memory/direct-to-bank-daily-standup-2026-04-21-0810-wat.md",
     "memory/direct-to-bank-daily-standup-2026-04-21-0727-wat-empty-stub.md",
@@ -195,16 +205,6 @@
     "memory/ipcoopco.md",
     "memory/strangler-fig.md",
     "memory/aptpay-suite.md",
-    "memory/juliana-switch.md",
-    "memory/cdd.md",
-    "memory/payment-gateway-platform.md",
-    "memory/cip.md",
-    "memory/tspp.md",
-    "memory/mp-technologies-uk.md",
-    "memory/teamapt-platformization-org-movements-1.md",
-    "memory/briefing-2026-04-24.md",
-    "memory/config-ingest-prompt.md",
-    "memory/jira.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
