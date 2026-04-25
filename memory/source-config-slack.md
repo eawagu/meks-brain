@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T14:10:00Z (15:10 WAT). 15:10 WAT Apr 25 skim-tick: zero-delta across all 5 Tier 1 channels + DM + keyword sweep."
-updated: "2026-04-25T14:20:35Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: zero-delta across all 5 Tier 1 channels + DM + keyword sweep. Four consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10 WAT)."
+updated: "2026-04-25T15:19:39Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T14:10:00Z"
+last_processed: "2026-04-25T15:10:00Z"
 ---
 
 ## Connection
@@ -48,17 +48,21 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
-### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero-delta
+### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), zero-delta
 
-15:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=quiet-saturday-prior-2-ticks-zero-deltas-active-situations-watching). Window 13:10:00Z → 14:10:00Z = 1h.
+16:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend-saturday-prior-3-ticks-zero-deltas-active-situations-watching). Window 14:10:00Z → 15:10:00Z = 1h.
 
-**`slack_read_channel(oldest=1777122600)` on all 5 Tier 1 channels: 0 new parent messages.** Saturday-afternoon quiet across #teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt.
+**`slack_read_channel(oldest=1777126200)` on all 5 Tier 1 channels: 0 new parent messages.** Saturday-afternoon quiet across #teamapt-tech-operations, #account-switch-alerts, #teamapt-x-paystack-transfer-support, #notifications-support-dev, #go-subscribe-by-teamapt.
 
-**DM scan (U080PEXEZ0E): 0 messages.** Keyword scan `(P1 OR RC91 OR outage OR breach OR "down") after:2026-04-25` returned 0 results.
+**DM scan (U080PEXEZ0E): 0 messages.** Keyword scan `(P1 OR RC91 OR outage OR breach OR "transaction failure" OR "settlement failure")` with `after=1777126200`: 0 results.
 
-**Active P1 silence-rule check:** No active P1s open at tick time per prior-tick checkpoints (Wema cycle resolved 08:49 WAT, FCMB resolved by trajectory 07:02 WAT, Stanbic cycle 33 closed 06:06 WAT). Three consecutive zero-delta skim ticks (13:10/14:10/15:10 WAT). FCMB Immediate-tier already dispatched at 06:19 WAT briefing — not re-firing on continued post-resolution silence.
+**Active P1 silence-rule check:** No active P1s open at tick time per prior-tick checkpoints. FCMB Immediate-tier already dispatched at 06:19 WAT briefing — not re-firing on continued post-resolution silence (consistent with prior 9 skim ticks). Four consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10 WAT).
 
-Factors: `skim_tick`, `saturday_afternoon`, `tier1_zero_delta`, `dm_zero`, `keyword_zero`, `no_active_p1_at_tick`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `epoch_arithmetic_correct_post_bug_fix`, `three_consecutive_zero_delta_skim_ticks`.
+Factors: `skim_tick`, `saturday_afternoon`, `tier1_zero_delta`, `dm_zero`, `keyword_zero`, `no_active_p1_at_tick`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`, `epoch_arithmetic_correct_post_bug_fix`, `four_consecutive_zero_delta_skim_ticks`.
+
+### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero-delta (preserved summary)
+
+15:10 WAT Apr 25 Saturday skim tick. Window 13:10:00Z → 14:10:00Z = 1h. All 5 Tier 1 channels silent. DM 0, keyword 0. No active P1s open. Three consecutive zero-delta skim ticks at write time.
 
 ### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), zero-delta
 
