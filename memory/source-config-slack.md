@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T19:10:00Z (20:10 WAT). 20:10 WAT Apr 25 skim-tick: 1 Tier 1 delta on #teamapt-x-paystack-transfer-support — Mustapha Account Switch scheduled-maintenance notice (Apr 26 18:00 WAT, ~3h downtime). Briefing-tier classification, awareness candidate for briefing-2026-04-26."
-updated: 2026-04-25
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: 1 Tier 1 delta on #teamapt-tech-operations — Olamide Stanbic RC91 P1 cycle 34 (21:00–21:10 WAT, 10–14m bank-resolved fast-cycle); within-pattern, no Immediate dispatch; awareness candidate for briefing-2026-04-26."
+updated: "2026-04-25T21:21:41Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T19:10:00Z"
+last_processed: "2026-04-25T21:10:00Z"
 ---
 
 
@@ -49,7 +49,22 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, single Account Switch maintenance announcement delta on Tier 1 Paystack channel
+### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), single Stanbic cycle 34 delta on Tier 1 ops channel
+
+22:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=last-tick-before-overnight-delegation-with-active-multi-bank-p1s-from-am-briefing). Window 19:10:00Z → 21:10:00Z = 2h. Tier 1 channels read-by-default sweep with `oldest=1777144200` (deterministic compute from prior `last_processed=2026-04-25T19:10:00Z`; runtime assertion `oldest <= now (1777151573)` passed):
+
+- **#teamapt-tech-operations (C0ABU8GMW75):** **1 message** — [[Olamide Ajibulu]] structured P1 post at 21:01 WAT: *"Product: ATS, Incident Summary: P1: Stanbic RC 91 Failures Across Processors, Incident Impact: Transactions were failing and success rate was impacted, Identified Cause: From the bank, Resolution Action: The issue was escalated to the bank for resolution, Incident Duration: 10minutes, Start Time: 9:00 PM, End Time: 9:10 PM."* **Stanbic ATS cycle 34** — clean post-resolution writeup. Salience factors: `channel=tier1_ops`, `keyword_floor=P1+RC91`, `active_situation_match=stanbic_bank_ats_persistent_rc91_pattern`, `sender_weighting=ops_lead_olamide`, `within_pattern_fast_cycle`, `bank_resolved_pre_tick`. Cycle 34 = 21:00–21:10 WAT (Slack-stated) / 21:14 WAT (email-confirmed via thread 19dc63afd3c001f0). Within fast-cycle envelope (4m–64m + cycle 33's 68m). Two-track filing (Slack+email), no TDSD ticket — single-track-Jira regression from cycle 33 continues across cycles 33+34. Same-day double-cycle (cycles 33+34 on Apr 25) mirrors Apr 18 (cycles 28+29). 14h54m intra-day gap from cycle 33 close (06:06 WAT). Standard "From the bank" / "escalated to bank for resolution" wording — cycle 33's "service restart" first-of-pattern framing does NOT recur, confirms anomaly hypothesis. **Awareness candidate for briefing-2026-04-26 06:00 WAT (B6 calibration precedent holds: bank-owned recurring pattern, no Immediate re-dispatch).**
+- **#account-switch-alerts (C098VUQCVRA), #teamapt-x-paystack-transfer-support (C096LCNP26P), #notifications-support-dev (C08PH35PLPK), #go-subscribe-by-teamapt (C090UHR9VDE):** zero messages each. Saturday-late-evening quiet across alerts/Paystack/dev/product channels.
+
+DM (`to:me after:1777144200` search) zero results. Keyword sweep (P1 OR RC91 OR RC96 OR outage OR breach OR incident OR "transaction failure" with `after=1777144200`) returned **No results found** — Slack search index lag at 22:10 WAT (the Stanbic post at 21:01 WAT should have indexed by ~21:15 WAT typically). Tier 1 read-by-default caught the message directly; no recall lost.
+
+**Active P1 silence-rule check:** Stanbic cycle 34 resolved 21:14 WAT email-confirmed (~56m before tick) — NOT active at tick. FCMB cycle 2 (16:04 WAT email-only filing) ~6h silent post-filing — within multi-day bank-cycle envelope, no active-P1 silence rule violation. No other active P1s.
+
+Cross-source: email caught Stanbic email thread 19dc63afd3c001f0 same-cycle (Olamide → Stanbic 21:00:33 UTC, Onyekachukwu reconfirm 21:09:38 UTC, Olamide processing-successfully 21:14:37 UTC). Jira sweep 0 deltas (no TDSD ticket for cycle 34 — Jira-track regression continues from cycle 33). Calendar: only Lattice Review block (already-known per briefing-2026-04-25 A4).
+
+Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777144200, oldest_le_now_assertion_passed, tier1_one_delta_stanbic_cycle34, within_pattern_fast_cycle, bank_resolved_pre_tick_56m, two_track_filing_slack_email, no_tdsd_ticket_jira_regression_continues, awareness_candidate_briefing_2026_04_26, no_immediate_dispatch, dm_keyword_zero, search_index_lag_tier1_read_compensated, saturday_late_evening_quiet, last_tick_before_overnight_delegation.
+
+### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, single Account Switch maintenance announcement delta on Tier 1 Paystack channel (preserved summary)
 
 20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h. Tier 1 channels read-by-default sweep with `oldest=1777137000` (deterministic compute from prior `last_processed=2026-04-25T17:10:00Z`; `oldest <= now (1777144302)` runtime assertion passed):
 
