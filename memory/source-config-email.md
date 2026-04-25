@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T09:10:00Z (10:10 WAT). 10:10 WAT Apr 25 skim-tick: BambooHR Layer 1 to:me Time-Off Approval notification 10:06 WAT — 5th consecutive day silent (Apr 21–25 same payload, Ravi Kiran Veluguleti Apr 01 sick + Muhammad Samu pending). Layer 1 directive bypassed. MISS captured."
-updated: 2026-04-25
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T10:10:00Z (11:10 WAT). 11:10 WAT Apr 25 skim-tick: zero genuinely-new threads in window."
+updated: "2026-04-25T10:23:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T09:10:00Z"
+last_processed: "2026-04-25T10:10:00Z"
 ---
 
 ## Connection
@@ -45,6 +45,16 @@ Gmail `search_threads` returns full-thread bodies that exceed context-window bud
 When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns a cached thread (often an old thread the user is a participant in) instead of an empty result. Filter must be applied client-side: check each returned thread's most-recent-message timestamp against the window cutoff; treat threads whose latest message predates the cutoff as zero-delta.
 
 ## Notes
+
+### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), zero genuinely-new threads
+
+11:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=weekend+active-situations-monitoring+prior-tick-quiet+no-immediate-firing). Window 09:10:00Z → 10:10:00Z = 1h. Query `newer_than:1h` returned threads predating 10:10 WAT cutoff (Wema RC91 cycle 08:34–08:49 WAT, BambooHR notification 10:06 WAT, Duty Handover 08:06 WAT, Hourly Reports 07:02 WAT, TACHA Backoffice 06:54 WAT) — all already captured in prior 10:10 WAT tick.
+
+**Zero genuinely-new threads in window.** No P1 emails. No to:me threads (BambooHR repeat already routed to briefing-2026-04-26 Decision candidate per 10:10 WAT tick). No active-situation entity matches with new content.
+
+**Active-situation entity coverage:** all situations updated within last 5h (Wema 10:19 WAT update, CoralPay 09:10 WAT, Ecobank Jira-side 08:13 WAT). No 48h+ silence triggers.
+
+Factors: `skim_tick`, `saturday_late_morning`, `zero_genuinely_new_threads`, `bamboohr_layer1_already_routed_via_prior_tick`, `no_p1_emails`, `no_immediate_dispatch_this_tick`, `quiet_weekend_window`.
 
 ### last_processed 2026-04-25T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, BambooHR Layer 1 calibration miss surfaced (5-day silent)
 
