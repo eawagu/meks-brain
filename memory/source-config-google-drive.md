@@ -4,10 +4,10 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
-updated: "2026-04-25T08:48:40Z"
+updated: "2026-04-26T07:25:18Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T08:10:00Z"
+last_processed: "2026-04-26T07:10:00Z"
 ---
 
 ## Connection
@@ -77,6 +77,12 @@ The bulk-dispatch path trades immediate brain integration (normal-chain step 3) 
 - Any file that fails to download / split / process / dispatch: do NOT advance `last_processed` past the failing file's `modifiedTime`; log the failure in the Notes section and retry next tick.
 
 ## Notes
+
+### Tick 2026-04-26 08:10 WAT — skim-level zero-delta, last_processed advanced past prior backlog-drain mark
+
+08:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-25T08:10:00Z'` returned **0 files**. No new Notes-by-Gemini activity in 23h+ since the Apr 25 09:10 WAT bulk-dispatch drain. `last_processed` advanced from `2026-04-25T08:10:00Z` to `2026-04-26T07:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog drained — normal-chain handling is now in effect for any future Notes-by-Gemini files.
+
+Factors: source=drive, skim_tick, zero_in_window_files, last_processed_advanced_23h, backlog_drained, normal_chain_now_active.
 
 ### Tick 2026-04-25 09:10 WAT — dark-window-recovery bulk-dispatch DRAIN, 13 files captured to ingress, Phase-2 phantom-policy deprecated
 
