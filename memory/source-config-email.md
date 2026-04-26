@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T11:10:00Z (12:10 WAT). 12:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword 0 NEW (the 09:12 UTC Access DD bilateral thread `19dc9102d9bde88a` was returned again — boundary-case dedup applied as second-tick repeat). Sunday late-morning quiet on email path. Bank reply on Access DD bilateral path still NOT visible at 1h59m post-filing — past typical 30–60min Access reply window."
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T12:10:00Z (13:10 WAT). 13:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 zero new in 1h window. Sunday afternoon quiet. Bank reply on Access DD bilateral path STILL not visible at 2h58m post-filing — well past typical 30–60min Access reply window — escalating concern. CoralPay 4th hourly report still missing (Daniel-shift handover at 08:01 WAT)."
 updated: 2026-04-26
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T11:10:00Z"
+last_processed: "2026-04-26T12:10:00Z"
 ---
 
 
@@ -50,38 +50,40 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-26T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (6h after Sunday briefing), Layer 1 zero + Layer 2 keyword 0 NEW (Access DD bilateral thread returned again — second-tick repeat boundary-case dedup)
+### last_processed 2026-04-26T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (7h after Sunday briefing), Layer 1 zero + Layer 2 zero — boundary-case Access DD bilateral thread no longer surfacing (>3h-old now); bank reply STILL absent 2h58m post-bilateral
 
-12:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Window 10:10:00Z → 11:10:00Z = 1h.
+13:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Window 11:10:00Z → 12:10:00Z = 1h.
 
-**Layer 1 query `to:me newer_than:2h`: 0 threads in window.** Empty result `{}` (Gmail MCP returned no residual-cache thread).
+**Layer 1 query `to:me newer_than:1d`: 0 threads in window.** Empty result `{}` (Gmail MCP returned no residual-cache thread).
 
-**Operational keyword query `(RC91 OR RC05 OR P1 OR outage OR NIBSS OR compromised OR Mandate OR resolved OR settlement OR Coralpay OR ZIB) newer_than:2h`: 1 thread returned, 0 NEW.**
-
-1. **Already-captured boundary thread** `19dc9102d9bde88a` (Access Bank DD Mandate Creation Failures bilateral track), most-recent-message timestamp 09:12:36Z. **This message is now ~2h59m before this tick — but Gmail MCP keeps returning it on the operational-keyword sweep because no newer keyword-matching thread exists in the 2h newer_than window.** The thread was captured and processed at the 10:10 WAT prior tick (substantively documented in [[Access Bank — Multi-Track Failures]] situation page) — and re-confirmed-as-already-processed at the 11:10 WAT prior tick — and now re-confirmed again at this 12:10 WAT tick. **Treat as zero-new-delta this tick.** This is a pattern: the same boundary thread keeps re-surfacing in subsequent ticks under newer_than:2h until either (a) a fresh keyword-matching thread arrives and bumps it out, or (b) the newer_than window narrows enough to exclude it. Per the dedup pattern documented in source-config-email prior-ticks, a thread is "already-processed" when it has a prior-tick narrative entry on a situation page — substantive content is captured, no need to re-process.
+**Operational keyword query: 0 threads in 1h window.** The Access DD bilateral thread `19dc9102d9bde88a` (last message 09:12:36Z) is now ~3h+ old and falls outside the standard `newer_than:2h` window — no longer re-surfacing as boundary-case repeat. Dedup pattern resolved naturally as the window narrowed past the source thread's age.
 
 **No additional issuer-bucket sweeps this skim-tick** (cost cap; next briefing-tick will cover).
 
 **Active P1 silence-rule check (cross-cutting):**
-- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend (4h21m+ silent on email path post-briefing-dispatch). The 4th hourly report (when Daniel files it) is the watchpoint signal — still not yet visible at this tick. Daniel's shift started 08:01 WAT; expected first hourly report ~08:50 WAT or ~09:50 WAT — neither is visible. Possible explanations: (a) Daniel hasn't filed an hourly report (ops cadence broken on Sunday handover), (b) hourly report was filed but to a different thread/recipient.
-- **Access Bank cycle 8** — closed bank-side at 07:54 WAT (Jira). Email path silent on closure (no closure note from bank, no Slack closure post propagated to email path).
-- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT Daniel Armstrong → Access Card Switching Team. **2h+ post-bilateral with NO bank reply visible** (>past typical 30–60min Access reply window). This is significant: prior Access cycles (e.g., cycle 8 with Tunde Akingbade replying ~34min post-Qazim's post) had reliable bank-side response on Sunday/overnight windows. The current 2h+ silence is anomalous for Access bank-side response patterns. Watchpoint: bank reply ETA — if no reply by ~14:00 WAT (4h post-bilateral), bank-side coordination breakdown becomes the leading hypothesis (escalation needed). The internal track now has TDSD-6732 with route-pause + merchant-notification — this may have lowered the urgency of bank-side response from TeamApt's angle but the bank-side silence is still a structural anomaly.
+- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend (5h21m+ silent on email path). The 4th hourly report (when Daniel files it) is the watchpoint signal — still not yet visible at this tick (2h+ past Daniel's 08:01 WAT shift start). Possible explanations unchanged: (a) Daniel hasn't filed an hourly report (ops cadence broken on Sunday handover), (b) hourly report was filed but to a different thread/recipient.
+- **Access Bank cycle 8** — closed bank-side at 07:54 WAT (Jira). Email path silent on closure (no closure note from bank, no Slack closure post propagated to email path). 5h17m+ post-resolution.
+- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT Daniel Armstrong → Access Card Switching Team. **2h58m+ post-bilateral with NO bank reply visible** (well past typical 30–60min Access reply window). The internal containment ticket TDSD-6732 transitioned to Completed at 13:01:54 WAT this tick (route-pause posture preserved in description) — but the bank-side response remains structurally absent. Watchpoint shifts: if no reply by ~14:00 WAT (4h post-bilateral), bank-side coordination breakdown becomes the leading hypothesis (escalation needed).
 
-**No Immediate dispatch from email-side this tick** — zero new substantive content. The 12:11 WAT Immediate dispatch was triggered from the Jira-side route-pause delta (TDSD-6732), not from email.
+**No Immediate dispatch from email-side this tick** — zero new substantive content. The TDSD-6732 → Completed status transition is a Jira-side delta (not Immediate-tier).
 
-Factors: source=email, skim_tick, layer1_zero, layer2_zero_new_boundary_case_already_captured_third_repeat, dedup_pattern_holds_through_3_consecutive_ticks, sunday_late_morning_quiet_on_email_path, no_immediate_dispatch_from_email_side, route_pause_came_from_jira, no_bank_reply_2h_post_bilateral_escalating_concern_watchpoint_at_14_00_wat.
+Factors: source=email, skim_tick, layer1_zero, layer2_zero_boundary_case_naturally_resolved_thread_aged_past_window, sunday_afternoon_quiet_on_email_path, no_immediate_dispatch_from_email_side, no_bank_reply_2h58m_post_bilateral_escalating_concern_watchpoint_at_14_00_wat, coralpay_4th_hourly_report_still_missing_2h_past_daniel_shift_start.
+
+### last_processed 2026-04-26T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (preserved summary)
+
+12:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 keyword 0 NEW (Access DD bilateral thread `19dc9102d9bde88a` returned again — third-tick boundary-case repeat dedup). Sunday late-morning quiet. Bank reply 1h59m+ post-bilateral — escalating concern.
 
 ### last_processed 2026-04-26T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (preserved summary)
 
-11:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 keyword 0 NEW (the 09:12 UTC Access DD bilateral thread `19dc9102d9bde88a` was returned but already captured at 10:10 WAT prior tick — boundary case). Sunday morning quiet on email path. No Immediate dispatch.
+11:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 keyword 0 NEW (Access DD bilateral thread already captured at 10:10 WAT prior tick — boundary case). Sunday morning quiet. No Immediate dispatch.
 
 ### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick (preserved summary)
 
-10:10 WAT Apr 26 Sunday skim. Window 07:10:00Z → 09:10:00Z = 2h. Layer 1 zero. Layer 2 1 new thread `19dc9102d9bde88a` Daniel Armstrong → Access Card Switching Team 10:12 WAT (CC oladapo.onayemi@moniepoint.com + aptpaytechnicalsupport@) — 5min after paired Slack post. Immediate-tier dispatched in concert with Slack path.
+10:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 1 new thread `19dc9102d9bde88a` Daniel Armstrong → Access Card Switching Team 10:12 WAT. Immediate-tier dispatched.
 
 ### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (preserved summary)
 
-08:10 WAT Apr 26 Sunday skim. Hourly Reports 3rd byte-identical resend at 07:50 WAT proves ops-cycle reporting failure structurally. Duty Handover Note 08:01 WAT Qazim → Daniel routine. No Immediate dispatch.
+08:10 WAT Apr 26 Sunday skim. Hourly Reports 3rd byte-identical resend at 07:50 WAT. Duty Handover Note 08:01 WAT. No Immediate.
 
 ### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (preserved summary)
 

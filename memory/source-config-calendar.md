@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T11:10:00Z (12:10 WAT). 12:10 WAT Apr 26 skim-tick: Sun→Mon window unchanged from 11:10 WAT capture. Lattice deadline 35h50m remaining at this tick."
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T12:10:00Z (13:10 WAT). 13:10 WAT Apr 26 skim-tick: 1 minor recurring-meeting metadata update (Channels Onboarding & Disbursement updated 11:37 WAT — stable, no salience-relevant delta). Sunday clear. Lattice deadline 34h50m remaining."
 updated: 2026-04-26
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T11:10:00Z"
+last_processed: "2026-04-26T12:10:00Z"
 ---
 
 
@@ -30,11 +30,19 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-26T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (6h after Sunday briefing), Sun→Mon window zero new events — Lattice deadline 35h50m
+### last_processed 2026-04-26T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (7h after Sunday briefing), 1 minor recurring-meeting metadata update — Lattice deadline 34h50m
 
-12:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Quick `list_events` Sun 12:10 WAT → Mon Apr 27 23:59 WAT confirmed Mon Apr 27 11-meeting day unchanged from 11:10 WAT capture. Most recent event update: "Direct to Bank: Daily stand up" (recurring, updated 2026-04-26T03:28:29Z = 04:28 WAT — predates last_processed window). **No new invites, no RSVP changes, no cancellations in 1h window.** Lattice deadline now 35h50m remaining (was 36h50m at 11:10 WAT — countdown advancing on schedule). Sunday calendar clear (Lattice block only).
+13:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Quick `list_events` Sun 12:10 WAT → Mon Apr 27 23:59 WAT confirmed Mon Apr 27 11-meeting day unchanged from 12:10 WAT capture.
 
-Factors: source=calendar, skim_tick, sunday_zero_delta_1h, monday_unchanged, lattice_deadline_35h50m, no_priority_signal_match.
+**1 metadata update in window:** "Channels Onboarding & Disbursement" recurring meeting updated 2026-04-26T10:37:11Z (11:37 WAT) — recurring stable, attendee list ~35 people unchanged from prior captures, no priority-signal directive match (not a declined-RSVP, not new same-day invite, not last-minute cancellation, not agenda-less >30min block, not back-to-back overload). Skip-rule applies: "Recurring standing meetings with unchanged metadata — no delta, no surface." Awareness-tier at most.
+
+**No new invites, no RSVP changes, no cancellations in 1h window.** Lattice deadline now 34h50m remaining (was 35h50m at 12:10 WAT — countdown advancing on schedule). Sunday calendar clear (Lattice block only).
+
+Factors: source=calendar, skim_tick, sunday_zero_priority_signal_1h, monday_unchanged, channels_meeting_metadata_update_skip_rule_match, lattice_deadline_34h50m, no_priority_signal_match, no_immediate_dispatch.
+
+### last_processed 2026-04-26T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (preserved summary)
+
+12:10 WAT Apr 26 Sunday skim. Sun→Mon window zero new events from prior tick. Lattice deadline 35h50m.
 
 ### last_processed 2026-04-26T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick — Lattice deadline 36h50m (preserved summary)
 

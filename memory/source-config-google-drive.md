@@ -3,21 +3,21 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed 2026-04-26T11:10:00Z (12:10 WAT). 12:10 WAT Apr 26 skim-tick: 0 new files in 5h+ window since 07:10 WAT advance. Backlog drained. Normal-chain handling active."
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed 2026-04-26T12:10:00Z (13:10 WAT). 13:10 WAT Apr 26 skim-tick: 0 new files in 1h window. Backlog drained. Normal-chain handling continues."
 updated: 2026-04-26
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T11:10:00Z"
+last_processed: "2026-04-26T12:10:00Z"
 ---
 
 ## Connection
 
-Google Drive MCP. Scope: files whose title starts with "Notes by Gemini" (meeting transcription artifacts).
+Google Drive MCP. Scope: files whose title starts with \"Notes by Gemini\" (meeting transcription artifacts).
 
 ## Directives
 
 ### Scope
-- Only "Notes by Gemini" files are in-scope. All other Drive activity is out-of-scope for this source.
+- Only \"Notes by Gemini\" files are in-scope. All other Drive activity is out-of-scope for this source.
 
 ### Handling chain — normal-tick operation (detect → download → split → dispatch)
 
@@ -25,7 +25,7 @@ When a new or modified Notes-by-Gemini file is detected during a normal tick (i.
 
 1. **Download** the file content via Drive MCP `read_file_content`.
 2. **Split** the downloaded content into two layers by section:
-   - **Transcript layer** — the transcript section, if a heading whose text contains the literal word "Transcript" (case-insensitive, matching `^##?#? *Transcript` or similar heading patterns) is present in the document body. The transcript layer is everything from that heading to end-of-document. The "Meeting records [Transcript](link)" inline link in the meta block does NOT count — only a section heading. If no such heading is present, the document has no inline transcript (often because Gemini keeps the transcript in a separate doc tab not retrieved by `read_file_content`).
+   - **Transcript layer** — the transcript section, if a heading whose text contains the literal word \"Transcript\" (case-insensitive, matching `^##?#? *Transcript` or similar heading patterns) is present in the document body. The transcript layer is everything from that heading to end-of-document. The \"Meeting records [Transcript](link)\" inline link in the meta block does NOT count — only a section heading. If no such heading is present, the document has no inline transcript (often because Gemini keeps the transcript in a separate doc tab not retrieved by `read_file_content`).
    - **Non-transcript layer** — everything else. Meta block, `### Summary`, `### Decisions`, `### Action items`, `### Next steps`, `### Details`, and any other structured content outside the transcript. When no transcript heading is present, the non-transcript layer is the entire document.
 3. **Process non-transcript layer as a heartbeat source** — treat the full non-transcript layer as in-tick signal:
    - Run `search` against the full brain for semantic matches (perfect cross-referencing per CLAUDE.md).
@@ -46,7 +46,7 @@ When Drive MCP recovers from a multi-tick outage and a backlog has accumulated (
 1. **Enumerate** all in-window files via `search_files` (`title contains 'Notes by Gemini' and modifiedTime > '<last_processed>'`). Paginate fully.
 2. **Per file, dispatch to ingress via `capture_note`** — no in-tick source page creation, no semantic-search integration:
    - **Files ≤300KB**: download full content; call `capture_note(name=<exact Drive title>, content=<metadata block + full content>)`.
-   - **Files >300KB**: download full content; if a heading containing "Transcript" exists at top-level (`^##?#? *.*Transcript`), call `capture_note(name=<exact Drive title>, content=<metadata block + non-transcript content + omitted-transcript note>)`. The full transcript remains accessible via the Drive view URL — dropping it from ingress is a budget concession, not data loss.
+   - **Files >300KB**: download full content; if a heading containing \"Transcript\" exists at top-level (`^##?#? *.*Transcript`), call `capture_note(name=<exact Drive title>, content=<metadata block + non-transcript content + omitted-transcript note>)`. The full transcript remains accessible via the Drive view URL — dropping it from ingress is a budget concession, not data loss.
    - **Metadata block** (prepended to all bulk-dispatch captures):
      ```
      # 📝 Notes
@@ -61,14 +61,14 @@ When Drive MCP recovers from a multi-tick outage and a backlog has accumulated (
    - Log the failure in the Notes section.
    - Set `last_processed` to the most-recent successfully-processed file's `modifiedTime` so the next tick retries the failed file.
    - Continue dispatching the remaining files (errors don't block the batch).
-5. **No Phase-2 dispatch deferral.** Bulk-dispatch IS the recovery mechanism — there is no separate Phase-2 process to hand off to. The "Phase-2 backlog hold" pattern that existed Apr 21–25 was a phantom reference to a non-existent mechanism and is now deprecated.
+5. **No Phase-2 dispatch deferral.** Bulk-dispatch IS the recovery mechanism — there is no separate Phase-2 process to hand off to. The \"Phase-2 backlog hold\" pattern that existed Apr 21–25 was a phantom reference to a non-existent mechanism and is now deprecated.
 
 The bulk-dispatch path trades immediate brain integration (normal-chain step 3) for context-budget feasibility on large backlogs. The ingest pipeline picks up the captured notes on its own schedule and creates source pages with full integration. The cost is a delay between dispatch and full brain integration; the benefit is the heartbeat's tick stays bounded and the backlog actually drains.
 
 ### Section detection heuristic
 - Gemini documents have a machine-generated structure: a meta block at top (date, title, invited attendees, attachments, meeting records link), then structured sections (commonly `### Summary`, `### Decisions`, `### Action items`, `### Next steps`, `### Details`, possibly others), and sometimes a transcript section at the end.
-- Split point: the first heading whose text contains "Transcript" (case-insensitive). Everything before is non-transcript layer; everything from that heading onward is transcript layer.
-- The "Meeting records [Transcript](link)" line in the meta block is a link to a separate doc tab, NOT a section heading — do not split on it.
+- Split point: the first heading whose text contains \"Transcript\" (case-insensitive). Everything before is non-transcript layer; everything from that heading onward is transcript layer.
+- The \"Meeting records [Transcript](link)\" line in the meta block is a link to a separate doc tab, NOT a section heading — do not split on it.
 - Some Gemini docs embed transcript inline (typically larger files, 500KB+); others keep it only in a separate doc tab accessed via the link. `read_file_content` exports main-tab content only — separate-tab transcripts are unreachable through this path. Files without inline transcripts get zero ingress drops; their content is fully covered by step 3's non-transcript source page.
 - Heuristic is best-effort. When uncertain whether a heading is the transcript start, prefer NOT splitting (over-capture to the non-transcript layer is recoverable; a wrong split wrecks both layers).
 
@@ -78,11 +78,15 @@ The bulk-dispatch path trades immediate brain integration (normal-chain step 3) 
 
 ## Notes
 
-### Tick 2026-04-26 12:10 WAT — skim-level zero-delta, last_processed advanced 4h
+### Tick 2026-04-26 13:10 WAT — skim-level zero-delta, last_processed advanced 1h
 
-12:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-26T07:10:00Z'` returned **0 files**. No new Notes-by-Gemini activity in 5h+ since the prior 08:10 WAT advance. `last_processed` advanced from `2026-04-26T07:10:00Z` to `2026-04-26T11:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog remains drained — normal-chain handling continues to be in effect for any future Notes-by-Gemini files.
+13:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-26T11:10:00Z'` returned **0 files** in the 1h window. (Note: a broader cross-validation query `modifiedTime > '2026-04-20T16:09:00Z'` returned 5 files — all already drained via the Apr 25 09:10 WAT bulk-dispatch; titles include Round-2 HoE Interview 2026/04/24, HoE VP+ Interview 2026/04/23, Disbursement-CBA arch review 2026/04/22, Deliberation HoE batch interviews 2026/04/24, Project delivery & optimization realignment 2026/04/23. None modified after 11:10 WAT today.) `last_processed` advanced from `2026-04-26T11:10:00Z` to `2026-04-26T12:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog remains drained — normal-chain handling continues to be in effect for any future Notes-by-Gemini files.
 
-Factors: source=drive, skim_tick, zero_in_window_files, last_processed_advanced_4h, backlog_drained, normal_chain_active.
+Factors: source=drive, skim_tick, zero_in_window_files_1h, last_processed_advanced_1h, backlog_drained, normal_chain_active.
+
+### Tick 2026-04-26 12:10 WAT — skim-level zero-delta, last_processed advanced 4h (preserved summary)
+
+12:10 WAT Apr 26 Sunday skim tick. `search_files` query returned 0 files. `last_processed` advanced from `2026-04-26T07:10:00Z` to `2026-04-26T11:10:00Z`. Backlog drained — normal-chain handling continues.
 
 ### Tick 2026-04-26 08:10 WAT — skim-level zero-delta, last_processed advanced past prior backlog-drain mark (preserved summary)
 
@@ -90,7 +94,7 @@ Factors: source=drive, skim_tick, zero_in_window_files, last_processed_advanced_
 
 ### Tick 2026-04-25 09:10 WAT — dark-window-recovery bulk-dispatch DRAIN, 13 files captured to ingress, Phase-2 phantom-policy deprecated (preserved summary)
 
-09:10 WAT Apr 25 Saturday tick. User explicit instruction: "we need to remove the hold off." 13 files dispatched to ingress via `capture_note` (subagent delegation for files 6–13 due to budget). `last_processed` advanced from `2026-04-20T16:09:00Z` to `2026-04-25T08:10:00Z` — first advance in 4d16h. Phase-2 phantom-policy deleted; Dark-window recovery directive added.
+09:10 WAT Apr 25 Saturday tick. User explicit instruction: \"we need to remove the hold off.\" 13 files dispatched to ingress via `capture_note` (subagent delegation for files 6–13 due to budget). `last_processed` advanced from `2026-04-20T16:09:00Z` to `2026-04-25T08:10:00Z` — first advance in 4d16h. Phase-2 phantom-policy deleted; Dark-window recovery directive added.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
