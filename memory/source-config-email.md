@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword 0 NEW (the 09:12 UTC Access DD bilateral thread `19dc9102d9bde88a` was already captured at 10:10 WAT prior tick — boundary case). Sunday morning quiet on email path."
-updated: "2026-04-26T15:23:25Z"
+updated: "2026-04-26T16:25:36Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T15:10:00Z"
+last_processed: "2026-04-26T16:10:00Z"
 ---
 
 
@@ -50,25 +50,29 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10h after Sunday briefing), Layer 1 zero + Layer 2 zero NEW
+### last_processed 2026-04-26T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (11h after Sunday briefing), Layer 1 zero + operational-keyword zero NEW; 1 issuer-bucket-scope thread observed (Fidelity DCIR credential reset, Awareness)
 
-16:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-quiet-priors). Window 14:10:00Z → 15:10:00Z = 1h.
+17:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-situations-in-background). Window 15:10:00Z → 16:10:00Z = 1h.
 
-**Layer 1 query `to:me newer_than:1d`: 0 To:me threads in 1h skim window.** All threads from broader 24h query date-filter to predates of 14:10:00Z (latest direct-handover at 07:01 UTC = 08:01 WAT).
+**Layer 1 query `to:me newer_than:1d`: 0 To:me threads in 1h skim window.** All threads from broader 24h query date-filter to predates of 15:10:00Z (latest direct-handover at 07:01 UTC = 08:01 WAT, prior tick).
 
-**Operational keyword query `(RC91 OR RC05 OR P1 OR outage OR Mandate OR settlement OR CoralPay OR ZIB OR Access) newer_than:1d`: 0 NEW threads in window.** All matches predate 14:10:00Z; latest in-window operational signal was the 08:01 WAT handover thread already captured prior tick.
+**Operational keyword sweep `(RC91 OR RC05 OR P1 OR outage OR Mandate OR settlement OR CoralPay OR ZIB OR Access) newer_than:1d`: 0 NEW threads in window.** All matches predate 15:10:00Z.
 
-**No additional issuer-bucket sweeps this skim-tick** (cost cap; next briefing-tick will cover).
+**Issuer-bucket scope observation (broad sweep, deferred under skim cost cap but observed via cross-source disambiguation query):** 1 thread `19dca72d60189611` — \"Reset Teamapt (DCIR) Application User Credentials\" Microsoft Teams meeting invite filed 16:40 WAT (= 15:40 UTC, in-window). Sender `aptpaytechnicalsupport@teamapt.com`. Recipients `aptpaytechnicalsupport@teamapt.com`, `Ayodele.Olukoya@fidelitybank.ng`, `SystemsAdmin@fidelitybank.ng`, `DatabaseAdmin5826@fidelitybank.ng`, `Caleb.Saidu@fidelitybank.ng`, `FEPSupport@fidelitybank.ng`, `Adamma.Ezimora@fidelitybank.ng`. **Classification:** Awareness-tier ops-coordination — routine credential-reset meeting between TeamApt support and Fidelity Bank IT for DCIR application user. No operational-keyword match (no RC91/P1/outage/Mandate/etc); only issuer-name match (Fidelity in recipient domain). User not in any recipient field — Layer 1 does not fire. Active-situation cross-check: [[Fidelity Bank ATS — RC91 Failure Ongoing]] is ATS-track (different application from DCIR); [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] covers DCIR vulnerability remediation but Fidelity is not a current named bank in that track. No briefing-decision tier; no Immediate dispatch.
 
 **Active P1 silence-rule check (cross-cutting, structural pattern observation):**
-- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend (~8h21m+ silent on email path). 4th hourly report (Daniel-on-duty) STILL not visible at this tick. **Pattern observation:** Daniel-on-duty cadence appears to have stopped after the 08:01 WAT handover acknowledgment — no Daniel-authored hourly reports observed in 8h+ since shift start. This is a structural ops-cycle-reporting failure that has now persisted across the entire Daniel shift today.
-- **Access Bank cycle 8** — closed bank-side at 07:54 WAT. Email path silent on closure (no closure note from bank, no Slack closure post propagated). ~8h17m+ post-resolution.
-- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT. ~6h post-bilateral. Post-watchpoint: bank-side `accessbankplc.com` sender still NOT visible. Bank-side coordination breakdown remains the leading hypothesis. Watchpoint hardens for briefing-2026-04-27.
-- **Ecobank settlements (NEW Apr 26 16:00 WAT)** — Daniel Armstrong filed [[TDSD-6735]] via Jira portal directly; no email thread accompanying the ticket filing observed in this 1h window. Watchpoint: Feyisayo Oyeniran 8h first-response SLA breach Mon Apr 27 17:00 WAT.
+- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend (~9h21m+ silent on email path). 4th hourly report (Daniel-on-duty) STILL not visible at this tick. **Pattern observation:** Daniel-on-duty cadence appears to have stopped after the 08:01 WAT handover acknowledgment — no Daniel-authored hourly reports observed in 9h+ since shift start. Structural ops-cycle-reporting failure persists across the entire Daniel shift today.
+- **Access Bank cycle 8** — closed bank-side at 07:54 WAT. Email path silent on closure (no closure note from bank, no Slack closure post propagated). ~9h17m+ post-resolution.
+- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT. ~7h post-bilateral. Post-watchpoint: bank-side `accessbankplc.com` sender still NOT visible. Bank-side coordination breakdown remains the leading hypothesis. Watchpoint hardens for briefing-2026-04-27.
+- **Ecobank settlements** TDSD-6735 (filed 15:59 WAT prior tick via Jira portal) — no email thread accompanying the ticket; bilateral channel still silent. Watchpoint: Feyisayo Oyeniran 8h first-response SLA breach Mon Apr 27 17:00 WAT (still ~24h ahead).
 
-**No Immediate dispatch from email-side this tick** — no new signal in 1h window.
+**No Immediate dispatch from email-side this tick** — no new Layer-1 / no operational-keyword signal in 1h window; the issuer-bucket-scope Fidelity DCIR thread is Awareness-tier ops-coordination.
 
-Factors: source=email, skim_tick, layer1_zero, layer2_zero, sunday_afternoon_quiet_on_email_path, no_immediate_dispatch_from_email_side, daniel_on_duty_hourly_report_cadence_stopped_8h_post_handover_structural_ops_failure_full_shift, watchpoint_hardens_for_briefing_apr27_if_no_accessbankplc_sender, eco_settlements_no_email_thread_jira_portal_only_filing.
+Factors: source=email, skim_tick, layer1_zero, operational_keyword_zero, issuer_bucket_one_observation_fidelity_dcir_credential_reset_meeting_invite, awareness_tier_ops_coordination, no_active_situation_cross_match_dcir_fidelity_intersection, sunday_evening_quiet_on_email_path, no_immediate_dispatch_from_email_side, daniel_on_duty_hourly_report_cadence_stopped_9h_post_handover_structural_ops_failure_persists, watchpoint_hardens_for_briefing_apr27_if_no_accessbankplc_sender, eco_settlements_no_email_thread_jira_portal_only_filing.
+
+### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (preserved summary)
+
+16:10 WAT Apr 26 Sunday skim. Layer 1 zero + Layer 2 zero NEW. CoralPay 4th hourly report missing 8h+ post-handover (Daniel cadence stopped — structural full-shift failure). Access DD bank-silence watchpoint hardens for briefing-2026-04-27. Eco settlements TDSD-6735 filed via Jira portal directly, no email thread accompanying. No Immediate.
 
 ### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
 
