@@ -4,10 +4,10 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: 1 Layer A delta — TDSD-6731 NEW 10:18 WAT \"Access | DD | Mandate Creation Failures | 20260426\" Daniel Armstrong reporter / Babajide Ojoboorun assignee (Medium, Work in progress). Process gap closed 11min post-Slack-post / 6min post-bilateral-email. Babajide assignment routes to credential-remediation track owner."
-updated: "2026-04-26T15:21:03Z"
+updated: "2026-04-26T16:27:30Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T15:10:00Z"
+last_processed: "2026-04-26T16:10:00Z"
 ---
 
 
@@ -56,7 +56,7 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 - `active_situation_match=<situation-page>` — ticket names an entity tracked in a developing situation.
 - `assignee=<user>` — Dominic routing to Awaiting Scheme Update = workflow-discipline pattern (tracking).
 - `archetype=<service_desk|software>` — service_desk tickets default to higher salience.
-- `description_signal=<route-off|merchant-notification|route-pause|escalated-to-bank|escalated-internally>` — surface description-level operational signals that warrant Immediate dispatch even when ticket priority/status alone do not (e.g., TDSD-6732 12:10 WAT Apr 26 — Medium-priority Work-in-progress ticket whose description carried "Routing has been paused temporarily" matched config-salience Immediate trigger #7 route-off).
+- `description_signal=<route-off|merchant-notification|route-pause|escalated-to-bank|escalated-internally>` — surface description-level operational signals that warrant Immediate dispatch even when ticket priority/status alone do not (e.g., TDSD-6732 12:10 WAT Apr 26 — Medium-priority Work-in-progress ticket whose description carried \"Routing has been paused temporarily\" matched config-salience Immediate trigger #7 route-off).
 
 ### Active-situation checkpoint re-verification (post 2026-04-25 13:10 WAT TDSD-6690 staleness)
 When the source-config trace describes an active-situation ticket's state in narrative shorthand (e.g., \"still at approval gates\", \"still WIP\", \"still Escalated\"), MUST re-verify the description against the live `status` field (and `statusCategory.key`) every full briefing-tick. NEVER propagate a narrative description from a prior tick without checking the current Jira state — descriptions go stale silently when the ticket transitions and prior-tick text is copied forward.
@@ -78,30 +78,41 @@ Layer A JQL `project = TDSD AND updated >= \"2026-04-26 06:10\" ORDER BY updated
 
 ## Notes
 
-### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10h after Sunday briefing), 1 Layer A delta — TDSD-6735 NEW (Ecobank settlements layer)
+### last_processed 2026-04-26T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (11h after Sunday briefing), 0 Layer A / 2 Layer B below-threshold observations
 
-16:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-quiet-priors). Window 14:10:00Z → 15:10:00Z = 1h.
+17:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-situations-in-background). Window 15:10:00Z → 16:10:00Z = 1h.
 
-**Layer A — TDSD service_desk delta:** 1 issue returned by `project in (TDSD, TCDD, ATPG, "ADD", "AS", ATPP) AND updated >= "2026-04-26 14:10" ORDER BY updated DESC` (results filtered to those updated post-14:10:00Z UTC):
-- **TDSD-6735** "Eco | Settlements issue | 20260426" — NEW at **15:59:43 WAT** (~10min before this skim tick). Reporter [[Daniel Armstrong]] (Sunday duty officer, on rotation since 08:01 WAT handover). Assignee [[Feyisayo Oyeniran]]. **[System] Incident type, Medium priority, Severity "Significant / Large", Customer "Ecobank", Component "ATS"**, status **INITIAL REVIEW**. Description: *"Eco settlements 20260426 awaiting requery"* + screenshot attachment (image-20260426-145918.png, 109KB). SLA Time-to-first-response 8h goal (breach Mon Apr 27 17:00 WAT); Time-to-resolution 24h goal (breach Wed Apr 29 17:00 WAT). No comments yet; no Slack P1 thread observed in same window (filed straight to Jira via portal). Active-situation match: [[Ecobank — RC91 on NUS Nodes]] — but this is a fourth operational layer (back-office settlements, distinct from the prior transaction-routing / portal-access / user-creation layers). Tier classification: **Briefing-tier** (tracked active-situation entity match, but no P1 + no Immediate trigger keyword + Severity/Customer/Component require situation-page narrative work, not direct Immediate dispatch). Situation page updated this tick to incorporate the new layer; briefing-2026-04-27 Decision-item candidate combining settlements + user-creation + compound-frequency pattern.
+**Layer A — TDSD service_desk delta:** 0 in 1h window via narrow scope JQL. Active TDSD ticket states unchanged at this tick (no Jira queries beyond the sweep — checkpoint pulled forward from 16:10 WAT prior tick):
+- **TDSD-6735** (Eco settlements, NEW prior tick 15:59 WAT) — UNCHANGED. INITIAL REVIEW, no comments yet, no SLA breach. Watchpoint: 8h first-response SLA breach Mon Apr 27 17:00 WAT (~24h ahead).
+- **TDSD-6731** (Access DD Mandate technical track at Babajide) — UNCHANGED ~7h+ from filing. Watchpoint: Awaiting Scheme Update / Escalated / Resolved transitions on Babajide's investigation.
+- **TDSD-6732** (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT (stable post-closure ~4h+). Route-pause status in description STILL not amended.
+- **TDSD-6729** (Access cycle 8) — Completed/Done at 07:54 WAT (~9h17m+ stable post-resolution). Slack closure post still NOT propagated.
+- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1)** — STILL NO TDSD TICKET at ~15h09m+ post-Slack-post. Process gap continues. Comparator: Access DD ops side filed TDSD-6732 within ~3h of original P1 (technical TDSD-6731 within 11min); CoralPay ZIB ops has filed nothing in 15h+.
 
-**Layer B — Software projects scoped sweep: 0 deltas.** No P1/P0/Blocker/Critical priority transitions in 1h window across the 17 software projects.
+**Layer B — Software projects scoped sweep: 0 deltas via proper Layer B JQL (priority in (Highest, Blocker, Critical) OR status transition gate).** A broader updated-only query surfaced 2 below-threshold observations that the Layer B JQL would correctly exclude:
+- **AS-4114** \"Approval for Project Commencement\" — Task, Medium, In Progress (no transition this tick), reporter+assignee Ifeoluwa Oguntona, updated 2026-04-26T16:21:28+0100 (15:21 UTC). Routine new-bank project setup paperwork by AptPay-side PM lead. No active-situation entity match (no specific bank named in summary). Below Layer B priority/transition gate.
+- **AS-4115** \"Account Opening - Bank & Teamapt\" — Task, Medium, In Progress (no transition this tick), reporter+assignee Ifeoluwa Oguntona, updated 2026-04-26T16:20:53+0100 (15:20 UTC). Same context as AS-4114; routine project setup. Below Layer B priority/transition gate.
+Both: project-setup pair authored within ~30s of each other (15:20 UTC + 15:21 UTC), suggesting a coordinated kickoff create/update cycle. Per Layer B selectivity (Medium priority + already-In-Progress + no transition), would not surface in proper Layer B sweep — recorded here as an observation only (no situation page update, no entity touch, no briefing item).
 
 **Active-situation checkpoint summary (skim-tick spot-check, derived from prior-tick state — no Jira queries this tick beyond the sweep):**
-- TDSD-6735 (Eco settlements) — NEW this tick. INITIAL REVIEW. Watchpoint: 8h first-response SLA breach Mon Apr 27 17:00 WAT.
-- TDSD-6731 (Access DD Mandate technical track) — Work in progress (Babajide assignee). UNCHANGED ~6h+. Watchpoint: Awaiting Scheme Update / Escalated / Resolved transitions on Babajide's investigation.
-- TDSD-6732 (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT. Stable post-closure ~3h+ at this tick. Route-pause status in description STILL not amended.
-- TDSD-6729 (Access cycle 8) — Completed/Done at 07:54 WAT (~8h17m+ stable post-resolution). Slack closure post still NOT propagated.
-- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1) — STILL NO TDSD TICKET at ~14h09m+ post-Slack-post.** Process gap continues. Comparator: Access DD ops side filed TDSD-6732 within ~3h of original P1 (technical TDSD-6731 within 11min); CoralPay ZIB ops has filed nothing in 14h+.
+- TDSD-6735 (Eco settlements) — UNCHANGED INITIAL REVIEW. 8h SLA breach Mon Apr 27 17:00 WAT (still ~24h ahead).
+- TDSD-6731 (Access DD Mandate technical track) — Work in progress (Babajide assignee). UNCHANGED ~7h+. Watchpoint: bank-silence past 4h threshold; hardens for briefing-2026-04-27.
+- TDSD-6732 (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT. Stable post-closure ~4h+. Description route-pause status still not amended.
+- TDSD-6729 (Access cycle 8) — Completed/Done at 07:54 WAT (~9h17m+ stable). Slack closure post still NOT propagated.
+- **CoralPay ZIB cycle — STILL NO TDSD TICKET at ~15h09m+ post-Slack-post.**
 - TDSD-6716 (NIBSS PTSA) — Completed since 2026-04-25 16:20 WAT. Situation retired at briefing-2026-04-26 06:10 WAT tick.
-- TDSD-6645 (Monnify VA reversal) — `Escalated` last verified 2026-04-24 11:20:45 WAT; Dominic silence advancing >92h+ at this tick.
+- TDSD-6645 (Monnify VA reversal) — `Escalated` last verified 2026-04-24 11:20:45 WAT; Dominic silence advancing >93h+ at this tick.
 - TDSD-6699 (Firewall HA) — `Awaiting implementation` last verified 2026-04-23 15:16:30 WAT; 3d+ at this tick.
 
-**Cross-source disambiguation:** Email 0 deltas. Slack 0 deltas all 5 Tier 1 channels. Calendar 0 priority signals. Drive 0 in-window files.
+**Cross-source disambiguation:** Email 0 Layer-1 / 0 operational-keyword deltas; broad sweep surfaced 1 issuer-bucket-scope thread (Fidelity DCIR credential reset Awareness — see source-config-email). Slack 0 deltas all 5 Tier 1 channels. Calendar 0 priority signals. Drive 0 in-window files.
 
-**Immediate dispatch this tick:** NO. TDSD-6735 is Briefing-tier (active-situation match but no Immediate trigger keyword/priority). No P1 keyword, no security signal, no SLA breach <1h.
+**Immediate dispatch this tick:** NO. No Layer A delta, no priority/status transition, no situation-entity match.
 
-Factors: source=jira, skim_tick, layer_a_one_delta_tdsd6735_eco_settlements, fourth_operational_layer_on_ecobank_in_9_days, severity_significant_large_customer_ecobank_component_ats, sunday_duty_officer_filing, active_situation_entity_match=ecobank-rc91-on-nus-nodes, layer_b_zero, technical_track_tdsd6731_unchanged_6h+, coralpay_zib_no_ticket_14h09m+, sunday_afternoon_quiet_on_jira_path_except_eco_settlements, no_immediate_dispatch_this_tick, briefing_apr27_decision_item_candidate.
+Factors: source=jira, skim_tick, layer_a_zero, layer_b_zero_via_proper_jql, two_below_threshold_observations_as-4114_as-4115, routine_project_setup_no_active_situation_match, coordinated_kickoff_create_pair_within_30s, sunday_evening_quiet_on_jira_path, no_immediate_dispatch_this_tick, coralpay_zib_no_ticket_15h09m+_continues, access_dd_technical_unchanged_7h+_watchpoint_hardens_for_briefing_apr27, eco_settlements_tdsd6735_initial_review_unchanged_24h_to_sla.
+
+### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (preserved summary)
+
+16:10 WAT Apr 26 Sunday skim. Layer A 1 delta — TDSD-6735 NEW Eco settlements (15:59:43 WAT). Briefing-tier. Active-situation match Ecobank — RC91 on NUS Nodes (4th operational layer). Situation page updated. Layer B 0. No Immediate dispatch.
 
 ### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
 
