@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T19:10:00Z (20:10 WAT). 20:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged. Lattice deadline Mon Apr 27 ~1d4h remaining."
-updated: 2026-04-25
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged. Lattice deadline Mon Apr 27 ~1d7h remaining."
+updated: "2026-04-26T05:28:08Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T19:10:00Z"
+last_processed: "2026-04-26T05:10:00Z"
 ---
 
 
@@ -29,75 +29,55 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, weekend zero-delta unchanged
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Sun clear + Mon Apr 27 11-meeting day with 2 hard overlaps + Lattice deadline 41h50m
 
-20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h. `list_events` Apr 25 20:00 WAT → Apr 27 23:59 WAT (timeZone Africa/Lagos) returned 12 events: 11 Mon Apr 27 meetings (Direct to Bank Stand-up, PTSP Weekly Stand-up, Cards & Account All Hands, Channels Onboarding & Disbursement, TPP x Platformization, Phoenix Stage 1 Weekly Check-in, Juliana Switch Daily Standup, Fraud Monitoring, Project Phoenix CI&P kick-off, ATPP Standup, Tech Support, Product-Engineering Sync) plus Lattice Review recurring block. **Zero events scheduled for tonight (Sat) or tomorrow (Sun).** Two Mon Apr 27 events with `responseStatus=needsAction` for user (Phoenix CI&P kick-off 15:00–16:00 WAT, TPP x Platformization 11:30–12:00 WAT) — both `updated` predates 17:10:00Z window cutoff; no new RSVP-required deltas this tick. "Direct to Bank: Daily stand up" updated 10:51:57Z (11:51 WAT) — predates window, not a delta. Weekend remains clear. Lattice deadline Mon Apr 27 ~1d4h remaining.
+06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick). `list_events` Apr 26 06:00 WAT → Apr 27 23:59 WAT (timeZone Africa/Lagos) returned 12 events:
 
-Factors: source=calendar, skim_tick, saturday_evening, weekend_clear_unchanged, monday_apr27_meeting_density_high, two_pending_rsvp_predate_window, lattice_deadline_apr27_1d4h_remaining, zero_priority_signal_match, no_immediate_dispatch.
+**Sunday Apr 26: 0 events** (Lattice Review recurring downward review block only — same as Saturday). Calendar clear.
 
-### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, weekend zero-delta unchanged (preserved summary)
+**Monday Apr 27: 11 events** —
+1. 08:30–09:30 WAT — Direct to Bank: Daily stand up (recurring, Khadijat Musa organizer, updated 03:28 WAT Apr 26 → minor delta in metadata)
+2. 09:45–10:15 WAT — PTSP Weekly Stand-up (recurring, Ifeoluwa Aliyu organizer)
+3. 10:30–11:15 WAT — Cards and Account: All Hands (recurring, David Redemi organizer)
+4. **11:30–12:00 WAT — TPP × Platformization** (one-off, Tracy Ojaigho creator, created Apr 24 16:31 WAT, updated Apr 26 00:33 WAT — `responseStatus=needsAction` for user)
+5. **11:30–12:30 WAT — Channels Onboarding & Disbursement** (recurring, Barakat Ajadi organizer — `responseStatus=accepted`) — **HARD OVERLAP with #4**
+6. 12:00–13:00 BST = 13:00–14:00 WAT — Phoenix Stage 1 Weekly Check in (recurring, Ravi Jakhodia)
+7. 13:30–14:10 WAT — Juliana Switch Daily Standup (recurring, June Johnson)
+8. 14:10–15:10 WAT — Fraud monitoring plan and concerns (one-off, June Johnson, created Apr 20)
+9. 15:00–16:00 WAT — Project Phoenix CI&P kick off meeting (one-off, Tracy Ojaigho, created Apr 22)
+10. **16:00–17:00 WAT — ATPP Daily Standup Meeting** (recurring, Ruth Adetunji — `responseStatus=accepted`)
+11. **16:00–17:00 WAT — Tech support meeting** (recurring, Chidera Molokwu — `responseStatus=accepted`) — **HARD OVERLAP with #10**
+12. 18:00–19:00 WAT — Product - Engineering Sync (recurring, user organizer)
 
-18:10 WAT Apr 25 Saturday skim tick. 13 events Apr 25 18:00 WAT → Apr 27 23:59 WAT. Zero events Sat/Sun past 18:00 WAT. Two Mon Apr 27 events needsAction (Phoenix CI&P, TPP x Platformization) predate window. Weekend clear. Lattice deadline ~1d6h.
+**Lattice Review** — 8 Pending Downward Reviews recurring block ends Apr 28 00:00 (Africa/Lagos = ~Apr 27 23:00 WAT) → effective deadline ~Apr 27 end-of-day → **41h50m remaining** at this tick.
 
-### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
+**Priority signal matches:**
+- Priority signal #1 (declined RSVPs): none observed.
+- Priority signal #2 (same-day/next-day invites): TPP × Platformization (created Apr 24, ~3 days advance — not same-day) and Tracy's Project Phoenix CI&P (created Apr 22, 5d advance).
+- Priority signal #5 (back-to-back overload): Mon Apr 27 has 6 consecutive meetings 09:45–17:00 WAT with only one ~30min gap (12:00→13:00 WAT) and the two 11:30 + 16:00 hard overlaps. **Overload condition met.**
+- Hard overlaps × 2: 11:30 (TPP×Plat 30min vs Channels Onboarding 60min); 16:00 (ATPP vs Tech support, both 60min).
 
-17:10 WAT Apr 25 Saturday skim tick. 1 event (Lattice recurring, stale). Saturday + Sunday calendar still clear. Lattice deadline ~1d6h remaining.
+**Briefing-2026-04-26 D4** — covers Mon meeting choices + Lattice deadline.
 
-### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
+**Sunday window:** clear for D3 (bulk-triage) + D4 path 3 (Lattice batch) + D5 (dad reminder close-out).
 
-16:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Saturday + Sunday clear. Lattice deadline ~1d7h remaining.
+Factors: source=calendar, briefing_tick, sunday_clear, monday_11_meetings, hard_overlap_count_2, lattice_deadline_41h50m, overload_condition_met, weekend_clear_unchanged, briefing_tier_classification.
 
-### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
+### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, weekend zero-delta unchanged (preserved summary)
 
-15:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Saturday + Sunday clear. Lattice deadline ~1d8h remaining.
+20:10 WAT Apr 25 Saturday skim tick. 11 Mon Apr 27 events + Lattice block. Zero events Sat/Sun past 18:00 WAT. Two Mon Apr 27 events `needsAction` (Phoenix CI&P 15:00–16:00, TPP × Platformization 11:30–12:00) — predate window. Weekend clear. Lattice deadline 1d4h.
 
-### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
+### last_processed 2026-04-25T11:10:00Z–17:10:00Z — preserved summary block
 
-14:10 WAT Apr 25 Saturday skim tick. Window 12:10:00Z → 13:10:00Z = 1h. `list_events` returned 1 event (Lattice Review recurring, stale). Saturday + Sunday calendar still clear. Lattice deadline ~1d9h remaining.
+Multiple Saturday skim ticks, weekend zero-delta unchanged across all. Lattice deadline countdown.
 
-### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
+### last_processed 2026-04-25T05:09:54Z–08:10:00Z — preserved summary block
 
-13:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Saturday + Sunday calendar still clear. Lattice deadline Mon Apr 27 ~1d10h remaining.
+Saturday early ticks. 06:09 WAT briefing-tick weekend zero-delta. Open weekend window for triage compound + dad reminder + Lattice batch.
 
-### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
+### last_processed 2026-04-24T05:09:00Z–21:10:00Z — preserved summary block
 
-12:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Weekend clear. Lattice deadline ~1d11h remaining.
-
-### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), weekend zero-delta unchanged (preserved summary)
-
-11:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Weekend clear. Lattice deadline ~1d12h remaining.
-
-### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, weekend zero-delta unchanged (preserved summary)
-
-09:10 WAT Apr 25 Saturday skim tick. Lattice Review recurring only. Weekend clear. Lattice deadline 1d15h away.
-
-### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, weekend zero-delta unchanged (preserved summary)
-
-08:10 WAT Apr 25 skim. Lattice Review recurring only. Weekend clear. Lattice deadline ~1d18h away.
-
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick weekend zero-delta (preserved summary)
-
-06:09 WAT Apr 25 Saturday briefing tick. Lattice Review recurring only. Weekend clear. No priority signal matches. Open weekend window for triage compound (D4) + dad reminder (D3) + Lattice batch (deadline Mon Apr 27).
-
-### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim weekend-ahead clear (preserved)
-
-22:10 WAT Apr 24 skim. Lattice recurring only. Weekend ahead calendar-clear. No priority match.
-
-### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level zero-delta (preserved)
-
-20:10 WAT Apr 24 full tick. Product-Eng Sync + Lattice concluded; no priority match.
-
-### last_processed 2026-04-24T16:09:00Z (17:09 WAT) — TeamApt Org Changes in progress (preserved)
-
-17:09 WAT Apr 24. TeamApt Org Changes 16:30–18:00 WAT in progress.
-
-### last_processed 2026-04-24T12:09:00Z (13:09 WAT) — TeamApt Org Changes time-shift (preserved)
-
-13:09 WAT Apr 24. TeamApt Org Changes updated 12:18 WAT Pawel Swiatek — meeting 16:00 → 16:30 WAT shift.
-
-### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
-
-06:09 WAT Apr 24 briefing tick: 11 events. TeamApt Org Changes 16:00–18:00 WAT new (Pawel Swiatek). Triple-overlap resolved in briefing-2026-04-24 D2.
+Apr 24 ticks. 06:09 WAT briefing-tick 11 events. TeamApt Org Changes 16:00–18:00 WAT new (Pawel Swiatek). Triple-overlap resolved in briefing-2026-04-24 D2.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
