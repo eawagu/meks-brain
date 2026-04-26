@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
-updated: "2026-04-26T07:25:18Z"
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed 2026-04-26T11:10:00Z (12:10 WAT). 12:10 WAT Apr 26 skim-tick: 0 new files in 5h+ window since 07:10 WAT advance. Backlog drained. Normal-chain handling active."
+updated: 2026-04-26
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T07:10:00Z"
+last_processed: "2026-04-26T11:10:00Z"
 ---
 
 ## Connection
@@ -78,49 +78,19 @@ The bulk-dispatch path trades immediate brain integration (normal-chain step 3) 
 
 ## Notes
 
-### Tick 2026-04-26 08:10 WAT — skim-level zero-delta, last_processed advanced past prior backlog-drain mark
+### Tick 2026-04-26 12:10 WAT — skim-level zero-delta, last_processed advanced 4h
 
-08:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-25T08:10:00Z'` returned **0 files**. No new Notes-by-Gemini activity in 23h+ since the Apr 25 09:10 WAT bulk-dispatch drain. `last_processed` advanced from `2026-04-25T08:10:00Z` to `2026-04-26T07:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog drained — normal-chain handling is now in effect for any future Notes-by-Gemini files.
+12:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-26T07:10:00Z'` returned **0 files**. No new Notes-by-Gemini activity in 5h+ since the prior 08:10 WAT advance. `last_processed` advanced from `2026-04-26T07:10:00Z` to `2026-04-26T11:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog remains drained — normal-chain handling continues to be in effect for any future Notes-by-Gemini files.
 
-Factors: source=drive, skim_tick, zero_in_window_files, last_processed_advanced_23h, backlog_drained, normal_chain_now_active.
+Factors: source=drive, skim_tick, zero_in_window_files, last_processed_advanced_4h, backlog_drained, normal_chain_active.
 
-### Tick 2026-04-25 09:10 WAT — dark-window-recovery bulk-dispatch DRAIN, 13 files captured to ingress, Phase-2 phantom-policy deprecated
+### Tick 2026-04-26 08:10 WAT — skim-level zero-delta, last_processed advanced past prior backlog-drain mark (preserved summary)
 
-09:10 WAT Apr 25 Saturday tick. User explicit instruction: "we need to remove the hold off." Plan executed: bulk-dispatch all backlog files via `capture_note` (option 2), delete Phase-2 backlog phantom-policy from Notes (option 4), add explicit Dark-window recovery directive (option 5).
+08:10 WAT Apr 26 Sunday skim tick. `search_files` query returned 0 files. `last_processed` advanced from `2026-04-25T08:10:00Z` to `2026-04-26T07:10:00Z`. Backlog drained — normal-chain handling now active.
 
-**Backlog enumeration:** `search_files` with `title contains 'Notes by Gemini' and modifiedTime > '2026-04-20T16:09:00Z'` returned **13 files** (not 22 as previously summarized — earlier counts double-incremented across ticks when files were content-updated; live count was authoritative).
+### Tick 2026-04-25 09:10 WAT — dark-window-recovery bulk-dispatch DRAIN, 13 files captured to ingress, Phase-2 phantom-policy deprecated (preserved summary)
 
-**Dispatch breakdown (all successful):**
-
-| # | File ID prefix | Title (truncated) | Size | Transcript stripped? |
-|---|---|---|---|---|
-| 1 | 1pzVmi… | Direct to Bank standup 04-21 07:27 WAT | 7KB | n/a (no transcript layer) |
-| 2 | 1N-JHl… | TeamApt Weekly Team Meeting 04-22 | 9KB | n/a (no transcript layer) |
-| 3 | 1yK2i9… | Direct to Bank standup 04-21 08:10 WAT | 12KB | n/a (no transcript layer) |
-| 4 | 1kPhVK… | Direct to Bank standup 04-22 08:21 WAT | 13KB | n/a (no transcript layer) |
-| 5 | 11CkVP… | ATPP Daily Standup 04-20 | 18KB | NO (transcript included — small file) |
-| 6 | 1vzleq… | Cards Team Str Systems & Roadmap 04-21 | 28KB | YES |
-| 7 | 1u126O… | Interview HoE VP+ Chris Purkis 04-23 | 52KB | YES |
-| 8 | 1bVruB… | Round 2 Interview HoE Venkatesh 04-24 | 193KB | YES (~23KB captured) |
-| 9 | 1GRwuL… | Deliberation HoE batch interviews 04-24 | 373KB | YES (~14KB captured) |
-| 10 | 1onYwT… | Phoenix Stage 1 Weekly Check in 04-07/24 | 740KB | YES (~82KB captured, split line 882) |
-| 11 | 1jnbTD… | Disbursement Issues & Next steps 04-22 | 1.4MB | YES (~233KB captured, split line 5738) |
-| 12 | 1SGCDs… | Project delivery and optimization realignment 04-23 | 851KB | NO (no transcript heading found, ~65KB captured) |
-| 13 | 1cgoS4… | Disbursement-CBA integration architecture review 04-22 | 867KB | YES (~20KB captured, split line 111) |
-
-**Execution path:** Files 1–5 captured inline via direct `capture_note` calls in main heartbeat context (small enough to pass through token budget). Files 6–13 delegated to 4 parallel general-purpose subagents with isolated context budgets — each subagent handled 2 files end-to-end (read via Drive MCP → bash-based jq extraction + transcript split for large files → `capture_note` to ingress). One subagent (handling files 12–13) stalled mid-batch on file 13 — successfully retried via a fresh subagent.
-
-**Total content delivered to ingress:** ~563KB structured non-transcript content across 13 markdown files. Transcript content (where stripped) remains accessible via Drive view URLs in each capture's metadata block.
-
-**`last_processed` advanced** from `2026-04-20T16:09:00Z` to `2026-04-25T08:10:00Z` — first advance in 4d16h.
-
-**Next steps for ingest pipeline:** The ingest scheduled task will pick up the 13 captured notes on its next run, create source pages, and run brain integration (entity/concept/situation cross-referencing) per the standard ingest chain. Expected pickup: next ingest cycle.
-
-**Policy changes applied this tick:**
-1. **"Phase-2 backlog hold" language deleted** from this file. The phantom-policy referenced a non-existent dispatch process and produced a 4d16h hold for no operational benefit.
-2. **Dark-window recovery directive added** to Directives section above. Specifies the bulk-dispatch path with explicit triggers (≥3 backlog files OR >24h stale), file-size-based handling (≤300KB full / >300KB transcript-stripped), subagent budget protection, and `last_processed` advance rules.
-
-Factors: `dark_window_recovery_drain`, `13_files_dispatched_to_ingress`, `phase2_phantom_policy_deprecated`, `directive_added_dark_window_recovery`, `last_processed_advanced_4d16h`, `subagent_delegation_for_budget_protection`, `transcript_stripping_for_files_over_300kb`, `563kb_total_content_to_ingest_pipeline`, `no_immediate_dispatch`, `briefing_2026_04_26_awareness_candidate=ingest_pipeline_pickup_observation`.
+09:10 WAT Apr 25 Saturday tick. User explicit instruction: "we need to remove the hold off." 13 files dispatched to ingress via `capture_note` (subagent delegation for files 6–13 due to budget). `last_processed` advanced from `2026-04-20T16:09:00Z` to `2026-04-25T08:10:00Z` — first advance in 4d16h. Phase-2 phantom-policy deleted; Dark-window recovery directive added.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
