@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
-summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed 2026-04-26T12:10:00Z (13:10 WAT). 13:10 WAT Apr 26 skim-tick: 0 new files in 1h window. Backlog drained. Normal-chain handling continues."
-updated: 2026-04-26
+summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
+updated: "2026-04-26T13:26:41Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T12:10:00Z"
+last_processed: "2026-04-26T13:10:00Z"
 ---
 
 ## Connection
@@ -78,11 +78,15 @@ The bulk-dispatch path trades immediate brain integration (normal-chain step 3) 
 
 ## Notes
 
-### Tick 2026-04-26 13:10 WAT — skim-level zero-delta, last_processed advanced 1h
+### Tick 2026-04-26 14:10 WAT — skim-level zero-delta, last_processed advanced 1h
 
-13:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-26T11:10:00Z'` returned **0 files** in the 1h window. (Note: a broader cross-validation query `modifiedTime > '2026-04-20T16:09:00Z'` returned 5 files — all already drained via the Apr 25 09:10 WAT bulk-dispatch; titles include Round-2 HoE Interview 2026/04/24, HoE VP+ Interview 2026/04/23, Disbursement-CBA arch review 2026/04/22, Deliberation HoE batch interviews 2026/04/24, Project delivery & optimization realignment 2026/04/23. None modified after 11:10 WAT today.) `last_processed` advanced from `2026-04-26T11:10:00Z` to `2026-04-26T12:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog remains drained — normal-chain handling continues to be in effect for any future Notes-by-Gemini files.
+14:10 WAT Apr 26 Sunday skim tick. `search_files` query `title contains 'Notes by Gemini' and modifiedTime > '2026-04-26T12:10:00Z'` returned **0 files** in the 1h window. `last_processed` advanced from `2026-04-26T12:10:00Z` to `2026-04-26T13:10:00Z` per the per-tick-behavior directive (no in-window files, advance to current tick window upper bound). Backlog remains drained — normal-chain handling continues to be in effect for any future Notes-by-Gemini files.
 
 Factors: source=drive, skim_tick, zero_in_window_files_1h, last_processed_advanced_1h, backlog_drained, normal_chain_active.
+
+### Tick 2026-04-26 13:10 WAT — skim-level zero-delta, last_processed advanced 1h (preserved summary)
+
+13:10 WAT Apr 26 Sunday skim tick. `search_files` query returned 0 files. `last_processed` advanced from `2026-04-26T11:10:00Z` to `2026-04-26T12:10:00Z`. Backlog drained — normal-chain handling continues.
 
 ### Tick 2026-04-26 12:10 WAT — skim-level zero-delta, last_processed advanced 4h (preserved summary)
 
