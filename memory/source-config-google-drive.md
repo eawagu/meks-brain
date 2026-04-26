@@ -4,7 +4,7 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
-updated: "2026-04-26T19:20:08Z"
+updated: "2026-04-26T21:24:13Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-26T17:10:00Z"
@@ -58,8 +58,7 @@ When Drive MCP recovers from a multi-tick outage and a backlog has accumulated (
      ```
 3. **Budget protection** — if the heartbeat's own context budget would be exceeded by reading large files inline, delegate to subagents (Task tool) with isolated context. Each subagent processes 1–2 files end-to-end (read → split → capture) and returns a one-line confirmation. The heartbeat only sees the confirmation, not the file content.
 4. **Advance `last_processed`** to the current tick timestamp ONLY after every file has been successfully dispatched. If any file fails:
-   - Log the failure in the Notes section.
-   - Set `last_processed` to the most-recent successfully-processed file's `modifiedTime` so the next tick retries the failed file.
+   - Emit an Awareness-tier signal for the failure (documenting the failing file's title, error details, and `modifiedTime`) and set `last_processed` to the most-recent successfully-processed file's `modifiedTime` so the next tick retries the failed file.
    - Continue dispatching the remaining files (errors don't block the batch).
 5. **No Phase-2 dispatch deferral.** Bulk-dispatch IS the recovery mechanism — there is no separate Phase-2 process to hand off to. The "Phase-2 backlog hold" pattern that existed Apr 21–25 was a phantom reference to a non-existent mechanism and is now deprecated.
 
@@ -74,7 +73,7 @@ The bulk-dispatch path trades immediate brain integration (normal-chain step 3) 
 
 ### Per-tick behavior
 - `last_processed` advances to current tick time only after every in-window file has successfully completed its handling path (either normal-chain steps 1–4 or dark-window-recovery steps 1–4 above).
-- Any file that fails to download / split / process / dispatch: do NOT advance `last_processed` past the failing file's `modifiedTime`; log the failure in the Notes section and retry next tick.
+- Any file that fails to download / split / process / dispatch: do NOT advance `last_processed` past the failing file's `modifiedTime`; emit an Awareness-tier signal for the failure (documenting the failing file's title, error details, and `modifiedTime`) and retry next tick.
 
 ## Notes
 
