@@ -4,7 +4,7 @@ type:
 title: source-config-jira
 created: 2026-04-11
 summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: 1 Layer A delta — TDSD-6731 NEW 10:18 WAT \"Access | DD | Mandate Creation Failures | 20260426\" Daniel Armstrong reporter / Babajide Ojoboorun assignee (Medium, Work in progress). Process gap closed 11min post-Slack-post / 6min post-bilateral-email. Babajide assignment routes to credential-remediation track owner."
-updated: "2026-04-26T17:20:23Z"
+updated: "2026-04-26T19:19:06Z"
 cssclasses:
   - "source-config"
 last_processed: "2026-04-26T17:10:00Z"
@@ -78,88 +78,4 @@ Layer A JQL `project = TDSD AND updated >= "2026-04-26 06:10" ORDER BY updated D
 
 ## Notes
 
-### last_processed 2026-04-26T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick (12h after Sunday briefing), 0 Layer A / 1 Layer B (AS-4966 routine project-setup → Done, Awareness)
-
-18:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-evening-active-situations-in-background). Window 16:10:00Z → 17:09:00Z = 59min.
-
-**Layer A — TDSD service_desk delta:** 0 in window (`project = TDSD AND updated > "2026-04-26 17:10" ORDER BY updated DESC` → empty result). Active TDSD ticket states unchanged at this tick:
-- **TDSD-6735** (Eco settlements, NEW 2 ticks ago 15:59 WAT) — UNCHANGED INITIAL REVIEW. Watchpoint: 8h first-response SLA breach Mon Apr 27 17:00 WAT (~23h ahead).
-- **TDSD-6731** (Access DD Mandate technical track at Babajide) — UNCHANGED ~7h45m+ from filing. Watchpoint: bank-silence past 4h threshold; hardens for briefing-2026-04-27 D-tier escalation if no `accessbankplc.com` sender by 06:10 WAT Apr 27.
-- **TDSD-6732** (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT (stable post-closure ~5h+). Route-pause status in description STILL not amended.
-- **TDSD-6729** (Access cycle 8) — Completed/Done at 07:54 WAT (~10h15m+ stable post-resolution). Slack closure post still NOT propagated.
-- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1)** — STILL NO TDSD TICKET at ~16h08m+ post-Slack-post. Process gap continues. Comparator: Access DD ops side filed TDSD-6732 within ~3h of original P1 (technical TDSD-6731 within 11min); CoralPay ZIB ops has filed nothing in 16h+.
-
-**Layer B — Software projects scoped sweep: 1 delta in window via proper Layer B JQL (priority in (Highest, Blocker, Critical) OR status transition gate).**
-- **AS-4966** "Stakeholders allocation by both parties (PM & Engineering support)" — Project: AptPay Switch (AS). Status: **Done** at 17:51:40 WAT (transitioned today, status-transition gate fires). Priority: Medium. Assignee: null. Reporter: not in returned fields. **Active-situation check:** No specific bank named in summary; aligns with the AS-4114/AS-4115 pattern observed prior tick (routine new-bank project setup paperwork by AptPay-side PM). No active-situation entity match. **Classification:** Awareness-tier — routine project-setup paperwork closure on a new-bank engagement track. No briefing item; no situation page update. Recorded as observation only.
-
-**Active-situation checkpoint summary (skim-tick spot-check, derived from prior-tick state — no Jira queries this tick beyond the sweep):**
-- TDSD-6735 (Eco settlements) — UNCHANGED INITIAL REVIEW. 8h SLA breach Mon Apr 27 17:00 WAT (~23h ahead).
-- TDSD-6731 (Access DD Mandate technical track) — Work in progress (Babajide assignee). UNCHANGED ~7h45m+. Watchpoint: bank-silence past 4h threshold; hardens for briefing-2026-04-27.
-- TDSD-6732 (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT. Stable post-closure ~5h+. Description route-pause status still not amended.
-- TDSD-6729 (Access cycle 8) — Completed/Done at 07:54 WAT (~10h15m+ stable). Slack closure post still NOT propagated.
-- **CoralPay ZIB cycle — STILL NO TDSD TICKET at ~16h08m+ post-Slack-post.**
-- TDSD-6716 (NIBSS PTSA) — Completed since 2026-04-25 16:20 WAT. Situation retired at briefing-2026-04-26 06:10 WAT tick.
-- TDSD-6645 (Monnify VA reversal) — `Escalated` last verified 2026-04-24 11:20:45 WAT; Dominic silence advancing >94h+ at this tick.
-- TDSD-6699 (Firewall HA) — `Awaiting implementation` last verified 2026-04-23 15:16:30 WAT; 3d+ at this tick.
-
-**Cross-source disambiguation:** Email 1 Layer-1 NEW (Greenhouse Kuldeep Singh scorecard reminder, To:user, Briefing-tier accumulation for briefing-2026-04-27). Operational-keyword zero new. Slack 0 deltas on 4/5 Tier 1 channels; 3 bot alerts on #account-switch-alerts clustered around 18:00 WAT maintenance window start (Awareness, documented bot noise pattern). Calendar 0 priority signals. Drive 0 in-window files.
-
-**Immediate dispatch this tick:** NO. Layer A zero, Layer B 1 with no active-situation match.
-
-Factors: source=jira, skim_tick, layer_a_zero, layer_b_one_as-4966_routine_project_setup_done_transition, project=as_aptpay_switch, priority=medium, assignee=null, no_active_situation_match, awareness_tier_only, sunday_evening_quiet_on_jira_path, no_immediate_dispatch_this_tick, coralpay_zib_no_ticket_16h08m+_continues, access_dd_technical_unchanged_7h45m+_watchpoint_hardens_for_briefing_apr27, eco_settlements_tdsd6735_initial_review_unchanged_23h_to_sla.
-
-### last_processed 2026-04-26T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (preserved summary)
-
-17:10 WAT Apr 26 Sunday skim. Layer A 0 deltas in 1h window. Layer B 0 via proper JQL; broader sweep surfaced 2 below-threshold observations (AS-4114 + AS-4115 routine project-setup pair, Medium/In Progress, no transition — would not surface in proper Layer B sweep). TDSD-6731 UNCHANGED ~7h+. CoralPay ZIB no TDSD ticket 15h09m+. No Immediate.
-
-### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (preserved summary)
-
-16:10 WAT Apr 26 Sunday skim. Layer A 1 delta — TDSD-6735 NEW Eco settlements (15:59:43 WAT). Briefing-tier. Active-situation match Ecobank — RC91 on NUS Nodes (4th operational layer). Situation page updated. Layer B 0. No Immediate dispatch.
-
-### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
-
-15:10 WAT Apr 26 Sunday skim. Layer A 0 deltas, Layer B 0 deltas in 1h window. TDSD-6731 UNCHANGED ~5h+. CoralPay ZIB no ticket 13h09m+. Sunday afternoon quiet on Jira path. No Immediate.
-
-### last_processed 2026-04-26T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (preserved summary)
-
-14:10 WAT Apr 26 Sunday skim. Layer A 1 unrelated delta — TDSD-6734 NEW "UPDATE OF REJECTED REFUND STATUS TO COMPLETED_VIA_PROVIDER AS @26042026" — Samson Anaele reporter / Oladimeji Alabi assignee, Medium, In Progress. Routine refund-status correction Service Request, Awareness-tier, no active-situation match. TDSD-6731 UNCHANGED 4h+. Layer B 0 deltas. No Immediate dispatch.
-
-### last_processed 2026-04-26T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (preserved summary)
-
-13:10 WAT Apr 26 Sunday skim. Layer A 1 delta — TDSD-6732 → Completed/Done 13:01:54 WAT (operational containment ticket closed; description NOT amended → route-pause status uncertain); TDSD-6731 unchanged. Layer B 24 VTIE-* tickets created/updated by Chiagoziem Okoye 12:19–12:44 WAT — coordinated reliability program planning batch (Awareness-tier). No Immediate dispatch.
-
-### last_processed 2026-04-26T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (preserved summary)
-
-12:10 WAT Apr 26 Sunday skim tick. Layer A 1 NEW delta — TDSD-6732 NEW 11:18 WAT Kabir Yusuf "Routing paused" + "merchants notified" → Immediate trigger #7 fired, dispatched 12:11 WAT. Parallel-ticket structure with TDSD-6731 (technical/Babajide engineering) vs TDSD-6732 (operational/Kabir Yusuf containment). Boundary-case dedup on TDSD-6731 (already processed prior tick).
-
-### last_processed 2026-04-26T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (preserved summary)
-
-11:10 WAT Apr 26 Sunday skim tick. Layer A 1 delta — TDSD-6731 NEW 10:18 WAT Daniel Armstrong reporter / Babajide Ojoboorun assignee. Process gap closed 11min post-Slack / 6min post-bilateral-email. Babajide assignment routes to credential-remediation track owner. No Immediate dispatch (state-update for already-dispatched P1).
-
-### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick (preserved summary)
-
-10:10 WAT Apr 26 Sunday skim. Layer A 1 delta: TDSD-6730 NEW + Completed in same tick (historical RC96 resync, low signal). No Access DD TDSD ticket yet (process gap 38min). No CoralPay ZIB ticket (8h+).
-
-### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (preserved summary)
-
-08:10 WAT Apr 26. Layer A 1 delta — TDSD-6729 → Completed/Done at 07:54 WAT, end-to-end 5h49m. Slack-to-Jira closure lag: +∞ (no Slack closure post).
-
-### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (preserved summary)
-
-07:10 WAT Apr 26. Layer A zero. TDSD-6729 unchanged Work in progress. ZIB cycle no TDSD ticket.
-
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (preserved summary)
-
-3 Layer A deltas: TDSD-6729 NEW, TDSD-6728 Completed, TDSD-6721 Closed.
-
-### last_processed 2026-04-25T13:10:00Z–earlier — preserved summary block
-
-Apr 25 afternoon/evening ticks. 17:10 TDSD-6716 Completed leased-line RCA. 14:10 Layer B 2 ADD cluster.
-
-### last_processed 2026-04-25T07:10:00Z–earlier — preserved summary block
-
-Apr 25 morning ticks. 11:10 TDSD-6684 Resolved. 09:10 TDSD-6728 NEW.
-
-### last_processed 2026-04-24T05:09:00Z–earlier — preserved summary block
-
-Apr 24 ticks.
+(Per config-heartbeat-prompt Source-config write scope directive: heartbeat MUST NOT modify body content. Tick-level audit lives in git history. This section intentionally empty.)
