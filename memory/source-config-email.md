@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: Layer 1 zero, Layer 2 keyword pass 1 thread — Stanbic RC91 cycle 34 thread 19dc63afd3c001f0 (21:00–21:14 WAT, 14m04s bank-resolved fast-cycle, two-track with Slack); awareness candidate for briefing-2026-04-26."
-updated: "2026-04-25T21:25:21Z"
+updated: "2026-04-26T05:25:57Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-25T21:10:00Z"
+last_processed: "2026-04-26T05:10:00Z"
 ---
 
 
@@ -50,81 +50,53 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), Layer 1 zero + Layer 2 keyword 1 delta (Stanbic cycle 34, two-track with Slack)
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer 1 zero genuinely-new + Layer 2 keyword 1 delta (Hourly Reports 20260426, 14/17 routes 5min before two P1 onsets)
 
-22:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=last-tick-before-overnight-delegation-with-active-multi-bank-p1s-from-am-briefing). Window 19:10:00Z → 21:10:00Z = 2h.
+06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window.
 
-**Layer 1 query `to:me newer_than:2h`: 0 threads (clean empty result).** **Operational keyword query `(RC91 OR RC96 OR RC05 OR P1 OR outage OR NIBSS OR FCMB OR breach OR "transaction failure" OR "settlement failure") newer_than:2h`: 1 thread** — Stanbic ATS RC91 cycle 34 thread `19dc63afd3c001f0` "Stanbic | RC91| 20260425":
-- 2026-04-25T20:00:33Z (21:00:33 WAT) — Olamide Ajibulu → Stanbic IT Service Management (`itservicemanagementnigeria@stanbicibtc.com`, `servicemonitoring@stanbicibtc.com`; CC `aptpaytechnicalsupport@teamapt.com`): "Hello team, Please be informed that Stanbic bank card transactions are currently failing. This is occurring with RC 91. Kindly assist with the review."
-- 2026-04-25T20:09:38Z (21:09:38 WAT) — Bank reply Onyekachukwu Okigbo (Officer, Service Monitoring | Information Technology, Stanbic IBTC) → Olamide: "Hello @Olamide Ajibulu, Kindly reconfirm status." — standard Stanbic IT Service Management fast-cycle reconfirmation signature, mirrors cycle 31's bank-side engagement pattern.
-- 2026-04-25T20:14:37Z (21:14:37 WAT) — Olamide → Onyekachukwu: "Transactions are processing successfully."
+**Layer 1 query `to:me after:2026/04/25`: 5 threads in window, 0 genuinely-new** — all Apr 25 dated emails (BambooHR Time Off Apr 25 10:06 WAT, McKinsey QED report Apr 25 11:04 WAT, TeamApt Juliana Backoffice Update June Johnson Apr 25 07:54 WAT, NPS UAT Script old Jan, PENTEST 2FA DCIR portal old Dec/Jan) all timestamps predate Apr 25 22:10 WAT last_processed cutoff — already captured in prior ticks. Layer 1 zero genuinely-new in this 8h overnight window.
 
-**Email-confirmed end-to-end 14m04s.** Cycle 34 = 21:00–21:14 WAT bank-resolved fast-cycle. Two-track filing with Slack #teamapt-tech-operations Olamide structured P1 post 21:01 WAT (Slack-stated 10m end-to-end). Salience factors: `keyword_floor=RC91+stanbic_issuer`, `active_situation_match=stanbic_bank_ats_persistent_rc91_pattern`, `within_pattern_fast_cycle`, `bank_resolved_pre_tick`, `two_track_with_slack`. Awareness candidate for briefing-2026-04-26 (B6 calibration precedent: bank-owned recurring pattern, no Immediate re-dispatch).
+**Operational keyword query `(RC91 OR P1 OR outage OR incident OR breach OR \"settlement failure\" OR \"transaction failure\") after:2026/04/25`: 1 genuinely-new thread** —
+- **Hourly Reports 20260426 thread 19dc749cf20cd04b** — Qazim Adedigba → aptpaytechnicalsupport@teamapt.com at 01:56 WAT Apr 26: \"Hello Team, Current System Status: 14 of 17 routes are operational. Coralpay banks (FBN, PVB, and SBP) were turned off due to business decisions. Coralpay transactions are routed through the [CoralPay_Cashout failover].\" 5min BEFORE both new P1s started (CoralPay ZIB 02:01 WAT, Access Bank 02:05 WAT). Salience factors: `keyword_floor=routes_operational+coralpay`, `predates_p1_onset_by_5_to_9_min`, `ops_cycle_gap_4h14m_overnight`, awareness-tier. Briefing-2026-04-26 A4.
 
-**Active-situation entity coverage:** Stanbic ATS — situation page updated this tick to cycle 34. NIBSS PTSA bilateral 26h+ silent post-19:05 WAT Apr 24 NIBSS counter-reply (under 48h threshold; TDSD-6716 closed unilaterally per Jira sweep 17:10 WAT tick). FCMB cycle 2 silent ~6h post-16:04 WAT email-only filing (within bank-cycle envelope, no escalation criteria fired).
+Other returned threads in window are repeats already captured: Stanbic cycle 34 thread 19dc63afd3c001f0 (last activity 21:14 WAT Apr 25, predates 22:10 WAT cutoff), FCMB cycle 2 thread 19dc52c43f7e9838 (16:04 WAT Apr 25, predates), Wema cycle thread 19dc390a02e9797c (07:34–07:49 WAT Apr 25, predates), Union RC96 thread 19dc1fd7e4326d6a (00:14–02:52 WAT Apr 25, predates), Duty Handover Note 20260425 (07:06–07:10 WAT Apr 25, predates), Hourly Reports 20260425 (01:20–07:02 WAT Apr 25, predates), Mock Monitoring (11:58 WAT Apr 25, bot-to-bot), TEAMAPT Monitoring (07:32 WAT Apr 25, bot-to-bot).
 
-Factors: source=email, skim_tick, saturday_late_evening, layer1_to_me_zero, layer2_keyword_one_delta_stanbic_cycle34, two_track_with_slack, within_pattern_fast_cycle, bank_resolved_pre_tick_56m, no_immediate_dispatch, fcmb_cycle2_silent_6h_within_envelope, nibss_ptsa_bilateral_under_48h_threshold, last_tick_before_overnight_delegation.
+**Active-situation entity coverage:** CoralPay ZIB / Access Bank — see Slack source-config (both Tier 1 deltas dispatched Immediate). NIBSS PTSA bilateral 35h+ silent post-19:05 WAT Apr 24 NIBSS counter-reply (under 48h threshold; TDSD-6716 Completed unilaterally Apr 25 16:20 WAT — situation retirement candidate). FCMB cycle 2 silent 14h+ post-16:04 WAT Apr 25 email-only filing — within multi-day bank-cycle envelope; FCMB not in Apr 26 01:56 WAT hourly report failure list.
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, Layer 1 + Layer 2 both zero-delta in 2h window (preserved summary)
+Factors: source=email, briefing_tick, layer1_zero_genuinely_new, layer2_one_delta_hourly_reports_20260426, predates_p1_onset, awareness_tier, post_overnight_delegation_resume.
 
-20:10 WAT Apr 25 Saturday skim tick (Step 0: level=skim, rationale=saturday-evening-fcmb-active-this-am-quiet-priors). Window 17:10:00Z → 19:10:00Z = 2h. Layer 1 + operational keyword passes both clean. FCMB cycle 2 ~4h05m silent post-16:04 WAT filing — within envelope. NIBSS PTSA bilateral 25h+ silent (under 48h threshold).
+### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), Layer 1 zero + Layer 2 keyword 1 delta (Stanbic cycle 34, two-track with Slack) (preserved summary)
+
+22:10 WAT Apr 25 Saturday skim tick. Window 19:10:00Z → 21:10:00Z = 2h. Layer 1 zero. Operational keyword query 1 thread — Stanbic ATS RC91 cycle 34 thread `19dc63afd3c001f0` (Olamide → Stanbic 21:00:33 WAT, bank reconfirm Onyekachukwu Okigbo 21:09:38 WAT, Olamide processing-successfully 21:14:37 WAT). Email-confirmed end-to-end 14m04s, two-track with Slack #teamapt-tech-operations Olamide P1 post 21:01 WAT.
+
+### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, Layer 1 + Layer 2 both zero-delta (preserved summary)
+
+20:10 WAT Apr 25 Saturday skim. Layer 1 + operational keyword passes both clean. FCMB cycle 2 ~4h05m silent post-16:04 WAT filing — within envelope.
 
 ### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, end-of-shift handover deltas only (preserved summary)
 
-18:10 WAT Apr 25 Saturday skim tick. 2 threads in window: Daily Report #20260425 (Afeez 16:17 WAT — 14/17 routes operational, recovery trajectory +4 from 02:20 WAT) + Re: Duty Handover Note #20260425 (Afeez → Olamide 16:22 WAT, Olamide ack 16:23 WAT). Both Layer 2 keyword surface; out of scope for user direct-to-me. No briefing-tier escalation (folded into D2 multi-bank tracking). No FCMB cycle 2 follow-up post-16:04 WAT.
+18:10 WAT Apr 25 Saturday skim. Daily Report #20260425 (Afeez 16:17 WAT) + Re: Duty Handover Note (Afeez/Olamide 16:22-16:23 WAT) — Layer 2 keyword surface; out of scope direct-to-me.
 
-### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (10min late), 1 Layer 2 keyword delta — FCMB RC91 cycle 2 escalation (1-tick delay from prior tick Layer-1-only sweep) (preserved summary)
+### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick, FCMB RC91 cycle 2 escalation 1-tick delay calibration (preserved summary)
 
-17:10 WAT Apr 25 Saturday skim tick. Window 15:10:00Z → 16:10:00Z = 1h. Thread 19dc52c43f7e9838 — `FCMB | RC91 | 20260425` from Afeez Kazeem at 16:04:26 WAT to FCMB. Cycle 2 of Apr 25 (cycle 1 implicit-resolved 07:02 WAT, 13h31m gap). Filed during prior-tick window (14:10:00Z → 15:10:00Z), missed by 16:10 WAT skim-tick that ran Layer 1 only. New skim-tick directive added: MUST run operational keyword pass every tick.
+17:10 WAT Apr 25 Saturday skim. FCMB RC91 cycle 2 from Afeez 16:04:26 WAT to FCMB caught via Layer 2 keyword pass (1-tick delay from 16:10 prior tick Layer-1-only sweep). Skim-tick keyword pass directive added.
 
-### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), zero genuinely-new threads (preserved summary; CALIBRATION NOTE: Afeez FCMB email at 15:04:26Z within window MISSED by Layer-1-only sweep, recovered by next tick keyword pass)
+### last_processed 2026-04-25T13:10:00Z–15:10:00Z — preserved summary block
 
-16:10 WAT Apr 25 Saturday skim tick. Window 14:10:00Z → 15:10:00Z = 1h. Documented Layer 1 query only ("clean empty result, no residual-cache"). **CALIBRATION**: this tick missed Afeez Kazeem's FCMB | RC91 | 20260425 email filed 15:04:26Z (within window) because operational keyword pass was not executed. Next tick (17:10 WAT) recovered it via keyword sweep. Skim-tick directive added 17:10 WAT: operational keyword pass MUST run every tick.
+Multiple skim ticks Saturday afternoon, all zero-delta with one mock-bot signal discarded.
 
-### last_processed 2026-04-25T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (10min late), zero genuinely-new threads (preserved summary)
+### last_processed 2026-04-25T11:10:00Z–12:10:00Z — preserved summary block
 
-15:10 WAT Apr 25 Saturday skim tick. Window 13:10:00Z → 14:10:00Z = 1h. Layer 1 `newer_than:2h` returned 0 threads (clean empty). Zero genuinely-new. NIBSS PTSA bilateral 20h+ silent.
-
-### last_processed 2026-04-25T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (10min late), zero genuinely-new threads (preserved summary)
-
-14:10 WAT Apr 25 Saturday skim tick. Window 12:10:00Z → 13:10:00Z = 1h. Layer 1 + Operational keyword passes both clean. Zero genuinely-new threads. NIBSS PTSA bilateral 19h+ silent.
-
-### last_processed 2026-04-25T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (10min late), 1 mock-bot signal below Layer 1 threshold (preserved summary)
-
-13:10 WAT Apr 25 Saturday skim tick. Window 11:10:00Z → 12:10:00Z = 1h. Mock Monitoring Service Alert (bot-to-bot recipient, NOT Layer 1) discarded. Zero genuinely-new Layer 1 threads.
-
-### last_processed 2026-04-25T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (10min late), zero genuinely-new threads (preserved summary)
-
-12:10 WAT Apr 25 Saturday skim tick. Window 10:10:00Z → 11:10:00Z = 1h. Clean empty query result. Zero genuinely-new threads. No P1 emails. Active-situation entity coverage all within last 6h.
-
-### last_processed 2026-04-25T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (10min late), zero genuinely-new threads (preserved summary)
-
-11:10 WAT Apr 25 Saturday skim tick. Window 09:10:00Z → 10:10:00Z = 1h. Returned threads predating cutoff (Wema/BambooHR/Duty Handover/Hourly Reports/TACHA — all already captured in prior 10:10 WAT tick). Zero genuinely-new.
+Saturday late morning/midday skim ticks zero-delta.
 
 ### last_processed 2026-04-25T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, BambooHR Layer 1 calibration miss surfaced (5-day silent) (preserved summary)
 
-10:10 WAT Apr 25 Saturday skim tick. Window 08:10:00Z → 09:10:00Z = ~1h. BambooHR "Time Off Requested: Ravi Kiran Veluguleti and Muhammad Samu" 10:06 WAT — Layer 1 To:me always-surface per directive. **5th consecutive daily notification with identical payload (Apr 21–25), none surfaced in any briefings — Layer 1 directive silently bypassed.** MISS captured to `MISS-bamboohr-layer1-silent-5-days-2026-04-25.md`. Hypothesis: bot-sender heuristic over-fired and preempted Layer 1 (now corrected — directive amended above to "Bot-sender heuristic MUST NOT preempt Layer 1"). Briefing-2026-04-26 Decision candidate (Confidence: high — single clear action: approve both via BambooHR portal).
+10:10 WAT Apr 25 Saturday skim. BambooHR \"Time Off Requested: Ravi Kiran Veluguleti and Muhammad Samu\" 10:06 WAT Layer 1 To:me. **5-consecutive-day silent miss** — `bot_sender` heuristic over-fired, preempting Layer 1. Directive amended above. MISS captured.
 
-### last_processed 2026-04-25T08:10:00Z (09:10 WAT) — skim-level 09:00-cron tick, 1 thread delta (Wema RC91 cycle) (preserved summary)
+### last_processed 2026-04-25T05:09:54Z–08:10:00Z — preserved summary block
 
-09:10 WAT Apr 25 Saturday skim tick. Wema Bank RC91 thread + TEAMAPT Monitoring Service Alert. Wema cycle 14m20s bank-resolved.
+Saturday early ticks. 06:09 WAT briefing tick captured 4 in-window threads (Hourly Reports, Duty Handover, Union RC96, NIBSS PTSA counter-reply latent). 08:10 WAT skim implicit-FCMB-resolved via 14/17 trajectory.
 
-### last_processed 2026-04-25T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick, 4 in-window threads (FCMB implicit-resolved via 14/17 trajectory, preserved summary)
+### last_processed 2026-04-24T05:09:00Z–21:10:00Z — preserved summary block
 
-08:10 WAT Apr 25 skim. 4 in-window threads: Hourly Reports update 07:02 WAT (14/17 routes operational, FCMB/Habari/Zenith/Union all dropped from failure list); Duty Handover 08:06 WAT (Qazim → Afeez, 14/17 confirmed stable + "Coralpay transactions are routed through the CoralPay_Cashout"); TACHA Backoffice update 06:54 WAT (June Johnson, internal Layer 1 to:me); Union RC96 thread (no new activity post-resolution). Implicit FCMB P1 closure resolves morning briefing D1 stale-by-trajectory.
-
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, 4 in-window threads (preserved summary)
-
-06:09 WAT Apr 25 briefing tick. 8h overnight window. 4 in-window threads: Hourly Reports 02:20 WAT (10/17 routes, Habari/Zenith failing RC91 to partners + Union RC96); Duty Handover 23:05 WAT Apr 24 (Olamide → Qazim, 14/17, FBN/PVB/SBP off); Union RC96 thread (filed 01:14 WAT, bank-resolved 02:52 WAT); NIBSS PTSA counter-reply thread (no new activity). MCP health 45h+ stable post-Apr-23-recovery.
-
-### last_processed 2026-04-24T21:10:00Z (22:10 WAT) — skim-level zero-genuinely-new (preserved summary)
-
-22:10 WAT Apr 24 skim. 1 thread returned (Fidelity PayFac Settlement) — predates window, residual-cache filtered. 0 genuinely new. NIBSS PTSA bilateral negotiation in read-latency state.
-
-### last_processed 2026-04-24T19:10:00Z (20:10 WAT) — full-level NIBSS counter-reply (preserved summary)
-
-20:10 WAT Apr 24 full tick. Thread 19dc0ab7bafe02e0 NIBSS counter-reply 19:05 WAT — contested-attribution round 2 stance with CTO Oladapo CC. Briefing tier delta to [[NIBSS PTSA — VPN Flapping Apr 22]].
-
-### last_processed 2026-04-24T05:09:00Z (06:09 WAT) — briefing-tick (preserved summary)
-
-06:09 WAT Apr 24 briefing tick: 86h+ backlog sweep via 5 narrow buckets. Key captures: Ecobank compound failure; TeamApt Org Changes invite; Jira approval queue; Wema Apr 23; Union RC69 Apr 23; AWS Outposts 7-day prompt.
+Apr 24 ticks. 06:09 WAT briefing-tick 86h+ backlog sweep via 5 narrow buckets. 20:10 WAT NIBSS counter-reply contested-attribution round 2.
