@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-26T14:10:00Z (15:10 WAT). 15:10 WAT Apr 26 skim-tick: 0 Tier 1 deltas (all 5 channels silent in 1h window); 0 DM deltas; 0 keyword deltas. Sunday afternoon quiet on Slack path. CoralPay ZIB cycle silent ~13h09m+ since 02:01 WAT filing (continuation, no novel Immediate trigger). Access DD Mandate ~5h33m active (TDSD-6731 still WIP at Babajide). No Immediate dispatch."
-updated: 2026-04-26
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: 0 Tier 1 deltas (all 5 channels silent in 1h window); 0 DM deltas; 0 keyword deltas. Sunday morning quiet on Slack path. CoralPay ZIB cycle silent 9h11m+ (no novel Immediate trigger). Access DD Mandate ~1h36m active (TDSD-6731 filed 10:18 WAT — Jira-side disambiguator)."
+updated: "2026-04-26T15:22:17Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T14:10:00Z"
+last_processed: "2026-04-26T15:10:00Z"
 ---
 
 
@@ -50,35 +50,39 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
-### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (9h after Sunday briefing), 0 deltas all paths
+### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10h after Sunday briefing), 0 deltas all paths
 
-15:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-p1-watch). Window 13:10:00Z → 14:10:00Z = 1h. Deterministic epoch compute: `oldest=int(parse_iso('2026-04-26T13:10:00Z').timestamp())=1777209000`; assertion `oldest (1777209000) <= now (1777212664)` passed.
+16:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-quiet-priors). Window 14:10:00Z → 15:10:00Z = 1h. Deterministic epoch compute: `oldest=int(parse_iso('2026-04-26T14:10:00Z').timestamp())=1777212600`; assertion `oldest (1777212600) <= now (1777216234)` passed.
 
-**Tier 1 channel reads (5 channels):**
-- **#teamapt-tech-operations (C0ABU8GMW75): 0 messages.** Both active P1s (CoralPay ZIB, Access DD Mandate) remain Slack-silent.
-- **#account-switch-alerts (C098VUQCVRA): 0 messages.**
-- **#teamapt-x-paystack-transfer-support (C096LCNP26P): 0 messages.** Maintenance window 18:00 WAT → 21:00 WAT is ~2h50m from this tick.
-- **#notifications-support-dev (C08PH35PLPK): 0 messages.**
-- **#go-subscribe-by-teamapt (C090UHR9VDE): 0 messages.**
+**Tier 1 channel reads (5 channels):** all 5 returned 0 messages in window.
+- #teamapt-tech-operations (C0ABU8GMW75): 0 messages. Both active P1s remain Slack-silent.
+- #account-switch-alerts (C098VUQCVRA): 0 messages.
+- #teamapt-x-paystack-transfer-support (C096LCNP26P): 0 messages. Account Switch maintenance window 18:00 WAT (~1h50m from this tick).
+- #notifications-support-dev (C08PH35PLPK): 0 messages.
+- #go-subscribe-by-teamapt (C090UHR9VDE): 0 messages.
 
-**DM scan `to:me after:1777209000`: 0 results.** No DMs to user.
+**DM scan `to:me after:<date>`: 0 results.**
 
-**Keyword sweep `(P1 OR RC91 OR RC96 OR RC05 OR outage OR breach OR Mandate OR resolved OR settlement OR CoralPay OR ZIB OR Access) after:2026-04-26` filtered to ts>1777209000: 0 results.** No P1/keyword matches in 1h window across public+private channels.
+**Keyword sweep filtered to ts>1777212600: 0 results.**
 
 **Active P1 silence-rule check (continuation-only, no novel triggers):**
-- **CoralPay ZIB RC91** active ~13h09m+ — Slack silent for ~9h+ post-12:11 WAT prior dispatch. Continuation of condition already dispatched at 06:22, 10:10, 12:11 WAT today. No novel trigger this tick.
-- **Access Bank cycle 8 RC91** — bank-resolved 07:54 WAT. **Slack closure post still NOT propagated** at ~7h17m+ post-resolution. Workflow gap continues.
-- **Access Bank DD Mandate Creation Failures** — ~5h33m active. **Bilateral email path saw the 12:55 UTC ambiguous-sender thread message captured at the prior tick (predates this 1h window cutoff).** No new email or Slack signals this hour. TDSD-6731 (technical track at Babajide) UNCHANGED ~5h+. Bank-silence watchpoint 4h post-bilateral threshold passed at 14:12 WAT prior tick — bank-side `accessbankplc.com` sender still not visible. Watchpoint shifts to briefing-2026-04-27 Decision-item escalation if no `accessbankplc.com` sender by 06:10 WAT Apr 27 (per source-config-email).
+- **CoralPay ZIB RC91** active ~14h09m+ — Slack silent for ~10h+ post-12:11 WAT prior dispatch. Continuation of condition already dispatched at 06:22, 10:10, 12:11 WAT today.
+- **Access Bank cycle 8 RC91** — bank-resolved 07:54 WAT. Slack closure post still NOT propagated at ~8h17m+ post-resolution. Workflow gap continues.
+- **Access Bank DD Mandate Creation Failures** — TDSD-6731 (technical track at Babajide) UNCHANGED ~6h+. Bank-silence watchpoint passed (4h post-bilateral threshold passed at 14:12 WAT prior tick). Watchpoint stays in place for briefing-2026-04-27 Decision-item escalation if no `accessbankplc.com` sender by 06:10 WAT Apr 27.
 
-**Cross-source disambiguation:** Email 0 deltas. Jira Layer A 0 deltas. Calendar 0 priority signals / 0 metadata updates. Drive 0 in-window files.
+**Cross-source disambiguation:** Email 0 deltas. Jira Layer A 1 delta (TDSD-6735 Eco settlements — fourth operational layer; Briefing-tier, situation page updated). Calendar 0 priority signals / 0 metadata updates. Drive 0 in-window files.
 
-**Immediate dispatch this tick:** NO. Zero Slack deltas in window. All active-P1 conditions are continuation of already-dispatched alerts.
+**Immediate dispatch this tick:** NO. Zero Slack deltas; TDSD-6735 is Briefing-tier on Jira side (no Slack propagation observed).
 
-Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777209000, oldest_le_now_assertion_passed, tier1_zero_all_5_channels, dm_zero, keyword_zero, sunday_afternoon_quiet_on_slack_path, no_zib_signal_9h_post_prior_dispatch, no_access_dd_slack_propagation_of_email_signal, bank_silence_watchpoint_passed_4h_threshold_at_prior_tick, no_immediate_dispatch_this_tick.
+Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777212600, oldest_le_now_assertion_passed, tier1_zero_all_5_channels, dm_zero, keyword_zero, sunday_afternoon_quiet_on_slack_path, no_zib_signal_10h_post_prior_dispatch, no_access_dd_slack_propagation_of_email_signal, account_switch_maintenance_in_1h50m_no_pre_window_announcement_yet, no_immediate_dispatch_this_tick.
+
+### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
+
+15:10 WAT Apr 26 Sunday skim. 0 Tier 1 / 0 DM / 0 keyword. CoralPay ZIB silent 13h09m+. Access DD bank-silence watchpoint passed 4h threshold. No Immediate.
 
 ### last_processed 2026-04-26T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (preserved summary)
 
-14:10 WAT Apr 26 Sunday skim. 5 of 5 Tier 1 channels 0 deltas; 0 DM; 0 keyword. CoralPay ZIB silent 12h08m+. Access DD bank-silence watchpoint reaches 4h threshold at 14:12 WAT (3min post-tick). Email 1 ambiguous-sender thread message at 13:55 WAT (`aptpaytechnicalsupport@teamapt.com` signed "Temitayo Bashir Ola-Buraimo") — conservative read = TeamApt internal acknowledgment, bank silence persists. No Immediate dispatch.
+14:10 WAT Apr 26 Sunday skim. 5 of 5 Tier 1 channels 0 deltas; 0 DM; 0 keyword. CoralPay ZIB silent 12h08m+. Access DD bank-silence watchpoint reaches 4h threshold at 14:12 WAT (3min post-tick). Email 1 ambiguous-sender thread message at 13:55 WAT (`aptpaytechnicalsupport@teamapt.com` signed \"Temitayo Bashir Ola-Buraimo\") — conservative read = TeamApt internal acknowledgment, bank silence persists. No Immediate dispatch.
 
 ### last_processed 2026-04-26T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (preserved summary)
 
