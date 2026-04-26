@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: zero Layer A TDSD transitions in 1h post-briefing window. TDSD-6729 (Access Bank cycle 8) unchanged Work in progress; CoralPay ZIB cycle still has no TDSD ticket (process gap continues at 5h+ post-Slack-post)."
-updated: "2026-04-26T07:23:03Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T09:10:00Z (10:10 WAT). 10:10 WAT Apr 26 skim-tick: 1 Layer A delta — TDSD-6730 Resync RC96 created+completed 09:20 WAT Daniel Armstrong (historical Apr 23 resync, low signal, awareness-only). No new TDSD ticket for the 09:36 WAT Access Bank DD Mandate P1 yet (process gap 38min); no new ticket for CoralPay ZIB cycle (8h+ process gap continues)."
+updated: "2026-04-26T09:26:12Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T07:10:00Z"
+last_processed: "2026-04-26T09:10:00Z"
 ---
 
 
@@ -69,49 +69,60 @@ When the source-config trace describes an active-situation ticket's state in nar
 3. **Per-ticket reasoning** — classify by archetype + priority + active-situation match; record triggering factors.
 4. **Client-side UTC filter** — Jira JQL interprets the `\"YYYY-MM-DD HH:MM\"` datetime literal in the user's configured timezone (Africa/Lagos = WAT). Since `last_processed` is stored in UTC (`YYYY-MM-DDTHH:MM:SSZ`), the server-side JQL filter using the UTC hour as-is is effectively 1h lax — it lets through updates from the hour before `last_processed`. Therefore the heartbeat MUST apply a client-side filter: convert each returned issue's `fields.updated` to UTC and compare to `last_processed`; discard any issue whose UTC-updated time ≤ `last_processed`.
 
+### Known limitation — Broad updated-window queries exceed token budget (observed 2026-04-26 10:10 WAT)
+Layer A JQL `project = TDSD AND updated >= \"2026-04-26 06:10\" ORDER BY updated DESC` against a window with multiple-day-trailing updates produced a 107K-character response that exceeded the tool token budget. Mitigation: keep `updated >= ...` window narrow (≤6h on full-tick, ≤1h on skim-tick) and cap `maxResults` at 25 unless a specific narrow query is in use. When the broad sweep is needed, scope by active-situation entity (e.g., `(text ~ \"Access\" OR text ~ \"CoralPay\" OR text ~ \"NIBSS\")`) or by status transition rather than pulling all `updated` issues.
+
 ## Notes
 
-### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (2h after Sunday briefing), Layer A 1 delta — TDSD-6729 RESOLVED (Access cycle 8 bank-resolved end-to-end 5h49m); ZIB cycle still no TDSD ticket (6h+ process gap continues)
+### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick (4h after Sunday briefing), Layer A 1 delta — TDSD-6730 Resync RC96 created+completed 09:20 WAT Daniel Armstrong (historical Apr 23 resync, low signal, awareness-only); no TDSD ticket for new Access DD Mandate P1 (process gap 38min); no TDSD ticket for ZIB cycle (8h+ continues)
 
-08:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-post-briefing-active-situations). Window 06:10:00Z → 07:10:00Z = 1h post-prior-tick. **Layer A only this tick** (skim-tick fast-path; Layer B deferred — no observed P1/Blocker filings in last 24h on software projects, ZIB cycle has no software-project filings to surface).
+10:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Window 07:10:00Z → 09:10:00Z = 2h. **Layer A only this tick** (skim-tick fast-path). Active-situation key spot-check used (TDSD-6729, TDSD-6728, TDSD-6645, TDSD-6711, TDSD-6716, TDSD-6699, TDSD-6690, TDSD-6684) plus narrow time-windowed `created >= \"2026-04-26 06:10\"` filter to catch new tickets.
 
-**Layer A (TDSD) JQL `project = TDSD AND updated >= \"2026-04-26 07:10\" ORDER BY updated DESC` returned 1 issue:**
+**Layer A new-ticket filter `project = TDSD AND created >= \"2026-04-26 06:10\" ORDER BY created DESC` returned 1 issue:**
 
-1. **TDSD-6729 — Updated to Completed** "Access Bank | ATS | RC 91 Failures | 20260426", Medium, [System] Incident, reporter+assignee Qazim Adedigba, status transition `Work in progress → Completed` (statusCategory `done`/green), Resolution `Done`, updated 2026-04-26T07:54:06.857+0100 (06:54 UTC). Cycle 8 closure on Jira. **End-to-end on Slack 02:05 WAT → ~07:54 WAT = 5h49m. Slack-to-Jira lag at filing was 19min; Jira-to-Slack lag at closure is currently +∞ (no Slack closure post observed).** **First Access Bank RC91 cycle to break the 3–50m bank-auto-recovery pattern of cycles 1–7** — but ultimately bank-resolved without intervention. Salience factors: `archetype=service_desk`, `priority=medium`, `status_transition=work_in_progress→completed`, `resolution=done`, `active_situation_match=access-bank-multi-track-failures`, `cycle8_anomalous_duration_5h49m`, `bank_resolved_no_intervention`, `consistent_with_implicit_resolve_pattern_at_anomalous_duration`, `slack_closure_post_absent`, `briefing_apr27_decision_candidate_post_mortem_+_workflow_gap`. **Briefing-2026-04-27 carryforward — closure of Briefing-2026-04-26 D2.**
+1. **TDSD-6730 — NEW + Completed in same tick** "Resync | RC96 | 20260423", Medium, [System] Service Desk Incident, reporter+assignee Daniel Armstrong. Created 09:20:48 WAT Apr 26, Status: Completed (statusCategory `done`/green). **Title references RC96 cycle dated 20260423 (Apr 23) — historical resync.** Daniel filing+closing a historical RC96 cycle as part of day-shift onboarding cleanup. **Low signal value** — resync is a routine ops action, not an incident. **Crucially: no NEW TDSD ticket for the 09:36 WAT Access Bank DD Mandate Creation Failures P1** that Daniel filed on Slack at 10:07 WAT — process gap 38min at this tick (parallel to FCMB cycle 1+2 + CoralPay ZIB Apr 26 process gap). Salience factors: `archetype=service_desk`, `priority=medium`, `created+completed_same_tick`, `historical_resync_action`, `low_signal_value`, `awareness_only`, `daniel_armstrong_day_shift_cleanup`.
 
 **Active-situation checkpoint summary (skim-tick spot-check on highest-salience tickets):**
-- TDSD-6729 (Access Bank cycle 8) — **RESOLVED** at 07:54 WAT, see above. Situation page [[Access Bank — Multi-Track Failures]] updated this tick.
-- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1) — STILL NO TDSD TICKET at 6h09m+ post-Slack-post.** Process gap continues. Per source-config-jira historical observation, ZIB cycle is a single-track-Slack regression. The absence of a TDSD ticket means **no Jira-side disambiguator is available for ZIB resolution** — cycle state inferable only from Slack (silent) or future explicit ops posts. Situation page [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]] updated this tick.
-- TDSD-6716 (NIBSS PTSA) — Completed since 2026-04-25 16:20 WAT (19h+ stable post-closure at this tick). Situation `resolving` retirement-candidate carries forward.
-- TDSD-6645 (Monnify VA reversal) — `Escalated` per last verified Apr 24 22:10 WAT; Dominic silence advancing >85h+ at this tick (re-verify at next sweep that includes ATS query).
-- TDSD-6699 (Firewall HA) — implementation window opened 18:00 WAT Apr 25, 14h+ ago; re-verify at next briefing tick.
+- TDSD-6729 (Access Bank cycle 8) — Completed/Done at 07:54 WAT (prior-tick observation, unchanged).
+- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1) — STILL NO TDSD TICKET at 8h09m+ post-Slack-post.** Process gap continues. No Jira-side disambiguator available.
+- **Access Bank DD Mandate Creation Failures (Apr 26 09:36 WAT P1) — NO TDSD TICKET YET** at 38min post-Slack-post. New process-gap track to monitor.
+- TDSD-6716 (NIBSS PTSA) — Completed since 2026-04-25 16:20 WAT (17h+ stable post-closure at this tick). Situation retired 06:10 WAT briefing tick.
+- TDSD-6645 (Monnify VA reversal) — `Escalated` last verified 2026-04-24 11:20:45 WAT (per ID-list spot-check this tick); Dominic silence advancing >85h+. **Re-verified live** — status unchanged, statusCategory.key `indeterminate`/yellow. Pure aging.
+- TDSD-6699 (Firewall HA) — `Awaiting implementation` last verified 2026-04-23 15:16:30 WAT; per direct re-check. Status unchanged. Last update 2d18h+ ago.
+- TDSD-6690 (Account Switch Reports stopgap) — `Completed` (re-verified live, last update 2026-04-22).
+- TDSD-6684 (Pending Refunds) — `Resolved` (re-verified live, last update 2026-04-25 10:54).
+- TDSD-6711 (Ecobank portal) — `Completed` (re-verified live, last update 2026-04-25 08:13).
 
-**Cross-source:** Slack zero deltas on Tier 1 (ops + alerts) — 5h49m P1 closure did not propagate to Slack ops channel. Email caught 2 deltas — Hourly Reports 20260426 3rd byte-identical resend at 07:50 WAT (post-TDSD-6729-creation AND -resolution proves ops-cycle reporting failure structurally) + routine duty handover at 08:01 WAT. Calendar zero new. Drive zero in-window.
+**Cross-source disambiguation:** Slack caught the new DD P1 (Daniel 10:07 WAT) — distinct failure mode from cycles 1–8. Email caught the bilateral DD track (10:12 WAT). Calendar zero new in 2h. Drive not checked.
 
-**No Immediate dispatch this tick** — TDSD-6729 → Completed is a resolution signal, not an Immediate trigger.
+**No Immediate dispatch from Jira-side this tick** — TDSD-6730 is a routine resync, no incident value. The new DD P1 Immediate dispatch was Slack-driven (Slack post preceded any Jira filing — no TDSD ticket exists yet for the DD P1).
 
-Factors: source=jira, skim_tick, layer_a_one_delta_tdsd6729_completed_done, end_to_end_5h49m_anomalous_duration_eventually_resolved, layer_b_deferred_skim_fast_path, no_zib_tdsd_ticket_6h+_process_gap_continues, jira_to_slack_closure_lag_unbounded_at_tick, briefing_apr27_decision_candidate_post_mortem_+_workflow_gap, no_immediate_dispatch.
+Factors: source=jira, skim_tick, layer_a_one_delta_tdsd6730_routine_resync, layer_b_deferred_skim_fast_path, no_zib_tdsd_ticket_8h+, no_dd_p1_tdsd_ticket_38min_process_gap_track, broad_query_token_budget_lesson, active_situation_re_verification_passed, no_immediate_dispatch.
 
-### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Layer A 0 deltas in 1h post-briefing window (preserved summary)
+### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (2h after Sunday briefing), Layer A 1 delta — TDSD-6729 RESOLVED (preserved summary)
 
-07:10 WAT Apr 26 Sunday skim tick. Window 05:10:00Z → 06:10:00Z = 1h. Layer A only (skim fast-path). **Layer A JQL returned 0 issues.** TDSD-6729 (Access Bank cycle 8) unchanged from briefing-tick state (Work in progress, Resolution null). No new TDSD ticket for CoralPay ZIB cycle (5h+ process gap). Cross-source: Slack zero, email Hourly Reports 06:44 WAT byte-identical resend (contradicts TDSD-6729). No Immediate dispatch.
+08:10 WAT Apr 26 Sunday skim tick. TDSD-6729 → Completed/Done at 07:54 WAT, end-to-end 5h49m on Slack. Slack-to-Jira closure lag: +∞ (no Slack closure post). No Immediate dispatch.
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer A 3 deltas (TDSD-6729 NEW + TDSD-6728 Completed + TDSD-6721 Closed) + Layer B 0 deltas (preserved summary)
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Layer A 0 deltas (preserved summary)
 
-06:10 WAT Apr 26 Sunday briefing tick. Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window. **Layer A 3 issues:** (1) TDSD-6729 NEW Access Bank cycle 8 02:24 WAT Work in progress (Briefing-2026-04-26 A2/D2). (2) TDSD-6728 → Completed at 02:13 WAT (CoralPay ZIB Apr 25 cycle 18h44m end-to-end / 6h44m downtime, failover-to-CoralPay_Cashout workaround documented; direct precursor to Apr 26 02:01 WAT cycle recurrence; Briefing-2026-04-26 A1). (3) TDSD-6721 PENDING PAYABLE POSTING Closed 23:44 WAT Apr 25 (routine, Briefing-2026-04-26 A3). **Layer B 0 issues.** Active-situation checkpoint summary covered above. No Immediate-tier Jira-driven dispatch (P1s Slack-originated, dispatched via Slack DM).
+07:10 WAT Apr 26. Layer A zero. TDSD-6729 unchanged Work in progress. ZIB cycle no TDSD ticket.
+
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26) (preserved summary)
+
+3 Layer A deltas: TDSD-6729 NEW, TDSD-6728 Completed, TDSD-6721 Closed.
 
 ### last_processed 2026-04-25T13:10:00Z–22:10:00Z — preserved summary block
 
-Multiple Saturday afternoon/evening ticks. 22:10 WAT zero across both layers; FCMB cycle 2 process-gap status continued. 17:10 WAT TDSD-6716 NIBSS PTSA Completed (situation stable→resolving). 14:10 WAT Layer B 2 ADD cluster. 13:10 WAT TDSD-6690 staleness correction.
+Apr 25 afternoon/evening ticks. 17:10 TDSD-6716 Completed leased-line RCA. 14:10 Layer B 2 ADD cluster.
 
 ### last_processed 2026-04-25T07:10:00Z–12:10:00Z — preserved summary block
 
-Saturday morning ticks. 11:10 WAT TDSD-6684 Resolved 10:54 WAT (Dominic silence broken). 09:10 WAT TDSD-6728 NEW CoralPay ZIB Interchange Stopped state incident (Apr 25 cycle precursor). 08:10 WAT TDSD-6727 Union RC96 Completed.
+Apr 25 morning ticks. 11:10 TDSD-6684 Resolved. 09:10 TDSD-6728 NEW.
 
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep, Layer A 2 deltas + Layer B 2 deltas (preserved summary)
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep (preserved summary)
 
-06:09 WAT Apr 25 briefing tick. Layer A 2: TDSD-6727 Union RC96 + TDSD-6726 Habari RC91 Problem ticket. Layer B 2: ADD-4599 + ADD-4597 Bukola Taiwo metadata.
+Apr 25 briefing tick.
 
 ### last_processed 2026-04-24T05:09:00Z–21:10:00Z — preserved summary block
 
-Apr 24 ticks. 06:09 WAT briefing-tick 5 TDSD deltas. 17:09 WAT TDSD-6713 Keystone Apr 24 cycle Completed. 20:10 WAT TDSD-6725 Paystack ₦4.5B Resolved.
+Apr 24 ticks.
