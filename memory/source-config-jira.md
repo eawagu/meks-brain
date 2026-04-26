@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: 1 Layer A delta — TDSD-6731 NEW 10:18 WAT \"Access | DD | Mandate Creation Failures | 20260426\" Daniel Armstrong reporter / Babajide Ojoboorun assignee (Medium, Work in progress). Process gap closed 11min post-Slack-post / 6min post-bilateral-email. Babajide assignment routes to credential-remediation track owner."
-updated: "2026-04-26T13:23:44Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T14:10:00Z (15:10 WAT). 15:10 WAT Apr 26 skim-tick: 0 Layer A deltas, 0 Layer B deltas in 1h window. TDSD-6731 (Access DD technical track at Babajide) UNCHANGED ~5h+. CoralPay ZIB STILL no TDSD ticket at 13h09m+ — process gap continues. Sunday afternoon quiet on Jira path."
+updated: 2026-04-26
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T13:10:00Z"
+last_processed: "2026-04-26T14:10:00Z"
 ---
 
 
@@ -62,7 +62,7 @@ Note: `ADD` and `AS` are JQL reserved words — must be quoted in query: `projec
 When the source-config trace describes an active-situation ticket's state in narrative shorthand (e.g., \"still at approval gates\", \"still WIP\", \"still Escalated\"), MUST re-verify the description against the live `status` field (and `statusCategory.key`) every full briefing-tick. NEVER propagate a narrative description from a prior tick without checking the current Jira state — descriptions go stale silently when the ticket transitions and prior-tick text is copied forward.
 
 ### Description-field reading discipline (post 2026-04-26 12:10 WAT TDSD-6732)
-For every Layer A ticket surfaced in a delta sweep, MUST read the `description` field at minimum (in addition to summary, status, priority, assignee, reporter). Description text routinely carries operational signals — route-pause / merchant-notification / escalation / containment decisions — that do NOT appear in any structured field but match config-salience Immediate triggers. The `getJiraIssue` call with `fields=[..., \"description\"]` (or `*all`) is the canonical pattern for any Layer A delta that lacks a clear summary-only signal. Skim-tick discipline: when Layer A returns ≥1 delta, MUST issue at least one description-fetching `getJiraIssue` call per delta before classifying tier — NEVER rely on summary alone for skim-tick triage. Without this, a ticket like TDSD-6732 (Medium, Work in progress, summary "Access TeamApt DD Mandate Creation Failure" — looks like routine duplicate) silently passes through as Awareness-tier when the description carries Immediate-tier route-off + merchant-notification escalation.
+For every Layer A ticket surfaced in a delta sweep, MUST read the `description` field at minimum (in addition to summary, status, priority, assignee, reporter). Description text routinely carries operational signals — route-pause / merchant-notification / escalation / containment decisions — that do NOT appear in any structured field but match config-salience Immediate triggers. The `getJiraIssue` call with `fields=[..., \"description\"]` (or `*all`) is the canonical pattern for any Layer A delta that lacks a clear summary-only signal. Skim-tick discipline: when Layer A returns ≥1 delta, MUST issue at least one description-fetching `getJiraIssue` call per delta before classifying tier — NEVER rely on summary alone for skim-tick triage. Without this, a ticket like TDSD-6732 (Medium, Work in progress, summary \"Access TeamApt DD Mandate Creation Failure\" — looks like routine duplicate) silently passes through as Awareness-tier when the description carries Immediate-tier route-off + merchant-notification escalation.
 
 ### Skip list (patterns explicitly excluded from Layer B surface)
 *(Empty — maintained via monthly periodic review + weekly skip candidate bulk-confirm per config-salience.)*
@@ -78,31 +78,32 @@ Layer A JQL `project = TDSD AND updated >= \"2026-04-26 06:10\" ORDER BY updated
 
 ## Notes
 
-### last_processed 2026-04-26T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (8h after Sunday briefing), Layer A 1 unrelated delta — TDSD-6734 routine refund-status correction by Samson Anaele/Oladimeji Alabi (Awareness-tier, no active-situation match)
+### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (9h after Sunday briefing), Layer A 0 deltas / Layer B 0 deltas — quietest 1h skim-window of the day
 
-14:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-with-active-p1-watch). Window 12:10:00Z → 13:10:00Z = 1h. Skim-tick fast-path executed.
+15:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-p1-watch). Window 13:10:00Z → 14:10:00Z = 1h. Skim-tick fast-path executed.
 
-**Layer A — TDSD service_desk delta:**
+**Layer A — TDSD service_desk delta:** 0 issues returned by `project = TDSD AND updated >= "2026-04-26 14:10" ORDER BY updated DESC`. Zero deltas in 1h window.
 
-1. **TDSD-6734 NEW — "UPDATE OF REJECTED REFUND STATUS TO COMPLETED_VIA_PROVIDER AS @26042026"**, Medium, In Progress, statusCategory `indeterminate`/yellow. Reporter [[Samson Anaele]] (`samson.anaele@moniepoint.com` — Moniepoint side requester; recurring Service Request reporter on RTGS reconciliations and refund-status corrections). Assignee [[Oladimeji Alabi]] (`oladimeji.alabi@teamapt.com` — TeamApt routing handler). Updated 2026-04-26T13:22:09 WAT. Description: "Dear Oladimeji, Kindly find attached set of transactions and assist to update the refund status to **COMPLETED_VIA_PROVIDER.** [linked Google Sheets]. The transactions have been logged for refund and processed successfully by the provider, so the need to update the status, so as to avoid exposure. Your swift response will be highly appreciated. Regards." Salience factors: `archetype=service_desk`, `priority=medium`, `status=in_progress`, `active_situation_match=null` (refund-status correction is routine ops administration, no tracked situation match), `description_signal=null` (no Immediate trigger keywords — provider-side already processed; ask is to update DB record), `request_type=service_request` (not Incident). **Salience: Awareness-tier, no situation creation needed, no Immediate dispatch.** Pattern adjacency: this is a sibling to TDSD-6721 (Apr 25 23:44 WAT closure of similar PENDING PAYABLE POSTING Service Request from Samson Anaele) — Samson's recurring Service Request cadence on settlement/reconciliation/refund-status corrections is now an established pattern (no situation page warranted; pattern stays at the entity level).
-2. **TDSD-6731 (Access DD technical track at Babajide) — UNCHANGED in window.** No status update visible in 1h JQL window. Cumulative Jira-side silence on TDSD-6731: 10:18 WAT filing → 14:09 WAT now = 3h51m. The cross-source sweep (email Layer 2 returned bilateral thread activity at 13:55 WAT but with ambiguous sender attribution — see source-config-email this tick) does not move the Jira ticket; engineering investigation has produced no Jira progress signal in the now-cumulative ~4h window since filing.
+**Layer B — Software projects scoped sweep: 0 deltas.** No P1/P0/Blocker/Critical priority transitions in 1h window across the 17 software projects.
 
-**Layer B — Software projects scoped sweep: 0 deltas.** No P1/P0/Blocker/Critical priority transitions in 1h window across the 17 software projects. The Apr 26 13:10 WAT 24-VTIE planning batch by Chiagoziem Okoye is bookkeeping-aged out of this 1h window.
-
-**Active-situation checkpoint summary (skim-tick spot-check):**
-- TDSD-6731 (Access DD Mandate technical track) — Work in progress (Babajide assignee). UNCHANGED 4h+. Watchpoint: Awaiting Scheme Update / Escalated / Resolved transitions on Babajide's investigation.
-- TDSD-6732 (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT. Stable post-closure 1h08m at this tick. Route-pause status in description STILL not amended.
-- TDSD-6729 (Access cycle 8) — Completed/Done at 07:54 WAT (6h17m+ stable post-resolution at this tick). Slack closure post still NOT propagated.
-- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1) — STILL NO TDSD TICKET at 12h08m+ post-Slack-post.** Process gap continues. Comparator: Access DD ops side filed TDSD-6732 within ~3h of original P1 (technical TDSD-6731 within 11min); CoralPay ZIB ops has filed nothing in 12h+.
-- TDSD-6716 (NIBSS PTSA) — Completed since 2026-04-25 16:20 WAT. Situation retired-candidate per Apr 26 06:10 WAT briefing tick (already retired at briefing, per source-config-slack note).
+**Active-situation checkpoint summary (skim-tick spot-check, derived from prior-tick state — no Jira queries this tick beyond the sweep):**
+- TDSD-6731 (Access DD Mandate technical track) — Work in progress (Babajide assignee). UNCHANGED ~5h+. Watchpoint: Awaiting Scheme Update / Escalated / Resolved transitions on Babajide's investigation.
+- TDSD-6732 (Access DD Mandate operational containment) — Completed/Done at 13:01:54 WAT. Stable post-closure ~2h+ at this tick. Route-pause status in description STILL not amended.
+- TDSD-6729 (Access cycle 8) — Completed/Done at 07:54 WAT (~7h17m+ stable post-resolution). Slack closure post still NOT propagated.
+- **CoralPay ZIB cycle (Apr 26 02:01 WAT P1) — STILL NO TDSD TICKET at ~13h09m+ post-Slack-post.** Process gap continues. Comparator: Access DD ops side filed TDSD-6732 within ~3h of original P1 (technical TDSD-6731 within 11min); CoralPay ZIB ops has filed nothing in 13h+.
+- TDSD-6716 (NIBSS PTSA) — Completed since 2026-04-25 16:20 WAT. Situation retired at briefing-2026-04-26 06:10 WAT tick.
 - TDSD-6645 (Monnify VA reversal) — `Escalated` last verified 2026-04-24 11:20:45 WAT; Dominic silence advancing >91h+ at this tick.
 - TDSD-6699 (Firewall HA) — `Awaiting implementation` last verified 2026-04-23 15:16:30 WAT; 3d at this tick.
 
-**Cross-source disambiguation:** Email Layer 2 caught 1 thread message on Access DD bilateral path at 13:55 WAT (sender attribution ambiguous — see source-config-email this tick). Slack 0 deltas on all 5 Tier 1 channels. Calendar 0 new events / 0 metadata updates. Drive 0 in-window files.
+**Cross-source disambiguation:** Email 0 deltas. Slack 0 deltas all 5 Tier 1 channels. Calendar 0 priority signals. Drive 0 in-window files.
 
-**Immediate dispatch this tick:** NO. TDSD-6734 is a routine refund-status Service Request, Awareness-tier. The ambiguous-sender bilateral acknowledgment is acknowledgment-only (Email-side analysis). No novel Immediate triggers across any source.
+**Immediate dispatch this tick:** NO. Zero deltas across all sources. No novel triggers.
 
-Factors: source=jira, skim_tick, layer_a_one_unrelated_delta_tdsd6734_refund_status_service_request, awareness_tier_routine_ops_administration, no_active_situation_match, samson_anaele_recurring_service_request_pattern, no_situation_creation, layer_b_zero, technical_track_tdsd6731_unchanged_4h+, briefing_apr27_no_decision_candidate_from_jira_this_tick, sunday_afternoon_quiet_otherwise, no_immediate_dispatch_this_tick.
+Factors: source=jira, skim_tick, layer_a_zero, layer_b_zero, technical_track_tdsd6731_unchanged_5h+, coralpay_zib_no_ticket_13h09m+, sunday_afternoon_quiet_on_jira_path, no_immediate_dispatch_this_tick.
+
+### last_processed 2026-04-26T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (preserved summary)
+
+14:10 WAT Apr 26 Sunday skim. Layer A 1 unrelated delta — TDSD-6734 NEW "UPDATE OF REJECTED REFUND STATUS TO COMPLETED_VIA_PROVIDER AS @26042026" — Samson Anaele reporter / Oladimeji Alabi assignee, Medium, In Progress. Routine refund-status correction Service Request, Awareness-tier, no active-situation match. TDSD-6731 UNCHANGED 4h+. Layer B 0 deltas. No Immediate dispatch.
 
 ### last_processed 2026-04-26T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (preserved summary)
 
