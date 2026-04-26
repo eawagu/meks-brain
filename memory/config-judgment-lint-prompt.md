@@ -4,7 +4,7 @@ type:
 title: config-judgment-lint-prompt
 created: "2026-04-12T19:52:49Z"
 summary: Judgment lint task execution prompt — four-phase weekly lint (stale claims, concept gaps, synthesis candidates, stale syntheses), read by scheduled task stub at runtime.
-updated: "2026-04-12T21:37:50Z"
+updated: "2026-04-26T22:30:08Z"
 cssclasses:
   - "config"
 ---
@@ -25,6 +25,7 @@ Call `lint_queries` four times, once per query type:
 2. `lint_queries` with `query_type: "concept_gaps", min_occurrences: 3` — returns wiki-linked terms without their own page, with occurrence counts
 3. `lint_queries` with `query_type: "synthesis_candidates", min_sources: 3` — returns pages with many source references but no synthesis
 4. `lint_queries` with `query_type: "stale_syntheses"` — returns syntheses outdated by newer related pages
+5. Instrumentation regression — query briefings via `search` (type_filter: `["briefing"]`, last 30 days), read each briefing's `## Tick Instrumentation` section. No `lint_queries` call needed.
 
 ## Phase 2: Assess Findings with Judgment
 
@@ -49,6 +50,12 @@ For each query's results, apply judgment — not just raw counts:
 
 ### Stale Syntheses
 - For each flagged synthesis, assess whether new sources materially change the synthesis or just add minor detail. Only flag for rewrite if the new material would change conclusions or add a competing interpretation.
+
+### Instrumentation Regression
+- For each phase column (Setup, Step0, Step1, Step2, Predict, Plan, Act, Improve), compute distribution across the window.
+- Flag findings where: (a) a phase's wall-clock has trended materially upward over time, (b) individual ticks spike beyond typical variance for their level, (c) phase-cost ratios have shifted from baseline.
+- Judgment-driven — no fixed numerical thresholds. Judge what counts as a meaningful regression in context of recent operational events (active situations, dark windows, cron drift).
+- Verdict per finding: investigate / ignore / calibration-update.
 
 ## Phase 3: Write Lint Report
 
@@ -98,6 +105,13 @@ Brain stats at time of run: [counts by type from get_stats]. [Open commitment co
 
 ## 4. Stale Syntheses
 [Findings or "No synthesis pages exist — nothing to assess."]
+
+---
+
+## 5. Instrumentation Regression
+[Findings or "No regression detected — wall-clock distribution stable across window."]
+
+[Table when findings exist: Phase | Trend | Recommendation]
 
 ---
 
