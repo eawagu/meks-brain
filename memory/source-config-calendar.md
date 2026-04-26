@@ -3,12 +3,13 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-25T15:10:00Z (16:10 WAT). 16:10 WAT Apr 25 skim-tick: weekend zero-delta unchanged. Lattice deadline Mon Apr 27 ~1d7h remaining."
-updated: "2026-04-26T05:28:08Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: Sunday→Monday window unchanged (Lattice block + Mon 11-meeting day captured at briefing). Lattice deadline 40h50m remaining at this tick."
+updated: "2026-04-26T06:24:05Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T05:10:00Z"
+last_processed: "2026-04-26T06:10:00Z"
 ---
+
 
 
 ## Connection
@@ -29,7 +30,13 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Sun clear + Mon Apr 27 11-meeting day with 2 hard overlaps + Lattice deadline 41h50m
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Sun→Mon window zero new events — Lattice deadline 40h50m
+
+07:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=hour-after-briefing-with-2-active-p1s-needing-delta-check). Sunday-morning calendar-side priority signals are extremely unlikely; quick `list_events` Sun 06:00 WAT → Mon 23:59 WAT confirmed only the Lattice Review recurring downward review block (end Apr 28 00:00 UTC = Apr 28 01:00 WAT). **No new invites, no RSVP changes, no cancellations in 1h window.** Mon Apr 27 schedule unchanged from briefing-tick capture: 11 events with 2 hard overlaps (TPP×Plat vs Channels Onboarding 11:30; ATPP vs Tech support 16:00). Lattice deadline now 40h50m remaining (was 41h50m at briefing tick — countdown advancing).
+
+Factors: source=calendar, skim_tick, sunday_zero_delta_1h, monday_unchanged, lattice_deadline_40h50m, no_priority_signal_match.
+
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Sun clear + Mon Apr 27 11-meeting day with 2 hard overlaps + Lattice deadline 41h50m (preserved summary)
 
 06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick). `list_events` Apr 26 06:00 WAT → Apr 27 23:59 WAT (timeZone Africa/Lagos) returned 12 events:
 
