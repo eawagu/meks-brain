@@ -3,12 +3,13 @@ type:
   - "source-config"
 title: source-config-jira
 created: 2026-04-11
-summary: "Jira signal source. 18-project scope. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: zero deltas across both Layer A (TDSD service_desk) and Layer B (software). Stanbic cycle 34 (Slack+email tick this tick) carries no TDSD ticket — single-track-Jira regression continues across cycles 33+34."
-updated: "2026-04-26T05:27:28Z"
+summary: "Jira signal source. 18-project scope. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: zero Layer A TDSD transitions in 1h post-briefing window. TDSD-6729 (Access Bank cycle 8) unchanged Work in progress; CoralPay ZIB cycle still has no TDSD ticket (process gap continues at 5h+ post-Slack-post)."
+updated: "2026-04-26T06:23:18Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T05:10:00Z"
+last_processed: "2026-04-26T06:10:00Z"
 ---
+
 
 
 ## Connection
@@ -70,7 +71,23 @@ When the source-config trace describes an active-situation ticket's state in nar
 
 ## Notes
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer A 3 deltas (TDSD-6729 NEW + TDSD-6728 Completed + TDSD-6721 Closed) + Layer B 0 deltas
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Layer A 0 deltas in 1h post-briefing window — TDSD-6729 unchanged, no new ticket for CoralPay ZIB cycle (process gap continues 5h+)
+
+07:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=hour-after-briefing-with-2-active-p1s-needing-delta-check). Window 05:10:00Z → 06:10:00Z = 1h post-briefing-tick. **Layer A only this tick** (skim-tick fast-path; Layer B deferred — no observed P1/Blocker filings in last 24h on software projects).
+
+**Layer A (TDSD) JQL `project = TDSD AND updated >= \"2026-04-26 06:10\" ORDER BY updated DESC` returned 0 issues.** TDSD-6729 (Access Bank cycle 8) unchanged from briefing-tick state — Work in progress, Resolution null. **No new TDSD ticket created for the CoralPay (ZIB) RC91 cycle** filed via Slack 02:01 WAT — process gap now 5h+ post-Slack-post (parallel to FCMB cycle 1+2 Apr 25 pattern; per-source-config-jira historical observation, ZIB cycle is a single-track-Slack regression).
+
+**Active-situation checkpoint summary (skim-tick spot-check on highest-salience tickets):**
+- TDSD-6729 (Access Bank cycle 8) — Work in progress, no transition. Either silent bank-side resolution unposted (consistent with Access cycles 1–7 implicit-resolve pattern but anomalous-duration weakens the inference) OR ticket carries forward unactioned.
+- No other active-situation ticket transitions observable in the 1h window.
+
+**Cross-source:** Slack zero deltas on Tier 1 (ops + alerts) — see source-config-slack tick note. Email caught one delta — Hourly Reports 20260426 reply (06:44 WAT, byte-identical to 01:56 WAT, contradicts TDSD-6729 with "0 tickets raised") — see source-config-email tick note. The hourly-report-vs-jira-state contradiction is structurally significant; surfaced via email source-config for briefing-2026-04-27.
+
+**No Immediate dispatch this tick** — TDSD-6729 unchanged is continuation of briefing-Immediate-dispatch, no novel trigger condition.
+
+Factors: source=jira, skim_tick, layer_a_zero_deltas_1h_window, layer_b_deferred_skim_fast_path, tdsd6729_unchanged_work_in_progress, no_zib_tdsd_ticket_5h+_process_gap, hourly_report_contradicts_jira_state_via_email_source_config, no_immediate_dispatch.
+
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer A 3 deltas (TDSD-6729 NEW + TDSD-6728 Completed + TDSD-6721 Closed) + Layer B 0 deltas (preserved summary)
 
 06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window.
 
