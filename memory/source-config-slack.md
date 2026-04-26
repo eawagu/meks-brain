@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: zero Tier 1 deltas in 1h window — both active P1s (CoralPay ZIB + Access Bank) silent on #teamapt-tech-operations since 06:10 WAT briefing tick. No resolution posts, no escalation messages. Continuation of 06:22 WAT Immediate dispatch."
-updated: "2026-04-26T06:21:30Z"
+updated: "2026-04-26T07:20:02Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T06:10:00Z"
+last_processed: "2026-04-26T07:10:00Z"
 ---
 
 
@@ -50,69 +50,44 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
-### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), zero Tier 1 deltas — both active P1s silent on ops channel for 1h post-briefing
+### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (2h after Sunday briefing), zero Tier 1 deltas — Tier 1 ops + alerts silent for 2h+ since briefing Immediate dispatch
 
-07:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=hour-after-briefing-with-2-active-p1s-needing-delta-check). Window 05:10:00Z → 06:10:00Z = 1h post-briefing-tick. Tier 1 channels read with `oldest=1777180200` (deterministic compute from `last_processed=2026-04-26T05:10:00Z`; runtime assertion `oldest <= now (1777183901)` passed):
+08:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-post-briefing-active-situations). Window 06:10:00Z → 07:10:00Z = 1h. Tier 1 channels read with `oldest=1777183800` (deterministic compute from `last_processed=2026-04-26T06:10:00Z`; runtime assertion `oldest <= now (1777187527)` passed):
 
-- **#teamapt-tech-operations (C0ABU8GMW75): 0 messages.** No resolution posts, no escalation messages, no new P1s. Both active P1s (CoralPay ZIB 02:01 WAT + Access Bank 02:05 WAT, TDSD-6729) carrying forward without Slack-side state change.
-- **#account-switch-alerts (C098VUQCVRA): 0 messages.**
-- **Other Tier 1 (C096LCNP26P, C08PH35PLPK, C090UHR9VDE): not read this skim tick** — fast-path Tier 1 prioritized to ops + alerts (where active P1s would surface). Per skim-tick discipline these zero-traffic channels are deferred to next full-tick.
+- **#teamapt-tech-operations (C0ABU8GMW75): 0 messages.** No new P1, no resolution post for either active P1, no escalation. Tier 1 ops channel silent for 2h+ since 06:10 WAT briefing tick despite (a) Access cycle 8 resolution on Jira at 07:54 WAT and (b) ZIB cycle continuing at 6h09m+. **The Jira-side resolution did NOT propagate to Slack** — operational team's coordination channel silent on a 5h49m P1 closure.
+- **#account-switch-alerts (C098VUQCVRA): 0 messages.** Sunday morning quiet on alert channel.
+- **Other Tier 1 (C096LCNP26P, C08PH35PLPK, C090UHR9VDE): not read this skim tick** — fast-path Tier 1 prioritized to ops + alerts (where active P1 deltas would surface). Per skim-tick discipline these zero-traffic channels deferred to next full-tick.
 
-DM (`to:me after:1777180200` keyword search) — broad keyword query `after:2026-04-26 (P1 OR RC91 OR resolved OR Coralpay OR Access)` returned zero hits across public+private+IM scope. **Note:** Slack search index appears to lag for messages within the last few hours — channel reads are the more reliable path for sub-hourly deltas; the keyword query null result is a confirmation of "no resolution post" rather than authoritative coverage.
+DM (`to:me after:1777183800` keyword search) — broad keyword query `(P1 OR RC91 OR resolved OR Coralpay OR ZIB OR \"Access Bank\" OR settlement) after:2026-04-26` returned zero hits across public+private+IM scope. Search index lag caveat from 07:10 WAT tick still applies for sub-hourly deltas; channel-read zero corroborates the keyword zero.
 
-**Active P1 silence-rule check (1h post-briefing-Immediate-dispatch):**
-- CoralPay ZIB RC91 active 5h09m at this tick — 1h continued silence past 06:10 WAT briefing dispatch. config-salience absence-of-signal Immediate threshold (1h no update) crosses again, but this is continuation of the same condition already dispatched at 06:22 WAT — no novel trigger.
-- Access Bank RC91 cycle 8 active 5h05m at this tick — same continuation pattern.
-- **No new Immediate dispatch this tick.** Structural anomaly (06:44 WAT hourly report byte-identical to 01:56 WAT and contradicts TDSD-6729 with "0 tickets raised") surfaced via email source-config — does not match config-salience Immediate trigger conditions, defers to briefing-2026-04-27 as Awareness/Decision item.
+**Active P1 silence-rule check (2h post-briefing-Immediate-dispatch):**
+- CoralPay ZIB RC91 active 6h09m+ at this tick — 2h+ continued silence past 06:10 WAT briefing dispatch. No closure post, no TDSD ticket. config-salience absence-of-signal Immediate threshold (1h no update) crosses again, but this is continuation of the same condition already dispatched at 06:22 WAT — no novel trigger.
+- Access Bank cycle 8 RC91 — **closed bank-side at or before 07:54 WAT (TDSD-6729 Resolution=Done) per Jira sweep this tick**. End-to-end 5h49m. **No Slack closure post observed** on #teamapt-tech-operations — this is a workflow gap: a 5h49m anomalous-duration P1 resolved without a Slack acknowledgement to the ops coordination channel. Continuation of the same hourly-report stale-state pattern (the 07:50 WAT report still says "0 tickets raised").
+- **No new Immediate dispatch this tick.** Both signals are continuations of already-dispatched alerts; resolution is not an Immediate trigger.
 
-Cross-source: Email caught Hourly Reports 20260426 reply (06:44 WAT, byte-identical resend) — see source-config-email tick note. Jira zero TDSD transitions in window — TDSD-6729 unchanged Work in progress. Calendar zero delta on Sun→Mon view (Lattice block only).
+Cross-source: Email caught 2 deltas — Hourly Reports 20260426 3rd byte-identical resend at 07:50 WAT (post-TDSD-6729-creation AND -resolution) + Duty Handover Note 20260426 at 08:01 WAT Qazim → Daniel Armstrong (routine shift change, ack 08:04 WAT). Jira caught 1 delta — TDSD-6729 → Completed/Done at 07:54 WAT, no other transitions. Calendar zero new deltas in 1h window. Drive zero in-window files.
 
-Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777180200, oldest_le_now_assertion_passed, tier1_zero_deltas_ops_and_alerts, active_p1_silence_continuation_no_novel_trigger, no_new_immediate_dispatch, structural_anomaly_via_email_source_config, awareness_candidate_briefing_apr27.
+Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777183800, oldest_le_now_assertion_passed, tier1_zero_deltas_ops_and_alerts, p1_resolution_jira_did_not_propagate_to_slack, ops_channel_silent_on_5h49m_p1_closure, zib_silence_continuation, no_new_immediate_dispatch, briefing_apr27_decision_candidate_workflow_gap_resolution_not_acknowledged_in_ops_channel.
+
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), zero Tier 1 deltas (preserved summary)
+
+07:10 WAT Apr 26 Sunday skim tick. Window 05:10:00Z → 06:10:00Z = 1h post-briefing-tick. Tier 1 read with `oldest=1777180200` (deterministic, assertion passed). #teamapt-tech-operations + #account-switch-alerts both 0 messages; other 3 Tier 1 deferred. DM/keyword 0. Both active P1s (CoralPay ZIB + Access Bank cycle 8) silent post-briefing-Immediate-dispatch — continuation, no novel trigger. Cross-source: email 1 delta (Hourly Reports 06:44 WAT byte-identical resend, contradicts TDSD-6729); Jira 0 deltas (TDSD-6729 unchanged Work in progress); Calendar 0; Drive 0. No new Immediate dispatch.
 
 ### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), 2 Tier 1 deltas on #teamapt-tech-operations during overnight delegation window — both active P1s now Immediate-tier dispatched at 06:00 resume (preserved summary)
 
-06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight. Tier 1 channels read-by-default sweep with `oldest=1777151400` (deterministic compute from prior `last_processed=2026-04-25T21:10:00Z`; runtime assertion `oldest <= now (1777180230)` passed):
-
-- **#teamapt-tech-operations (C0ABU8GMW75): 2 messages** —
-  - **02:01 WAT Apr 26 (Qazim Adedigba) — CoralPay (ZIB) RC91 P1**, structured post: "Product: Switch, Incident Summary: P1: CoralPay (ZIB) RC 91 Failures, Identified Cause: From the bank, Resolution Action: The issue has been escalated to the Coralpay for review, Incident Duration: Ongoing, Start Time: 2:01 AM, End Time: Ongoing." 4h09m active at tick. Salience factors: `channel=tier1_ops`, `keyword_floor=P1+RC91`, `active_situation_match=coralpay-fbn-turned-off-production-deploy-did-not-prevent-recurrence`, `recurrence_within_6h_of_apr25_close (TDSD-6728)`, `escalating_recurrence_trajectory_1h53m_18h44m_4h09m`, `no_tdsd_ticket`, `sender_weighting=ops_lead_qazim`, `urgency_dominant`, `pattern_significance_dominant`. **Briefing-2026-04-26 D1.** **Immediate-tier dispatched** (combined draft with Access Bank to D081JT4AD0Q at 06:10 WAT — overnight delegation policy resume at 06:00 fired).
-  - **02:05 WAT Apr 26 (Qazim Adedigba) — Access Bank RC91 P1**, structured post: "Product: ATS, Incident Summary: P1: Access Bank RC 91 Failures, Identified Cause: From the bank, Resolution Action: Issue escalated to the bank for resolution, Incident Duration: Ongoing, Start Time: 2:05 AM, End Time: Ongoing." 4h05m active at tick. Salience factors: `channel=tier1_ops`, `keyword_floor=P1+RC91`, `active_situation_match=access-bank-multi-track-failures`, `cycle8_breaks_3-50m_auto_recovery_pattern_cycles1_7`, `anomalous_duration_4x_upper_bound`, `tdsd6729_filed_02-24_wat_19min_lag`, `sender_weighting=ops_lead_qazim`, `urgency_dominant`, `pattern_significance_dominant`. **Briefing-2026-04-26 D2.** **Immediate-tier dispatched** (combined draft above).
-
-- **#account-switch-alerts (C098VUQCVRA), #teamapt-x-paystack-transfer-support (C096LCNP26P), #notifications-support-dev (C08PH35PLPK), #go-subscribe-by-teamapt (C090UHR9VDE):** zero messages each. Overnight Saturday→Sunday quiet across alerts/Paystack/dev/product channels.
-
-DM (`to:me after:1777151400` search) zero results. Keyword sweep covered by Tier 1 reads (both P1s landed on the ops channel).
-
-**Active P1 silence-rule check (post-overnight resume):**
-- CoralPay ZIB RC91 active 4h09m, no resolution signal — exceeds 1h absence-of-signal Immediate threshold; alert dispatched at 06:00 resume per overnight delegation policy.
-- Access Bank RC91 active 4h05m, no resolution signal — same; alert dispatched at 06:00 resume (combined DM with above).
-- Latest visible state: Hourly Reports 20260426 01:56 WAT (5min BEFORE both P1s) — 14/17 routes operational. No 03:00 / 04:00 / 05:00 hourly reports overnight (consistent with overnight cadence gap).
-
-Cross-source: email caught Hourly Reports 20260426 01:56 WAT thread 19dc749cf20cd04b. Jira sweep returned 3 Layer A deltas (TDSD-6729 Access Bank cycle 8 filed 02:24 WAT Work in progress; TDSD-6728 CoralPay ZIB Apr 25 incident Completed 02:13 WAT — direct precursor to Apr 26 cycle; TDSD-6721 PENDING PAYABLE POSTING Closed 23:44 WAT Apr 25). Layer B 0 deltas. Calendar: Mon Apr 27 11-meeting day with 2 hard overlaps (TPP×Plat vs Channels Onboarding 11:30, ATPP vs Tech support 16:00); Sun Apr 26 clear. Drive backlog 22 unchanged.
-
-Factors: source=slack, briefing_tick, deterministic_epoch_compute_oldest=1777151400, oldest_le_now_assertion_passed, tier1_two_deltas_p1_coralpay_zib_+_access_bank, both_active_at_tick, immediate_tier_dispatch_at_06_00_resume, post_overnight_delegation_window, no_dm_keyword_zero, four_other_tier1_silent.
+06:10 WAT Apr 26 Sunday briefing tick. Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight. Tier 1 read with `oldest=1777151400`. #teamapt-tech-operations 2 messages — Qazim Adedigba CoralPay ZIB RC91 P1 02:01 WAT (Briefing-2026-04-26 D1, Immediate-tier dispatched) + Qazim Access Bank RC91 P1 02:05 WAT (Briefing-2026-04-26 D2, TDSD-6729 filed 02:24 WAT, combined Immediate-tier dispatch with above). Cycle 8 broke the auto-recovery pattern (4h05m active at tick, anomalous duration). Other 4 Tier 1 silent. DM/keyword 0. Combined Immediate-tier Slack DM dispatched to user at 06:10 WAT post-overnight-delegation resume.
 
 ### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), single Stanbic cycle 34 delta on Tier 1 ops channel (preserved summary)
 
-22:10 WAT Apr 25 Saturday skim tick. Window 19:10:00Z → 21:10:00Z = 2h. Tier 1 read with `oldest=1777144200` (deterministic, assertion passed). #teamapt-tech-operations 1 message — Olamide Ajibulu Stanbic ATS RC91 cycle 34 P1 21:01 WAT (10–14m bank-resolved fast-cycle, two-track with email thread 19dc63afd3c001f0). Other 4 Tier 1 silent. DM/keyword 0. Stanbic cycle 34 single-track-Jira regression continues across cycles 33+34.
+22:10 WAT Apr 25 Saturday skim tick. Window 19:10:00Z → 21:10:00Z = 2h. Tier 1 read with `oldest=1777144200`. #teamapt-tech-operations 1 message — Olamide Ajibulu Stanbic ATS RC91 cycle 34 P1 21:01 WAT (10–14m bank-resolved fast-cycle, two-track with email thread 19dc63afd3c001f0). Other 4 Tier 1 silent. DM/keyword 0. Stanbic cycle 34 single-track-Jira regression continues across cycles 33+34.
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, single Account Switch maintenance announcement delta on Tier 1 Paystack channel (preserved summary)
+### last_processed 2026-04-25T17:10:00Z–20:10:00Z — preserved summary block
 
-20:10 WAT Apr 25 Saturday skim tick. Mustapha Ajibade #teamapt-x-paystack-transfer-support 18:19 WAT planned Account Switch maintenance Apr 26 6:00PM WAT (~3h downtime), tagged Paystack reps. Briefing-tier classification, awareness candidate.
+Multiple Saturday late-afternoon/evening skim ticks. 20:10 WAT Account Switch maintenance announcement. 18:10 WAT firewall HA change announcement (TDSD-6699). 17:10 WAT zero-delta.
 
-### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, single firewall-HA-notification delta on Tier 1 (preserved summary)
+### last_processed 2026-04-25T09:10:00Z–16:10:00Z — preserved summary block
 
-18:10 WAT Apr 25 Saturday skim tick. Tier 1: #teamapt-tech-operations 1 message — Mustapha 17:26 WAT firewall HA change announcement (TDSD-6699, 6pm Apr 25, NIBSS leased-line → VPN, no downtime). Cross-referenced into [[NIBSS PTSA — VPN Flapping Apr 22]] situation page. Other 4 Tier 1 silent. DM/keyword 0. Planned change Briefing-tier, no Immediate.
-
-### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (10min late), zero-delta (preserved summary)
-
-17:10 WAT Apr 25 Saturday skim tick. Window 15:10:00Z → 16:10:00Z = 1h. All 5 Tier 1 silent. DM 0, keyword 0. FCMB cycle 2 fresh email-only signal at 16:04 WAT (caught via email keyword sweep this tick, not Slack). Five consecutive zero-delta skim ticks (13:10/14:10/15:10/16:10/17:10 WAT). Cross-source: TDSD-6716 NIBSS PTSA Completed at 16:20 WAT (Jira sweep delta this tick) — no Slack signal.
-
-### last_processed 2026-04-25T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10min late), zero-delta (preserved summary)
-
-16:10 WAT Apr 25 Saturday skim tick. Four consecutive zero-delta ticks. Afeez FCMB RC91 email at 15:04:26Z within window — filed email-only, caught by next tick keyword sweep.
-
-### last_processed 2026-04-25T09:10:00Z–14:10:00Z — preserved summary block
-
-Multiple skim ticks across late Saturday morning/afternoon, mostly zero-delta. Notable: 10:10 WAT recovered Wema RC91 P1 08:39 WAT after 09:10 WAT epoch-bug false zero (deterministic-compute directive added).
+Multiple Saturday morning/afternoon skim ticks, mostly zero-delta. Notable: 10:10 WAT recovered Wema RC91 P1 08:39 WAT after 09:10 WAT epoch-bug false zero (deterministic-compute directive added).
 
 ### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — full-level briefing-tick, 3 P1 messages overnight + Immediate-tier dispatch (preserved summary)
 
