@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: 0 Tier 1 deltas (all 5 channels silent in 1h window); 0 DM deltas; 0 keyword deltas. Sunday morning quiet on Slack path. CoralPay ZIB cycle silent 9h11m+ (no novel Immediate trigger). Access DD Mandate ~1h36m active (TDSD-6731 filed 10:18 WAT — Jira-side disambiguator)."
-updated: "2026-04-26T15:22:17Z"
+updated: "2026-04-26T16:22:22Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T15:10:00Z"
+last_processed: "2026-04-26T16:10:00Z"
 ---
 
 
@@ -50,31 +50,36 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
-### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10h after Sunday briefing), 0 deltas all paths
+### last_processed 2026-04-26T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick (11h after Sunday briefing), 0 deltas all paths
 
-16:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-quiet-priors). Window 14:10:00Z → 15:10:00Z = 1h. Deterministic epoch compute: `oldest=int(parse_iso('2026-04-26T14:10:00Z').timestamp())=1777212600`; assertion `oldest (1777212600) <= now (1777216234)` passed.
+17:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-situations-in-background). Window 15:10:00Z → 16:10:00Z = 1h. Deterministic epoch compute: `oldest=int(parse_iso('2026-04-26T15:10:00Z').timestamp())=1777216200`; assertion `oldest (1777216200) <= now (1777219851)` passed.
 
 **Tier 1 channel reads (5 channels):** all 5 returned 0 messages in window.
 - #teamapt-tech-operations (C0ABU8GMW75): 0 messages. Both active P1s remain Slack-silent.
 - #account-switch-alerts (C098VUQCVRA): 0 messages.
-- #teamapt-x-paystack-transfer-support (C096LCNP26P): 0 messages. Account Switch maintenance window 18:00 WAT (~1h50m from this tick).
+- #teamapt-x-paystack-transfer-support (C096LCNP26P): 0 messages. Account Switch maintenance window 18:00 WAT (~50min from this tick).
 - #notifications-support-dev (C08PH35PLPK): 0 messages.
 - #go-subscribe-by-teamapt (C090UHR9VDE): 0 messages.
 
 **DM scan `to:me after:<date>`: 0 results.**
 
-**Keyword sweep filtered to ts>1777212600: 0 results.**
+**Keyword sweep filtered to ts>1777216200: 0 results.**
 
 **Active P1 silence-rule check (continuation-only, no novel triggers):**
-- **CoralPay ZIB RC91** active ~14h09m+ — Slack silent for ~10h+ post-12:11 WAT prior dispatch. Continuation of condition already dispatched at 06:22, 10:10, 12:11 WAT today.
-- **Access Bank cycle 8 RC91** — bank-resolved 07:54 WAT. Slack closure post still NOT propagated at ~8h17m+ post-resolution. Workflow gap continues.
-- **Access Bank DD Mandate Creation Failures** — TDSD-6731 (technical track at Babajide) UNCHANGED ~6h+. Bank-silence watchpoint passed (4h post-bilateral threshold passed at 14:12 WAT prior tick). Watchpoint stays in place for briefing-2026-04-27 Decision-item escalation if no `accessbankplc.com` sender by 06:10 WAT Apr 27.
+- **CoralPay ZIB RC91** active ~15h09m+ — Slack silent ~11h+ post-12:11 WAT prior dispatch. Continuation of condition already dispatched at 06:22, 10:10, 12:11 WAT today.
+- **Access Bank cycle 8 RC91** — bank-resolved 07:54 WAT. Slack closure post still NOT propagated at ~9h17m+ post-resolution. Workflow gap continues.
+- **Access Bank DD Mandate Creation Failures** — TDSD-6731 (technical track at Babajide) UNCHANGED ~7h+. Bank-silence watchpoint past 4h post-bilateral threshold (passed 14:12 WAT prior tick); hardens for briefing-2026-04-27 Decision-item escalation if no `accessbankplc.com` sender by 06:10 WAT Apr 27.
+- **Ecobank settlements** TDSD-6735 (filed 15:59 WAT prior tick) — unchanged at this tick; INITIAL REVIEW. 8h SLA breach Mon Apr 27 17:00 WAT (still ~24h ahead).
 
-**Cross-source disambiguation:** Email 0 deltas. Jira Layer A 1 delta (TDSD-6735 Eco settlements — fourth operational layer; Briefing-tier, situation page updated). Calendar 0 priority signals / 0 metadata updates. Drive 0 in-window files.
+**Cross-source disambiguation:** Email 0 Layer-1 / 0 operational-keyword deltas; broad sweep surfaced 1 thread `19dca72d60189611` (Fidelity DCIR credential reset meeting invite at 16:40 WAT — sender aptpaytechnicalsupport@, recipients Fidelity Bank IT) — Awareness-tier ops-coordination, not in operational-keyword bucket, no active-situation entity match for DCIR/Fidelity intersection. Jira 0 Layer-A / 2 Layer-B-below-threshold (AS-4114, AS-4115 routine project-setup tasks, Medium / In Progress, no transition). Calendar 0 priority signals. Drive 0 in-window files.
 
-**Immediate dispatch this tick:** NO. Zero Slack deltas; TDSD-6735 is Briefing-tier on Jira side (no Slack propagation observed).
+**Immediate dispatch this tick:** NO.
 
-Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777212600, oldest_le_now_assertion_passed, tier1_zero_all_5_channels, dm_zero, keyword_zero, sunday_afternoon_quiet_on_slack_path, no_zib_signal_10h_post_prior_dispatch, no_access_dd_slack_propagation_of_email_signal, account_switch_maintenance_in_1h50m_no_pre_window_announcement_yet, no_immediate_dispatch_this_tick.
+Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777216200, oldest_le_now_assertion_passed, tier1_zero_all_5_channels, dm_zero, keyword_zero, sunday_evening_quiet_on_slack_path, no_zib_signal_11h_post_prior_dispatch, no_access_dd_slack_propagation_of_email_signal, account_switch_maintenance_in_50min_no_pre_window_announcement_yet, no_immediate_dispatch_this_tick.
+
+### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (preserved summary)
+
+16:10 WAT Apr 26 Sunday skim. 0 Tier 1 / 0 DM / 0 keyword. CoralPay ZIB silent 14h09m+. Access cycle 8 closure not propagated 8h17m+. Access DD Mandate Failures bank-silence watchpoint past 4h. TDSD-6735 NEW Eco settlements (Jira-side). No Immediate.
 
 ### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
 
