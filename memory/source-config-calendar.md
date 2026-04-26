@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Sun→Mon window unchanged from 10:10 WAT capture. Lattice deadline 36h50m remaining at this tick."
-updated: "2026-04-26T15:23:54Z"
+updated: "2026-04-26T16:22:51Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T15:10:00Z"
+last_processed: "2026-04-26T16:10:00Z"
 ---
 
 
@@ -30,13 +30,15 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10h after Sunday briefing), 0 priority signals / 0 metadata updates in window — Lattice deadline 31h50m
+### last_processed 2026-04-26T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick, 0 priority signals / 0 metadata updates — Lattice deadline 30h50m
 
-16:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-quiet-priors). `list_events` Sun 16:00 WAT → Mon Apr 27 23:59 WAT returned the standard Mon Apr 27 11-meeting day unchanged from prior-tick capture. All event records examined have `updated` timestamps ≤ 11:37 UTC (the most-recent prior-tick \"Channels Onboarding & Disbursement\" capture). **0 metadata updates in 14:10 → 15:10 UTC window.**
+17:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-situations-in-background). `list_events` Sun 17:00 WAT → Mon Apr 27 23:59 WAT returned the standard Mon Apr 27 11-meeting day unchanged from prior-tick capture. Most-recent event `updated` timestamp 11:37 WAT (Channels Onboarding & Disbursement, captured 13:10 WAT prior tick). **0 metadata updates in 15:10 → 16:10 UTC window.** No new invites, no RSVP changes, no cancellations. Lattice deadline now 30h50m remaining (countdown advancing on schedule). Sunday calendar clear (Lattice block only). Mon Apr 27 conflicts unchanged from briefing-2026-04-26 D4 (TPP×Platformization vs Channels Onboarding 11:30; ATPP vs Tech support 16:00).
 
-**No new invites, no RSVP changes, no cancellations in 1h window.** Mon Apr 27 11-meeting day with two hard overlaps unchanged (TPP×Platformization vs Channels Onboarding 11:30; ATPP vs Tech support 16:00 — D4 conflicts unchanged from briefing-2026-04-26 D4). Lattice deadline now 31h50m remaining (countdown advancing on schedule). Sunday calendar clear (Lattice block only).
+Factors: source=calendar, skim_tick, sunday_zero_priority_signal_1h, sunday_zero_metadata_update_1h, monday_unchanged, lattice_deadline_30h50m, no_priority_signal_match, no_immediate_dispatch.
 
-Factors: source=calendar, skim_tick, sunday_zero_priority_signal_1h, sunday_zero_metadata_update_1h, monday_unchanged, lattice_deadline_31h50m, no_priority_signal_match, no_immediate_dispatch.
+### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (preserved summary)
+
+16:10 WAT Apr 26 Sunday skim. Sun→Mon window unchanged. 0 metadata updates in 1h window. Lattice deadline 31h50m. Mon Apr 27 11-meeting day unchanged.
 
 ### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
 
