@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T09:10:00Z (10:10 WAT). 10:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword pass 1 NEW thread — Access Bank DD Mandate Creation Failures bilateral track (10:12 WAT, Daniel Armstrong → Access Card Switching Team, CC aptpaytechnicalsupport + oladapo.onayemi). Immediate-tier dispatched in concert with paired Slack post."
-updated: "2026-04-26T09:24:55Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword 0 NEW (the 09:12 UTC Access DD bilateral thread `19dc9102d9bde88a` was already captured at 10:10 WAT prior tick — boundary case). Sunday morning quiet on email path."
+updated: "2026-04-26T10:21:19Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T09:10:00Z"
+last_processed: "2026-04-26T10:10:00Z"
 ---
 
 
@@ -50,57 +50,47 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick (4h after Sunday briefing), Layer 1 zero + Layer 2 keyword 1 NEW delta — Access Bank DD Mandate Creation Failures bilateral track at 10:12 WAT
+### last_processed 2026-04-26T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (5h after Sunday briefing), Layer 1 zero + Layer 2 keyword 0 NEW (Access DD bilateral thread already captured at prior tick — boundary case)
 
-10:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Window 07:10:00Z → 09:10:00Z = 2h.
+11:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Window 09:10:00Z → 10:10:00Z = 1h.
 
-**Layer 1 query `to:me newer_than:3h`: 0 threads in window.** Zero genuinely-new Layer-1 traffic in 2h.
+**Layer 1 query `to:me newer_than:2h`: 0 threads in window.** Empty result (Gmail MCP returned `{}` — no residual-cache thread observed).
 
-**Operational keyword query `(RC91 OR P1 OR Mandate OR \"Access Bank\" OR Coralpay OR ZIB OR settlement OR resolved) newer_than:3h`: 1 NEW thread plus historical context threads.**
+**Operational keyword query `(RC91 OR RC05 OR P1 OR outage OR NIBSS OR compromised OR Mandate OR resolved OR settlement) newer_than:2h`: 1 thread returned, 0 NEW.**
 
-1. **NEW — Access Bank | DD | Mandate Creation Failures bilateral track.** Thread `19dc9102d9bde88a`, sender daniel.armstrong@teamapt.com, sent 10:12 WAT Apr 26 (09:12:36Z) to cardswitchingteam@accessbankplc.com + Itunu.Olubode@accessbankplc.com + Adeolu.Atilade@accessbankplc.com + ogheneyoma.erese@accessbankplc.com + Amarachi.Ibe@accessbankplc.com + Tunde.Akingbade@accessbankplc.com + temitayo.ola-buraimo@accessbankplc.com (CC: aptpaytechnicalsupport@teamapt.com, oladapo.onayemi@moniepoint.com). Subject: "Access Bank | DD | Mandate Creation Failures". Snippet: _"Hello Team, Please be informed that we're getting a checkpoint ⇢ 401 UNAUTHORIZED from POST https://acs-connector.accessbankplc.com/api/v1/acs-connector/oauth/token [DefaultWebClient] 2026-04-26..."_ **5 minutes after Daniel's paired Slack post on #teamapt-tech-operations** — standard bilateral filing pattern (Slack 10:07 + email 10:12). CC includes Oladapo Onayemi (CTO escalation visibility from filing time) and aptpaytechnicalsupport@ (ops list). 401 OAuth authentication-layer failure — distinct from RC91 transaction-routing failures. **Consistent with the long-running [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]] situation** — Default OAuth secrets remediation, JAR vulnerability re-opened Apr 17, ACS connector replacement track. Salience factors: `keyword_floor=P1+Mandate+401+UNAUTHORIZED+OAuth`, `active_situation_entity_match=access-bank-multi-track-failures+dcir-acs-credential-remediation`, `bilateral_track_paired_with_slack_post_5min_offset`, `sender=daniel_armstrong_active_duty_engineer`, `cc_includes_cto_oladapo_onayemi`, `bot_sender=false`, `urgency=p1_active`, `cto_specificity=high_credential_rotation_hypothesis`, `pattern_significance=third_access_p1_in_8h+credential_remediation_theme`, `immediate_tier_dispatched_at_10:10_wat`. Situation page [[Access Bank — Multi-Track Failures]] updated this tick.
-
-**Other in-window threads (already captured in prior tick or pre-existing context):**
-
-- Thread `19dc7640c5af3022` (Access Bank ATS RC91 cycle 8 bilateral) — additional messages from 02:11 WAT Qazim → Tunde with updated RRN samples. Pre-existing thread from cycle 8. Already captured in source-config-jira this-tick parallel sweep (TDSD-6729 → Completed 07:54 WAT). Salience factor: `cycle8_post_resolution_thread_silent_post-03_11_wat_until_resolution`. No new email content here that wasn't already documented.
-- Thread `19dc897ecc7b9e7e` (Duty Handover Note 20260426) — already captured in 08:10 WAT prior-tick.
-- Thread `19dc749cf20cd04b` (Hourly Reports 20260426) — preserved context, no new resends in this 2h window. **The 4th hourly report has not yet been filed by Daniel Armstrong** — ops-cycle gap 2h20m at this tick (last hourly 07:50 WAT Qazim, handover 08:01 WAT). Watchpoint for next-tick.
+1. **Already-captured boundary thread** `19dc9102d9bde88a` (Access Bank DD Mandate Creation Failures bilateral track), most-recent-message timestamp 09:12:36Z. **This message arrives 2m36s AFTER last_processed 09:10:00Z** — it is in-window by client-side filter, BUT the prior 10:10 WAT tick's `newer_than:3h` query already captured and processed it (the prior tick's effective sweep window ran past 09:10:00Z to query-execution time). Substantive content is already documented in source-config-email prior-tick narrative and in [[Access Bank — Multi-Track Failures]] situation page. **Treat as zero-new-delta this tick to avoid duplicate processing.** Per-tick deduplication note: when a returned message's `internalDate` falls within the window but the thread already has a prior-tick narrative entry, treat as zero-new-delta — the substantive content has been captured. This is a recurring boundary-case pattern under `newer_than:Nh` semantics that drift past stored `last_processed`.
 
 **No additional issuer-bucket sweeps this skim-tick** (cost cap; next briefing-tick will cover).
 
 **Active P1 silence-rule check (cross-cutting):**
-- CoralPay ZIB RC91 — no email mention since Hourly Reports 07:50 WAT byte-identical resend. 4h+ silent on email path post-briefing-dispatch. The next hourly report (when filed by Daniel) is the watchpoint signal.
-- Access Bank cycle 8 — closed bank-side at 07:54 WAT (Jira). Email path silent on closure (no closure note from bank, no Slack closure post propagated to email path).
-- Access Bank DD Mandate Failures — bilateral filing at 10:12 WAT documented above. ~38min active at this tick. Watchpoint: bank reply ETA, internal ACS-connector engineering response (Babajide Ojoboorun's track).
+- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend. 5h+ silent on email path post-briefing-dispatch. The 4th hourly report (when Daniel files it) is the watchpoint signal — still not yet visible at this tick (3h20m+ post-handover).
+- **Access Bank cycle 8** — closed bank-side at 07:54 WAT (Jira). Email path silent on closure (no closure note from bank, no Slack closure post propagated to email path).
+- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT documented at prior tick. ~1h36m active at this tick. **No bank reply on email path yet** (typical Access reply lag 30–60min — currently at 58m post-bilateral, on the edge of expected reply window). Watchpoint: bank reply ETA, internal ACS-connector engineering response (Babajide Ojoboorun's track — now formalized as TDSD-6731 assignee per Jira-side this tick).
 
-**No additional Immediate dispatch from email-side this tick** — the new DD P1 was already dispatched via Slack-side detection at 10:10 WAT (Slack post 5min preceded the email), so this email is the cross-confirmation. Bilateral pattern means the same incident; one dispatch covers both.
+**No Immediate dispatch from email-side this tick** — zero new substantive content.
 
-Factors: source=email, skim_tick, layer1_zero, layer2_one_new_delta_dd_mandate_bilateral_track, paired_with_slack_post_5min_offset, cc_oladapo_visibility, no_immediate_dispatch_already_covered_via_slack_path, ops_cycle_4th_hourly_report_not_yet_filed_watchpoint, briefing_apr27_decision_candidate.
+Factors: source=email, skim_tick, layer1_zero, layer2_zero_new_boundary_case_already_captured, dedup_pattern_documented, sunday_morning_quiet_on_email_path, no_immediate_dispatch, briefing_apr27_decision_candidate=none-from-email-path.
 
-### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (2h after Sunday briefing), Layer 1 zero + Layer 2 keyword 2 deltas (Hourly Reports 3rd byte-identical resend NOW POST-HOC DISPROVES "0 tickets raised" via TDSD-6729 resolution; Duty Handover routine shift change propagates stale state) (preserved summary)
+### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, Layer 1 zero + Layer 2 keyword 1 NEW delta — Access Bank DD Mandate Creation Failures bilateral track at 10:12 WAT (preserved summary)
 
-08:10 WAT Apr 26 Sunday skim tick. Hourly Reports 3rd byte-identical resend at 07:50 WAT proves ops-cycle reporting failure structurally (post-hoc disproves "0 tickets raised" via TDSD-6729 resolution at 07:54 WAT). Duty Handover Note 08:01 WAT Qazim → Daniel routine shift change. No Immediate dispatch.
+10:10 WAT Apr 26 Sunday skim tick. Window 07:10:00Z → 09:10:00Z = 2h. Layer 1 zero. Layer 2 1 new thread `19dc9102d9bde88a` Daniel Armstrong → Access Card Switching Team 10:12 WAT (CC oladapo.onayemi@moniepoint.com + aptpaytechnicalsupport@) — 5min after paired Slack post. Immediate-tier dispatched in concert with Slack path (one dispatch covers both bilateral channels).
 
-### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing) (preserved summary)
+### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (preserved summary)
 
-Layer 1 zero. Operational keyword 1 thread — Hourly Reports 06:44 WAT byte-identical resend (ambiguous at the time, resolved at 08:10 tick).
+08:10 WAT Apr 26 Sunday skim tick. Hourly Reports 3rd byte-identical resend at 07:50 WAT proves ops-cycle reporting failure structurally. Duty Handover Note 08:01 WAT Qazim → Daniel routine. No Immediate dispatch.
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26) (preserved summary)
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (preserved summary)
+
+Layer 1 zero. Operational keyword 1 thread — Hourly Reports 06:44 WAT byte-identical resend.
+
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (preserved summary)
 
 Layer 1 zero. Operational keyword 1 delta — Hourly Reports 20260426 thread 19dc749cf20cd04b 01:56 WAT (Briefing-2026-04-26 A4).
 
-### last_processed 2026-04-25T17:10:00Z–22:10:00Z — preserved summary block
+### last_processed 2026-04-25T17:10:00Z–earlier — preserved summary block
 
-Multiple Saturday late-afternoon/evening skim ticks. 22:10 Stanbic cycle 34 thread two-track. 18:10 end-of-shift handover deltas. 17:10 FCMB cycle 2 keyword recovery (1-tick delay).
+Apr 25 ticks (Stanbic cycle 34, end-of-shift handover, FCMB cycle 2 keyword recovery 1-tick delay, BambooHR Layer 1 calibration miss).
 
-### last_processed 2026-04-25T09:10:00Z–16:10:00Z — preserved summary block
-
-Saturday morning/afternoon skim ticks. 10:10 BambooHR Layer 1 calibration miss surfaced.
-
-### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep (preserved summary)
-
-Apr 25 briefing tick.
-
-### last_processed 2026-04-24T05:09:00Z–21:10:00Z — preserved summary block
+### last_processed 2026-04-24T05:09:00Z–earlier — preserved summary block
 
 Apr 24 ticks.

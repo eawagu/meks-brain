@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-calendar
 created: 2026-04-11
-summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T09:10:00Z (10:10 WAT). 10:10 WAT Apr 26 skim-tick: Sunday→Monday window unchanged from 08:10 WAT capture. Lattice deadline 37h50m remaining at this tick."
-updated: "2026-04-26T09:26:35Z"
+summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Sun→Mon window unchanged from 10:10 WAT capture. Lattice deadline 36h50m remaining at this tick."
+updated: "2026-04-26T10:21:19Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T09:10:00Z"
+last_processed: "2026-04-26T10:10:00Z"
 ---
 
 
@@ -30,11 +30,15 @@ Google Calendar MCP. Primary calendar for user.
 
 ## Notes
 
-### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick (4h after Sunday briefing), Sun→Mon window zero new events — Lattice deadline 37h50m
+### last_processed 2026-04-26T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (5h after Sunday briefing), Sun→Mon window zero new events — Lattice deadline 36h50m
 
-10:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Quick `list_events` Sun 10:10 WAT → Mon Apr 27 23:59 WAT confirmed Mon Apr 27 11-meeting day unchanged from 08:10 WAT capture (TPP × Platformization 11:30 vs Channels Onboarding & Disbursement 11:30 — hard overlap; ATPP Daily Standup 16:00 vs Tech support meeting 16:00 — hard overlap; Lattice Review block ending Apr 28 00:00 UTC). Most recent calendar updates within window: zero. **No new invites, no RSVP changes, no cancellations in 2h window.** Lattice deadline now 37h50m remaining (was 39h50m at 08:10 WAT, 41h50m at briefing tick — countdown advancing).
+11:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim). Quick `list_events` Sun 11:10 WAT → Mon Apr 27 23:59 WAT confirmed Mon Apr 27 11-meeting day unchanged from 10:10 WAT capture. Most recent event update: "TPP x Platformization" (created Apr 24, updated 2026-04-26T00:33:01Z = 01:33 WAT — predates last_processed window). **No new invites, no RSVP changes, no cancellations in 1h window.** Lattice deadline now 36h50m remaining (was 37h50m at 10:10 WAT — countdown advancing on schedule). Sunday calendar clear (Lattice block only).
 
-Factors: source=calendar, skim_tick, sunday_zero_delta_2h, monday_unchanged, lattice_deadline_37h50m, no_priority_signal_match.
+Factors: source=calendar, skim_tick, sunday_zero_delta_1h, monday_unchanged, lattice_deadline_36h50m, no_priority_signal_match.
+
+### last_processed 2026-04-26T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick — Lattice deadline 37h50m (preserved summary)
+
+10:10 WAT Apr 26 Sunday skim. Sun→Mon window zero new events. Mon Apr 27 11-meeting day unchanged. Lattice deadline 37h50m.
 
 ### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick — Lattice deadline 39h50m (preserved summary)
 
@@ -44,25 +48,17 @@ Factors: source=calendar, skim_tick, sunday_zero_delta_2h, monday_unchanged, lat
 
 07:10 WAT Apr 26 Sunday skim. Sun→Mon zero-delta. Mon Apr 27 unchanged from briefing.
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Sun clear + Mon Apr 27 11-meeting day with 2 hard overlaps + Lattice deadline 41h50m (preserved summary)
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (preserved summary)
 
 06:10 WAT Apr 26 briefing tick. 12 events Apr 26 06:00 → Apr 27 23:59 WAT. Sunday clear (Lattice block only). Monday 11 events with 2 hard overlaps. Briefing-2026-04-26 D4.
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — preserved summary
+### last_processed 2026-04-25T19:10:00Z–earlier — preserved summary
 
 Apr 25 Saturday skim. Weekend zero-delta unchanged.
 
-### last_processed 2026-04-25T11:10:00Z–17:10:00Z — preserved summary block
+### last_processed 2026-04-25T11:10:00Z–earlier — preserved summary block
 
 Apr 25 morning/afternoon ticks. Weekend zero-delta.
-
-### last_processed 2026-04-25T05:09:54Z–08:10:00Z — preserved summary block
-
-Apr 25 early ticks. Briefing-tick weekend zero-delta.
-
-### last_processed 2026-04-24T05:09:00Z–21:10:00Z — preserved summary block
-
-Apr 24 ticks. 06:09 briefing-tick 11 events. TeamApt Org Changes triple-overlap.
 
 ### Dark window 2026-04-20 17:09 WAT → 2026-04-23 ~09:00 WAT (~64h auth-failure) — preserved
 
