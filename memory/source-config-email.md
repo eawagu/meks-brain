@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword pass 1 thread — Hourly Reports 20260426 reply (06:44 WAT, byte-identical to 01:56 WAT original, \"0 tickets raised\" stale vs TDSD-6729; does not mention either active P1) — Awareness candidate for briefing-2026-04-27."
-updated: "2026-04-26T06:19:15Z"
+updated: "2026-04-26T07:21:31Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T06:10:00Z"
+last_processed: "2026-04-26T07:10:00Z"
 ---
 
 
@@ -33,7 +33,7 @@ Gmail MCP. Profile: eawagu@gmail.com.
 - Automated status emails without operational keywords — discard unless matches active-situation entity OR is To:user (Layer 1 preempts skip).
 
 ### Skim-tick query discipline (post 2026-04-25 17:10 WAT FCMB cycle-2 1-tick delay)
-Skim-tick MUST run BOTH Layer 1 (`to:me newer_than:Nh`) AND Layer 2 keyword pass (operational keywords + issuer-name buckets) every tick. The 16:10 WAT Apr 25 prior-tick documented only Layer 1 sweep (\"clean empty result, no residual-cache\") and missed Afeez's FCMB RC91 escalation email filed at 15:04:26Z (within window). The next tick's keyword sweep recovered the signal at 17:10 WAT — 1h05m delay is bounded but undesirable. **Skim-tick MUST run the operational keyword bucket as part of the per-source delta-check pass** — Layer-1-only is not sufficient. Only the issuer-name buckets (which exceed token budget when OR'd) may be deferred under skim cost cap; operational + governance + process buckets fit within budget per the execution pattern below.
+Skim-tick MUST run BOTH Layer 1 (`to:me newer_than:Nh`) AND Layer 2 keyword pass (operational keywords + issuer-name buckets) every tick. The 16:10 WAT Apr 25 prior-tick documented only Layer 1 sweep ("clean empty result, no residual-cache") and missed Afeez's FCMB RC91 escalation email filed at 15:04:26Z (within window). The next tick's keyword sweep recovered the signal at 17:10 WAT — 1h05m delay is bounded but undesirable. **Skim-tick MUST run the operational keyword bucket as part of the per-source delta-check pass** — Layer-1-only is not sufficient. Only the issuer-name buckets (which exceed token budget when OR'd) may be deferred under skim cost cap; operational + governance + process buckets fit within budget per the execution pattern below.
 
 ### Query execution pattern (post 10:09 limitation note)
 Use narrow per-keyword buckets with `newer_than:Nh` to stay inside Gmail MCP token budget:
@@ -50,54 +50,41 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Layer 1 zero + Layer 2 keyword 1 delta (Hourly Reports byte-identical resend; ops-cycle vs Jira-state contradiction)
+### last_processed 2026-04-26T07:10:00Z (08:10 WAT) — skim-level 08:00-cron tick (2h after Sunday briefing), Layer 1 zero + Layer 2 keyword 2 deltas (Hourly Reports 3rd byte-identical resend NOW POST-HOC DISPROVES "0 tickets raised" via TDSD-6729 resolution; Duty Handover routine shift change propagates stale state)
 
-07:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=hour-after-briefing-with-2-active-p1s-needing-delta-check). Window 05:10:00Z → 06:10:00Z = 1h post-briefing-tick.
+08:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-post-briefing-active-situations). Window 06:10:00Z → 07:10:00Z = 1h.
 
 **Layer 1 query `to:me newer_than:2h`: 0 threads in window.** Zero genuinely-new Layer-1 traffic in 1h.
 
-**Operational keyword query `newer_than:2h (RC91 OR P1 OR \"Hourly Report\" OR Coralpay OR ZIB OR \"Access Bank\" OR outage OR settlement)`: 1 genuinely-new thread** —
-- **Hourly Reports 20260426 thread `19dc749cf20cd04b` reply `19dc8519c120d6d2`** — Qazim Adedigba → aptpaytechnicalsupport@teamapt.com at 06:44:28 WAT Apr 26 (Re: Hourly Reports 20260426). **Body content is byte-identical to the 01:56 WAT original** including "Number of tickets raised: 0" and "Number of tickets closed: 0" — both stale vs reality (TDSD-6729 was filed by Qazim himself at 02:24 WAT, 4h20m before this report). Report does not mention CoralPay (ZIB) RC91 P1 (active 5h+ since 02:01 WAT) or Access Bank RC91 P1 (active 5h+ since 02:05 WAT, TDSD-6729). Same Coralpay-banks-off list as original (FBN, PVB, SBP — ZIB still implicitly operational per the report). **Two interpretations consistent with observed silence:** (A) silent resolution — both P1s recovered bank-side, ops did not Slack-post, hourly report omits resolved cycles correctly; (B) ops-cycle reporting failure — Qazim resent prior text 4h48m later without state-checking, both P1s still active and unrecorded. Parallel pattern across two open P1s (CoralPay ZIB + Access Bank cycle 8) at the same hourly report strengthens (B) as the more parsimonious common cause. Salience factors: `keyword_floor=hourly_report+routes_operational`, `byte_identical_to_prior_4h48m_later`, `contradicts_jira_state_0_tickets_raised_vs_TDSD-6729`, `parallel_silence_two_open_p1s`, `awareness_tier`, `structural_signal_independent_of_resolution`. Awareness candidate for briefing-2026-04-27. Situation pages updated this tick: [[Access Bank — Multi-Track Failures]] + [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]].
+**Operational keyword query `(RC91 OR P1 OR \"Hourly Report\" OR Coralpay OR ZIB OR \"Access Bank\" OR outage OR settlement OR resolved) newer_than:2h`: 2 genuinely-new threads** —
 
-**No Immediate dispatch this tick** — both active P1s already covered by 06:22 WAT briefing Immediate dispatch (D1+D2); structural-anomaly framing is novel but does not match a config-salience Immediate trigger condition (not a new P1, not a new instance of >2h silence beyond the existing dispatch, not an urgent direct DM). Defers to briefing-2026-04-27 as Decision/Awareness item.
+1. **Hourly Reports 20260426 thread `19dc749cf20cd04b` reply `19dc88da9c0c0287`** — Qazim Adedigba → aptpaytechnicalsupport@teamapt.com at 07:50:02 WAT Apr 26 (Re: Hourly Reports 20260426). **3rd byte-identical resend** of the 01:56 WAT original. Same content: "Number of tickets raised: 0", "Number of tickets closed: 0", same 14/17-routes-operational with Coralpay banks FBN/PVB/SBP off, ZIB still implicitly operational per the report. Cumulative resend pattern: 01:56 WAT (origin) → 06:44 WAT (1st resend, 4h48m gap) → 07:50 WAT (2nd resend, 1h06m gap). **Critical disambiguator from the parallel Jira signal: TDSD-6729 (Access Bank cycle 8) was active for ~5h30m at the time of this 07:50 WAT resend, and was resolved 4 minutes after this resend was filed (07:54 WAT). The "Number of tickets raised: 0" line is therefore POST-HOC PROVABLY FALSE — TDSD-6729 existed and was about to be resolved when this report claimed zero tickets raised.** This proves the Hourly Reports byte-identical-resend stream is an **ops-cycle reporting failure (interpretation B)** structurally, independent of any individual cycle's resolution status. The most parsimonious explanation: Qazim copy-pastes the prior text without state-checking. Salience factors: `keyword_floor=hourly_report+routes_operational`, `byte_identical_to_prior_3rd_consecutive`, `0_tickets_raised_post_hoc_disproven_by_tdsd6729_resolution`, `interpretation_b_ops_cycle_reporting_failure_structurally_proven`, `parallel_evidence_from_access_jira_resolution`, `awareness_or_decision_tier`, `briefing_apr27_decision_candidate`. Situation pages updated this tick: [[Access Bank — Multi-Track Failures]] + [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]].
 
-Factors: source=email, skim_tick, layer1_zero, layer2_one_delta_hourly_report_byte_identical_resend, ops_cycle_vs_jira_state_contradiction, parallel_pattern_two_open_p1s, awareness_tier, no_immediate_dispatch_continuation_of_briefing_dispatch.
+2. **Duty Handover Note 20260426 thread `19dc897ecc7b9e7e`** — Qazim Adedigba → daniel.armstrong@teamapt.com at 08:01:16 WAT Apr 26 + Daniel Armstrong acknowledgement reply 08:04:05 WAT (`19dc89a7f6c5b074`). Routine shift change at 08:00 WAT Sunday. Body content (per snippet): "Current System Status: 14 of 17 routes are operational. - Coralpay banks (FBN, PVB, and SBP) were turned off due to business decisions. - Coralpay transactions are routed through the [CoralPay_Cashout]…" — **same 14/17-routes content as the Hourly Reports stream, propagated to next-shift Daniel Armstrong**. The stale state continues into Sunday day shift; Daniel acknowledged without flagging the discrepancy with TDSD-6729 (likely because Daniel does not have visibility into Jira state at the moment of acknowledgement). **Routine handover does not match an Immediate trigger condition.** Salience factors: `keyword_floor=duty_handover`, `routine_shift_change`, `propagates_stale_state_to_next_shift`, `daniel_armstrong_inheritance_of_stale_state`, `awareness_tier`, `cross_referenced_with_hourly_reports_resend_pattern`. No situation page update for shift change itself; the stale-state propagation is folded into the active situation pages above.
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer 1 zero genuinely-new + Layer 2 keyword 1 delta (Hourly Reports 20260426, 14/17 routes 5min before two P1 onsets) (preserved summary)
+**No Immediate dispatch this tick** — both deltas are continuations / structural signals; neither matches a config-salience Immediate trigger condition (not a new P1, not a new instance of >2h silence beyond the existing dispatch, not an urgent direct DM). Both defer to briefing-2026-04-27 (Decision-tier candidate for the structural reporting failure; Awareness-tier for the routine handover).
 
-06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window. Layer 1 zero. Operational keyword 1 delta — Hourly Reports 20260426 thread 19dc749cf20cd04b 01:56 WAT (5min before P1 onsets) — Briefing-2026-04-26 A4. Active-situation entity coverage handled this tick: CoralPay ZIB / Access Bank both Tier 1 dispatched.
+Factors: source=email, skim_tick, layer1_zero, layer2_two_deltas_hourly_report_3rd_byte_identical_resend_+_duty_handover_routine, ops_cycle_reporting_failure_structurally_proven_by_parallel_jira_evidence, stale_state_propagated_to_next_shift, no_immediate_dispatch_continuation_+_structural.
 
-### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), Layer 1 zero + Layer 2 keyword 1 delta (Stanbic cycle 34, two-track with Slack) (preserved summary)
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Layer 1 zero + Layer 2 keyword 1 delta (Hourly Reports byte-identical resend; ambiguous at the time) (preserved summary)
 
-22:10 WAT Apr 25 Saturday skim tick. Window 19:10:00Z → 21:10:00Z = 2h. Layer 1 zero. Operational keyword query 1 thread — Stanbic ATS RC91 cycle 34 thread `19dc63afd3c001f0` (Olamide → Stanbic 21:00:33 WAT, bank reconfirm Onyekachukwu Okigbo 21:09:38 WAT, Olamide processing-successfully 21:14:37 WAT). Email-confirmed end-to-end 14m04s, two-track with Slack #teamapt-tech-operations Olamide P1 post 21:01 WAT.
+07:10 WAT Apr 26 Sunday skim tick. Window 05:10:00Z → 06:10:00Z. Layer 1 zero. Operational keyword 1 thread — Hourly Reports 20260426 reply `19dc8519c120d6d2` 06:44 WAT, byte-identical to 01:56 WAT original including "0 tickets raised" line that contradicts TDSD-6729 filed at 02:24 WAT. Two interpretations consistent at this tick (silent resolution vs ops-cycle reporting failure); resolved structurally at 08:10 WAT tick by TDSD-6729 Resolution=Done evidence. No Immediate dispatch.
 
-### last_processed 2026-04-25T19:10:00Z (20:10 WAT) — skim-level 20:00-cron tick, Layer 1 + Layer 2 both zero-delta (preserved summary)
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer 1 zero genuinely-new + Layer 2 keyword 1 delta (Hourly Reports 20260426 origin, 14/17 routes 5min before two P1 onsets) (preserved summary)
 
-20:10 WAT Apr 25 Saturday skim. Layer 1 + operational keyword passes both clean. FCMB cycle 2 ~4h05m silent post-16:04 WAT filing — within envelope.
+06:10 WAT Apr 26 Sunday briefing tick. Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window. Layer 1 zero. Operational keyword 1 delta — Hourly Reports 20260426 thread 19dc749cf20cd04b 01:56 WAT (5min before P1 onsets) — Briefing-2026-04-26 A4. Active-situation entity coverage handled this tick: CoralPay ZIB / Access Bank both Tier 1 dispatched.
 
-### last_processed 2026-04-25T17:10:00Z (18:10 WAT) — skim-level 18:00-cron tick, end-of-shift handover deltas only (preserved summary)
+### last_processed 2026-04-25T17:10:00Z–22:10:00Z — preserved summary block
 
-18:10 WAT Apr 25 Saturday skim. Daily Report #20260425 (Afeez 16:17 WAT) + Re: Duty Handover Note (Afeez/Olamide 16:22-16:23 WAT) — Layer 2 keyword surface; out of scope direct-to-me.
+Multiple Saturday late-afternoon/evening skim ticks. 22:10 WAT Stanbic cycle 34 thread (two-track with Slack). 20:10 WAT zero-delta. 18:10 WAT end-of-shift handover deltas. 17:10 WAT FCMB cycle 2 keyword recovery (1-tick delay from Layer-1-only sweep prior).
 
-### last_processed 2026-04-25T16:10:00Z (17:10 WAT) — skim-level 17:00-cron tick, FCMB RC91 cycle 2 escalation 1-tick delay calibration (preserved summary)
+### last_processed 2026-04-25T09:10:00Z–16:10:00Z — preserved summary block
 
-17:10 WAT Apr 25 Saturday skim. FCMB RC91 cycle 2 from Afeez 16:04:26 WAT to FCMB caught via Layer 2 keyword pass (1-tick delay from 16:10 prior tick Layer-1-only sweep). Skim-tick keyword pass directive added.
+Multiple Saturday morning/afternoon skim ticks. 10:10 WAT BambooHR Layer 1 calibration miss surfaced (5-day silent — bot_sender over-fired, directive amended).
 
-### last_processed 2026-04-25T13:10:00Z–15:10:00Z — preserved summary block
+### last_processed 2026-04-25T05:09:54Z (06:09 WAT) — briefing-tick full sweep (preserved summary)
 
-Multiple skim ticks Saturday afternoon, all zero-delta with one mock-bot signal discarded.
-
-### last_processed 2026-04-25T11:10:00Z–12:10:00Z — preserved summary block
-
-Saturday late morning/midday skim ticks zero-delta.
-
-### last_processed 2026-04-25T09:10:00Z (10:10 WAT) — skim-level 10:00-cron tick, BambooHR Layer 1 calibration miss surfaced (5-day silent) (preserved summary)
-
-10:10 WAT Apr 25 Saturday skim. BambooHR \"Time Off Requested: Ravi Kiran Veluguleti and Muhammad Samu\" 10:06 WAT Layer 1 To:me. **5-consecutive-day silent miss** — `bot_sender` heuristic over-fired, preempting Layer 1. Directive amended above. MISS captured.
-
-### last_processed 2026-04-25T05:09:54Z–08:10:00Z — preserved summary block
-
-Saturday early ticks. 06:09 WAT briefing tick captured 4 in-window threads (Hourly Reports, Duty Handover, Union RC96, NIBSS PTSA counter-reply latent). 08:10 WAT skim implicit-FCMB-resolved via 14/17 trajectory.
+06:09 WAT Apr 25 briefing tick. 4 in-window threads (Hourly Reports, Duty Handover, Union RC96, NIBSS PTSA counter-reply latent) via 5 narrow buckets.
 
 ### last_processed 2026-04-24T05:09:00Z–21:10:00Z — preserved summary block
 
