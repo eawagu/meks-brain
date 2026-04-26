@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T14:10:00Z (15:10 WAT). 15:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword 0 NEW (Access DD bilateral thread `19dc9102d9bde88a` returned by residual-cache; latest message 12:55:56Z predates 13:10:00Z window cutoff — discarded by client-side filter). Sunday afternoon quiet on email path. CoralPay 4th hourly report still missing 7h+ past Daniel shift start."
-updated: 2026-04-26
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword 0 NEW (the 09:12 UTC Access DD bilateral thread `19dc9102d9bde88a` was already captured at 10:10 WAT prior tick — boundary case). Sunday morning quiet on email path."
+updated: "2026-04-26T15:23:25Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T14:10:00Z"
+last_processed: "2026-04-26T15:10:00Z"
 ---
 
 
@@ -50,41 +50,41 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (9h after Sunday briefing), Layer 1 zero + Layer 2 0 NEW (residual-cache return discarded by client-side filter)
+### last_processed 2026-04-26T15:10:00Z (16:10 WAT) — skim-level 16:00-cron tick (10h after Sunday briefing), Layer 1 zero + Layer 2 zero NEW
 
-15:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-active-p1-watch). Window 13:10:00Z → 14:10:00Z = 1h.
+16:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=sunday-afternoon-quiet-priors). Window 14:10:00Z → 15:10:00Z = 1h.
 
-**Layer 1 query `to:me newer_than:2h`: 0 threads in window.** Empty result `{}` (no residual-cache).
+**Layer 1 query `to:me newer_than:1d`: 0 To:me threads in 1h skim window.** All threads from broader 24h query date-filter to predates of 14:10:00Z (latest direct-handover at 07:01 UTC = 08:01 WAT).
 
-**Operational keyword query `(RC91 OR RC05 OR P1 OR outage OR NIBSS OR compromised OR Mandate OR CoralPay OR ZIB OR Access) newer_than:2h`: 1 thread in window — `19dc9102d9bde88a` Access Bank | DD | Mandate Creation Failures.** Three messages visible:
-- 09:12:36 UTC (10:12 WAT) Daniel Armstrong → Access Card Switching Team — original bilateral filing
-- 11:45:52 UTC (12:45 WAT) Daniel Armstrong "Gentle reminder"
-- 12:55:56 UTC (13:55 WAT) `aptpaytechnicalsupport@teamapt.com` — ambiguous-sender acknowledgment captured at prior tick
-
-**Client-side residual-cache filter applied:** thread's most-recent-message timestamp is 12:55:56Z. Cutoff is 13:10:00Z. Latest < cutoff → **thread discarded as zero-new this window.** This is the expected residual-cache behavior on `newer_than:2h` queries when no genuinely new content arrives — the thread re-appears because it sits within the 2h window but predates the per-tick cutoff. No new signal.
+**Operational keyword query `(RC91 OR RC05 OR P1 OR outage OR Mandate OR settlement OR CoralPay OR ZIB OR Access) newer_than:1d`: 0 NEW threads in window.** All matches predate 14:10:00Z; latest in-window operational signal was the 08:01 WAT handover thread already captured prior tick.
 
 **No additional issuer-bucket sweeps this skim-tick** (cost cap; next briefing-tick will cover).
 
-**Active P1 silence-rule check (cross-cutting):**
-- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend (~7h21m+ silent on email path). The 4th hourly report (when Daniel files it) is the watchpoint signal — still not yet visible at this tick (~7h+ past Daniel's 08:01 WAT shift start). The structural ops-cycle-reporting failure persists into the afternoon.
-- **Access Bank cycle 8** — closed bank-side at 07:54 WAT. Email path silent on closure (no closure note from bank, no Slack closure post propagated). ~7h17m+ post-resolution.
-- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT. **~5h post-bilateral, 4h watchpoint passed at 14:12 WAT prior tick.** Post-watchpoint: bank-side `accessbankplc.com` sender still NOT visible — only the ambiguous-sender `aptpaytechnicalsupport@teamapt.com` acknowledgment from 13:55 WAT. Bank-side coordination breakdown remains the leading hypothesis. **Watchpoint hardens for briefing-2026-04-27:** if no `accessbankplc.com` sender is visible by 06:10 WAT Apr 27 briefing tick, escalate as briefing-2026-04-27 Decision item.
+**Active P1 silence-rule check (cross-cutting, structural pattern observation):**
+- **CoralPay ZIB RC91** — no email mention since Hourly Reports 07:50 WAT byte-identical resend (~8h21m+ silent on email path). 4th hourly report (Daniel-on-duty) STILL not visible at this tick. **Pattern observation:** Daniel-on-duty cadence appears to have stopped after the 08:01 WAT handover acknowledgment — no Daniel-authored hourly reports observed in 8h+ since shift start. This is a structural ops-cycle-reporting failure that has now persisted across the entire Daniel shift today.
+- **Access Bank cycle 8** — closed bank-side at 07:54 WAT. Email path silent on closure (no closure note from bank, no Slack closure post propagated). ~8h17m+ post-resolution.
+- **Access Bank DD Mandate Failures** — bilateral filing 10:12 WAT. ~6h post-bilateral. Post-watchpoint: bank-side `accessbankplc.com` sender still NOT visible. Bank-side coordination breakdown remains the leading hypothesis. Watchpoint hardens for briefing-2026-04-27.
+- **Ecobank settlements (NEW Apr 26 16:00 WAT)** — Daniel Armstrong filed [[TDSD-6735]] via Jira portal directly; no email thread accompanying the ticket filing observed in this 1h window. Watchpoint: Feyisayo Oyeniran 8h first-response SLA breach Mon Apr 27 17:00 WAT.
 
 **No Immediate dispatch from email-side this tick** — no new signal in 1h window.
 
-Factors: source=email, skim_tick, layer1_zero, layer2_one_thread_residual_cache_discarded_latest_predates_cutoff, sunday_afternoon_quiet_on_email_path, no_immediate_dispatch_from_email_side, post_4h_bank_silence_watchpoint, watchpoint_hardens_for_briefing_apr27_if_no_accessbankplc_sender, coralpay_4th_hourly_report_still_missing_7h_past_daniel_shift_start.
+Factors: source=email, skim_tick, layer1_zero, layer2_zero, sunday_afternoon_quiet_on_email_path, no_immediate_dispatch_from_email_side, daniel_on_duty_hourly_report_cadence_stopped_8h_post_handover_structural_ops_failure_full_shift, watchpoint_hardens_for_briefing_apr27_if_no_accessbankplc_sender, eco_settlements_no_email_thread_jira_portal_only_filing.
+
+### last_processed 2026-04-26T14:10:00Z (15:10 WAT) — skim-level 15:00-cron tick (preserved summary)
+
+15:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 1 thread `19dc9102d9bde88a` returned by residual-cache; latest message 12:55:56Z predates 13:10:00Z window cutoff — discarded. Sunday afternoon quiet. CoralPay 4th hourly report still missing 7h+ past Daniel shift start. No Immediate.
 
 ### last_processed 2026-04-26T13:10:00Z (14:10 WAT) — skim-level 14:00-cron tick (preserved summary)
 
-14:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 1 NEW thread message at 13:55:56 WAT — Access DD bilateral thread, sender `aptpaytechnicalsupport@teamapt.com` signed "Temitayo Bashir Ola-Buraimo" — AMBIGUOUS sender (TeamApt vs Access Bank Temitayo). Brain search found no TeamApt employee with that name. Conservative read: TeamApt internal acknowledgment. Bank silence persists at 4h post-bilateral watchpoint (14:12 WAT). No Immediate dispatch.
+14:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 1 NEW thread message at 13:55:56 WAT — Access DD bilateral thread, sender `aptpaytechnicalsupport@teamapt.com` signed \"Temitayo Bashir Ola-Buraimo\" — AMBIGUOUS sender (TeamApt vs Access Bank Temitayo). Brain search found no TeamApt employee with that name. Conservative read: TeamApt internal acknowledgment. Bank silence persists at 4h post-bilateral watchpoint (14:12 WAT). No Immediate dispatch.
 
 ### last_processed 2026-04-26T12:10:00Z (13:10 WAT) — skim-level 13:00-cron tick (preserved summary)
 
-13:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 0 NEW threads in 1h window (Access DD bilateral thread `19dc9102d9bde88a` aged past `newer_than:2h` window — natural dedup). Sunday afternoon quiet on email path. CoralPay 4th hourly report still missing 2h+ past Daniel shift start. Access DD bank reply 2h58m+ post-bilateral with NO bank reply visible (well past typical 30–60min Access reply window). Watchpoint: if no reply by ~14:00 WAT (4h post-bilateral), bank-side coordination breakdown becomes leading hypothesis. No Immediate dispatch.
+13:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 0 NEW threads in 1h window. Access DD bank reply 2h58m+ post-bilateral with NO bank reply visible. Watchpoint: if no reply by ~14:00 WAT (4h post-bilateral), bank-side coordination breakdown becomes leading hypothesis. No Immediate dispatch.
 
 ### last_processed 2026-04-26T11:10:00Z (12:10 WAT) — skim-level 12:00-cron tick (preserved summary)
 
-12:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 keyword 0 NEW (Access DD bilateral thread `19dc9102d9bde88a` returned again — third-tick boundary-case repeat dedup). Bank reply 1h59m+ post-bilateral — escalating concern.
+12:10 WAT Apr 26 Sunday skim. Layer 1 zero. Layer 2 keyword 0 NEW. Bank reply 1h59m+ post-bilateral — escalating concern.
 
 ### last_processed 2026-04-26T10:10:00Z (11:10 WAT) — skim-level 11:00-cron tick (preserved summary)
 
