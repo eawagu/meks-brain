@@ -3,12 +3,13 @@ type:
   - "source-config"
 title: source-config-slack
 created: 2026-04-11
-summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: 1 Tier 1 delta on #teamapt-tech-operations — Olamide Stanbic RC91 P1 cycle 34 (21:00–21:10 WAT, 10–14m bank-resolved fast-cycle); within-pattern, no Immediate dispatch; awareness candidate for briefing-2026-04-26."
-updated: "2026-04-26T05:24:47Z"
+summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: zero Tier 1 deltas in 1h window — both active P1s (CoralPay ZIB + Access Bank) silent on #teamapt-tech-operations since 06:10 WAT briefing tick. No resolution posts, no escalation messages. Continuation of 06:22 WAT Immediate dispatch."
+updated: "2026-04-26T06:21:30Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T05:10:00Z"
+last_processed: "2026-04-26T06:10:00Z"
 ---
+
 
 
 ## Connection
@@ -49,7 +50,26 @@ The Slack `oldest` parameter MUST be computed as `int(parse_iso(last_processed).
 
 ## Notes
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), 2 Tier 1 deltas on #teamapt-tech-operations during overnight delegation window — both active P1s now Immediate-tier dispatched at 06:00 resume
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), zero Tier 1 deltas — both active P1s silent on ops channel for 1h post-briefing
+
+07:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=hour-after-briefing-with-2-active-p1s-needing-delta-check). Window 05:10:00Z → 06:10:00Z = 1h post-briefing-tick. Tier 1 channels read with `oldest=1777180200` (deterministic compute from `last_processed=2026-04-26T05:10:00Z`; runtime assertion `oldest <= now (1777183901)` passed):
+
+- **#teamapt-tech-operations (C0ABU8GMW75): 0 messages.** No resolution posts, no escalation messages, no new P1s. Both active P1s (CoralPay ZIB 02:01 WAT + Access Bank 02:05 WAT, TDSD-6729) carrying forward without Slack-side state change.
+- **#account-switch-alerts (C098VUQCVRA): 0 messages.**
+- **Other Tier 1 (C096LCNP26P, C08PH35PLPK, C090UHR9VDE): not read this skim tick** — fast-path Tier 1 prioritized to ops + alerts (where active P1s would surface). Per skim-tick discipline these zero-traffic channels are deferred to next full-tick.
+
+DM (`to:me after:1777180200` keyword search) — broad keyword query `after:2026-04-26 (P1 OR RC91 OR resolved OR Coralpay OR Access)` returned zero hits across public+private+IM scope. **Note:** Slack search index appears to lag for messages within the last few hours — channel reads are the more reliable path for sub-hourly deltas; the keyword query null result is a confirmation of "no resolution post" rather than authoritative coverage.
+
+**Active P1 silence-rule check (1h post-briefing-Immediate-dispatch):**
+- CoralPay ZIB RC91 active 5h09m at this tick — 1h continued silence past 06:10 WAT briefing dispatch. config-salience absence-of-signal Immediate threshold (1h no update) crosses again, but this is continuation of the same condition already dispatched at 06:22 WAT — no novel trigger.
+- Access Bank RC91 cycle 8 active 5h05m at this tick — same continuation pattern.
+- **No new Immediate dispatch this tick.** Structural anomaly (06:44 WAT hourly report byte-identical to 01:56 WAT and contradicts TDSD-6729 with "0 tickets raised") surfaced via email source-config — does not match config-salience Immediate trigger conditions, defers to briefing-2026-04-27 as Awareness/Decision item.
+
+Cross-source: Email caught Hourly Reports 20260426 reply (06:44 WAT, byte-identical resend) — see source-config-email tick note. Jira zero TDSD transitions in window — TDSD-6729 unchanged Work in progress. Calendar zero delta on Sun→Mon view (Lattice block only).
+
+Factors: source=slack, skim_tick, deterministic_epoch_compute_oldest=1777180200, oldest_le_now_assertion_passed, tier1_zero_deltas_ops_and_alerts, active_p1_silence_continuation_no_novel_trigger, no_new_immediate_dispatch, structural_anomaly_via_email_source_config, awareness_candidate_briefing_apr27.
+
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), 2 Tier 1 deltas on #teamapt-tech-operations during overnight delegation window — both active P1s now Immediate-tier dispatched at 06:00 resume (preserved summary)
 
 06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight. Tier 1 channels read-by-default sweep with `oldest=1777151400` (deterministic compute from prior `last_processed=2026-04-25T21:10:00Z`; runtime assertion `oldest <= now (1777180230)` passed):
 
