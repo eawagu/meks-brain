@@ -3,11 +3,11 @@ type:
   - "source-config"
 title: source-config-email
 created: 2026-04-11
-summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-25T21:10:00Z (22:10 WAT). 22:10 WAT Apr 25 skim-tick: Layer 1 zero, Layer 2 keyword pass 1 thread — Stanbic RC91 cycle 34 thread 19dc63afd3c001f0 (21:00–21:14 WAT, 14m04s bank-resolved fast-cycle, two-track with Slack); awareness candidate for briefing-2026-04-26."
-updated: "2026-04-26T05:25:57Z"
+summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T06:10:00Z (07:10 WAT). 07:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword pass 1 thread — Hourly Reports 20260426 reply (06:44 WAT, byte-identical to 01:56 WAT original, \"0 tickets raised\" stale vs TDSD-6729; does not mention either active P1) — Awareness candidate for briefing-2026-04-27."
+updated: "2026-04-26T06:19:15Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-26T05:10:00Z"
+last_processed: "2026-04-26T06:10:00Z"
 ---
 
 
@@ -50,20 +50,22 @@ When no threads match the `newer_than:Nh` filter, Gmail MCP occasionally returns
 
 ## Notes
 
-### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer 1 zero genuinely-new + Layer 2 keyword 1 delta (Hourly Reports 20260426, 14/17 routes 5min before two P1 onsets)
+### last_processed 2026-04-26T06:10:00Z (07:10 WAT) — skim-level 07:00-cron tick (1h after Sunday briefing), Layer 1 zero + Layer 2 keyword 1 delta (Hourly Reports byte-identical resend; ops-cycle vs Jira-state contradiction)
 
-06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window.
+07:10 WAT Apr 26 Sunday skim tick (Step 0: level=skim, rationale=hour-after-briefing-with-2-active-p1s-needing-delta-check). Window 05:10:00Z → 06:10:00Z = 1h post-briefing-tick.
 
-**Layer 1 query `to:me after:2026/04/25`: 5 threads in window, 0 genuinely-new** — all Apr 25 dated emails (BambooHR Time Off Apr 25 10:06 WAT, McKinsey QED report Apr 25 11:04 WAT, TeamApt Juliana Backoffice Update June Johnson Apr 25 07:54 WAT, NPS UAT Script old Jan, PENTEST 2FA DCIR portal old Dec/Jan) all timestamps predate Apr 25 22:10 WAT last_processed cutoff — already captured in prior ticks. Layer 1 zero genuinely-new in this 8h overnight window.
+**Layer 1 query `to:me newer_than:2h`: 0 threads in window.** Zero genuinely-new Layer-1 traffic in 1h.
 
-**Operational keyword query `(RC91 OR P1 OR outage OR incident OR breach OR \"settlement failure\" OR \"transaction failure\") after:2026/04/25`: 1 genuinely-new thread** —
-- **Hourly Reports 20260426 thread 19dc749cf20cd04b** — Qazim Adedigba → aptpaytechnicalsupport@teamapt.com at 01:56 WAT Apr 26: \"Hello Team, Current System Status: 14 of 17 routes are operational. Coralpay banks (FBN, PVB, and SBP) were turned off due to business decisions. Coralpay transactions are routed through the [CoralPay_Cashout failover].\" 5min BEFORE both new P1s started (CoralPay ZIB 02:01 WAT, Access Bank 02:05 WAT). Salience factors: `keyword_floor=routes_operational+coralpay`, `predates_p1_onset_by_5_to_9_min`, `ops_cycle_gap_4h14m_overnight`, awareness-tier. Briefing-2026-04-26 A4.
+**Operational keyword query `newer_than:2h (RC91 OR P1 OR \"Hourly Report\" OR Coralpay OR ZIB OR \"Access Bank\" OR outage OR settlement)`: 1 genuinely-new thread** —
+- **Hourly Reports 20260426 thread `19dc749cf20cd04b` reply `19dc8519c120d6d2`** — Qazim Adedigba → aptpaytechnicalsupport@teamapt.com at 06:44:28 WAT Apr 26 (Re: Hourly Reports 20260426). **Body content is byte-identical to the 01:56 WAT original** including "Number of tickets raised: 0" and "Number of tickets closed: 0" — both stale vs reality (TDSD-6729 was filed by Qazim himself at 02:24 WAT, 4h20m before this report). Report does not mention CoralPay (ZIB) RC91 P1 (active 5h+ since 02:01 WAT) or Access Bank RC91 P1 (active 5h+ since 02:05 WAT, TDSD-6729). Same Coralpay-banks-off list as original (FBN, PVB, SBP — ZIB still implicitly operational per the report). **Two interpretations consistent with observed silence:** (A) silent resolution — both P1s recovered bank-side, ops did not Slack-post, hourly report omits resolved cycles correctly; (B) ops-cycle reporting failure — Qazim resent prior text 4h48m later without state-checking, both P1s still active and unrecorded. Parallel pattern across two open P1s (CoralPay ZIB + Access Bank cycle 8) at the same hourly report strengthens (B) as the more parsimonious common cause. Salience factors: `keyword_floor=hourly_report+routes_operational`, `byte_identical_to_prior_4h48m_later`, `contradicts_jira_state_0_tickets_raised_vs_TDSD-6729`, `parallel_silence_two_open_p1s`, `awareness_tier`, `structural_signal_independent_of_resolution`. Awareness candidate for briefing-2026-04-27. Situation pages updated this tick: [[Access Bank — Multi-Track Failures]] + [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]].
 
-Other returned threads in window are repeats already captured: Stanbic cycle 34 thread 19dc63afd3c001f0 (last activity 21:14 WAT Apr 25, predates 22:10 WAT cutoff), FCMB cycle 2 thread 19dc52c43f7e9838 (16:04 WAT Apr 25, predates), Wema cycle thread 19dc390a02e9797c (07:34–07:49 WAT Apr 25, predates), Union RC96 thread 19dc1fd7e4326d6a (00:14–02:52 WAT Apr 25, predates), Duty Handover Note 20260425 (07:06–07:10 WAT Apr 25, predates), Hourly Reports 20260425 (01:20–07:02 WAT Apr 25, predates), Mock Monitoring (11:58 WAT Apr 25, bot-to-bot), TEAMAPT Monitoring (07:32 WAT Apr 25, bot-to-bot).
+**No Immediate dispatch this tick** — both active P1s already covered by 06:22 WAT briefing Immediate dispatch (D1+D2); structural-anomaly framing is novel but does not match a config-salience Immediate trigger condition (not a new P1, not a new instance of >2h silence beyond the existing dispatch, not an urgent direct DM). Defers to briefing-2026-04-27 as Decision/Awareness item.
 
-**Active-situation entity coverage:** CoralPay ZIB / Access Bank — see Slack source-config (both Tier 1 deltas dispatched Immediate). NIBSS PTSA bilateral 35h+ silent post-19:05 WAT Apr 24 NIBSS counter-reply (under 48h threshold; TDSD-6716 Completed unilaterally Apr 25 16:20 WAT — situation retirement candidate). FCMB cycle 2 silent 14h+ post-16:04 WAT Apr 25 email-only filing — within multi-day bank-cycle envelope; FCMB not in Apr 26 01:56 WAT hourly report failure list.
+Factors: source=email, skim_tick, layer1_zero, layer2_one_delta_hourly_report_byte_identical_resend, ops_cycle_vs_jira_state_contradiction, parallel_pattern_two_open_p1s, awareness_tier, no_immediate_dispatch_continuation_of_briefing_dispatch.
 
-Factors: source=email, briefing_tick, layer1_zero_genuinely_new, layer2_one_delta_hourly_reports_20260426, predates_p1_onset, awareness_tier, post_overnight_delegation_resume.
+### last_processed 2026-04-26T05:10:00Z (06:10 WAT) — full-level briefing-tick (Sunday Apr 26), Layer 1 zero genuinely-new + Layer 2 keyword 1 delta (Hourly Reports 20260426, 14/17 routes 5min before two P1 onsets) (preserved summary)
+
+06:10 WAT Apr 26 Sunday briefing tick (Step 0: level=full, rationale=briefing-tick — floor override). Window 21:10:00Z Apr 25 → 05:10:00Z Apr 26 = 8h overnight delegation window. Layer 1 zero. Operational keyword 1 delta — Hourly Reports 20260426 thread 19dc749cf20cd04b 01:56 WAT (5min before P1 onsets) — Briefing-2026-04-26 A4. Active-situation entity coverage handled this tick: CoralPay ZIB / Access Bank both Tier 1 dispatched.
 
 ### last_processed 2026-04-25T21:10:00Z (22:10 WAT) — skim-level 22:00-cron tick (last tick before overnight delegation), Layer 1 zero + Layer 2 keyword 1 delta (Stanbic cycle 34, two-track with Slack) (preserved summary)
 
