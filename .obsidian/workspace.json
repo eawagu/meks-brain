@@ -11,10 +11,14 @@
             "id": "9f9284ba647d5068",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "memory/briefing-2026-04-27.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "briefing-2026-04-27"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "briefi",
+                "query": "briefing-2026-04-27",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -177,7 +181,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "c28a7b5f438a7191",
+  "active": "9f9284ba647d5068",
   "lastOpenFiles": [
     "memory/briefing-2026-04-26.md",
     "memory/sterling-bank-sla-clause-55.md",
