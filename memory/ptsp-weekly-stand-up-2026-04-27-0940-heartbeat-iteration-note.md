@@ -1,20 +1,20 @@
 ---
-title: PTSP Weekly Stand-up 2026-04-27 0940 Heartbeat Iteration Note
 type:
   - "source"
+title: PTSP Weekly Stand-up 2026-04-27 0940 Heartbeat Iteration Note
+created: "2026-04-27T11:32:17Z"
+summary: "Heartbeat dispatch note flagging a 09:40 WAT Drive-doc iteration of the same PTSP Weekly Stand-up already captured by source page 2824 — different drive_file_id, same meeting, no substantive content."
+updated: "2026-04-27T11:34:55Z"
 cssclasses:
   - "source"
+supersedes: PTSP Weekly Stand-up 2026-04-27 0935 Gemini Notes
+drive_owner: ialiyu@teamapt.com
 source_path: PTSP Weekly Stand-up - 2026_04_27 09_40 WAT - Notes by Gemini.md
 drive_file_id: 127kO9_rOq85cSwN2XmHA2IGzDzIlWWZ5iyog61zaL2U
-drive_view_url: "https://docs.google.com/document/d/127kO9_rOq85cSwN2XmHA2IGzDzIlWWZ5iyog61zaL2U/edit"
-drive_owner: ialiyu@teamapt.com
 drive_modified: "2026-04-27T09:34:35Z"
-supersedes: PTSP Weekly Stand-up 2026-04-27 0935 Gemini Notes
+drive_view_url: "https://docs.google.com/document/d/127kO9_rOq85cSwN2XmHA2IGzDzIlWWZ5iyog61zaL2U/edit"
 retention_label: discard
 retention_rationale: Heartbeat meta-note about a duplicate Drive doc for an already-ingested meeting; metadata fully captured in this source page and back-linked to the canonical record (page 2824).
-created: "2026-04-27T11:32:17Z"
-updated: "2026-04-27T11:32:17Z"
-summary: "Heartbeat dispatch note flagging a 09:40 WAT Drive-doc iteration of the same PTSP Weekly Stand-up already captured by source page 2824 — different drive_file_id, same meeting, no substantive content."
 ---
 
 ## Summary
@@ -29,6 +29,7 @@ The ingress file itself contains only the heartbeat's meta-note — no extracted
 - New drive_file_id: `127kO9_rOq85cSwN2XmHA2IGzDzIlWWZ5iyog61zaL2U`; new view URL captured in frontmatter.
 - Heartbeat dispatcher chose dispatch-to-ingress over in-tick handling to avoid duplicate-source-page creation.
 - Canonical record (2824) is updated to note this iteration; this page is the breadcrumb.
+- Pattern signal for [[Ingest pipeline integrity]]: Gemini Notes can emit multiple Drive docs for the same meeting at slightly different timestamps; ingress pipeline must support deduplication/supersession routing rather than naive one-source-page-per-file.
 
 ## Entities Mentioned
 
@@ -38,7 +39,7 @@ The ingress file itself contains only the heartbeat's meta-note — no extracted
 
 - [[PTSP Weekly Stand-up]]
 - [[Heartbeat Dispatch]]
-- [[Source Page Deduplication]]
+- [[Ingest pipeline integrity]]
 
 ## Sources
 

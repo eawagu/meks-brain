@@ -1,7 +1,10 @@
 ---
-title: PTSP Weekly Stand-up 2026-04-27 0935 Gemini Notes
 type:
   - "source"
+title: PTSP Weekly Stand-up 2026-04-27 0935 Gemini Notes
+created: "2026-04-27T09:20:27Z"
+summary: "PTSP Weekly Stand-up 2026-04-27 09:35 WAT Gemini Notes — Gemini summary unavailable (insufficient supported-language conversation); document carries no decisions, action items, or details. Attendee list captures cross-functional PTSP standup membership. Superseding 09:40 iteration tracked in [[PTSP Weekly Stand-up 2026-04-27 0940 Heartbeat Iteration Note]]."
+updated: "2026-04-27T11:34:55Z"
 cssclasses:
   - "source"
 source_path: "PTSP Weekly Stand-up - 2026/04/27 09:35 WAT - Notes by Gemini"
@@ -9,9 +12,8 @@ drive_file_id: 1xjlZeoD7rn_9BZb9Vdax8DtNerMUTeerj5PQ5RXyr3g
 drive_view_url: "https://docs.google.com/document/d/1xjlZeoD7rn_9BZb9Vdax8DtNerMUTeerj5PQ5RXyr3g/edit"
 retention_label: discard
 retention_rationale: Empty Gemini stub — summary explicitly unavailable, no extracted content; full record present in this source page (attendee list + meta), no value in raw retention.
-created: "2026-04-27T09:20:27Z"
-updated: "2026-04-27T09:20:27Z"
-summary: "PTSP Weekly Stand-up 2026-04-27 09:35 WAT Gemini Notes — Gemini summary unavailable (insufficient supported-language conversation); document carries no decisions, action items, or details. Attendee list captures cross-functional PTSP standup membership."
+iterations:
+  - "PTSP Weekly Stand-up 2026-04-27 0940 Heartbeat Iteration Note"
 ---
 
 ## Summary
@@ -19,6 +21,10 @@ summary: "PTSP Weekly Stand-up 2026-04-27 09:35 WAT Gemini Notes — Gemini summ
 PTSP (Payment Terminal Service Provider) Weekly Stand-up — Apr 27, 2026 ~09:35 WAT. Gemini Notes auto-generation produced no summary, decisions, action items, or details for this meeting. Per Gemini's stub: *"A summary wasn't produced for this meeting because there wasn't enough conversation in a supported language."* Either the meeting was conducted predominantly in a non-supported language, attendance was insufficient to produce a transcript, or the call was very brief / cancelled-on-call.
 
 The meeting's existence and attendee list are captured here for cross-referencing; substantive content is unavailable.
+
+## Iterations / supersession
+
+At 11:10 WAT (Apr 27, 2026), the heartbeat dispatcher detected a second Drive document for the same meeting dated 09:40 WAT, drive_file_id `127kO9_rOq85cSwN2XmHA2IGzDzIlWWZ5iyog61zaL2U` (different from this page's canonical drive_file_id `1xjlZeoD7rn_9BZb9Vdax8DtNerMUTeerj5PQ5RXyr3g`). The dispatcher routed it to ingress for explicit deduplication rather than in-tick handling. See [[PTSP Weekly Stand-up 2026-04-27 0940 Heartbeat Iteration Note]] for the iteration breadcrumb. This page remains the canonical record for this PTSP standup occurrence.
 
 ## Attendees
 
@@ -32,3 +38,4 @@ PTSP standup spans Switching, Operations, Customer Support, Cards, Project Deliv
 
 - [PTSP Weekly Stand-up - 2026/04/27 09:35 WAT - Notes by Gemini](https://docs.google.com/document/d/1xjlZeoD7rn_9BZb9Vdax8DtNerMUTeerj5PQ5RXyr3g/edit)
 - Calendar event: PTSP Weekly Stand-up (recurring), organizer [[Idris Aliyu]]
+- Iteration breadcrumb: [[PTSP Weekly Stand-up 2026-04-27 0940 Heartbeat Iteration Note]]
