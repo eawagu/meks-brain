@@ -4,7 +4,7 @@ type:
 title: config-briefing
 created: "2026-04-11T15:44:07Z"
 summary: Briefing format specification — decision-forcing structure with Ask/Signal/Recommended Action/References/Confidence, three-tier triage routing, disposition annotations, dynamic context assembly at triage time.
-updated: "2026-04-12T16:11:57Z"
+updated: "2026-04-27T01:24:59Z"
 cssclasses:
   - "config"
 ---
@@ -95,6 +95,28 @@ After triage, the client appends a `## Triage Results` section to the briefing p
 Valid dispositions: `approved`, `overridden`, `held`, `discarded`, `noted` (awareness items only).
 
 The Improve phase reads this table to compare Recommended Action vs Disposition per item. Overrides are the primary calibration signal. Tier 1 pull-outs (items moved from auto-advance to individual review) are a secondary signal — they indicate the heartbeat's confidence assessment was too high.
+
+## Tick Instrumentation
+
+Per-tick wall-clock timing data captured by the heartbeat (config-heartbeat-prompt) and written to the day's briefing page. The day's first briefing-tick creates this section after Improve's declaration with the column header row and the first data row. Subsequent ticks within the day append rows. Pre-briefing ticks write nothing — there is no briefing page yet to append to.
+
+### Format
+
+| Tick | Level | Setup | Step0 | Step1 | Step2 | Predict | Plan | Act | Improve |
+|---|---|---|---|---|---|---|---|---|---|
+
+Columns:
+- **Tick** — local time (configured timezone) of tick wall-clock start, formatted `HH:MM:SS TZ`.
+- **Level** — Step 0 work-level decision (`full`, `skim`, `minimal`, or `silent`).
+- **Setup, Step0, Step1, Step2, Predict, Plan, Act, Improve** — wall-clock duration for that phase, formatted compactly (e.g., `12s`, `47s`, `4m12s`). Phases not executed on this tick recorded as `—`.
+
+### Read
+
+The instrumentation-regression check in config-judgment-lint-prompt (Phase 1 step 5; Phase 2 § Instrumentation Regression; Phase 3 § 5. Instrumentation Regression) reads this section across briefings from the last 30 days and judges whether any phase's distribution shows a meaningful regression.
+
+### Lifecycle
+
+The section persists for the life of the briefing page (`status: current` → `status: superseded` → historical). Briefing pages are excluded from ingest and synthesis but remain queryable via `search` with `type_filter: ["briefing"]`. The instrumentation lint reads them directly as historical timing record.
 
 ## Briefing Boundary Rules
 
