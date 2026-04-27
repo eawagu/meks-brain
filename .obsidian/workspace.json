@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "ingress-",
+                "query": "briefi",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -70,7 +70,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -176,7 +177,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "9f9284ba647d5068",
+  "active": "c28a7b5f438a7191",
   "lastOpenFiles": [
     "memory/briefing-2026-04-26.md",
     "memory/sterling-bank-sla-clause-55.md",
