@@ -4,7 +4,7 @@ type:
 title: config-ingest-prompt
 created: "2026-04-16T09:17:59Z"
 summary: "Ingest task execution prompt — express-mode file processing from ingress folder. Batch tools: batch_get_pages + batch_upsert_pages for entity/concept updates. MISS: prefix routing to tuning log. Retention disposition via finalize_ingest."
-updated: "2026-04-27T08:13:38Z"
+updated: "2026-04-27T09:03:17Z"
 cssclasses:
   - "config"
 ---
@@ -46,7 +46,7 @@ For each file returned by scan, in order:
 1. **Read**: Call `read_ingress` with the file_path.
    - If it returns a response with an `error` field (`"unknown_format"`, `"conversion_failed"`, `"image_too_large"`, or any other error): the file should have been moved to review/ automatically. Verify the response contains a `moved_to` field confirming the move. If `moved_to` is present, note the skip with the error type, reason, and destination. If `error` is present but `moved_to` is absent, note a warning — the file is stuck in ingress and needs manual intervention. In either case, do NOT call `finalize_ingest` for this file. Continue to the next file.
    - If the tool call itself fails (MCP error / exception rather than a structured error response), note the failure and continue to the next file. Do NOT call `finalize_ingest` — the file remains in ingress for retry next scan.
-   - **Image files** return vision content blocks (not markdown text). The response contains the image directly and a JSON metadata block with `format: "image"`. Proceed to step 2 using the image content — examine it directly with vision.
+   - **Image files** — if `read_ingress` returns a response with `format: "image"`, MUST load `config-ingest-image-prompt` via `get_page` and follow its instructions for vision-content handling and image-specific source page extraction (covers this Read sub-step bullet and the For image files bullet in sub-step 2 below). If the load fails (page absent or `get_page` returns an error), MUST log the failure and skip this file — do not call `finalize_ingest`; the file remains in ingress for retry on the next run.
 
 2. **Create source page**: Call `create_page` with:
    - title: the filename without extension (deduplicate if needed by appending a number)
@@ -64,7 +64,7 @@ For each file returned by scan, in order:
      - `fs` — raw worth keeping for traceability or occasional manual reference, but not worth indexing in Postgres for retrieval. Examples: routine emails, screenshots, handover notes, vendor newsletters with one extracted action, files you might want to look at again but unlikely to query semantically.
      - `discard` — the source page captures everything worth retaining; the raw has no future utility beyond what's already extracted. Examples: brief one-line notifications, calibration signals, files whose content is fully encoded in the Key Points and Entities sections.
    - The `retention_rationale` is a single sentence stating WHY this label was chosen (e.g., "Multi-stakeholder transcript with named decisions; future retrieval likely.", "Routine vendor invoice — totals captured in source page.", "One-line ack; no further utility."). Be specific to this file, not generic. The rationale is the calibration substrate — the Improve phase reads it.
-   - **For image files:** examine the image visually. Extract all readable text (amounts, dates, names, reference numbers, addresses). Identify document type (receipt, passport page, invoice, photo, etc.). Use extracted content for Key Points and Entities. If text is partially legible, include best-effort reading with a note. Apply the same retention judgment — most images default to `fs` (worth keeping the original visual) unless the source page fully captures the content (then `discard`) or the image is reference material likely to drive future retrieval (then `postgres`).
+   - **For image files:** Extraction handled per `config-ingest-image-prompt` when loaded.
 
 3. **Batch entity/concept update**:
    Collect all entity names and concept names from the source page extraction (step 2's `## Entities Mentioned` and `## Concepts` sections).
