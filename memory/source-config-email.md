@@ -4,10 +4,10 @@ type:
 title: source-config-email
 created: 2026-04-11
 summary: "Gmail signal-source configuration: Layer 1 To:me always surface, Layer 2 keyword filtering. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Layer 1 zero, Layer 2 keyword 0 NEW (the 09:12 UTC Access DD bilateral thread `19dc9102d9bde88a` was already captured at 10:10 WAT prior tick — boundary case). Sunday morning quiet on email path."
-updated: "2026-04-27T12:20:13Z"
+updated: 2026-04-27
 cssclasses:
   - "source-config"
-last_processed: "2026-04-27T12:09:00Z"
+last_processed: "2026-04-27T13:09:00Z"
 ---
 
 
