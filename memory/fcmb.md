@@ -3,8 +3,8 @@ type:
   - "entity"
 title: FCMB
 created: 2026-04-11
-summary: "First City Monument Bank — ATS and Direct Debit routing. Fresh RC91 P1 active 3h36m+ at briefing-2026-04-25. D2B Apr 21–22: server access escalated to DH; FCMB plans to drop BVN from API responses entirely."
-updated: "2026-04-25T11:47:32Z"
+summary: "First City Monument Bank — Nigerian bank on Moniepoint's ATS, account transfer (switch), and Direct Debit routing. On 2026-04-27: account-transfer SLA sent to bank's legal; switch APIs delivered, awaiting bank's inbound/outbound APIs; institutional-admin profiling open; Direct Debit deferred per Ella resourcing decision; FCMBNSS on hold pending account-switch SLA signoff."
+updated: "2026-04-27T17:49:43Z"
 cssclasses:
   - "entity"
 ---
@@ -38,6 +38,14 @@ Tracked in [[FCMB — RC91 P1 Apr 17]] situation page. Day-3 trajectory with two
 - **Aligned decision** — BVN requirement removed from integration; exclusion confirmed not to impact functionality.
 - Source: [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]].
 
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+- **FCMB account transfer (via switch APIs)** — team delivered name-inquiry and transfer APIs to the bank; awaiting bank's inbound/outbound APIs. Bank gave the team two profiling users; team can only profile one as institutional admin (that admin then profiles the rest). Mail sent to bank to confirm which person to profile.
+- **FCMB account transfer SLA** — reviewed by [[Nora]] today and sent to FCMB legal for review.
+- **[[FCMB Direct Debit]] paused** — per [[Ella]], resource constraints force focus on account transfer first (account transfer is faster to implement); direct debit resumes after account transfer is cleared. Reframed as resource prioritization, not an escalation.
+- **FCMBNSS** — bank's position is unchanged: account-switch SLA must be signed (sent today) before NSS consent letter discussion. Project on hold by the bank.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## MFA/VPN
 
 FCMB MFA enrollment for VPN access confirmed as part of ACS connector replacement (Apr 10).
@@ -57,3 +65,5 @@ FCMB MFA enrollment for VPN access confirmed as part of ACS connector replacemen
 - [[Qazim Adedigba]]
 - [[Direct to Bank Daily standup - 2026-04-21 08:10 WAT]]
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]

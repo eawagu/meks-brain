@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Zenith Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and CoralPay routing; settlement counterparty for the TeamApt/TMSS switch integration. D2B Apr 21–22: pentest fix, LDAP-vs-MFA reliance decision, user-disable workaround via standby role."
-updated: "2026-04-25T11:47:32Z"
+summary: Nigerian bank — Moniepoint settlement counterparty for TMSS switch; on 2026-04-27 vulnerabilities fixed and team committed to running an internal scan to evidence-back false-positive claims; Zenith NSS proceeding via Money Point transactions (ATS endpoint not ready) with internal-work deadline 15 May; pilot kickoff target 30 April.
+updated: "2026-04-27T17:49:43Z"
 cssclasses:
   - "entity"
 ---
@@ -52,6 +52,13 @@ Three open Zenith ATS threads surfaced at the Apr 23 D2B standup:
 
 Source: [[note_2026-04-23T13-53-37-857Z]].
 
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+- **Vulnerability fixes** (Zenits ATS) — all bank-flagged appsec vulnerabilities have been fixed. In today's bank meeting, the team disputed several findings as likely false positives or mismatches; **bank's directive: team must run their own internal scan and bring the result back, so claims of false positive can be evidence-backed (no verbal/assumption-based claims)**. Team agreed with this. Internal security team committed to feedback before end-of-day. Fix-and-pilot commitment date: **30 April** (latest).
+- **Training day 2** — did not happen last week (was meant for users to exercise the system and ask role-based questions after day 1 functionality walkthrough). Team requested a new date; awaiting bank confirmation.
+- **Zenith NSS** — switch team configured the required per-bank-user daily reports. Because [[ATS]] endpoint is not ready (and is far away), [[Kevin]] proposed using [[Money Point|Moniepoint]] transactions for the NSS test; internal-work timeline **15 May**. Meeting expected this week to align direction. Expected NSS pilot date: **29 April**.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## Sources
 
 - [[review-queue]]
@@ -60,3 +67,5 @@ Source: [[note_2026-04-23T13-53-37-857Z]].
 - [[Direct to Bank Daily standup - 2026-04-21 08:10 WAT]]
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]

@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Paystack
 created: 2026-04-11
-summary: Nigerian fintech (Stripe-acquired) — competitor and transfer integration partner to Moniepoint. Direct debit product, ₦4.4B halt on Easter Saturday Apr 5, and transfer traffic disruption reported Apr 13.
-updated: "2026-04-13T00:13:12Z"
+summary: "Nigerian fintech (Stripe-acquired) — competitor and transfer integration partner to Moniepoint. On 2026-04-27: Direct Debit integration in progress on Paystack's side; team aligning internally on activity-tracking using Glory Alioha's Global Pay implementation plan template. Same project Aqua was previously reporting."
+updated: "2026-04-27T17:49:44Z"
 cssclasses:
   - "entity"
 ---
@@ -28,8 +28,19 @@ Paystack is a Nigerian fintech company (acquired by Stripe) and a direct competi
 - Remita (a payments competitor/adjacent player) experienced a breach Apr 2
 - Noted alongside Paystack DD outreach in the same day's notes — potential market context for Paystack's outreach
 
+## Direct Debit Integration
+
+### 2026-04-27 — Project Delivery & Optimization Realignment
+
+- **Paystack DD** — currently in initiation phase but effectively at the integration side: Paystack is the one currently integrating; team's job is to test the APIs.
+- **Internal alignment** — [[Oluwakemi Oni]] flagged that internal activities are happening without a shared tracker; team needs to commit to a list of activities so work isn't done in silos. Replicating the [[Global Pay]] implementation plan template that [[Glory Alioha]] used; team needs to confirm those activities are appropriate for this implementation.
+- **Continuity** — [[Taiwo Baptista]] confirmed Paystack DD is the same project [[Aqua]] was previously reporting (now under Kemi's ownership).
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## Relationships
 
 - [[TeamApt / Moniepoint]] — primary competitive counterpart and transfer integration partner
 - [[Direct Debit Program]] — overlapping product area
 - [[Monnify]] — competing payment gateway
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]

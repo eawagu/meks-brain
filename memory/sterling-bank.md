@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Sterling Bank
 created: 2026-04-11
-summary: Nigerian bank — Apr 27 compliance testing scheduled (Virtual Account + Transfer API); virtual account share gave back gains (33.9% → 31.1% w/c Apr 24); SLA Clause 5.5 being rejected, TSQ insistence; consent-letter pending; dedicated GL accounts confirmed.
-updated: "2026-04-27T05:39:29Z"
+summary: "Nigerian bank — prior virtual-account threat-actor breach episode; SLA Clause 5.5 + TSQ insistence per D2B 2026-04-23. On 2026-04-27 (most significant update of the day): SLA in Nora's final-review hands; awaiting board-resolution-letter signature to obtain income account (settlement prerequisite); product team incorporating 'plus 5.5' comments. Premium Trust still working fixes — no sig updates."
+updated: "2026-04-27T17:49:43Z"
 cssclasses:
   - "entity"
 ---
@@ -19,7 +19,7 @@ Per [[CEO Gazette - 24th April 26]]: Sterling Bank has scheduled a compliance te
 
 ## Virtual Account share — week of Apr 24, 2026
 
-Sterling gave back last week's gains entirely: share dropped 33.9% → 31.1%, almost exactly reversing the Wk2 shift. The Apr 14 spike that looked like a competitive threat now appears to have been a one-off, not a sustained trend. (Source: [[CEO Gazette - 24th April 26]].)
+Sterling gave back last week's gains entirely: share dropped 33.9% → 31.1%, almost exactly reversing the Wk2 shift. The Apr 14 spike that looked like a competitive threat now appears to have been a one-off, not a sustained trend. (Source: [[CEO Gazette - 24th April 26]]).
 
 ## Direct Debit — D2B Project Realignment (2026-04-23)
 
@@ -37,6 +37,15 @@ Why: without TSQ, Moniepoint cannot confirm transaction state in real time and w
 - [[Glory Alioha]] following up with Legal on board-resolution drafting status.
 - [[Kevin]] to send SLA comments to Sterling Bank with rejection of Clause 5.5 + TSQ insistence.
 
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+**Identified by [[Glory Alioha]] as the single most significant update of the day.**
+
+- **Sterling Bank account switch SLA** — product team has been reviewing the SLA against [[Nora]]'s comments and the **"plus 5.5"** component (the Clause 5.5 concession path discussed at the 2026-04-23 standup). All comments now provided. **Nora doing the final review** before reverting to Glory; once received, Glory shares with the bank.
+- **Board resolution letter** — still awaiting **signature**. The board resolution letter must be provided to Sterling so they can give us the **income account**, which is a prerequisite for proceeding with **settlements**.
+- All other Sterling threads remain where they were.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## Related
 
 - [[Sterling Bank SLA Clause 5.5]]
@@ -44,6 +53,8 @@ Why: without TSQ, Moniepoint cannot confirm transaction state in real time and w
 - [[Sterling + Polaris — Routes Degraded]]
 - [[Sterling Bank Compliance Testing]]
 - [[Project Delivery and Optimization Realignment - 2026-04-23 14:55 WAT]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
 - [[CEO Gazette - 24th April 26]]
 
 ## Sources
@@ -51,3 +62,5 @@ Why: without TSQ, Moniepoint cannot confirm transaction state in real time and w
 - [[review-queue]]
 - [[Project Delivery and Optimization Realignment - 2026-04-23 14:55 WAT]]
 - [[CEO Gazette - 24th April 26]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]

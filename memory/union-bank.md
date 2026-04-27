@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — 7 RC91 cycles in 9 days (Apr 12–20). DD: Apr 22 server access resolved, waiting for bank to provide 10-digit account number (9-digit caused API failure)."
-updated: "2026-04-25T11:47:32Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — 7 RC91 cycles in 9 days (Apr 12–20). On 2026-04-27: DD blocked by name-inquiry API returning 'unauthorized' against the 10-digit account; NSS admin user-details shared and being configured; Polaris fund settlement minimal progress; account transfer awaiting bank feedback on inbound-only test; SLA under bank review."
+updated: "2026-04-27T17:49:43Z"
 cssclasses:
   - "entity"
 ---
@@ -22,6 +22,13 @@ cssclasses:
 **2026-04-22 08:21 D2B:** Server access for Union Bank Direct Debit testing has been **resolved**. Team now waiting for the bank to provide a **10-digit account number** for testing — the previously provided 9-digit number caused the API to fail. [[Oluwakemi Oni]] following up with the bank on API fix status. Source: [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]].
 
 **2026-04-23:** DD progress still advancing on mandate creation and transaction simulation; [[Cosmos]] blocker remains active — [[Abiodun Famoye]] to engage after this call. No other Union Bank DD update at the standup. Source: [[note_2026-04-23T13-53-37-857Z]].
+
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+- **Union Bank Direct Debit** — still in mandation/test-simulation phase. Bank delivered the requested 10-digit account, but team is **unable to validate** because bank's name-inquiry API is returning an **unauthorized error** (token not authenticating). The error is not a 'failing' API — it's an explicit "unauthorized" response. Team investigating internally. Owner: [[Oluwakemi Oni]].
+- **Union Bank NSS** — bank shared the admin user details; team is configuring the portal.
+- **Union Bank account transfer** — bank has indicated they only want to proceed with **inbound transfer** testing currently. Team has shared everything needed; awaiting feedback. Bank has shown interest. SLA under bank review.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
 
 ## ATS RC91 — Accumulating Pattern (7 cycles in 9 days)
 
@@ -68,3 +75,5 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
 - [[NIBSS PTSA — Route Failure Apr 16]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]

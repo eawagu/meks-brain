@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Ecobank
 created: 2026-04-11
-summary: "Pan-African bank on Moniepoint's ATS routing — Apr 16 ATS RC91 cycle, monitoring portal down (502). D2B Apr 22: account-name change to ATS pending end-of-week; foreign settlement agent process restarted; LDAP user-disable workaround source."
-updated: "2026-04-25T11:47:32Z"
+summary: "Pan-African bank — on Moniepoint's ATS routing. On 2026-04-27 Fund Settlement Agent integration commenced with two-week timeline (test environment completion ~12 May; production agent target 15 May). All sandbox issues resolved."
+updated: "2026-04-27T17:49:43Z"
 cssclasses:
   - "entity"
 ---
@@ -28,5 +28,10 @@ cssclasses:
 - **LDAP user-disable workaround source** — the "standby role" pattern that strips authorities while preserving LDAP for other apps was originally implemented at Ecobank; [[Ugochukwu Ebirika]] surfacing it for Zenith adoption. [[Abdulgafar Obeitor]] to log in to confirm Ecobank LDAP user disable implementation is still live; Ugochukwu to reconfirm presence within Ecobank environment.
 - Source: [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]].
 
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+- **Ecobank Fund Settlement Agent** — all tests have been completed; sandbox issues resolved. Integration commenced today. Engineering committed to a **two-week timeline** for the test environment → completion ~**12 May**. After the test phase, the team will move to obtaining the production API. Production target: **15 May**.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## Sources
-[[Direct to Bank Daily Stand Up 2026-04-01 0824]]; email Olamide Ajibulu → Ecobank, 18:54 WAT Apr 16 (ATS RC91); email Olamide Ajibulu → Ecobank, 19:31 WAT Apr 16 (portal down 502); [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
+[[Direct to Bank Daily Stand Up 2026-04-01 0824]]; email Olamide Ajibulu → Ecobank, 18:54 WAT Apr 16 (ATS RC91); email Olamide Ajibulu → Ecobank, 19:31 WAT Apr 16 (portal down 502); [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]; [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]; [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
