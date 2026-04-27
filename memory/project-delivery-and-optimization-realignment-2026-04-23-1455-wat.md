@@ -1,15 +1,15 @@
 ---
-title: "Project Delivery and Optimization Realignment - 2026-04-23 14:55 WAT"
 type:
   - "source"
+title: "Project Delivery and Optimization Realignment - 2026-04-23 14:55 WAT"
+created: "2026-04-25T12:18:29Z"
+summary: "2026-04-23 14:55 WAT Project delivery and optimization realignment meeting (owner Emmanuella Edeh). Aligned: Union Bank NSS+account-transfer streams consolidated; Sterling Bank SLA Clause 5.5 (liability for duplicate payments) rejected with insistence on TSQ integration; escalation reporting standardized as single consolidated Slack message. Comprehensive bank-status updates across Union, Sterling, Fidelity, Premium Trust, Access, WEMA, Keystone, Moneyify TSA, Clean/FCNB, Global Pay, FCNB DD, CORP, First Bank, Post DD."
+updated: "2026-04-27T17:52:58Z"
 cssclasses:
   - "source"
 source_path: Project delivery and optimization realignment - 2026_04_23 14_55 WAT - Notes by Gemini.md
 retention_label: postgres
 retention_rationale: Comprehensive D2B project realignment with 12+ bank-specific status updates, three aligned decisions (Union Bank consolidation, Sterling Bank SLA Clause 5.5 rejection + TSQ integration, escalation reporting format), and a 30+ action items distributed across 8+ owners. Future retrieval likely — referenced by ongoing per-bank tracking, SLA negotiations, escalation routing, and quarterly delivery reviews.
-created: "2026-04-25T12:18:29Z"
-updated: "2026-04-25T12:18:29Z"
-summary: "2026-04-23 14:55 WAT Project delivery and optimization realignment meeting (owner Emmanuella Edeh). Aligned: Union Bank NSS+account-transfer streams consolidated; Sterling Bank SLA Clause 5.5 (liability for duplicate payments) rejected with insistence on TSQ integration; escalation reporting standardized as single consolidated Slack message. Comprehensive bank-status updates across Union, Sterling, Fidelity, Premium Trust, Access, WEMA, Keystone, Moneyify TSA, Clean/FCNB, Global Pay, FCNB DD, CORP, First Bank, Post DD."
 ---
 
 ## Summary
@@ -18,11 +18,13 @@ summary: "2026-04-23 14:55 WAT Project delivery and optimization realignment mee
 
 Three aligned strategic decisions: Union Bank NSS+account-transfer stream consolidation; Sterling Bank SLA Clause 5.5 rejection + TSQ integration insistence; escalation reporting format standardized as single consolidated Slack message.
 
+> **Next session in this series:** [[Project delivery and optimization realignment - 2026-04-27 - Transcript]] / [[Project delivery and optimization realignment - 2026-04-27 - Notes]]. See also the recurring concept page: [[Project Delivery and Optimization Realignment Meeting]].
+
 ## Decisions (ALIGNED)
 
-- **Union Bank project streams consolidated** \u2014 NSS and account-transfer project streams merged into a single workflow for streamlined execution.
-- **Sterling Bank SLA pushback strategy** \u2014 reject Sterling Bank SLA **Clause 5.5** (liability for duplicate payments post-reversal); insist on **TSQ integration** to enable real-time transaction confirmation.
-- **Escalation reporting format standardized** \u2014 escalations submitted as a **single consolidated message** in the Slack group; communication remains cohesive (not fragmented by intervening messages).
+- **Union Bank project streams consolidated** — NSS and account-transfer project streams merged into a single workflow for streamlined execution.
+- **Sterling Bank SLA pushback strategy** — reject Sterling Bank SLA **Clause 5.5** (liability for duplicate payments post-reversal); insist on **TSQ integration** to enable real-time transaction confirmation.
+- **Escalation reporting format standardized** — escalations submitted as a **single consolidated message** in the Slack group; communication remains cohesive (not fragmented by intervening messages).
 
 ## Per-Bank Status
 
@@ -37,14 +39,14 @@ Three aligned strategic decisions: Union Bank NSS+account-transfer stream consol
 ### Union Bank
 
 - NSS + account-transfer streams **consolidating** (per aligned decision).
-- **Direct debit stalled**: bank provided 9-digit account; API requires 10-digit \u2014 engagement needed.
+- **Direct debit stalled**: bank provided 9-digit account; API requires 10-digit — engagement needed.
 - Back-office config ongoing; awaiting admin user details from bank.
 - Account-transfer SLA received feedback; integration document shared.
 - Deployment request: latest production direct-debit JARs to Union Bank servers.
 
 ### Sterling Bank
 
-- **Critical blocker**: SLA Clause 5.5 (liability for duplicate payments post-reversal) \u2014 team will reject; push for **TSQ integration**.
+- **Critical blocker**: SLA Clause 5.5 (liability for duplicate payments post-reversal) — team will reject; push for **TSQ integration**.
 - Dedicated GL accounts confirmed; Finance team drafting board resolution for team income account.
 - Awaiting consent letter issuance after SLA sign-off.
 
@@ -197,3 +199,4 @@ System: [[Gemini]]
 - [[Fidelity Bank pricing blocker]]
 - [[Direct to Bank program]]
 - [[Direct Debit integration]]
+- [[Project Delivery and Optimization Realignment Meeting]]
