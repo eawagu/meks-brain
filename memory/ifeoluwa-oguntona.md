@@ -3,13 +3,13 @@ type:
   - "entity"
 title: Ifeoluwa Oguntona
 created: 2026-04-11
-summary: "TeamApt Direct to Bank team member — tracks DD integration follow-ups with banks. Heavy action-owner across Apr 21–23 standups: Zenith status updates, branch visit, Ecobank settlement form, UBA SLA legal cycle, Kevin/Finance follow-up."
-updated: "2026-04-25T11:51:59Z"
+summary: TeamApt Direct to Bank team member — owns Zenith Bank, Stanbic, and Ecobank Fund Settlement tracks; resumed Apr 9 with Zenith DD JARs scanning, OTP API and Ecobank SLA follow-ups.
+updated: "2026-04-27T17:43:51Z"
 cssclasses:
   - "entity"
 ---
 
-TeamApt [[Direct to Bank program]] team member — resumed Apr 9, tasked with following up on Zenith DD jars scanning feedback, OTP API error, and Ecobank SLA with Felix.
+TeamApt [[Direct to Bank program]] team member — resumed Apr 9, tasked with following up on Zenith DD JARs scanning feedback, OTP API error, and Ecobank SLA with Felix.
 
 ## 2026-04-21 — D2B Standup (08:10 WAT)
 
@@ -33,8 +33,21 @@ TeamApt [[Direct to Bank program]] team member — resumed Apr 9, tasked with fo
 - Noted no changes have occurred on the security side of things for the DD project.
 - Source: [[note_2026-04-23T13-53-37-857Z]].
 
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+Led the first set of updates. Highlights:
+- **[[Zenith Bank]] vulnerabilities** — bank-flagged appsec vulnerabilities have been fixed. In today's bank meeting, team agreed to run their own internal scan and bring results back so claims of false positives can be evidence-backed (rather than asserted verbally). Internal security team committed to feedback before end-of-day.
+- **Zenith user training** — Day 2 (where users would exercise the system and ask role-based questions) did not happen last week. Requested a new date; awaiting bank confirmation.
+- **Zenith NSS** — switch team configured the required per-bank-user daily reports. Because the [[ATS]] endpoint is not ready, [[Kevin]] proposed using [[Money Point|Moniepoint]] transactions for the NSS test; internal-work deadline of 15 May. Meeting expected this week to confirm direction.
+- **[[Ecobank]] Fund Settlement Agent** — all tests done, sandbox issues resolved, integration commenced today; engineering committed to two-week timeline → test environment completion ~12 May. Production API engagement after.
+- **Pilot commitments**: Resolve Zenith items by 30 April to start DD pilot. NSS expected 29 April. Stanbic Phone Settlement Agent 30 April. Ecobank Fund Settlement Agent 15 May.
+- **Owns**: scheduling NSS Money Point meeting this week; following up on Zenith user-training reschedule.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## Sources
 - [[Direct to Bank Daily Stand Up 2026-04-09]]
 - [[Direct to Bank Daily standup - 2026-04-21 08:10 WAT]]
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]

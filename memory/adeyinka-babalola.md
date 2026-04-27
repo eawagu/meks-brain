@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Adeyinka Babalola
 created: 2026-04-11
-summary: "TeamApt ATPP team member — running Fidelity Bank HCT and acquirer-processing pipeline. Apr 20 owns: Fidelity (Fidencia) influence-building strategy, Access Bank pay-clearing meeting Wednesday, AC ACT onboarding tomorrow, Q2 acquirer-lead-conversion target."
-updated: "2026-04-25T12:03:36Z"
+summary: TeamApt ATPP team member — running Fidelity Bank HCT and acquirer-processing pipeline; on 2026-04-27 reported pricing tussle nearing close, PureShops switch revalidation, Mastercard licensing meeting set for 29 April, and Fidelity acquirer-processing engagement officially initiating.
+updated: "2026-04-27T17:43:52Z"
 cssclasses:
   - "entity"
 ---
@@ -30,9 +30,20 @@ Plans to **aggressively pursue all potential acquirer-processing customers this 
 
 Source: [[ATPP Daily Standup - 2026-04-20 15:52 WAT]].
 
+## 2026-04-27 — Project Delivery & Optimization Realignment
+
+Updates given (last speaker before close):
+- **[[Fidelity Bank]] card processing pricing** — pricing tussle escalated to [[Dennis]] and bank leadership. Looks like the tussle is nearing the end. Until then, unsure they will use the platform maximally.
+- **[[Pureshops|PureShops]] PS integration** — all test cases run; switch team flagged a particular case which is being repeated. [[Mustafa]] and team revalidating now.
+- **[[Mastercard]] licensing** — after a long delay, Mastercard came back; meeting set for **29 April** to discuss the licensing agreements pending since February. Compliance walkthrough completed last week to prep for [[Mastercard MPGS]] card-not-present kickoff.
+- **Fidelity Bank acquirer processing service** — bank has shown interest. Spoke at length today; will share commercials and scheme nomination templates so the bank can officially initiate. Owner (Adeyinka): share commercials & scheme nomination templates with Fidelity Bank.
+- Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
 ## Sources
 
 - [[ATPP Daily Standup 20260330 Gemini Notes]]
 - [[ATPP Daily Standup 20260408 Gemini Notes]]
 - [[ATPP Daily Standup Meeting 20260408]]
 - [[ATPP Daily Standup - 2026-04-20 15:52 WAT]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
+- [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
