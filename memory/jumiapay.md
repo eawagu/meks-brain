@@ -1,27 +1,28 @@
 ---
-title: Jumiapay
+title: JumiaPay
 type:
   - "entity"
 cssclasses:
   - "entity"
-created: "2026-04-17T15:43:29Z"
-updated: "2026-04-17T15:43:29Z"
-summary: "Jumia's payment arm; counterparty to Moniepoint with a ₦105.5M exposure under active recovery as of 17 Apr 2026."
+created: "2026-04-27T05:39:26Z"
+updated: "2026-04-27T05:39:26Z"
+summary: JumiaPay — counterparty with active unfunded transaction exposure (~₦115.6M) tied to reversals; ₦87.9M secured via lien.
 ---
 
-# Jumiapay
+## Overview
 
-Payment subsidiary of Jumia, counterparty exposure line for [[Moniepoint]].
+JumiaPay is a counterparty with an active unfunded transaction exposure tracked under the [[JumiaPay Unfunded Transaction Exposure]] workstream.
 
-## Current exposure (17 Apr 2026 CEO Gazette)
-- Total exposure: **₦105.5M**
-- Liened (secured against balances): **₦87.9M**
-- Unfunded / uncovered: **₦17.6M**
-- Recovery this week: **NGN21.8M** recovered
-- Completion: **78.07%** of recovery target
-- Status: active recovery mode, weekly reporting to CEO
+## Exposure status (week of Apr 24, 2026)
+
+- Total managed exposure: ₦115.6M tied to JumiaPay reversals
+- Secured via lien: ₦87.9M
+- Disbursement discrepancies recovery: ₦5.9M total; 45% recovered from internal Moniepoint accounts; ₦3,228,717.43 remains with external banks (engagements ongoing)
+
+Source: [[CEO Gazette - 24th April 26]].
 
 ## Related
-- [[Jumiapay Unfunded Exposure]] — dedicated tracker for the uncovered portion
-- [[Cowrywise]] — parallel counterparty exposure line
-- [[CEO Gazette]] — weekly reporting surface
+
+- [[JumiaPay Unfunded Transaction Exposure]]
+- [[Moniepoint]]
+- [[CEO Gazette - 24th April 26]]

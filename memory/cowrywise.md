@@ -1,26 +1,29 @@
 ---
+title: Cowrywise
 type:
   - "entity"
-title: CowryWise
-created: 2026-04-11
-summary: Nigerian savings and investment fintech — first live DD merchant; active counterparty exposure of NGN35.2M under recovery as of 17 Apr 2026 (Polaris DD → Monnify → CowryWise chain).
-updated: "2026-04-19T16:47:07Z"
 cssclasses:
   - "entity"
-aliases:
-  - "Cowrywise"
+created: "2026-04-27T05:39:25Z"
+updated: "2026-04-27T05:39:25Z"
+summary: Cowrywise — counterparty with outstanding Direct Debit exposure on Moniepoint; original exposure ₦159.5M, ₦124.4M recovered, ₦35.2M outstanding (78.07% recovery, no movement w/c Apr 24).
 ---
 
 ## Overview
 
-CowryWise is a Nigerian savings and investment fintech. First live merchant on [[TeamApt]]'s [[Direct Debit Program]] — bullish on DD as a future payment rail.
+Cowrywise is a counterparty with an outstanding Direct Debit exposure tracked under the [[Cowrywise Recovery]] workstream.
 
-## Direct Debit
+## Exposure status (Apr 24, 2026)
 
-- Live pilot transactions at [[Fidelity Bank]] and [[Keystone Bank]]
-- First DD merchant to go live on the platform
+- Total exposure: ₦159,542,627
+- Credit received from Cowrywise: ₦124,354,205
+- Outstanding: ₦35,188,422
+- Completion: 78.07% (unchanged WoW; no movement this week per [[CEO Gazette - 24th April 26]])
+- Cause noted at [[TeamApt MANCo Meeting - 31 March 2026]]: customer accounts not funded.
 
-## Counterparty Exposure (17 Apr 2026 CEO Gazette)
+## Related
 
-- Active recovery line: **NGN35.2M** to recover
-- Part of the longer Polaris DD → Monnify → CowryWise recovery chain tracked since Jan 2026
+- [[Cowrywise Recovery]]
+- [[Direct Debit Program]]
+- [[CEO Gazette - 24th April 26]]
+- [[TeamApt MANCo Meeting - 31 March 2026]]
