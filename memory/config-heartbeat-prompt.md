@@ -4,7 +4,7 @@ type:
 title: config-heartbeat-prompt
 created: "2026-04-12T19:51:34Z"
 summary: Heartbeat task execution prompt — Perceive Step 0 work-level judgment (Full/Skim/Minimal/Silent) with floor requirements (briefing tick override, Immediate-tier scan, Improve), source signal check, reminder evaluation, briefing generation, Improve phase. Ingest is now a separate task (config-ingest-prompt).
-updated: "2026-04-26T19:13:25Z"
+updated: "2026-04-27T01:24:12Z"
 cssclasses:
   - "config"
 ---
@@ -147,3 +147,11 @@ This declaration is the Improve phase's completion signal. If it is absent from 
 
 - If a source-config check fails, isolate the error, log it, and continue to the next source. Do not abort the tick.
 - If Improve fails, log the error. The heartbeat's signal-check results are still valid.
+
+## Tick Instrumentation
+
+Per-tick wall-clock timing data is recorded into today's briefing page for downstream analysis by the instrumentation-regression check in config-judgment-lint-prompt. Section schema lives in config-briefing.
+
+- **Phase-boundary timestamping.** Within each tick, MUST record an ISO-8601 timestamp at the wall-clock start and end of every phase the LLM executes: Setup, Step 0, Step 1, Step 2, Predict, Plan, Act, Improve. For phases not executed on this tick, MUST record the phase's duration as `—`.
+- **Section creation (briefing tick).** When this tick is the day's briefing tick (the tick that created `briefing-YYYY-MM-DD` via `create_page` during Act), MUST call `update_page` on that briefing page after Improve's declaration to add a `## Tick Instrumentation` section per the schema in config-briefing, initialized with the column header row and exactly one data row populated from this tick's phase durations.
+- **Row append (subsequent ticks).** When today's briefing page (`briefing-YYYY-MM-DD` in configured timezone) exists with a `## Tick Instrumentation` section AND this tick did not create that page, MUST call `update_page` on that briefing page after Improve's declaration to append one data row to the section, populated from this tick's phase durations. When today's briefing page does not yet exist (this tick fires before the day's first briefing tick), MUST NOT write to instrumentation.
