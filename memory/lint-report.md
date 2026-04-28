@@ -5,10 +5,10 @@ title: lint-report
 created: "2026-04-12T07:47:04Z"
 summary: "Judgment lint findings from 2026-04-26 — 100 stale claims (38 pages still pinned at 2026-04-11 confirms ingest pipeline failure unresolved); 100 concept gaps (pipe-spec leakage, alias-detector false positives, and source-name leakage all persist from prior cycle); 7 stale syntheses (every synthesis page now drifted 2–6d); 1 new high-value true gap (Wycliffe Ochieng' apostrophe variant, 26 refs); meta-finding: 4 of 6 prior recommendations remain unresolved.</summary>
 <parameter name=\"frontmatter_updates\">{\"updated\": \"2026-04-26\"}"
-updated: "2026-04-26T03:11:06Z"
+updated: 2026-04-28
 cssclasses:
   - "config"
-last_triaged: "2026-04-19T17:30:00Z"
+last_triaged: "2026-04-28T13:25:00Z"
 ---
 
 ## Judgment Lint — 2026-04-26
@@ -63,6 +63,8 @@ Growth since last run (2026-04-19): +111 entity, +20 source, +148 concept, +7 si
 
 **Assessment:** This is the same finding as 2026-04-19 with stronger evidence. The 4 entries that were at 5d gaps last cycle (MonieBook, CoralPay, Transaction Switching, BRM Regulatory Exposure) are *still* at 5d gaps — they updated once in the interval but the stale pattern recurred immediately. Per-page remediation will not hold. **Investigating the ingest pipeline is the single highest-impact action.**
 
+**Triage disposition (2026-04-28):** Skipped as a category — ingest pipeline regression is structural; per-page remediation cannot hold until the upstream code path is fixed. Deferred to brain pipeline investigation as a separate workstream.
+
 ---
 
 ## 2. Concept Gaps
@@ -103,11 +105,15 @@ Apparent alias gaps where the canonical page already exists. Previous lint claim
 
 **Wycliffe Ochieng' is the standout new case** — 26 references using apostrophe variant. The non-apostrophe page (177) has only 8 source references. Suggests the apostrophe form is becoming canonical; consider renaming the page rather than aliasing.
 
+**Triage disposition (2026-04-28):** All 10 verified as detector false positives — every flagged alias is already in the canonical page's frontmatter `aliases` array. The detector is not consulting frontmatter before flagging. This is a structural detector issue, not a triage action item. Two items pulled out for separate decisions: (a) Wycliffe Ochieng' canonical-form question — kept canonical as-is (cost of rename exceeds benefit since aliases already resolve); (b) `TeamApt / Moniepoint` compound alias removed from Moniepoint (5) — was a semantic bug flattening parent/subsidiary distinction. Notes entry added documenting the deliberate exclusion.
+
 ### High-Value True Gaps (10+ occurrences, after detector noise removed)
 
 | Term | Refs | Notes |
 |---|---|---|
 | Atlas | 14 | **Carried from prior lint** (was 10 refs, user skipped). Now grown +4. Needs decision: create page or document why permanently skipped. |
+
+**Triage disposition (2026-04-28):** Atlas entity page created (id 2947) with full sourcing from Atlas Transfer Service Specification, MFB Systems Blindspot Analysis, and Project Phoenix Initiative.
 
 ### Medium-Value Gaps (5–9 occurrences) — Notable Additions Since Last Lint
 
@@ -137,6 +143,20 @@ Apparent alias gaps where the canonical page already exists. Previous lint claim
 | Khalil | 4 | Person — TSP context |
 | Ope Adeyemi, Astrid Decrop, Emir Emanetoglu, Christine Fok, Kaushal Shukla | 4 each | Phoenix consultants/staff cluster |
 
+**Triage disposition (2026-04-28):**
+
+Detector false positives (already aliased — no action): Habari Pay, Tunde Okufi, Syed Ali (3).
+
+Aliases added to existing pages (3): Sumac MFB → Sumac Microfinance Bank; Moniepoint Technologies UK → MP Technologies UK; Direct to Bank → Direct to Bank program.
+
+New pages created (14):
+- Sulaiman Adeeyo, Sunday Ayodele, Michael Afolabi, Eywa, Frances Omelu (5 high-confidence with verified roles)
+- Card Infrastructure Team roster batch (9): Spandan Mishra, Oreoluwa Somuyiwa, Abdullah Ismail, Amar Sharma, Oluwatosin Awodire, Ridwan Abdulazeez, Taiwo Enikuomehin, Mohammed-Nasir Ajoge, Moshood Idris
+
+Skipped (insufficient role signal — would create thin pages): Paul Okeke, Adewuyi Mayowa, Moses Ajani, Ekene Udodi, Khalil (5).
+
+Skipped (ambiguous/disambiguation needed): Kafka, TPP (2).
+
 ### Lower-Value Gaps (3–4 occurrences) — Deferred
 
 50+ terms at 3–4 occurrences. Notable: PIP Process, Head of Engineering hiring, 2026 Strategy Retreat, MADD, Aptent, MPGS, Engineering Resources, OKR Cascade, OKR Accountability, EMV Compliance, Compliance Gap Inventory, Country-Agnostic Platform, Consolidated Switch, Stanbic IBTC. Several of these are reasonable concept-page candidates but the prior lint's lower-value tier was deferred — same disposition this cycle.
@@ -163,6 +183,8 @@ Apparent alias gaps where the canonical page already exists. Previous lint claim
 | Reconciliation, Settlement, and Recovery — Operational Layer | Reconciliation (8), Recovery Operations (8), Settlement Integrity (5), Clearing and Settlement (5), Settlement Accuracy (3) | 29+ | Five distinct concept pages all in the same operational domain. Synthesis would unify the framework and surface gaps between definitions. |
 | CEO Gazette Pattern — Communication Cadence and Themes | CEO Gazette concept (11), individual gazette pages (multiple) | 11+ | Recurring artifact with consistent structure but no meta-page describing why/how/themes-over-time. Modest synthesis. |
 
+**Triage disposition (2026-04-28):** Skipped new synthesis creation this cycle. Rationale: synthesis lifecycle has no maintenance mechanism (Meta-Observation 2 confirms all 7 existing syntheses stale within 1 week of creation). Adding 3+ new syntheses without addressing the maintenance mechanism just expands the staleness surface from 7 to 10. Deferred to brain pipeline workstream as part of the synthesis-refresh-mechanism design.
+
 ---
 
 ## 4. Stale Syntheses
@@ -183,11 +205,13 @@ Apparent alias gaps where the canonical page already exists. Previous lint claim
 
 The pattern itself — all 7 syntheses stale within a week of creation — suggests the brain has no mechanism to nudge synthesis updates as related pages change. This mirrors the stale-claims pipeline issue: writes to underlying pages are not propagating to synthesis pages.
 
+**Triage disposition (2026-04-28):** Bank Integration synthesis refreshed — absorbed Apr 19→Apr 28 evolution including HabariPay pattern entry (Apr 24), JULS Card Crisis (Apr 23), 5-bank turn-off concentration (Apr 28), Wema/Access bilateral standoffs, Apr 27 evening closure backfill, and Fidelity TDSD-6753/6754 INITIAL REVIEW. Updated frontmatter date to 2026-04-28. Other 6 syntheses left for next cycle — synthesis-refresh-mechanism design is the structural fix.
+
 ---
 
 ## Triage Status
 
-**Awaiting triage.** Findings ready for user review per config-triage Step 3b.
+**Triaged 2026-04-28.**
 
 ---
 
@@ -222,10 +246,10 @@ Source count grew +20 in the week, concept count grew +148. Either (a) the user 
 1. **Investigate the ingest pipeline entity-update step.** Highest-impact unresolved issue. 38 pages still pinned at 2026-04-11 across two consecutive lint cycles confirms this is not transient. Per-page remediation cannot hold until this is fixed at the pipeline level.
 2. **Add a synthesis-refresh mechanism.** All 7 syntheses stale within 1 week of creation indicates the synthesis lifecycle is missing a maintenance phase. Options: heartbeat-driven synthesis refresh, lint-driven flagging (current), or constituent-change-driven rebuild.
 3. **Fix detector issues (alias resolution, pipe-spec stripping, source-name filtering).** These are filling the top of the concept-gap list with noise and burying real findings. Fix at the lint query / ingest layer.
-4. **Resolve Wycliffe Ochieng' apostrophe split.** 26 refs to apostrophe form vs 8 to non-apostrophe. Decide canonical form and consolidate.
-5. **Triage Atlas decision.** 3rd consecutive lint surfacing. Either create page or document explicit decision-not-to-create with rationale, so it stops appearing.
-6. **Refresh Bank Integration synthesis first.** Most material stale synthesis (6d gap) covering active RC91 situations.
-7. **Process Card Infrastructure team people batch.** 7+ team members surface as 4–6 ref gaps. A team-page-driven batch creation would resolve the cluster efficiently.
+4. **Resolve Wycliffe Ochieng' apostrophe split.** 26 refs to apostrophe form vs 8 to non-apostrophe. Decide canonical form and consolidate. **(Triaged 2026-04-28: kept canonical as-is — aliases already resolve correctly.)**
+5. **Triage Atlas decision.** 3rd consecutive lint surfacing. Either create page or document explicit decision-not-to-create with rationale, so it stops appearing. **(Triaged 2026-04-28: Atlas entity page created.)**
+6. **Refresh Bank Integration synthesis first.** Most material stale synthesis (6d gap) covering active RC91 situations. **(Triaged 2026-04-28: refreshed to Apr 28.)**
+7. **Process Card Infrastructure team people batch.** 7+ team members surface as 4–6 ref gaps. A team-page-driven batch creation would resolve the cluster efficiently. **(Triaged 2026-04-28: 9 roster pages created.)**
 8. **Process lower-value gaps (3–4 refs)** in dedicated pass.
 
 ---
