@@ -1,20 +1,20 @@
 ---
-title: Bank Integration — RC91 Patterns, Failures, and Operational Posture
 type:
   - "synthesis"
-cssclasses:
-  - "synthesis"
+title: Bank Integration — RC91 Patterns, Failures, and Operational Posture
 status: current
 created: "2026-04-19T17:15:10Z"
-updated: "2026-04-19T17:15:10Z"
-summary: "Cross-cutting synthesis of Moniepoint's bank-integration layer — RC91 pattern across 14+ banks (20+ days), three distinct failure profiles (fast-cycle / intermediate / scheduled maintenance), attribution dynamics between Moniepoint/NIBSS/banks, the Stanbic routing-restoration automation gap as highest-value single fix, and implications for leadership action on the Domestic Switching backlog."
+summary: "Cross-cutting synthesis of Moniepoint's bank-integration layer — RC91 pattern across 14+ banks (30+ days), now decomposing into issuer-ATS vs processor-layer sub-classifications; Apr 28 surfaces 5-bank simultaneous route turn-off as highest-concentration coordination event; HabariPay entered pattern Apr 24 as new processor-layer member; attribution standoffs proliferating (Wema + Access DD bilateral carryforwards); Stanbic routing-restoration automation gap remains unaddressed despite Apr 14→28 escalations; refresh date 2026-04-28."
+updated: "2026-04-28T12:02:23Z"
+cssclasses:
+  - "synthesis"
 ---
 
 ## Scope and Purpose
 
 Moniepoint/[[TeamApt Limited]] operates integration surfaces into 14+ Nigerian banks across two primary product streams: the [[ATS]] (Automated Transfer System) for bank-to-bank transfers, and bank-facing Direct Debit / card rails running through [[NIBSS]], [[CoralPay]], and [[HabariPay]]. Since late March 2026, these integration surfaces have surfaced a sustained, multi-bank operational failure pattern centered on RC91 ("Issuer or Switch Inoperative") but extending into credential remediation, settlement disputes, protocol migration, and attribution standoffs with NIBSS and banks.
 
-This synthesis consolidates the bank-integration layer across the documented incidents, attribution disputes, and structural fixes. Scope: Apr 2026 snapshot. For per-bank cycle-level detail, see the linked entity and situation pages; this synthesis is the cross-cutting view.
+This synthesis consolidates the bank-integration layer across the documented incidents, attribution disputes, and structural fixes. **Last refresh: 2026-04-28.** Apr 19→Apr 28 evolution captured below in a dedicated section. For per-bank cycle-level detail, see the linked entity and situation pages; this synthesis is the cross-cutting view.
 
 ## The Integration Topology
 
@@ -30,11 +30,11 @@ Each path has independent failure modes, separate escalation paths, and differen
 
 ### Scope and Duration
 
-Sustained from March 30, 2026 through April 19, 2026 (20+ days). Spans 14+ banks across both Switch and ATS product streams. RC91 is not a single incident — it is a recurring symptom surfacing across a diverse set of bank-integration paths, with heterogeneous underlying causes.
+Sustained from late March 2026 through April 28, 2026 (30+ days). Spans 14+ banks across both Switch and ATS product streams. RC91 is not a single incident — it is a recurring symptom surfacing across a diverse set of bank-integration paths, with heterogeneous underlying causes.
 
-### Resolved RCA (per triage Apr 19)
+### RCA Position (per Apr 19 triage)
 
-Root cause attribution landed as **bank-side or CoralPay**. Mitigation applied: the entire CoralPay suite (ZIB, FBN, PVB, SBP — four banks) turned off as a business decision. Banks not on CoralPay routes are tracked either as bank-owned recurring patterns (Stanbic) or per-incident P1s (Union Bank, Fidelity, NIBSS PTSA, Ecobank, FCMB, Wema, UBA).
+Root cause attribution landed as **bank-side or CoralPay**. Mitigation applied: the entire CoralPay suite (ZIB, FBN, PVB, SBP — four banks) turned off as a business decision. Banks not on CoralPay routes are tracked either as bank-owned recurring patterns (Stanbic) or per-incident P1s.
 
 ### Failure-Profile Classification
 
@@ -42,29 +42,76 @@ The pattern is not uniform. Three distinct failure profiles have emerged:
 
 | Profile | Duration Band | Examples | Interpretation |
 |---|---|---|---|
-| Fast-cycle | 4m–64m | Stanbic (historical 30 cycles), Fidelity Apr 19 (14m), NIBSS PTSA Apr 19 (15m), Wema cycle 7 (~4m), UBA Apr 18 (3m) | Bank-side or intermediary transient; self-resolves |
-| Intermediate | 1h–3h | Union Bank Apr 19 (2h10m), FCMB Apr 16 (43m + recurrence) | Longer restoration, bank engagement required |
-| Scheduled maintenance | 7h+ | Stanbic Apr 19 (7h3m), Access Apr 19 (7h50m) | NOT cycles — planned bank maintenance windows that surfaced as automated P1s |
+| Fast-cycle | 4m–64m | Stanbic (30+ historical cycles), Fidelity Apr 27 (4m), HabariPay Apr 24 (25m), Apr 25 (7m) | Bank-side or intermediary transient; self-resolves |
+| Intermediate | 1h–3h | Union Bank cycles, FCMB cycles | Longer restoration, bank engagement required |
+| Scheduled maintenance | 7h+ | Stanbic Apr 19, Access Apr 19 | NOT cycles — planned bank maintenance windows that surfaced as automated P1s |
+| Active P1 (extended) | 4h+ unresolved | Stanbic Apr 28 (4h30m+ at 09:30 WAT) | New profile — sustained active P1 into business hours |
 
-The "scheduled maintenance" classification is critical: prior-day triage initially framed the Apr 19 00:00–07:50 WAT Stanbic+Access concurrence as a regime-change signal and common-mode wave. Two rounds of CTO correction established that both 7h+ windows were planned bank maintenance. TDSD-6624 (Stanbic) and TDSD-6625 (Access) are automated P1s raised against maintenance, not cycle records. The common-mode-wave hypothesis is withdrawn.
+The "scheduled maintenance" classification is critical: prior-day triage initially framed the Apr 19 00:00–07:50 WAT Stanbic+Access concurrence as a regime-change signal and common-mode wave. Two rounds of CTO correction established that both 7h+ windows were planned bank maintenance.
 
-### Banks in the Pattern (current tracking state)
+### Banks in the Pattern (current tracking state — Apr 28, 2026)
 
-| Bank | Stream | Active State | Cycles (scope) | Notable |
-|---|---|---|---|---|
-| [[Stanbic Bank]] | ATS | Bank-handling recurring pattern | 30 genuine cycles Apr 3–18 | Bank owns resolution; no CTO action; Apr 19 was maintenance |
-| [[Access Bank]] | ATS | Active multi-track | 7 RC91 cycles Apr 10–18; 8 concurrent tracks | Apr 19 was maintenance; see [[Access Bank — Multi-Track Failures]] |
-| [[Union Bank]] | ATS | Active | 5 cycles in 8 days (Apr 12, 15, 16×2, 19) | Apr 19 first-ever overnight-wave participant (2h10m) |
-| [[NIBSS PTSA]] | Switch/routing | Active | Re-surfaced Apr 19 (15m) after retirement | TDSD-6597 Apr 17 31h18m, closed by Afeez Kazeem |
-| [[Fidelity Bank]] | ATS | Active | Cycle 5 Apr 19 (14m) after 3.5-day quiet | Fast-cycle profile |
-| [[Ecobank]] | ATS (NUS) | Attribution standoff | TDSD-6619 Apr 18 | First NIBSS-reported RC91 on NUS nodes |
-| [[FCMB]] | ATS | Active | Apr 16 cycle recurred; TDSD-6613 Apr 17 P1 | First FCMB P1 of watch window; DCIR portal also re-failing |
-| [[Wema Bank]] | ATS | Active | 7 cycles Apr 8–17 | Cycle 7 Apr 17 bank-confirmed in 4 min; DCIR at 25–27% failure band |
-| [[UBA]] | ATS | Active | 4 cycles in 4.5h Apr 14 + Apr 16, 18 | 36h intermittent degradation period; DCIR 2FA deployed weekend Apr 18–19 |
-| [[Sterling Bank]] | ATS/Switch | Suspended | — | Reclassified into CoralPay suite Apr 18 |
-| [[Polaris Bank]] | Switch | Restored | — | 5-day suspension; VPN root cause; restored Apr 8 |
-| [[Keystone Bank]] | Card | Active | Apr 17 21:38 WAT P1 | RC05, NOT RC91 — card-layer fault; distinct failure mode |
-| CoralPay-routed: PVB, FBN, SBP, ZIB | Switch | Turned off | — | Business decision per RCA mitigation |
+| Bank | Stream | Active State | Notable |
+|---|---|---|---|
+| [[Stanbic Bank]] | ATS | Active P1 (4h30m+ as of Apr 28 morning) | DR Failback exercise scheduled May 9, 2026 |
+| [[Access Bank]] | ATS | Multi-track | See [[Access Bank — Multi-Track Failures]] — cycles 9/10/11 closed Apr 27 evening |
+| [[Union Bank]] | ATS | Active | Apr 27 evening events: ~20m fast-cycle + server-access event (treated 9min) |
+| [[NIBSS PTSA]] | Switch/routing | Active | Intermittent recurrence; TDSD-6737 NIBSS network failure closed Apr 27 |
+| [[Fidelity Bank]] | ATS | Active | Apr 27 fast-cycle 4min (19:22–19:26 WAT) + bilateral cycle 18:35 WAT; TDSD-6753 + TDSD-6754 Apr 28 ATS/DD credentials INITIAL REVIEW |
+| [[Ecobank]] | ATS (NUS) | Attribution standoff |  |
+| [[FCMB]] | ATS | TDSD-6478 RC91 closed Apr 27 17:45 WAT |  |
+| [[Wema Bank]] | ATS | Route turned off | TDSD-6736 Wema RC91 closed Apr 27 17:32 WAT; bilateral standoff carryforward to Apr 28 |
+| [[UBA]] | ATS | Active |  |
+| [[Sterling Bank]] | Switch | Turned off (CoralPay) | Part of overnight Apr 28 5-bank turn-off |
+| [[Polaris Bank]] | Switch | Turned off | TDSD-6752 RC91 work-in-progress; turned off overnight Apr 28 |
+| [[Keystone Bank]] | Card | Active | RC05 (NOT RC91) — card-layer fault, distinct |
+| **[[HabariPay]]** | Switch (GTB) | **NEW pattern member as of Apr 24** | First-ever RC91 cycle Apr 24 18:30–18:55 WAT (25min), 2nd cycle Apr 25 02:06 WAT (~7min VPN flap with RC91 persists). Crosses 48h situation-creation threshold. **Processor-layer RC91 distinct from issuer-ATS RC91.** |
+| **CoralPay-routed: ZIB cycles continue** | Switch | Cycle 4 closed Apr 27 23:44 WAT (TDSD-6751); 4-cycle process-gap on production deploy effectiveness |  |
+| **Apr 28 morning: 5 banks off** | — | **Wema + Polaris + FBN + Providus + Sterling all simultaneously off** | **Highest route-off concentration in brain's recorded history** (per briefing-2026-04-28 B1) |
+
+## Apr 19→Apr 28 Evolution (Refresh Section)
+
+This section absorbs the 9 days of activity since the synthesis was originally written.
+
+### New pattern members and surfaces
+
+- **HabariPay (GTB switch route) entered the pattern Apr 24** — first-ever processor-layer RC91 cycle. Critically, this introduces a new sub-classification: **processor-layer RC91** (intermediary infrastructure failure, e.g., Habari, NIBSS PTSA) is distinct from **issuer ATS RC91** (bank's own switch nodes, e.g., Stanbic, Access, Wema). Both manifest as the same response code but require different RCAs and escalation paths. The Apr 25 cycle revealed that VPN-tunnel-flap was a *sub-event in an active failure window*, not the cause — an important fault-localization finding.
+- **JULS Card Crisis Apr 23** — JULS ACCESS hit 68.18% card failure, JULS FCMB 25%. HabariPay (0.72%) and ISW (1.88%) held steady, confirming the fault line is JULS-specific, not industry-wide. Adds a new failure axis distinct from RC91: card-rail vs switch-route.
+- **NIBSS Routing Anomaly Apr 17** — when NIBSS dropped to ~20% of normal, ISW absorbed 3.5M routing-redirected transactions. Pattern documents how routing absorbers behave under primary-rail collapse.
+
+### Concentration risk surfaced Apr 28
+
+The Apr 28 morning briefing flagged **5 simultaneous route turn-offs** (Wema + Polaris + FBN + Providus + Sterling) as the highest concentration in brain history. Combined with active Stanbic P1 (4h30m+) this is a coordination event, not a per-bank failure. The mitigation pattern (turn off CoralPay suite as RCA-driven business decision) has expanded — now operating across multiple parallel routes simultaneously.
+
+### Attribution-standoff carryforwards
+
+- **Wema bilateral standoff** — Hadiza Abubakar's Apr 26 20:30 WAT "transactions did not get to the bank" claim contradicts TeamApt's affirmative ATS-arrival evidence. Standoff persisted through Apr 27. Per briefing-2026-04-28 B2, ops-session-to-review path requested Apr 27 14:58 WAT produced no visible motion 18h+. CTO-direct escalation to Hadiza is the next-tier action.
+- **Access DD bank silence** — Apr 26→Apr 28 silence on bilateral, ~47h+ at Apr 28 morning tick. CTO-direct to Innocent Nwaokorie / Mudiakevwe Omuvwie next-tier.
+
+### Resolved RCA/closure cycles
+
+Closures during the Apr 27 evening window (surfaced via Jira backfill after MCP auth recovery Apr 28):
+- **TDSD-6751** Zenith(CoralPay) RC91 cycle 4 — closed 23:44 WAT Apr 27 (~7h40m e2e). Overturns prior framing in [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]] which had marked CoralPay cycles as having "no TDSD" — the Jira track exists. Process-gap on the production-deploy not preventing recurrence is now 3 cycles, not 4 (one cycle does have post-incident Jira closure).
+- **TDSD-6736** Wema RC91 closed 17:32 WAT Apr 27
+- **TDSD-6750** Access 3DS Auth RC 301 closed 21:51 WAT Apr 27 (fast-cycle, distinct from RC91 track)
+- **TDSD-6478** FCMB RC91 closed 17:45 WAT Apr 27
+- **TDSD-6737** NIBSS network failure closed 17:00 WAT Apr 27
+- **TDSD-6756** Disbursement Downtime 20260428 closed 10:03 WAT Apr 28 — fresh-and-closed within 6 minutes of briefing tick
+
+### Fidelity track additions (Apr 28)
+
+Two new INITIAL REVIEW Jira filings on Fidelity track surfaced post-auth-recovery: **TDSD-6753** (Fidelity ATS user credentials update) and **TDSD-6754** (Fidelity DD funds transfer credentials update), both filed by [[Feyisayo Oyeniran]] Apr 28 09:00–09:20 WAT. Fidelity now has formal Jira tracking on both ATS and DD credential tracks with Feyisayo as track owner.
+
+### DR Failback exercise on the calendar
+
+Stanbic DR Failback exercise scheduled May 9, 2026 (per Babajide Odusanya email Apr 27 22:14 WAT CET). Continuation of Feb 21 DR fail-over thread; coordination lead on TeamApt side is [[Oladapo Onayemi]].
+
+### What hasn't changed
+
+- **Stanbic routing-restoration automation gap remains unaddressed.** Apr 28 morning briefing's hold-posture disposition (no CTO-direct on Stanbic) means the structural fix has *not* been pursued — operating cycle continues to absorb the cost. The leverage-path question is unchanged from Apr 19.
+- **Attribution-evidence infrastructure** has not been built. Each new attribution standoff (Wema, Access DD, Ecobank historical) consumes engineering time on case-by-case investigation.
+- **Per-bank integration maturity** still not tracked as a first-class metric.
+- **Operational documentation discipline** still has no forcing function. Jira MCP went auth-failed for 16h17m on Apr 27→28 (auto-recovered) — visibility gap continues to recur.
 
 ## Attribution Dynamics
 
@@ -72,17 +119,15 @@ A defining characteristic of the pattern is the **attribution standoff** that re
 
 ### NIBSS ↔ Moniepoint
 
-[[Moses Ajani]] (NIBSS PTSA Operations) has repeatedly attributed RC91 to Moniepoint-side timeout: "no response from your end within the timeout period" (Apr 12, Stanbic context). On Apr 15, for the 09:49–09:53 WAT NIBSS PTSA RC91 window, Moses Ajani issued an explicit denial of service degradation on NIBSS's side, claiming transactions processed successfully on TeamApt terminals during the same window. [[Olamide Ajibulu]]'s counter-position was that NIBSS was unavailable and transactions did not reach their interchange.
-
-The standoff is now a stable pattern: NIBSS defaults to attributing to Moniepoint-side latency; Moniepoint counter-attributes to NIBSS or bank-side. Neither party concedes without engineering evidence.
+[[Moses Ajani]] (NIBSS PTSA Operations) has repeatedly attributed RC91 to Moniepoint-side timeout. Standoff is a stable pattern: NIBSS defaults to attributing to Moniepoint-side latency; Moniepoint counter-attributes to NIBSS or bank-side. Neither party concedes without engineering evidence.
 
 ### Bank ↔ Moniepoint
 
-The same pattern recurs at bank level. [[Adewuyi Mayowa]] (Ecobank) responded to an Apr 17 escalation with "Everything looks fine from this end" — contested attribution, no resolution action. The Apr 19 17:09 WAT tick broke Ecobank bank silence: Adewuyi requested re-confirmation and samples ~24h after first direct-to-bank contact. The CTO-direct-action case materially weakened; Monday reframed as a sample-response cycle with Adewuyi as engagement surface, not escalation surface.
+The same pattern recurs at bank level. [[Adewuyi Mayowa]] (Ecobank) responded to an Apr 17 escalation with "Everything looks fine from this end" — contested attribution, no resolution action. **New as of Apr 26-28: Wema and Access DD bilateral standoffs** — both have produced no engineering motion in 24h+ business windows; CTO-direct escalation to bank IT directors is the next-tier action both tracks now require.
 
 ### The Deciding Mechanism
 
-Attribution standoffs are only resolved by engineering investigation producing dispositive evidence. [[Oladapo Onayemi]] was the Moniepoint SRE lead coordinating NIBSS counterparty engagement; his commitment on RC91 RCA was the tracked deciding mechanism. The RCA concluded bank-side or CoralPay — a resolution that partially validates both positions (banks and CoralPay are in scope; a pure Moniepoint-latency explanation is not).
+Attribution standoffs are only resolved by engineering investigation producing dispositive evidence. The current process does this manually, per-incident; automated evidence generation does not exist systematically.
 
 ## The Stanbic Routing-Restoration Automation Gap
 
@@ -90,7 +135,7 @@ Documented 2026-04-14 via [[Oladapo Onayemi]] DM. Mechanism: during a bank CBA f
 
 The automation gap (automated detection of bank recovery + automated config restoration) is a **Primitive 4 (Systems)** responsibility of the [[Domestic Switching]] department. Business owner: [[Babatunde Okufi]] (CBDO, TeamApt; reports to [[Dennis Ajalie]]).
 
-Oladapo has escalated to the Moniepoint team "severally" without a Moniepoint-side fix being prioritized. The automation gap directly explains why bank-resolved RC91 cycles continue to show Moniepoint-side impact beyond bank recovery.
+Oladapo has escalated to the Moniepoint team "severally" without a Moniepoint-side fix being prioritized. **As of Apr 28, the gap remains unaddressed.** Apr 28 briefing disposition is hold-posture (no CTO-direct on Stanbic); the structural fix is not on the path.
 
 **Open leverage question:** which intra-group path lands this on the Domestic Switching backlog?
 - Direct peer [[Emeka Awagu]] (CTO) → [[Babatunde Okufi]] (CBDO)
@@ -104,107 +149,104 @@ The RC91 pattern does not exist in isolation. Several concurrent tracks interact
 
 ### DCIR/ACS/DD Credential Remediation
 
-Following an [[Access Bank]] pen-test, 5 CRITICAL vulnerabilities were identified across [[DCIR]], ACS, and [[Direct Debit]] (see [[DCIR Security Vulnerabilities]]): default OAuth secrets, JWT tokens valid to 2037, DsMockController auto-approving all 3DS in production, plus two more. [[Abdulgafar Obeitor]] committed to closing all by April 8, 2026; partial remediation completed, residual items outstanding Apr 10.
+Following an [[Access Bank]] pen-test, 5 CRITICAL vulnerabilities were identified across [[DCIR]], ACS, and [[Direct Debit]] (see [[DCIR Security Vulnerabilities]]). [[Abdulgafar Obeitor]] committed to closing all by April 8, 2026; partial remediation completed.
 
-**Bank-by-bank remediation state (Apr 2026):**
-- **UBA** — DCIR 2FA production deployment approved, implemented Apr 18–19 weekend
-- **FCMB** — MFA enrollment for VPN access confirmed; ACS connector replacement in progress; DCIR portal track RE-FAILED Apr 19 (1h27m apparent recovery collapsed)
+**Bank-by-bank remediation state:**
+- **UBA** — DCIR 2FA production deployment Apr 18–19 weekend
+- **FCMB** — MFA enrollment for VPN access; ACS connector replacement
 - **Access Bank** — pen-test closed Apr; JAR-scan re-opened Apr 17
 - **Zenith** — CISO acknowledged
-
-DCIR failure rate (Wema route) trajectory Apr 15–17: 40.65% → 20.4% → 66.0% → stabilized at 25–27% band. Remediation has not stabilized this route below the 25% floor.
+- **Fidelity** — Hashing-algorithm disable request (MD5/SHA-1 on server 10.20.1.98) under internal review by Emeka Joseph; Funds Transfer Credentials update awaiting Chidi Akinmoyewa confirmation; **TDSD-6753 + TDSD-6754 Apr 28 INITIAL REVIEW filings now formalize Jira tracking**
 
 ### Harness CI/CD Migration
 
-TDSD-6479. CTO-approved Apr 12. DCIR and related services migrating to [[Harness]] for standardized deployment governance. MANCo confirmed 100% migration complete; pending CTO approval for P1 workloads. CBN AML flag applies.
+TDSD-6479. CTO-approved Apr 12. MANCo confirmed 100% migration complete; pending CTO approval for P1 workloads. CBN AML flag applies.
 
 ### Settlement & Reconciliation
 
-- Stanbic settlement validation thread (Apr 11+): DCIR migration confirmed by Emeka Joseph; Stanbic requesting failed transaction list citing CBN timeline pressure
+- Stanbic settlement validation thread
 - Union Bank recurring settlement batch failures: weekend/holiday ₦20M limit, [[TDSD-6276]]
-- Stanbic settlement account reconciliation thread Apr 16 (Stanbic reconciliation unit engagement)
+- Stanbic settlement account reconciliation engagement Apr 16
 - NIBSS-flagged ATS timeout outstanding
 
 ### TMS Protocol Migration
 
-Structural fix separate from RC91 but addresses a closely-adjacent failure mode (RC68/RC91 from HA Proxy readiness probe failures). [[Solomon Amadi]] committed Apr 6 to HTTP protocol migration: internal rollout Apr 7, BO piloting end of week, full rollout following week.
+Structural fix separate from RC91 but addresses a closely-adjacent failure mode (RC68/RC91 from HA Proxy readiness probe failures). [[Solomon Amadi]] committed Apr 6 to HTTP protocol migration.
 
 ## Operational Posture
 
 ### What the Current Operating Model Looks Like
 
-- **Detection:** Automated P1 filing on RC91 threshold breach; Jira TDSD ticket creation; Slack #teamapt-tech-operations post; email escalation to bank Switch Support. Key ops filers: [[Afeez Kazeem]], [[Olamide Ajibulu]], [[Qazim Adedigba]].
+- **Detection:** Automated P1 filing on RC91 threshold breach; Jira TDSD ticket creation; Slack #teamapt-tech-operations post; email escalation to bank Switch Support. Key ops filers: [[Afeez Kazeem]], [[Olamide Ajibulu]], [[Qazim Adedigba]], [[Frances Omelu]].
 - **Engagement:** Bank-specific email to dedicated switching-support addresses. Typical loop: file → bank asks reconfirm → ops reconfirms or confirms resolved → TDSD closed or left open.
-- **Escalation:** When bank engagement fails or attribution is contested, escalate to NIBSS (if NIBSS-routed), or to the bank's dedicated infrastructure contact (e.g., Victor Iyama for Union Bank).
+- **Escalation:** When bank engagement fails or attribution is contested, escalate to NIBSS (if NIBSS-routed), or to the bank's dedicated infrastructure contact.
 - **Resolution:** Most cycles are bank-resolved self-healing (fast-cycle profile). Intermediate and long cycles require bank action. Attribution-contested cycles require engineering evidence to close.
 
 ### Posture Characteristics
 
-1. **Reactive, not structural** — the playbook is file/engage/await resolution. Root cause investigation happens per-incident, not via sustained bank-relationship engineering.
-2. **Attribution-tolerant** — the team has normalized the NIBSS-vs-Moniepoint and bank-vs-Moniepoint attribution standoff. Multiple cycles close without clear attribution.
-3. **Jira-documentation-discipline gap** — 2026-04-15 [[Yasir Syed Ali]] raised this explicitly: important information (Moniepoint settlement account update, Union Bank / HabariPay details) was not being captured in tickets. This is the second independent data point in one week that TeamApt's incident/operational documentation discipline is a structural gap, not a one-off.
-4. **Forcing-function absence** — the Stanbic routing-restoration automation gap has been known internally but has not made it onto the Domestic Switching backlog despite multiple escalations. Behavioral remediation has failed; structural leverage has not been applied.
+1. **Reactive, not structural** — the playbook is file/engage/await resolution. Root cause investigation happens per-incident.
+2. **Attribution-tolerant** — the team has normalized the NIBSS-vs-Moniepoint and bank-vs-Moniepoint attribution standoff.
+3. **Jira-documentation-discipline gap** — 2026-04-15 [[Yasir Syed Ali]] raised this explicitly. **Reinforced Apr 27→28 by 16h17m Jira MCP auth-failed window** that prevented status verification on active situations.
+4. **Forcing-function absence** — the Stanbic routing-restoration automation gap remains unaddressed despite multiple escalations across Apr 14–28. Behavioral remediation continues to fail; structural leverage has not been applied.
 
 ### Capacity Strain Signals
 
-- Concurrent Access Bank tracks (7–8 active streams on a single bank in Apr 2026)
-- 4-bank simultaneous RC91 on Apr 16 (FCMB, Stanbic, Union, UBA in the same morning window)
-- Jira blind Day 5 (Apr 16 tick observation): filed tickets visible only via email notifications
+- Apr 28 morning: **5 simultaneous route turn-offs** (highest in brain history) + active Stanbic P1 (4h30m+)
+- Concurrent Access Bank tracks (multi-stream)
 - Duty Handover structure in use — overnight delegation window (23:00–06:00 WAT) defers Immediate-dispatch P1s to morning triage
+- Jira MCP auth-failure recurrence pattern (briefing-2026-04-22 B-tier, briefing-2026-04-28 B3) — visibility infrastructure itself is intermittent
 
 ## Cross-Cutting Observations
 
 ### 1. RC91 is a Symptom Layer, Not a Failure Class
 
-The 14+ banks participating in the pattern have heterogeneous underlying causes. Stanbic is self-recurring and bank-owned. CoralPay-routed banks share an intermediary. Ecobank surfaces via NIBSS NUS nodes. Fidelity runs fast-cycle. Union varies mid-spectrum. Grouping these under "RC91 pattern" is correct for observability (the symptom is shared) but incorrect for remediation (the root causes differ). Any "fix the RC91 pattern" initiative must decompose per-route.
+The 14+ banks participating in the pattern have heterogeneous underlying causes. **Apr 24 update: RC91 now decomposes further into issuer-ATS RC91 vs processor-layer RC91** — same response code, different RCA paths. Stanbic/Access/Wema fall into the issuer category; HabariPay/NIBSS PTSA fall into the processor category. Any "fix the RC91 pattern" initiative must decompose per-route AND per-layer.
 
 ### 2. The Fix Stack Is Multi-Layered
 
 Structural fixes span four independent tracks:
-- **Routing restoration automation** (Moniepoint, Domestic Switching) — addresses the Stanbic-class persistence
-- **CoralPay suite turn-off** (business decision) — addresses the CoralPay-routed sub-pattern
-- **DCIR/ACS/DD credential remediation** (security) — addresses audit findings on the DCIR route
+- **Routing restoration automation** (Moniepoint, Domestic Switching) — addresses Stanbic-class persistence
+- **CoralPay suite turn-off** (business decision, now extended to multi-bank simultaneous turn-offs) — addresses CoralPay-routed sub-pattern
+- **DCIR/ACS/DD credential remediation** (security) — addresses audit findings
 - **TMS HTTP migration** (Moniepoint infrastructure) — addresses HA Proxy readiness probe failure mode
 
 Each fix moves an independent lever. None is a global RC91 fix.
 
 ### 3. Attribution Standoffs Are Structural
 
-Between Moniepoint, NIBSS, and the banks, no party has unilateral ability to produce dispositive evidence. NIBSS and banks have their own monitoring that shows their side operational; Moniepoint's monitoring shows RC91. Closing an attribution standoff requires either (a) cross-party engineering investigation (as happened with the Oladapo RCA) or (b) automated evidence generation (transaction samples, timing traces) at the point of escalation. The current process does (a) manually; (b) does not exist systematically.
+Between Moniepoint, NIBSS, and the banks, no party has unilateral ability to produce dispositive evidence. Apr 26→28 carryforwards (Wema bilateral, Access DD silence) confirm the structural pattern: ops-session-to-review paths produce no engineering motion within business-day windows.
 
 ### 4. Bank-Specific Integration Maturity Varies Significantly
 
-Direct to Bank VPN setup: delayed for UBA. Cosmos blocker pending for Union Bank DD. Ecobank Direct to Bank SLA signature pending. Access Bank resistant to cloud infrastructure setup. FCMB MFA enrollment per-route per-security-review. Each bank integration is operationally distinct — common playbook breaks down per-bank.
+Each bank integration is operationally distinct — common playbook breaks down per-bank.
 
 ## Implications for Leadership Action
 
-1. **The Stanbic automation gap is the highest-value single structural fix** — it directly resolves the largest single contributor to RC91-pattern persistence (Stanbic's 30 cycles, plus the analogous mechanism operating on any bank-recovery event). It is known, bounded, and has an identified owner. The missing element is forcing-function placement.
-2. **Attribution evidence infrastructure is a second-order investment** — building automated transaction-sample and timing-trace generation into the escalation flow would collapse the attribution-standoff loop that currently consumes operations time per cycle.
-3. **Per-bank integration maturity needs visibility as a first-class metric** — tracking VPN status, SLA signature, deployment pipeline completeness, and credential remediation state per bank would surface the integration-maturity gradient that currently manifests as per-incident surprise.
-4. **Operational documentation discipline needs a forcing function** — the Jira-ticket-capture gap (Yasir's signal) and the 3-day entity-page staleness cohort both point to the same structural issue: write-through updates from incident work to knowledge assets don't happen reliably. This is a capacity-and-process problem that compounds over time.
+1. **The Stanbic automation gap remains the highest-value single structural fix** — and remains unaddressed as of Apr 28. The Apr 28 hold-posture means another day of operational cost without the structural lever being pulled. Apr 19→Apr 28 confirms behavioral remediation is not converging.
+2. **Multi-bank turn-off concentration is a new escalation surface** — 5-bank simultaneous turn-off (Apr 28) is a coordination event that warrants leadership-level visibility ([[Oladapo Onayemi]] for SRE, [[Frank Atashili]] / [[Dennis Ajalie]] for biz). Concentration risk is now a first-class signal.
+3. **Attribution evidence infrastructure is a second-order investment** with compounding returns — Apr 26-28 added 2 more attribution standoffs (Wema, Access DD) consuming CTO-direct escalation bandwidth.
+4. **Per-bank integration maturity needs visibility as a first-class metric.**
+5. **Jira/MCP visibility infrastructure is itself fragile** — Apr 27→28 16h17m auth-failed window is a recurrence of the briefing-2026-04-22 pattern. Visibility infrastructure that requires manual re-authentication is a structural single-point-of-failure for incident triage.
 
 ## Key References
 
 ### Concept & Situation Pages
 - [[RC91 Multi-Bank Failure Pattern]] — the core pattern page
-- [[Stanbic Bank ATS — Persistent RC91 Pattern]] — 30-cycle bank-owned track
-- [[Access Bank — Multi-Track Failures]] — 8-concurrent-track entity
-- [[Union Bank — RC91 P1 Apr 19]] — overnight-wave situation
-- [[Ecobank — RC91 on NUS Nodes]] — attribution standoff
-- [[FCMB — RC91 P1 Apr 17]] — first FCMB P1 of watch window
-- [[NIBSS PTSA — Intermittent RC91 Apr 17]] — retired Apr 18
-- [[NIBSS PTSA — RC91 Apr 19]] — re-surfaced
-- [[Fidelity Bank ATS — RC91 Failure Ongoing]] — fast-cycle profile
-- [[Wema Bank — RC91 After Settlement Resolution]]
+- [[Stanbic Bank ATS — Persistent RC91 Pattern]]
+- [[Access Bank — Multi-Track Failures]]
+- [[Wema Bank — RC91 P1 Apr 17]]
+- [[Sterling + Polaris — Routes Degraded]]
 - [[CoralPay — FBN Turned Off, Production Deploy Did Not Prevent Recurrence]]
+- [[NIBSS Routing Anomaly]]
+- [[JULS Card Crisis]]
 - [[DCIR/ACS/DD — Credential Remediation and Harness Migration Blocked]]
 - [[DCIR Security Vulnerabilities]]
 
 ### Entities
 - Banks: [[Access Bank]], [[Stanbic Bank]], [[Fidelity Bank]], [[Ecobank]], [[UBA]], [[Wema Bank]], [[FCMB]], [[Union Bank]], [[Zenith Bank]], [[Sterling Bank]], [[Keystone Bank]], [[Polaris Bank]]
-- Infrastructure: [[NIBSS]], [[CoralPay]], [[HabariPay]], [[ATS]]
-- People (ops): [[Oladapo Onayemi]], [[Afeez Kazeem]], [[Olamide Ajibulu]], [[Qazim Adedigba]], [[Yasir Syed Ali]]
-- People (counterparties): [[Moses Ajani]] (NIBSS), [[Adewuyi Mayowa]] (Ecobank), Victor Iyama (Union Bank)
+- Infrastructure: [[NIBSS]], [[CoralPay]], [[HabariPay]], [[ATS]], [[ISW]]
+- People (ops): [[Oladapo Onayemi]], [[Afeez Kazeem]], [[Olamide Ajibulu]], [[Qazim Adedigba]], [[Yasir Syed Ali]], [[Frances Omelu]], [[Feyisayo Oyeniran]]
+- People (counterparties): [[Moses Ajani]] (NIBSS), [[Adewuyi Mayowa]] (Ecobank), [[Hadiza Abubakar]] (Wema), [[Innocent Nwaokorie]] (Access), [[Babajide Odusanya]] (Stanbic)
 - Leverage-path people: [[Babatunde Okufi]], [[Dennis Ajalie]], [[Felix Ike]], [[Solomon Amadi]], [[Emeka Awagu]]
 
 ### Concepts
@@ -212,4 +254,3 @@ Direct to Bank VPN setup: delayed for UBA. Cosmos blocker pending for Union Bank
 - [[Direct Debit]] — the product rail running over NIBSS
 - [[Harness]] — CI/CD migration target
 - [[DCIR]] — platform under remediation
-- [[TeamApt Incident Remediation]] — structural-fix concept
