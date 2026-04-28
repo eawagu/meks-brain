@@ -6,10 +6,9 @@ aliases:
   - "MoniePoint"
   - "Moniepoint Inc."
   - "Moneypoint"
-  - "TeamApt / Moniepoint"
 created: 2026-04-11
 summary: Moniepoint Inc. — Nigerian fintech group; parent of TeamApt Ltd; 4 business lines (DD/CDD, Monnify, TPP, Domestic Switching); 2025 revenue ₦24.2B target, ~₦10-12B actual (~35-50%); building multi-market card issuance platform (Project Phoenix); 13-level job framework.
-updated: "2026-04-19T09:36:32Z"
+updated: "2026-04-28T11:42:19Z"
 cssclasses:
   - "entity"
 ---
@@ -147,6 +146,7 @@ Per [[Moniepoint Job Levels]], the rubric defines two parallel tracks:
 - IC and management tracks share the 050/051 number range, indicating organizational equivalence at that band
 - TeamApt Ltd is the operational subsidiary; Moniepoint Inc. is the group parent
 - Nigeria removed from FATF grey list Oct 2025
+- The compound reference `TeamApt / Moniepoint` is intentionally NOT aliased here — it refers to two distinct entities (TeamApt Ltd subsidiary + Moniepoint Inc. parent) and silently flattening it loses the parent/subsidiary distinction. Sources using that compound form should be disambiguated to one or the other based on context.
 
 ## Sources
 
