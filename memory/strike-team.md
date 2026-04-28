@@ -1,35 +1,45 @@
 ---
-title: Strike team
 type:
   - "concept"
+title: Strike Team
+created: 2026-04-11
+summary: Lean dedicated engineering team assembled to lead Phase One delivery on Phoenix platforms (TSP and CI&P) — composition balances technical expertise with domain knowledge across operations, infrastructure, and product management. Per 2026-04-27 CI&P kick-off, Nadeem Abbas owns finalizing CI&P strike team composition and stakeholder alignment.
+updated: "2026-04-28T16:43:51Z"
 cssclasses:
   - "concept"
-created: "2026-04-25T12:07:39Z"
-updated: "2026-04-25T12:07:39Z"
-summary: Phoenix operating-model pattern — a dedicated cross-functional team formed to spec-and-build a new platform module while existing teams hold-the-fort on legacy. Strike team + continuity model. Apr 21 KT confirmed strike team for new CMS / AI initiatives.
 ---
 
 ## Definition
 
-The **Strike team** is the [[Project Phoenix]] operating-model pattern: a dedicated cross-functional team formed to spec-and-build a new platform module **while existing teams hold the fort on legacy systems** — the [[Strike Team + Continuity Operating Model]].
+A **strike team** is a small, dedicated engineering team assembled to lead the initial delivery of a new platform under [[Project Phoenix]]. The strike team builds the new system in parallel ([[Strangler Pattern]]) while the existing teams maintain the legacy systems on a continuity basis ([[Strike Team + Continuity Operating Model]]).
 
-The pattern lets Moniepoint build new platform components without freezing the existing services that fund the business.
+## Why
 
-## Cards Strike Team (Apr 21 KT — ALIGNED)
+- Concentrated, focused capacity for net-new build without competing BAU obligations.
+- Mixed seniority and cross-functional composition (engineering + product + design + operations) so the team can spec-and-build end-to-end.
+- Phase 1 strike teams are explicitly time-boxed on Phase 1 scope; later phases absorb additional capabilities as the platform matures.
 
-At the 2026-04-21 Cards Team Str/Sys/Roadmap meeting, the team aligned on:
+## Phase 1 Strike Teams
 
-- **Strike team formation for platform development** — a dedicated strike team will be established to build the new [[Card Management System]] (CMS) and drive upcoming card-issuing initiatives.
-- **Strategic priorities for new platform rollout** — platform launches on the [[Visa project]], with primary focus on migrating services to eliminate dependency on [[Postillion]] and providing improved operational support for the chargeback and logistics teams.
-- **AI initiatives** under the strike team: **highest priority** = Chargeback / Issue Resolution ([[Aima]] / [[Precious]]); **second priority** = Card Production / Logistics ([[Philip]]).
+- **TSP Phase 1 (~15 people):** Team Spine ([[Sulaiman Adeeyo]] EM) and Team Adapters ([[Sunday Ayodele]] EM); strike-team members include [[Abeeb Ahmad]] (Juliana Switch), [[Muhammad Siddiqui]] (Principal SE), [[Christopher Ogbosuka]] (built TACHA) plus 2–3 UK engineers and supplements from MonieWorld and Cards (MFB). PM: [[Bunmi Oyefisayo]].
+- **CI&P Phase 1:** Two strike teams under [[Tracy Ojaigho]] + [[Emeka Awagu]] — Team 1 Card Processing (Authorization Engine, 3DS/SCA, Card Dispute) and Team 2 Card Issuance (CMS, Card Controls, EMV Data Prep, Perso interface). [[Ketan Dhamasana]] joins Team 2 as EM (transferred from [[AptPay Suite]]).
 
-## TSPP Strike Team (Apr 22 brief)
+## 2026-04-27 — CI&P Kick Off ALIGNED decision
 
-The TSPP Phase 1 strike team operates in parallel: spec-and-build the new TSPP platform while [[Wycliffe Ochieng']] (EM double-hat) and [[Abdulgafar Obeitor]] hold-the-fort on legacy. [[Oluwabunmi Oyefisayo]] is the spec-owner.
+The CI&P kick-off meeting on 2026-04-27 ALIGNED that **Phase One will be led by a dedicated strike team whose composition and accountability will be finalized this week**. [[Nadeem Abbas]] owns finalizing the strike team composition and obtaining stakeholder alignment on deployment.
 
-## Sources
+Source: [[Project Phoenix - CI&P kick off meeting - 2026-04-27]].
 
+## Success criteria pattern
+
+- Phase One typically targets a percentage cutover of production volume with zero tolerance for data loss or transaction discrepancy. CI&P's stated target: **10% of production volume**.
+
+## Related
+
+- [[Project Phoenix]]
 - [[Strike Team + Continuity Operating Model]]
-- [[Cards Team Structure Systems Roadmap - 2026-04-21 13:00 WAT]]
-- [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
-- [[TeamApt-Platformization-Org-Movements (1)]]
+- [[Strangler Pattern]]
+- [[TSP]]
+- [[Card Issuance & Processing Platform]]
+- [[Project Phoenix Actions]]
+- [[Project Phoenix - CI&P kick off meeting - 2026-04-27]]

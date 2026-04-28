@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Damilola Oyediran
 created: 2026-04-11
-summary: Product Manager on Moniepoint MFB Cards Team 2 (Card Infrastructure) — the larger of the two MFB cards product teams; owns transaction processing, security modules, system integrations, and the deferred VAS scope; operational counterpart to EM Nitish Chand.
-updated: "2026-04-23T05:24:48Z"
+summary: Product Manager on Moniepoint MFB Cards Team 2 (Card Infrastructure) — the larger of the two MFB cards product teams; owns transaction processing, security modules, system integrations, and deferred VAS scope. Per 2026-04-27 CI&P kick-off, also owns Hiring Roadmap workstream aligned with platform expansion phasing.
+updated: "2026-04-28T16:43:50Z"
 cssclasses:
   - "entity"
 ---
@@ -40,6 +40,12 @@ Card Infrastructure functions:
 
 Confirmed (with [[Tracy Ojaigho]] and [[Mish]]) that most functions currently in Card Manager Service logically belong inside the new [[Card Management System]] being built under [[Project Phoenix]].
 
+## 2026-04-27 — Project Phoenix CI&P Kick Off Meeting
+
+Attended the CI&P kick-off meeting hosted by [[Tracy Ojaigho]]. **Owns the Hiring Roadmap workstream** — develop a detailed hiring roadmap aligned with platform expansion phasing. The ALIGNED decision in the meeting is that the hiring plan must prioritize [[AI and Automation Adoption]] in line with strategic goals.
+
+Source: [[Project Phoenix - CI&P kick off meeting - 2026-04-27]].
+
 ## Source-document name correction
 
 The 2026-04-21 KT meeting report transcribed her name as "Damola" — corrected to **Damilola Oyediran** per established Moniepoint MFB roster.
@@ -50,6 +56,7 @@ The 2026-04-21 KT meeting report transcribed her name as "Damola" — corrected 
 - [[Nadeem Abbas]] — PM on Team 1 (Card Sales & Distribution)
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
 - [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]
+- [[Project Phoenix - CI&P kick off meeting - 2026-04-27]]
 - [[Card Manager Service CMS Specification]]
 - [[Card Manager Service]]
 - [[Card Transaction Service]]

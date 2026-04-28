@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Ketan Dhamasana
 created: 2026-04-11
-summary: "EM transferring from AptPay Suite to CI&P (CMS/Card Issuance) under Emeka Awagu and Tracy Ojaigho — Phase 1 of Project Phoenix. Apr 22 weekly: Inflow Sac filter for Monify reported only 3 issues; Prateek consolidated ownership of all moneyify vulns."
-updated: "2026-04-25T12:03:37Z"
+summary: EM transferring from AptPay Suite to CI&P (CMS/Card Issuance) under Emeka Awagu and Tracy Ojaigho — Phase 1 of Project Phoenix. Per 2026-04-27 CI&P kick-off, owns Regulatory Alignment workstream — ensure compliance across applicable jurisdictions (incl. PCI-DSS, African banking regulations, scheme rules).
+updated: "2026-04-28T16:43:51Z"
 cssclasses:
   - "entity"
 ---
@@ -34,6 +34,12 @@ Pre-Phoenix he led the [[AptPay Suite]] area in TeamApt.
 
 Noted that the Inflow Sac filter being used for Monify reporting only surfaced three issues. [[Prateek Gupta]] subsequently consolidated ownership of all "moneyify"-domain vulnerabilities (atm.moneyifi, app.moneyify.com) for investigation. Source: [[TeamApt Weekly Team Meeting - 2026-04-22 16:59 IST]].
 
+## 2026-04-27 — Project Phoenix CI&P Kick Off Meeting
+
+Attended the CI&P kick-off meeting hosted by [[Tracy Ojaigho]]. **Owns the Regulatory Alignment workstream** — ensure regulatory compliance and alignment with all applicable jurisdictional requirements, which per the Details section spans African banking regulations, [[PCI-DSS]] requirements, and local payment scheme rules.
+
+Source: [[Project Phoenix - CI&P kick off meeting - 2026-04-27]].
+
 ## Also Note
 
 [[Ravi Kiran Veluguleti]] remains with TSPP as functional engineering manager (separate track; NOT CI&P).
@@ -43,3 +49,4 @@ Noted that the Inflow Sac filter being used for Monify reporting only surfaced t
 - [[Note — Existing Cards Team Moniepoint MFB Transition 2026-04-14]]
 - [[TeamApt-Platformization-Org-Movements (1)]] — Frank's Apr 22, 2026 brief formalising Phase 1 EM transfer
 - [[TeamApt Weekly Team Meeting - 2026-04-22 16:59 IST]]
+- [[Project Phoenix - CI&P kick off meeting - 2026-04-27]]
