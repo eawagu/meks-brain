@@ -1,12 +1,16 @@
 ---
-title: MP Technologies UK
 type:
   - "entity"
+title: MP Technologies UK
+created: "2026-04-24T11:50:56Z"
+summary: Legal home of the central Platform Organization (IPCo) under Project Phoenix — owns IP, product management, engineering (incl. SREs), design, platform roadmap and SLAs; charges OpCos for services. Pawel Swiatek is Group COO.
+updated: "2026-04-28T11:57:29Z"
 cssclasses:
   - "entity"
-created: "2026-04-24T11:50:56Z"
-updated: "2026-04-24T11:50:56Z"
-summary: Legal home of the central Platform Organization (IPCo) under Project Phoenix — owns IP, product management, engineering (incl. SREs), design, platform roadmap and SLAs; charges OpCos for services. Pawel Swiatek is Group COO.
+aliases:
+  - "Moniepoint Technologies UK"
+  - "MP Tech UK"
+  - "Moniepoint Tech UK"
 ---
 
 ## Overview
