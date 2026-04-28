@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Project Phoenix
 created: 2026-04-11
-summary: "Moniepoint's group-wide transformation initiative \u2014 platformization + AI-nativeness; central Platform Organization (Moniepoint Technologies UK / IPCo) serves all OpCos as tenants; TSP is Phase 1 because other platforms depend on it (peer product line, not umbrella); One Platform migration via Strangler Fig targeting Nigeria/UK/Kenya in 6 months; CI&P Phase 1 kicked off Apr 7, 2026; MFB Cards takeover under Strike Team + Continuity model (Apr 14)."
-updated: "2026-04-24T11:43:38Z"
+summary: "Moniepoint's group-wide transformation initiative — platformization + AI-nativeness; central Platform Organization (Moniepoint Technologies UK / IPCo) serves all OpCos as tenants; TSP is Phase 1 because other platforms depend on it; One Platform migration via Strangler Fig targeting Nigeria/UK/Kenya in 6 months; CI&P Phase 1 broader kick-off Apr 7, 2026; CI&P-team-specific kick-off Apr 27, 2026 (hosted by Tracy Ojaigho)."
+updated: "2026-04-28T16:49:51Z"
 cssclasses:
   - "entity"
 ---
@@ -25,10 +25,11 @@ TeamApt had already been building in a platformized, multi-tenant, country-agnos
 - **Mar 27, 2026**: Phase 1 start confirmed — build for Nigeria, UK, Kenya. Full production in **6 months ("sacrosanct")**. [[Ravi Jakhodia]] leads program
 - **Apr 14, 2026 (Retreat Day 1, London):** Tosin publicly confirmed Phase 1 TSP launch in progress (account transfers, cards, other services consolidated), core platform + Phoenix design system starting across POS and web. **Phase 2 begins June** — company-wide adoption of new design system + AI-native processes. Phase 3 — beta new app + parallel backend to "strangle" legacy, progressive traffic cutover. Team leads own June scope definitions and transition planning. Kenya launch 2026 confirmed via [[Sumac Microfinance Bank]] acquisition. Moneywalls shifts to business-led platform model (business team operates, central team runs platform). Org split target: one configurable global product + global platform team vs country business entities. See [[source — Retreat Day 1 Profitability Phoenix Kenya Competitive Strategy Summary (Apr 14 2026)]].
 - **Apr 22, 2026**: [[Frank Atashili]] issued [[TeamApt-Platformization-Org-Movements (1)|Org Movements brief]] to [[Dennis Ajalie]] and [[Pawel Swiatek]] laying out how Phoenix lands on TeamApt's people — see *TeamApt Org Movements* below.
+- **Apr 27, 2026**: Formal CI&P-team-specific kick-off meeting hosted by [[Tracy Ojaigho]] — see *Card Issuance & Processing Platform* section below for details.
 
 ## Platform Cluster Architecture (Official — Tosin's Project_Phoenix_v3)
 
-The Platform Organization is structured into three operating divisions plus cross-cutting CoEs/departments, per the March 2026 Platforms Conference deck ([[source — Project Phoenix Org Structure Changes (March 2026)]]):
+The Platform Organization is structured into three operating divisions plus cross-cutting CoEs/departments, per the March 2026 Platforms Conference deck ([[source — Project Phoenix Org Structure Changes (March 2026)]])
 
 ### Business Banking Platforms
 - [[TSP|Transaction Switching & Processing]] — foundational payment kernel; sub-platforms: Card Switching, Account Switching, VAS Switching, Integrations. **TSP is in Phase 1 because most other platforms depend on it, not because it's an umbrella that absorbs them.** Other platforms are peers, not children of TSP.
@@ -70,7 +71,7 @@ Each platform node is led by a triad: Product Leader + Engineering Leader + Desi
 
 ## One Platform Migration Strategy (Mar 27, 2026)
 
-Strangler Fig pattern. Led by [[Ravi Jakhodia]]. Total timeline: 6 months.
+[[Strangler Pattern]] (Strangler Fig). Led by [[Ravi Jakhodia]]. Total timeline: 6 months.
 
 | Stage | Focus | Duration | Target |
 |---|---|---|---|
@@ -86,7 +87,23 @@ Stage 1 workstreams (per [[Phoenix Stage 1 Consolidated Project Plan]]): 5 core 
 
 ## Card Issuance & Processing Platform (Phase 1 — Kicked Off)
 
-**Phase 1 kick-off: April 7, 2026** — formally initiated per [[Emeka Awagu]]'s CTO notes. Architecture in active design. Kick-off occurred during a high-operational-stress week (3 concurrent P1s, GoSubscribe war room, Easter weekend incidents).
+**Phase 1 broader kick-off: April 7, 2026** — formally initiated per [[Emeka Awagu]]'s CTO notes. Architecture in active design. Kick-off occurred during a high-operational-stress week (3 concurrent P1s, GoSubscribe war room, Easter weekend incidents).
+
+**Formal CI&P-team-specific kick-off meeting: April 27, 2026** — hosted by [[Tracy Ojaigho]]. Attendees: [[Elishma Nwobodo]], [[Nadeem Abbas]], [[Emeka Awagu]], [[Damilola Oyediran]], Tracy, [[Nitish Chand]], [[Ketan Dhamasana]], [[Olufemi Davies]]. Three ALIGNED decisions:
+- Hiring strategy balanced with [[AI and Automation Adoption]] (owner: Damilola).
+- Platform migration target end of Q3 2026 with quarterly milestones.
+- Phase One led by a dedicated [[Strike Team]] — composition finalized this week (owner: Nadeem).
+
+Workstream owners assigned at the kick-off:
+- **Strike team definition** → Nadeem Abbas
+- **[[Governance Structure]]** → Tracy Ojaigho
+- **Hiring roadmap** → Damilola Oyediran
+- **Technology roadmap** → Elishma Nwobodo
+- **Infrastructure assessment** → Emeka Awagu
+- **Regulatory alignment** ([[PCI-DSS]] etc.) → Ketan Dhamasana
+- **[[Change Management]]** → Olufemi Davies
+
+Source: [[Project Phoenix - CI&P kick off meeting - 2026-04-27]]. See also [[Card Issuance and Processing]] (concept), [[Phase One Migration]], [[Centralized Card Platform]].
 
 The platform is designed around a [[Spine and Module Architecture]] — a market-agnostic shared Spine plus independently deployable market-specific Modules. It is the **first fully-specified Phoenix platform and the proof point for the whole Spine-and-Module pattern**.
 
@@ -98,7 +115,7 @@ The platform is designed around a [[Spine and Module Architecture]] — a market
 - [[EMV Data Preparation Platform]] — EMV profile management and personalisation vendor data flows
 
 ### Delivery Phases
-1. **Phase 1** — Nigeria Platform Build: Spine + Nigeria Module (Verve and Visa adapters, personalisation vendor, BIN/config) ← **KICKED OFF APR 7, 2026**
+1. **Phase 1** — Nigeria Platform Build: Spine + Nigeria Module (Verve and Visa adapters, personalisation vendor, BIN/config) ← **KICKED OFF APR 7, 2026; CI&P-team-specific formal kick-off APR 27, 2026**
 2. **Phase 2** — Nigeria Incremental Cutover: feature-flagged traffic migration with rollback capability
 3. **Phase 3** — UK Launch: add UK Module (Visa/Mastercard adapters, PSD2-compliant SCA adapter)
 4. **Phase 4** — Kenya Launch: add Kenya Module (Visa adapter, config)
@@ -119,6 +136,7 @@ Under the [[Strike Team + Continuity Operating Model]] (2026-04-14), platform le
 - New market capability delivered via config vs. code: >80%
 - Change failure rate: <5%
 - Zero money-loss incidents
+- Phase One: process 10% of production volume with zero tolerance for data loss or transaction discrepancies (per Apr 27 kick-off)
 
 ## TSP Phase 1 Status (as of April 10, 2026)
 
@@ -214,3 +232,4 @@ Phoenix described as "calibration moment." Primary dimensions tested: Customer O
 - [[source — Retreat Day 1 Management Framework Loan Portfolio Risk Summary (Apr 14 2026)]] — Tosin's 7-principle management framework (cascade goals → structure → people → incentives → context → systems → governance)
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]] — first full inventory of the MFB cards stack feeding the CI&P build; strike-team formation + new CMS plan
 - [[TeamApt-Platformization-Org-Movements (1)]] — Frank's Apr 22, 2026 brief to Dennis and Pawel on how Phoenix lands on TeamApt's people
+- [[Project Phoenix - CI&P kick off meeting - 2026-04-27]] — formal CI&P-team-specific kick-off; ALIGNED decisions and workstream owners
