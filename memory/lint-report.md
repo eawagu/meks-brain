@@ -5,13 +5,15 @@ title: lint-report
 created: "2026-04-12T07:47:04Z"
 summary: "Judgment lint findings from 2026-04-26 — 100 stale claims (38 pages still pinned at 2026-04-11 confirms ingest pipeline failure unresolved); 100 concept gaps (pipe-spec leakage, alias-detector false positives, and source-name leakage all persist from prior cycle); 7 stale syntheses (every synthesis page now drifted 2–6d); 1 new high-value true gap (Wycliffe Ochieng' apostrophe variant, 26 refs); meta-finding: 4 of 6 prior recommendations remain unresolved.</summary>
 <parameter name=\"frontmatter_updates\">{\"updated\": \"2026-04-26\"}"
-updated: 2026-04-28
+updated: "2026-04-28T17:37:47Z"
 cssclasses:
   - "config"
 last_triaged: "2026-04-28T13:25:00Z"
 ---
 
 ## Judgment Lint — 2026-04-26
+
+> **Note (2026-04-28):** Structural pipeline issues surfaced by this lint are now consolidated in [[Brain pipeline downstream gaps]] — that page tracks the three persistent defects (stale-claims propagation, synthesis lifecycle, detector noise) and proposes candidate fixes. Future lint cycles should reference that page rather than re-document the structural pattern.
 
 Brain stats at time of run: 438 entity, 420 source, 352 concept, 31 situation, 14 config, 13 briefing, 7 synthesis, 5 source-config, 1 commitment, 1 reminder. 0 open commitments. 7 synthesis pages.
 
@@ -63,7 +65,7 @@ Growth since last run (2026-04-19): +111 entity, +20 source, +148 concept, +7 si
 
 **Assessment:** This is the same finding as 2026-04-19 with stronger evidence. The 4 entries that were at 5d gaps last cycle (MonieBook, CoralPay, Transaction Switching, BRM Regulatory Exposure) are *still* at 5d gaps — they updated once in the interval but the stale pattern recurred immediately. Per-page remediation will not hold. **Investigating the ingest pipeline is the single highest-impact action.**
 
-**Triage disposition (2026-04-28):** Skipped as a category — ingest pipeline regression is structural; per-page remediation cannot hold until the upstream code path is fixed. Deferred to brain pipeline investigation as a separate workstream.
+**Triage disposition (2026-04-28):** Skipped as a category — ingest pipeline regression is structural; per-page remediation cannot hold until the upstream code path is fixed. See [[Brain pipeline downstream gaps#Gap 1: Stale-claims propagation failure]] for consolidated treatment and candidate fixes.
 
 ---
 
@@ -84,7 +86,7 @@ Growth since last run (2026-04-19): +111 entity, +20 source, +148 concept, +7 si
 | Direct to Bank Daily Stand Up 2026-04-01 0824 | 10 | Source-name leakage |
 | Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21 | 5 | Source-name leakage |
 
-**Status:** Identical issue class to 2026-04-19 finding. Recommendation #2 and #3/#4 from prior lint remain unactioned. Pipe-spec count actually grew (was ~3 previously, now 6 distinct cases).
+**Status:** Identical issue class to 2026-04-19 finding. Recommendation #2 and #3/#4 from prior lint remain unactioned. Pipe-spec count actually grew (was ~3 previously, now 6 distinct cases). See [[Brain pipeline downstream gaps#Gap 3: Lint detector noise]] for consolidated treatment.
 
 ### Alias Fixes — Detector False Positives Still Present
 
@@ -183,7 +185,7 @@ Skipped (ambiguous/disambiguation needed): Kafka, TPP (2).
 | Reconciliation, Settlement, and Recovery — Operational Layer | Reconciliation (8), Recovery Operations (8), Settlement Integrity (5), Clearing and Settlement (5), Settlement Accuracy (3) | 29+ | Five distinct concept pages all in the same operational domain. Synthesis would unify the framework and surface gaps between definitions. |
 | CEO Gazette Pattern — Communication Cadence and Themes | CEO Gazette concept (11), individual gazette pages (multiple) | 11+ | Recurring artifact with consistent structure but no meta-page describing why/how/themes-over-time. Modest synthesis. |
 
-**Triage disposition (2026-04-28):** Skipped new synthesis creation this cycle. Rationale: synthesis lifecycle has no maintenance mechanism (Meta-Observation 2 confirms all 7 existing syntheses stale within 1 week of creation). Adding 3+ new syntheses without addressing the maintenance mechanism just expands the staleness surface from 7 to 10. Deferred to brain pipeline workstream as part of the synthesis-refresh-mechanism design.
+**Triage disposition (2026-04-28):** Skipped new synthesis creation this cycle. Rationale: synthesis lifecycle has no maintenance mechanism (Meta-Observation 2 confirms all 7 existing syntheses stale within 1 week of creation). Adding 3+ new syntheses without addressing the maintenance mechanism just expands the staleness surface from 7 to 10. See [[Brain pipeline downstream gaps#Gap 2: Synthesis lifecycle has no maintenance mechanism]].
 
 ---
 
@@ -205,7 +207,7 @@ Skipped (ambiguous/disambiguation needed): Kafka, TPP (2).
 
 The pattern itself — all 7 syntheses stale within a week of creation — suggests the brain has no mechanism to nudge synthesis updates as related pages change. This mirrors the stale-claims pipeline issue: writes to underlying pages are not propagating to synthesis pages.
 
-**Triage disposition (2026-04-28):** Bank Integration synthesis refreshed — absorbed Apr 19→Apr 28 evolution including HabariPay pattern entry (Apr 24), JULS Card Crisis (Apr 23), 5-bank turn-off concentration (Apr 28), Wema/Access bilateral standoffs, Apr 27 evening closure backfill, and Fidelity TDSD-6753/6754 INITIAL REVIEW. Updated frontmatter date to 2026-04-28. Other 6 syntheses left for next cycle — synthesis-refresh-mechanism design is the structural fix.
+**Triage disposition (2026-04-28):** Bank Integration synthesis refreshed — absorbed Apr 19→Apr 28 evolution including HabariPay pattern entry (Apr 24), JULS Card Crisis (Apr 23), 5-bank turn-off concentration (Apr 28), Wema/Access bilateral standoffs, Apr 27 evening closure backfill, and Fidelity TDSD-6753/6754 INITIAL REVIEW. Updated frontmatter date to 2026-04-28. Other 6 syntheses left for next cycle — synthesis-refresh-mechanism design is the structural fix. See [[Brain pipeline downstream gaps]] for candidate solutions.
 
 ---
 
@@ -229,11 +231,11 @@ The pattern itself — all 7 syntheses stale within a week of creation — sugge
 | 6. Process lower-value gaps | **Deferred** — same disposition |
 | Cross-recommendation: 6 syntheses | **Done** — 6 created, lifting count from 1 → 7 |
 
-The synthesis-creation recommendation was the only one fully executed. Ingest/detector recommendations require code changes to the brain pipeline; they cannot be resolved through triage alone. This is a structural blocker — flagging the same defects each week without an upstream fix is itself a process failure.
+The synthesis-creation recommendation was the only one fully executed. Ingest/detector recommendations require code changes to the brain pipeline; they cannot be resolved through triage alone. This is a structural blocker — flagging the same defects each week without an upstream fix is itself a process failure. **Now consolidated in [[Brain pipeline downstream gaps]] with candidate fixes and forcing-function recommendations.**
 
 ### Meta-Observation 2: Synthesis Lifecycle Has No Maintenance Mechanism
 
-All 7 syntheses created 2026-04-19 → 2026-04-23 are now stale. The brain creates synthesis pages but does not refresh them as constituent pages change. This is the synthesis-side analog to the stale-claims pipeline issue: write-through from constituent updates to dependent aggregations is missing.
+All 7 syntheses created 2026-04-19 → 2026-04-23 are now stale. The brain creates synthesis pages but does not refresh them as constituent pages change. This is the synthesis-side analog to the stale-claims pipeline issue: write-through from constituent updates to dependent aggregations is missing. See [[Brain pipeline downstream gaps#Gap 2: Synthesis lifecycle has no maintenance mechanism]].
 
 ### Meta-Observation 3: Source Ingestion Slowdown vs Concept Growth Asymmetry
 
@@ -243,9 +245,9 @@ Source count grew +20 in the week, concept count grew +148. Either (a) the user 
 
 ## Recommendations (Ordered by Impact)
 
-1. **Investigate the ingest pipeline entity-update step.** Highest-impact unresolved issue. 38 pages still pinned at 2026-04-11 across two consecutive lint cycles confirms this is not transient. Per-page remediation cannot hold until this is fixed at the pipeline level.
-2. **Add a synthesis-refresh mechanism.** All 7 syntheses stale within 1 week of creation indicates the synthesis lifecycle is missing a maintenance phase. Options: heartbeat-driven synthesis refresh, lint-driven flagging (current), or constituent-change-driven rebuild.
-3. **Fix detector issues (alias resolution, pipe-spec stripping, source-name filtering).** These are filling the top of the concept-gap list with noise and burying real findings. Fix at the lint query / ingest layer.
+1. **Investigate the ingest pipeline entity-update step.** Highest-impact unresolved issue. 38 pages still pinned at 2026-04-11 across two consecutive lint cycles confirms this is not transient. Per-page remediation cannot hold until this is fixed at the pipeline level. Candidate fixes in [[Brain pipeline downstream gaps#For Gap 1 (Stale-claims propagation)]].
+2. **Add a synthesis-refresh mechanism.** All 7 syntheses stale within 1 week of creation indicates the synthesis lifecycle is missing a maintenance phase. Candidate fixes in [[Brain pipeline downstream gaps#For Gap 2 (Synthesis lifecycle)]].
+3. **Fix detector issues (alias resolution, pipe-spec stripping, source-name filtering).** These are filling the top of the concept-gap list with noise and burying real findings. Candidate fixes in [[Brain pipeline downstream gaps#For Gap 3 (Lint detector noise)]].
 4. **Resolve Wycliffe Ochieng' apostrophe split.** 26 refs to apostrophe form vs 8 to non-apostrophe. Decide canonical form and consolidate. **(Triaged 2026-04-28: kept canonical as-is — aliases already resolve correctly.)**
 5. **Triage Atlas decision.** 3rd consecutive lint surfacing. Either create page or document explicit decision-not-to-create with rationale, so it stops appearing. **(Triaged 2026-04-28: Atlas entity page created.)**
 6. **Refresh Bank Integration synthesis first.** Most material stale synthesis (6d gap) covering active RC91 situations. **(Triaged 2026-04-28: refreshed to Apr 28.)**
