@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Tracy Ojaigho
 created: 2026-04-11
-summary: "Head of CI&P Product — Product Leader for the Card Issuance & Processing Platform at Moniepoint Technologies UK / IPCo. Co-lead with Olufemi Davies on Cards. Apr 21 received Cards KT; action items: meet Nadin/Damola/Romulo/current MFB Cards team."
-updated: "2026-04-25T12:03:37Z"
+summary: Head of CI&P Product — Product Leader for the Card Issuance & Processing Platform at Moniepoint Technologies UK / IPCo. Co-lead with Olufemi Davies on Cards. Hosted the formal CI&P kick-off meeting on 2026-04-27; owns Project Governance setup workstream.
+updated: "2026-04-28T16:44:55Z"
 cssclasses:
   - "entity"
 ---
@@ -47,6 +47,21 @@ Tracy and [[Emeka Awagu]] formalized the platform takeover of the existing [[MFB
 
 ## Recent Actions / Signals
 
+### 2026-04-27 — Project Phoenix CI&P Kick Off Meeting (host)
+
+Hosted the formal CI&P-team-specific kick-off meeting on 2026-04-27. Attendees: [[Elishma Nwobodo]], [[Nadeem Abbas]], [[Emeka Awagu]], [[Damilola Oyediran]], Tracy, [[Nitish Chand]], [[Ketan Dhamasana]], [[Olufemi Davies]].
+
+ALIGNED decisions:
+- Hiring strategy balanced with [[AI and Automation Adoption]].
+- Platform migration target end of Q3 2026, with quarterly milestones (Phase 1 complete Q2, Phase 2 expansion Q3, production cutover Q3 end).
+- Phase One led by a dedicated [[Strike Team]] — composition finalized this week.
+
+**Tracy's owned action item:** *Project governance — set up governance structure for [[Project Phoenix]] CI&P including steering committee, working groups, and escalation protocols.* See [[Governance Structure]].
+
+**Date note:** Brain's [[Project Phoenix]] page logs Phase 1 broader kick-off as 2026-04-07. The 2026-04-27 meeting is the formal CI&P-team-specific kick-off (vs. the broader Phoenix Phase 1 kick-off mark from earlier in April).
+
+Source: [[Project Phoenix - CI&P kick off meeting - 2026-04-27]].
+
 ### 2026-04-22 — Formal role conversion confirmed
 
 [[Frank Atashili]]'s [[TeamApt-Platformization-Org-Movements (1)|Org Movements brief]] to Dennis Ajalie and Pawel Swiatek names Tracy as Head of CI&P, drops her from TPP commercial/P&L, and confirms Ketan joins her engineering team from AptPay Suite.
@@ -88,3 +103,4 @@ These capabilities now feed directly into the Phoenix CI&P platform she now lead
 - [[Moniepoint Group Platformization]]
 - [[source — Project Phoenix Org Structure Changes (March 2026)]]
 - [[TeamApt-Platformization-Org-Movements (1)]] — Frank's Apr 22, 2026 brief formalising role conversion
+- [[Project Phoenix - CI&P kick off meeting - 2026-04-27]]
