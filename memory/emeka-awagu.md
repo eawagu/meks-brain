@@ -6,8 +6,8 @@ aliases:
   - "Mek"
   - "Emeka"
 created: 2026-04-11
-summary: "CTO at TeamApt Ltd (subsidiary of Moniepoint Inc.), responsible for technology strategy, reliability, talent, and operations across the Technology Operations division. This is the brain owner's own profile — this brain belongs to Emeka Awagu (Mek)."
-updated: "2026-04-24T11:46:07Z"
+summary: "CTO at TeamApt Ltd (subsidiary of Moniepoint Inc.), responsible for technology strategy, reliability, talent, and operations across the Technology Operations division. Per 2026-04-27 CI&P kick-off, owns Infrastructure Assessment workstream for platform consolidation. This is the brain owner's own profile."
+updated: "2026-04-28T16:46:41Z"
 cssclasses:
   - "entity"
 ---
@@ -36,6 +36,17 @@ Per Frank's [[TeamApt-Platformization-Org-Movements (1)|Org Movements brief]] (A
 - **Integration with other platforms:** CI&P consumes [[TSPP]] (Auth Engine / 3DS–SCA path requires sub-500ms TSP responses); Payment Gateway Platform consumes CI&P for 3DS/SCA.
 
 This is a peer triad role at the group platform level — it does not reduce Emeka's TeamApt CTO accountabilities.
+
+### 2026-04-27 — Project Phoenix CI&P Kick Off Meeting
+
+Attended the formal CI&P kick-off meeting hosted by [[Tracy Ojaigho]]. **Owns the Infrastructure Assessment workstream** — conduct an assessment of current infrastructure and requirements for platform consolidation, defining the technical foundation needed for the centralized CI&P platform. The output feeds the technology roadmap [[Elishma Nwobodo]] is developing in parallel.
+
+ALIGNED decisions taken at the meeting:
+- Hiring strategy balanced with [[AI and Automation Adoption]].
+- Platform migration target end of Q3 2026, with quarterly milestones.
+- Phase One led by a dedicated [[Strike Team]] — composition finalized this week (owned by [[Nadeem Abbas]]).
+
+Source: [[Project Phoenix - CI&P kick off meeting - 2026-04-27]].
 
 ## CEO Scorecard Footprint (FY2026)
 
@@ -72,7 +83,7 @@ Mek's Apr 15 review (see [[note_2026-04-15T11-42-42-517Z]]) characterises this f
 - **PIP decision — Tolulope Obianwu** — due April 14 on Tolulope's return from bereavement leave
 - **Head of Engineering Hiring** — Varun Singh deliberation April 10; role scoped to central product vertical
 - **CBN Compliance — POS Recertification** — 10+ days overdue as of early April 2026
-- **Project Phoenix** — Phase 1 kicked off April 7; CI&P Engineering role on platform triad formalised Apr 22 (Org Movements brief)
+- **Project Phoenix** — Phase 1 broader kick-off Apr 7; CI&P-team-specific kick-off Apr 27, hosted by Tracy; Infrastructure Assessment owned by Emeka
 - **Paystack DD partnership** — commercial engagement at product team level
 - **CEO Scorecard FY2026 Technology Section Revisions** — two proposed rubric changes logged Apr 15 (see [[note_2026-04-15T11-42-42-517Z]])
 - **[[Visa Payments Forum Paris]] (30 Jun – 2 Jul 2026)** — [[French Schengen visa application]] in progress; [[Visa Europe Limited]] invitation letter received 17 Apr 2026 (see [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]])
@@ -82,6 +93,7 @@ Mek's Apr 15 review (see [[note_2026-04-15T11-42-42-517Z]]) characterises this f
 - TDSD-6479: Harness P1 migration (Bank Cashout + Card routing) — deployment window Apr 10
 - Public Holiday Incentive: Easter Apr 3 + Apr 6; final approval gate
 - Lattice performance reviews: Oladapo (deadline Apr 10); Tolulope (deadline Apr 10)
+- **CI&P Infrastructure Assessment** (per Apr 27 kick-off) — assess current infra and requirements for platform consolidation.
 
 ## Sources
 - [[accountabilities]] — role definition, key relationships, accountability signals
@@ -91,3 +103,4 @@ Mek's Apr 15 review (see [[note_2026-04-15T11-42-42-517Z]]) characterises this f
 - [[weekly-digest-2026-03-30]] — week summary
 - [[invitation letter - VISA Payments Forum Paris 2026 - Emeka Awagu]] — Visa Europe support letter for French business visa (Apr 17 2026)
 - [[TeamApt-Platformization-Org-Movements (1)]] — Frank's Apr 22, 2026 brief formalising CI&P engineering triad role and Ketan's EM transfer
+- [[Project Phoenix - CI&P kick off meeting - 2026-04-27]] — formal CI&P kick-off; Infrastructure Assessment ownership
