@@ -1,13 +1,17 @@
 ---
-title: Direct to Bank program
 type:
   - "concept"
   - "entity"
+title: Direct to Bank program
+created: "2026-04-25T11:47:34Z"
+summary: TeamApt internal program covering bank integration pipeline (ATS, Direct Debit, Fund Settlement) across ~15+ Nigerian and pan-African banks. Daily standup is the operational cadence; meeting owner Khadijat Musa.
+updated: "2026-04-28T11:57:46Z"
 cssclasses:
   - "concept"
-created: "2026-04-25T11:47:34Z"
-updated: "2026-04-25T11:47:34Z"
-summary: TeamApt internal program covering bank integration pipeline (ATS, Direct Debit, Fund Settlement) across ~15+ Nigerian and pan-African banks. Daily standup is the operational cadence; meeting owner Khadijat Musa.
+aliases:
+  - "Direct to Bank"
+  - "D2B"
+  - "Direct to Bank Program"
 ---
 
 ## Definition
