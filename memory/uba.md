@@ -5,15 +5,15 @@ title: UBA
 aliases:
   - "United Bank for Africa"
 created: 2026-04-11
-summary: "United Bank for Africa on Moniepoint's ATS routing and Direct to Bank integration pipeline. D2B Apr 22: UBA Fund Settlements SLA pending bank legal sign-off; legal clause clarified, updated document shared with UBA for final review."
-updated: "2026-04-25T11:47:33Z"
+summary: "United Bank for Africa on Moniepoint's ATS routing and Direct to Bank integration pipeline. D2B Apr 22: SLA pending bank legal sign-off. D2B Apr 28: SLA signed 13 days ago; legal team follow-up underway; server deployment pushed to next week (internal upgrades first)."
+updated: "2026-04-29T11:50:39Z"
 cssclasses:
   - "entity"
 ---
 
 ## Overview
 
-[[UBA]] (United Bank for Africa) is a Nigerian bank on [[TeamApt / Moniepoint]]'s [[ATS]] routing and on the Direct to Bank integration pipeline. Direct to Bank VPN setup delayed as of Apr 2026; settlement agent SLA under bank review.
+[[UBA]] (United Bank for Africa) is a Nigerian bank on [[TeamApt / Moniepoint]]'s [[ATS]] routing and on the Direct to Bank integration pipeline. Direct to Bank VPN setup delayed as of Apr 2026; settlement agent SLA signed; server deployment pending internal upgrades.
 
 ## ATS RC91 Pattern
 
@@ -34,6 +34,7 @@ UBA appears recurrently in the multi-bank RC91 cycle. Bank-side resolution is ty
 - **VPN setup:** delayed as of Apr 2026.
 - **Settlement agent SLA:** still under bank review per Direct to Bank Daily Standup 2026-04-14 — no movement. CoralPay integration to ATS in parallel test is ongoing.
 - **D2B Apr 22:** [[Ifeoluwa Oguntona]] confirmed UBA fund settlements integration began last quarter; **SLA pending review and sign-off by bank's legal team**. Legal clause clarified yesterday; updated document shared with UBA for final review. Source: [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]].
+- **D2B Apr 28:** SLA was **signed 13 days ago** (i.e., ~Apr 15); legal team **follow-up underway**. **UBA server deployment** decided to commence **next week**, with internal service upgrades prioritized for the current week. Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
 - **Validation for Apr 2 sent** per Duty Handover #20260414.
 
 ## Sources
@@ -44,3 +45,4 @@ UBA appears recurrently in the multi-bank RC91 cycle. Bank-side resolution is ty
 - Slack #teamapt-tech-operations P1 logs Apr 14 (cycles 3–4)
 - Email: RE: FW: PENTEST_ 2FA on DCIR portal (Christian Uchegbu, 08:58 UTC Apr 16) — production deployment approved
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
+- [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]

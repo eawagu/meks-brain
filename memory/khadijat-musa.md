@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Khadijat Musa
 created: 2026-04-11
-summary: "TeamApt team member — owns the Direct to Bank daily standup meeting. Apr 21–23: chairs standups; reminded team to prioritize across all outstanding refund issues; manages Opay project track."
-updated: "2026-04-25T11:51:58Z"
+summary: "TeamApt team member — owns the Direct to Bank daily standup meeting. Apr 21–28: chairs standups; reminded team to prioritize across all outstanding refund issues; manages Opay project track."
+updated: "2026-04-29T11:50:39Z"
 cssclasses:
   - "entity"
 ---
@@ -27,9 +27,15 @@ TeamApt team member — owns the [[Direct to Bank program]] daily standup meetin
 - Said the [[V2 Jazz]] regression documentation is not yet ready but committed to checking with [[Jamiu]] and [[Wally]] to see if it can be concluded today. [[Olawale Olapetan]] confirmed team is almost done and currently working on the V2 regression report.
 - Source: [[note_2026-04-23T13-53-37-857Z]].
 
+## 2026-04-28 — D2B standup (08:27 WAT)
+
+- Drive owner of the standup notes. Standup mandated **daily status updates owned by the assigned ticket owner** (not the project delivery lead) — management accountability decision. [[UBA]] server deployment slipped a week (internal upgrades prioritized first).
+- Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
+
 ## Sources
 - [[Direct to Bank Daily Standup 2026-03-30]]
 - [[Direct to Bank Daily standup - 2026-04-21 07:27 WAT - empty stub]]
 - [[Direct to Bank Daily standup - 2026-04-21 08:10 WAT]]
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
+- [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]

@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Ecobank
 created: 2026-04-11
-summary: "Pan-African bank — on Moniepoint's ATS routing. On 2026-04-27 Fund Settlement Agent integration commenced with two-week timeline (test environment completion ~12 May; production agent target 15 May). All sandbox issues resolved."
-updated: "2026-04-27T17:49:43Z"
+summary: "Pan-African bank — on Moniepoint's ATS routing. On 2026-04-27 Fund Settlement Agent integration commenced (two-week timeline). Apr 28 D2B: account name change completed; waiting on bank signature and implementation."
+updated: "2026-04-29T11:50:39Z"
 cssclasses:
   - "entity"
 ---
@@ -33,5 +33,9 @@ cssclasses:
 - **Ecobank Fund Settlement Agent** — all tests have been completed; sandbox issues resolved. Integration commenced today. Engineering committed to a **two-week timeline** for the test environment → completion ~**12 May**. After the test phase, the team will move to obtaining the production API. Production target: **15 May**.
 - Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
 
+## 2026-04-28 — D2B standup
+
+- **Account name change completed.** Now waiting for the bank's **signature** and implementation. Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
+
 ## Sources
-[[Direct to Bank Daily Stand Up 2026-04-01 0824]]; email Olamide Ajibulu → Ecobank, 18:54 WAT Apr 16 (ATS RC91); email Olamide Ajibulu → Ecobank, 19:31 WAT Apr 16 (portal down 502); [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]; [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]; [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
+[[Direct to Bank Daily Stand Up 2026-04-01 0824]]; email Olamide Ajibulu → Ecobank, 18:54 WAT Apr 16 (ATS RC91); email Olamide Ajibulu → Ecobank, 19:31 WAT Apr 16 (portal down 502); [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]; [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]; [[Project delivery and optimization realignment - 2026-04-27 - Notes]]; [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]

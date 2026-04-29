@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Polaris Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS routing. D2B Apr 22: Polaris Name-Inquiry and Transfer APIs failing/unstable; fund-settlement sign-off remains a blocker; Oluwakemi visiting bank to address API instability; dedicated war-room session scheduled."
-updated: "2026-04-25T11:47:32Z"
+summary: "Nigerian bank on Moniepoint's ATS routing. D2B Apr 22: APIs failing/unstable; war room. Apr 28: APIs tested, awaiting peer test with Wally."
+updated: "2026-04-29T11:50:39Z"
 cssclasses:
   - "entity"
 ---
@@ -25,11 +25,13 @@ VPN restored Apr 8, but settlement issue ([[TDSD-6493]]) filed Apr 10 with zero 
 
 **2026-04-23:** Still no feedback from Polaris on fund settlement and DD. [[Oluwakemi Oni]] noted Polaris contacted them yesterday (Apr 22) indicating they are prioritizing certain internal issues; a promised email was not received. [[Glory Alioha]] reaffirmed that Polaris requested an extension **until next week** (rolling forward from Apr 16's "next week" commitment — the extension has been rolled at least once). Oluwakemi owns follow-up with Polaris contacts. Source: [[note_2026-04-23T13-53-37-857Z]].
 
+**2026-04-28 D2B:** Polaris APIs **tested**; team is **awaiting peer test with [[Wally]]** before proceeding. Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
+
 Earlier: Prosper (Polaris) requested stakeholders meeting to review ongoing projects (Oct 2025), wanting CFO present — flagged by [[Emeka Awagu]] as unusual.
 
 ## Pattern
 
-Polaris's "extend until next week" response on the DD/fund-settlement SLA has now been stated **at least three times** (Apr 16, Apr 22 implicit, Apr 23 explicit) without a concrete delivery. Concurrent with Apr 22's API instability discovery (Name-Inquiry + Transfer both failing), this is now a multi-track durable failure, not just a delay pattern.
+Polaris's "extend until next week" response on the DD/fund-settlement SLA has now been stated **at least three times** (Apr 16, Apr 22 implicit, Apr 23 explicit) without a concrete delivery. Concurrent with Apr 22's API instability discovery (Name-Inquiry + Transfer both failing), this is now a multi-track durable failure, not just a delay pattern. Apr 28 update suggests the API instability has narrowed to a peer-test step — incremental progress on the API track even while the pattern note above stands on the SLA track.
 
 ## Related
 - [[Sterling + Polaris — Routes Degraded]]
@@ -37,3 +39,4 @@ Polaris's "extend until next week" response on the DD/fund-settlement SLA has no
 - [[Direct to Bank Daily Stand Up 2026-04-16]]
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
+- [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]

@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — 7 RC91 cycles in 9 days (Apr 12–20). On 2026-04-27: DD blocked by name-inquiry API returning 'unauthorized' against the 10-digit account; NSS admin user-details shared and being configured; Polaris fund settlement minimal progress; account transfer awaiting bank feedback on inbound-only test; SLA under bank review."
-updated: "2026-04-27T17:49:43Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — 7 RC91 cycles in 9 days (Apr 12–20). Apr 27: DD blocked by name-inquiry API 'unauthorized' on 10-digit account; NSS configured. Apr 28: mandation/transaction-simulation phase, NEW PRIVATE KEY received."
+updated: "2026-04-29T11:50:39Z"
 cssclasses:
   - "entity"
 ---
@@ -29,6 +29,12 @@ cssclasses:
 - **Union Bank NSS** — bank shared the admin user details; team is configuring the portal.
 - **Union Bank account transfer** — bank has indicated they only want to proceed with **inbound transfer** testing currently. Team has shared everything needed; awaiting feedback. Bank has shown interest. SLA under bank review.
 - Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
+
+## 2026-04-28 — D2B standup
+
+- **Direct Debit** still in **mandation testing and transaction simulation phase**.
+- **NEW PRIVATE KEY received** from the bank — likely the unblock for the Apr 27 'unauthorized' name-inquiry-API issue (token not authenticating). Validates the Apr 27 inference that the auth issue was a credential issue, not an API logic issue.
+- Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
 
 ## ATS RC91 — Accumulating Pattern (7 cycles in 9 days)
 
@@ -77,3 +83,4 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 - [[NIBSS PTSA — Route Failure Apr 16]]
 - [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
 - [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
+- [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]
