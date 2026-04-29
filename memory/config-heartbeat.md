@@ -3,15 +3,15 @@ type:
   - "config"
 title: config-heartbeat
 created: "2026-04-11T15:43:35Z"
-summary: "Heartbeat configuration — cron as wake-only delivery (15 ticks/day, no weekday/weekend split); per-tick work-level judgment (Full/Skim/Minimal/Silent) via config-heartbeat-prompt Perceive Step 0 with floor requirements (06:00 briefing, Immediate-tier scan, pending-triage processing). Briefing tick detection, error isolation, Improve phase (7-day Triage Results, 20-tuple recalc trigger). Ingest is a separate scheduled task (config-ingest-prompt)."
-updated: "2026-04-18T12:22:54Z"
+summary: "Heartbeat configuration — cron as wake-only delivery (4 ticks/day at 06:00, 10:00, 14:00, 18:00 WAT, no weekday/weekend split); per-tick work-level judgment (Full/Skim/Minimal/Silent) via config-heartbeat-prompt Perceive Step 0 with floor requirements (06:00 briefing, Immediate-tier scan, pending-triage processing). Briefing tick detection, error isolation, Improve phase (7-day Triage Results, 20-tuple recalc trigger). Ingest is a separate scheduled task (config-ingest-prompt)."
+updated: "2026-04-29T12:38:54Z"
 cssclasses:
   - "config"
 ---
 
 ## Cadence
 
-Cron delivers 15 wake opportunities per day: `0 6-18,20,22 * * *` (evaluated in local timezone per config-user). Cron carries no weekday/weekend semantics — every tick is the same wake opportunity.
+Cron delivers 4 wake opportunities per day: `0 6,10,14,18 * * *` (evaluated in local timezone per config-user). Cron carries no weekday/weekend semantics — every tick is the same wake opportunity.
 
 Work level per tick is judgment-driven. See config-heartbeat-prompt Perceive Step 0 for the four-level ladder (Full / Skim / Minimal / Silent) and judgment inputs. Weekend, vacation, travel, and working-weekend behavior emerge from per-tick reasoning — no day-of-week rules in this config.
 
@@ -22,7 +22,7 @@ Work level per tick is judgment-driven. See config-heartbeat-prompt Perceive Ste
 
 **Briefing hour:** 06:00 (local time per config-user timezone). The 06:00 tick produces the briefing. If for any reason 06:00 is missed, the next tick that has not yet produced today's briefing creates it.
 
-**Overnight delegation:** Overnight monitoring is delegated to the ops team. Off-hours direct contact (Slack DM, phone) is the Immediate-tier path between 23:00 and 06:00 WAT — heartbeat polling does not cover this window. Active-P1 silence rules and absence-of-signal Immediate alerts do not fire overnight; they resume at the 06:00 tick. Off-hours urgent DM signals (config-salience structural marker) still affect salience scoring at 06:00 triage.
+**Overnight delegation:** Overnight monitoring is delegated to the ops team. Off-hours direct contact (Slack DM, phone) is the Immediate-tier path between 18:00 and 06:00 WAT — heartbeat polling does not cover this window. Active-P1 silence rules and absence-of-signal Immediate alerts do not fire overnight; they resume at the 06:00 tick. Off-hours urgent DM signals (config-salience structural marker) still affect salience scoring at 06:00 triage.
 
 ## Heartbeat Cycle
 
