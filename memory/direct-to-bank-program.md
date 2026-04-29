@@ -9,7 +9,7 @@ aliases:
   - "Direct to Bank Program"
 created: "2026-04-25T11:47:34Z"
 summary: TeamApt internal program covering bank integration pipeline (ATS, Direct Debit, Fund Settlement) across ~15+ Nigerian and pan-African banks. Daily standup is the operational cadence; meeting owner Khadijat Musa.
-updated: "2026-04-29T11:50:40Z"
+updated: "2026-04-29T11:52:37Z"
 cssclasses:
   - "concept"
 ---
@@ -32,7 +32,8 @@ The Direct to Bank (D2B) program is the [[TeamApt]] internal effort to onboard N
 - ATS routing: [[Zenith Bank]], [[Union Bank]], [[FCMB]], [[Ecobank]], [[UBA]], [[Polaris Bank]], [[Access Bank]] (and others)
 - Direct Debit pipeline: [[Money Point]], [[Tap]], [[Keystone Bank]], [[Karry MFB]], [[Steel Bank]], [[Abar Pay]], [[GT Bank]], [[CAB]]
 - SLA sign-off pending: [[UBA]] (signed Apr 15, legal follow-up Apr 28), [[WHMA Bank]], [[Steel Bank]], [[Coral Pay]] / [[Access Bank]], [[Polaris Bank]]
-- [[Zen DG]] integration: 2-week timeline extended into 3rd week (per Apr 28 standup)
+- [[Zen DG]] integration: 2-week timeline extended into 3rd week (per Apr 28 standup); delays continuing per Apr 29 standup
+- [[VPN Connectivity]] processes underway for multiple banks (Apr 29 standup)
 
 ## Recurring patterns
 
@@ -42,6 +43,7 @@ The Direct to Bank (D2B) program is the [[TeamApt]] internal effort to onboard N
 - **SLA sign-off blockers** dominate the pipeline — see [[SLA sign-off blocker]].
 - **Polaris pattern of "extend until next week"** rolled at least three times (Apr 16, Apr 22, Apr 23); Apr 28 update suggests narrowing to a peer-test step (incremental progress).
 - **Apr 28 governance decision:** ticket-status update ownership clarified — the **assigned ticket owner** must perform daily status updates, not the project delivery lead.
+- **Recurring direct-debit vulnerabilities** under investigation across multiple bank deployments (Apr 29 standup).
 
 ## Sources
 
@@ -53,3 +55,4 @@ The Direct to Bank (D2B) program is the [[TeamApt]] internal effort to onboard N
 - [[Direct to Bank Daily Standup 2026-03-30]]
 - [[note_2026-04-23T13-53-37-857Z]]
 - [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]
+- [[Direct to Bank Daily standup - 2026-04-29 08:26 WAT]]

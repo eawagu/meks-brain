@@ -1,12 +1,12 @@
 ---
-title: Zen DG
 type:
   - "concept"
+title: Zen DG
+created: "2026-04-29T11:50:40Z"
+summary: "Zen Direct Gateway / Zen DG integration on the Direct to Bank pipeline — Apr 28 status: 2-week timeline slipped into 3rd week; Apr 29: delays continuing, awaiting bank vulnerability reports."
+updated: "2026-04-29T11:52:37Z"
 cssclasses:
   - "concept"
-created: "2026-04-29T11:50:40Z"
-updated: "2026-04-29T11:50:40Z"
-summary: "Zen Direct Gateway / Zen DG integration on the Direct to Bank pipeline — Apr 28 status: 2-week timeline has slipped into a 3rd week, awaiting blocker updates. (Underlying counterparty / product not yet captured in the brain.)"
 ---
 
 ## Definition
@@ -21,7 +21,14 @@ summary: "Zen Direct Gateway / Zen DG integration on the Direct to Bank pipeline
 - **Awaiting blocker updates.**
 - Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
 
+### 2026-04-29 standup
+
+- **Delays continuing.**
+- **Pending bank vulnerability reports.**
+- Source: [[Direct to Bank Daily standup - 2026-04-29 08:26 WAT]].
+
 ## Related
 
 - [[Direct to Bank program]]
 - [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]
+- [[Direct to Bank Daily standup - 2026-04-29 08:26 WAT]]
