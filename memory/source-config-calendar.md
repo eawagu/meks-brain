@@ -4,10 +4,10 @@ type:
 title: source-config-calendar
 created: 2026-04-11
 summary: "Calendar signal-source configuration: priority signals on declined RSVPs, cancellations, agenda-less invites, overload. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: Sun→Mon window unchanged from 10:10 WAT capture. Lattice deadline 36h50m remaining at this tick."
-updated: "2026-04-29T06:19:30Z"
+updated: "2026-04-29T07:21:58Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-29T06:15:55Z"
+last_processed: "2026-04-29T07:15:00Z"
 ---
 
 
