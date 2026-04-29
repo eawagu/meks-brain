@@ -1,15 +1,15 @@
 ---
-title: ATPP Daily Standup 20260427 Gemini Notes
 type:
   - "source"
+title: ATPP Daily Standup 20260427 Gemini Notes
+created: "2026-04-29T11:39:52Z"
+summary: Apr 27 ATPP standup — issuer cert/test keys generated, card data awaiting EMV prep, CMS security/UI documentation pending end-of-May, dispute management sprint kicked off, ACT enhancements deployed, account migration to run in two batches.
+updated: "2026-04-29T11:41:07Z"
 cssclasses:
   - "source"
 source_path: ATPP Daily Standup Meeting - 2026_04_27 15_51 WAT - Notes by Gemini.md
 retention_label: fs
 retention_rationale: "Standup summary with structured Key Updates fully captured in source page extraction; raw worth keeping for traceability but unlikely to need semantic-search retrieval beyond what's in Key Points."
-created: "2026-04-29T11:39:52Z"
-updated: "2026-04-29T11:39:52Z"
-summary: Apr 27 ATPP standup — issuer cert/test keys generated, card data awaiting EMV prep, CMS security/UI documentation pending end-of-May, dispute management sprint kicked off, ACT enhancements deployed, account migration to run in two batches.
 ---
 
 ## Summary
@@ -18,8 +18,8 @@ ATPP standup on Apr 27, 2026 (15:51 WAT) covered card processing milestones, sys
 
 ## Key Points
 
-- **Issuer processing**: Successfully generated issuer public key certificate and loaded [[Visa]] test keys on HSM
-- **Card data**: Two card data generated; awaiting EMV data prep output for white plastic production
+- **Issuer processing**: Successfully generated issuer public key certificate and loaded [[Visa]] test keys on [[HSM]]
+- **Card data**: Two card data generated; awaiting [[EMV Data Prep]] output for [[White Plastic Production]]
 - **Visa global testing**: Form completion underway with [[Money Point]]; cards dispatched to Singapore for testing
 - **CMS security**: API/system documentation still unavailable; revised partner timeline end of May
 - **CMS enhanced UI**: Deployed to staging; user guide and system document pending (end of May)
@@ -31,7 +31,7 @@ ATPP standup on Apr 27, 2026 (15:51 WAT) covered card processing milestones, sys
 - **ACT enhancements**: Deployed successfully including conversion currency and user room management
 - **Bureau integration**: UAT progressing; one case being reworked; production move expected end of day
 - **Account migration**: Two-batch approach established; account deactivation underway
-- **Decision**: Account migration strategy will be executed in two separate batches
+- **Decision**: [[Account Migration]] strategy will be executed in two separate batches
 
 ## Entities Mentioned
 
@@ -39,6 +39,8 @@ ATPP standup on Apr 27, 2026 (15:51 WAT) covered card processing milestones, sys
 - [[Money Point]]
 - [[Visa]]
 - [[Mastercard]]
+- [[Card Management System]] (referenced as "CMS")
+- [[HSM]]
 
 ## Concepts
 
@@ -46,18 +48,16 @@ ATPP standup on Apr 27, 2026 (15:51 WAT) covered card processing milestones, sys
 - [[Visa Issuer Processing Certification]]
 - [[EMV Data Prep]]
 - [[White Plastic Production]]
-- [[CMS]]
-- [[ACT]]
+- [[ACT (Acquirer/Card Tech)]]
 - [[Bureau Integration]]
 - [[Account Migration]]
 - [[Visa 3DS]]
 - [[Mastercard e-commerce]]
 - [[Dispute Management]]
-- [[HSM]]
 
 ## Source
 
 - Drive file ID: `1ez_D0sPhfsYQ-v9CrMeZtZD7vXXuQbxVEX_KQHeuKzw`
 - Drive view URL: https://docs.google.com/document/d/1ez_D0sPhfsYQ-v9CrMeZtZD7vXXuQbxVEX_KQHeuKzw/edit
 - Modified: 2026-04-29T08:27:25.503Z
-- Owner: ruth.adetunji@teamapt.com (note: Drive owner field listed Ruth Adetunji on this file even though the prior ATPP standup files were under the same owner)
+- Owner: ruth.adetunji@teamapt.com
