@@ -1,15 +1,15 @@
 ---
-title: Moniepoint Q2 2026 Action Items
+due: 2026-05-15
 type:
   - "commitment"
+owner: Mek
+title: Moniepoint Q2 2026 Action Items
+status: open
+created: "2026-04-29T16:28:11Z"
+summary: "Four open action items for Moniepoint engineering: Cosmos access, Vault query, CI/CD tool replacement (Theo Makola), Card Issuance Slack channel."
+updated: "2026-04-29T16:51:48Z"
 cssclasses:
   - "commitment"
-owner: Mek
-status: open
-due: 2026-05-15
-created: "2026-04-29T16:28:11Z"
-updated: "2026-04-29T16:28:11Z"
-summary: "Four open action items for Moniepoint engineering: Cosmos access, Vault query, CI/CD tool replacement (Theo Makola), Card Issuance Slack channel."
 ---
 
 ## Status: Open
@@ -37,7 +37,7 @@ summary: "Four open action items for Moniepoint engineering: Cosmos access, Vaul
 ---
 
 ### 3. CI/CD Tool Replacement: Theo Makola
-**Owner:** Engineering team  
+**Owner:** Mek  
 **Status:** New tool named **Theo Makola** replaces the AI process Alex has built.  
 **Scope:** CI/CD, AI coding, and related automation workflows.
 
@@ -46,7 +46,7 @@ summary: "Four open action items for Moniepoint engineering: Cosmos access, Vaul
 ---
 
 ### 4. Create Slack Channel: Card Issuance Engineering Leads
-**Owner:** Mek (or delegate to eng ops)  
+**Owner:** Mek  
 **Action:** Create a Slack channel for the card issuance engineering leads team.
 
 **Scope:** Internal coordination channel for [[Card Issuance]] engineering leadership.
@@ -55,6 +55,6 @@ summary: "Four open action items for Moniepoint engineering: Cosmos access, Vaul
 
 ## Dependencies
 - Item 1 (Cosmos) may unblock [[Union Bank]] [[Direct Debit]] service work
-- Item 2 (Vault) informs Item 2's follow-up with Michael Afolabi
-- Item 3 (Theo Makola) requires stakeholder communication once transition is finalized
+- Item 2 (Vault) informs follow-up with Michael Afolabi
+- Item 3 (Theo Makola) requires stakeholder communication and transition planning
 - Item 4 (Slack channel) is independent
