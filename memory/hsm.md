@@ -5,8 +5,8 @@ title: HSM
 aliases:
   - "Hardware Security Module"
 created: "2026-04-23T05:24:49Z"
-summary: "Hardware Security Module — dedicated crypto processor securing card keys across Moniepoint's card infrastructure; works alongside Postillion for card production and authorisation."
-updated: "2026-04-23T05:35:45Z"
+summary: "Hardware Security Module — dedicated crypto processor securing card keys across Moniepoint's card infrastructure; works alongside Postillion for card production and authorisation. Apr 27: Visa test keys loaded on HSM as part of issuer processing readiness."
+updated: "2026-04-29T11:44:38Z"
 cssclasses:
   - "entity"
 ---
@@ -25,9 +25,14 @@ cssclasses:
 
 Per the [[Card Manager Service CMS Specification]] and Card Management System documentation, key types managed: KVP, CVK, IK, CAK, ECK, EMK, KWP.
 
+## Recent activity
+
+- **2026-04-27 ATPP standup**: [[Visa]] test keys **loaded on HSM** as part of issuer processing readiness; issuer public key certificate also generated this week. Source: [[ATPP Daily Standup 20260427 Gemini Notes]].
+
 ## Related
 
 - [[Postillion]]
 - [[Card Manager Service]]
 - [[Card Management System]]
 - [[Source — Cards Team Knowledge Transfer Olufemi to Tracy 2026-04-21]]
+- [[ATPP Daily Standup 20260427 Gemini Notes]]

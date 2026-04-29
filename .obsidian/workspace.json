@@ -183,6 +183,14 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/dispute-management.md",
+    "memory/mastercard-e-commerce.md",
+    "memory/visa-3ds.md",
+    "memory/account-migration.md",
+    "memory/bureau-integration.md",
+    "memory/act-acquirercard-tech.md",
+    "memory/white-plastic-production.md",
+    "memory/emv-data-prep.md",
     "memory/atpp-daily-standup-20260427-gemini-notes.md",
     "memory/briefing-2026-04-29.md",
     "memory/config-heartbeat-reminder-prompt.md",
@@ -201,14 +209,6 @@
     "memory/muhammad-samu.md",
     "memory/muhammad-toqeer.md",
     "memory/project-delivery-and-optimization-realignment-2026-04-23-1455-wat.md",
-    "memory/disbursement-cba-integration-architecture-review-2026-04-22-1930-ist.md",
-    "memory/technical-depth-bar.md",
-    "memory/maybe-equals-reject-framework.md",
-    "memory/moniepoint-country-launch-tech-debt.md",
-    "memory/moniepoint-ai-harness.md",
-    "memory/ai-native-company-strategy.md",
-    "memory/oluwasholabomi-tinubu.md",
-    "memory/john-ojetunde.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }

@@ -1,12 +1,12 @@
 ---
-title: ATPP
 type:
   - "concept"
+title: ATPP
+created: "2026-04-25T12:07:39Z"
+summary: "Acquiring, Transaction Processing & Issuing — TeamApt vertical covering acquirer processing, issuer processing, settlement, EMV data prep, and license-agreement chains for Visa/Mastercard. Cadence: daily standup at ~15:52–16:00 WAT, owner Ruth Adetunji."
+updated: "2026-04-29T11:44:38Z"
 cssclasses:
   - "concept"
-created: "2026-04-25T12:07:39Z"
-updated: "2026-04-25T12:07:39Z"
-summary: "Acquiring, Transaction Processing & Issuing — TeamApt vertical covering acquirer processing, issuer processing, settlement, EMV data prep, and license-agreement chains for Visa/Mastercard. Cadence: daily standup at ~15:52–16:00 WAT, owner Ruth Adetunji."
 ---
 
 ## Definition
@@ -31,7 +31,9 @@ Under [[Project Phoenix]], ATPP folds into the platformization streams:
 - Issuer Processing similarly absorbs in later phases
 - The Apr 22 [[TeamApt-Platformization-Org-Movements (1)|Org Movements brief]] formalises [[Tracy Ojaigho]]'s transition to Head of CI&P Product, taking platform-level ownership of CMS, EMV prep, card dispute, 3DS, and Authorization Engine across markets.
 
-## Recurring topics observed (Apr 20 standup)
+## Recurring topics observed
+
+### Apr 20 standup
 
 - Acquiring + settlement
 - SLA standardization (legal team)
@@ -42,9 +44,25 @@ Under [[Project Phoenix]], ATPP folds into the platformization streams:
 - Acquirer-processing customer pursuit (Q2 conversion target)
 - Dashboard search-filter delivery
 
+### Apr 27 standup
+
+- Issuer processing: issuer public key cert generated + [[Visa]] test keys loaded on [[HSM]]
+- Card data: 2 generated, awaiting [[EMV Data Prep]] output for [[White Plastic Production]]
+- Visa global testing: form completion with [[Money Point]]; cards dispatched to Singapore
+- CMS security/UI: documentation still unavailable; revised partner timeline end of May
+- [[Mastercard e-commerce]]: documentation review pending; onboarding draft underway
+- [[Visa 3DS]]: pilot transaction simulation needed; internal compliance review completed
+- [[Dispute Management]]: sprint officially kickstarted
+- [[ACT (Acquirer/Card Tech)|ACT]] enhancements: deployed including currency conversion + user room management
+- [[Bureau Integration]]: UAT progressing; production move expected end of day
+- [[Account Migration]]: two-batch approach decided; account deactivation underway
+
+Source: [[ATPP Daily Standup 20260427 Gemini Notes]].
+
 ## Related
 
 - [[Project Phoenix]]
 - [[Card Issuance & Processing Platform]]
 - [[ACT (Acquirer/Card Tech)]]
 - [[ATPP Daily Standup - 2026-04-20 15:52 WAT]]
+- [[ATPP Daily Standup 20260427 Gemini Notes]]
