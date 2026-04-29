@@ -183,6 +183,7 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/juliana-switch-daily-catchup-2026-04-28-1122-wat.md",
     "memory/vpn-connectivity.md",
     "memory/direct-to-bank-daily-standup-2026-04-29-0826-wat.md",
     "memory/sla.md",
@@ -208,7 +209,6 @@
     "memory/idempotency.md",
     "memory/disbursement-service.md",
     "memory/modify-atlas-integration-service.md",
-    "memory/first-bank.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
