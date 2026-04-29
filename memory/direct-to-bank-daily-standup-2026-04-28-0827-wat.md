@@ -1,20 +1,20 @@
 ---
-title: "Direct to Bank Daily standup - 2026-04-28 08:27 WAT"
 type:
   - "source"
+title: "Direct to Bank Daily standup - 2026-04-28 08:27 WAT"
+created: "2026-04-29T11:46:03Z"
+summary: "Apr 28 D2B standup — Bar Pay DD + transaction manager services initiated, vulnerability remediation reframed to critical/high only, UBA server deployment slipped a week, Zen DG into 3rd week, Ecobank waiting on bank signature, Keystone end-to-end test pending. Decision: ticket-status updates owned by ticket-owner not delivery lead."
+updated: "2026-04-29T11:47:01Z"
 cssclasses:
   - "source"
 source_path: Direct to Bank _ Daily stand up – 2026_04_28 08_27 WAT – Notes by Gemini.md
 retention_label: fs
 retention_rationale: "D2B standup summary — structured Key Updates capture the bank-by-bank progress concisely; raw worth keeping for traceability and future cross-bank narrative continuity but not material for semantic-search retrieval beyond what's in the source page."
-created: "2026-04-29T11:46:03Z"
-updated: "2026-04-29T11:46:03Z"
-summary: "Apr 28 D2B standup — Bar Pay DD + transaction manager services initiated, vulnerability remediation reframed to critical/high only, UBA server deployment slipped a week, Zen DG into 3rd week, Ecobank waiting on bank signature, Keystone end-to-end test pending. Decision: ticket-status updates owned by ticket-owner not delivery lead."
 ---
 
 ## Summary
 
-Direct to Bank daily standup on Apr 28, 2026 (08:27 WAT) covered service status updates, bank testing prioritization, and task ownership accountability. System services successfully initiated and pending vulnerabilities identified (Bar Pay direct debits + transaction manager services now active). Teams prioritized [[Polaris Bank]] settlement testing and [[Keystone Bank]] direct debit validations; [[UBA]] deployment slipped a week pending internal upgrades. Management mandated daily status updates owned by the ticket assignee (not the project delivery lead).
+Direct to Bank daily standup on Apr 28, 2026 (08:27 WAT) covered service status updates, bank testing prioritization, and task ownership accountability. System services successfully initiated and pending vulnerabilities identified ([[Abar Pay]] direct debits + transaction manager services now active). Teams prioritized [[Polaris Bank]] settlement testing and [[Keystone Bank]] direct debit validations; [[UBA]] deployment slipped a week pending internal upgrades. Management mandated daily status updates owned by the ticket assignee (not the project delivery lead).
 
 ## Key Points
 
@@ -25,8 +25,8 @@ Direct to Bank daily standup on Apr 28, 2026 (08:27 WAT) covered service status 
 - **[[Polaris Bank]]**: APIs tested; awaiting peer test with [[Wally]]
 - **[[Keystone Bank]]**: end-to-end test on test environment first; deployment targeted for **end of next week**
 - **[[Union Bank]] direct debit**: mandation testing and transaction simulation phase; **new private key received**
-- **[[Bar Pay]] direct debits**: base URL fix and transfer point issue **resolved**; testing expected soon
-- **Service status**: system services successfully initiated; Bar Pay direct debits + transaction manager services now **active**
+- **[[Abar Pay]] direct debits** (transcribed as "Bar Pay" in source): base URL fix and transfer point issue **resolved**; testing expected soon
+- **Service status**: system services successfully initiated; Abar Pay direct debits + transaction manager services now **active**
 
 ## Decisions
 
@@ -41,7 +41,7 @@ Direct to Bank daily standup on Apr 28, 2026 (08:27 WAT) covered service status 
 - [[Polaris Bank]]
 - [[Keystone Bank]]
 - [[Union Bank]]
-- [[Bar Pay]]
+- [[Abar Pay]]
 - [[Wally]]
 
 ## Concepts
@@ -58,3 +58,7 @@ Direct to Bank daily standup on Apr 28, 2026 (08:27 WAT) covered service status 
 - Drive view URL: https://docs.google.com/document/d/1a48cCfuwfrVgkF7RVHfq1EO6ddKXV1z29Hrv3vxfmko/edit
 - Modified: 2026-04-28T08:14:02.501Z
 - Owner: khadijat.musa@teamapt.com
+
+## Naming notes
+
+- Source transcript renders the partner name as "Bar Pay" — treated as a Gemini transcription artifact for [[Abar Pay]] (the established D2B Direct Debit partner). Linked to [[Abar Pay]] accordingly.
