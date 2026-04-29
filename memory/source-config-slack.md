@@ -4,10 +4,10 @@ type:
 title: source-config-slack
 created: 2026-04-11
 summary: "Slack signal-source configuration: Tier 1 channels, user DM target, directives. last_processed 2026-04-26T10:10:00Z (11:10 WAT). 11:10 WAT Apr 26 skim-tick: 0 Tier 1 deltas (all 5 channels silent in 1h window); 0 DM deltas; 0 keyword deltas. Sunday morning quiet on Slack path. CoralPay ZIB cycle silent 9h11m+ (no novel Immediate trigger). Access DD Mandate ~1h36m active (TDSD-6731 filed 10:18 WAT — Jira-side disambiguator)."
-updated: "2026-04-29T09:21:19Z"
+updated: "2026-04-29T10:24:52Z"
 cssclasses:
   - "source-config"
-last_processed: "2026-04-29T09:15:00Z"
+last_processed: "2026-04-29T10:14:00Z"
 ---
 
 
