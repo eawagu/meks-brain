@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Polaris Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS routing. D2B Apr 22: APIs failing/unstable; war room. Apr 28: APIs tested, awaiting peer test with Wally."
-updated: "2026-04-29T11:50:39Z"
+summary: "Nigerian bank on Moniepoint's ATS routing. D2B Apr 22: APIs failing/unstable; war room. Apr 28: APIs tested, awaiting peer test with Wally. Apr 28 Juliana Switch catchup: sentiment APIs functional, awaiting final QA — follow-up assigned to Ali/Wally."
+updated: "2026-04-29T22:57:15Z"
 cssclasses:
   - "entity"
 ---
@@ -29,9 +29,13 @@ VPN restored Apr 8, but settlement issue ([[TDSD-6493]]) filed Apr 10 with zero 
 
 Earlier: Prosper (Polaris) requested stakeholders meeting to review ongoing projects (Oct 2025), wanting CFO present — flagged by [[Emeka Awagu]] as unusual.
 
+## 2026-04-28 — Juliana Switch Daily Catchup (11:22 WAT) — Sentiment API Track
+
+Distinct from the DD/fund-settlement and Name-Inquiry/Transfer API tracks: Polaris **sentiment APIs** are reported **functional** and **awaiting final QA verification**. Follow-up to confirm testing completion is assigned to **Ali** and **Wally** — Wally cross-references the Apr 28 D2B peer-test contact, suggesting Wally is the bridging Polaris-side QA/testing peer across both tracks. Source: [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]].
+
 ## Pattern
 
-Polaris's "extend until next week" response on the DD/fund-settlement SLA has now been stated **at least three times** (Apr 16, Apr 22 implicit, Apr 23 explicit) without a concrete delivery. Concurrent with Apr 22's API instability discovery (Name-Inquiry + Transfer both failing), this is now a multi-track durable failure, not just a delay pattern. Apr 28 update suggests the API instability has narrowed to a peer-test step — incremental progress on the API track even while the pattern note above stands on the SLA track.
+Polaris's "extend until next week" response on the DD/fund-settlement SLA has now been stated **at least three times** (Apr 16, Apr 22 implicit, Apr 23 explicit) without a concrete delivery. Concurrent with Apr 22's API instability discovery (Name-Inquiry + Transfer both failing), this is now a multi-track durable failure, not just a delay pattern. Apr 28 update suggests the API instability has narrowed to a peer-test step — incremental progress on the API track even while the pattern note above stands on the SLA track. Apr 28 Juliana Switch catchup adds a third concurrent track (sentiment APIs functional, awaiting QA) — Polaris activity surface is widening, with two of three tracks (peer-test API, sentiment API QA) now in advanced testing phases.
 
 ## Related
 - [[Sterling + Polaris — Routes Degraded]]
@@ -40,3 +44,4 @@ Polaris's "extend until next week" response on the DD/fund-settlement SLA has no
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
 - [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]
+- [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]]

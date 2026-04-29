@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Union Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — 7 RC91 cycles in 9 days (Apr 12–20). Apr 27: DD blocked by name-inquiry API 'unauthorized' on 10-digit account; NSS configured. Apr 28: mandation/transaction-simulation phase, NEW PRIVATE KEY received."
-updated: "2026-04-29T11:50:39Z"
+summary: "Nigerian bank on Moniepoint's ATS and Direct Debit routing — 7 RC91 cycles in 9 days (Apr 12–20). Apr 27: DD blocked by name-inquiry API 'unauthorized' on 10-digit account; NSS configured. Apr 28: mandation/transaction-simulation phase, NEW PRIVATE KEY received. Apr 28 Juliana Switch catchup decision: user onboarding to use test-phase users first, production-ready users requested later."
+updated: "2026-04-29T22:57:15Z"
 cssclasses:
   - "entity"
 ---
@@ -35,6 +35,10 @@ cssclasses:
 - **Direct Debit** still in **mandation testing and transaction simulation phase**.
 - **NEW PRIVATE KEY received** from the bank — likely the unblock for the Apr 27 'unauthorized' name-inquiry-API issue (token not authenticating). Validates the Apr 27 inference that the auth issue was a credential issue, not an API logic issue.
 - Source: [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]].
+
+## 2026-04-28 — Juliana Switch Daily Catchup (11:22 WAT) — User Onboarding Decision
+
+**Decision:** Union Bank user onboarding implementation to use **test-phase users first**, with **production-ready users requested later**. Bridging note: this sequencing decision applies above the DD-credential / private-key thread (Apr 27/28 D2B) and the NSS portal-configuration thread (Apr 27 admin users shared). Action recorded: Union Bank admin users to be **shared with [[June Johnson]]** and [[Jira]] updated. Source: [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]].
 
 ## ATS RC91 — Accumulating Pattern (7 cycles in 9 days)
 
@@ -84,3 +88,4 @@ Recurring settlement batch failures caused by weekend/holiday ₦20M limit ([[TD
 - [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
 - [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
 - [[Direct to Bank Daily standup - 2026-04-28 08:27 WAT]]
+- [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]]

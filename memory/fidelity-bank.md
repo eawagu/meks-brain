@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Fidelity Bank
 created: 2026-04-11
-summary: "Nigerian bank — multi-front operational stress in Apr 2026: RC91 P1, DD null mandate errors, AptPay UAT rescheduled, ACT 'Fidencia' adoption strategy. On 2026-04-27: account transfer SLA awaiting Dennis + Felix signatures; dev environment progressing toward UAT by 30 April; Direct Debit training tentatively 4 May; NSS blocked by account-switch SLA; acquirer-processing engagement officially initiating."
-updated: "2026-04-27T17:49:43Z"
+summary: "Nigerian bank — multi-front operational stress in Apr 2026: RC91 P1, DD null mandate errors, AptPay UAT rescheduled, ACT 'Fidencia' adoption strategy. On 2026-04-27: account transfer SLA awaiting Dennis + Felix signatures; dev environment progressing toward UAT by 30 April; Direct Debit training tentatively 4 May; NSS blocked by account-switch SLA; acquirer-processing engagement officially initiating. Apr 28 Juliana Switch catchup: transfer integration in UAT + network connectivity coordination phase."
+updated: "2026-04-29T22:57:14Z"
 cssclasses:
   - "entity"
 ---
@@ -36,9 +36,15 @@ Multiple Fidelity tracks discussed:
 - **Acquirer processing service** — bank has shown interest. [[Adeyinka Babalola]] to share commercials and scheme nomination templates so the bank can officially initiate.
 - Source: [[Project delivery and optimization realignment - 2026-04-27 - Transcript]].
 
+## 2026-04-28 — Juliana Switch Daily Catchup (11:22 WAT)
+
+- **Transfer integration** — Fidelity transfer is in active UAT and network connectivity coordination phase alongside [[Zone]]. Cross-references the Apr 27 'UAT by 30 April' commitment from the Project Delivery & Optimization Realignment session — Apr 28 catchup confirms continued progression on that track.
+- Source: [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]].
+
 ## Sources
 
 - [[review-queue]]
 - [[ATPP Daily Standup - 2026-04-20 15:52 WAT]]
 - [[Project delivery and optimization realignment - 2026-04-27 - Transcript]]
 - [[Project delivery and optimization realignment - 2026-04-27 - Notes]]
+- [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]]

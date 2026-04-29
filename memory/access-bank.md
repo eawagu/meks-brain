@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Access Bank
 created: 2026-04-11
-summary: "Nigerian bank on Moniepoint's ATS and DD routing — multiple concurrent failure tracks. D2B Apr 22: Coral Pay × Access Bank integration blocked by SLA pricing dispute; Interbank Transfer SLA awaiting Access Bank sign-off."
-updated: "2026-04-25T11:47:32Z"
+summary: "Nigerian bank on Moniepoint's ATS and DD routing — multiple concurrent failure tracks. D2B Apr 22: Coral Pay × Access Bank integration blocked by SLA pricing dispute; Interbank Transfer SLA awaiting Access Bank sign-off. Apr 28 Juliana Switch catchup: transfer progress remains stagnant despite a signed agreement."
+updated: "2026-04-29T22:57:15Z"
 cssclasses:
   - "entity"
 ---
@@ -25,9 +25,14 @@ Nigerian bank on [[Moniepoint]]'s [[ATS]] and [[Direct Debit]] routing. Multiple
 
 [[Mariam Davies]] requested a status update from Access Bank. [[Opeyemi Animashaun]] stated there was no update but committed to calling Access Bank contacts within 30 minutes of the meeting to follow up. Source: [[note_2026-04-23T13-53-37-857Z]].
 
+### 2026-04-28 — Juliana Switch Daily Catchup (11:22 WAT)
+
+Access Bank **transfer progress remains stagnant despite a signed agreement** — track noted under Partnership/Agreements at the standup. The signed-agreement-but-stalled framing reinforces the long-running pattern: SLA sign-off no longer the gating step for forward motion. Cross-references the Apr 22 Interbank Transfer SLA sign-off thread (which appears to have advanced) and the Apr 23 "no update" thread (which has not). Source: [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]].
+
 ## Related
 - [[review-queue]]
 - [[Coral Pay]]
 - [[SLA sign-off blocker]]
 - [[Direct to Bank Daily standup - 2026-04-22 08:21 WAT]]
 - [[note_2026-04-23T13-53-37-857Z]]
+- [[Juliana Switch Daily Catchup - 2026_04_28 11_22 WAT - Notes by Gemini]]

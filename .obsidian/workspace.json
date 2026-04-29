@@ -183,6 +183,7 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/juliana-switch-daily-catchup-20260428-1122-wat-notes-by-gemini.md",
     "memory/moniepoint-q2-2026-action-items.md",
     "memory/juliana-switch-daily-catchup-2026-04-28-1122-wat.md",
     "memory/vpn-connectivity.md",
@@ -208,7 +209,6 @@
     "memory/kafka-partitioning.md",
     "memory/outbox-pattern.md",
     "memory/idempotency.md",
-    "memory/disbursement-service.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
