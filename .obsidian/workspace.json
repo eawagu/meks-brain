@@ -183,6 +183,9 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/sla.md",
+    "memory/vulnerability-remediation.md",
+    "memory/zen-dg.md",
     "memory/direct-to-bank-daily-standup-2026-04-28-0827-wat.md",
     "memory/dispute-management.md",
     "memory/mastercard-e-commerce.md",
@@ -206,9 +209,6 @@
     "memory/first-bank.md",
     "memory/emmanuella-edeh.md",
     "memory/temitayo-akinmola.md",
-    "memory/benjamin-ononogbu.md",
-    "memory/muhammad-samu.md",
-    "memory/muhammad-toqeer.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
