@@ -183,6 +183,14 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/briefing-2026-04-30.md",
+    "memory/sentiment-api.md",
+    "memory/card-present-integration.md",
+    "memory/user-acceptance-testing.md",
+    "memory/pure-for-momentum.md",
+    "memory/first-city-monument-bank.md",
+    "memory/zone.md",
+    "memory/tulu.md",
     "memory/juliana-switch-daily-catchup-20260428-1122-wat-notes-by-gemini.md",
     "memory/moniepoint-q2-2026-action-items.md",
     "memory/juliana-switch-daily-catchup-2026-04-28-1122-wat.md",
@@ -201,14 +209,6 @@
     "memory/white-plastic-production.md",
     "memory/emv-data-prep.md",
     "memory/atpp-daily-standup-20260427-gemini-notes.md",
-    "memory/briefing-2026-04-29.md",
-    "memory/config-heartbeat-reminder-prompt.md",
-    "memory/briefing-2026-04-26.md",
-    "memory/sterling-bank-sla-clause-55.md",
-    "memory/tsq-integration.md",
-    "memory/kafka-partitioning.md",
-    "memory/outbox-pattern.md",
-    "memory/idempotency.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
