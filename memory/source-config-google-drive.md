@@ -4,11 +4,12 @@ type:
 title: source-config-google-drive
 created: "2026-04-12T20:46:37Z"
 summary: "Google Drive signal-source scoped to 'Notes by Gemini' files only. Handling chain: detect → download → split transcript/non-transcript → process non-transcript layer as in-tick heartbeat source + (if transcript present) dispatch transcript to ingress via capture_note(name=drive-title). last_processed held at 2026-04-20T16:09:00Z pending Phase-2 backlog (22 files). 06:09 WAT Apr 25 briefing-tick: 0 genuinely-new files; same 3 HoE/Phoenix files predate cutoff. Backlog unchanged."
-updated: 2026-04-30
+updated: 2026-05-01
 cssclasses:
   - "source-config"
-last_processed: "2026-04-30T17:14:00Z"
+last_processed: "2026-05-01T05:13:00Z"
 ---
+
 
 
 
