@@ -8,7 +8,7 @@ aliases:
   - "Habari"
 created: 2026-04-11
 summary: "Nigerian payment processor — GTBank's acquiring arm. **3rd RC91 P1 cycle in 5 days now active 4h28m+ at 09:09 WAT Apr 29** (Afeez 04:41 WAT start, single-track Slack-only — no Jira, no email bilateral, zero Slack messages since initial post — record-duration outlier vs prior 25m/7m envelope). Trigger #2 (>2h) crossed; absence-of-signal Immediate firing; re-dispatched combined Slack DM with Ecobank fresh P1. Situation-creation threshold firmly crossed."
-updated: "2026-04-29T08:26:50Z"
+updated: "2026-05-01T05:43:52Z"
 cssclasses:
   - "entity"
 ---
@@ -58,9 +58,23 @@ From Apr 24 cycle: Olamide's Identified Cause \"From Habari\" indicates TeamApt 
 
 **2026-04-29 — third RC91 P1 cycle in 5 days, record-duration outlier still active at 09:09 WAT.** [[Afeez Kazeem]] structured P1 post in #teamapt-tech-operations at 05:39 WAT Apr 29 — Slack `slack_send_message` actual filing time slightly after the start: \"Product: Switch, Incident Summary: P1: Habari RC 91 Failures, Identified Cause: From the bank, Resolution Action: Escalated to Habari for review, Start Time 04:41 AM, Ongoing.\" Briefing-2026-04-29 B1 dispatched Immediate at 06:10 WAT (1h29m active at briefing tick). **At 09:09 WAT post-briefing tick the cycle is still active 4h28m+ with zero subsequent Slack messages on Habari since the original 04:41 WAT post — single-track Slack-only filing pattern continues (no Jira ticket, no email bilateral with Habari/GTBank).** Trigger #2 (>2h) crossed 2h28m ago; absence-of-signal Immediate rule (1h no update) firing. Re-dispatched as combined Immediate Slack DM at 09:09 WAT alongside Ecobank fresh P1.
 
-This cycle's duration is a record outlier on Habari: prior cycles were Apr 24 25min bank-resolved, Apr 25 7min VPN-flap (RC91 persisted independently). 4h28m+ is ~10× the prior worst-case envelope. Two interpretations remain plausible: (a) silently bank-resolved without Slack closure post — consistent with Wema/UBA implicit-resolve historical pattern on tracked banks, where P1s self-resolve bank-side without human closure; (b) actually stuck in record-duration cycle pending Habari/GTBank engagement. Briefing B1 already framed both paths; the new 09:09 WAT data point is the additional 3h of silence since briefing dispatch.
+This cycle's duration is a record outlier on Habari: prior cycles were Apr 24 25min bank-resolved, Apr 25 7min VPN-flap (RC91 persisted independently). 4h28m+ is ~10× the prior worst-case envelope. Two interpretations remain plausible: (a) silently bank-resolved without Slack closure post — consistent with Wema/UBA implicit-resolve historical pattern on tracked banks, where P1s self-resolve bank-side without human closure; (b) actually stuck in record-duration cycle pending Habari/GTBank engagement. Briefing B1 already framed both paths; the new 09:09 WAT data point is the additional 3h of silence since briefing dispatch. Per briefing-2026-04-30 B6 18:10 WAT update, Habari was 37h28m silent (no Slack/email/Jira signal across overnight) — silence dominant, consistent with implicit silent-resolved interpretation.
 
-**3rd Habari/GTB-route RC91 cycle in 5 days** (Apr 24 / Apr 25 / Apr 29) — situation-creation threshold from Apr 24 directive is now firmly crossed. Briefing-2026-04-29 B1 already includes \"considering creating a Habari RC91 situation page\" as part of recommended action; the user disposition on B1 will determine whether the situation page spins up. Pattern signal strengthens: 3 cycles in 5 days, increasing duration trajectory (25m → 7m + RC91-persistent → 4h28m+), single-track-Slack-only filing on Apr 29 (no Jira ticket — same regression observed on Apr 27 Access cycles 10/11 + Apr 28 FCMB).
+**3rd Habari/GTB-route RC91 cycle in 5 days** (Apr 24 / Apr 25 / Apr 29) — situation-creation threshold from Apr 24 directive is now firmly crossed.
+
+## 2026-04-30 — Fourth RC91 P1 cycle in 7 days, silent-resolved overnight
+
+**2026-04-30 18:11 WAT — fourth Habari RC91 P1 cycle filed by Qazim, posted 5 minutes AFTER briefing-2026-04-30 18:09 WAT pre-overnight tick was finalized — narrowly missed yesterday's briefing capture.** [[Qazim Adedigba]] structured Slack post in #teamapt-tech-operations: "Product: Switch, Incident Summary: P1: Habari RC 91 Failures, Identified Cause: From the partner, Resolution Action: The issue was escalated to the partner for investigation and resolution, Start Time 6:11 PM, Ongoing." Single-track Slack-only filing pattern continues — no Jira ticket, no email bilateral with Habari/GTBank.
+
+**Implicit silent-resolved overnight per Hourly Report 22:49 WAT Apr 30** — Qazim hourly report `19ddf84ce7d7422b`: "13 of 17 routes are operational. Coralpay banks (FBN, PVB, and SBP) were turned off due to business decisions. Ecobank transactions are failing with RC 91" — only 4 routes off (Coralpay 3 + Ecobank); **Habari NOT in turned-off list**, implicit operational again. End-time inferred between 18:11 WAT (start) and ≤22:49 WAT (operational by overnight handover) — duration ≤4h38m, **consistent with Apr 29 4h28m+ silent-resolve precedent** (silent-resolve pattern strengthens to 3 consecutive cycles).
+
+**4-cycle pattern across 7 days:**
+- Apr 24: 25 min bank-resolved (explicit closure)
+- Apr 25: 7 min VPN flap with RC91 persistence (explicit closure on VPN, RC91 silent-resolved)
+- Apr 29: 4h28m+ silent-resolved (no closure post)
+- Apr 30: ≤4h38m silent-resolved (no closure post)
+
+Single-track Slack-only filing pattern (no Jira, no email bilateral) is now stable across all 4 cycles. Bank/partner-side resolution without human closure post is the established disposition. **Situation-page creation directive ("if 2nd RC91 cycle within 48h spin up situation page") long since crossed.** Briefing-2026-05-01 B3 surfaces situation-page creation as Decision item with high confidence — recommended title `[[HabariPay — RC91 Recurring]]` or analogous to capture 4-cycle pattern, single-track-Slack-only filing trend, and silent-resolve bank-side dispositioning.
 
 ## Other References
 
