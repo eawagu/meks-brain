@@ -183,6 +183,7 @@
   },
   "active": "9f9284ba647d5068",
   "lastOpenFiles": [
+    "memory/briefing-2026-05-01.md",
     "memory/briefing-2026-04-30.md",
     "memory/sentiment-api.md",
     "memory/card-present-integration.md",
@@ -208,7 +209,6 @@
     "memory/act-acquirercard-tech.md",
     "memory/white-plastic-production.md",
     "memory/emv-data-prep.md",
-    "memory/atpp-daily-standup-20260427-gemini-notes.md",
     "mcp-server/src/tools/write.ts.tmp.19284.1776320750887"
   ]
 }
