@@ -1,12 +1,12 @@
 ---
-title: Business Impact Analysis
 type:
   - "concept"
+title: Business Impact Analysis
+created: "2026-04-20T05:37:26Z"
+summary: Structured assessment identifying critical business processes and their disruption tolerance (RPO + RTO). Foundational input to ISO 22301 business continuity planning. Apr 30 ISO audit close-out flagged the need to ensure process owners are familiar with BIA methodology as an explicit remediation step.
+updated: "2026-05-02T21:33:23Z"
 cssclasses:
   - "concept"
-created: "2026-04-20T05:37:26Z"
-updated: "2026-04-20T05:37:26Z"
-summary: "Structured assessment of process criticality, Recovery Point Objective, and Recovery Time Objective; TeamApt's Apr 2026 BIA identified 7 Critical, 5 Major, 4 Moderate, 14 Minor processes."
 ---
 
 ## Overview
@@ -37,5 +37,10 @@ Per the [[TeamApt Management Review 19_04_2026]]:
 - Major: 5
 - Critical: 7
 
+## Apr 30, 2026 — ISO Audit close-out next-step
+
+The Apr 30 [[ISO Audit]] close-out session flagged BIA familiarity as one of the 10 next-step remediation actions: *"Ensure process owners are familiar with the Business Impact Analysis methodology."* Source: [[ISO Audit-Close out session – 2026_04_30 16_27 WAT – Notes by Gemini]].
+
 ## Sources
 - [[TeamApt Management Review 19_04_2026]]
+- [[ISO Audit-Close out session – 2026_04_30 16_27 WAT – Notes by Gemini]]

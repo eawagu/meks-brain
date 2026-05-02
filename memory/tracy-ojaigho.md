@@ -3,8 +3,8 @@ type:
   - "entity"
 title: Tracy Ojaigho
 created: 2026-04-11
-summary: Head of CI&P Product — Product Leader for the Card Issuance & Processing Platform at Moniepoint Technologies UK / IPCo. Co-lead with Olufemi Davies on Cards. Hosted the formal CI&P kick-off meeting on 2026-04-27; owns Project Governance setup workstream.
-updated: "2026-04-28T16:44:55Z"
+summary: "Head of CI&P Product at Moniepoint platform organization (post-Phoenix); previously led TeamApt's TPP Department. Co-leads Cards domain with Olufemi Davies (Tracy: central platform Product; Femi: MFB Cards Business). Hosts CI&P-team kick-offs and AI-product-process deep-dives bridging Card Issuance with emerging AI work."
+updated: "2026-05-02T21:33:22Z"
 cssclasses:
   - "entity"
 ---
@@ -46,6 +46,10 @@ Under Phoenix, Tracy is **co-lead with [[Olufemi Davies]]** on the Cards domain:
 Tracy and [[Emeka Awagu]] formalized the platform takeover of the existing [[MFB Cards Team]] under the [[Strike Team + Continuity Operating Model]]. Existing MFB engineers maintain the legacy stack; a strike team builds the new central [[Card Management System]].
 
 ## Recent Actions / Signals
+
+### 2026-04-30 — AI product process + Card Issuance (Drive doc)
+
+Hosted/owned a Drive document titled *AI product process + Card Issuance* (14:59 WAT). Stub Gemini-notes file landed in ingress 2026-04-30 with Drive metadata only; full transcript/document content lives in the Drive doc (file id 1GGn7qQ6GK65sISNs43DoaaQOgmyxqLo4V54H6jp66FM, modified 2026-04-30T16:03:22Z). Topic intersects [[Card Issuance]] domain with emerging [[AI product process]] work — likely product/process integration thinking that complements the [[Project Phoenix]] CI&P platform build. Source: [[AI product process + Card Issuance - 2026_04_30 14_59 WAT - Notes by Gemini]].
 
 ### 2026-04-27 — Project Phoenix CI&P Kick Off Meeting (host)
 
@@ -104,3 +108,4 @@ These capabilities now feed directly into the Phoenix CI&P platform she now lead
 - [[source — Project Phoenix Org Structure Changes (March 2026)]]
 - [[TeamApt-Platformization-Org-Movements (1)]] — Frank's Apr 22, 2026 brief formalising role conversion
 - [[Project Phoenix - CI&P kick off meeting - 2026-04-27]]
+- [[AI product process + Card Issuance - 2026_04_30 14_59 WAT - Notes by Gemini]]
