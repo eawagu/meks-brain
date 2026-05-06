@@ -1035,4 +1035,299 @@ export const batchUpsertPages: ToolDef = {
   },
 };
 
-export const writeTools = [createPage, updatePage, deletePage, finalizeIngest, batchUpsertPages, captureNote, captureReminder];
+
+// ─── update_page_frontmatter ──────────────────────────────────
+// Frontmatter-only update: body never traverses the caller's context.
+//
+// Motivation: `update_page` and `update_config` are full-body-replace by
+// contract. The caller has to round-trip the entire body through its own
+// context window to change a single field. When the caller is an LLM with
+// finite context, intermittent body truncation has happened (config-salience
+// commit 4d004d5 lost 222 lines from a 246-line file in a single update).
+// This tool keeps the body server-side: it reads the existing body from
+// Postgres, merges new frontmatter, and rewrites the file with the original
+// body. The LLM never holds the body, so it cannot truncate it.
+//
+// Embedding cost: re-embedding skipped unless `summary` changed (title can't
+// change here, body is unchanged). Frees up the embedding budget for cases
+// where it's actually needed.
+
+export const updatePageFrontmatter: ToolDef = {
+  name: "update_page_frontmatter",
+  description:
+    "Update only the frontmatter (and optionally summary) of an existing brain page. The body is read server-side and preserved unchanged — the caller never sends or receives the body, so this is safe for routine field updates (last_processed, status, summary) where update_page would risk body truncation under context pressure. Embedding is regenerated only when summary changes. Validates merged frontmatter against the schema. Use this instead of update_page whenever body content is not changing.",
+  schema: z.object({
+    title: z.string().describe("Page title (exact match to existing page)"),
+    frontmatter_updates: z
+      .record(z.any())
+      .describe(
+        "Frontmatter fields to merge with existing frontmatter (e.g., {last_processed: '2026-05-06T18:00:00Z'} or {status: 'superseded'})"
+      ),
+    summary: z
+      .string()
+      .optional()
+      .describe(
+        "Updated summary (omit to keep existing). When changed, embedding is regenerated; otherwise the embedding is left in place."
+      ),
+  }),
+  accessLevel: "write",
+  handler: async (params) => {
+    const { title, frontmatter_updates, summary } = params;
+
+    // Fetch existing page WITH body — we need the body to rewrite the file
+    // unchanged on disk, but it never leaves this server-side handler.
+    const existing = await query(
+      "SELECT id, file_path, type, frontmatter, body, summary FROM pages WHERE title = $1 AND deleted = FALSE",
+      [title]
+    );
+    if (existing.rows.length === 0) {
+      throw new Error(`Page "${title}" not found`);
+    }
+
+    const page = existing.rows[0];
+    const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+
+    // Merge frontmatter — same shape as update_page's merge to keep behavior
+    // consistent (callers can switch from update_page to update_page_frontmatter
+    // without observable change to the resulting frontmatter).
+    const mergedFm: Record<string, any> = {
+      ...page.frontmatter,
+      ...frontmatter_updates,
+      updated: now,
+    };
+
+    const types = mergedFm.type || page.type;
+    const ptc = await validateTypes(types);
+    validateFrontmatter(mergedFm, types, ptc);
+
+    // Effective summary: explicit `summary` arg wins; otherwise keep existing.
+    // Matches update_page behavior so the two tools agree on summary semantics.
+    const effectiveSummary = summary ?? page.summary;
+    if (effectiveSummary) mergedFm.summary = effectiveSummary;
+
+    // Write file with the EXISTING body — buildMarkdown rebuilds the YAML
+    // block + appends body unchanged.
+    const filePath = path.join(config.memoryPath, page.file_path);
+    const markdown = buildMarkdown(mergedFm, page.body);
+    await fs.writeFile(filePath, markdown, "utf-8");
+
+    // Decide whether to regenerate the embedding. The embedding text is
+    // title + summary + body (see embeddings.ts/embeddingText). Title can't
+    // change via this tool and body is preserved, so summary is the only
+    // input that can shift the embedding. Skip regen when summary unchanged.
+    const summaryChanged = effectiveSummary !== page.summary;
+
+    if (summaryChanged) {
+      const embText = embeddingText(title, effectiveSummary, page.body);
+      const embedding = await embed(embText);
+      const embeddingLiteral = `[${embedding.join(",")}]`;
+      await query(
+        `UPDATE pages SET
+           frontmatter = $1,
+           summary = $2,
+           embedding = $3::vector,
+           updated_at = $4,
+           indexed_at = NOW()
+         WHERE id = $5`,
+        [mergedFm, effectiveSummary, embeddingLiteral, now, page.id]
+      );
+    } else {
+      await query(
+        `UPDATE pages SET
+           frontmatter = $1,
+           summary = $2,
+           updated_at = $3,
+           indexed_at = NOW()
+         WHERE id = $4`,
+        [mergedFm, effectiveSummary, now, page.id]
+      );
+    }
+
+    await gitCommit(`update-frontmatter: ${title}`);
+
+    return {
+      id: page.id,
+      title,
+      file_path: page.file_path,
+      embedding_regenerated: summaryChanged,
+      message: `Updated frontmatter for "${title}"${summaryChanged ? " (embedding regenerated)" : ""}`,
+    };
+  },
+};
+
+
+// ─── append_to_page_section ───────────────────────────────────
+// Server-side body patch for appending content to a named section.
+//
+// Motivation: tools/uses that need to grow a list inside a known section
+// (Tuning Log tuples in config-salience, Deltas in situation pages, briefing
+// instrumentation rows) currently have to round-trip the entire body through
+// the caller's context to do the append. This tool moves the read+patch+write
+// loop server-side so the caller never holds the body — the LLM sends the
+// new chunk only.
+//
+// Insertion semantics: content is appended at the END of the section, defined
+// as "before the next heading of same-or-higher level, or EOF if none". A
+// blank-line separator is inserted between existing content and the new chunk
+// so the file stays Markdown-clean across many appends.
+
+/**
+ * Patch `body` by appending `content` at the end of the section identified by
+ * the exact line `sectionHeading` (e.g. "## Tuning Log"). End of section is
+ * the line before the next heading of same-or-higher level, or EOF.
+ *
+ * Throws when the section is not found — silently appending at EOF would
+ * mask author typos in section_heading and lead to data ending up in the
+ * wrong place.
+ */
+function appendToSection(
+  body: string,
+  sectionHeading: string,
+  content: string
+): string {
+  const headingMatch = sectionHeading.match(/^(#+)\s+/);
+  if (!headingMatch) {
+    throw new Error(
+      `Invalid section_heading "${sectionHeading}" — must start with one or more '#' characters followed by a space and the section title (e.g. "## Tuning Log")`
+    );
+  }
+  const targetLevel = headingMatch[1].length;
+
+  const lines = body.split("\n");
+  const headingTrimmed = sectionHeading.trim();
+  let sectionStart = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].trim() === headingTrimmed) {
+      sectionStart = i;
+      break;
+    }
+  }
+  if (sectionStart < 0) {
+    throw new Error(
+      `Section heading "${sectionHeading}" not found in page body — append rejected to surface authoring typos`
+    );
+  }
+
+  // Find first subsequent heading of same-or-higher level (lower or equal #
+  // count). That's where this section ends.
+  let sectionEnd = lines.length;
+  for (let i = sectionStart + 1; i < lines.length; i++) {
+    const m = lines[i].match(/^(#+)\s+/);
+    if (m && m[1].length <= targetLevel) {
+      sectionEnd = i;
+      break;
+    }
+  }
+
+  // Snapshot the section (heading + content), trim trailing blank lines to
+  // prevent unbounded growth of empty separators across many appends.
+  const section = lines.slice(sectionStart, sectionEnd);
+  while (section.length > 1 && section[section.length - 1].trim() === "") {
+    section.pop();
+  }
+
+  // Append blank-line separator + new content, then re-trim trailing blanks
+  // from the new content too.
+  section.push("", ...content.split("\n"));
+  while (section.length > 0 && section[section.length - 1].trim() === "") {
+    section.pop();
+  }
+
+  // Restore one trailing blank line before the next heading for readability,
+  // but only if there is a next section (otherwise the file would gain a
+  // pointless trailing newline beyond what `body` already had).
+  if (sectionEnd < lines.length) {
+    section.push("");
+  }
+
+  return [
+    ...lines.slice(0, sectionStart),
+    ...section,
+    ...lines.slice(sectionEnd),
+  ].join("\n");
+}
+
+export const appendToPageSection: ToolDef = {
+  name: "append_to_page_section",
+  description:
+    "Append content to the END of a named section in an existing brain page. Body is read server-side and patched server-side — the caller sends only the new chunk, never the existing body, which makes this safe for routine list-append patterns (Tuning Log tuples, briefing instrumentation rows, situation Deltas) where update_page would risk body truncation under context pressure. Insertion point is the line before the next heading of same-or-higher level, or EOF if the target section is the last one. Throws if section_heading is not found verbatim — surfaces typos rather than silently appending at EOF. Embedding is always regenerated since body content changed.",
+  schema: z.object({
+    title: z.string().describe("Page title (exact match to existing page)"),
+    section_heading: z
+      .string()
+      .describe(
+        'Exact heading line including markdown level marker, e.g. "## Tuning Log" or "### Improve phase note — 2026-04-22 ~12:45 WAT tick"'
+      ),
+    content: z
+      .string()
+      .describe(
+        "Content to append at the end of the section. May contain newlines; will be inserted as-is after a blank-line separator."
+      ),
+  }),
+  accessLevel: "write",
+  handler: async (params) => {
+    const { title, section_heading, content } = params;
+
+    // Fetch existing page WITH body — patch happens server-side.
+    const existing = await query(
+      "SELECT id, file_path, type, frontmatter, body, summary FROM pages WHERE title = $1 AND deleted = FALSE",
+      [title]
+    );
+    if (existing.rows.length === 0) {
+      throw new Error(`Page "${title}" not found`);
+    }
+
+    const page = existing.rows[0];
+    const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+
+    const newBody = appendToSection(page.body, section_heading, content);
+
+    // Touch frontmatter.updated for consistency with update_page conventions.
+    const mergedFm: Record<string, any> = {
+      ...page.frontmatter,
+      updated: now,
+    };
+
+    // Re-validate frontmatter — paranoia, but keeps this tool consistent
+    // with all other writers (no path that bypasses validation).
+    const types = mergedFm.type || page.type;
+    const ptc = await validateTypes(types);
+    validateFrontmatter(mergedFm, types, ptc);
+
+    if (page.summary) mergedFm.summary = page.summary;
+
+    // Write file
+    const filePath = path.join(config.memoryPath, page.file_path);
+    const markdown = buildMarkdown(mergedFm, newBody);
+    await fs.writeFile(filePath, markdown, "utf-8");
+
+    // Body changed → embedding must be regenerated.
+    const embText = embeddingText(title, page.summary, newBody);
+    const embedding = await embed(embText);
+    const embeddingLiteral = `[${embedding.join(",")}]`;
+
+    await query(
+      `UPDATE pages SET
+         frontmatter = $1,
+         body = $2,
+         embedding = $3::vector,
+         updated_at = $4,
+         indexed_at = NOW()
+       WHERE id = $5`,
+      [mergedFm, newBody, embeddingLiteral, now, page.id]
+    );
+
+    await gitCommit(`append-section: ${title} → ${section_heading}`);
+
+    return {
+      id: page.id,
+      title,
+      file_path: page.file_path,
+      section_heading,
+      bytes_appended: content.length,
+      message: `Appended ${content.length} bytes to "${section_heading}" in "${title}"`,
+    };
+  },
+};
+
+export const writeTools = [createPage, updatePage, updatePageFrontmatter, appendToPageSection, deletePage, finalizeIngest, batchUpsertPages, captureNote, captureReminder];
