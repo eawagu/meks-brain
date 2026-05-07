@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { query } from "../db.js";
 import { config } from "../config.js";
+import { gitCommit } from "../git.js";
 import type { ToolDef } from "./types.js";
 
 // ─── get_config ────────────────────────────────────────────────
@@ -130,6 +131,12 @@ export const updateConfig: ToolDef = {
        WHERE id = $5`,
       [mergedFm, body, embeddingLiteral, today, page.id]
     );
+
+    // Git commit — parallel to gitCommit calls in tools/write.ts. Without
+    // this, config-page edits were silently un-versioned (incident: heartbeat
+    // prompt updates landed in Postgres + disk but never appeared in
+    // git log; recovered by manual commit).
+    await gitCommit(`update-config: ${title}`);
 
     return {
       id: page.id,

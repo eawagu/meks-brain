@@ -12,12 +12,14 @@ import { FAKE_EMBEDDING } from "../fixtures.js";
 import {
   makeMockEmbed,
   makeMockFs,
+  makeMockGit,
   makeMockQuery,
   stripFrontmatter,
 } from "../helpers.js";
 
 const dbRig = makeMockQuery();
 const embedRig = makeMockEmbed(FAKE_EMBEDDING);
+const gitRig = makeMockGit();
 const fsRig = makeMockFs();
 
 vi.mock("../../src/db.js", () => ({
@@ -30,6 +32,10 @@ vi.mock("../../src/db.js", () => ({
 vi.mock("../../src/embeddings.js", () => ({
   embed: (...args: any[]) => embedRig.embed(...args),
   embeddingText: (...args: any[]) => embedRig.embeddingText(...args),
+}));
+
+vi.mock("../../src/git.js", () => ({
+  gitCommit: (...args: any[]) => gitRig.gitCommit(...args),
 }));
 
 vi.mock("fs/promises", () => ({
@@ -58,6 +64,7 @@ async function getConfigTools() {
 beforeEach(() => {
   dbRig.reset();
   embedRig.reset();
+  gitRig.reset();
   fsRig.reset();
 });
 
@@ -160,6 +167,25 @@ describe("updateConfig", () => {
     expect(embedRig.embed).toHaveBeenCalledOnce();
   });
 
+  it("auto-commits via gitCommit (regression guard)", async () => {
+    // Before this guard: updateConfig wrote to Postgres + disk but never
+    // committed. Heartbeat-prompt edits landed in Postgres + disk and were
+    // silently un-versioned. Asserting the commit happens prevents that
+    // regression from sneaking back in.
+    dbRig.enqueue([existingSourceConfigRow()]);
+    dbRig.enqueue([]);
+
+    const { updateConfig } = await getConfigTools();
+    await updateConfig.handler({
+      title: "source-config-slack",
+      body: "x",
+      frontmatter_updates: {},
+    });
+
+    expect(gitRig.commits).toHaveLength(1);
+    expect(gitRig.commits[0]).toBe("update-config: source-config-slack");
+  });
+
   it("updates last_processed when explicitly provided in frontmatter_updates", async () => {
     dbRig.enqueue([existingSourceConfigRow()]);
     dbRig.enqueue([]);
@@ -238,6 +264,35 @@ describe("updateConfig", () => {
     );
   });
 });
+      "tiny body — original directives gone"
+    );
+  });
+});
+    // This test locks in the buggy behavior before update_page_frontmatter
+    // lands as the recommended frontmatter-only path. Documenting here so
+    // anyone reading these tests understands why we added the new tool.
+    dbRig.enqueue([
+      {
+        ...existingSourceConfigRow(),
+        // original body in DB — large
+      },
+    ]);
+    dbRig.enqueue([]);
+
+    const { updateConfig } = await getConfigTools();
+    await updateConfig.handler({
+      title: "source-config-slack",
+      body: "tiny body — original directives gone",
+      frontmatter_updates: {},
+    });
+
+    const [, content] = fsRig.writeFile.mock.calls[0];
+    expect(stripFrontmatter(content as string)).toBe(
+      "tiny body — original directives gone"
+    );
+  });
+});
+ct(stripFrontmatter(content as string)).toBe(
       "tiny body — original directives gone"
     );
   });
