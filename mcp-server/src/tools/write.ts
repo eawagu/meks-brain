@@ -447,51 +447,6 @@ export const deletePage: ToolDef = {
   },
 };
 
-// ─── mark_processed ────────────────────────────────────────────
-export const markProcessed: ToolDef = {
-  name: "mark_processed",
-  description:
-    "Record that an ingress source file has been processed. Updates the scan state and ingested_sources table. Called after express or full ingest completes for a file.",
-  schema: z.object({
-    file_path: z
-      .string()
-      .describe("Relative path of the source file in the ingress folder"),
-    file_modified: z
-      .string()
-      .describe("ISO-8601 filesystem modification timestamp of the source file"),
-    page_id: z
-      .number()
-      .int()
-      .optional()
-      .describe("ID of the source page created from this file"),
-  }),
-  accessLevel: "write",
-  handler: async (params) => {
-    const { file_path, file_modified, page_id } = params;
-
-    // Upsert ingested source
-    await query(
-      `INSERT INTO ingested_sources (file_path, file_modified, ingested_at, page_id)
-       VALUES ($1, $2, NOW(), $3)
-       ON CONFLICT (file_path) DO UPDATE SET
-         file_modified = EXCLUDED.file_modified,
-         ingested_at = NOW(),
-         page_id = COALESCE(EXCLUDED.page_id, ingested_sources.page_id)`,
-      [file_path, file_modified, page_id || null]
-    );
-
-    // Update scan timestamp
-    await query(
-      `UPDATE scan_state SET value = NOW() WHERE key = 'last_ingress_scan'`
-    );
-
-    return {
-      file_path,
-      message: `Marked "${file_path}" as processed`,
-    };
-  },
-};
-
 // ─── capture_note ─────────────────────────────────────────────
 export const captureNote: ToolDef = {
   name: "capture_note",
