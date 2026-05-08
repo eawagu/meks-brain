@@ -120,6 +120,7 @@ export function createOAuthRouter(publicOrigin: string): Router {
       issuer: publicOrigin,
       authorization_endpoint: `${publicOrigin}/authorize`,
       token_endpoint: `${publicOrigin}/token`,
+      registration_endpoint: `${publicOrigin}/register`,
       response_types_supported: ["code"],
       grant_types_supported: ["authorization_code"],
       code_challenge_methods_supported: ["S256"],
@@ -178,6 +179,26 @@ export function createOAuthRouter(publicOrigin: string): Router {
     url.searchParams.set("code", code);
     if (state) url.searchParams.set("state", state);
     res.redirect(url.toString());
+  });
+
+  // ── POST /register — Dynamic Client Registration (RFC 7591) ──
+  //
+  // Required by Claude's MCP client, which has no fallback to a
+  // pre-configured client_id when the authorization-server metadata omits
+  // `registration_endpoint`. The metadata the client posts is informational
+  // — real auth is gated by the password token at POST /authorize, so we
+  // accept any submitted metadata, mint a UUID client_id, and echo back. No
+  // client_secret is issued (public client + PKCE per OAuth 2.1).
+
+  router.post("/register", (req: Request, res: Response) => {
+    const metadata = (req.body || {}) as Record<string, unknown>;
+    const clientId = randomUUID();
+    res.status(201).json({
+      ...metadata,
+      client_id: clientId,
+      client_id_issued_at: Math.floor(Date.now() / 1000),
+      token_endpoint_auth_method: "none",
+    });
   });
 
   // ── POST /token — exchange auth code for access token ─────
