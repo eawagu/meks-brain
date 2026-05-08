@@ -440,22 +440,3 @@ describe("readIngress", () => {
     ).rejects.toThrow(/timed out/);
   });
 });
-ls();
-    const result = await readIngress.handler({ file_path: "broken.pdf" });
-
-    expect(result.error).toBe("conversion_failed");
-    expect(result.reason).toBe("missing dependency: tesseract");
-  });
-
-  it("re-throws on converter timeout (file stays for retry)", async () => {
-    addFile(`${INGRESS}/slow.mp4`, 100);
-    const err: any = new Error("timeout");
-    err.killed = true;
-    execFileMock.mockRejectedValueOnce(err);
-
-    const { readIngress } = await getIngressTools();
-    await expect(
-      readIngress.handler({ file_path: "slow.mp4" })
-    ).rejects.toThrow(/timed out/);
-  });
-});
