@@ -6,7 +6,7 @@ title: Access Bank — Multi-Track Failures
 status: developing
 created: "2026-04-11T16:42:53Z"
 summary: "May 1 14:13 WAT full-tick: cycle 14 RC91 (TDSD-6811) Completed at 11:43 WAT — ~3h39m bank-resolved within-pattern (Start 08:04 WAT → close 11:43 WAT). 14th Access RC91 cycle in 21 days."
-updated: "2026-05-10T05:22:33Z"
+updated: "2026-05-11T05:18:43Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -65,3 +65,5 @@ slack #teamapt-tech-operations multi-cycle history Apr 10–27; email Access bil
 - [2026-05-09 18:11 WAT] — NEW Access settlement-track ticket [[TDSD-6903]] "Access Settlement Failed #20260508 insufficient funds" filed 17:23 WAT (Olamide reporter, David Oseji assignee, Medium INITIAL REVIEW). 5th bank addition to the briefing-2026-05-09 B4 settlement-cluster pattern (Stanbic/Fidelity/Keystone/Hydrogen + now Access in same May 8-9 settlement window). Insufficient-funds modifier is a distinct settlement failure mode from the partner-bank-requery pattern of Stanbic/Fidelity (which were "awaiting requery"). Awareness-tier; ownership clear (David Oseji workflow); operational track. Pattern compounding warrants Monday review of cluster pattern (5 banks settlement-track issues clustered in 36h is meaningful, distinct from RC91 transaction layer).
 
 - [2026-05-10 06:10 WAT] — TWO new tracks: (a) **Access Bank Scheduled Maintenance announced 22:48 WAT May 9** (Qazim Slack #teamapt-tech-operations ATS post — DCIR Database Storage Optimization, ETA TBD). Per 23:11 WAT hourly report Access Bank already off due to scheduled maintenance — maintenance window started overnight Sat→Sun. Post text "Sunday 9th of May 10:30 AM" is contradictory (May 9 is Saturday); most likely intended Sunday May 10 10:30 AM but maintenance already in effect by 23:11 WAT. Bank concentration contributor — counted in 11/17 routes at Saturday evening. (b) **TDSD-6903 Access Settlement Incident** still open per 23:11 WAT hourly report — RC 51 Insufficient Funds for May 8 11PM + May 9 1AM/3AM/4AM settlements; bank reviewing. Multi-window settlement failure pattern.
+
+- [2026-05-11 06:10 WAT] Access RC 91 P1 May 10 morning bank-resolved 2h22m via TDSD-6909 (Afeez Slack P1 08:13 WAT, Start 7:53 AM, TDSD-6909 filed 08:16 WAT Completed 10:38 WAT) with bilateral thread `19e10af0c3ee4e7b` 06:59 Daniel→Access escalation, 09:34 WAT Temitayo Bashir Ola-Buraimo "processing fine on our end now. Please reconfirm status." Multi-source-resolution-detection applied — no Immediate dispatch retroactively. Cycle count incremented. Settlement-track: TDSD-6912 NEW INITIAL REVIEW 16:09 WAT May 10 (Afeez/David Oseji) — multi-window RC51 pattern (May 8 11PM + May 9 1/3/4/8AM) continuing the B15 carryforward thread; TDSD-6903 also INITIAL REVIEW touched 00:01 WAT May 11. Access Bank DCIR DB scheduled maintenance announced 22:48 WAT May 9 ends — Access back operational per bank concentration normalization 5→3 off this tick.
