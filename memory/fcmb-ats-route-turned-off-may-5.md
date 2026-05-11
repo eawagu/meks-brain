@@ -6,7 +6,7 @@ title: FCMB ATS — Route Turned Off May 5
 status: developing
 created: "2026-05-05T17:19:51Z"
 summary: "FCMB ATS route turned off 14:17 WAT May 5 — Trigger #7 fires; bank concentration risk now 4 banks turned off (FCMB joins First Bank, Providus, Sterling). Origin: 12-day persistent transaction-failure trend on the previously escalated network layer; Tofunmi 08:06 WAT email \"FCMB: Increased Transaction Failure Rate\" → Ugochukwu Ebirika 14:17 WAT halt declaration → 14:31/14:37/14:51 WAT bank escalation cascade (\"Moniepoint has stopped processing transactions\") → 15:54 WAT Teams meeting link sent. Single-track-email escalation; no Slack post in Tier 1 channels. CTO Immediate DM dispatched 18:11 WAT."
-updated: "2026-05-10T05:22:46Z"
+updated: "2026-05-11T05:18:56Z"
 cssclasses:
   - "situation"
 accountability: ats-operations
@@ -67,3 +67,5 @@ Gmail thread `19df72d768ca962d` (FCMB: Increased Transaction Failure Rate, 6 mes
 - [2026-05-05 18:11 WAT] — Created. Route-off declaration 14:17 WAT (Ugochukwu Ebirika); 12-day persistent network-layer trend (Tofunmi 08:06 WAT). Bank concentration now 4 banks turned off out of 17 PTSAs. Single-track-email escalation; no Slack-side P1. CTO Immediate DM dispatched. Status: developing — pending bank-side investigation outcome and re-onboarding decision. Recommended next-tick observation: monitor Teams session outcome, watch for bank-side response from Oluwaseun Sonaike / Bashir Adeyemi, watch for Slack catch-up post or RCA narrative.
 
 - [2026-05-10 06:10 WAT] — **B1 yesterday "Failing generally" trajectory resolved silently** between 02:44 WAT May 9 single-track-email filing and 23:11 WAT May 9 hourly report. FCMB not in 23:11 WAT off-list (CoralPay 4 + Access maint + Stanbic RC 91 = 6; FCMB operational). No Slack closure post, no formal bilateral resolution email observed in this tick's sweep — silent recovery typical of single-track-email "Failing generally" patterns when no route-off decision lands. Trajectory: returned to operation May 7 → fast-cycle RC91 May 8 02:08–02:35 WAT (27m) → "Failing generally" overnight May 9 02:44 WAT → silent recovery by 23:11 WAT (~20h cycle). FCMB stable as of May 10 06:10 WAT briefing tick. Within-pattern recurrence, no escalation needed.
+
+- [2026-05-11 06:10 WAT] FCMB back operational — NOT in 3-off list per Olamide duty handover thread `19e14237833d5dfd` 23:05 WAT May 10 + Afeez Daily Report 15:18 WAT May 10 ("14 of 17 PTSAs operational. First bank, providus and sterling turned off"). Carryforward closure from briefing-2026-05-10 B8a (yesterday's resolution observation) operationally confirmed today via duty handover. Bank concentration normalization 5→3 off; FCMB transition from off-list (May 5 14:17 WAT halt declaration) → back operational (sometime between May 8 02:44 WAT "Failing generally" overnight email and May 9 23:11 WAT hourly report); persistent 3-off baseline = FBN/PVB/Sterling.
