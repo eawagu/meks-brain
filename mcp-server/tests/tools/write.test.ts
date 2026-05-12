@@ -254,6 +254,134 @@ describe("createPage", () => {
     });
     expect(result.orphan).toBe(false);
   });
+
+  // ─── briefing source-config compliance gate ─────────────────
+  // When creating a briefing, the server checks every source-config and
+  // rejects the create if any has frontmatter.updated > frontmatter.last_processed.
+  // This closes the silent-defer pathway where a heartbeat tick reads an
+  // updated directive but writes the briefing without acting on it.
+
+  it("creates a briefing when all source-configs are compliant (last_processed >= updated)", async () => {
+    dbRig.enqueue([{ body: PAGE_TYPES_BODY }]); // loadPageTypeConfig
+    dbRig.enqueue([
+      {
+        title: "source-config-slack",
+        frontmatter: {
+          updated: "2026-05-10T10:00:00Z",
+          last_processed: "2026-05-12T08:00:00Z",
+        },
+      },
+      {
+        title: "source-config-google-drive",
+        frontmatter: {
+          updated: "2026-05-12T08:10:32Z",
+          last_processed: "2026-05-12T08:15:00Z",
+        },
+      },
+    ]); // checkSourceConfigCompliance — all compliant
+    dbRig.enqueue([]); // duplicate check
+    dbRig.enqueue([{ id: 99 }]); // syncToPostgres
+    dbRig.enqueue([{ count: "0" }]); // orphan check
+
+    const { createPage } = await getWriteTools();
+    const result = await createPage.handler({
+      title: "briefing-2026-05-13",
+      type: ["briefing"],
+      body: "## Decision Items\n\nB1...",
+      summary: "Test briefing",
+      frontmatter: { status: "current" },
+    });
+
+    expect(result.id).toBe(99);
+    expect(result.title).toBe("briefing-2026-05-13");
+  });
+
+  it("rejects briefing creation when a source-config has updated > last_processed", async () => {
+    dbRig.enqueue([{ body: PAGE_TYPES_BODY }]);
+    dbRig.enqueue([
+      {
+        title: "source-config-google-drive",
+        frontmatter: {
+          // Directive updated today but last_processed stuck 9 days ago —
+          // mirrors the real 2026-05-12 information-to-action gap.
+          updated: "2026-05-12T08:10:32Z",
+          last_processed: "2026-05-03T17:15:00Z",
+        },
+      },
+      {
+        title: "source-config-slack",
+        frontmatter: {
+          updated: "2026-05-10T10:00:00Z",
+          last_processed: "2026-05-12T08:00:00Z",
+        },
+      },
+    ]);
+
+    const { createPage } = await getWriteTools();
+    await expect(
+      createPage.handler({
+        title: "briefing-2026-05-13",
+        type: ["briefing"],
+        body: "## Decision Items",
+        frontmatter: { status: "current" },
+      })
+    ).rejects.toThrow(/Cannot create briefing.*source-config-google-drive.*last_processed=2026-05-03T17:15:00Z/s);
+
+    // No file write, no Postgres write, no git commit
+    expect(fsRig.writeFile).not.toHaveBeenCalled();
+    expect(gitRig.commits).toHaveLength(0);
+  });
+
+  it("rejects briefing creation when a source-config has no last_processed", async () => {
+    // A source-config with `updated` but missing `last_processed` means the
+    // directive has never been executed against this source — functionally
+    // identical to "directive updated since last sweep" per
+    // config-heartbeat-prompt Directive freshness gate. Gate fires, briefing
+    // creation is blocked, error message uses literal "null" placeholder.
+    dbRig.enqueue([{ body: PAGE_TYPES_BODY }]);
+    dbRig.enqueue([
+      {
+        title: "source-config-new",
+        frontmatter: {
+          updated: "2026-05-12T08:10:32Z",
+          // last_processed missing
+        },
+      },
+    ]);
+
+    const { createPage } = await getWriteTools();
+    await expect(
+      createPage.handler({
+        title: "briefing-2026-05-13",
+        type: ["briefing"],
+        body: "## Decision Items",
+        frontmatter: { status: "current" },
+      })
+    ).rejects.toThrow(/Cannot create briefing.*source-config-new.*last_processed=null/s);
+
+    expect(fsRig.writeFile).not.toHaveBeenCalled();
+    expect(gitRig.commits).toHaveLength(0);
+  });
+
+  it("skips compliance check for non-briefing page creates", async () => {
+    // The check only fires when types includes "briefing". Creating an entity
+    // page must not query source-configs — the existing test enqueue sequence
+    // would fail if an extra query were inserted.
+    dbRig.enqueue([{ body: PAGE_TYPES_BODY }]);
+    dbRig.enqueue([]); // duplicate check (next in sequence — proves no compliance query ran)
+    dbRig.enqueue([{ id: 50 }]);
+    dbRig.enqueue([{ count: "0" }]);
+
+    const { createPage } = await getWriteTools();
+    const result = await createPage.handler({
+      title: "Some Entity",
+      type: ["entity"],
+      body: "x",
+      frontmatter: {},
+    });
+
+    expect(result.id).toBe(50);
+  });
 });
 
 // ─── updatePage ───────────────────────────────────────────────

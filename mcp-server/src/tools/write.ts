@@ -230,6 +230,58 @@ async function syncToPostgres(
   return result.rows[0].id;
 }
 
+// ─── Source-config compliance check ───────────────────────────
+// Schema invariant: when a briefing is created (the structural signal of
+// tick completion), every source-config MUST have last_processed >= updated.
+// A directive whose `updated` timestamp is newer than its `last_processed`
+// represents an information-to-action gap — the heartbeat had the directive
+// update in its working state but did not execute it this tick. Blocking
+// briefing creation in that state removes the silent-defer pathway: the
+// heartbeat must either (a) execute the directive on the source's in-window
+// set and advance last_processed to max(modifiedTime); or (b) advance
+// last_processed via update_page_frontmatter to acknowledge no in-window
+// work. Either path closes the gap before the briefing can be written.
+
+interface NonCompliantSource {
+  title: string;
+  updated: string;
+  last_processed: string | null;
+}
+
+async function checkSourceConfigCompliance(): Promise<NonCompliantSource[]> {
+  const result = await query(
+    `SELECT title, frontmatter FROM pages
+     WHERE deleted = FALSE
+       AND type && ARRAY['source-config']`,
+    []
+  );
+
+  const nonCompliant: NonCompliantSource[] = [];
+  for (const row of result.rows) {
+    const fm = row.frontmatter ?? {};
+    const updated = fm.updated;
+    const lastProcessed = fm.last_processed;
+    // Without `updated` there is nothing to compare against — skip.
+    if (!updated) continue;
+    // Missing `last_processed` means the source has never been swept under
+    // the current directive, which is functionally identical to "directive
+    // updated since last sweep" — gate fires (per config-heartbeat-prompt
+    // Directive freshness gate). Otherwise compare timestamps.
+    if (
+      !lastProcessed ||
+      new Date(updated).getTime() > new Date(lastProcessed).getTime()
+    ) {
+      nonCompliant.push({
+        title: row.title,
+        updated,
+        last_processed: lastProcessed ?? null,
+      });
+    }
+  }
+
+  return nonCompliant;
+}
+
 // ─── create_page ───────────────────────────────────────────────
 export const createPage: ToolDef = {
   name: "create_page",
@@ -272,6 +324,29 @@ export const createPage: ToolDef = {
     if (summary) fullFm.summary = summary;
 
     validateFrontmatter(fullFm, types, ptc);
+
+    // Schema invariant: briefings are the tick-completion structural signal.
+    // Before a briefing can be created, every source-config must have
+    // last_processed >= updated. Closes the information-to-action gap where
+    // a heartbeat tick reads an updated directive but writes the briefing
+    // without acting on it. See checkSourceConfigCompliance.
+    if (types.includes("briefing")) {
+      const nonCompliant = await checkSourceConfigCompliance();
+      if (nonCompliant.length > 0) {
+        const lines = nonCompliant
+          .map(
+            (s) =>
+              `  - ${s.title}: updated=${s.updated}, last_processed=${s.last_processed ?? "null"}`
+          )
+          .join("\n");
+        throw new Error(
+          `Cannot create briefing — ${nonCompliant.length} source-config(s) have directive updates not yet acted on. ` +
+            `For each, 'updated' is newer than 'last_processed', indicating this tick did not execute the directive after it changed.\n\n` +
+            `Non-compliant:\n${lines}\n\n` +
+            `Resolution: either (a) execute the current directive on the source's in-window set and advance last_processed to max(modifiedTime) via update_page_frontmatter; or (b) advance last_processed via update_page_frontmatter to acknowledge no in-window work this tick.`
+        );
+      }
+    }
 
     // Check for duplicate
     const existing = await query(
