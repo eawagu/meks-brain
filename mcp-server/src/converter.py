@@ -107,11 +107,17 @@ def html_to_md(filepath: str) -> str:
 
 
 def _pandoc(fmt: str, filepath: str) -> str:
-    """Convert a file to markdown via pandoc."""
+    """Convert a file to markdown via pandoc.
+
+    No internal timeout — the outer wrapper in ingress.ts (10 min) bounds
+    wall-clock time. Removing the inner 120s timeout eliminates size-based
+    silent defer for docx files that pandoc could otherwise convert given
+    a few more seconds. See designs/size-defer-fix.md.
+    """
     pandoc_cmd = os.environ.get("PANDOC_CMD", "pandoc")
     result = subprocess.run(
         [pandoc_cmd, "-f", fmt, "-t", "markdown", "--wrap=none", filepath],
-        capture_output=True, timeout=120
+        capture_output=True
     )
     if result.returncode != 0:
         stderr = result.stderr.decode("utf-8", errors="replace") if result.stderr else ""
@@ -119,9 +125,55 @@ def _pandoc(fmt: str, filepath: str) -> str:
     return result.stdout.decode("utf-8", errors="replace")
 
 
+def _docx_to_md_python_docx(filepath: str) -> str:
+    """Lossy fallback: extract text content via python-docx when pandoc fails.
+
+    No formatting fidelity (tables become pipe-joined rows, headings lose
+    hierarchy, footnotes dropped) — but never fails on valid docx as long
+    as the file's XML is well-formed. Used as the second-line path in
+    docx_to_md so that pandoc errors never cause a silent defer to review/.
+
+    Requires `python-docx` (pip install python-docx). If unavailable, the
+    ImportError surfaces to the caller which converts it back into a
+    conversion_failed → MISS calibration tuple — explicit signal, not silent.
+    """
+    from docx import Document
+    doc = Document(filepath)
+    parts = []
+    for para in doc.paragraphs:
+        text = para.text.strip()
+        if text:
+            parts.append(text)
+    for table in doc.tables:
+        for row in table.rows:
+            cells = [cell.text.strip() for cell in row.cells]
+            if any(cells):
+                parts.append(" | ".join(cells))
+    return "\n\n".join(parts)
+
+
 def docx_to_md(filepath: str) -> str:
-    """Convert DOCX to markdown via pandoc."""
-    return _pandoc("docx", filepath)
+    """Convert DOCX to markdown.
+
+    Primary path: pandoc (full formatting fidelity).
+    Fallback path: python-docx (lossy text extraction) — used when pandoc
+    errors so that no docx file is ever deferred to review/ purely on
+    a pandoc-side failure mode.
+
+    Either path's success means the file gets a source page. Both paths
+    failing produces a RuntimeError that surfaces as conversion_failed in
+    ingress.ts, which emits a MISS calibration tuple (no silent defer).
+    """
+    try:
+        return _pandoc("docx", filepath)
+    except RuntimeError as primary_err:
+        try:
+            return _docx_to_md_python_docx(filepath)
+        except Exception as fallback_err:
+            raise RuntimeError(
+                f"pandoc failed: {primary_err}; "
+                f"python-docx fallback also failed: {fallback_err}"
+            )
 
 
 def rtf_to_md(filepath: str) -> str:

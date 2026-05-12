@@ -154,7 +154,62 @@ const IMAGE_MIME: Record<string, string> = {
   ".webp": "image/webp",
   ".gif": "image/gif",
 };
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 5MB — oversized images moved to review/
+// ─── MISS calibration emission ─────────────────────────────────────────────
+//
+// When read_ingress defers a file to review/ (or fails via the outer wrapper
+// timeout), emit a MISS-prefixed calibration file at the ingress root so the
+// next ingest tick routes the defer event into config-salience tuning log
+// via the existing MISS routing path. This eliminates silent defer — every
+// review/ move is paired with an operational signal.
+//
+// See designs/size-defer-fix.md decision 3 and 12.
+
+async function writeMissCalibration(params: {
+  file_path: string;
+  error_type: string;
+  reason: string;
+  file_size?: number;
+  moved_to?: string;
+}): Promise<string> {
+  const now = new Date();
+  const stamp = now
+    .toISOString()
+    .replace(/[:.]/g, "-")
+    .replace(/Z$/, "z");
+  const sanitized = params.file_path
+    .replace(/[\/\\]/g, "_")
+    .replace(/[^a-zA-Z0-9._-]/g, "_")
+    .slice(0, 80);
+  const missFileName = `MISS-ingress-defer-${sanitized}-${stamp}.md`;
+  const missPath = path.join(config.ingressPath, missFileName);
+  const sizeStr =
+    params.file_size !== undefined
+      ? ` File size: ${params.file_size} bytes.`
+      : "";
+  const movedStr = params.moved_to
+    ? ` Moved to: ${params.moved_to}.`
+    : "";
+  const reasonClean = params.reason
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 800);
+  const content =
+    `MISS: ${now.toISOString()} read_ingress ${params.error_type} ` +
+    `for ${params.file_path} — Class: ingest_pipeline_defer.` +
+    `${sizeStr}${movedStr} Reason: ${reasonClean}. ` +
+    `Operator action: review file in review/ folder; if recoverable, ` +
+    `drop back into ingress root for retry. ` +
+    `Tag: read_ingress_defer, ${params.error_type}, ` +
+    `file_path=${params.file_path}.\n`;
+  try {
+    await fs.writeFile(missPath, content, "utf-8");
+  } catch {
+    // Filesystem write failed — degrade gracefully, do not block the defer.
+    // The lack of MISS file is itself observable on the next scan (a defer
+    // that never surfaces).
+  }
+  return missFileName;
+}
 
 // ─── read_ingress ─────────────────────────────────────────────
 
@@ -190,26 +245,8 @@ export const readIngress: ToolDef = {
     const ext = path.extname(file_path).toLowerCase();
 
     // ── Image files: return as MCP image content block for Claude vision ──
+    // No size cap — vision handles oversized images. See designs/size-defer-fix.md decision 11.
     if (IMAGE_EXTS.has(ext)) {
-      if (stat.size > MAX_IMAGE_BYTES) {
-        const reviewDest = path.join(config.ingressReviewPath, file_path);
-        await fs.mkdir(path.dirname(reviewDest), { recursive: true });
-        try {
-          await fs.rename(resolved, reviewDest);
-        } catch {
-          await fs.copyFile(resolved, reviewDest);
-          await fs.unlink(resolved);
-        }
-        return {
-          file_path,
-          error: "image_too_large",
-          max_bytes: MAX_IMAGE_BYTES,
-          actual_bytes: stat.size,
-          moved_to: path.relative(config.ingressPath, reviewDest),
-          message: `Image exceeds 5MB limit (${(stat.size / 1024 / 1024).toFixed(1)}MB) — moved to review/ for manual processing`,
-        };
-      }
-
       const data = await fs.readFile(resolved);
       const mimeType = IMAGE_MIME[ext] || "image/jpeg";
 
@@ -263,11 +300,36 @@ export const readIngress: ToolDef = {
         warnings,
       };
     } catch (err: any) {
-      // Timeout — transient, throw so file stays for retry next scan
+      // Outer-wrapper timeout (10 min). Previously this re-threw so the file
+      // stayed in ingress for retry. That created silent loops for genuinely
+      // pathological files. Per designs/size-defer-fix.md decision 12: emit a
+      // MISS calibration tuple and move to review/ — defer is now visible.
       if (err.killed) {
-        throw new Error(
-          `Conversion timed out for ${file_path} — will retry next scan`
-        );
+        const reason = `Conversion exceeded 10-min outer wrapper timeout (${file_path})`;
+        const reviewDest = path.join(config.ingressReviewPath, file_path);
+        await fs.mkdir(path.dirname(reviewDest), { recursive: true });
+        try {
+          await fs.rename(resolved, reviewDest);
+        } catch {
+          await fs.copyFile(resolved, reviewDest);
+          await fs.unlink(resolved);
+        }
+        const movedTo = path.relative(config.ingressPath, reviewDest);
+        const missFile = await writeMissCalibration({
+          file_path,
+          error_type: "conversion_timed_out",
+          reason,
+          file_size: stat.size,
+          moved_to: movedTo,
+        });
+        return {
+          file_path,
+          error: "conversion_timed_out",
+          reason,
+          moved_to: movedTo,
+          miss_calibration: missFile,
+          message: `Conversion exceeded 10-min wrapper timeout — moved to review/. MISS calibration emitted for tuning log.`,
+        };
       }
 
       // Exit code 2 = unknown format — move to review/
@@ -283,12 +345,22 @@ export const readIngress: ToolDef = {
           await fs.unlink(resolved);
         }
 
+        const movedTo = path.relative(config.ingressPath, reviewDest);
+        const missFile = await writeMissCalibration({
+          file_path,
+          error_type: "unknown_format",
+          reason: `Unknown format "${unknownExt}"`,
+          file_size: stat.size,
+          moved_to: movedTo,
+        });
+
         return {
           file_path,
           error: "unknown_format",
           extension: unknownExt,
-          moved_to: path.relative(config.ingressPath, reviewDest),
-          message: `Unknown format "${unknownExt}" — moved to review/ for manual processing`,
+          moved_to: movedTo,
+          miss_calibration: missFile,
+          message: `Unknown format "${unknownExt}" — moved to review/. MISS calibration emitted for tuning log.`,
         };
       }
 
@@ -302,13 +374,22 @@ export const readIngress: ToolDef = {
         await fs.copyFile(resolved, reviewDest);
         await fs.unlink(resolved);
       }
+      const movedTo = path.relative(config.ingressPath, reviewDest);
+      const missFile = await writeMissCalibration({
+        file_path,
+        error_type: "conversion_failed",
+        reason,
+        file_size: stat.size,
+        moved_to: movedTo,
+      });
 
       return {
         file_path,
         error: "conversion_failed",
         reason,
-        moved_to: path.relative(config.ingressPath, reviewDest),
-        message: `Conversion failed — moved to review/. Reason: ${reason}`,
+        moved_to: movedTo,
+        miss_calibration: missFile,
+        message: `Conversion failed — moved to review/. Reason: ${reason}. MISS calibration emitted for tuning log.`,
       };
     }
   },
