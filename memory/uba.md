@@ -4,9 +4,10 @@ type:
 title: UBA
 aliases:
   - "United Bank for Africa"
+  - "UBA Bank"
 created: 2026-04-11
 summary: "United Bank for Africa on Moniepoint's ATS routing and Direct to Bank integration pipeline. D2B Apr 22: SLA pending bank legal sign-off. D2B Apr 28: SLA signed 13 days ago; legal team follow-up underway; server deployment pushed to next week (internal upgrades first)."
-updated: "2026-04-29T11:50:39Z"
+updated: "2026-05-12T11:44:52Z"
 cssclasses:
   - "entity"
 ---
