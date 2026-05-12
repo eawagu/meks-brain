@@ -1,34 +1,14 @@
 ---
-title: Outbox pattern
 type:
   - "concept"
+title: Outbox pattern
+created: "2026-04-25T12:20:42Z"
+summary: Proposed replacement for requery API in MIS disbursement flow — store message in DB, poll to Kafka; combined with CBA idempotency eliminates need for long requery waits (Apr 22, 2026 arch review).
+updated: "2026-05-12T10:57:08Z"
 cssclasses:
   - "concept"
-created: "2026-04-25T12:20:42Z"
-updated: "2026-04-25T12:20:42Z"
-summary: "Distributed-systems pattern — first store message in a database, then poll it to Kafka. Apr 22: proposed as the replacement for the existing requery mechanism on the Disbursement↔CBA integration; reduces reliance on long-waiting requery status checks."
 ---
 
-## Definition
+Outbox pattern was proposed in the 2026-04-22 [[Disbursement-CBA integration architecture review - 2026_04_22 19_30 IST]] as the replacement for [[MIS]]'s requery API call. Approach: store the message in DB, poll to [[Kafka]]. Combined with [[CBA]]'s idempotency (duplicate-transaction response code) on second post, this eliminates the need for long requery waits.
 
-The **outbox pattern** is a distributed-systems pattern: first store a message in a database (the "outbox" table), then poll it to a downstream channel like [[Kafka]]. This decouples the database transaction from the message-publish step.
-
-## Why proposed for Disbursement↔CBA (Apr 22)
-
-Replaces the requery mechanism. Instead of:
-
-1. Push message to Kafka
-2. Wait for response
-3. If "unable to locate record," requery (status check) before retrying
-
-The new flow uses:
-
-1. Store message in outbox
-2. Poll outbox to Kafka
-3. On no-response, **directly repost** (CBA [[Idempotency]] makes this safe)
-
-This reduces reliance on potentially long waiting times associated with requery status checks.
-
-## Sources
-
-- [[Disbursement-CBA Integration Architecture Review - 2026-04-22 19:30 IST]]
+Source: [[Disbursement-CBA integration architecture review - 2026_04_22 19_30 IST]]
