@@ -6,7 +6,7 @@ title: Fidelity Bank ATS — RC91 Failure Ongoing
 status: developing
 created: "2026-04-11T16:45:01Z"
 summary: "RC91 cycle re-surfaces Apr 19 01:50–02:04 WAT (14m, bank-resolved) after ~4-day quiet window since Apr 15 memory closure — status returns to developing. Part of overnight 5-bank RC91 wave (Stanbic 7h3m, Access 7h50m, NIBSS PTSA 15m, Fidelity 14m, Union 2h10m). MEMORY RESOURCE INCREASE completed Apr 15; Afrigo and NSS admin credential tracks still open."
-updated: "2026-04-19T07:34:20Z"
+updated: "2026-05-12T08:13:58Z"
 cssclasses:
   - "situation"
 accountability: Technology Reliability and Security
@@ -71,3 +71,5 @@ email Christian Okeke → [[Emeka Joseph]] 14:02 WAT Apr 15 (RE: MEMORY RESOURCE
 - 2026-04-15 11:09 WAT — Three Fidelity-side responses: Christian MEMORY ack 10:54 WAT; Jeje NSS pushback 10:45 WAT; Victoria Afrigo ack 10:41 WAT.
 - 2026-04-15 14:09 WAT — **MEMORY RESOURCE INCREASE COMPLETED 14:02 WAT.** Christian Okeke confirmed 48GB allocated; Emeka Joseph ack 14:04 WAT. 20h end-to-end, 3h08min from Fidelity ack to fulfillment. Exposure item #9 closed. Two open Apr 15 surfaces remain: Afrigo retest, NSS admin credentials ownership.
 - 2026-04-19 07:11 WAT — **Cycle 5 re-surface: 01:50–02:04 WAT Apr 19, 14m bank-resolved.** Breaks ~3.5-day RC91 quiet window. Part of overnight 5-bank wave (Stanbic, Access, NIBSS PTSA, Fidelity, Union). Fidelity's 14m bank-side resolution contrasts with Stanbic cycle 31 (7h3m) and Access cycle 8 (7h50m) in the SAME overnight window — suggests either differentiated routing-path exposure to the common-mode driver, or that Fidelity/NIBSS PTSA are on a separate fault surface that clustered in time. No Jira ticket verified at tick time. Status: resolving → developing. Carries into briefing-2026-04-19 as awareness item under the overnight-wave Decision item. Factors: source=slack/email, situation_delta (re-surface after quiet window), pattern_significance (overnight-wave participant), accountability_alignment.
+
+- [2026-05-12 09:04 WAT] — Fidelity RC91 P1 May 11 18:31 WAT (Olamide Slack, Start 7:35 PM, End 7:38 PM) — 3min fast-cycle bank-resolved with formal closure post. No Jira (within fast-cycle envelope). Within recurring pattern envelope. briefing-2026-05-12 B11.
