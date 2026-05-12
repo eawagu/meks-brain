@@ -1,12 +1,20 @@
 ---
-title: Emmanuel Olatunbosun
 type:
   - "entity"
+title: Emmanuel Olatunbosun
 created: 2026-04-11
-updated: 2026-04-11
+summary: Moniepoint team member — stakeholder on merchant-account credit/debit feature ticket; coordinating priority discussion with Larry.
+updated: "2026-05-12T10:48:44Z"
 cssclasses:
   - "entity"
-summary: Operations Lead for Monnify at TeamApt — direct report to Tolulope Obianwu; responsible for merchant settlement, exception management, and operational SLA compliance.
 ---
 
-Mentioned in [[scorecard-emmanuel]], [[Operation Organogram (Vacant)]], [[tolu]].
+## Overview
+
+Emmanuel Olatunbosun is a [[Moniepoint]] team member involved in the [[Cards and Account All Hands]] cadence — stakeholder on the merchant-account credit/debit feature ticket.
+
+## 2026-04-13
+
+Requested update on when discussion with Larry regarding credit/debit on merchant-account ticket could take place (Larry was on leave). [[Ankit Kushwaha]] advised Emmanuel to sync with Larry to schedule the meeting. Action: sync with [[David Redemi]] to schedule.
+
+Source: [[Cards and Account All Hands - 2026_04_13 10_25 WAT]]
