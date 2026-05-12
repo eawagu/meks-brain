@@ -7,7 +7,7 @@ title: Moniepoint Q2 2026 Action Items
 status: open
 created: "2026-04-29T16:28:11Z"
 summary: "Four open action items for Moniepoint engineering: Cosmos access, Vault query, CI/CD tool replacement (Theo Makola), Card Issuance Slack channel."
-updated: "2026-04-29T17:20:25Z"
+updated: "2026-05-12T11:38:52Z"
 cssclasses:
   - "commitment"
 ---
@@ -30,6 +30,14 @@ cssclasses:
 - 18:05 WAT — Mek raised TDSD service desk ticket [[ISSD-2530]] (auto-acknowledged 18:05 WAT, auto-assigned to Michael Afolabi 18:05 WAT). Per Mek's DM at 18:11 WAT, request covers both moniepoint cosmos (immediate) and aptpay cosmos (secondary) — confirm coverage in ISSD-2530 description or raise sibling ticket if not.
 
 ---
+
+**Resolved 2026-05-12 via triage disposition (briefing-2026-05-12 B5 override):** Mek confirmed resolution at triage time.
+
+**Naming divergence flag (not reconciled):** briefing-2026-05-12 B5 referenced this as "Olympus access + Vault" with [[Michael Oyedele]] / [[Hakeem Ogunbona]] / [[Celestina Amadi]] workflow (May 6 DM chain). This page's Item 1 records "Cosmos Access Coordination" with [[Michael Afolabi]] workflow (Apr 29 DM chain, ISSD-2530). Two interpretations: (a) Item 1 was renamed Cosmos → Olympus and reassigned to Michael Oyedele's chain, page is stale; (b) Olympus is a distinct workflow that heartbeat mis-tagged as Q2 Item #1. Fulfillment recorded per user instruction; if (b) holds, Cosmos Access Coordination here may require separate verification.
+
+**Pattern:** heartbeat-carried-resolved-item MISS class — see config-salience Tuning Log 2026-05-12 ~09:30 WAT triage tuple. Pairs with briefing-2026-05-12 B20 (Public Holiday Incentive outbound-reply-detection-gap).
+
+Items #2 (Vault), #3 (Theo Makola CI/CD), #4 (Card Issuance Slack channel) remain open.
 
 ### 2. Vault Usage Check – Card Issuance
 **Owner:** Mek  
